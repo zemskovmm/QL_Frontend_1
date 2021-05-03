@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "web-app",
+  "version": "1.0.0",
+  "license": "",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "export": "next export",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@project/components": "*",
+    "next": "^10.2.0",
+    "next-compose-plugins": "^2.2.0",
+    "next-transpile-modules": "^6.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.2",
+    "autoprefixer": "^10.2.5",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "postcss": "^8.2.13",
+    "tailwind-bootstrap-grid": "^3.3.0",
+    "tailwindcss": "^2.1.2"
+  }
+}

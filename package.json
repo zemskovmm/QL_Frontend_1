@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "ql",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/node": "^14.0.23",
+    "@types/react": "^17.0.2"
+  },
+  "scripts": {
+    "admin-start": "yarn workspace admin-app start",
+    "admin-build": "yarn workspace admin-app build",
+    "next-dev": "yarn workspace web-app dev",
+    "next-build": "yarn workspace web-app build"
+  }
+}
