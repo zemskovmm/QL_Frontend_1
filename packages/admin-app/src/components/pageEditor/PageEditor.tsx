@@ -16,6 +16,7 @@ import { bind, dmap } from "src/utils/util";
 import { AdminTabControl } from "src/components/common/AdminTabControl";
 import { AllLanguages } from "src/utils/langs";
 import "@kekekeks/remoteui/src/RemoteUiEditor.css";
+import {AdminTextBox} from "src/components/common/AdminTextBox";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -119,17 +120,9 @@ export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) =>
           <PageEditorCellDialog store={s.cellEditor} />
         </AdminOverlayDialog>
       )}
-      <label>
-        <b>Title</b>
-      </label>
-      <br />
-      <input {...bind(s, "title")} />
-      <br />
-      <label>
-        <b>Url</b>
-      </label>
-      <br />
-      <input {...bind(s, "url")} />
+      <AdminTextBox id={"title"} label="Title" {...bind(s, "title")}/>
+      <AdminTextBox id={"url"} label="Url" {...bind(s, "url")}/>
+      
       <br />
       {s.rows.map((r, i) => (
         <PageEditorRow key={i.toString()} store={r} />
