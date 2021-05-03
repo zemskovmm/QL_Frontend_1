@@ -1,8 +1,8 @@
-import type { AppProps /*, AppContext */ } from 'next/app'
+import type {AppProps} from 'next/app'
 import 'src/styles/global.css'
 
-function MyApp({ Component, pageProps }: AppProps) {
-    return <Component {...pageProps} />
+function MyApp({Component, pageProps}: AppProps) {
+  return <Component {...pageProps} />
 }
 
 // Only uncomment this method if you have blocking data requirements for

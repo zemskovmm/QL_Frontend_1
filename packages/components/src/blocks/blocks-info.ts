@@ -14,7 +14,7 @@ enum PredefinedTypes {
 }
 
 export interface BlockUiPossibleValue {
-  id: string|null;
+  id: string | null;
   name: string;
 }
 
@@ -33,24 +33,23 @@ export interface BlockUiFieldDefinition {
 
 
 export interface BlockSubTypeDefinition {
-    fields: BlockUiFieldDefinition[];
+  fields: BlockUiFieldDefinition[];
 }
 
 export interface BlockUiDefinition extends BlockSubTypeDefinition {
-    fields: BlockUiFieldDefinition[];
-    subTypes?: { [name: string]: BlockSubTypeDefinition }
+  fields: BlockUiFieldDefinition[];
+  subTypes?: { [name: string]: BlockSubTypeDefinition }
 }
 
 export interface BlockTypeInfo {
-    id: string,
-    name: string;
-    definition: BlockUiDefinition;
-    renderer: (props: any) => any;
-    initialData: any;
+  id: string,
+  name: string;
+  definition: BlockUiDefinition;
+  renderer: (props: any) => any;
+  initialData: any;
 }
 
-export interface TypedBlockTypeInfo<T> extends BlockTypeInfo
-{
-    initialData: T;
+export interface TypedBlockTypeInfo<T> extends BlockTypeInfo {
+  initialData: T;
 }
 

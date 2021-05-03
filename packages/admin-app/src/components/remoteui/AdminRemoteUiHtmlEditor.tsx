@@ -1,12 +1,11 @@
 import {observable} from "mobx";
-import Draft, {ContentState, EditorState} from "draft-js";
+import Draft, {EditorState} from "draft-js";
 import {stateFromHTML} from 'draft-js-import-html';
 import {stateToHTML} from 'draft-js-export-html';
 import React, {lazy, Suspense} from "react";
 import {useObserver} from "mobx-react";
 import styles from "./AdminRemoteUiHtmlEditor.module.css"
 import {IRemoteUiData} from "@kekekeks/remoteui/src";
-
 
 
 export class AdminRemoteUiHtmlEditorStore implements IRemoteUiData {

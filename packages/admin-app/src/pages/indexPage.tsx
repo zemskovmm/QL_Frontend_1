@@ -1,15 +1,13 @@
 import React from 'react';
 import {Test} from '@project/components';
-import {PageEditorStore} from "../components/pageEditor/PageEditorStore";
-import {PageEditor} from "../components/pageEditor/PageEditor";
-const pageStore = new PageEditorStore(null, null);
+import {PageEditorStore} from "src/components/pageEditor/PageEditorStore";
+import {PageEditor} from "src/components/pageEditor/PageEditor";
+import {RouterLink} from "mobx-state-router";
+import {RouteNames} from "src/routing/routes";
 
-export const IndexPage = ()=>(
+export const IndexPage = () => (
   <div>
-    <div className="bg-red-500">Red</div>
-    <Test/>
-    <PageEditor store={pageStore}/>
-
+    <RouterLink routeName={RouteNames.newPage}>New page</RouterLink>
   </div>
 
 )
