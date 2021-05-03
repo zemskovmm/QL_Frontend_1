@@ -11,7 +11,13 @@
     "mobx": "^5.15.6",
     "mobx-react": "^6.2.5",
     "mobx-react-lite": "^2.2.2",
-    "mobx-state-router": "3.1.5"
+    "mobx-state-router": "3.1.5",
+    "draft-js": "^0.11.7",
+    "draft-js-export-html": "^1.4.1",
+    "draft-js-import-html": "^1.4.1",
+    "react-draft-wysiwyg": "^1.14.6",
+    "react-slider": "^1.1.4",
+    "react-sortable-hoc": "^2.0.0"
   },
   "devDependencies": {
     "@craco/craco": "^6.1.2",
@@ -24,7 +30,10 @@
     "postcss-nested": "^5.0.5",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "@types/history": "~4.7.3",
-    "cross-env": "^5.1.6"
+    "cross-env": "^5.1.6",
+    "@types/draft-js": "^0.11.1",
+    "@types/react-draft-wysiwyg": "^1.13.2",
+    "@types/react-slider": "^1.1.2"
   },
   "scripts": {
     "start": "cross-env DISABLE_ESLINT_PLUGIN=true PORT=3001 craco start",

@@ -1,0 +1,3 @@
+[submodule "external/remoteui"]
+	path = external/remoteui
+	url = git@github.com:kekekeks/remoteui.git

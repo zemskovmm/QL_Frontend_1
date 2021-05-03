@@ -16,6 +16,7 @@ const fixModuleTypeScriptPlugin = {
         const newIncludePaths = [
           // relative path to my yarn workspace library
           path.resolve(__dirname, '../components'),
+          path.resolve(__dirname, '../../external/remoteui/RemoteUi/web'),
         ];
         if (tsxRule) {
           if (Array.isArray(tsxRule.include)) {
