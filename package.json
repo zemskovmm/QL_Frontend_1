@@ -17,6 +17,7 @@
     "admin-start": "yarn workspace admin-app start",
     "admin-build": "yarn workspace admin-app build",
     "next-dev": "yarn workspace web-app dev",
-    "next-build": "yarn workspace web-app build"
+    "next-build": "yarn workspace web-app build",
+    "next-start": "yarn workspace web-app start"
   }
 }
