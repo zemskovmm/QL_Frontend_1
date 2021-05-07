@@ -5,8 +5,8 @@ import { RouteNames } from "src/routing/routes";
 import { AdminTable } from "src/components/common/AdminTable";
 import { Paginator } from "src/components/common/Paginator";
 import { dmap } from "src/utils/util";
-import { AllLanguages } from "src/utils/langs";
-import { AdminPageListItemDto } from "src/interfaces/PageDto";
+import { AllLanguages } from "@project/components/src/utils/langs";
+import { AdminPageListItemDto } from "src/interfaces/AdminPageDto";
 
 export const PageListPage = () => {
   var s = useRootStore().pageListPage;

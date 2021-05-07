@@ -1,19 +1,7 @@
+import {PageDataDto} from "@project/components/src/interfaces/pageSharedDto";
+
 export interface IdResponseDto {
   id: number
-}
-
-export interface PageBlockRowDto {
-  blocks: PageBlockDto[];
-}
-
-export interface PageBlockDto {
-  size: number;
-  type: string,
-  data: any
-}
-
-export interface PageDataDto {
-  rows: PageBlockRowDto[];
 }
 
 export interface AdminPageLanguageDto {

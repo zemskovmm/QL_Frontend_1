@@ -10,7 +10,7 @@ import {
 import { AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemoteUiHtmlEditor";
 import { action, computed, observable, runInAction } from "mobx";
 import { AvailableBlocks, findBlockInfo } from "@project/components/src/blocks";
-import { AdminPageDto, AdminPageLanguageDto } from "src/interfaces/PageDto";
+import { AdminPageDto, AdminPageLanguageDto } from "src/interfaces/AdminPageDto";
 import { RequestTracking } from "src/utils/Loadable";
 import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
@@ -115,13 +115,16 @@ export class PageEditorCellStore {
   }
 
   triggerDelete() {
-    if(!confirm("Are you sure?"))
-      return;
+    if (!confirm("Are you sure?")) return;
     this.row.cells = this.row.cells.filter((x) => x != this);
   }
 }
 
-function editNewCell(editor: PageLanguageEditorStore, row: PageEditorRowStore, cb: (cell: PageEditorCellStore)=>void) {
+function editNewCell(
+  editor: PageLanguageEditorStore,
+  row: PageEditorRowStore,
+  cb: (cell: PageEditorCellStore) => void
+) {
   const cell = new PageEditorCellStore(
     editor,
     row,
@@ -141,7 +144,7 @@ export class PageEditorRowStore {
   constructor(private editor: PageLanguageEditorStore) {}
 
   @action addNewCell() {
-    editNewCell(this.editor, this, cell => {
+    editNewCell(this.editor, this, (cell) => {
       this.cells.push(cell);
     });
   }
@@ -151,9 +154,8 @@ export class PageEditorRowStore {
   }
 
   remove() {
-    if(!confirm("Are you sure?"))
-      return;
-    this.editor.rows= this.editor.rows.filter((x) => x != this);
+    if (!confirm("Are you sure?")) return;
+    this.editor.rows = this.editor.rows.filter((x) => x != this);
   }
 }
 
@@ -175,10 +177,10 @@ export class PageLanguageEditorStore {
 
   @action addRow() {
     const row = new PageEditorRowStore(this);
-    editNewCell(this, row, cell => {
+    editNewCell(this, row, (cell) => {
       row.cells.push(cell);
       this.rows.push(row);
-    })
+    });
   }
 
   serialize(): AdminPageLanguageDto {

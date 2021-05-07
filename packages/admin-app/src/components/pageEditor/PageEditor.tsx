@@ -14,9 +14,9 @@ import { AdminSlider } from "src/components/common/AdminSlider";
 import { AdminOverlayDialog } from "src/components/common/AdminOverlayDialog";
 import { bind, dmap } from "src/utils/util";
 import { AdminTabControl } from "src/components/common/AdminTabControl";
-import { AllLanguages } from "src/utils/langs";
 import "@kekekeks/remoteui/src/RemoteUiEditor.css";
 import {AdminTextBox} from "src/components/common/AdminTextBox";
+import {AllLanguages} from "@project/components/src/utils/langs";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;

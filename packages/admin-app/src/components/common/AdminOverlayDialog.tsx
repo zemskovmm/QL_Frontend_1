@@ -1,5 +1,5 @@
 import styles from './AdminOverlayDialog.module.css'
-import {Portal} from "./Portal";
+import {Portal} from "@project/components/src/utils/Portal";
 
 export const AdminOverlayDialog = (props: { children?: any, cancel: () => void }) => {
   return <Portal>
