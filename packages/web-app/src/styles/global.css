@@ -1,5 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
+
+:root {
+  --color-primary: #373737;
+  --color-secondary: #567DD0;
+  /* ... */
+}
+
 @tailwind base;
 
 @tailwind components;
 
 @tailwind utilities;
+
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--color-primary);
+}
