@@ -1,0 +1,69 @@
+stages:
+  - build
+  - deploy-admin
+  - deploy-web
+    
+build:
+  stage: build
+  tags:
+    - shell
+    - ql-dev
+  artifacts:
+    paths:
+      - out
+  script:
+    - git submodule update --init --recursive
+    - yarn install --frozen-lockfile
+    - yarn workspace web-app run build && yarn workspace admin-app run build
+
+deploy-web:
+  stage: deploy-web
+  tags:
+    - shell
+    - ql-dev
+  dependencies:
+    - build
+  only:
+    - master
+  script: 
+    - sudo systemctl stop quartier-latin-web
+    - rm -rf /apps/quartier-admin/web && cp -r ./ /apps/quartier-admin/web/
+    - sudo systemctl start quartier-latin-web
+
+deploy-admin:
+  stage: deploy-admin
+  tags:
+    - shell
+    - ql-dev
+  dependencies:
+    - build
+  only:
+    - master
+  script:
+    - rm -rf /apps/quartier-admin/admin/ && cp -r packages/admin-app/build/ /apps/quartier-admin/admin/
+
+deploy-web-dev:
+  stage: deploy-web
+  tags:
+    - shell
+    - ql-dev
+  dependencies:
+    - build
+  only:
+    - Development
+  script:
+    - sudo systemctl stop quartier-latin-web-dev
+    - rm -rf /apps/quartier-dev/web && cp -r ./ /apps/quartier-dev/web/
+    - sudo systemctl start quartier-latin-web-dev
+
+deploy-admin-dev:
+  stage: deploy-admin
+  tags:
+    - shell
+    - ql-dev
+  dependencies:
+    - build
+  only:
+    - Development
+  script:
+    - rm -rf /apps/quartier-dev/admin/ && cp -r packages/admin-app/build/ /apps/quartier-dev/admin/
