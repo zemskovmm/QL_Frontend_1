@@ -2,24 +2,24 @@ import { HeaderDataDto } from "src/interfaces/headerDataDto";
 
 const headerData: { [key: string]: HeaderDataDto } = {
   ru: {
-    social: {
-      vk: {
+    social: [
+      {
         url: "https://vk.com/quartierlatinru",
         title: "vk",
       },
-      facebook: {
+      {
         url: "https://www.facebook.com/QuartierLatinRU/",
         title: "facebook",
       },
-      telegram: {
+      {
         url: "https://t.me/quartierlatinru",
         title: "telegram",
       },
-      instagram: {
+      {
         title: "instagram",
         url: "https://www.instagram.com/quartierlatinru/",
       },
-    },
+    ],
     offers: [
       {
         url: "/ru/training",
@@ -58,24 +58,20 @@ const headerData: { [key: string]: HeaderDataDto } = {
     ],
   },
   en: {
-    social: {
-      vk: {
+    social: [
+      {
         title: "facebook",
         url: "https://www.facebook.com/QuartierLatinEN/",
       },
-      facebook: {
+      {
         title: "instagram",
         url: "https://www.instagram.com/quartierlatinen/",
       },
-      telegram: {
-        url: "",
-        title: "",
-      },
-      instagram: {
+      {
         title: "WhatsApp",
         url: "https://api.whatsapp.com/send/?phone=33626638627&text&app_absent=0",
       },
-    },
+    ],
     offers: [
       {
         title: "EDUCATION",
@@ -114,24 +110,6 @@ const headerData: { [key: string]: HeaderDataDto } = {
     ],
   },
   cn: {
-    social: {
-      vk: {
-        url: "",
-        title: "",
-      },
-      facebook: {
-        url: "",
-        title: "",
-      },
-      telegram: {
-        url: "",
-        title: "",
-      },
-      instagram: {
-        url: "",
-        title: "",
-      },
-    },
     offers: [
       {
         url: "/cn/training",
@@ -170,24 +148,20 @@ const headerData: { [key: string]: HeaderDataDto } = {
     ],
   },
   fr: {
-    social: {
-      vk: {
+    social: [
+      {
         title: "facebook",
         url: "https://www.facebook.com/QuartierLatinFR/",
       },
-      facebook: {
+      {
         title: "instagram",
         url: "https://www.instagram.com/quartierlatinfr/",
       },
-      telegram: {
-        url: "",
-        title: "",
-      },
-      instagram: {
+      {
         title: "WhatsApp",
         url: "https://api.whatsapp.com/send/?phone=33626638627&text&app_absent=0",
       },
-    },
+    ],
     offers: [
       {
         title: "Enseignement",
@@ -226,24 +200,24 @@ const headerData: { [key: string]: HeaderDataDto } = {
     ],
   },
   esp: {
-    social: {
-      vk: {
+    social: [
+      {
         title: "facebook",
         url: "https://www.facebook.com/QuartierLatinEN/",
       },
-      facebook: {
+      {
         title: "instagram",
         url: "https://www.instagram.com/quartierlatinesp/",
       },
-      telegram: {
+      {
         url: "",
         title: "",
       },
-      instagram: {
+      {
         title: "WhatsApp",
         url: "https://api.whatsapp.com/send/?phone=33626638627&text&app_absent=0",
       },
-    },
+    ],
     offers: [
       {
         title: "Estudios",

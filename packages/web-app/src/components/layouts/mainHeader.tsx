@@ -8,7 +8,9 @@ import {ContactUsFormButton} from "src/components/common/contactUsForm";
 import {LocalizedText} from "src/components/common/LocalizedText";
 
 export interface MainHeaderProps {
-  data: HeaderDataDto;
+  data: {
+    [key: string]: HeaderDataDto
+  };
   urls: { [key: string]: string };
 }
 
@@ -19,9 +21,9 @@ export const MainHeader = (props: MainHeaderProps) => {
     <div className="bg-blue-500 text-white mb-4">
       Quartier Latin
       <div>
-        {props.data.links.map((l) => (
-          <a className="m-1" href={l[lang].url}>
-            {l[lang].title}
+        {props.data[lang].links.map((l) => (
+          <a className="m-1" href={l.url}>
+            {l.title}
           </a>
         ))}
       </div>
