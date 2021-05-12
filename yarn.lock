@@ -11793,11 +11793,6 @@ tailwind-bootstrap-grid@^3.3.0:
     lodash "^4.17.15"
     reduce-css-calc "^2.1.6"
 
-tailwindcss-pseudo-elements@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/tailwindcss-pseudo-elements/-/tailwindcss-pseudo-elements-2.0.0.tgz#778a29b9aafeef89fe2e22efe047ae56822627a3"
-  integrity sha512-cbnF8Rg1tJjsgrUK1sLt/TNAea9zKNhWGTI5NtKxZ8WhYjHCMAGOjaHg+iql8UlXaW1U9jPeyJsGlQsLGrbomQ==
-
 tailwindcss@^2.1.2, "tailwindcss@npm:@tailwindcss/postcss7-compat":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@tailwindcss/postcss7-compat/-/postcss7-compat-2.1.2.tgz#4ae2a3a3c05622ee04307997b0f8bea5c8dbc2b6"
