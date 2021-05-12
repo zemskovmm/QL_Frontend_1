@@ -17,7 +17,8 @@
     "draft-js-import-html": "^1.4.1",
     "react-draft-wysiwyg": "^1.14.6",
     "react-slider": "^1.1.4",
-    "react-sortable-hoc": "^2.0.0"
+    "react-sortable-hoc": "^2.0.0",
+    "fast-json-stable-stringify": "^2.1.0"
   },
   "devDependencies": {
     "@craco/craco": "^6.1.2",
