@@ -2,6 +2,8 @@ import { OverlayDialog } from "src/components/common/dialog/OverlayDialog";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { useState } from "react";
 
+import styles from './contactUsForm.css'
+
 export const ContactUsForm = (props: { onDismiss: () => void }) => {
   return (
     <OverlayDialog cancel={props.onDismiss}>
@@ -21,7 +23,7 @@ export const ContactUsFormButton = (props: { children: any }) => {
 
   return (
     <>
-      <a
+      <a className={styles.button}
         href="#"
         onClick={() => {
           setIsOpen(true);
