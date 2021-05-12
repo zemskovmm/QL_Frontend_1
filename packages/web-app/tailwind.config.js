@@ -7,6 +7,8 @@ module.exports = {
     colors: {
       primary: 'var(--color-primary)',
       secondary: 'var(--color-secondary)',
+      bgprimary: 'var(--color-bg-primary)',
+      bgsecondary: 'var(--color-bg-secondary)',
     },
     boxShadow: {
       DEFAULT: '0 5px 10px rgba(0, 78, 255, 0.05), 0 10px 30px rgba(0, 78, 255, 0.03);',

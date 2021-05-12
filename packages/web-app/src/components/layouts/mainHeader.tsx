@@ -8,7 +8,9 @@ import {ContactUsFormButton} from "src/components/common/contactUsForm";
 import {LocalizedText} from "src/components/common/LocalizedText";
 
 import Logo from "src/assets/images/logo.png"
-import IconVk from "src/assets/images/socials/vk.svg";
+import IconVk from "../../assets/icons/IconVk";
+import IconFacebook from "../../assets/icons/IconFacebook";
+import IconInstagram from "../../assets/icons/IconInstagram";
 
 export interface MainHeaderProps {
   data: HeaderDataDto;
@@ -20,7 +22,7 @@ export const MainHeader = (props: MainHeaderProps) => {
   const router = useRouter();
   return (
     <div className="shadow">
-      <div className="flex justify-between max-w-screen-xl w-full my-0 mx-auto py-6 px-0">
+      <div className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-6 px-0">
         <div className="flex">
           <img className="mr-10" src={Logo} alt="Quartier Latin" />
           <ul className="list-none flex">
@@ -33,22 +35,28 @@ export const MainHeader = (props: MainHeaderProps) => {
             ))}
           </ul>
         </div>
-        <IconVk />
-        <ContactUsFormButton><LocalizedText id="contactUs_title"/></ContactUsFormButton>
-        <select
-          className="text-black"
-          value={lang}
-          onChange={(e) => {
-            const newLang = e.target.value;
-            if (props.urls.hasOwnProperty(newLang)) {
-              router.push(props.urls[newLang]);
-            }
-          }}
-        >
-          {supportedLocales.map((l) => (
-            <option value={l}>{AllLanguages[l].title}</option>
-          ))}
-        </select>
+        <div className="flex">
+          <div className="flex justify-end items-center mr-4">
+            <a className="mx-3 cursor-pointer"><IconVk /></a>
+            <a className="mx-3 cursor-pointer"><IconFacebook /></a>
+            <a className="mx-3 cursor-pointer"><IconInstagram /></a>
+          </div>
+          <ContactUsFormButton><LocalizedText id="contactUs_title"/></ContactUsFormButton>
+         {/* <select
+            className="text-black"
+            value={lang}
+            onChange={(e) => {
+              const newLang = e.target.value;
+              if (props.urls.hasOwnProperty(newLang)) {
+                router.push(props.urls[newLang]);
+              }
+            }}
+          >
+            {supportedLocales.map((l) => (
+              <option value={l}>{AllLanguages[l].title}</option>
+            ))}
+          </select>*/}
+        </div>
       </div>
       <div>
         Test:
