@@ -8,6 +8,7 @@ import {ContactUsFormButton} from "src/components/common/contactUsForm";
 import {LocalizedText} from "src/components/common/LocalizedText";
 
 import Logo from "src/assets/images/logo.png"
+import IconVk from "src/assets/images/socials/vk.svg";
 
 export interface MainHeaderProps {
   data: HeaderDataDto;
@@ -32,6 +33,7 @@ export const MainHeader = (props: MainHeaderProps) => {
             ))}
           </ul>
         </div>
+        <IconVk />
         <ContactUsFormButton><LocalizedText id="contactUs_title"/></ContactUsFormButton>
         <select
           className="text-black"
