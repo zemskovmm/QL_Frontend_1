@@ -10,10 +10,8 @@ import {useEffect} from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const lang = router.query.lang;
+  const lang = router.query.lang || "en";
   let {urls} = pageProps;
-  if (lang == null)
-    return <div>404 - not found</div>;
   if(urls == null)
     urls = getLanguageUrlsFromRouterState(router);
 

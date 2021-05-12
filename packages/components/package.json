@@ -9,6 +9,7 @@
     },
     "peerDependencies": {
       "react": "*",
-      "typescript": "*"
+      "typescript": "*",
+      "fast-json-stable-stringify": "*"
     }
   }
