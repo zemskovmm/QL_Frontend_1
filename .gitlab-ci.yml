@@ -2,45 +2,13 @@ stages:
   - deploy-web
   - deploy-admin
     
-#deploy-web:
-#  stage: deploy-web
-#  tags:
-#    - shell
-#    - ql-dev
-#  dependencies:
-#    - build
-#  only:
-#    - master
-#  script: 
-#    - git submodule sync && git submodule update --init --recursive
-#    - yarn install --frozen-lockfile
-#    - yarn workspace web-app run
-#    - sudo systemctl stop quartier-latin-web
-#    - rm -rf /apps/quartier-admin/web && cp -r . /apps/quartier-admin/web/
-#    - sudo systemctl start quartier-latin-web
-#
-#deploy-admin:
-#  stage: deploy-admin
-#  tags:
-#    - shell
-#    - ql-dev
-#  dependencies:
-#    - build
-#  only:
-#    - master
-#  script:
-#    - git submodule sync && git submodule update --init --recursive
-#    - yarn install --frozen-lockfile
-#    - yarn workspace admin-app run build
-#    - rm -rf /apps/quartier-admin/admin/ && cp -r out/packages/admin-app/build/ /apps/quartier-admin/admin/
-
 deploy-web-dev:
   stage: deploy-web
   tags:
     - shell
     - ql-dev
   only:
-    - Development
+    - develop
   script:
     - git submodule sync && git submodule update --init --recursive
     - yarn install --frozen-lockfile
@@ -55,7 +23,7 @@ deploy-admin-dev:
     - shell
     - ql-dev
   only:
-    - Development
+    - develop
   script:
     - git submodule sync && git submodule update --init --recursive
     - yarn install --frozen-lockfile
