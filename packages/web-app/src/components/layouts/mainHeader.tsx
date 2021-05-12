@@ -33,6 +33,8 @@ export const MainHeader = (props: MainHeaderProps) => {
           if (props.urls.hasOwnProperty(newLang)) {
             router.push(props.urls[newLang]);
           }
+          else
+            router.push("/" + newLang);
         }}
       >
         {supportedLocales.map((l) => (

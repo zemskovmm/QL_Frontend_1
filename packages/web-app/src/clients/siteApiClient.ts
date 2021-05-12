@@ -1,6 +1,7 @@
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { ClientRouteDto } from "src/interfaces/clientRouteDto";
 import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilterDto";
+import { useData } from "@project/components/src/utils/dataEffect";
 
 export interface CatalogFilterRequestDto {
   identifier: string;
@@ -19,6 +20,16 @@ export class SiteApiClient extends ApiClientBase {
     return res.filters;
   }
 
+  useCatalogFilters(lang: string, entityType: string): CatalogFilterDto[] | undefined {
+    return useData(
+      {
+        lang: lang,
+        entityType: entityType,
+      },
+      (req) => this.getCatalogFilters(req.lang, req.entityType)
+    );
+  }
+
   async getCatalogItems<T>(
     lang: string,
     entityType: string,
@@ -30,9 +41,28 @@ export class SiteApiClient extends ApiClientBase {
     const req = {
       pageSize: pageSize,
       page: pageNumber,
-      filters: filters
+      filters: filters,
     };
     return this.sendRequest<CatalogResponseDto<T>>(url, req);
+  }
+
+  useCatalogItems<T>(
+    lang: string,
+    entityType: string,
+    pageSize: number,
+    pageNumber: number,
+    filters: CatalogFilterRequestDto[]
+  ): CatalogResponseDto<T> | undefined {
+    return useData(
+      {
+        lang: lang,
+        entityType: entityType,
+        pageSize: pageSize,
+        pageNumber: pageNumber,
+        filters: filters,
+      },
+      (req) => this.getCatalogItems(req.lang, req.entityType, req.pageSize, req.pageNumber, req.filters)
+    );
   }
 }
 
