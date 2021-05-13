@@ -1,0 +1,27 @@
+﻿.breadcrumbs__items {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  text-decoration: underline;
+  color: #A8B5CC;
+  text-transform: capitalize;
+}
+
+.breadcrumbs__items:not(:first-child) {
+  position: relative;
+  padding-left: 38px;
+  margin-left: 16px;
+}
+
+.breadcrumbs__items:not(:first-child):after {
+  left: 0;
+  transform: translateY(2px);
+  position: absolute;
+  content: url("src/assets/icons/arrow-left.svg");
+}
+
+.breadcrumbs__items:last-child {
+  text-decoration: none;
+  color: #646F83;
+}
