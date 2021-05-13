@@ -9,6 +9,7 @@ module.exports = {
       secondary: 'var(--color-secondary)',
       bgprimary: 'var(--color-bg-primary)',
       bgsecondary: 'var(--color-bg-secondary)',
+      bdprimary: 'var(--color-bg-primary)'
     },
     boxShadow: {
       DEFAULT: '0 5px 10px rgba(0, 78, 255, 0.05), 0 10px 30px rgba(0, 78, 255, 0.03);',
@@ -17,6 +18,9 @@ module.exports = {
       spacing: {
         128: '32rem',
       },
+      borderRadius: {
+        primary: '0.1875rem'
+      }
     },
   },
   variants: {

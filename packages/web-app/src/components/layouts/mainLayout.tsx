@@ -9,7 +9,7 @@ export interface MainLayoutProps {
   };
   footer: FooterDataDto;
   children: any;
-  urls: { [key: string]: string };
+  urls: string [];
 }
 
 export const MainLayout = (props: MainLayoutProps) => {

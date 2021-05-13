@@ -1,0 +1,17 @@
+.button {
+  padding: 5px 21px 5px 12px;
+}
+
+.button:before {
+  content: '';
+  background: url('src/assets/images/icons/call.svg') no-repeat 0 center / 18px 20px;
+  width: 40px;
+  height: 30px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--color-bd-primary);
+  margin-right: 17px;
+  font-size: 0.875em;
+  line-height: 121%;
+  font-weight: 500;
+
+}
