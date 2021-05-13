@@ -1,20 +1,38 @@
-import React from "react";
-
+import React, {useState} from "react";
 import cn from 'classnames'
-
+import {default  as Flags} from "src/assets/icons/flags";
 import styles from './langChooser.module.css'
+import {HeaderDataDto} from "../../../interfaces/headerDataDto";
 
-export interface langProps {
+interface langProps {
   urls: string [],
   lang: string
 }
 
-export const  LangChooser = ({lang, urls}:langProps) => (
-  <div className={cn(styles.lang, 'bg-bgprimary', 'rounded-primary')}>
-    <span>RU</span>
-    <span>{lang.toUpperCase()}</span>
-    {urls.map(el => <span>{el}</span>)}
-  </div>)
+type currType = {
+  [key: string]: string
+}
+
+export const  LangChooser = ({lang, urls}:langProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const curr: currType = {
+    ru: 'RUB',
+    cn: '¥',
+    esp: '$',
+    en: '$',
+    fr: '€'
+  }
+
+  return <div onClick={()=>setIsOpen(!isOpen)} className={cn(styles.lang, 'bg-bgprimary', 'rounded-primary')}>
+    <Flags icon={lang} />
+    <span>{curr[lang]}</span>
+    {urls.length > 0 && <ul className={isOpen ? styles.open : ''}>
+      {urls.map(el => <li className={el === lang ? 'font-bold' : ''}><a href={el === lang ? '#' : `/${el}`}>{el}</a></li>)}
+    </ul>
+    }
+  </div>
+}
 
 
 /*<select

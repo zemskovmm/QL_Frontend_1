@@ -9,16 +9,14 @@ import {LocalizedText} from "src/components/common/LocalizedText";
 
 
 import Logo from "src/assets/images/logo.png"
+import {default  as Social} from "src/assets/icons/social";
+import {LangChooser} from "src/components/common/langChooser/langChooser";
+import IconMagnify from "src/assets/icons/IconMagnify";
 
-import {default  as Social} from "../../assets/icons/social";
+//import {defaults} from "autoprefixer";
 
-import IconVk from "../../assets/icons/social/IconVk";
-import IconFacebook from "../../assets/icons/social/IconFacebook";
-import IconInstagram from "../../assets/icons/social/IconInstagram";
-
-import {LangChooser} from "../common/langChooser/langChooser";
-import IconMagnify from "../../assets/icons/IconMagnify";
-import {defaults} from "autoprefixer";
+import styles from './main.module.css'
+import cn from "classnames";
 
 export interface MainHeaderProps {
   data: {
@@ -35,11 +33,11 @@ export const MainHeader = (props: MainHeaderProps) => {
       <div className="shadow w-full">
         <div className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
           <div className="flex">
-            <img className="mr-10" src={Logo} alt="Quartier Latin" />
+            <img className="mr-6" src={Logo} alt="Quartier Latin" />
             <ul className="list-none flex">
               {props.data[lang].links.map((l) => (
-                <li className="mx-6 uppercase flex items-center">
-                  <a className="text-xs font-bold hover:text-secondary" href={l.url}>
+                <li className="mx-4 uppercase flex items-center">
+                  <a className="text-xs font-bold hover:text-hover" href={l.url}>
                     {l.title}
                   </a>
                 </li>
@@ -48,7 +46,11 @@ export const MainHeader = (props: MainHeaderProps) => {
           </div>
           <div className="flex items-center">
             <div className="flex justify-end items-center mr-4">
-              {props.data[lang].social?.map(({title, url}) => {return title ? <a className="mx-3 cursor-pointer" href={url}><Social icon={title} /></a> : ''})}
+              {props.data[lang].social?.map(({title, url}) => {
+                return title
+                  ? <a className={cn("mx-3 cursor-pointer", styles.social)} href={url}><Social icon={title} /></a>
+                  : ''
+              })}
             </div>
             <div className="ml-2.5">
               <ContactUsFormButton><LocalizedText id="contactUs_title"/></ContactUsFormButton>

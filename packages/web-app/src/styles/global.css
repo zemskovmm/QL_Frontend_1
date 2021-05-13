@@ -7,7 +7,8 @@
   --color-secondary: #567DD0;
   --color-bg-primary: #EFF3FA;
   --color-bg-secondary: #EFF3FA;
-  --color-bd-primary: #C9D5F0
+  --color-bd-primary: #C9D5F0;
+  --color-hover: #567DD0
 }
 
 @tailwind base;
@@ -20,4 +21,8 @@
 body {
   font-family: 'Montserrat', sans-serif;
   color: var(--color-primary);
+}
+
+img {
+  object-fit: contain;
 }

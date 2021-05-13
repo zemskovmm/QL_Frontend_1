@@ -1,5 +1,6 @@
 .button {
   padding: 5px 21px 5px 12px;
+  white-space: nowrap;
 }
 
 .button:before {
