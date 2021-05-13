@@ -3,69 +3,69 @@ import { FooterDataDto } from "src/interfaces/footerDataDto";
 const footerData: FooterDataDto = {
   ru: {
     socials: [
-    {
-      url: "https://www.youtube.com/channel/UCEfRnfb8l-Wp7WXHkG-gUZA",
-      title: "youtube"
-    },
-    {
-      url: "https://www.google.com/maps/place/Quartier+Latin/@48.8697751,2.3483846,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x19b7799162dd9861!8m2!3d48.8697751!4d2.3505733?hl=ru&authuser=1",
-        title: "G+"
-    },
-    {
-      title: "linkedIn",
-        url: "https://fr.linkedin.com/in/quartier-latin-0b9ba084"
-    },
-    {
-      url: "https://www.instagram.com/quartierlatinru/",
-        title: "instagram"
-    },
-    {
-      title: "telegram",
-        url: "https://t.me/quartierlatinru"
-    },
-    {
-      url: "https://vk.com/quartierlatinru",
-        title: "vk"
-    },
-    {
-      url: "https://www.facebook.com/QuartierLatinRU/",
-        title: "facebook"
-    },
-    {
-      url: "https://twitter.com/quartierlatinru",
-        title: "twitter"
-    }
-  ],
+      {
+        url: "https://www.youtube.com/channel/UCEfRnfb8l-Wp7WXHkG-gUZA",
+        title: "youtube"
+      },
+      {
+        url: "https://www.google.com/maps/place/Quartier+Latin/@48.8697751,2.3483846,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x19b7799162dd9861!8m2!3d48.8697751!4d2.3505733?hl=ru&authuser=1",
+          title: "G+"
+      },
+      {
+        title: "linkedIn",
+          url: "https://fr.linkedin.com/in/quartier-latin-0b9ba084"
+      },
+      {
+        url: "https://www.instagram.com/quartierlatinru/",
+          title: "instagram"
+      },
+      {
+        title: "telegram",
+          url: "https://t.me/quartierlatinru"
+      },
+      {
+        url: "https://vk.com/quartierlatinru",
+          title: "vk"
+      },
+      {
+        url: "https://www.facebook.com/QuartierLatinRU/",
+          title: "facebook"
+      },
+      {
+        url: "https://twitter.com/quartierlatinru",
+          title: "twitter"
+      }
+    ],
     headLinks: {
-    forPartners: {
-      icon: "./../images/icons/cnain.svg",
-      link: {
-        title: "Для партнёров",
-        url: "https://quartier-latin.com/dlja-partnerov"
-      }
-    },
-    about: {
-      icon: "./../images/icons/equals.svg",
-      link: {
-        title: "О компании",
-        url: "https://quartier-latin.com/o-kompanii"
-      }
-    },
-    blog: {
-      icon: "./../images/icons/equals.svg",
-      link: {
-          url: "https://quartier-latin.com/blog",
-          title: "Блог"
-      }
-    },
-    faq: {
-      icon: "./../images/icons/information.svg",
+      forPartners: {
+        icon: "./../images/icons/cnain.svg",
         link: {
-        url: "https://quartier-latin.com/faq",
-          title: "faq"
+          title: "Для партнёров",
+          url: "https://quartier-latin.com/dlja-partnerov"
+        }
+      },
+      about: {
+        icon: "./../images/icons/equals.svg",
+        link: {
+          title: "О компании",
+          url: "https://quartier-latin.com/o-kompanii"
+        }
+      },
+      blog: {
+        icon: "./../images/icons/equals.svg",
+        link: {
+            url: "https://quartier-latin.com/blog",
+            title: "Блог"
+        }
+      },
+      faq: {
+        icon: "./../images/icons/information.svg",
+          link: {
+          url: "https://quartier-latin.com/faq",
+            title: "faq"
+        }
       }
-    }
-  },
+    },
     writeUs: "НАПИСАТЬ НАМ",
     links: [
     {
