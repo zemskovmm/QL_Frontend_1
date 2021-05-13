@@ -1,10 +1,10 @@
 import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
+import { CatalogInnerAbout } from "src/components/catalogInner/about/catalogInnerAbout";
 
 export const UniversityModule = (props: ClientUniversityDto) => {
   return (
     <div>
-      <h1>{props.title}</h1>
-      <pre>{JSON.stringify(props, null, 4)}</pre>
+      <CatalogInnerAbout data={props} />
     </div>
   );
 };
