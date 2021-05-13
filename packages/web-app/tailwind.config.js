@@ -7,6 +7,7 @@ module.exports = {
     colors: {
       primary: 'var(--color-primary)',
       secondary: 'var(--color-secondary)',
+      third: 'var(--color-third)',
       bgprimary: 'var(--color-bg-primary)',
       bgsecondary: 'var(--color-bg-secondary)',
       bdprimary: 'var(--color-bg-primary)',
