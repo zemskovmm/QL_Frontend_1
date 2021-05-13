@@ -16,7 +16,7 @@
 
 .breadcrumbs__items:not(:first-child):after {
   left: 0;
-  transform: translateY(2px);
+  transform: translateY(4px);
   position: absolute;
   content: url("src/assets/icons/arrow-left.svg");
 }
