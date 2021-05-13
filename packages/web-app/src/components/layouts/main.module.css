@@ -1,0 +1,7 @@
+.social:hover svg {
+  fill: var(--color-hover)
+}
+
+.social svg {
+  fill: var(--color-bd-primary)
+}
