@@ -8,7 +8,7 @@ const Index = () => <div>Redirecting...</div>;
 export default Index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  var lang = "en";
+  let lang = "en";
   if (context.req) {
     const acceptLanguage = context.req.headers["accept-language"];
     if (acceptLanguage != null)
