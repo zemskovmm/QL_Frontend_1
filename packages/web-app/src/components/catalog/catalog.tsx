@@ -7,7 +7,8 @@ import { CatalogFilterRequestDto, siteApi } from "src/clients/siteApiClient";
 import { ParsedUrlQuery } from "querystring";
 import { LoadingIf } from "src/components/utilities/Loading";
 import { Paginator } from "src/components/utilities/Paginator";
-import {CatalogView} from "src/components/catalog/catalogView";
+import { CatalogView } from "src/components/catalog/catalogView";
+import style from "./style/catalog.module.css";
 
 export interface CatalogProps<T> {
   elementRenderer: (element: T) => JSX.Element;
@@ -79,14 +80,16 @@ export function Catalog<T>(props: CatalogProps<T>) {
   };
 
   return (
-    <CatalogView<T>
-      page={parsed.page}
-      filters={filters}
-      parsedFilters={parsed.filters}
-      data={data}
-      setPage={setPage}
-      setFilter={setFilter}
-      elementRenderer={props.elementRenderer}
-    />
+    <div className={style.catalogWrapper}>
+      <CatalogView<T>
+        page={parsed.page}
+        filters={filters}
+        parsedFilters={parsed.filters}
+        data={data}
+        setPage={setPage}
+        setFilter={setFilter}
+        elementRenderer={props.elementRenderer}
+      />
+    </div>
   );
 }
