@@ -4,10 +4,12 @@ import { MainHeader } from "src/components/layouts/mainHeader";
 import {MainFooter} from "src/components/layouts/mainFooter";
 
 export interface MainLayoutProps {
-  header: HeaderDataDto;
+  header: {
+    [key: string]: HeaderDataDto
+  };
   footer: FooterDataDto;
   children: any;
-  urls: { [key: string]: string };
+  urls: string [];
 }
 
 export const MainLayout = (props: MainLayoutProps) => {

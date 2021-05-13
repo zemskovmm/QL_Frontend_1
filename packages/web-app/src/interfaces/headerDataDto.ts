@@ -1,14 +1,7 @@
-import { LocalizedLinkDto } from "src/interfaces/localizedLinkDto";
-
-export interface HeaderSocialLinksDto {
-  vk: LocalizedLinkDto;
-  facebook: LocalizedLinkDto;
-  telegram: LocalizedLinkDto;
-  instagram: LocalizedLinkDto;
-}
+import {LocalizedLinkLocale} from "src/interfaces/localizedLinkDto";
 
 export interface HeaderDataDto {
-  social: HeaderSocialLinksDto;
-  offers: LocalizedLinkDto[];
-  links: LocalizedLinkDto[];
+  social?: LocalizedLinkLocale[];
+  offers: LocalizedLinkLocale[];
+  links: LocalizedLinkLocale[];
 }

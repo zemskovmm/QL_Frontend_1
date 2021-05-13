@@ -1,6 +1,9 @@
 import { OverlayDialog } from "src/components/common/dialog/OverlayDialog";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { useState } from "react";
+import cn from 'classnames'
+
+import styles from './contactUsForm.module.css'
 
 export const ContactUsForm = (props: { onDismiss: () => void }) => {
   return (
@@ -21,7 +24,7 @@ export const ContactUsFormButton = (props: { children: any }) => {
 
   return (
     <>
-      <a
+      <a className={cn(styles.button, 'bg-bgprimary', 'rounded-primary', 'font-medium', 'flex', 'items-center', 'text-secondary')}
         href="#"
         onClick={() => {
           setIsOpen(true);

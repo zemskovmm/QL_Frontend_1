@@ -1,0 +1,51 @@
+﻿.postScriptButton {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.postScriptButton__button {
+  padding: 11px 45px;
+  color: white;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FF6768;
+  border-radius: 3px;
+  border: 0;
+  cursor: pointer;
+}
+
+.postScriptButton__button:first-child {
+  margin: auto;
+}
+
+.postScriptButton__description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  margin-right: 25px;
+  color: #646F83;
+  padding-left: 23px;
+  margin-left: auto;
+  position: relative;
+}
+
+.postScriptButton__description:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  border: 1px solid #FF6768;
+  width: 8.5px;
+  height: 8.5px;
+  box-sizing: border-box;
+  top: 7px;
+  transform: rotate(45deg);
+  transition: border 0.3s;
+}
