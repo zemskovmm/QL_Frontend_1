@@ -16,7 +16,7 @@ export function useAsyncBusy(
     setIsBusy(true);
 
     try {
-      cb();
+      await cb();
     } catch (e) {
       if (onError !== undefined) onError(e);
       else alert(e);
