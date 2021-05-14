@@ -19,5 +19,7 @@ const fr: LocaleDefinition = {
   contactUs_applyButton: "Envoyer",
   contactUs_thanks: "Merci pour votre candidature <br> <br> nous vous contacterons sous peu",
   catalogWidget_search: "Trouver",
+  breadcrumbs_Main: "Principal",
+  breadcrumbs_Catalog: "Catalogue",
 };
 export default fr;

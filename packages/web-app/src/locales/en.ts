@@ -17,6 +17,8 @@ const en = {
   contactUs_applyButton: "Submit a Request",
   contactUs_thanks: "Thank you for your application <br> <br> we will contact you shortly",
   catalogWidget_search: "Search",
+  breadcrumbs_Main: "Main",
+  breadcrumbs_Catalog: "Catalog",
 };
 
 export default en;

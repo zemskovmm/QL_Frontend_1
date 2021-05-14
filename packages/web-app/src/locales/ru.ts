@@ -19,5 +19,7 @@ const ru: LocaleDefinition = {
   contactUs_applyButton: "Подать заявку",
   contactUs_thanks: "Спасибо за заявку <br><br> мы скоро с вами свяжемся",
   catalogWidget_search: "Найти",
+  breadcrumbs_Main: "Главная",
+  breadcrumbs_Catalog: "Каталог",
 };
 export default ru;

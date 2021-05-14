@@ -18,6 +18,8 @@ const esp: LocaleDefinition = {
   contactUs_applyButton: "Submit a Request",
   contactUs_thanks: "Gracias por tu solicitud <br> <br> nos contactaremos a la brevedad",
   catalogWidget_search: "Encontrar",
+  breadcrumbs_Main: "el principal",
+  breadcrumbs_Catalog: "Catalogar",
 };
 
 export default esp;

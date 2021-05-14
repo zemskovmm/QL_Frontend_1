@@ -18,7 +18,9 @@ const cn: LocaleDefinition = {
     "By clicking Submit a Request, you agree to our <a href='#'>Terms of Use</a> and our <a href='#'>Privacy Policy</a>",
   contactUs_applyButton: "Submit a Request",
   contactUs_thanks: "谢谢您的申请<br> <br>我们会尽快与您联系",
-  catalogWidget_search: "寻找"
+  catalogWidget_search: "寻找",
+  breadcrumbs_Main: "主要的",
+  breadcrumbs_Catalog: "目录",
 };
 
 export default cn;
