@@ -29,9 +29,9 @@ export const MainHeader = (props: MainHeaderProps) => {
   const lang = useIntl().locale;
 
   return (
-    <div className="flex flex-col">
+    <header id="header" className="flex flex-col">
       <div className="shadow w-full">
-        <div className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
+        <nav className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
           <div className="flex">
             <img className="mr-6" src={Logo} alt="Quartier Latin" />
             <ul className="list-none flex">
@@ -48,7 +48,7 @@ export const MainHeader = (props: MainHeaderProps) => {
             <div className="flex justify-end items-center mr-4">
               {props.data[lang].social?.map(({title, url}) => {
                 return title
-                  ? <a className={cn("mx-3 cursor-pointer", styles.social)} href={url}><Social icon={title} /></a>
+                  ? <a className={cn("mx-3 cursor-pointer", styles.header_social)} href={url}><Social icon={title} /></a>
                   : ''
               })}
             </div>
@@ -62,14 +62,14 @@ export const MainHeader = (props: MainHeaderProps) => {
               <LangChooser lang={lang} urls={props.urls} />
             </div>
           </div>
-        </div>
+        </nav>
       </div>
       <div className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
         <Link href={`/${lang}`}>[Main]</Link>
         <Link href={`/${lang}/education`}>[Education]</Link>
         <Link href={`/${lang}/catalog/university`}>[Catalog]</Link>
       </div>
-    </div>
+    </header>
 
   );
 };

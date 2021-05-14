@@ -8,11 +8,11 @@ export interface LocalizedLinkDto {
 }
 
 export interface LocalizedLinkWithIconDto {
-  link: LocalizedLinkDto;
+  link: LocalizedLinkLocale;
   icon: string;
 }
 
 export interface LocalizedLinkGroupDto {
-  group: LocalizedLinkDto;
-  items: LocalizedLinkDto[];
+  group: LocalizedLinkLocale;
+  items: LocalizedLinkLocale[];
 }
