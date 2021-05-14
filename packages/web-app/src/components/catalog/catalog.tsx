@@ -7,7 +7,9 @@ import { CatalogFilterRequestDto, siteApi } from "src/clients/siteApiClient";
 import { ParsedUrlQuery } from "querystring";
 import { LoadingIf } from "src/components/utilities/Loading";
 import { Paginator } from "src/components/utilities/Paginator";
-import {CatalogView} from "src/components/catalog/catalogView";
+import { CatalogView } from "src/components/catalog/catalogView";
+import style from "./style/catalog.module.css";
+import { Breadcrumbs } from "src/components/ui/Breadcrumbs/breadcrumbs";
 
 export interface CatalogProps<T> {
   elementRenderer: (element: T) => JSX.Element;
@@ -78,15 +80,73 @@ export function Catalog<T>(props: CatalogProps<T>) {
     changeQueryArg(router!, "filter-" + identifier, newItems.join(","));
   };
 
+  const bread = {
+    fr: [
+      {
+        name: "Principal",
+        link: "/fr",
+      },
+      {
+        name: "Catalogue",
+        link: "/fr/catalog/university",
+      },
+    ],
+    en: [
+      {
+        name: "Main",
+        link: "/en",
+      },
+      {
+        name: "Catalog",
+        link: "/en/catalog/university",
+      },
+    ],
+    esp: [
+      {
+        name: "el principal",
+        link: "/esp",
+      },
+      {
+        name: "Catalogar",
+        link: "/esp/catalog/university",
+      },
+    ],
+    ru: [
+      {
+        name: "Главная",
+        link: "/ru",
+      },
+      {
+        name: "Каталог",
+        link: "/ru/catalog/university",
+      },
+    ],
+    cn: [
+      {
+        name: "主要的",
+        link: "/cn",
+      },
+      {
+        name: "目录",
+        link: "/cn/catalog/university",
+      },
+    ],
+  };
+
   return (
-    <CatalogView<T>
-      page={parsed.page}
-      filters={filters}
-      parsedFilters={parsed.filters}
-      data={data}
-      setPage={setPage}
-      setFilter={setFilter}
-      elementRenderer={props.elementRenderer}
-    />
+    <div className={style.catalogWrapper}>
+      <div className={`mr-auto mb-7`}>
+        <Breadcrumbs items={bread[locale]} />
+      </div>
+      <CatalogView<T>
+        page={parsed.page}
+        filters={filters}
+        parsedFilters={parsed.filters}
+        data={data}
+        setPage={setPage}
+        setFilter={setFilter}
+        elementRenderer={props.elementRenderer}
+      />
+    </div>
   );
 }

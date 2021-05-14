@@ -12,6 +12,7 @@
   "dependencies": {
     "@project/components": "*",
     "accept-language-parser": "^1.5.0",
+    "element-react": "^1.4.34",
     "fast-json-stable-stringify": "^2.1.0",
     "next": "^10.2.0",
     "next-compose-plugins": "^2.2.0",
