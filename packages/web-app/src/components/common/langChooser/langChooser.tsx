@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import cn from 'classnames'
 import {default  as Flags} from "src/assets/icons/flags";
 import styles from './langChooser.module.css'
-import {HeaderDataDto} from "../../../interfaces/headerDataDto";
+import { useRouter } from "next/router";
 
+import Link from "next/link";
 interface langProps {
   urls: string [],
   lang: string
@@ -15,6 +16,7 @@ type currType = {
 
 export const  LangChooser = ({lang, urls}:langProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const path = useRouter().asPath;
 
   const curr: currType = {
     ru: 'RUB',
@@ -27,9 +29,13 @@ export const  LangChooser = ({lang, urls}:langProps) => {
   return <div onClick={()=>setIsOpen(!isOpen)} className={cn(styles.lang, 'bg-bgprimary', 'rounded-primary')}>
     <Flags icon={lang} />
     <span>{curr[lang]}</span>
-    {urls.length > 0 && <ul className={isOpen ? styles.open : ''}>
-      {urls.map(el => <li className={el === lang ? 'font-bold' : ''}><a href={el === lang ? '#' : `/${el}`}>{el}</a></li>)}
-    </ul>
+    {urls.length > 0 && <>
+      <div className={isOpen ? styles.back : ''}></div>
+      <ul className={isOpen ? styles.open : ''}>
+        {urls.map(el => <li className={el === lang ? 'font-bold' : ''}><Link href={path.replace('/'+lang, '/' + el)}>{el}</Link></li>)}
+      </ul>
+    </>
+
     }
   </div>
 }

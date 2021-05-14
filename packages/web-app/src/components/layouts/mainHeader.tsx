@@ -2,7 +2,7 @@ import { HeaderDataDto } from "src/interfaces/headerDataDto";
 import { useIntl } from "react-intl";
 //import { supportedLocales } from "src/locales/locales";
 //import { AllLanguages } from "@project/components/src/utils/langs";
-//import { useRouter } from "next/router";
+
 import Link from "next/link";
 import {ContactUsFormButton} from "src/components/common/contactUsForm/contactUsForm";
 import {LocalizedText} from "src/components/common/LocalizedText";
