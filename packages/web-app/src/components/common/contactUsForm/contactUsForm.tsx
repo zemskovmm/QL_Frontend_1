@@ -18,6 +18,16 @@ export const SuccessMessage = (props: { onDismiss: () => void }) => {
     </OverlayDialog>
   );
 };
+
+export type ContactUsFormType = {
+  name: string;
+  lastname: string;
+  email: string;
+  tel: string;
+  com: string;
+  url: string;
+};
+
 export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => void }) => {
   const intl = useIntl();
 
@@ -129,14 +139,14 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
   );
 };
 
+const ContactUsFormController = (props: { onDismiss: () => void }) => {
+  const [isSuccess, setIsSuccess] = useState(false);
+  if (isSuccess) return <SuccessMessage onDismiss={props.onDismiss} />;
+  return <ContactUsForm onDismiss={props.onDismiss} onSuccess={() => setIsSuccess(true)} />;
+};
+
 export const ContactUsFormButton = (props: { children: any }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const ContactUsFormController = (props: { onDismiss: () => void }) => {
-    const [isSuccess, setIsSuccess] = useState(false);
-    if (isSuccess) return <SuccessMessage onDismiss={props.onDismiss} />;
-    return <ContactUsForm onDismiss={props.onDismiss} onSuccess={() => setIsSuccess(true)} />;
-  };
 
   return (
     <>

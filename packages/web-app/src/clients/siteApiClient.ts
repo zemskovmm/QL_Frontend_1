@@ -2,6 +2,7 @@ import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { ClientRouteDto } from "src/interfaces/clientRouteDto";
 import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilterDto";
 import { useData } from "@project/components/src/utils/dataEffect";
+import { ContactUsFormType } from "src/components/common/contactUsForm/contactUsForm";
 
 export interface CatalogFilterRequestDto {
   identifier: string;
@@ -14,10 +15,9 @@ export class SiteApiClient extends ApiClientBase {
     return this.sendRequest<ClientRouteDto>(url);
   }
 
-  async sendCallback(req: any) {
+  async sendCallback(req: ContactUsFormType) {
     const url = `call/request`;
-    const res = await this.sendRequest(url, req);
-    return res;
+    return await this.sendRequest(url, req);
   }
 
   async getCatalogFilters(lang: string, entityType: string): Promise<CatalogFilterDto[]> {
