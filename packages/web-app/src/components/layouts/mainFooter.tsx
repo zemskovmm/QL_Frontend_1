@@ -8,16 +8,18 @@ import cn from "classnames";
 import Logo from "src/assets/images/logoFooter.svg"
 import Arrow from "src/assets/images/icons/arrow.svg"
 
+import {default  as Social} from "src/assets/icons/socialFooter";
+
 export const MainFooter = (props: FooterDataDto) => {
   const lang = useIntl().locale;
   return (
     <footer className="bg-bgsecondary text-third flex flex-col">
-      <div className={cn("flex justify-between max-w-screen-xl w-full my-0 mx-auto mx-8 px-2 py-16", styles.footer_menu)}>
+      <div className={cn("flex justify-between max-w-screen-xl w-full my-0 mx-auto px-10 py-16", styles.footer_menu)}>
         <div className="flex items-center">
           <img className="mr-20" src={Logo} alt="Quartier Latin" />
           <ul className="flex">
             {props[lang].headLinks.map(link=><li>
-              <a className="flex mx-7 whitespace-nowrap" href={link.link.url}>
+              <a className="flex mx-7 whitespace-nowrap font-bold" href={link.link.url}>
                 <img className="mr-3" src={link.icon} alt="" />
                 {link.link.title}
               </a>
@@ -28,7 +30,7 @@ export const MainFooter = (props: FooterDataDto) => {
           <img src={Arrow} alt="" />
         </a>
       </div>
-      <div className="flex flex-wrap max-w-screen-xl w-full my-0 mx-auto px-10 pt-14">
+      <div className="flex flex-wrap max-w-screen-xl w-full my-0 mx-auto mx-8 px-10 pt-14">
         {props[lang].links.map(({group, items}) => (
           <div className={cn("w-1/3", styles.footer_column)}>
             <a className="font-bold" href={group.url}>{group.title}</a>
@@ -45,7 +47,10 @@ export const MainFooter = (props: FooterDataDto) => {
             <li>Contact@quartier-latin.com</li>
             <li>Skype: QuartierLatinRU</li>
           </ul>
-
+          {props[lang].writeUs && <a href="mailto:" className={styles.footer_writeus}>{props[lang].writeUs}</a>}
+          <div className={styles.footer_social}>
+            {props[lang].socials.map(link=>link.title ? <a href={link.url}><Social icon={link.title} /></a> : '')}
+          </div>
         </div>
       </div>
     </footer>
