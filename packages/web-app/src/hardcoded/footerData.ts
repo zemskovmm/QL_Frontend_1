@@ -9,23 +9,23 @@ const footerData: FooterDataDto = {
       },
       {
         url: "https://www.google.com/maps/place/Quartier+Latin/@48.8697751,2.3483846,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x19b7799162dd9861!8m2!3d48.8697751!4d2.3505733?hl=ru&authuser=1",
-          title: "G+"
+        title: "G+"
       },
       {
         title: "linkedIn",
-          url: "https://fr.linkedin.com/in/quartier-latin-0b9ba084"
+        url: "https://fr.linkedin.com/in/quartier-latin-0b9ba084"
       },
       {
         url: "https://www.instagram.com/quartierlatinru/",
-          title: "instagram"
+        title: "instagram"
       },
       {
         title: "telegram",
-          url: "https://t.me/quartierlatinru"
+        url: "https://t.me/quartierlatinru"
       },
       {
         url: "https://vk.com/quartierlatinru",
-          title: "vk"
+        title: "vk"
       },
       {
         url: "https://www.facebook.com/QuartierLatinRU/",
@@ -36,36 +36,36 @@ const footerData: FooterDataDto = {
           title: "twitter"
       }
     ],
-    headLinks: {
-      forPartners: {
-        icon: "./../images/icons/cnain.svg",
+    headLinks: [
+      {
+        icon: "/images/icons/chain.svg",
         link: {
           title: "Для партнёров",
           url: "https://quartier-latin.com/dlja-partnerov"
         }
       },
-      about: {
-        icon: "./../images/icons/equals.svg",
+      {
+        icon: "/images/icons/equals.svg",
         link: {
           title: "О компании",
           url: "https://quartier-latin.com/o-kompanii"
         }
       },
-      blog: {
-        icon: "./../images/icons/equals.svg",
+      {
+        icon: "/images/icons/equals.svg",
         link: {
             url: "https://quartier-latin.com/blog",
             title: "Блог"
         }
       },
-      faq: {
-        icon: "./../images/icons/information.svg",
+      {
+        icon: "/images/icons/information.svg",
           link: {
           url: "https://quartier-latin.com/faq",
             title: "faq"
         }
       }
-    },
+    ],
     writeUs: "НАПИСАТЬ НАМ",
     links: [
     {
@@ -301,36 +301,36 @@ const footerData: FooterDataDto = {
       url: "https://twitter.com/QuartierLatinRU"
     }
   ],
-  headLinks: {
-    forPartners: {
-      icon: "./../images/icons/cnain.svg",
+  headLinks: [
+    {
+      icon: "/images/icons/chain.svg",
         link: {
         url: "https://quartier-latin.com/en/dlja-partnerov",
           title: "FOR PARTNERS"
       }
     },
-    about: {
-      icon: "./../images/icons/equals.svg",
+    {
+      icon: "/images/icons/equals.svg",
         link: {
         url: "https://quartier-latin.com/en/o-kompanii",
           title: "ABOUT US"
       }
     },
-    blog: {
-      icon: "./../images/icons/equals.svg",
+    {
+      icon: "/images/icons/equals.svg",
         link: {
         url: "https://quartier-latin.com/en/blog",
           title: "blog"
       }
     },
-    faq: {
-      icon: "./../images/icons/information.svg",
+    {
+      icon: "/images/icons/information.svg",
         link: {
         title: "faq",
           url: "https://quartier-latin.com/en/faq"
       }
     }
-  },
+  ],
   writeUs: "WRITE TO US",
     links: [
     {
@@ -566,36 +566,36 @@ const footerData: FooterDataDto = {
       title: "https://twitter.com/quartierlatinfr"
     }
   ],
-  headLinks: {
-    forPartners: {
-      icon: "./../images/icons/cnain.svg",
+  headLinks: [
+    {
+      icon: "/images/icons/chain.svg",
         link: {
         title: "对于合作伙伴",
           url: "https://quartier-latin.com/cn/dlja-partnerov"
       }
     },
-    about: {
-      icon: "./../images/icons/equals.svg",
+    {
+      icon: "/images/icons/equals.svg",
         link: {
         title: "公司简介",
           url: "https://quartier-latin.com/cn/o-kompanii"
       }
     },
-    blog: {
-      icon: "./../images/icons/equals.svg",
+    {
+      icon: "/images/icons/equals.svg",
         link: {
         url: "https://quartier-latin.com/cn/blog",
           title: "博客"
       }
     },
-    faq: {
-      icon: "./../images/icons/information.svg",
+    {
+      icon: "/images/icons/information.svg",
         link: {
         title: "常见问题与解答",
           url: "https://quartier-latin.com/cn/faq"
       }
     }
-  },
+  ],
   writeUs: "给我们留言",
     links: [
     {
@@ -831,36 +831,36 @@ const footerData: FooterDataDto = {
         title: "twitter"
     }
   ],
-  headLinks: {
-    forPartners: {
-      icon: "./../images/icons/cnain.svg",
+  headLinks: [
+    {
+      icon: "/images/icons/chain.svg",
         link: {
         title: "Pour les partenaires",
           url: "https://quartier-latin.com/fr/dlja-partnerov"
       }
     },
-    about: {
-      icon: "./../images/icons/equals.svg",
+    {
+      icon: "/images/icons/equals.svg",
         link: {
         url: "https://quartier-latin.com/fr/o-kompanii",
           title: "QUI SOMMES-NOUS?"
       }
     },
-    blog: {
-      icon: "./../images/icons/equals.svg",
+    {
+      icon: "/images/icons/equals.svg",
         link: {
         url: "https://quartier-latin.com/fr/blog",
           title: "blog"
       }
     },
-    faq: {
-      icon: "./../images/icons/information.svg",
+    {
+      icon: "/images/icons/information.svg",
         link: {
         url: "https://quartier-latin.com/fr/faq",
           title: "faq"
       }
     }
-  },
+  ],
   writeUs: "NOUS ECRIRE",
     links: [
     {
@@ -1096,36 +1096,36 @@ const footerData: FooterDataDto = {
         title: "twitter"
     }
   ],
-  headLinks: {
-    forPartners: {
-      icon: "./../images/icons/cnain.svg",
+  headLinks: [
+    {
+      icon: "/images/icons/chain.svg",
         link: {
         url: "https://quartier-latin.com/en/dlja-partnerov",
           title: "PARA SOCIOS"
       }
     },
-    about: {
-      icon: "./../images/icons/equals.svg",
+    {
+      icon: "/images/icons/equals.svg",
         link: {
         title: "¿QUIÉNES SOMOS?",
           url: "https://quartier-latin.com/en/o-kompanii"
       }
     },
-    blog: {
-      icon: "./../images/icons/equals.svg",
+    {
+      icon: "/images/icons/equals.svg",
         link: {
         title: "BLOG ",
           url: "https://quartier-latin.com/en/blog"
       }
     },
-    faq: {
-      icon: "./../images/icons/information.svg",
+    {
+      icon: "/images/icons/information.svg",
         link: {
         url: "https://quartier-latin.com/en/faq",
           title: "PREGUNTAS FRECUENTES "
       }
     }
-  },
+  ],
   writeUs: "Escríbenos",
     links: [
     {

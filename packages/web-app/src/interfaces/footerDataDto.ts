@@ -5,17 +5,17 @@ import {
 } from "src/interfaces/localizedLinkDto";
 
 
-export interface FooterHeadLinks {
+/*export interface FooterHeadLinks {
   forPartners: LocalizedLinkWithIconDto;
   about: LocalizedLinkWithIconDto;
   blog: LocalizedLinkWithIconDto;
   faq: LocalizedLinkWithIconDto;
-}
+}*/
 
 export interface FooterDataDto {
   [key: string]: {
     socials: LocalizedLinkLocale[],
-    headLinks: FooterHeadLinks,
+    headLinks: LocalizedLinkWithIconDto[],
     writeUs: string,
     links: LocalizedLinkGroupDto[]
   }

@@ -1,7 +1,93 @@
-.social_header:hover svg {
+.header_social:hover svg {
   fill: var(--color-hover)
 }
 
-.social_header svg {
+.header_social svg {
   fill: var(--color-bd-primary)
+}
+
+.footer_menu {
+  border-bottom: 1px solid rgba(255,255,255,0.08)
+}
+
+.footer_arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  background-color: #567DD0;
+  box-shadow: 0 5px 10px rgba(0, 78, 255, 0.05), 0 10px 30px rgba(0, 78, 255, 0.03);
+  border-radius: 6px;
+  transition: background-color 0.4s;
+}
+
+.footer_arrow:hover {
+  background-color: #C9D5F0;
+}
+
+.footer_column {
+  display: flex;
+  flex-direction: column;
+  padding-right: 30px;
+}
+
+.footer_column > a {
+  font-size: 1rem;
+  line-height: 150%;
+  margin-bottom: 0.875rem;
+}
+
+.footer_column ul {
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  line-height: 150%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 54px;
+}
+
+.footer_column li {
+  margin-bottom: 0.5rem;
+}
+
+
+.footer_column ul a {
+  display: flex;
+}
+
+.footer_column ul a:before {
+  content: '';
+  margin-top: 6px;
+  width: 10px;
+  height: 9px;
+  background: url('src/assets/images/icons/romb.svg') no-repeat center / contain;
+  margin-right: 16px;
+  opacity: 0.4;
+}
+
+.footer_column ul a:hover {
+  color: var(--color-third);
+  text-decoration: underline;
+}
+
+
+.footer_column ul a:hover:before {
+  opacity: 1;
+}
+
+.footer_address ul li {
+  color: #ffffff;
+  display: flex;
+  font-size: 1rem;
+}
+
+.footer_address li:before {
+  content: '';
+  margin-top: 6px;
+  width: 10px;
+  height: 9px;
+  background: url('src/assets/images/icons/rombfill.svg') no-repeat center / contain;
+  margin-right: 16px;
 }

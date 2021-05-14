@@ -29,7 +29,7 @@ export const MainHeader = (props: MainHeaderProps) => {
   const lang = useIntl().locale;
 
   return (
-    <header className="flex flex-col">
+    <header id="header" className="flex flex-col">
       <div className="shadow w-full">
         <nav className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
           <div className="flex">
@@ -48,7 +48,7 @@ export const MainHeader = (props: MainHeaderProps) => {
             <div className="flex justify-end items-center mr-4">
               {props.data[lang].social?.map(({title, url}) => {
                 return title
-                  ? <a className={cn("mx-3 cursor-pointer", styles.social_header)} href={url}><Social icon={title} /></a>
+                  ? <a className={cn("mx-3 cursor-pointer", styles.header_social)} href={url}><Social icon={title} /></a>
                   : ''
               })}
             </div>
