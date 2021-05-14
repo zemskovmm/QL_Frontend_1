@@ -22,18 +22,19 @@ export interface MainHeaderProps {
   data: {
     [key: string]: HeaderDataDto
   };
-  urls: string []
+  urls: {
+    [key: string]: string
+  };
 }
 
 export const MainHeader = (props: MainHeaderProps) => {
   const lang = useIntl().locale;
-
   return (
     <header id="header" className="flex flex-col">
       <div className="shadow w-full">
         <nav className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
           <div className="flex">
-            <img className="mr-6" src={Logo} alt="Quartier Latin" />
+            <Link href={`/${lang}`}><img className="mr-6 cursor-pointer" src={Logo} alt="Quartier Latin" /></Link>
             <ul className="list-none flex">
               {props.data[lang].links.map((l) => (
                 <li className="mx-4 uppercase flex items-center">
