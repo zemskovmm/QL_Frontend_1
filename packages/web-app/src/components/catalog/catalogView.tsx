@@ -71,42 +71,7 @@ function CatalogItems<T>(props: {
         <div className={`${style.catalog__count}`}>{props.data.totalItems} программ</div>
       </div>
       {props.data.items.map((item, idx) => (
-        <a href={item.url} className={style.card} key={idx}>
-          <div className={style.card__left}>
-            <div className={style.card__leftImg}>
-              <img src={img} alt="" />
-            </div>
-          </div>
-          <div className={style.card__right}>
-            <div className={style.card__rightTitle}>{item.name}</div>
-            <div className={style.card__rightLevel}>
-              <span className={style.card__rightSubtitle}>Уровень: </span>
-              {item.degrees?.map((el) => (
-                <span className={style.card__rightLevel_degree}>{el}</span>
-              ))}
-            </div>
-            <div className={style.card__rightLanguage}>
-              <span className={style.card__rightSubtitle}>Язык:</span>
-              <div className={style.card__rightLanguage_list}>
-                <b>
-                  <img src="`../../images/catalogFlags/${lang}.svg`" alt="" />
-                  <span>Все языки</span>
-                </b>
-              </div>
-            </div>
-            <div className={style.card__rightPrice}>
-              <span className={style.card__rightSubtitle}>Стоимость:</span>
-              <div className={style.card__rightPrice__list}>
-                <span className={style.card__rightPrice__listItem}>
-                  <b>от {item.priceFrom} €</b> / нед.
-                </span>
-                <span className={style.card__rightPrice__listItem}>
-                  <b>до {item.priceTo} €</b> / нед.
-                </span>
-              </div>
-            </div>
-          </div>
-        </a>
+        <div key={idx}>{props.elementRenderer(item)}</div>
       ))}
       <Paginator page={props.page} totalPages={props.data.totalPages} setPage={props.setPage} />
     </div>
