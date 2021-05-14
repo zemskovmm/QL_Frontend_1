@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import cn from 'classnames'
 import {default  as Flags} from "src/assets/icons/flags";
 import styles from './langChooser.module.css'
-import { useRouter } from "next/router";
 
 import Link from "next/link";
 interface langProps {
-  urls: string [],
+  urls: {
+    [key: string] : string
+  },
   lang: string
 }
 
@@ -16,7 +17,6 @@ type currType = {
 
 export const  LangChooser = ({lang, urls}:langProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const path = useRouter().asPath;
 
   const curr: currType = {
     ru: 'RUB',
@@ -29,10 +29,10 @@ export const  LangChooser = ({lang, urls}:langProps) => {
   return <div onClick={()=>setIsOpen(!isOpen)} className={cn(styles.lang, 'bg-bgprimary', 'rounded-primary')}>
     <Flags icon={lang} />
     <span>{curr[lang]}</span>
-    {urls.length > 0 && <>
+    {Object.keys(urls).length > 0 && <>
       <div className={isOpen ? styles.back : ''}></div>
       <ul className={isOpen ? styles.open : ''}>
-        {urls.map(el => <li className={el === lang ? 'font-bold' : ''}><Link href={path.replace('/'+lang, '/' + el)}>{el}</Link></li>)}
+        {Object.keys(urls).map(el => <li className={el === lang ? 'font-bold' : ''}><Link href={urls[el]}>{el}</Link></li>)}
       </ul>
     </>
 
