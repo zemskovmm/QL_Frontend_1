@@ -1,7 +1,10 @@
+
 //import { HeaderDataDto } from "src/interfaces/headerDataDto";
 import { useIntl } from "react-intl";
 import { FooterDataDto } from "src/interfaces/footerDataDto";
 //import {LocalizedLink} from "src/components/LocalizedLink";
+
+
 
 import styles from './main.module.css'
 import cn from "classnames";

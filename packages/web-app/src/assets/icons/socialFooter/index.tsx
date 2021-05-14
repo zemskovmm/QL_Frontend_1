@@ -5,6 +5,7 @@ import Twitter from "src/assets/images/social/twitter.svg";
 import Linkedin from "src/assets/images/social/linkedin.svg";
 import Google from "src/assets/images/social/google.svg";
 import Vk from "src/assets/images/social/vk.svg";
+import Youtube from "src/assets/images/social/youtube.svg";
 
 export interface socialProps {
   icon: string
@@ -24,6 +25,8 @@ export default ({icon}:socialProps) => {
       return <img src={Google} alt={icon} />
     case 'twitter':
       return <img src={Twitter} alt={icon} />
+    case 'youtube':
+       return <img src={Youtube} alt={icon} />
     case 'vk':
     default:
       return <img src={Vk} alt={icon} />
