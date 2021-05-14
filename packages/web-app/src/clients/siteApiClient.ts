@@ -14,6 +14,12 @@ export class SiteApiClient extends ApiClientBase {
     return this.sendRequest<ClientRouteDto>(url);
   }
 
+  async sendCallback(req: any) {
+    const url = `call/request`;
+    const res = await this.sendRequest(url, req);
+    return res;
+  }
+
   async getCatalogFilters(lang: string, entityType: string): Promise<CatalogFilterDto[]> {
     const url = `catalog/${entityType}/filters/${lang}`;
     const res = await this.sendRequest<{ filters: CatalogFilterDto[] }>(url);
