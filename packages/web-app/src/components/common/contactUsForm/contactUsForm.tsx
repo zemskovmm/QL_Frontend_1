@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import cn from "classnames";
 import { siteApi } from "src/clients/siteApiClient";
+import { useAsyncBusy } from "@project/components/src/utils/asyncBusyEffect";
 
 import styles from "./contactUsForm.module.css";
 
@@ -37,7 +38,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
   const [tel, setTel] = useState("");
   const [com, setCom] = useState("");
 
-  const sendForm = async () => {
+  const [isBusy, sendForm] = useAsyncBusy(async () => {
     try {
       await siteApi.sendCallback({
         name: name,
@@ -51,14 +52,20 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
     } catch (e) {
       alert(e);
     }
-  };
+  });
 
   return (
     <OverlayDialog cancel={props.onDismiss}>
       <h3 className={styles.applyModal__title}>
         <LocalizedText id="contactUs_title" />
       </h3>
-      <form className={"flex flex-col"}>
+      <form
+        className={"flex flex-col"}
+        onSubmit={(e) => {
+          e.preventDefault();
+          sendForm();
+        }}
+      >
         <div className={"flex justify-between mb-7"}>
           <div className={"flex flex-col w-6/12 mr-3"}>
             <div className={styles.applyModal__formColTitle}>
@@ -130,7 +137,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
             className={styles.applyModal__description}
             dangerouslySetInnerHTML={{ __html: useLocalizedText({ id: "contactUs_description" }, intl) }}
           />
-          <button className={styles.applyModal__buttonApply} type="button" onClick={sendForm}>
+          <button disabled={isBusy} className={styles.applyModal__buttonApply} type="submit">
             <LocalizedText id="contactUs_applyButton" />
           </button>
         </div>
