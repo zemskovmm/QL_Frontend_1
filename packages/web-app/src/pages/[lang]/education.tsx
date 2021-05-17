@@ -10,14 +10,15 @@ import { BigCardsListBlock } from "src/components/education/BigCardsListBlock/bi
 import { SponsorBlock } from "src/components/education/SponsorBlock/sponsorBlock";
 import { WideCardsBlock } from "src/components/education/WideCardsBlock/wideCardsBlock";
 import { LeftImgRightContentBlock } from "src/components/education/LeftImgRightContentBlock/leftImgRightContentBlock";
+import Search from "src/components/common/search/Search";
 
 const EducationLangingPage = (props: EducationPageDataDto) => {
   const lang = useIntl().locale;
   return (
     <div>
-      <div className="m-4 border-red-500 border-2">
+      <Search title={educationPageData.firstScreen[lang]}>
         <ServerCatalogWidget filterIds={["city", "instruction-language", "degree"]} entityType="university" />
-      </div>
+      </Search>
       <ClientReviewBlock data={educationPageData.allReviews[lang]} />
       <ReasonsListBlock data={educationPageData.reasonsList[lang]} />
       <BigCardsListBlock
