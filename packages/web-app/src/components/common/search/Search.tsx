@@ -5,15 +5,17 @@ import styles from "src/components/common/search/Search.module.css"
 
 interface SearchProps {
   title?: string
-  children: any
+  children: any,
+  className?: string
 }
 
-const Search = ({title, children}: SearchProps) => (
+const Search = ({title, children, className}: SearchProps) => (
   <div className={styles.Search}>
-
     <div className="flex flex-col items-start max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
       <h1>{title}</h1>
-      {children}
+      <div className={className}>
+        {children}
+      </div>
     </div>
   </div>
 )

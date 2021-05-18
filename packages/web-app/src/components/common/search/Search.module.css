@@ -7,7 +7,7 @@
   font-size: 1.875rem;
   line-height: 140%;
   font-weight: 700;
-  max-width: 750px;
+  max-width: 710px;
   margin-bottom: 50px;
 }
 
@@ -16,7 +16,6 @@
   box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
   border-radius: 6px;
   width: 100%;
-  padding: 35px 70px 60px 70px;
   display: flex;
   justify-content: space-between;
 }

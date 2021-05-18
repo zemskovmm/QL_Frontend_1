@@ -16,7 +16,7 @@ const EducationLangingPage = (props: EducationPageDataDto) => {
   const lang = useIntl().locale;
   return (
     <div>
-      <Search title={educationPageData.firstScreen[lang]}>
+      <Search className="py-9 px-10" title={educationPageData.firstScreen[lang]}>
         <ServerCatalogWidget filterIds={["city", "instruction-language", "degree"]} entityType="university" />
       </Search>
       <ClientReviewBlock data={educationPageData.allReviews[lang]} />
