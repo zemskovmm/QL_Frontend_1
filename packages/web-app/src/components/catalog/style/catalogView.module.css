@@ -311,3 +311,15 @@
   line-height: 24px;
   color: #373737;
 }
+
+.catalogWrapper {
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-sizing: content-box;
+  margin: auto;
+  padding: 36px 20px;
+  display: flex;
+  max-width: 1170px;
+}

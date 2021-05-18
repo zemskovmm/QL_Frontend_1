@@ -152,7 +152,7 @@ const ContactUsFormController = (props: { onDismiss: () => void }) => {
   return <ContactUsForm onDismiss={props.onDismiss} onSuccess={() => setIsSuccess(true)} />;
 };
 
-export const ContactUsFormButton = (props: { children: any }) => {
+export const ContactUsFormButton = (props: { children: JSX.Element }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

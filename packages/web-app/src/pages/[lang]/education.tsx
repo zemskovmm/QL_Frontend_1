@@ -13,6 +13,7 @@ import { LeftImgRightContentBlock } from "src/components/education/LeftImgRightC
 
 const EducationLangingPage = (props: EducationPageDataDto) => {
   const lang = useIntl().locale;
+
   return (
     <div>
       <div className="m-4 border-red-500 border-2">

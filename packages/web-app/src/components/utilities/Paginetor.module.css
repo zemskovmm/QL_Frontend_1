@@ -1,0 +1,14 @@
+﻿.btn{
+  border: 1px solid #EFF3FA;
+  box-sizing: border-box;
+  border-radius: 3px;
+  padding: 8px 16px;
+  margin: 0 5px;
+  color: #A8B5CC;
+  transition: 0.3s;
+}
+
+.btn:hover, .btn_active{
+  color: #567DD0;
+  background: #EFF3FA;
+}

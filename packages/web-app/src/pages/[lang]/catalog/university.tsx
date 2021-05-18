@@ -1,8 +1,10 @@
 import { Catalog } from "src/components/catalog/catalog";
-import {CatalogUniversityDto} from "src/interfaces/catalogFilterDto";
+import { CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
 import Link from "next/link";
 import style from "src/components/catalog/style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
+import { Breadcrumbs } from "../../../components/ui/Breadcrumbs/breadcrumbs";
+import { BreadcrumbMain, BreadcrumbUniversityCatalog } from "../../../components/ui/Breadcrumbs/commonBreadcumbs";
 
 const UniversityCatalogElement = (item: CatalogUniversityDto) => (
   <a href={item.url} className={style.card}>
@@ -31,19 +33,27 @@ const UniversityCatalogElement = (item: CatalogUniversityDto) => (
       <div className={style.card__rightPrice}>
         <span className={style.card__rightSubtitle}>Стоимость:</span>
         <div className={style.card__rightPrice__list}>
-                <span className={style.card__rightPrice__listItem}>
-                  <b>от {item.priceFrom} €</b> / нед.
-                </span>
           <span className={style.card__rightPrice__listItem}>
-                  <b>до {item.priceTo} €</b> / нед.
-                </span>
+            <b>от {item.priceFrom} €</b> / нед.
+          </span>
+          <span className={style.card__rightPrice__listItem}>
+            <b>до {item.priceTo} €</b> / нед.
+          </span>
         </div>
       </div>
     </div>
-  </a>);
+  </a>
+);
 
 const UniversityCatalogPage = () => {
-  return <Catalog<CatalogUniversityDto> elementRenderer={UniversityCatalogElement} apiElementName="university" />;
+  return (
+    <div className={style.catalogWrapper}>
+      <div className={`mr-auto mb-7`}>
+        <Breadcrumbs items={[BreadcrumbMain, BreadcrumbUniversityCatalog]} />
+      </div>
+      <Catalog<CatalogUniversityDto> elementRenderer={UniversityCatalogElement} apiElementName="university" />;
+    </div>
+  );
 };
 
 export default UniversityCatalogPage;
