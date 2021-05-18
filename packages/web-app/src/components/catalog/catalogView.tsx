@@ -5,6 +5,7 @@ import { LoadingIf } from "src/components/utilities/Loading";
 import style from "./style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
 import education from "src/assets/icons/education.svg";
+import hotel from "src/assets/icons/hotel.svg";
 
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
@@ -99,7 +100,7 @@ export function CatalogView<T>(props: {
               <span className={`${style.toggle__switchName}`}>Образование</span>
             </a>
             <a href="#" className={`${style.toggle__switch}`}>
-              <img src={education} alt="" className={`${style.toggle__switchImg}`} />
+              <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
               <span className={`${style.toggle__switchName}`}>Проживание</span>
             </a>
           </div>

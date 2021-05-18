@@ -218,10 +218,11 @@
   cursor: pointer;
   transition: all .3s ease;
   text-decoration: none;
+  margin-bottom: 30px;
 }
 
-.card:not(:first-child){
-  margin-top: 30px;
+.card:hover{
+  box-shadow: 0 10px 30px rgb(0 78 255 / 7%), 0 20px 50px rgb(0 78 255 / 5%);
 }
 
 .card__left{
