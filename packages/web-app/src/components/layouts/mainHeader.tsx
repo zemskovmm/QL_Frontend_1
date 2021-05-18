@@ -59,7 +59,7 @@ export const MainHeader = (props: MainHeaderProps) => {
             <div className="bg-bgprimary rounded-primary cursor-pointer flex-shrink-0 p-2.5 ml-2.5 flex items-center text-secondary">
               <IconMagnify />
             </div>
-            <div className="m-2.5">
+            <div className="ml-2.5">
               <LangChooser lang={lang} urls={props.urls} />
             </div>
           </div>
