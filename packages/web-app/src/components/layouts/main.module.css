@@ -69,6 +69,7 @@
   background: url('src/assets/images/icons/romb.svg') no-repeat center / contain;
   margin-right: 16px;
   opacity: 0.4;
+  flex-shrink: 0;
 }
 
 .footer_column ul a:hover {
