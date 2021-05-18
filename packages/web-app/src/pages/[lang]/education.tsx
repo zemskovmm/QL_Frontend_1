@@ -11,25 +11,31 @@ import { SponsorBlock } from "src/components/education/SponsorBlock/sponsorBlock
 import { WideCardsBlock } from "src/components/education/WideCardsBlock/wideCardsBlock";
 import { LeftImgRightContentBlock } from "src/components/education/LeftImgRightContentBlock/leftImgRightContentBlock";
 import Search from "src/components/common/search/Search";
+import bgSearch from "src/assets/images/Training.png";
 
 const EducationLangingPage = (props: EducationPageDataDto) => {
   const lang = useIntl().locale;
 
   return (
     <div>
-      <Search className="py-9 px-10" title={educationPageData.firstScreen[lang]}>
+      <Search
+        className="py-9 px-10"
+        title={educationPageData[lang].firstScreen}
+        background={bgSearch}
+        breadcrumbs={educationPageData[lang].breadcrumbs}
+      >
         <ServerCatalogWidget filterIds={["city", "instruction-language", "degree"]} entityType="university" />
       </Search>
-      <ClientReviewBlock data={educationPageData.allReviews[lang]} />
-      <ReasonsListBlock data={educationPageData.reasonsList[lang]} />
+      <ClientReviewBlock data={educationPageData[lang].allReviews} />
+      <ReasonsListBlock data={educationPageData[lang].reasonsList} />
       <BigCardsListBlock
-        cards={educationPageData.links.map((el) => el[lang])}
-        linksButton={educationPageData.linksButton[lang]}
-        title={educationPageData.linksTitle[lang]}
+        cards={educationPageData[lang].links}
+        linksButton={educationPageData[lang].linksButton}
+        title={educationPageData[lang].linksTitle}
       />
-      <SponsorBlock title={educationPageData.sponsorTitle[lang]} />
-      <WideCardsBlock data={educationPageData.wideCards[lang]} />
-      <LeftImgRightContentBlock data={educationPageData.leftImgRightContent[lang]} />
+      <SponsorBlock title={educationPageData[lang].sponsorTitle} />
+      <WideCardsBlock data={educationPageData[lang].wideCards} />
+      <LeftImgRightContentBlock data={educationPageData[lang].leftImgRightContent} />
     </div>
   );
 };
