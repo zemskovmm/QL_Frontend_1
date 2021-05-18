@@ -6,6 +6,27 @@
   fill: var(--color-bd-primary)
 }
 
+.header_offer {
+  position: relative;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.header_offer:hover {
+  color: var(--color-hover);
+}
+
+.header_offer + .header_offer:before {
+  content: '';
+  height: 60px;
+  width: 1px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(to top, #F9FAFD 0, #C9D5F0 50%, #F9FAFD 100%);
+}
+
 .footer_menu {
   border-bottom: 1px solid rgba(255,255,255,0.08)
 }

@@ -44,27 +44,3 @@
   font-size: 1.125rem;
   line-height: 144%;
 }
-
-.all {
-  background: #EFF3FA;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  padding: 5px 16px;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.875rem;
-  height: 40px;
-  color: #567DD0;
-}
-
-.all:before {
-  content: '';
-  background: url('src/assets/icons/arrow-left.svg') no-repeat 0 center / 16px 16px;
-  height: 100%;
-  width: 28px;
-  padding-right: 16px;
-  margin-right: 19px;
-  border-right: 1px solid #C9D5F0;
-  flex-shrink: 0;
-}

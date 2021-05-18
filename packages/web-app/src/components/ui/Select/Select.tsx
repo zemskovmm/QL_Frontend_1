@@ -21,7 +21,7 @@ const Select = ({label, value, options, selectChange}: SelectProps) => {
       {options.length > 0 && <>
         {isOpen && <div /> }
         <ul>
-          {options.map(el => <li onClick={()=>selectChange(el)} className={el === value ? 'font-bold' : ''}>{el}</li>)}
+          {options.map((el, ind) => <li key={ind} onClick={()=>selectChange(el)} className={el === value ? 'font-bold' : ''}>{el}</li>)}
         </ul>
       </>}
     </div>

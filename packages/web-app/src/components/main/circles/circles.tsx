@@ -15,7 +15,7 @@ export interface CirclesBlockProps {
 export const CirclesBlock = (props: CirclesBlockProps) => {
   return <div className="py-28">
     <div className="flex justify-between mx-auto max-w-screen-xl w-full">
-      {props.elements.map(e => <div className={styles.circleItem}>
+      {props.elements.map((e, ind) => <div key={ind} className={styles.circleItem}>
         <div className={styles.circleArticle}>{e.header}</div>
         <div className={styles.circleCount}>{e.number}</div>
         <div className={styles.circleText}>{e.text}</div>

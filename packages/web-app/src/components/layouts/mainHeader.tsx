@@ -17,6 +17,7 @@ import IconMagnify from "src/assets/icons/IconMagnify";
 
 import styles from './main.module.css'
 import cn from "classnames";
+import headerData from "../../hardcoded/headerData";
 
 export interface MainHeaderProps {
   data: {
@@ -65,10 +66,8 @@ export const MainHeader = (props: MainHeaderProps) => {
           </div>
         </nav>
       </div>
-      <div className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
-        <Link href={`/${lang}`}>[Main]</Link>
-        <Link href={`/${lang}/education`}>[Education]</Link>
-        <Link href={`/${lang}/catalog/university`}>[Catalog]</Link>
+      <div className="flex justify-center items-center max-w-screen-xl w-full my-0 mx-auto py-1 px-10">
+        {headerData[lang].offers.map(({url, title}) => <Link href={url}><a className={cn(styles.header_offer,"py-5 whitespace-nowrap text-center")}>{title}</a></Link>)}
       </div>
     </header>
 
