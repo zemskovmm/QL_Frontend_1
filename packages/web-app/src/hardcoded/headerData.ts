@@ -22,7 +22,7 @@ const headerData: { [key: string]: HeaderDataDto } = {
     ],
     offers: [
       {
-        url: "/ru/training",
+        url: "/ru/education",
         title: "Обучение",
       },
       {
@@ -75,7 +75,7 @@ const headerData: { [key: string]: HeaderDataDto } = {
     offers: [
       {
         title: "EDUCATION",
-        url: "/en/training",
+        url: "/en/education",
       },
       {
         title: "LEARNING THE LANGUAGE",
@@ -112,7 +112,7 @@ const headerData: { [key: string]: HeaderDataDto } = {
   cn: {
     offers: [
       {
-        url: "/cn/training",
+        url: "/cn/education",
         title: "高等教育",
       },
       {
@@ -165,7 +165,7 @@ const headerData: { [key: string]: HeaderDataDto } = {
     offers: [
       {
         title: "Enseignement",
-        url: "/fr/training",
+        url: "/fr/education",
       },
       {
         title: "Apprentissage de la langue",
@@ -221,7 +221,7 @@ const headerData: { [key: string]: HeaderDataDto } = {
     offers: [
       {
         title: "Estudios",
-        url: "/esp/training",
+        url: "/esp/education",
       },
       {
         url: "https://quartier-latin.com/en/izuchenie-jazyka",
