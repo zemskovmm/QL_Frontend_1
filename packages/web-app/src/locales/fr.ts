@@ -21,5 +21,18 @@ const fr: LocaleDefinition = {
   catalogWidget_search: "Trouver",
   breadcrumbs_Main: "Principal",
   breadcrumbs_Catalog: "Catalogue",
+  catalogEducation_title: "Éducation à l'étranger",
+  catalogEducation_search_result: "programmes",
+  catalogEducation_categories: "Catégories",
+  catalogEducation_education: "Éducation",
+  catalogEducation_accommodationn: "Hébergement",
+  catalogItems_degree: "Niveau",
+  catalogItems_language: "Langue",
+  catalogItems_language_all: "Toutes les langues",
+  catalogItems_price: "Le coût",
+  catalogItems_price_from: "de",
+  catalogItems_price_before: "avant que",
+  catalogItems_price_week: "semaine",
+  catalogItems_price_value: "€",
 };
 export default fr;
