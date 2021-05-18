@@ -21,5 +21,18 @@ const ru: LocaleDefinition = {
   catalogWidget_search: "Найти",
   breadcrumbs_Main: "Главная",
   breadcrumbs_Catalog: "Каталог",
+  catalogEducation_title: "Образование за рубежом",
+  catalogEducation_search_result: "программ",
+  catalogEducation_categories: "Категории",
+  catalogEducation_education: "Образование",
+  catalogEducation_accommodationn: "Проживание",
+  catalogItems_degree: "Уровень",
+  catalogItems_language: "Язык",
+  catalogItems_language_all: "Все языки",
+  catalogItems_price: "Стоимость",
+  catalogItems_price_from: "от",
+  catalogItems_price_before: "до",
+  catalogItems_price_week: "нед.",
+  catalogItems_price_value: "€",
 };
 export default ru;

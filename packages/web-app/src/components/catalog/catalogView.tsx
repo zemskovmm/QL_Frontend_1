@@ -6,6 +6,7 @@ import style from "./style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
 import education from "src/assets/icons/education.svg";
 import hotel from "src/assets/icons/hotel.svg";
+import { LocalizedText } from "../common/LocalizedText";
 
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
@@ -69,8 +70,12 @@ function CatalogItems<T>(props: {
   return (
     <div className={`flex flex-col w-full`}>
       <div className={`flex items-center`}>
-        <h1 className={`${style.catalog__h1}`}>Образование за рубежом</h1>
-        <div className={`${style.catalog__count}`}>{props.data.totalItems} программ</div>
+        <h1 className={`${style.catalog__h1}`}>
+          <LocalizedText id={"catalogEducation_title"} />
+        </h1>
+        <div className={`${style.catalog__count}`}>
+          {props.data.totalItems} <LocalizedText id={"catalogEducation_search_result"} />
+        </div>
       </div>
       {props.data.items.map((item, idx) => (
         <div key={idx}>{props.elementRenderer(item)}</div>
@@ -93,15 +98,21 @@ export function CatalogView<T>(props: {
     <div className={`flex w-full`}>
       <div className={`${style.catalog__filterCol} align-top`}>
         <div className={style.catalog__filterRow}>
-          <h3 className={style.catalog__filterTitle}>КАТЕГОРИИ</h3>
+          <h3 className={style.catalog__filterTitle}>
+            <LocalizedText id={"catalogEducation_categories"} />
+          </h3>
           <div>
             <a href="#" className={`${style.toggle__switch} ${style.toggle__switch_active}`}>
               <img src={education} alt="" className={`${style.toggle__switchImg}`} />
-              <span className={`${style.toggle__switchName}`}>Образование</span>
+              <span className={`${style.toggle__switchName}`}>
+                <LocalizedText id={"catalogEducation_education"} />
+              </span>
             </a>
             <a href="#" className={`${style.toggle__switch}`}>
               <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
-              <span className={`${style.toggle__switchName}`}>Проживание</span>
+              <span className={`${style.toggle__switchName}`}>
+                <LocalizedText id={"catalogEducation_accommodationn"} />
+              </span>
             </a>
           </div>
         </div>
