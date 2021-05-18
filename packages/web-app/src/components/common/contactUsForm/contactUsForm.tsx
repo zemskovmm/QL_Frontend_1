@@ -1,6 +1,6 @@
 import { OverlayDialog } from "src/components/common/dialog/OverlayDialog";
 import { LocalizedText, useLocalizedText } from "src/components/common/LocalizedText";
-import { useState } from "react";
+import React, { FC, useState } from "react";
 import { useIntl } from "react-intl";
 import cn from "classnames";
 import { siteApi } from "src/clients/siteApiClient";
@@ -174,6 +174,38 @@ export const ContactUsFormButton = (props: { children: JSX.Element }) => {
       >
         {props.children}
       </a>
+      {isOpen ? <ContactUsFormController onDismiss={() => setIsOpen(false)} /> : null}
+    </>
+  );
+};
+
+type PostScriptProps = {
+  data: {
+    name: string;
+    description: string;
+  };
+};
+
+export const PostScript: FC<PostScriptProps> = ({ data }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <div className={styles.postScriptButton}>
+        {data.description && (
+          <div
+            className={styles.postScriptButton__description}
+            dangerouslySetInnerHTML={{ __html: data.description }}
+          />
+        )}
+        <button
+          className={styles.postScriptButton__button}
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        >
+          {data.name}
+        </button>
+      </div>
       {isOpen ? <ContactUsFormController onDismiss={() => setIsOpen(false)} /> : null}
     </>
   );
