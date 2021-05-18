@@ -6,7 +6,7 @@ export interface MainPageDataDto {
   utp: { [key: string]: { items: { titleWord: string; total: string; subtitle: string }[] } };
   offersTitle: { [key: string]: { title: string; subtitle: string } };
   partners: LocalizedLinkDto;
-  offers: { [key: string]: { img: string; title: string; url: string } }[];
+  offers: { [key: string]: { img: string; title: string; url: string }[] };
   articles: LocalizedLinkDto;
   assorted: LocalizedLinkDto[];
 }
