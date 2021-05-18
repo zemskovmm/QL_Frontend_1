@@ -1,29 +1,28 @@
 import { useIntl } from "react-intl";
-import { MainPageDataDto } from "src/interfaces/mainPageDataDto";
-import { CatalogWidget, ServerCatalogWidget } from "src/components/catalog/catalogWidget";
-import { housingCatalogFilters } from "src/hardcoded/housingCatalogFilters";
+//import { MainPageDataDto } from "src/interfaces/mainPageDataDto";
+import Search from 'src/components/common/search/Search'
+import {CatalogWidget, ServerCatalogWidget} from "../../components/catalog/catalogWidget";
+import {housingCatalogFilters} from "src/hardcoded/housingCatalogFilters";
+import mainPageData from "src/hardcoded/mainPageData";
+import Tabs from "src/components/ui/Tabs/Tabs";
 
-const MainLangingPage = (props: MainPageDataDto) => {
+const MainLangingPage = () => {
   const lang = useIntl().locale;
   return (
-    <div>
-      Main page!
-      <br />
-      Current locale is {lang}
-      <br />
-      <div className="m-4 border-blue-500 border-2">
+    <Search title={mainPageData.firstScreen[lang]}>
+
+    <Tabs
+      titles={['Проживание','Обучение']}
+      components={[
         <CatalogWidget
           filters={housingCatalogFilters[lang].filters}
           filterIds={["City", "Placement"]}
           entityType="housing"
-        />
-      </div>
-      <div className="m-4 border-red-500 border-2">
+        />,
         <ServerCatalogWidget filterIds={["city", "instruction-language", "degree"]} entityType="university" />
-      </div>
-      <br />
-      <pre>{JSON.stringify(props)}</pre>
-    </div>
+      ]}
+    />
+    </Search>
   );
 };
 

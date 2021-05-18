@@ -30,7 +30,7 @@ export const  LangChooser = ({lang, urls}:langProps) => {
     <Flags icon={lang} />
     <span>{curr[lang]}</span>
     {Object.keys(urls).length > 0 && <>
-      <div className={isOpen ? styles.back : ''}></div>
+      <div className={isOpen ? styles.back : ''} />
       <ul className={isOpen ? styles.open : ''}>
         {Object.keys(urls).map(el => <li className={el === lang ? 'font-bold' : ''}><Link href={urls[el]}>{el}</Link></li>)}
       </ul>
