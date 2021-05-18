@@ -14,7 +14,7 @@ export const ReasonsListBlock: FC<ReasonsListBlockProps> = ({ data }) => {
           <div className={style.reasonsListBlock__list}>
             {data.items.map((el) => (
               <div className={style.reasonsListBlock__item} key="item.title + index">
-                <img src="" alt="" className={style.reasonsListBlock__itemImg} />
+                <img src={el.img} alt="" className={style.reasonsListBlock__itemImg} />
                 <div className={style.reasonsListBlock__itemTitle}>
                   {el.title.toUpperCase()[0] + el.title.toLowerCase().slice(1)}
                 </div>

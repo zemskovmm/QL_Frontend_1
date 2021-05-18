@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import style from "./wideCardsBlock.module.css";
-import { PostScript } from "src/components/education/PostScript/postScript";
+import { PostScript } from "src/components/common/contactUsForm/contactUsForm";
 
 type WideCardsBlockProps = {
   data: {

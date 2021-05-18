@@ -14,6 +14,7 @@ import Search from "src/components/common/search/Search";
 
 const EducationLangingPage = (props: EducationPageDataDto) => {
   const lang = useIntl().locale;
+
   return (
     <div>
       <Search className="py-9 px-10" title={educationPageData.firstScreen[lang]}>

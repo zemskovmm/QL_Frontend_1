@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import style from "./bigCardsListBlock.module.css";
-import { PostScript } from "src/components/education/PostScript/postScript";
+import { PostScript } from "src/components/common/contactUsForm/contactUsForm";
 
 type BigCardProps = {
   card: {

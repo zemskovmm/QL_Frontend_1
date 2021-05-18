@@ -9,3 +9,8 @@ export function buildQueryString(data: { [key: string]: string }): string {
 export function hasOwnProperty<X extends {}, Y extends PropertyKey>(obj: X, prop: Y): obj is X & Record<Y, unknown> {
   return obj.hasOwnProperty(prop);
 }
+
+export const rangeMap = (count: number) =>
+  Array(count)
+    .fill(null)
+    .map((_, i) => i);

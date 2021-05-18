@@ -218,10 +218,11 @@
   cursor: pointer;
   transition: all .3s ease;
   text-decoration: none;
+  margin-bottom: 30px;
 }
 
-.card:not(:first-child){
-  margin-top: 30px;
+.card:hover{
+  box-shadow: 0 10px 30px rgb(0 78 255 / 7%), 0 20px 50px rgb(0 78 255 / 5%);
 }
 
 .card__left{
@@ -310,4 +311,16 @@
   font-size: 18px;
   line-height: 24px;
   color: #373737;
+}
+
+.catalogWrapper {
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-sizing: content-box;
+  margin: auto;
+  padding: 36px 20px;
+  display: flex;
+  max-width: 1170px;
 }
