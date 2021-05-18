@@ -15,11 +15,11 @@ const Tabs = ({titles, components}:TabsProps) => {
   return <div className="flex flex-col w-full">
     <div className={cn(styles.tabs, "flex p-2.5")}>
       <div className="flex mx-auto">
-        {titles.map((title, ind) => <div className={cn(ind === activeTab ? styles.active : '')} onClick={()=>setActiveTab(ind)}>{title}</div>)}
+        {titles.map((title, ind) => <div key={ind} className={cn(ind === activeTab ? styles.active : '')} onClick={()=>setActiveTab(ind)}>{title}</div>)}
       </div>
     </div>
     <div className={cn(styles.content, "py-9 px-10")}>
-      {components.map((comp:any, ind:number) => <div className={cn(ind === activeTab ? styles.active : '')}>{comp}</div>)}
+      {components.map((comp:any, ind:number) => <div key={ind} className={cn(ind === activeTab ? styles.active : '')}>{comp}</div>)}
     </div>
   </div>
 }

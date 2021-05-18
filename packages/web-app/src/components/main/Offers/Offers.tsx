@@ -21,14 +21,11 @@ const Offers:React.FC<OffersProps> = ({title, subtitle, offers}) => (
         {subtitle && <h3>{subtitle}</h3>}
       </div>
       <div className={cn(styles.links,"flex justify-between mb-12")}>
-        {offers.map(({img,title,url})=> <a href={url}>
+        {offers.map(({img,title,url}, ind)=> <a key={ind} href={url}>
             <img src={img} alt="" />
             <span>{title}</span>
           </a>
         )}
-      </div>
-      <div className="flex justify-end">
-        <a href="#" className={styles.all}>Все предложения</a>
       </div>
     </div>
   </section>
