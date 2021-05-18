@@ -266,7 +266,7 @@ const mainPageData: MainPageDataDto = {
   offersTitle: {
     ru: {
       title: "КОМПЛЕКСНЫЕ ПРЕДЛОЖЕНИЯ",
-      subtitle: "73% наших клиентов предпочитают купить пакет услуг, <br> чтобы сделать переезд комфортным и выгодным",
+      subtitle: "73% наших клиентов предпочитают купить пакет услуг, чтобы сделать переезд комфортным и выгодным",
     },
     cn: {
       title: "優惠",
@@ -309,89 +309,73 @@ const mainPageData: MainPageDataDto = {
       title: "Our partners",
     },
   },
-  offers: [
-    {
-      cn: {
-        img: "./../images/slider/1.jpg",
+  offers: {
+      cn: [{
+        img: "/images/slider/1.png",
         title: "高等教育",
         url: "https://quartier-latin.com/cn/predlozhenija/stoimost-uslug",
-      },
-      ru: {
-        img: "./../images/slider/1.jpg",
-        title: "Поступление в ВУЗ",
-        url: "https://quartier-latin.com/predlozhenija/stoimost-uslug",
-      },
-      esp: {
-        img: "./../images/slider/1.jpg",
-        url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
-        title: "ESTUDIOS",
-      },
-      en: {
-        img: "./../images/slider/1.jpg",
-        title: "EDUCATION",
-        url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
-      },
-      fr: {
-        img: "./../images/slider/1.jpg",
-        url: "https://quartier-latin.com/fr/predlozhenija/tarifs-de-nos-services",
-        title: "ENSEIGNEMENT",
-      },
-    },
-    {
-      cn: {
-        img: "./../images/slider/3.jpg",
+      },{
+        img: "/images/slider/3.png",
         title: "签证申请",
         url: "https://quartier-latin.com/cn/predlozhenija/stoimost-uslug",
-      },
-      ru: {
-        img: "./../images/slider/3.jpg",
-        title: "Визовая поддержка",
-        url: "https://quartier-latin.com/vizovaja-podderzhka/help-with-visa-package",
-      },
-      en: {
-        img: "./../images/slider/3.jpg",
-        url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
-        title: "VISA SUPPORT",
-      },
-      esp: {
-        img: "./../images/slider/3.jpg",
-        url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
-        title: "OBTENCIÓN DEL VISADO",
-      },
-      fr: {
-        img: "./../images/slider/3.jpg",
-        url: "https://quartier-latin.com/fr/predlozhenija/tarifs-de-nos-services",
-        title: "AIDE À L’OBTENTION DU VISA",
-      },
-    },
-    {
-      cn: {
-        img: "./../images/slider/2.jpg",
+      },{
+        img: "/images/slider/2.png",
         title: "语言学习",
         url: "https://quartier-latin.com/cn/uslugi-po-adaptatsii/pakety-uslug-po-adaptatsii",
-      },
-      ru: {
-        img: "./../images/slider/2.jpg",
+      }],
+      ru: [{
+        img: "/images/slider/1.png",
+        title: "Поступление в ВУЗ",
+        url: "https://quartier-latin.com/predlozhenija/stoimost-uslug",
+      },{
+        img: "/images/slider/3.png",
+        title: "Визовая поддержка",
+        url: "https://quartier-latin.com/vizovaja-podderzhka/help-with-visa-package",
+      }, {
+        img: "/images/slider/2.png",
         url: "https://quartier-latin.com/uslugi-po-adaptatsii/pakety-uslug-po-adaptatsii",
         title: "Услуги по адаптации",
-      },
-      esp: {
-        img: "./../images/slider/2.jpg",
+      }],
+      esp: [{
+        img: "/images/slider/1.png",
+        url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
+        title: "ESTUDIOS",
+      }, {
+        img: "/images/slider/3.png",
+        url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
+        title: "OBTENCIÓN DEL VISADO",
+      },{
+        img: "/images/slider/2.png",
         url: "https://quartier-latin.com/en/uslugi-po-adaptatsii/adaptation-service-packages",
         title: "ADAPTACIÓN ",
-      },
-      en: {
-        img: "./../images/slider/2.jpg",
+      }],
+      en: [{
+        img: "/images/slider/1.png",
+        title: "EDUCATION",
+        url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
+      },{
+        img: "/images/slider/3.png",
+        url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
+        title: "VISA SUPPORT",
+      },{
+        img: "/images/slider/2.png",
         url: "https://quartier-latin.com/en/uslugi-po-adaptatsii/adaptation-service-packages",
         title: "ADAPTATION SERVICES",
-      },
-      fr: {
-        img: "./../images/slider/2.jpg",
+      }],
+      fr: [{
+        img: "/images/slider/1.png",
+        url: "https://quartier-latin.com/fr/predlozhenija/tarifs-de-nos-services",
+        title: "ENSEIGNEMENT",
+      },{
+        img: "/images/slider/3.png",
+        url: "https://quartier-latin.com/fr/predlozhenija/tarifs-de-nos-services",
+        title: "AIDE À L’OBTENTION DU VISA",
+      },{
+        img: "/images/slider/2.png",
         url: "https://quartier-latin.com/fr/uslugi-po-adaptatsii/pack-de-services-dadaptation",
         title: "SERVICES D'ADAPTATION",
-      },
+      }]
     },
-  ],
   articles: {
     cn: {
       url: "https://quartier-latin.com/cn/blog",

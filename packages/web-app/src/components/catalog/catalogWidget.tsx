@@ -6,7 +6,9 @@ import {buildQueryString} from "src/utilities/utils";
 import {useIntl} from "react-intl";
 import {router} from "next/client";
 import {siteApi} from "src/clients/siteApiClient";
+import Select from "src/components/ui/Select/Select";
 
+import styles from './style/catalogWidget.module.css'
 
 export interface CatalogWidgetFilterOption {
   id: number | string;
@@ -68,24 +70,18 @@ export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
   }
 
   return (
-    <div>
+    <div className="flex justify-between items-end w-full text-xs leading-relaxed">
       {appliedFilters.map((filter) => (
-        <div>
-          {filter.name}
-          <br />
-          <select value={selected[filter.identifier] ?? -1} onChange={e=>{
-            const value = e.target.value == "none" ? undefined : e.target.value;
-            setSelected({...selected, [filter.identifier]: value});
-          }}>
-            <option value="none">{filter.name}</option>
-            {filter.options.map((opt) => (
-              <option value={opt.id}>{opt.name}</option>
-            ))}
-          </select>
+        <div className="w-full mr-7">
+          <Select
+            label={filter.name}
+            value={selected[filter.identifier] || filter.name}
+            selectChange={value => setSelected({...selected, [filter.identifier]: value})}
+            options={[filter.name, ...filter.options.map(({name}) => (name))]}
+          />
         </div>
-
       ))}
-      <a href="#" onClick={e=>{
+      <a className={styles.catalog_button} href="#" onClick={e=>{
         e.preventDefault();
         navigateToCatalog(lang, router, props.entityType, selected);
       }}><LocalizedText id={"catalogWidget_search"}/></a>
