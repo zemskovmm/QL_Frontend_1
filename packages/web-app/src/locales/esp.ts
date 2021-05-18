@@ -18,6 +18,21 @@ const esp: LocaleDefinition = {
   contactUs_applyButton: "Submit a Request",
   contactUs_thanks: "Gracias por tu solicitud <br> <br> nos contactaremos a la brevedad",
   catalogWidget_search: "Encontrar",
+  breadcrumbs_Main: "el principal",
+  breadcrumbs_Catalog: "Catalogar",
+  catalogEducation_title: "Educación en el extranjero",
+  catalogEducation_search_result: "programas",
+  catalogEducation_categories: "Categorías",
+  catalogEducation_education: "Educación",
+  catalogEducation_accommodationn: "Alojamiento",
+  catalogItems_degree: "Nivel",
+  catalogItems_language: "Idioma",
+  catalogItems_language_all: "Todos los idiomas",
+  catalogItems_price: "El costo",
+  catalogItems_price_from: "de",
+  catalogItems_price_before: "antes de",
+  catalogItems_price_week: "semana",
+  catalogItems_price_value: "€",
 };
 
 export default esp;

@@ -1,0 +1,32 @@
+stages:
+  - deploy-web
+  - deploy-admin
+    
+deploy-web-dev:
+  stage: deploy-web
+  tags:
+    - shell
+    - ql-dev
+  only:
+    - develop
+  script:
+    - git submodule sync && git submodule update --init --recursive
+    - yarn install --frozen-lockfile
+    - yarn workspace web-app run build
+    - sudo systemctl stop quartier-latin-web-dev
+    - rm -rf /apps/quartier-dev/web && cp -r . /apps/quartier-dev/web/
+    - sudo systemctl start quartier-latin-web-dev
+
+deploy-admin-dev:
+  stage: deploy-admin
+  tags:
+    - shell
+    - ql-dev
+  only:
+    - develop
+  script:
+    - git submodule sync && git submodule update --init --recursive
+    - yarn install --frozen-lockfile
+    - yarn workspace admin-app run build
+    - sudo rm -rf /var/www/qladmin-dev/ && sudo cp -r packages/admin-app/build/ /var/www/qladmin-dev/
+    - sudo chown -R www-data /var/www/qladmin-dev/

@@ -1,6 +1,8 @@
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { ClientRouteDto } from "src/interfaces/clientRouteDto";
 import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilterDto";
+import { useData } from "@project/components/src/utils/dataEffect";
+import { ContactUsFormType } from "src/components/common/contactUsForm/contactUsForm";
 
 export interface CatalogFilterRequestDto {
   identifier: string;
@@ -13,10 +15,25 @@ export class SiteApiClient extends ApiClientBase {
     return this.sendRequest<ClientRouteDto>(url);
   }
 
+  async sendCallback(req: ContactUsFormType) {
+    const url = `call/request`;
+    return await this.sendRequest(url, req);
+  }
+
   async getCatalogFilters(lang: string, entityType: string): Promise<CatalogFilterDto[]> {
     const url = `catalog/${entityType}/filters/${lang}`;
     const res = await this.sendRequest<{ filters: CatalogFilterDto[] }>(url);
     return res.filters;
+  }
+
+  useCatalogFilters(lang: string, entityType: string): CatalogFilterDto[] | undefined {
+    return useData(
+      {
+        lang: lang,
+        entityType: entityType,
+      },
+      (req) => this.getCatalogFilters(req.lang, req.entityType)
+    );
   }
 
   async getCatalogItems<T>(
@@ -30,9 +47,28 @@ export class SiteApiClient extends ApiClientBase {
     const req = {
       pageSize: pageSize,
       page: pageNumber,
-      filters: filters
+      filters: filters,
     };
     return this.sendRequest<CatalogResponseDto<T>>(url, req);
+  }
+
+  useCatalogItems<T>(
+    lang: string,
+    entityType: string,
+    pageSize: number,
+    pageNumber: number,
+    filters: CatalogFilterRequestDto[]
+  ): CatalogResponseDto<T> | undefined {
+    return useData(
+      {
+        lang: lang,
+        entityType: entityType,
+        pageSize: pageSize,
+        pageNumber: pageNumber,
+        filters: filters,
+      },
+      (req) => this.getCatalogItems(req.lang, req.entityType, req.pageSize, req.pageNumber, req.filters)
+    );
   }
 }
 

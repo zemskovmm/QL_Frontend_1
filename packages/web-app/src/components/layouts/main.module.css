@@ -1,0 +1,164 @@
+.header_social:hover svg {
+  fill: var(--color-hover)
+}
+
+.header_social svg {
+  fill: var(--color-bd-primary)
+}
+
+.header_offer {
+  position: relative;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.header_offer:hover {
+  color: var(--color-hover);
+}
+
+.header_offer + .header_offer:before {
+  content: '';
+  height: 60px;
+  width: 1px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(to top, #F9FAFD 0, #C9D5F0 50%, #F9FAFD 100%);
+}
+
+.footer_menu {
+  border-bottom: 1px solid rgba(255,255,255,0.08)
+}
+
+.footer_arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  background-color: #567DD0;
+  box-shadow: 0 5px 10px rgba(0, 78, 255, 0.05), 0 10px 30px rgba(0, 78, 255, 0.03);
+  border-radius: 6px;
+  transition: background-color 0.4s;
+}
+
+.footer_arrow:hover {
+  background-color: #C9D5F0;
+}
+
+.footer_column {
+  display: flex;
+  flex-direction: column;
+  padding-right: 30px;
+}
+
+.footer_column > a {
+  font-size: 1rem;
+  line-height: 150%;
+  margin-bottom: 0.875rem;
+}
+
+.footer_column ul {
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  line-height: 150%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 54px;
+}
+
+.footer_column.footer_address ul {
+  margin-bottom: 20px;
+}
+
+.footer_column li {
+  margin-bottom: 0.5rem;
+}
+
+
+.footer_column ul a {
+  display: flex;
+}
+
+.footer_column ul a:before {
+  content: '';
+  margin-top: 6px;
+  width: 10px;
+  height: 9px;
+  background: url('src/assets/images/icons/romb.svg') no-repeat center / contain;
+  margin-right: 16px;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.footer_column ul a:hover {
+  color: var(--color-third);
+  text-decoration: underline;
+}
+
+
+.footer_column ul a:hover:before {
+  opacity: 1;
+}
+
+.footer_address ul li {
+  color: #ffffff;
+  display: flex;
+  font-size: 1rem;
+}
+
+.footer_address li:before {
+  content: '';
+  margin-top: 6px;
+  width: 10px;
+  height: 9px;
+  background: url('src/assets/images/icons/rombfill.svg') no-repeat center / contain;
+  margin-right: 16px;
+}
+
+.footer_social {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 240px;
+}
+
+.footer_social a {
+  cursor: pointer;
+  margin-left: 24px;
+  margin-bottom: 24px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  opacity: .6;
+  transition: opacity 0.4s;
+}
+
+.footer_social a:hover {
+  opacity: 1;
+}
+
+.footer_column a.footer_writeus {
+  background: #FF6768;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 5px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+  max-width: 220px;
+  height: 50px;
+  margin: 0 24px 40px;
+}
+
+.footer_column a.footer_writeus:before {
+  content: '';
+  background: url('src/assets/images/icons/mail.svg') no-repeat 0 center / 20px 20px;
+  height: 100%;
+  width: 36px;
+  padding-right: 16px;
+  margin-right: 19px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}

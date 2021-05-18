@@ -1,0 +1,46 @@
+.offers {
+  background-color: #F9FAFD;
+}
+
+.offers h2 {
+  font-size: 1.875rem;
+  line-height: 140%;
+  font-weight: 700;
+  white-space: nowrap;
+  padding-bottom: 8px;
+}
+
+.offers h3 {
+  display: flex;
+  margin-left: 56px;
+  font-size: 0.875rem;
+  line-height: 140%;
+  max-width: 440px;
+}
+
+.offers h3:before {
+  content: '';
+  flex-shrink: 0;
+  margin-top: 6px;
+  width: 10px;
+  height: 9px;
+  background: url('src/assets/images/icons/romb.svg') no-repeat center / contain;
+  margin-right: 16px;
+}
+
+.links a {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
+  border-radius: 6px;
+  width: 370px;
+  padding: 15px;
+}
+
+.links span {
+  font-weight: 700;
+  margin: 24px 10px;
+  font-size: 1.125rem;
+  line-height: 144%;
+}

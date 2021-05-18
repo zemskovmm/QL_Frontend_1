@@ -28,9 +28,16 @@ export function getLanguageUrlsFromRouterState(router: NextRouter): { [key: stri
   const path = router.asPath.replace(/^\/[a-z]+\//, "");
 
   const urls: { [key: string]: string } = {};
-  for (const l of supportedLocales) {
-    urls[l] = "/" + l + "/" + path;
+  if (path === '/' + lang) {
+    for (const l of supportedLocales) {
+      urls[l] = "/" + l
+    }
+  } else {
+    for (const l of supportedLocales) {
+      urls[l] = "/" + l + "/" + path;
+    }
   }
+
   return urls;
 }
 

@@ -17,6 +17,21 @@ const en = {
   contactUs_applyButton: "Submit a Request",
   contactUs_thanks: "Thank you for your application <br> <br> we will contact you shortly",
   catalogWidget_search: "Search",
+  breadcrumbs_Main: "Main",
+  breadcrumbs_Catalog: "Catalog",
+  catalogEducation_title: "Education abroad",
+  catalogEducation_search_result: "programs",
+  catalogEducation_categories: "Сategories",
+  catalogEducation_education: "Education",
+  catalogEducation_accommodationn: "Accommodation",
+  catalogItems_degree: "Level",
+  catalogItems_language: "Language",
+  catalogItems_language_all: "All language",
+  catalogItems_price: "The cost",
+  catalogItems_price_from: "from",
+  catalogItems_price_before: "before",
+  catalogItems_price_week: "week",
+  catalogItems_price_value: "€",
 };
 
 export default en;

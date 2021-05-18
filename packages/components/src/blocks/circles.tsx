@@ -1,6 +1,6 @@
 import React from 'react';
 import {TypedBlockTypeInfo} from "./blocks-info";
-import styles from './circles.module.css'
+import styles from './circles.module.css';
 
 export interface CirclesBlockElement {
   header: string;

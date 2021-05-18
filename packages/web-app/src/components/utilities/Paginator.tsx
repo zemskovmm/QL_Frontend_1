@@ -1,26 +1,15 @@
 import React from "react";
+import style from "./Paginetor.module.css";
 
 export const Paginator = (props: { page: number; totalPages: number; setPage: (page: number) => void }) => {
   const { page, totalPages, setPage } = props;
   const Btn = (props: { page: number; index: number; totalButtons: number }) => {
-    var isCurrent = page == props.page;
-    var isFirst = props.index == 0;
-    var isLast = props.index == props.totalButtons - 1;
-    var isMiddle = !isFirst && !isLast;
-    var classes = "w-full text-base bg-white hover:bg-gray-100 px-4 py-2 ";
-
-    if (isFirst && isLast) classes += " rounded-xl";
-    if (isFirst) classes += " rounded-l-xl";
-    else if (isLast) classes += " rounded-r-xl";
-    if (isCurrent) classes += " text-indigo-500";
-    else classes += " text-gray-600";
-
-    if (!isFirst && !isLast && props.index != props.totalButtons - 2) classes += " border-t border-b border-r";
-    else if (props.index == props.totalButtons - 2) classes += " border-t border-b";
-    else classes += " border";
-
     return (
-      <button type="button" onClick={() => setPage(props.page)} className={classes}>
+      <button
+        type="button"
+        onClick={() => setPage(props.page)}
+        className={`${style.btn} ${page === props.page ? style.btn_active : ""}`}
+      >
         {props.page + 1}
       </button>
     );
