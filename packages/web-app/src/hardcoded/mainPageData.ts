@@ -10,137 +10,142 @@ const mainPageData: MainPageDataDto = {
     esp: "Obtenga una educación superior o tome un curso de idiomas en Francia",
     en: "Get a higher education or take a language course in France",
   },
-  news: [
-    {
-      ru: {
+  firstScreenTabs: {
+    ru: ["Обучение", "Проживание"],
+    cn: ["高等教育", "住宿"],
+    fr: ["Enseignement", "Hébergement"],
+    esp: ["Estudios", "Alojamiento"],
+    en: ["Education", "Accommodation"],
+  },
+  news: {
+      ru: [
+        {
         link: "https://quartier-latin.com/blog/no-progress",
-        img: "./../images/news/1.jpg",
+        img: "/images/news/1.jpg",
         description: "ПОЧЕМУ НЕТ ПРОГРЕССА ВО ФРАНЦУЗСКОМ",
         date: "04-02-2017",
-      },
-      cn: {
+      },{
+        link: "https://quartier-latin.com/blog/six-useful-french-exp",
+        img: "/images/news/2.jpg",
+        description: "ШЕСТЬ ПОЛЕЗНЫХ ФРАНЦУЗСКИХ ВЫРАЖЕНИЙ",
+        date: "04-02-2017",
+      },{
+        link: "https://quartier-latin.com/blog/frantsija/prigorod-ili-tsentr",
+        img: "/images/news/3en.jpg",
+        description: "ПРИГОРОД ИЛИ ЦЕНТР",
+        date: "15-09-2016",
+      },{
+        link: "https://quartier-latin.com/blog/frantsija/kak-bystro-razgovarivat",
+        img: "/images/news/2cn.jpg",
+        description: "КАК БЫСТРО ВЫУЧИТЬ ФРАНЦУЗСКИЙ",
+        date: "15-09-2016",
+      }],
+      cn: [
+        {
         link: "https://quartier-latin.com/cn/blog/no-progress",
-        img: "./../images/news/1.jpg",
+        img: "/images/news/1.jpg",
         description: "为什么您觉得法语水平没有提高的六个原因：",
         date: "31-03-2018",
       },
-      fr: {
+        {
+          link: "https://quartier-latin.com/cn/blog/kak-bystro-zagovorit",
+          img: "/images/news/2cn.jpg",
+          description: "在短时间内学会说法语",
+          date: "31-03-2018",
+        },
+        {
+          link: "https://quartier-latin.com/cn/blog/prigorod-ili-tsentr",
+          img: "/images/news/3en.jpg",
+          description: "城市还是郊区？",
+          date: "31-03-2018",
+        },
+        {
+          link: "https://quartier-latin.com/cn/blog/six-useful-french-exp",
+          img: "/images/news/2.jpg",
+          description: "六句常用的法语口语",
+          date: "31-03-2018",
+        },
+      ],
+      fr: [
+        {
         link: "https://quartier-latin.com/fr/blog/no-progress",
-        img: "./../images/news/1.jpg",
+        img: "/images/news/1.jpg",
         description:
           "SIX RAISONS POUR LESQUELLES VOUS NE RESSENTEZ PAS DE PROGRÈS DANS VOTRE APPRENTISSAGE DU FRANÇAIS",
         date: "04-02-2017",
       },
-      esp: {
-        link: "https://quartier-latin.com/en/blog/no-progress",
-        img: "./../images/news/1.jpg",
-        description: "SIX REASONS WHY YOU DON'T FEEL PROGRESS WHEN LEARNING FRENCH",
-        date: "06-02-2017",
-      },
-      en: {
-        link: "https://quartier-latin.com/en/blog/no-progress",
-        img: "./../images/news/1.jpg",
-        description: "SIX REASONS WHY YOU DON'T FEEL PROGRESS WHEN LEARNING FRENCH",
-        date: "06-02-2017",
-      },
-    },
-    {
-      ru: {
-        link: "https://quartier-latin.com/blog/six-useful-french-exp",
-        img: "./../images/news/2.jpg",
-        description: "ШЕСТЬ ПОЛЕЗНЫХ ФРАНЦУЗСКИХ ВЫРАЖЕНИЙ",
-        date: "04-02-2017",
-      },
-      cn: {
-        link: "https://quartier-latin.com/cn/blog/kak-bystro-zagovorit",
-        img: "./../images/news/2cn.jpg",
-        description: "在短时间内学会说法语",
-        date: "31-03-2018",
-      },
-      fr: {
+      {
         link: "https://quartier-latin.com/fr/blog/six-useful-french-exp",
-        img: "./../images/news/2.jpg",
+        img: "/images/news/2.jpg",
         description: "6 PHRASES EN FRANÇAIS UTILES",
         date: "04-02-2017",
       },
-      esp: {
-        link: "https://quartier-latin.com/en/blog/six-useful-french-exp",
-        img: "./../images/news/2.jpg",
-        description: "SIX USEFUL FRENCH PHRASES FOR EVERY DAY USE",
-        date: "06-02-2017",
-      },
-      en: {
-        link: "https://quartier-latin.com/en/blog/six-useful-french-exp",
-        img: "./../images/news/2.jpg",
-        description: "SIX USEFUL FRENCH PHRASES FOR EVERY DAY USE",
-        date: "06-02-2017",
-      },
-    },
-    {
-      ru: {
-        link: "https://quartier-latin.com/blog/frantsija/prigorod-ili-tsentr",
-        img: "./../images/news/3en.jpg",
-        description: "ПРИГОРОД ИЛИ ЦЕНТР",
-        date: "15-09-2016",
-      },
-      cn: {
-        link: "https://quartier-latin.com/cn/blog/prigorod-ili-tsentr",
-        img: "./../images/news/3en.jpg",
-        description: "城市还是郊区？",
-        date: "31-03-2018",
-      },
-      fr: {
+      {
         link: "https://quartier-latin.com/fr/blog/prigorod-ili-tsentr",
-        img: "./../images/news/3en.jpg",
+        img: "/images/news/3en.jpg",
         description: "CENTRE-VILLE OU BANLIEUE?",
         date: "21-10-2016",
       },
-      esp: {
-        link: "https://quartier-latin.com/en/blog/frantsija/downtown-or-in-the-suburbs",
-        img: "./../images/news/3en.jpg",
-        description: "DOWNTOWN OR IN THE SUBURBS?",
-        date: "15-09-2016",
-      },
-      en: {
-        link: "https://quartier-latin.com/en/blog/frantsija/downtown-or-in-the-suburbs",
-        img: "./../images/news/3en.jpg",
-        description: "DOWNTOWN OR IN THE SUBURBS?",
-        date: "15-09-2016",
-      },
-    },
-    {
-      ru: {
-        link: "https://quartier-latin.com/blog/frantsija/kak-bystro-razgovarivat",
-        img: "./../images/news/2cn.jpg",
-        description: "КАК БЫСТРО ВЫУЧИТЬ ФРАНЦУЗСКИЙ",
-        date: "15-09-2016",
-      },
-      cn: {
-        link: "https://quartier-latin.com/cn/blog/six-useful-french-exp",
-        img: "./../images/news/2.jpg",
-        description: "六句常用的法语口语",
-        date: "31-03-2018",
-      },
-      fr: {
+      {
         link: "https://quartier-latin.com/fr/blog/kak-bystro-zagovorit",
-        img: "./../images/news/2cn.jpg",
+        img: "/images/news/2cn.jpg",
         description: "PARLER FRANÇAIS RAPIDEMENT",
         date: "21-10-2016",
       },
-      esp: {
-        link: "https://quartier-latin.com/en/blog/frantsija/how-to-start-speaking-french",
-        img: "./../images/news/2cn.jpg",
-        description: "HOW TO START SPEAKING FRENCH",
-        date: "15-09-2016",
+      ],
+      esp: [
+      {
+        link: "https://quartier-latin.com/en/blog/no-progress",
+        img: "/images/news/1.jpg",
+        description: "SIX REASONS WHY YOU DON'T FEEL PROGRESS WHEN LEARNING FRENCH",
+        date: "06-02-2017",
       },
-      en: {
-        link: "https://quartier-latin.com/en/blog/frantsija/how-to-start-speaking-french",
-        img: "./../images/news/2cn.jpg",
-        description: "HOW TO START SPEAKING FRENCH",
-        date: "15-09-2016",
+        {
+          link: "https://quartier-latin.com/en/blog/six-useful-french-exp",
+          img: "/images/news/2.jpg",
+          description: "SIX USEFUL FRENCH PHRASES FOR EVERY DAY USE",
+          date: "06-02-2017",
+        },
+        {
+          link: "https://quartier-latin.com/en/blog/frantsija/downtown-or-in-the-suburbs",
+          img: "/images/news/3en.jpg",
+          description: "DOWNTOWN OR IN THE SUBURBS?",
+          date: "15-09-2016",
+        },
+        {
+          link: "https://quartier-latin.com/en/blog/frantsija/how-to-start-speaking-french",
+          img: "/images/news/2cn.jpg",
+          description: "HOW TO START SPEAKING FRENCH",
+          date: "15-09-2016",
+        },
+      ],
+      en: [
+        {
+        link: "https://quartier-latin.com/en/blog/no-progress",
+        img: "/images/news/1.jpg",
+        description: "SIX REASONS WHY YOU DON'T FEEL PROGRESS WHEN LEARNING FRENCH",
+        date: "06-02-2017",
       },
+        {
+          link: "https://quartier-latin.com/en/blog/six-useful-french-exp",
+          img: "/images/news/2.jpg",
+          description: "SIX USEFUL FRENCH PHRASES FOR EVERY DAY USE",
+          date: "06-02-2017",
+        },
+        {
+          link: "https://quartier-latin.com/en/blog/frantsija/downtown-or-in-the-suburbs",
+          img: "/images/news/3en.jpg",
+          description: "DOWNTOWN OR IN THE SUBURBS?",
+          date: "15-09-2016",
+        },
+        {
+          link: "https://quartier-latin.com/en/blog/frantsija/how-to-start-speaking-french",
+          img: "/images/news/2cn.jpg",
+          description: "HOW TO START SPEAKING FRENCH",
+          date: "15-09-2016",
+        },
+      ],
     },
-  ],
   utp: {
     ru: {
       items: [
@@ -263,6 +268,28 @@ const mainPageData: MainPageDataDto = {
       ],
     },
   },
+  partners: {
+    ru: {
+      title: "Наши партнёры",
+      url: "https://quartier-latin.com/partners",
+    },
+    cn: {
+      url: "https://quartier-latin.com/en/partners",
+      title: "我們的合作夥伴",
+    },
+    fr: {
+      title: "Nos partenaires",
+      url: "https://quartier-latin.com/fr/partners",
+    },
+    esp: {
+      title: "Nuestros compañeros",
+      url: "https://quartier-latin.com/en/partners",
+    },
+    en: {
+      url: "https://quartier-latin.com/en/partners",
+      title: "Our partners",
+    },
+  },
   offersTitle: {
     ru: {
       title: "КОМПЛЕКСНЫЕ ПРЕДЛОЖЕНИЯ",
@@ -285,28 +312,6 @@ const mainPageData: MainPageDataDto = {
     en: {
       title: "OFFERS",
       subtitle: "73% of our customers prefer to buy a package to make the relocation comfortable and profitable",
-    },
-  },
-  partners: {
-    ru: {
-      title: "Наши партнёры",
-      url: "https://quartier-latin.com/partners",
-    },
-    cn: {
-      url: "https://quartier-latin.com/en/partners",
-      title: "我們的合作夥伴",
-    },
-    fr: {
-      title: "Nos partenaires",
-      url: "https://quartier-latin.com/fr/partners",
-    },
-    esp: {
-      title: "Nuestros compañeros",
-      url: "https://quartier-latin.com/en/partners",
-    },
-    en: {
-      url: "https://quartier-latin.com/en/partners",
-      title: "Our partners",
     },
   },
   offers: {
@@ -398,51 +403,47 @@ const mainPageData: MainPageDataDto = {
       url: "https://quartier-latin.com/fr/blog",
     },
   },
-  assorted: [
+  assorted: {
+    esp: [
     {
-      esp: {
-        title: "Instagram",
-        url: "https://www.instagram.com/p/CKdRgIEAqVX/embed",
-      },
-      en: {
-        url: "https://www.instagram.com/p/CLBoWC2jO_D/embed",
-        title: "Instagram",
-      },
-      fr: {
-        url: "https://www.instagram.com/p/CKyLchbj34V/embed",
-        title: "Instagram",
-      },
-      cn: {
-        url: "",
-        title: "",
-      },
-      ru: {
-        url: "https://www.instagram.com/p/CKdRgIEAqVX/embed",
-        title: "Instagram",
-      },
+      title: "Instagram",
+      url: "https://www.instagram.com/p/CKdRgIEAqVX/embed",
     },
     {
-      fr: {
+      title: "Facebook",
+      url: "https://www.facebook.com/QuartierLatinEN/",
+    }
+    ],
+    en: [
+    {
+      url: "https://www.instagram.com/p/CLBoWC2jO_D/embed",
+      title: "Instagram",
+    },
+      {
+        url: "https://www.facebook.com/QuartierLatinEN/",
+        title: "Facebook",
+      }
+    ],
+    fr: [
+    {
+      url: "https://www.instagram.com/p/CKyLchbj34V/embed",
+      title: "Instagram",
+    },
+      {
         title: "Facebook",
         url: "https://www.facebook.com/QuartierLatinFR/",
       },
-      en: {
-        url: "https://www.facebook.com/QuartierLatinEN/",
-        title: "Facebook",
-      },
-      esp: {
-        title: "Facebook",
-        url: "https://www.facebook.com/QuartierLatinEN/",
-      },
-      ru: {
-        title: "YouTube",
-        url: "https://www.youtube.com/channel/UCEfRnfb8l-Wp7WXHkG-gUZA",
-      },
-      cn: {
-        title: "",
-        url: "",
-      },
+    ],
+    ru: [
+      {
+      url: "https://www.instagram.com/p/CKdRgIEAqVX/embed",
+      title: "Instagram",
     },
-  ],
+    {
+      title: "YouTube",
+      url: "https://www.youtube.com/channel/UCEfRnfb8l-Wp7WXHkG-gUZA",
+    }
+    ]
+  }
 };
 export default mainPageData;

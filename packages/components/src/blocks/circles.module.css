@@ -1,16 +1,18 @@
 .circleItem {
   display: flex;
+  flex-direction: column;
   flex-grow: 2;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
   position: relative;
   margin-top: 10px;
 }
 
 .circleArticle {
   position: absolute;
-  top: -5px;
+  top: -6px;
   background-color: white;
+  padding: 2px 8px;
   font-style: normal;
   font-weight: bold;
   font-size: 10px;
@@ -35,9 +37,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 103px;
-  height: 52px;
+  width: 130px;
+  height: 130px;
   margin-bottom: 24px;
+  flex-shrink: 0;
 }
 
 .circleText {
@@ -51,4 +54,5 @@
   justify-content: center;
   text-align: center;
   color: #373737;
+  max-width: 210px;
 }
