@@ -1,0 +1,24 @@
+.readMoreBlock{
+  
+}
+
+.readMoreBlock__title{
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+  color: #373737;
+  margin-bottom: 16px;
+}
+
+.readMoreBlock__text{
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.readMoreBlock__button{
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 11px;
+  color: #567DD0;
+  border-bottom: 1px dashed rgba(75, 116, 205, 0.6);
+}
