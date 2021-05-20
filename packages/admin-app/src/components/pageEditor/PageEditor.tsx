@@ -15,8 +15,9 @@ import { AdminOverlayDialog } from "src/components/common/AdminOverlayDialog";
 import { bind, dmap } from "src/utils/util";
 import { AdminTabControl } from "src/components/common/AdminTabControl";
 import "@kekekeks/remoteui/src/RemoteUiEditor.css";
-import {AdminTextBox} from "src/components/common/AdminTextBox";
-import {AllLanguages} from "@project/components/src/utils/langs";
+import { AdminTextBox } from "src/components/common/AdminTextBox";
+import { AllLanguages } from "@project/components/src/utils/langs";
+import grid from "@project/components/src/styles/grid.module.css";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -46,16 +47,17 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
       <table style={{ width: "100%" }}>
         <tbody>
           <tr>
-            <td style={{ width: "100%" }}>
+            <td style={{ width: "100%" }} className={`p-4`}>
               <div>
                 {props.store.cells.map((cell, i) => (
                   <div
-                    className="inline-block"
-                    style={{ width: `calc(${8 * cell.size}% - 6px)`, margin: 3, verticalAlign: 'top' }}>
+                    className={`inline-block ${grid["col-" + cell.size]} border border-blue-400 box-border`}
+                    style={{ verticalAlign: "top" }}
+                  >
                     <PageEditorCell key={i.toString()} store={cell} />
                   </div>
                 ))}
-                <div className="inline-block ma-4" style={{verticalAlign: 'bottom'}}>
+                <div className="inline-block m-4" style={{ verticalAlign: "bottom" }}>
                   <AdminButton color={"primary"} onClick={() => props.store.addNewCell()}>
                     +
                   </AdminButton>
@@ -120,9 +122,9 @@ export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) =>
           <PageEditorCellDialog store={s.cellEditor} />
         </AdminOverlayDialog>
       )}
-      <AdminTextBox id={"title"} label="Title" {...bind(s, "title")}/>
-      <AdminTextBox id={"url"} label="Url" {...bind(s, "url")}/>
-      
+      <AdminTextBox id={"title"} label="Title" {...bind(s, "title")} />
+      <AdminTextBox id={"url"} label="Url" {...bind(s, "url")} />
+
       <br />
       {s.rows.map((r, i) => (
         <PageEditorRow key={i.toString()} store={r} />

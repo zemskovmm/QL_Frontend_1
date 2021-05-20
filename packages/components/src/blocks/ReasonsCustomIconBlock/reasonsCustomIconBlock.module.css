@@ -1,0 +1,98 @@
+.reasonsCustomIconBlock{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.reasonsCustomIconBlock__title{
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 42px;
+  margin-bottom: 60px;
+  color: #373737;
+  max-width: 640px;
+}
+
+.reasonsCustomIconBlock__list{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.reasonsCustomIconBlock__item{
+  max-width: 29.6006944444%;
+  min-width: 29.6006944444%;
+  margin-right: 5.12152777778%;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.reasonsCustomIconBlock__item:nth-child(3n){
+  margin-right: 0;
+}
+
+.reasonsCustomIconBlock__icon{
+  max-width: 60px;
+  min-width: 60px;
+  max-height: 60px;
+  min-height: 60px;
+  background: #EFF3FA;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 19px;
+}
+
+.reasonsCustomIconBlock__itemTitle{
+  color: #373737;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 10px;
+}
+
+.reasonsCustomIconBlock__text{
+  font-size: 14px;
+  line-height: 30px;
+  color: #646F83;
+}
+
+.reasonsCustomIconBlock__button{
+  background: #FF6768;
+  border-radius: 3px;
+  padding: 11px 25px 12px;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  width: fit-content;
+}
+
+.reasonsCustomIconBlock__button:hover{
+  background: #fd7172;
+}
+
+.reasonsCustomIconBlock__buttonText{
+  font-size: 14px;
+  line-height: 24px;
+  color: #373737;
+  margin-bottom: 25px;
+}
+
+.reasonsCustomIconBlock__buttonText a{
+  color: #FF6768;
+  text-decoration: underline;
+}
+
+.reasonsCustomIconBlock__buttonText:before{
+  content: "";
+  border: 5px solid #FF6768;
+  width: 30px;
+  border-radius: 4px;
+  display: flex;
+  margin-bottom: 30px;
+}
