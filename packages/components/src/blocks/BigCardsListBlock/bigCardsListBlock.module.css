@@ -1,18 +1,8 @@
-﻿.bigCardsListBlock__background {
-  background: #E5E5E5;
-}
-
-.bigCardsListBlock__maxWidth {
-  max-width: 1170px;
-  margin: auto;
-  padding: 0 20px;
-  box-sizing: content-box;
-}
-
-.bigCardsListBlock__container {
+﻿.bigCardsListBlock__container {
   display: flex;
   flex-direction: column;
   padding: 69px 0 40px 0;
+  width: 100%;
 }
 
 .bigCardsListBlock__title {
@@ -46,6 +36,7 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
+  width: 100%;
 }
 
 .bigCard:hover {
