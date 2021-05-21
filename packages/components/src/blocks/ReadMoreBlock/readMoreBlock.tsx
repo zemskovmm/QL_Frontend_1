@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./readMoreBlock.module.css";
-import { is } from "@babel/types/lib/index-legacy";
 
 export interface ReadMoreBlockElement {
   header: string;
@@ -10,19 +9,21 @@ export interface ReadMoreBlockElement {
 }
 
 export const ReadMoreBlock = (props: ReadMoreBlockElement) => {
-  // const [isOpen, Open] = useState(false);
+  const [isOpen, Open] = useState(false);
   return (
     <div className="py-28">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.readMoreBlock}>
           <div className={styles.readMoreBlock__title}>{props.header}</div>
           <div className={styles.readMoreBlock__text} dangerouslySetInnerHTML={{ __html: props.textBefore }} />
-          {/*{props.textAfter && !isOpen && (*/}
-          {/*  <button className={styles.readMoreBlock__button} type={"button"} onClick={() => Open(true)}>*/}
-          {/*    Читать полностью*/}
-          {/*  </button>*/}
-          {/*)}*/}
-          {/*{isOpen && <div className={styles.readMoreBlock__text} dangerouslySetInnerHTML={{__html: props.textAfter}}/></div>}*/}
+          {props.textAfter && !isOpen && (
+            <button className={styles.readMoreBlock__button} type={"button"} onClick={() => Open(true)}>
+              Читать полностью
+            </button>
+          )}
+          {isOpen && (
+            <div className={styles.readMoreBlock__text} dangerouslySetInnerHTML={{ __html: props.textAfter }} />
+          )}
         </div>
       </div>
     </div>

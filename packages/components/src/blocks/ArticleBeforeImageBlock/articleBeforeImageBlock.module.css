@@ -1,0 +1,25 @@
+.articleBeforeImageBlock {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.articleBeforeImageBlock__img{
+  width: 100%;
+  border-radius: 6px;
+}
+
+.articleBeforeImageBlock__title{
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 42px;
+  color: #373737;
+  margin-bottom: 14px;
+}
+
+.articleBeforeImageBlock__text p{
+  font-size: 14px;
+  line-height: 24px;
+  color: #373737;
+  margin-bottom: 21px;
+}

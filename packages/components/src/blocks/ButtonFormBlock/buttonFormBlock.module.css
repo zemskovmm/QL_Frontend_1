@@ -1,0 +1,32 @@
+.button {
+  padding: 11px 27px 12px 28px;
+  white-space: nowrap;
+  background: #FF6768;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  transition: 0.3s;
+  cursor: pointer;
+  border: 0;
+  display: flex;
+  align-items: center;
+}
+
+.button img {
+  height: 20px;
+  width: 20px;
+  box-sizing: content-box;
+  padding-right: 16px;
+  margin-right: 19px;
+  margin-left: -10px;
+  padding-top: 4px;
+  padding-bottom: 3px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.button:hover{
+  background: #fd7777;
+}
