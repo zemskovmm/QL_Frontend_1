@@ -48,6 +48,24 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
         <tbody>
           <tr>
             <td style={{ width: "100%" }} className={`p-4`}>
+              <div className={`flex mb-3`}>
+                <label className={`flex flex-col mr-6`}>
+                  <span className={`mb-3`}>MaxWidth</span>
+                  <input
+                    type={"text"}
+                    onChange={(e) => (props.store.maxWidth = e.target.value)}
+                    value={props.store.maxWidth}
+                  />
+                </label>
+                <label className={`flex flex-col`}>
+                  <span className={`mb-3`}>backGround</span>
+                  <input
+                    type={"text"}
+                    onChange={(e) => (props.store.backGround = e.target.value)}
+                    value={props.store.backGround}
+                  />
+                </label>
+              </div>
               <div>
                 {props.store.cells.map((cell, i) => (
                   <div

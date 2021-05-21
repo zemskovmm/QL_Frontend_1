@@ -1,5 +1,7 @@
 export interface PageBlockRowDto {
   blocks: PageBlockDto[];
+  maxWidth?: string;
+  background?: string;
 }
 
 export interface PageBlockDto {
