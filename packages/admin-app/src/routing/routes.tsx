@@ -4,6 +4,7 @@ import { convertRoutes } from "./route";
 import { IndexPage } from "src/pages/indexPage";
 import { PageEditorPage } from "src/pages/pageEditorPage";
 import {PageListPage} from "src/pages/pageListPage";
+import {FilesPage} from "src/pages/filesPage";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -11,6 +12,8 @@ export enum RouteNames {
   pageList = "pageList",
   editPage = "editPage",
   newPage = "newPage",
+  fileList = "fileList",
+  fileListById = "fileListById",
 }
 
 export const RouteViewMap = {
@@ -18,7 +21,9 @@ export const RouteViewMap = {
   [RouteNames.index]: <IndexPage />,
   [RouteNames.newPage]: <PageEditorPage />,
   [RouteNames.editPage]: <PageEditorPage />,
-  [RouteNames.pageList]: <PageListPage />
+  [RouteNames.pageList]: <PageListPage />,
+  [RouteNames.fileList]: <FilesPage />,
+  [RouteNames.fileListById]: <FilesPage />
 };
 
 export const Routes: Route[] = convertRoutes([
@@ -44,5 +49,15 @@ export const Routes: Route[] = convertRoutes([
     pattern: "/pages/:id",
     name: RouteNames.editPage,
     onEnter: (root, to) => root.pageEditorPage.load(parseInt(to.params['id'])),
+  },
+  {
+    pattern: "/files",
+    name: RouteNames.fileList,
+    onEnter: root => root.filesStore.load()
+  },
+  {
+    pattern: "/files/:id",
+    name: RouteNames.fileListById,
+    onEnter: (root, to) => root.filesStore.load(parseInt(to.params['id'])),
   },
 ]);
