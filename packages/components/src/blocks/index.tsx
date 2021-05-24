@@ -4,6 +4,10 @@ import { CirclesBlockInfo } from "./circles";
 import { ReadMoreBlockInfo } from "./ReadMoreBlock/readMoreBlock";
 import { ReasonsAcceptIconBlockInfo } from "./ReasonsAcceptIconBlock/reasonsAcceptIconBlock";
 import { ReasonsCustomIconBlockInfo } from "./ReasonsCustomIconBlock/reasonsCustomIconBlock";
+import { LeftAlignBlockInfo } from "./LeftAlignBlock/leftAlignBlock";
+import { ArticleBeforeImageBlockInfo } from "./ArticleBeforeImageBlock/articleBeforeImageBlock";
+import { BigCardsListBlockInfo } from "./BigCardsListBlock/bigCardsListBlock";
+import { ButtonFormBlockInfo } from "./ButtonFormBlock/buttonFormBlock";
 import { BlockTypeInfo } from "./blocks-info";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
@@ -12,6 +16,10 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ReadMoreBlockInfo,
   ReasonsAcceptIconBlockInfo,
   ReasonsCustomIconBlockInfo,
+  LeftAlignBlockInfo,
+  ArticleBeforeImageBlockInfo,
+  BigCardsListBlockInfo,
+  ButtonFormBlockInfo,
 ];
 
 export function findBlockInfo(blockType: string): BlockTypeInfo | null {
