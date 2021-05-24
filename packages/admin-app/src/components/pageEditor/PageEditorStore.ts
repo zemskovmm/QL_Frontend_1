@@ -244,7 +244,7 @@ export class PageEditorStore extends RequestTracking {
     const dto = this.serialize();
     fireAndAlertOnError(() =>
       this.track(async () => {
-        if (this.id == null) this.id = (await AdminApi.createPage(dto)).id;
+        if (this.id === null) this.id = (await AdminApi.createPage(dto)).id;
         else await AdminApi.updatePage(this.id, dto);
         this.onSave(this.id);
       })

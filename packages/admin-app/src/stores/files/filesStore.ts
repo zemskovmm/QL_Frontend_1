@@ -9,7 +9,10 @@ interface IFilesStore {
   current: FilesListDto,
   currentFolder: number,
   load: (id? : number) => void,
-  createFolder: (title: string) => void
+  createFolder: (title: string) => void,
+  loadFile: (data: FormData) => void,
+  rename: (title: string, id: number) => void,
+  delete: (id: number) => void
 }
 
 export const FilesStores = observable<IFilesStore>({
@@ -44,10 +47,44 @@ export const FilesStores = observable<IFilesStore>({
         ? this.load(this.currentFolder)
         : this.load()
     }
+  },
+
+  async loadFile(data) {
+    const res = await FilesApi.loadFile(data)
+
+    if (res) {
+      this.currentFolder
+        ? this.load(this.currentFolder)
+        : this.load()
+    }
+  },
+
+
+  async rename(title, id) {
+    const res = await FilesApi.updateFolder(id,{title})
+
+    if (res) {
+      this.currentFolder
+        ? this.load(this.currentFolder)
+        : this.load()
+    }
+  },
+
+  async delete(id) {
+    const res = await FilesApi.deleteFolder(id)
+
+    if (res) {
+      this.currentFolder
+        ? this.load(this.currentFolder)
+        : this.load()
+    }
   }
 }, {
   load: action.bound,
-  createFolder: action.bound
+  createFolder: action.bound,
+  rename: action.bound,
+  loadFile: action.bound,
+  delete: action.bound
 });
 /*
 
