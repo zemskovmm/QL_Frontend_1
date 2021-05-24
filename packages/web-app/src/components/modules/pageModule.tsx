@@ -5,9 +5,12 @@ import grid from "@project/components/src/styles/grid.module.css";
 
 const PageRow = (props: PageBlockRowDto) => {
   return (
-    <div>
+    <div style={{ background: props.background }}>
       {props.blocks.map((cell, i) => (
-        <div className={`inline-block ${grid["col-" + cell.size]}`} style={{ margin: 3, verticalAlign: "top" }}>
+        <div
+          className={`inline-block ${grid["col-" + cell.size]}`}
+          style={{ margin: 3, verticalAlign: "top", maxWidth: props.maxWidth }}
+        >
           <BlockPresenter key={i} blockType={cell.type} blockData={cell.data} />
         </div>
       ))}
@@ -17,10 +20,10 @@ const PageRow = (props: PageBlockRowDto) => {
 
 export const PageModule = (props: ClientPageDto) => {
   return (
-    <div className={"mx-auto max-w-screen-xl px-10"}>
+    <div className={"mx-auto "}>
       <h1>{props.title}</h1>
       {props.block.rows.map((row, i) => (
-        <PageRow key={i} blocks={row.blocks} />
+        <PageRow key={i} blocks={row.blocks} maxWidth={row.maxWidth} background={row.background} />
       ))}
     </div>
   );

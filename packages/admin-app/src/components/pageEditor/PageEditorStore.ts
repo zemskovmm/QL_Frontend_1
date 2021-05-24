@@ -140,6 +140,8 @@ function editNewCell(
 
 export class PageEditorRowStore {
   @observable cells: PageEditorCellStore[] = [];
+  @observable maxWidth?: string;
+  @observable backGround?: string;
 
   constructor(private editor: PageLanguageEditorStore) {}
 
@@ -165,6 +167,8 @@ export class PageLanguageEditorStore {
     this.url = data.url;
     this.rows = data.pageData.rows.map((row) => {
       const editor = new PageEditorRowStore(this);
+      editor.maxWidth = row.maxWidth;
+      editor.backGround = row.background;
       for (const cell of row.blocks) editor.addCellWithData(cell.type, cell.data, cell.size);
       return editor;
     });
@@ -189,6 +193,8 @@ export class PageLanguageEditorStore {
       url: this.url,
       pageData: {
         rows: this.rows.map((r) => ({
+          maxWidth: r.maxWidth,
+          background: r.backGround,
           blocks: r.cells.map((c) => ({ type: c.blockType, data: c.blockData, size: c.size })),
         })),
       },
@@ -220,6 +226,8 @@ export class PageEditorStore extends RequestTracking {
       pageData: {
         rows: [
           {
+            maxWidth: "",
+            background: "",
             blocks: [
               {
                 size: 12,
