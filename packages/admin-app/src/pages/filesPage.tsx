@@ -1,5 +1,4 @@
-import FileLoader from "src/components/fileLoader/fileLoader";
-import {useState} from "react";
+import {FileLoader} from "src/components/fileLoader/FileLoader";
 
 export const FilesPage = () => {
 

@@ -1,11 +1,9 @@
-import {AdminButton} from "src/components/common/AdminButton";
-import {useObserver} from "mobx-react";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {action, observable} from "mobx";
 import {FilesListDto} from "src/interfaces/FilesDto";
 import {FilesApi} from "src/clients/filesApiClient";
-
-//configure({enforceActions: "observed"})
+import {useObserver} from "mobx-react";
+import {AdminButton} from "src/components/common/AdminButton";
 
 interface IFilesStore {
   current: FilesListDto,
@@ -16,12 +14,12 @@ interface IFilesStore {
   rename: (title: string, id: number) => void,
   delete: (id: number) => void
 }
-
 interface IFileLoader {
-  selectMedia?: (value:string)=>void
+  selectMedia?: (value:number)=>void
 }
 
-const FileLoader = ({selectMedia}:IFileLoader) => {
+
+export const FileLoader = ({selectMedia}:IFileLoader) => {
   const [filesStore] = useState(() => observable<IFilesStore>({
       current: {
         title: null,
@@ -109,18 +107,18 @@ const FileLoader = ({selectMedia}:IFileLoader) => {
       <div className="m-2 flex flex-col justify-center">
         <input className="m-2" ref={inputFile} type="file" onChange={e=>setCanLoad(!!e?.target?.files?.length)}/>
         {canLoad && <div className="m-2">
-            <AdminButton
-              color={"primary"}
-              onClick={() => {
-                const data = new FormData();
-                data.append("UploadedFile",inputFile?.current?.files[0])
-                data.append("FileType","Image")
-                if (filesStore.currentFolder > 0) data.append("StorageFolderId",filesStore.currentFolder.toString())
-                filesStore.loadFile(data)
-              }}>
-              Load file
-            </AdminButton>
-          </div>
+          <AdminButton
+            color={"primary"}
+            onClick={() => {
+              const data = new FormData();
+              data.append("UploadedFile",inputFile?.current?.files[0])
+              data.append("FileType","Image")
+              if (filesStore.currentFolder > 0) data.append("StorageFolderId",filesStore.currentFolder.toString())
+              filesStore.loadFile(data)
+            }}>
+            Load file
+          </AdminButton>
+        </div>
         }
         <div className="m-2">
           <AdminButton color={"primary"} onClick={()=>{
@@ -153,7 +151,7 @@ const FileLoader = ({selectMedia}:IFileLoader) => {
                     <AdminButton
                       color={"danger"}
                       onClick={()=>{if (confirm(`Are you sure?`)) return filesStore.delete(id)}}>
-                        Delete
+                      Delete
                     </AdminButton>
                   </div>
                 </div>
@@ -162,10 +160,10 @@ const FileLoader = ({selectMedia}:IFileLoader) => {
             ))}
             {filesStore.current.media.sort((a, b) => a.id - b.id).map(({title, id})=>(
               <div key={id} className="py-2 flex justify-between items-center">
-                <span onClick={()=>selectMedia ? selectMedia(`https://ql.dotlic.ru/api/media/scaled/${id}`) : {}} className="cursor-pointer">
+                <span onClick={()=>selectMedia ? selectMedia(id) : {}} className="cursor-pointer">
                   {title}
                 </span>
-                <img onClick={()=>selectMedia ? selectMedia(`https://ql.dotlic.ru/api/media/scaled/${id}`) : {}} className="mr-2 cursor-pointer" src={`https://ql.dotlic.ru/api/media/scaled/${id}?dimension=128`} alt=""/>
+                <img onClick={()=>selectMedia ? selectMedia(id) : {}} className="mr-2 cursor-pointer" src={`https://ql.dotlic.ru/api/media/scaled/${id}?dimension=128`} alt=""/>
               </div>
             ))}
           </>
@@ -176,5 +174,3 @@ const FileLoader = ({selectMedia}:IFileLoader) => {
     </div>
   ))
 }
-
-export default FileLoader;

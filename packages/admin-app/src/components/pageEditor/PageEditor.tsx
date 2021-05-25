@@ -7,6 +7,7 @@ import {
 } from "./PageEditorStore";
 import { useObserver } from "mobx-react";
 import { AdminRemoteUiHtmlEditor, AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemoteUiHtmlEditor";
+import { AdminRemoteUiImageFieldEditor, AdminRemoteUiImageFieldStore } from "src/components/remoteui/AdminRemoteUiImageEditor";
 import { AvailableBlocks, BlockPresenter } from "@project/components/src/blocks";
 import { AdminButton } from "src/components/common/AdminButton";
 import { IRemoteUiData, IRemoteUiEditorCustomization, RemoteUiEditor } from "@kekekeks/remoteui/src";
@@ -79,6 +80,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
 class RemoteUiCustomization implements IRemoteUiEditorCustomization {
   getEditorFor(store: IRemoteUiData): any {
     if (store instanceof AdminRemoteUiHtmlEditorStore) return <AdminRemoteUiHtmlEditor store={store} />;
+    if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
     return null;
   }
 }
