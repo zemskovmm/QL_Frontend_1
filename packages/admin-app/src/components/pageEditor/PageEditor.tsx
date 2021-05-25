@@ -4,10 +4,14 @@ import {
   PageEditorRowStore,
   PageEditorStore,
   PageLanguageEditorStore,
+  PageRowsEditorStore,
 } from "./PageEditorStore";
 import { useObserver } from "mobx-react";
 import { AdminRemoteUiHtmlEditor, AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemoteUiHtmlEditor";
-import { AdminRemoteUiImageFieldEditor, AdminRemoteUiImageFieldStore } from "src/components/remoteui/AdminRemoteUiImageEditor";
+import {
+  AdminRemoteUiImageFieldEditor,
+  AdminRemoteUiImageFieldStore,
+} from "src/components/remoteui/AdminRemoteUiImageEditor";
 import { AvailableBlocks, BlockPresenter } from "@project/components/src/blocks";
 import { AdminButton } from "src/components/common/AdminButton";
 import { IRemoteUiData, IRemoteUiEditorCustomization, RemoteUiEditor } from "@kekekeks/remoteui/src";
@@ -19,6 +23,7 @@ import "@kekekeks/remoteui/src/RemoteUiEditor.css";
 import { AdminTextBox } from "src/components/common/AdminTextBox";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
+import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -99,6 +104,7 @@ class RemoteUiCustomization implements IRemoteUiEditorCustomization {
   getEditorFor(store: IRemoteUiData): any {
     if (store instanceof AdminRemoteUiHtmlEditorStore) return <AdminRemoteUiHtmlEditor store={store} />;
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
+    if (store instanceof AdminRemoteUiRowsStore) return <AdminRemoteUiRowsEditor store={store} />;
     return null;
   }
 }
@@ -132,20 +138,17 @@ const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
   ));
 };
 
-export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) => {
+export const PageRowsEditor = (props: { store: PageRowsEditorStore }) => {
   const s = props.store;
 
   return useObserver(() => (
-    <div>
+    <>
       {s.cellEditor == null ? null : (
         <AdminOverlayDialog cancel={() => (s.cellEditor = null)}>
           <PageEditorCellDialog store={s.cellEditor} />
         </AdminOverlayDialog>
       )}
-      <AdminTextBox id={"title"} label="Title" {...bind(s, "title")} />
-      <AdminTextBox id={"url"} label="Url" {...bind(s, "url")} />
 
-      <br />
       {s.rows.map((r, i) => (
         <PageEditorRow key={i.toString()} store={r} />
       ))}
@@ -154,6 +157,17 @@ export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) =>
           Add row
         </AdminButton>
       </div>
+    </>
+  ));
+};
+
+export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) => {
+  return useObserver(() => (
+    <div>
+      <AdminTextBox id={"title"} label="Title" {...bind(props.store, "title")} />
+      <AdminTextBox id={"url"} label="Url" {...bind(props.store, "url")} />
+      <br />
+      <PageRowsEditor store={props.store} />
     </div>
   ));
 };
