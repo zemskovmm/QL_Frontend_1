@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./cardsWithLinksBlock.module.css";
+import Link from "next/link";
+import arrow from "./arrow-left.svg";
 
 export interface CardsWithLinksBlockElement {
   title: string;
   subtitle: string;
-  elements: { title: string; text: string; links: { name: string; link: string }[] }[];
+  elements: { title: string; links: { name: string; link: string }[] }[];
 }
 
 export const CardsWithLinksBlock = (props: CardsWithLinksBlockElement) => {
@@ -23,7 +25,15 @@ export const CardsWithLinksBlock = (props: CardsWithLinksBlockElement) => {
           <div className={styles.cardsWithLinksBlock__list}>
             {props.elements.map((el) => (
               <div className={styles.cardsWithLinksBlock__item + " " + styles.cardsWithLinksBlock__grid}>
-                <div className={styles.cardsWithLinksBlock__itemTitle} />
+                <div className={styles.cardsWithLinksBlock__itemTitle} dangerouslySetInnerHTML={{ __html: el.title }} />
+                {el.links?.map((item) => (
+                  <Link href={item.link}>
+                    <a className={`flex`}>
+                      <img src={arrow} alt="" />
+                      {item.name}
+                    </a>
+                  </Link>
+                ))}
               </div>
             ))}
           </div>
@@ -43,7 +53,6 @@ export const CardsWithLinksBlockInfo: TypedBlockTypeInfo<CardsWithLinksBlockElem
     elements: [
       {
         title: "string",
-        text: "string",
         links: [
           {
             name: "st",
