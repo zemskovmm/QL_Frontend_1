@@ -5,21 +5,23 @@ import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
 import footerData from "src/hardcoded/footerData";
 import headerData from "src/hardcoded/headerData";
-import {getLanguageUrlsFromRouterState, getLocaleMessages} from "src/locales/locales";
+import { getLanguageUrlsFromRouterState, getLocaleMessages } from "src/locales/locales";
+import React from "react";
+import { AppContextS } from "@project/components/src/blocks";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const lang = router.query.lang || "en";
-  let {urls} = pageProps;
-  if(urls == null)
-    urls = getLanguageUrlsFromRouterState(router);
-
+  let { urls } = pageProps;
+  if (urls == null) urls = getLanguageUrlsFromRouterState(router);
 
   return (
     <IntlProvider locale={lang as string} defaultLocale="en" messages={getLocaleMessages(lang as string)}>
-      <MainLayout header={headerData} footer={footerData} urls={urls}>
-        <Component {...pageProps} />
-      </MainLayout>
+      <AppContextS.Provider value={{ showContactUsForm: () => console.log("user") }}>
+        <MainLayout header={headerData} footer={footerData} urls={urls}>
+          <Component {...pageProps} />
+        </MainLayout>
+      </AppContextS.Provider>
     </IntlProvider>
   );
 }

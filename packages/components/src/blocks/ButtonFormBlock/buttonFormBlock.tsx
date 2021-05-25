@@ -4,20 +4,26 @@ import styles from "./buttonFormBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
 import cn from "classnames";
 
+interface IComponentHost {
+  showContactUsForm: () => void;
+}
+
 export interface ButtonFormBlockElement {
   name: string;
   icon: number | null;
   link: string;
   align: string;
+  MyContext?: IComponentHost;
 }
 
 export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
+  console.log(props.MyContext?.showContactUsForm);
   return (
-    <div className={`flex mx-auto max-w-screen-xl w-full ${props.align}`} >
-      <a className={styles.button} href={props.link}>
+    <div className={`flex mx-auto max-w-screen-xl w-full ${props.align}`}>
+      <button type={"button"} className={styles.button} onClick={() => props.MyContext?.showContactUsForm}>
         {props.icon && <img src={`https://ql.dotlic.ru/api/media/${props.icon}`} alt="" />}
         <span>{props.name}</span>
-      </a>
+      </button>
     </div>
   );
 };
@@ -43,7 +49,7 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
         id: "icon",
         name: "icon",
         type: "Custom",
-        customType: "Image"
+        customType: "Image",
       },
       {
         id: "link",

@@ -37,10 +37,18 @@ export function findBlockInfo(blockType: string): BlockTypeInfo | null {
   return null;
 }
 
+export const AppContextS = React.createContext({ showContactUsForm: () => console.log("hi") });
+
 export const BlockPresenter = (props: { blockType: string; blockData: any }) => {
   const info = findBlockInfo(props.blockType);
   if (info == null) return <div>Unknown block type: {props.blockType}</div>;
   const Renderer = info.renderer;
+  if (props.blockType === "buttonFormBlock")
+    return (
+      <AppContextS.Consumer>
+        {({ showContactUsForm }) => <Renderer MyContext={showContactUsForm} {...props.blockData} />}
+      </AppContextS.Consumer>
+    );
   return <Renderer {...props.blockData} />;
 };
 
