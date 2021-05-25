@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./buttonFormBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
+import cn from "classnames";
 
 export interface ButtonFormBlockElement {
   name: string;
@@ -12,7 +13,7 @@ export interface ButtonFormBlockElement {
 
 export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
   return (
-    <div className="flex mx-auto max-w-screen-xl w-full" style={{ justifyContent: props.align }}>
+    <div className={`flex mx-auto max-w-screen-xl w-full ${props.align}`} >
       <a className={styles.button} href={props.link}>
         {props.icon && <img src={`https://ql.dotlic.ru/api/media/${props.icon}`} alt="" />}
         <span>{props.name}</span>
@@ -55,15 +56,15 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
         name: "align",
         possibleValues: [
           {
-            id: "flex-start",
+            id: "justify-start",
             name: "left",
           },
           {
-            id: "center",
+            id: "justify-center",
             name: "center",
           },
           {
-            id: "flex-end",
+            id: "justify-end",
             name: "right",
           },
         ],
