@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./buttonFormBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
 import cn from "classnames";
-
-interface IComponentHost {
-  showContactUsForm: () => void;
-}
+import { ComponentHostContext } from "../index";
 
 export interface ButtonFormBlockElement {
   name: string;
   icon: number | null;
   link: string;
   align: string;
-  MyContext?: IComponentHost;
 }
 
 export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
-  console.log(props.MyContext?.showContactUsForm);
+  const cl = useContext(ComponentHostContext);
   return (
     <div className={`flex mx-auto max-w-screen-xl w-full ${props.align}`}>
-      <button type={"button"} className={styles.button} onClick={() => props.MyContext?.showContactUsForm}>
+      <button type={"button"} className={styles.button} onClick={() => cl?.showContactUsForm()}>
         {props.icon && <img src={`https://ql.dotlic.ru/api/media/${props.icon}`} alt="" />}
         <span>{props.name}</span>
       </button>

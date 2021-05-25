@@ -1,28 +1,24 @@
-import type { AppContext, AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import "src/styles/global.css";
 import { MainLayout } from "src/components/layouts/mainLayout";
 import { useRouter } from "next/router";
-import { IntlProvider } from "react-intl";
 import footerData from "src/hardcoded/footerData";
 import headerData from "src/hardcoded/headerData";
-import { getLanguageUrlsFromRouterState, getLocaleMessages } from "src/locales/locales";
+import { getLanguageUrlsFromRouterState } from "src/locales/locales";
 import React from "react";
-import { AppContextS } from "@project/components/src/blocks";
+import { AppComponentHost } from "src/components/AppComponentHost";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const lang = router.query.lang || "en";
   let { urls } = pageProps;
   if (urls == null) urls = getLanguageUrlsFromRouterState(router);
 
   return (
-    <IntlProvider locale={lang as string} defaultLocale="en" messages={getLocaleMessages(lang as string)}>
-      <AppContextS.Provider value={{ showContactUsForm: () => console.log("user") }}>
-        <MainLayout header={headerData} footer={footerData} urls={urls}>
-          <Component {...pageProps} />
-        </MainLayout>
-      </AppContextS.Provider>
-    </IntlProvider>
+    <AppComponentHost>
+      <MainLayout header={headerData} footer={footerData} urls={urls}>
+        <Component {...pageProps} />
+      </MainLayout>
+    </AppComponentHost>
   );
 }
 

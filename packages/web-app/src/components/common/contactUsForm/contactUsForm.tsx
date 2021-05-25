@@ -146,7 +146,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
   );
 };
 
-const ContactUsFormController = (props: { onDismiss: () => void }) => {
+export const ContactUsFormController = (props: { onDismiss: () => void }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   if (isSuccess) return <SuccessMessage onDismiss={props.onDismiss} />;
   return <ContactUsForm onDismiss={props.onDismiss} onSuccess={() => setIsSuccess(true)} />;
