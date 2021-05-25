@@ -9,6 +9,8 @@ import { ArticleBeforeImageBlockInfo } from "./ArticleBeforeImageBlock/articleBe
 import { BigCardsListBlockInfo } from "./BigCardsListBlock/bigCardsListBlock";
 import { ButtonFormBlockInfo } from "./ButtonFormBlock/buttonFormBlock";
 import { ImageBlockInfo } from "./ImageBlock/imageBlock";
+import { ReasonsAcceptCardBlockInfo } from "./ReasonsAcceptCardBlock/reasonsAcceptCardBlock";
+import { CardsWithLinksBlockInfo } from "./CardsWithLinksBlock/cardsWithLinksBlock";
 import { BlockTypeInfo } from "./blocks-info";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
@@ -22,6 +24,8 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   BigCardsListBlockInfo,
   ButtonFormBlockInfo,
   ImageBlockInfo,
+  ReasonsAcceptCardBlockInfo,
+  CardsWithLinksBlockInfo,
 ];
 
 export function findBlockInfo(blockType: string): BlockTypeInfo | null {

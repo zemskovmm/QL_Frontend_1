@@ -86,8 +86,8 @@
 
 .reasonsAcceptIconBlock__buttonText:before{
   content: "";
-  border: 5px solid #FF6768;
-  width: 30px;
+  border: 3px solid #FF6768;
+  width: 35px;
   border-radius: 4px;
   display: flex;
   margin-bottom: 30px;
