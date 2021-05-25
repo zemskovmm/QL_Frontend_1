@@ -32,6 +32,12 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   TabControlBlockInfo,
 ];
 
+export interface IComponentHost {
+  showContactUsForm: () => void;
+}
+
+export const ComponentHostContext = React.createContext<IComponentHost | null>(null);
+
 export function findBlockInfo(blockType: string): BlockTypeInfo | null {
   for (var info of AvailableBlocks) if (info.id == blockType) return info;
   return null;
@@ -63,8 +69,8 @@ export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
   return (
     <>
       {props.rows.map((row, i) => (
-        <RowPresenter key={i} blocks={row.blocks} maxWidth={row.maxWidth} background={row.background}/>
+        <RowPresenter key={i} blocks={row.blocks} maxWidth={row.maxWidth} background={row.background} />
       ))}
     </>
   );
-}
+};
