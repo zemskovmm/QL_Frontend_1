@@ -21,6 +21,7 @@ export const AdminButton = (props: AdminButtonProps) => {
       className={classes}
       href={href || "#"}
       onClick={(e) => {
+        e.preventDefault();
         if (onClick != null) {
           onClick(e);
         }

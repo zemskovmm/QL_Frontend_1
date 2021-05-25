@@ -15,6 +15,8 @@ import { AdminPageDto, AdminPageLanguageDto } from "src/interfaces/AdminPageDto"
 import { RequestTracking } from "src/utils/Loadable";
 import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
+import { PageBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
+import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
 function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -46,6 +48,7 @@ class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization {
   getCustomStore(config: RemoteUiEditorConfiguration, type: string, data: any): IRemoteUiData {
     if (type == "Html") return new AdminRemoteUiHtmlEditorStore(data);
     if (type == "Image") return new AdminRemoteUiImageFieldStore(data);
+    if (type == "Rows") return new AdminRemoteUiRowsStore(data);
     return null!;
   }
 }
@@ -97,7 +100,7 @@ export class PageEditorCellStore {
   @observable size: number;
 
   constructor(
-    private editor: PageLanguageEditorStore,
+    private editor: PageRowsEditorStore,
     private row: PageEditorRowStore,
     size: number,
     blockType: string,
@@ -121,11 +124,7 @@ export class PageEditorCellStore {
   }
 }
 
-function editNewCell(
-  editor: PageLanguageEditorStore,
-  row: PageEditorRowStore,
-  cb: (cell: PageEditorCellStore) => void
-) {
+function editNewCell(editor: PageRowsEditorStore, row: PageEditorRowStore, cb: (cell: PageEditorCellStore) => void) {
   const cell = new PageEditorCellStore(
     editor,
     row,
@@ -144,7 +143,7 @@ export class PageEditorRowStore {
   @observable maxWidth?: string;
   @observable backGround?: string;
 
-  constructor(private editor: PageLanguageEditorStore) {}
+  constructor(private editor: PageRowsEditorStore) {}
 
   @action addNewCell() {
     editNewCell(this.editor, this, (cell) => {
@@ -160,13 +159,19 @@ export class PageEditorRowStore {
     if (!confirm("Are you sure?")) return;
     this.editor.rows = this.editor.rows.filter((x) => x != this);
   }
+
+  serialize(): PageBlockRowDto {
+    return {
+      maxWidth: this.maxWidth,
+      background: this.backGround,
+      blocks: this.cells.map((c) => ({ type: c.blockType, data: c.blockData, size: c.size })),
+    };
+  }
 }
 
-export class PageLanguageEditorStore {
-  constructor(data: AdminPageLanguageDto) {
-    this.title = data.title;
-    this.url = data.url;
-    this.rows = data.pageData.rows.map((row) => {
+export class PageRowsEditorStore {
+  constructor(rows: PageBlockRowDto[]) {
+    this.rows = rows.map((row) => {
       const editor = new PageEditorRowStore(this);
       editor.maxWidth = row.maxWidth;
       editor.backGround = row.background;
@@ -177,8 +182,6 @@ export class PageLanguageEditorStore {
 
   @observable rows: PageEditorRowStore[] = [];
   @observable cellEditor: PageEditorCellDialogStore | null = null;
-  @observable title: string;
-  @observable url: string;
 
   @action addRow() {
     const row = new PageEditorRowStore(this);
@@ -187,17 +190,23 @@ export class PageLanguageEditorStore {
       this.rows.push(row);
     });
   }
+}
+
+export class PageLanguageEditorStore extends PageRowsEditorStore {
+  @observable title: string;
+  @observable url: string;
+  constructor(data: AdminPageLanguageDto) {
+    super(data.pageData.rows);
+    this.title = data.title;
+    this.url = data.url;
+  }
 
   serialize(): AdminPageLanguageDto {
     return {
       title: this.title,
       url: this.url,
       pageData: {
-        rows: this.rows.map((r) => ({
-          maxWidth: r.maxWidth,
-          background: r.backGround,
-          blocks: r.cells.map((c) => ({ type: c.blockType, data: c.blockData, size: c.size })),
-        })),
+        rows: this.rows.map((r) => r.serialize()),
       },
     };
   }

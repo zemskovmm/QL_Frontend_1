@@ -1,15 +1,28 @@
-import styles from './AdminOverlayDialog.module.css'
-import {Portal} from "@project/components/src/utils/Portal";
+import styles from "./AdminOverlayDialog.module.css";
+import { Portal } from "@project/components/src/utils/Portal";
+import React, {useContext} from "react";
 
-export const AdminOverlayDialog = (props: { children?: any, cancel: () => void }) => {
-  return <Portal>
-    <div className={styles.overlayDialogOverlay} onClick={_ => props.cancel()}>
+const OverlayDialogZIndex = React.createContext(8000);
 
-    </div>
-    <div className={styles.overlayDialogContainerMargin} onClick={_ => props.cancel()}>
-      <div className={styles.overlayDialogContainer} onClick={e => e.stopPropagation()}>
-        {props.children}
+
+const AdminOverlayDialogRenderer = (props: { children?: any; cancel: () => void }) => {
+  const currentIndex = useContext(OverlayDialogZIndex);
+  return (
+    <Portal>
+      <div style={{ zIndex: currentIndex }} className={styles.overlayDialogOverlay} onClick={(_) => props.cancel()} />
+      <div
+        style={{ zIndex: currentIndex + 1 }}
+        className={styles.overlayDialogContainerMargin}
+        onClick={(_) => props.cancel()}
+      >
+        <div className={styles.overlayDialogContainer} onClick={(e) => e.stopPropagation()}>
+          <OverlayDialogZIndex.Provider value={currentIndex + 2}>{props.children}</OverlayDialogZIndex.Provider>
+        </div>
       </div>
-    </div>
-  </Portal>
+    </Portal>
+  );
+};
+
+export const AdminOverlayDialog = (props: { children?: any; cancel: () => void }) => {
+  return <AdminOverlayDialogRenderer {...props} />;
 };
