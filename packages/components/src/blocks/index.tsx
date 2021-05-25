@@ -9,6 +9,8 @@ import { ArticleBeforeImageBlockInfo } from "./ArticleBeforeImageBlock/articleBe
 import { BigCardsListBlockInfo } from "./BigCardsListBlock/bigCardsListBlock";
 import { ButtonFormBlockInfo } from "./ButtonFormBlock/buttonFormBlock";
 import { ImageBlockInfo } from "./ImageBlock/imageBlock";
+import { ReasonsAcceptCardBlockInfo } from "./ReasonsAcceptCardBlock/reasonsAcceptCardBlock";
+import { CardsWithLinksBlockInfo } from "./CardsWithLinksBlock/cardsWithLinksBlock";
 import { BlockTypeInfo } from "./blocks-info";
 import { PageBlockRowDto } from "../interfaces/pageSharedDto";
 import grid from "../styles/grid.module.css";
@@ -25,6 +27,8 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   BigCardsListBlockInfo,
   ButtonFormBlockInfo,
   ImageBlockInfo,
+  ReasonsAcceptCardBlockInfo,
+  CardsWithLinksBlockInfo,
   TabControlBlockInfo,
 ];
 

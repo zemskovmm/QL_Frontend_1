@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./leftAlignBlock.module.css";
-import { is } from "@babel/types/lib/index-legacy";
-import icon from "./acceptIcon.svg";
 
 export interface LeftAlignBlockElement {
-  elements: { title: string; text: string }[];
+  elements: { title: string; text: string; img: number | null }[];
 }
 
 export const LeftAlignBlock = (props: LeftAlignBlockElement) => {
@@ -17,7 +15,7 @@ export const LeftAlignBlock = (props: LeftAlignBlockElement) => {
             {props.elements.map((el) => (
               <div className={styles.leftAlignBlock__item}>
                 <div className={styles.leftAlignBlock__icon}>
-                  <img src={icon} alt="" />
+                  <img src={`https://ql.dotlic.ru/api/media/${el.img}`} alt="" />
                 </div>
                 <div className={`flex flex-col`}>
                   <div className={styles.leftAlignBlock__itemTitle}>{el.title}</div>
@@ -41,6 +39,7 @@ export const LeftAlignBlockInfo: TypedBlockTypeInfo<LeftAlignBlockElement> = {
       {
         title: "string",
         text: "string",
+        img: null,
       },
     ],
   },
@@ -58,6 +57,12 @@ export const LeftAlignBlockInfo: TypedBlockTypeInfo<LeftAlignBlockElement> = {
             type: "Custom",
             customType: "Html",
             name: "Text",
+          },
+          {
+            id: "img",
+            type: "Custom",
+            customType: "Image",
+            name: "Img",
           },
         ],
       },
