@@ -12,6 +12,9 @@ import { ImageBlockInfo } from "./ImageBlock/imageBlock";
 import { ReasonsAcceptCardBlockInfo } from "./ReasonsAcceptCardBlock/reasonsAcceptCardBlock";
 import { CardsWithLinksBlockInfo } from "./CardsWithLinksBlock/cardsWithLinksBlock";
 import { BlockTypeInfo } from "./blocks-info";
+import { PageBlockRowDto } from "../interfaces/pageSharedDto";
+import grid from "../styles/grid.module.css";
+import { TabControlBlockInfo } from "./TabControlBlock/TabControlBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -26,6 +29,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ImageBlockInfo,
   ReasonsAcceptCardBlockInfo,
   CardsWithLinksBlockInfo,
+  TabControlBlockInfo,
 ];
 
 export function findBlockInfo(blockType: string): BlockTypeInfo | null {
@@ -38,4 +42,29 @@ export const BlockPresenter = (props: { blockType: string; blockData: any }) => 
   if (info == null) return <div>Unknown block type: {props.blockType}</div>;
   const Renderer = info.renderer;
   return <Renderer {...props.blockData} />;
+};
+
+const RowPresenter = (props: PageBlockRowDto) => {
+  return (
+    <div style={{ background: props.background }}>
+      {props.blocks.map((cell, i) => (
+        <div
+          className={`inline-block ${grid["col-" + cell.size]}`}
+          style={{ margin: 3, verticalAlign: "top", maxWidth: props.maxWidth }}
+        >
+          <BlockPresenter key={i} blockType={cell.type} blockData={cell.data} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
+  return (
+    <>
+      {props.rows.map((row, i) => (
+        <RowPresenter key={i} blocks={row.blocks} maxWidth={row.maxWidth} background={row.background} />
+      ))}
+    </>
+  );
 };
