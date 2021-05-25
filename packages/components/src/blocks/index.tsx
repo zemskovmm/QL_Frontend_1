@@ -55,8 +55,8 @@ const RowPresenter = (props: PageBlockRowDto) => {
     <div style={{ background: props.background }}>
       {props.blocks.map((cell, i) => (
         <div
-          className={`inline-block ${grid["col-" + cell.size]}`}
-          style={{ margin: 3, verticalAlign: "top", maxWidth: props.maxWidth }}
+          className={`inline-block ${grid["col-" + cell.size]} box-border	`}
+          style={{ verticalAlign: "top", maxWidth: props.maxWidth }}
         >
           <BlockPresenter key={i} blockType={cell.type} blockData={cell.data} />
         </div>
