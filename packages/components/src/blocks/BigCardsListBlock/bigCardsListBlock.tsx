@@ -5,7 +5,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 type BigCardProps = {
   card: {
     title: string;
-    img: string;
+    img: number | null;
     url: string;
     text: string;
   };
@@ -16,13 +16,13 @@ const BigCard: FC<BigCardProps> = ({ card }) => {
     <>
       {card.url ? (
         <a href={card.url} className={style.bigCard}>
-          <img src={card.img} alt="" className={style.bigCard__img} />
+          <img src={`https://ql.dotlic.ru/api/media/${card.img}`} alt="" className={style.bigCard__img} />
           <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
           <div className={style.bigCard__subtitle} dangerouslySetInnerHTML={{ __html: card.text }} />
         </a>
       ) : (
         <div className={style.bigCard}>
-          <img src={card.img} alt="" className={style.bigCard__img} />
+          <img src={`https://ql.dotlic.ru/api/media/${card.img}`} alt="" className={style.bigCard__img} />
           <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
           <div className="bigCard__subtitle" dangerouslySetInnerHTML={{ __html: card.text }} />
         </div>
@@ -32,7 +32,7 @@ const BigCard: FC<BigCardProps> = ({ card }) => {
 };
 
 type BigCardsListBlockElement = {
-  elements: { img: string; title: string; text: string; url: string }[];
+  elements: { img: number | null; title: string; text: string; url: string }[];
   title: string;
   linksButton: { link: string; name: string; description: string }[];
 };
@@ -63,19 +63,19 @@ export const BigCardsListBlockInfo: TypedBlockTypeInfo<BigCardsListBlockElement>
       {
         title: "string",
         text: "string",
-        img: "string",
+        img: null,
         url: "",
       },
       {
         title: "string",
         text: "string",
-        img: "string",
+        img: null,
         url: "",
       },
       {
         title: "string",
         text: "string",
-        img: "string",
+        img: null,
         url: "",
       },
     ],
@@ -118,7 +118,8 @@ export const BigCardsListBlockInfo: TypedBlockTypeInfo<BigCardsListBlockElement>
           },
           {
             id: "img",
-            type: "String",
+            type: "Custom",
+            customType: "Image",
             name: "Img",
           },
           {
