@@ -8,7 +8,7 @@ import { LeftAlignBlockInfo } from "./LeftAlignBlock/leftAlignBlock";
 import { ArticleBeforeImageBlockInfo } from "./ArticleBeforeImageBlock/articleBeforeImageBlock";
 import { BigCardsListBlockInfo } from "./BigCardsListBlock/bigCardsListBlock";
 import { ButtonFormBlockInfo } from "./ButtonFormBlock/buttonFormBlock";
-import { GoogleMapBlockInfo } from "./GoogleMapBlock/googleMapBlock";
+import { ImageBlockInfo } from "./ImageBlock/imageBlock";
 import { BlockTypeInfo } from "./blocks-info";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
@@ -21,7 +21,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ArticleBeforeImageBlockInfo,
   BigCardsListBlockInfo,
   ButtonFormBlockInfo,
-  GoogleMapBlockInfo,
+  ImageBlockInfo,
 ];
 
 export function findBlockInfo(blockType: string): BlockTypeInfo | null {

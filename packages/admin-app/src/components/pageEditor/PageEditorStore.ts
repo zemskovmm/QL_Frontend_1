@@ -8,13 +8,13 @@ import {
   RemoteUiTypeDefinition,
 } from "@kekekeks/remoteui/src";
 import { AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemoteUiHtmlEditor";
+import { AdminRemoteUiImageFieldStore } from "src/components/remoteui/AdminRemoteUiImageEditor";
 import { action, computed, observable, runInAction } from "mobx";
 import { AvailableBlocks, findBlockInfo } from "@project/components/src/blocks";
 import { AdminPageDto, AdminPageLanguageDto } from "src/interfaces/AdminPageDto";
 import { RequestTracking } from "src/utils/Loadable";
 import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
-
 function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -45,6 +45,7 @@ function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
 class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization {
   getCustomStore(config: RemoteUiEditorConfiguration, type: string, data: any): IRemoteUiData {
     if (type == "Html") return new AdminRemoteUiHtmlEditorStore(data);
+    if (type == "Image") return new AdminRemoteUiImageFieldStore(data);
     return null!;
   }
 }
@@ -252,7 +253,7 @@ export class PageEditorStore extends RequestTracking {
     const dto = this.serialize();
     fireAndAlertOnError(() =>
       this.track(async () => {
-        if (this.id == null) this.id = (await AdminApi.createPage(dto)).id;
+        if (this.id === null) this.id = (await AdminApi.createPage(dto)).id;
         else await AdminApi.updatePage(this.id, dto);
         this.onSave(this.id);
       })

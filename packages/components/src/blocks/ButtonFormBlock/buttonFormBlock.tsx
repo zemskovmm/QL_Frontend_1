@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./buttonFormBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
+import cn from "classnames";
 
 export interface ButtonFormBlockElement {
   name: string;
-  icon: string;
+  icon: number | null;
   link: string;
   align: string;
 }
 
 export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
   return (
-    <div className="flex mx-auto max-w-screen-xl w-full" style={{ justifyContent: props.align }}>
+    <div className={`flex mx-auto max-w-screen-xl w-full ${props.align}`} >
       <a className={styles.button} href={props.link}>
-        {props.icon && <img src={props.icon} alt="" />}
+        {props.icon && <img src={`https://ql.dotlic.ru/api/media/${props.icon}`} alt="" />}
         <span>{props.name}</span>
       </a>
     </div>
@@ -27,7 +28,7 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
   renderer: ButtonFormBlock,
   initialData: {
     name: "string",
-    icon: "string",
+    icon: null,
     link: "string",
     align: "string",
   },
@@ -40,8 +41,9 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
       },
       {
         id: "icon",
-        type: "String",
         name: "icon",
+        type: "Custom",
+        customType: "Image"
       },
       {
         id: "link",
@@ -54,15 +56,15 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
         name: "align",
         possibleValues: [
           {
-            id: "flex-start",
+            id: "justify-start",
             name: "left",
           },
           {
-            id: "center",
+            id: "justify-center",
             name: "center",
           },
           {
-            id: "flex-end",
+            id: "justify-end",
             name: "right",
           },
         ],
