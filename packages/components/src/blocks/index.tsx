@@ -15,6 +15,8 @@ import { BlockTypeInfo } from "./blocks-info";
 import { PageBlockRowDto } from "../interfaces/pageSharedDto";
 import grid from "../styles/grid.module.css";
 import { TabControlBlockInfo } from "./TabControlBlock/TabControlBlock";
+import { TitleAndTabsBlockInfo } from "./TitleAndTabsBlock/titleAndTabsBlock";
+import { SiteApiClient } from "web-app/src/clients/siteApiClient";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -30,10 +32,13 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ReasonsAcceptCardBlockInfo,
   CardsWithLinksBlockInfo,
   TabControlBlockInfo,
+  TitleAndTabsBlockInfo,
 ];
 
 export interface IComponentHost {
   showContactUsForm: () => void;
+  filters: SiteApiClient;
+  lang: string;
 }
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);
@@ -55,10 +60,11 @@ const RowPresenter = (props: PageBlockRowDto) => {
     <div style={{ background: props.background }}>
       {props.blocks.map((cell, i) => (
         <div
+          key={i}
           className={`inline-block ${grid["col-" + cell.size]} box-border	`}
           style={{ verticalAlign: "top", maxWidth: props.maxWidth }}
         >
-          <BlockPresenter key={i} blockType={cell.type} blockData={cell.data} />
+          <BlockPresenter blockType={cell.type} blockData={cell.data} />
         </div>
       ))}
     </div>
