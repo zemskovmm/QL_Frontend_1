@@ -17,6 +17,7 @@ import grid from "../styles/grid.module.css";
 import { TabControlBlockInfo } from "./TabControlBlock/TabControlBlock";
 import { TitleAndTabsBlockInfo } from "./TitleAndTabsBlock/titleAndTabsBlock";
 import { BreadcrumbsBlockInfo } from "./BreadcrumbsBlock/breadcrumbsBlock";
+import { TitleAndCallBackBlockInfo } from "./TitleAndCallBackBlock/titleAndCallBackBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -34,6 +35,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   TabControlBlockInfo,
   TitleAndTabsBlockInfo,
   BreadcrumbsBlockInfo,
+  TitleAndCallBackBlockInfo,
 ];
 
 export interface IComponentHost {

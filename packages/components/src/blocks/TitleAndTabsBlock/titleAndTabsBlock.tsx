@@ -1,6 +1,5 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
-import styles from "./titleAndTabsBlock.module.css";
 import Tabs from "../../ui/Tabs/Tabs";
 import Search from "../../ui/search/Search";
 import { ServerCatalogWidget, CatalogWidget } from "../../ui/catalog/catalogWidget";
