@@ -31,7 +31,9 @@ const PageEditorCell = (props: { store: PageEditorCellStore }) => {
     <div>
       <div className="bg-white">
         <div className="relative">
-          <div>{s.blockData == null ? null : <BlockPresenter blockType={s.blockType} blockData={s.blockData} />}</div>
+          <div className={`py-10`}>
+            {s.blockData == null ? null : <BlockPresenter blockType={s.blockType} blockData={s.blockData} />}
+          </div>
           <div className="absolute top-0 right-0">
             <AdminButton color={"primary"} onClick={() => s.triggerEdit()}>
               ...
@@ -75,7 +77,9 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
               <div>
                 {props.store.cells.map((cell, i) => (
                   <div
-                    className={`inline-block ${grid["col-" + cell.size]} border border-blue-400 box-border`}
+                    className={`inline-block ${
+                      grid["col-" + cell.size]
+                    } border border-blue-400 box-border relative py-10`}
                     style={{ verticalAlign: "top" }}
                   >
                     <PageEditorCell key={i.toString()} store={cell} />
