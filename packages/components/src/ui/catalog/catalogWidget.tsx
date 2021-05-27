@@ -5,7 +5,6 @@ import styles from "./style/catalogWidget.module.css";
 import { ComponentHostContext } from "../../blocks";
 import { buildQueryString } from "../../utils/buildQueryString";
 import { housingCatalogFilters } from "../../hardcoded/housingCatalogFilters";
-import { siteApi } from "web-app/src/clients/siteApiClient";
 
 export interface CatalogWidgetFilterOption {
   id: number | string;
@@ -62,7 +61,7 @@ export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
   const [selected, setSelected] = useState<{ [key: string]: string | undefined }>({});
   const [selectedName, setSelectedName] = useState<{ [key: string]: string | undefined }>({});
   for (const id of props.filterIds) {
-    const found = props.filters.find((x) => x.identifier == id.filter);
+    const found = props.filters.find((x) => x.identifier == id);
     if (found) appliedFilters.push(found);
   }
 

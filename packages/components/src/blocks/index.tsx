@@ -16,7 +16,6 @@ import { PageBlockRowDto } from "../interfaces/pageSharedDto";
 import grid from "../styles/grid.module.css";
 import { TabControlBlockInfo } from "./TabControlBlock/TabControlBlock";
 import { TitleAndTabsBlockInfo } from "./TitleAndTabsBlock/titleAndTabsBlock";
-import { SiteApiClient } from "web-app/src/clients/siteApiClient";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -37,7 +36,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
 
 export interface IComponentHost {
   showContactUsForm: () => void;
-  filters: SiteApiClient;
+  filters: any;
   lang: string;
 }
 
