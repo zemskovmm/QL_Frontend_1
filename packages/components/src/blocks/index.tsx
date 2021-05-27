@@ -11,6 +11,7 @@ import { ButtonFormBlockInfo } from "./ButtonFormBlock/buttonFormBlock";
 import { ImageBlockInfo } from "./ImageBlock/imageBlock";
 import { ReasonsAcceptCardBlockInfo } from "./ReasonsAcceptCardBlock/reasonsAcceptCardBlock";
 import { CardsWithLinksBlockInfo } from "./CardsWithLinksBlock/cardsWithLinksBlock";
+import { GoogleMapBlockInfo } from "./GoogleMapBlock/googleMapBlock";
 import { BlockTypeInfo } from "./blocks-info";
 import { PageBlockRowDto } from "../interfaces/pageSharedDto";
 import grid from "../styles/grid.module.css";
@@ -30,6 +31,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ReasonsAcceptCardBlockInfo,
   CardsWithLinksBlockInfo,
   TabControlBlockInfo,
+  GoogleMapBlockInfo
 ];
 
 export interface IComponentHost {
