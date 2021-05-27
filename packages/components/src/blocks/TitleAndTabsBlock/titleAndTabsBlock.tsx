@@ -13,12 +13,12 @@ enum TabsEnum {
 export interface TitleAndTabsBlockElement {
   title: string;
   background: number | null;
-  tabs: { title: string; filters: string[]; type: string }[];
+  tabs: { title: string; filters: { filter: string }[]; type: string }[];
 }
 
 export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
   const tabsComponent = props.tabs.map((el, index) => (
-    <ServerCatalogWidget key={index + el.type} filterIds={el.filters} entityType={el.type} />
+    <ServerCatalogWidget key={index + el.type} filterIds={el.filters.map((el) => el.filter)} entityType={el.type} />
   ));
   return (
     <Search title={props.title} background={props.background}>

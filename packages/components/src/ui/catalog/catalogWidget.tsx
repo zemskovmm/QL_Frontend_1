@@ -117,9 +117,9 @@ export const ServerCatalogWidget: FC<ServerCatalogWidgetProps> = (props) => {
       }
     } else {
       if (state.filtersLoadedForLang != cl?.lang) {
-        cl?.filters.getCatalogFilters(cl?.lang, props.entityType).then((filters) =>
+        cl?.filters.getCatalogFilters(cl?.lang, props.entityType).then((filter: any) =>
           setState({
-            filters: filters,
+            filters: filter,
             filtersLoadedForLang: cl?.lang,
           })
         );
