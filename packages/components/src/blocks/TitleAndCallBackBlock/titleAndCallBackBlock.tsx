@@ -16,15 +16,18 @@ export interface TitleAndCallBackBlockElement {
   textButton: string;
   textAbove: string;
   background: number | null;
+  showButton: boolean;
 }
 
 export const TitleAndCallBackBlock = (props: TitleAndCallBackBlockElement) => {
   return (
     <Search title={props.title} background={props.background} callback={true}>
-      <div className={`flex flex-col ${styles.callbackBlock}`}>
-        <div className={`${styles.callbackBlockText}`} dangerouslySetInnerHTML={{ __html: props.textAbove }} />
-        <ButtonFormBlock name={props.textButton} align={`center`} />
-      </div>
+      {props.showButton && (
+        <div className={`flex flex-col ${styles.callbackBlock}`}>
+          <div className={`${styles.callbackBlockText}`} dangerouslySetInnerHTML={{ __html: props.textAbove }} />
+          <ButtonFormBlock name={props.textButton} align={`center`} />
+        </div>
+      )}
     </Search>
   );
 };
@@ -38,6 +41,7 @@ export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlock
     textButton: "Title",
     textAbove: "Title",
     background: null,
+    showButton: false,
   },
   definition: {
     fields: [
@@ -62,6 +66,11 @@ export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlock
         type: "Custom",
         customType: "Image",
         name: "Background",
+      },
+      {
+        id: "showButton",
+        type: "CheckBox",
+        name: "Show button",
       },
     ],
   },
