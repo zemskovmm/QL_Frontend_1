@@ -3,12 +3,14 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsAcceptIconBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
 import icon from "./acceptIcon.svg";
+import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 
 export interface ReasonsAcceptIconBlockElement {
   header: string;
   textOverButton: string;
   elements: { title: string; text: string }[];
   showButton: boolean;
+  textButton: string;
 }
 
 export const ReasonsAcceptIconBlock = (props: ReasonsAcceptIconBlockElement) => {
@@ -38,7 +40,7 @@ export const ReasonsAcceptIconBlock = (props: ReasonsAcceptIconBlockElement) => 
                     dangerouslySetInnerHTML={{ __html: props.textOverButton }}
                   />
                 )}
-                <button className={styles.reasonsAcceptIconBlock__button}>hi</button>
+                <ButtonFormBlock name={props.textButton} align={`center`} />
               </div>
             )}
           </div>
@@ -62,6 +64,7 @@ export const ReasonsAcceptIconBlockInfo: TypedBlockTypeInfo<ReasonsAcceptIconBlo
       },
     ],
     showButton: true,
+    textButton: "search",
   },
   definition: {
     subTypes: {
@@ -102,6 +105,11 @@ export const ReasonsAcceptIconBlockInfo: TypedBlockTypeInfo<ReasonsAcceptIconBlo
         id: "showButton",
         type: "CheckBox",
         name: "Show Button",
+      },
+      {
+        id: "textButton",
+        type: "String",
+        name: "Text button",
       },
     ],
   },

@@ -152,28 +152,32 @@ export const ContactUsFormController = (props: { onDismiss: () => void }) => {
   return <ContactUsForm onDismiss={props.onDismiss} onSuccess={() => setIsSuccess(true)} />;
 };
 
-export const ContactUsFormButton = (props: { children: React.ReactNode }) => {
+export const ContactUsFormButton = (props: { children: React.ReactNode; footer?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <a
-        className={cn(
-          styles.button,
-          "bg-bgprimary",
-          "rounded-primary",
-          "font-medium",
-          "flex",
-          "items-center",
-          "text-secondary"
-        )}
-        href="#"
+      <button
+        type={"button"}
+        className={
+          props.footer
+            ? ""
+            : cn(
+                styles.button,
+                "bg-bgprimary",
+                "rounded-primary",
+                "font-medium",
+                "flex",
+                "items-center",
+                "text-secondary"
+              )
+        }
         onClick={() => {
           setIsOpen(true);
         }}
       >
         {props.children}
-      </a>
+      </button>
       {isOpen ? <ContactUsFormController onDismiss={() => setIsOpen(false)} /> : null}
     </>
   );

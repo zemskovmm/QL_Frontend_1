@@ -7,7 +7,7 @@ import { ComponentHostContext } from "../index";
 
 export interface ButtonFormBlockElement {
   name: string;
-  icon?: number | null;
+  icon?: number | null | string;
   link?: string;
   align: string;
   class?: string;

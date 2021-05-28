@@ -1,14 +1,12 @@
-//import { HeaderDataDto } from "src/interfaces/headerDataDto";
 import { useIntl } from "react-intl";
 import { FooterDataDto } from "src/interfaces/footerDataDto";
-//import {LocalizedLink} from "src/components/LocalizedLink";
-
 import styles from "./main.module.css";
 import cn from "classnames";
 import Logo from "src/assets/images/logoFooter.svg";
 import Arrow from "src/assets/images/icons/arrow.svg";
-
 import { default as Social } from "src/assets/icons/socialFooter";
+import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
+import React from "react";
 
 export const MainFooter = (props: FooterDataDto) => {
   const lang = useIntl().locale;
@@ -60,9 +58,10 @@ export const MainFooter = (props: FooterDataDto) => {
             <li>Skype: QuartierLatinRU</li>
           </ul>
           {props[lang].writeUs && (
-            <a href="mailto:" className={styles.footer_writeus}>
-              {props[lang].writeUs}
-            </a>
+            <ContactUsFormButton footer={true}>
+              <button className={styles.footer_writeus}>{props[lang].writeUs}</button>
+            </ContactUsFormButton>
+            // <ButtonFormBlock icon={Mail} class={`w-full`} name={props[lang].writeUs} align={`flex-center`} />
           )}
           <div className={styles.footer_social}>
             {props[lang].socials.map((link, i) =>

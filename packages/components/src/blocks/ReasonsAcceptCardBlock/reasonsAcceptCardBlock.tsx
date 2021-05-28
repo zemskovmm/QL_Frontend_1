@@ -3,12 +3,15 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsAcceptCardBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
 import icon from "./acceptIcon.svg";
+import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 
 export interface ReasonsAcceptCardBlockElement {
   header: string;
   textOverButton: string;
   elements: { title: string; text: string }[];
   showPostscript: boolean;
+  textButton: string;
+  showButton: boolean;
 }
 
 export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => {
@@ -29,12 +32,15 @@ export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => 
                 />
               </div>
             ))}
-            {props.showPostscript && (
+            {(props.showPostscript || props.showButton) && (
               <div className={styles.reasonsAcceptCardBlock__blockText + " flex-col align"}>
-                <div
-                  className={styles.reasonsAcceptCardBlock__buttonText}
-                  dangerouslySetInnerHTML={{ __html: props.textOverButton }}
-                />
+                {props.showPostscript && (
+                  <div
+                    className={styles.reasonsAcceptCardBlock__buttonText}
+                    dangerouslySetInnerHTML={{ __html: props.textOverButton }}
+                  />
+                )}
+                {props.showButton && <ButtonFormBlock name={props.textButton} class={`mt-3`} align={`flex-start`} />}
               </div>
             )}
           </div>
@@ -58,6 +64,8 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
       },
     ],
     showPostscript: true,
+    showButton: true,
+    textButton: "search",
   },
   definition: {
     subTypes: {
@@ -94,6 +102,16 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
         id: "showPostscript",
         type: "CheckBox",
         name: "ShowPostscript",
+      },
+      {
+        id: "textButton",
+        type: "String",
+        name: "Text button",
+      },
+      {
+        id: "showButton",
+        type: "CheckBox",
+        name: "Show button",
       },
     ],
   },

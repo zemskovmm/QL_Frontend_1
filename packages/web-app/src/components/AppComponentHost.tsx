@@ -5,6 +5,7 @@ import { IntlProvider } from "react-intl";
 import { getLocaleMessages } from "../locales/locales";
 import { ContactUsFormController } from "./common/contactUsForm/contactUsForm";
 import { siteApi } from "../clients/siteApiClient";
+import Head from "next/head";
 
 export const AppComponentHost: React.FC = ({ children }) => {
   const [isContactUsFormShown, setContactUsFormShown] = useState(false);
@@ -16,11 +17,16 @@ export const AppComponentHost: React.FC = ({ children }) => {
     lang: lang as string,
   };
   return (
-    <IntlProvider locale={lang as string} defaultLocale="en" messages={getLocaleMessages(lang as string)}>
-      <ComponentHostContext.Provider value={host}>
-        {children}
-        {isContactUsFormShown ? <ContactUsFormController onDismiss={() => setContactUsFormShown(false)} /> : null}
-      </ComponentHostContext.Provider>
-    </IntlProvider>
+    <>
+      <Head>
+        <link rel="shortcut icon" href="/static/favicon.ico" />
+      </Head>
+      <IntlProvider locale={lang as string} defaultLocale="en" messages={getLocaleMessages(lang as string)}>
+        <ComponentHostContext.Provider value={host}>
+          {children}
+          {isContactUsFormShown ? <ContactUsFormController onDismiss={() => setContactUsFormShown(false)} /> : null}
+        </ComponentHostContext.Provider>
+      </IntlProvider>
+    </>
   );
 };
