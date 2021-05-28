@@ -139,12 +139,13 @@
   opacity: 1;
 }
 
-.footer_column a.footer_writeus {
+.footer_column button.footer_writeus {
   background: #FF6768;
   border-radius: 3px;
   display: flex;
   align-items: center;
   padding: 5px 16px;
+  padding-right: 25px;
   cursor: pointer;
   font-weight: 500;
   font-size: 0.875rem;
@@ -153,7 +154,7 @@
   margin: 0 24px 40px;
 }
 
-.footer_column a.footer_writeus:before {
+.footer_column button.footer_writeus:before {
   content: '';
   background: url('src/assets/images/icons/mail.svg') no-repeat 0 center / 20px 20px;
   height: 100%;

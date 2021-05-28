@@ -7,15 +7,16 @@ import { ComponentHostContext } from "../index";
 
 export interface ButtonFormBlockElement {
   name: string;
-  icon: number | null;
-  link: string;
+  icon?: number | null | string;
+  link?: string;
   align: string;
+  class?: string;
 }
 
 export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
   const cl = useContext(ComponentHostContext);
   return (
-    <div className={`flex mx-auto max-w-screen-xl w-full ${props.align}`}>
+    <div className={`flex mx-auto max-w-screen-xl w-full ${props.align} ${props.class}`}>
       <button type={"button"} className={styles.button} onClick={() => cl?.showContactUsForm()}>
         {props.icon && <img src={`https://ql.dotlic.ru/api/media/${props.icon}`} alt="" />}
         <span>{props.name}</span>

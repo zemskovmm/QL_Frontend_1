@@ -1,5 +1,5 @@
 import React from "react";
-import { BasicHtmlBlockInfo } from "./basic-html";
+import { BasicHtmlBlockInfo } from "./BasicHtmlBlock/basic-html";
 import { CirclesBlockInfo } from "./circles";
 import { ReadMoreBlockInfo } from "./ReadMoreBlock/readMoreBlock";
 import { ReasonsAcceptIconBlockInfo } from "./ReasonsAcceptIconBlock/reasonsAcceptIconBlock";
@@ -16,6 +16,11 @@ import { BlockTypeInfo } from "./blocks-info";
 import { PageBlockRowDto } from "../interfaces/pageSharedDto";
 import grid from "../styles/grid.module.css";
 import { TabControlBlockInfo } from "./TabControlBlock/TabControlBlock";
+import { TitleAndTabsBlockInfo } from "./TitleAndTabsBlock/titleAndTabsBlock";
+import { BreadcrumbsBlockInfo } from "./BreadcrumbsBlock/breadcrumbsBlock";
+import { TitleAndCallBackBlockInfo } from "./TitleAndCallBackBlock/titleAndCallBackBlock";
+import { ImgAndTextEditorBlockInfo } from "./ImgAndTextEditorBlock/imgAndTextEditorBlock";
+import { LeftTabsRightContentBlockInfo } from "./LeftTabsRightContentBlock/TabControlBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -31,11 +36,18 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ReasonsAcceptCardBlockInfo,
   CardsWithLinksBlockInfo,
   TabControlBlockInfo,
-  GoogleMapBlockInfo
+  GoogleMapBlockInfo,
+  TitleAndTabsBlockInfo,
+  BreadcrumbsBlockInfo,
+  TitleAndCallBackBlockInfo,
+  ImgAndTextEditorBlockInfo,
+  LeftTabsRightContentBlockInfo,
 ];
 
 export interface IComponentHost {
   showContactUsForm: () => void;
+  filters: any;
+  lang: string;
 }
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);
@@ -54,15 +66,22 @@ export const BlockPresenter = (props: { blockType: string; blockData: any }) => 
 
 const RowPresenter = (props: PageBlockRowDto) => {
   return (
-    <div style={{ background: props.background }}>
-      {props.blocks.map((cell, i) => (
-        <div
-          className={`inline-block ${grid["col-" + cell.size]} box-border	`}
-          style={{ verticalAlign: "top", maxWidth: props.maxWidth }}
-        >
-          <BlockPresenter key={i} blockType={cell.type} blockData={cell.data} />
-        </div>
-      ))}
+    <div style={{ background: props.background }} className={`relative`}>
+      {props.blocks.map((cell, i) => {
+        if (cell.type !== "breadcrumbsBlock") {
+          return (
+            <div
+              key={i}
+              className={`inline-block ${grid["col-" + cell.size]} box-border`}
+              style={{ verticalAlign: "top", maxWidth: props.maxWidth }}
+            >
+              <BlockPresenter blockType={cell.type} blockData={cell.data} />
+            </div>
+          );
+        } else {
+          return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
+        }
+      })}
     </div>
   );
 };

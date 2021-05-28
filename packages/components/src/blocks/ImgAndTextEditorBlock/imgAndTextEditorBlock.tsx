@@ -1,0 +1,109 @@
+import React from "react";
+import { TypedBlockTypeInfo } from "../blocks-info";
+import styles from "./imgAndTextEditorBlock.module.css";
+import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
+
+export interface ImgAndTextEditorBlockElement {
+  align: boolean;
+  text: string;
+  img: number | null;
+  imgWidth: string;
+  textButton: string;
+  showButton: boolean;
+}
+
+export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
+  return (
+    <div className="py-28">
+      <div className="flex justify-between mx-auto max-w-screen-xl w-full">
+        <div className={`${styles.imgAndTextEditorBlock} ${props.align ? "flex-row-reverse" : ""}`}>
+          <div
+            className={`${styles.imgAndTextEditorBlock__content} ${
+              props.align ? styles.imgAndTextEditorBlock__contentRight : styles.imgAndTextEditorBlock__contentLeft
+            }`}
+          >
+            <div
+              className={styles.imgAndTextEditorBlock__contentText}
+              dangerouslySetInnerHTML={{ __html: props.text }}
+            />
+            {props.showButton && <ButtonFormBlock class={`mt-6`} name={props.textButton} align={`justify-start`} />}
+          </div>
+          <img
+            src={`https://ql.dotlic.ru/api/media/${props.img}`}
+            style={{ maxWidth: props.imgWidth }}
+            alt=""
+            className={styles.imgAndTextEditorBlock__img}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const ImgAndTextEditorBlockInfo: TypedBlockTypeInfo<ImgAndTextEditorBlockElement> = {
+  id: "imgAndTextEditorBlock",
+  name: "ImgAndTextEditorBlock",
+  renderer: ImgAndTextEditorBlock,
+  initialData: {
+    align: false,
+    text: "string",
+    img: null,
+    imgWidth: "400px",
+    textButton: "",
+    showButton: false,
+  },
+  definition: {
+    fields: [
+      {
+        id: "text",
+        type: "Custom",
+        customType: "Html",
+        name: "Text",
+      },
+      {
+        id: "img",
+        type: "Custom",
+        customType: "Image",
+        name: "Img",
+      },
+      {
+        id: "align",
+        type: "CheckBox",
+        name: "Image from the left",
+      },
+      {
+        id: "imgWidth",
+        type: "Select",
+        name: "Img Width",
+        possibleValues: [
+          {
+            id: "400px",
+            name: "400 px",
+          },
+          {
+            id: "470px",
+            name: "470 px",
+          },
+          {
+            id: "500px",
+            name: "500 px",
+          },
+          {
+            id: "600px",
+            name: "600 px",
+          },
+        ],
+      },
+      {
+        id: "textButton",
+        type: "String",
+        name: "Text button",
+      },
+      {
+        id: "showButton",
+        type: "CheckBox",
+        name: "Show button",
+      },
+    ],
+  },
+};

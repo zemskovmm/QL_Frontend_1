@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsCustomIconBlock.module.css";
+import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 
 export interface ReasonsCustomIconBlockElement {
   header: string;
   elements: { title: string; text: string; image: number | null }[];
   showButton: boolean;
+  textButton: string;
   alignButton: string;
 }
 
@@ -29,9 +31,7 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
               </div>
             ))}
           </div>
-          <div className={`flex ${props.alignButton}`}>
-            {props.showButton && <button className={styles.reasonsCustomIconBlock__button}>Подобрать жилье</button>}
-          </div>
+          {props.showButton && <ButtonFormBlock name={props.textButton} align={props.alignButton} />}
         </div>
       </div>
     </div>
@@ -53,6 +53,7 @@ export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlo
     ],
     showButton: true,
     alignButton: "",
+    textButton: "call",
   },
   definition: {
     subTypes: {
@@ -93,6 +94,11 @@ export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlo
         id: "showButton",
         type: "CheckBox",
         name: "Show Button",
+      },
+      {
+        id: "textButton",
+        type: "String",
+        name: "Text button",
       },
       {
         id: "alignButton",
