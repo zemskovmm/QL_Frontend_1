@@ -1,5 +1,5 @@
 import React from "react";
-import { BasicHtmlBlockInfo } from "./basic-html";
+import { BasicHtmlBlockInfo } from "./BasicHtmlBlock/basic-html";
 import { CirclesBlockInfo } from "./circles";
 import { ReadMoreBlockInfo } from "./ReadMoreBlock/readMoreBlock";
 import { ReasonsAcceptIconBlockInfo } from "./ReasonsAcceptIconBlock/reasonsAcceptIconBlock";
