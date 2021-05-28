@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cn from "classnames";
 
-import styles from "./TabsControlBlock.module.css";
+import styles from "./LeftTabsRightContentBlock.module.css";
 import { PageBlockRowDto } from "../../interfaces/pageSharedDto";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import { RowsPresenter } from "../index";
@@ -13,6 +13,7 @@ interface TabControlBlockTab {
 
 interface TabControlBlockProps {
   tabs: TabControlBlockTab[];
+  revers: boolean;
 }
 
 interface TabsProps {
@@ -20,23 +21,26 @@ interface TabsProps {
   components: any;
 }
 
-const LeftTabsRightContentBlock = ({ tabs }: TabControlBlockProps) => {
+const LeftTabsRightContentBlock = ({ tabs, revers }: TabControlBlockProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const effectiveActiveTab = Math.min(activeTab, tabs.length - 1);
 
   return (
-    <div className="flex flex-col w-full">
-      <div className={cn(styles.tabs, "flex p-2.5")}>
-        <div className="flex mx-auto">
-          {tabs.map((tab, ind) => (
-            <div key={ind} className={cn(ind === activeTab ? styles.active : "")} onClick={() => setActiveTab(ind)}>
-              {tab.title}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={cn(styles.content, "py-9 px-10")}>
+    <div className={`flex w-full ${revers ? "flex-row-reverse" : ""}`}>
+      <div className={cn(styles.content, revers ? styles.contentRight : styles.contentLeft)}>
         <div>{effectiveActiveTab < 0 ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}</div>
+      </div>
+      <div className={`flex flex-col w-full ml-auto ${styles.tab__elementList}`}>
+        {tabs.map((tab, ind) => (
+          <button
+            type={"button"}
+            key={ind}
+            className={cn(ind === activeTab ? styles.tab__elementActive : "", styles.tab__element)}
+            onClick={() => setActiveTab(ind)}
+          >
+            {tab.title}
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -53,6 +57,7 @@ export const LeftTabsRightContentBlockInfo: TypedBlockTypeInfo<TabControlBlockPr
         rows: [],
       },
     ],
+    revers: false,
   },
   definition: {
     subTypes: {
@@ -78,6 +83,11 @@ export const LeftTabsRightContentBlockInfo: TypedBlockTypeInfo<TabControlBlockPr
         name: "Tabs",
         type: "List",
         listType: "Tab",
+      },
+      {
+        id: "revers",
+        type: "CheckBox",
+        name: "Reverse",
       },
     ],
   },

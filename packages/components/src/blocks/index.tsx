@@ -20,7 +20,7 @@ import { TitleAndTabsBlockInfo } from "./TitleAndTabsBlock/titleAndTabsBlock";
 import { BreadcrumbsBlockInfo } from "./BreadcrumbsBlock/breadcrumbsBlock";
 import { TitleAndCallBackBlockInfo } from "./TitleAndCallBackBlock/titleAndCallBackBlock";
 import { ImgAndTextEditorBlockInfo } from "./ImgAndTextEditorBlock/imgAndTextEditorBlock";
-import { LeftTabsRightContentBlockInfo } from "./LeftTabsRightContentBlock/TabControlBlock";
+import { LeftTabsRightContentBlockInfo } from "./LeftTabsRightContentBlock/LeftTabsRightContentBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
