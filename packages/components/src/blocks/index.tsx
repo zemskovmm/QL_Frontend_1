@@ -21,7 +21,6 @@ import { BreadcrumbsBlockInfo } from "./BreadcrumbsBlock/breadcrumbsBlock";
 import { TitleAndCallBackBlockInfo } from "./TitleAndCallBackBlock/titleAndCallBackBlock";
 import { ImgAndTextEditorBlockInfo } from "./ImgAndTextEditorBlock/imgAndTextEditorBlock";
 import { LeftTabsRightContentBlockInfo } from "./LeftTabsRightContentBlock/LeftTabsRightContentBlock";
-import { GoogleMapBlockInfo } from "./GoogleMapBlock/googleMapBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
