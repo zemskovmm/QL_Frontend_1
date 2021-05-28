@@ -19,6 +19,7 @@ import { TitleAndTabsBlockInfo } from "./TitleAndTabsBlock/titleAndTabsBlock";
 import { BreadcrumbsBlockInfo } from "./BreadcrumbsBlock/breadcrumbsBlock";
 import { TitleAndCallBackBlockInfo } from "./TitleAndCallBackBlock/titleAndCallBackBlock";
 import { ImgAndTextEditorBlockInfo } from "./ImgAndTextEditorBlock/imgAndTextEditorBlock";
+import { LeftTabsRightContentBlockInfo } from "./LeftTabsRightContentBlock/TabControlBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -38,6 +39,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   BreadcrumbsBlockInfo,
   TitleAndCallBackBlockInfo,
   ImgAndTextEditorBlockInfo,
+  LeftTabsRightContentBlockInfo,
 ];
 
 export interface IComponentHost {

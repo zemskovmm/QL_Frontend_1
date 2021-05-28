@@ -20,7 +20,7 @@ interface TabsProps {
   components: any;
 }
 
-const TabControl = ({ tabs }: TabControlBlockProps) => {
+const LeftTabsRightContentBlock = ({ tabs }: TabControlBlockProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const effectiveActiveTab = Math.min(activeTab, tabs.length - 1);
 
@@ -36,18 +36,16 @@ const TabControl = ({ tabs }: TabControlBlockProps) => {
         </div>
       </div>
       <div className={cn(styles.content, "py-9 px-10")}>
-        <div>
-          {effectiveActiveTab < 0 ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}
-        </div>
+        <div>{effectiveActiveTab < 0 ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}</div>
       </div>
     </div>
   );
 };
 
-export const TabControlBlockInfo: TypedBlockTypeInfo<TabControlBlockProps> = {
-  id: "tab-control",
-  name: "Tabs with content",
-  renderer: TabControl,
+export const LeftTabsRightContentBlockInfo: TypedBlockTypeInfo<TabControlBlockProps> = {
+  id: "leftTabsRightContentBlock",
+  name: "LeftTabsRightContentBlock",
+  renderer: LeftTabsRightContentBlock,
   initialData: {
     tabs: [
       {
