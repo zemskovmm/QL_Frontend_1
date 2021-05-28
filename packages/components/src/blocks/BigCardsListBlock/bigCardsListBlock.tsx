@@ -14,19 +14,11 @@ type BigCardProps = {
 const BigCard: FC<BigCardProps> = ({ card }) => {
   return (
     <>
-      {card.url ? (
-        <a href={card.url} className={style.bigCard}>
-          <img src={`https://ql.dotlic.ru/api/media/${card.img}`} alt="" className={style.bigCard__img} />
-          <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
-          <div className={style.bigCard__subtitle} dangerouslySetInnerHTML={{ __html: card.text }} />
-        </a>
-      ) : (
-        <div className={style.bigCard}>
-          <img src={`https://ql.dotlic.ru/api/media/${card.img}`} alt="" className={style.bigCard__img} />
-          <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
-          <div className="bigCard__subtitle" dangerouslySetInnerHTML={{ __html: card.text }} />
-        </div>
-      )}
+      <a href={card.url} className={style.bigCard}>
+        <img src={`https://ql.dotlic.ru/api/media/${card.img}`} alt="" className={style.bigCard__img} />
+        <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
+        <div className={style.bigCard__subtitle} dangerouslySetInnerHTML={{ __html: card.text }} />
+      </a>
     </>
   );
 };
@@ -34,10 +26,9 @@ const BigCard: FC<BigCardProps> = ({ card }) => {
 type BigCardsListBlockElement = {
   elements: { img: number | null; title: string; text: string; url: string }[];
   title: string;
-  linksButton: { link: string; name: string; description: string }[];
 };
 
-export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({ elements, linksButton, title }) => {
+export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({ elements, title }) => {
   return (
     <div className="py-28">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
@@ -80,29 +71,9 @@ export const BigCardsListBlockInfo: TypedBlockTypeInfo<BigCardsListBlockElement>
       },
     ],
     title: "string",
-    linksButton: [{ link: "string", name: "string", description: "string" }],
   },
   definition: {
     subTypes: {
-      linksButton: {
-        fields: [
-          {
-            id: "link",
-            type: "String",
-            name: "link",
-          },
-          {
-            id: "name",
-            type: "String",
-            name: "name",
-          },
-          {
-            id: "description",
-            type: "String",
-            name: "description",
-          },
-        ],
-      },
       element: {
         fields: [
           {
@@ -132,19 +103,13 @@ export const BigCardsListBlockInfo: TypedBlockTypeInfo<BigCardsListBlockElement>
     },
     fields: [
       {
-        id: "elements",
-        name: "Elements",
-        type: "List",
-        listType: "element",
-      },
-      {
         id: "title",
         type: "String",
         name: "Title",
       },
       {
-        id: "linksButton",
-        name: "LinksButton",
+        id: "elements",
+        name: "Elements",
         type: "List",
         listType: "element",
       },
