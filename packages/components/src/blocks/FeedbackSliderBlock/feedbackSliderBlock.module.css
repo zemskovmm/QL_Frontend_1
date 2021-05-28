@@ -1,0 +1,18 @@
+.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex: 0 0 300px;
+}
+
+.item {
+  display: inline-block;
+  width: 300px !important;
+}

@@ -15,6 +15,7 @@ import { BlockTypeInfo } from "./blocks-info";
 import { PageBlockRowDto } from "../interfaces/pageSharedDto";
 import grid from "../styles/grid.module.css";
 import { TabControlBlockInfo } from "./TabControlBlock/TabControlBlock";
+import { FeedbackSliderBlockInfo } from "./FeedbackSliderBlock/feedbackSliderBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -30,6 +31,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ReasonsAcceptCardBlockInfo,
   CardsWithLinksBlockInfo,
   TabControlBlockInfo,
+  FeedbackSliderBlockInfo
 ];
 
 export interface IComponentHost {
