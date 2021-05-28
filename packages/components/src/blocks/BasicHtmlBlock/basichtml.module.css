@@ -1,0 +1,33 @@
+﻿.htmlBlock h1{
+  color: #373737;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+.htmlBlock h2{
+  color: #373737;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.htmlBlock h3{
+  color: #373737;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.htmlBlock p{
+  color: #646F83;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.htmlBlock a{
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  color: #567DD0;
+}
