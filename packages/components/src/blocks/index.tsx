@@ -36,7 +36,6 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ReasonsAcceptCardBlockInfo,
   CardsWithLinksBlockInfo,
   TabControlBlockInfo,
-  GoogleMapBlockInfo,
   TitleAndTabsBlockInfo,
   BreadcrumbsBlockInfo,
   TitleAndCallBackBlockInfo,
