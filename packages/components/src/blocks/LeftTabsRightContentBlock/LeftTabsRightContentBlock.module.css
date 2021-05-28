@@ -1,0 +1,33 @@
+.tab__element{
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #EFF3FA;
+  box-sizing: border-box;
+  padding: 20px 30px 21px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #373737;
+  text-align: left;
+  transition: .3s;
+}
+
+.tab__element:not(:last-child){
+  margin-bottom: 5px;
+}
+
+.tab__elementActive, .tab__element:hover{
+  background: #EFF3FA;
+  color: #646F83;
+}
+
+.tab__elementList{
+  max-width: 370px;
+}
+
+.contentLeft{
+  padding-right: 100px;
+}
+
+.contentRight{
+  padding-left: 100px;
+}
