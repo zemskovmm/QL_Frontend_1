@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import style from "./catalogInnerAbout.module.css";
 import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
+import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
 
 const CatalogCallBack = () => {
   return (
@@ -9,7 +10,9 @@ const CatalogCallBack = () => {
         <h3 className={style.catalogCallBack__title}>Есть вопросы?</h3>
         <div className={style.catalogCallBack__subtitle}>Наш менеджер на них ответит!</div>
       </div>
-      <button className={style.catalogCallBack__btn}>Хочу учиться здесь</button>
+      <ContactUsFormButton footer={true}>
+        <button className={style.catalogCallBack__btn}>Хочу учиться здесь</button>
+      </ContactUsFormButton>
     </div>
   );
 };

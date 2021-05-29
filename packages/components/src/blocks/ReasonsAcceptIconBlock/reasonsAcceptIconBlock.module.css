@@ -57,21 +57,6 @@
   color: #646F83;
 }
 
-.reasonsAcceptIconBlock__button{
-  background: #FF6768;
-  border-radius: 3px;
-  padding: 11px 25px 12px;
-  color: #FFFFFF;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  width: fit-content;
-}
-
-.reasonsAcceptIconBlock__button:hover{
-  background: #fd7172;
-}
-
 .reasonsAcceptIconBlock__buttonText{
   font-size: 14px;
   line-height: 24px;
@@ -86,8 +71,8 @@
 
 .reasonsAcceptIconBlock__buttonText:before{
   content: "";
-  border: 5px solid #FF6768;
-  width: 30px;
+  border: 3px solid #FF6768;
+  width: 35px;
   border-radius: 4px;
   display: flex;
   margin-bottom: 30px;

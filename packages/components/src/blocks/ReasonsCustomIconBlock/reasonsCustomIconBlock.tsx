@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsCustomIconBlock.module.css";
-import { is } from "@babel/types/lib/index-legacy";
-import icon from "./acceptIcon.svg";
+import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 
 export interface ReasonsCustomIconBlockElement {
   header: string;
-  elements: { title: string; text: string }[];
+  elements: { title: string; text: string; image: number | null }[];
   showButton: boolean;
+  textButton: string;
   alignButton: string;
 }
 
@@ -22,7 +22,7 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
             {props.elements.map((el) => (
               <div className={styles.reasonsCustomIconBlock__item}>
                 <div className={styles.reasonsCustomIconBlock__icon}>
-                  <img src={icon} alt="" />
+                  <img src={`https://ql.dotlic.ru/api/media/${el.image}`} alt="" />
                 </div>
                 <div className={`flex flex-col`}>
                   <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
@@ -30,12 +30,8 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
                 </div>
               </div>
             ))}
-            {props.showButton && (
-              <button className={styles.reasonsCustomIconBlock__button} style={{ margin: props.alignButton }}>
-                Подобрать жилье
-              </button>
-            )}
           </div>
+          {props.showButton && <ButtonFormBlock name={props.textButton} align={props.alignButton} />}
         </div>
       </div>
     </div>
@@ -52,10 +48,12 @@ export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlo
       {
         title: "string",
         text: "string",
+        image: null,
       },
     ],
     showButton: true,
     alignButton: "",
+    textButton: "call",
   },
   definition: {
     subTypes: {
@@ -70,6 +68,12 @@ export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlo
             id: "text",
             type: "String",
             name: "Text",
+          },
+          {
+            id: "image",
+            name: "image",
+            type: "Custom",
+            customType: "Image",
           },
         ],
       },
@@ -92,9 +96,28 @@ export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlo
         name: "Show Button",
       },
       {
-        id: "alignButton",
+        id: "textButton",
         type: "String",
+        name: "Text button",
+      },
+      {
+        id: "alignButton",
+        type: "Radio",
         name: "Align Button",
+        possibleValues: [
+          {
+            id: "justify-start",
+            name: "left",
+          },
+          {
+            id: "justify-center",
+            name: "center",
+          },
+          {
+            id: "justify-end",
+            name: "right",
+          },
+        ],
       },
     ],
   },
