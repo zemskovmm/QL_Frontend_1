@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
-import "react-multi-carousel/lib/styles.css";
 import styles from "./feedbackSliderBlock.module.css"
 
 import Carousel from "react-multi-carousel";
