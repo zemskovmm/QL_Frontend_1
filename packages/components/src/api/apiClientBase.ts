@@ -1,19 +1,18 @@
-import {hasOwnProperty} from "web-app/src/utilities/utils";
+import { hasOwnProperty } from "web-app/src/utilities/utils";
 
-export const ApiBaseUrl = (
-  process.env["API_BASE_URL"]
-  || process.env["REACT_APP_API_BASE_URL"]
-  || process.env["NEXT_PUBLIC_API_BASE_URL"]
-  || "").replace(
-  /\/+$/,
-  ""
+const removeLastSlash = (url: string) => url.replace(/\/+$/, "");
+
+export const ApiBaseUrl = removeLastSlash(
+  process.env["REACT_APP_API_BASE_URL"] || process.env["NEXT_PUBLIC_API_BASE_URL"] || ""
 );
+
+export const SsrCompatibleApiBaseUrl = removeLastSlash(process.env["API_BASE_URL"] || ApiBaseUrl);
 
 export class ApiClientBase {
   async sendRequest<T>(path: string, data?: any, method?: string, formData?: boolean) {
     const headers = new Headers();
     if (data != null && !formData) {
-        headers.append("Content-Type", "application/json");
+      headers.append("Content-Type", "application/json");
     }
     const init: RequestInit = {
       method: method || (data == null ? "GET" : "POST"),
@@ -25,7 +24,8 @@ export class ApiClientBase {
           : JSON.stringify(data),
     };
 
-    const res = await fetch(ApiBaseUrl + "/api/" + path, init);
+    const url = SsrCompatibleApiBaseUrl + "/api/" + path;
+    const res = await fetch(url, init);
 
     if (res.ok) {
       const resText = await res.text()
@@ -37,7 +37,8 @@ export class ApiClientBase {
         return <T>kostylAnswer
       }
     }
-    console.log(await res.text());
-    throw new Error("Network error");
+    const errorText = await res.text();
+    console.error(`Network error for request ${init.method} ${url}\n${init.body}\nError: ${res.status} ${errorText}`)
+    throw new Error(`Network error: ${res.status} ${errorText}`);
   }
 }
