@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import "src/styles/global.css";
+import "react-multi-carousel/lib/styles.css";
 import { MainLayout } from "src/components/layouts/mainLayout";
 import { useRouter } from "next/router";
 import footerData from "src/hardcoded/footerData";
