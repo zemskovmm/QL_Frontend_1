@@ -12,7 +12,7 @@ export interface CardsWithLinksBlockElement {
 
 export const CardsWithLinksBlock = (props: CardsWithLinksBlockElement) => {
   return (
-    <div className="py-28">
+    <div className="py-2">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.cardsWithLinksBlock}>
           <div className={styles.cardsWithLinksBlock__head}>

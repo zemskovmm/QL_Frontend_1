@@ -14,8 +14,8 @@ export interface ImgAndTextEditorBlockElement {
 
 export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
   return (
-    <div className="py-28">
-      <div className="flex justify-between mx-auto max-w-screen-xl w-full">
+    <div className="py-2">
+      <div className="flex justify-center mx-auto max-w-screen-xl w-full">
         <div className={`${styles.imgAndTextEditorBlock} ${props.align ? "flex-row-reverse" : ""}`}>
           <div
             className={`${styles.imgAndTextEditorBlock__content} ${

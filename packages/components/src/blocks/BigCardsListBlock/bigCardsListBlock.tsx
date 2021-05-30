@@ -30,7 +30,7 @@ type BigCardsListBlockElement = {
 
 export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({ elements, title }) => {
   return (
-    <div className="py-28">
+    <div className="py-2">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={style.bigCardsListBlock__container}>
           <h2 className={style.bigCardsListBlock__title} dangerouslySetInnerHTML={{ __html: title }} />
