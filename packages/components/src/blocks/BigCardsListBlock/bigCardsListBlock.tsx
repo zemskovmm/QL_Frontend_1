@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import style from "./bigCardsListBlock.module.css";
 import { TypedBlockTypeInfo } from "../blocks-info";
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 type BigCardProps = {
   card: {
@@ -15,7 +16,7 @@ const BigCard: FC<BigCardProps> = ({ card }) => {
   return (
     <>
       <a href={card.url} className={style.bigCard}>
-        <img src={`https://ql.dotlic.ru/api/media/${card.img}`} alt="" className={style.bigCard__img} />
+        <img src={`${ApiBaseUrl}/api/media/${card.img}`} alt="" className={style.bigCard__img} />
         <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
         <div className={style.bigCard__subtitle} dangerouslySetInnerHTML={{ __html: card.text }} />
       </a>

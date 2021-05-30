@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from "./Search.module.css";
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 interface SearchProps {
   title?: string;
@@ -17,7 +18,7 @@ interface SearchProps {
 const Search = ({ title, children, className, background, breadcrumbs, callback }: SearchProps) => (
   <div
     className={styles.Search + ` ${breadcrumbs ? styles.SearchPadding__breadcrumbs : styles.SearchPadding}`}
-    style={{ backgroundImage: `url(https://ql.dotlic.ru/api/media/${background})` }}
+    style={{ backgroundImage: `url(${ApiBaseUrl}/api/media/${background})` }}
   >
     <div className={`flex items-start max-w-screen-xl w-full my-0 mx-auto px-10 ${callback ? "flex-row" : "flex-col"}`}>
       <h1>{title}</h1>

@@ -4,6 +4,7 @@ import styles from "./buttonFormBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
 import cn from "classnames";
 import { ComponentHostContext } from "../index";
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 export interface ButtonFormBlockElement {
   name: string;
@@ -19,7 +20,7 @@ export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
   const icon = props.iconLink
     ? props.iconLink
     : props.icon
-      ? `https://ql.dotlic.ru/api/media/${props.icon}`
+      ? `${ApiBaseUrl}/api/media/${props.icon}`
     : null
   return (
     <div className={`flex mx-auto max-w-screen-xl w-full ${props.align} ${props.class}`}>

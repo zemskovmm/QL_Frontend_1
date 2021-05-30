@@ -9,6 +9,7 @@ import {ButtonFormBlock} from "../ButtonFormBlock/buttonFormBlock";
 
 import ArrowPict from '../../assets/img/arrow-left.svg'
 import ClosePict from '../../assets/img/close.svg'
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 export interface FeedbackSliderBlockElement {
   title: string;
@@ -53,7 +54,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
           containerClass={styles.container}
         >
          {props.elements.map((feedback, ind) => <div key={ind}>
-             <img src={feedback.avatar ? `https://ql.dotlic.ru/api/media/${feedback.avatar}` : ''} alt="" />
+             <img src={feedback.avatar ? `${ApiBaseUrl}/api/media/${feedback.avatar}` : ''} alt="" />
              <div>
                <h3 className="font-bold">{feedback.name}</h3>
                <h4>{feedback.about}</h4>
@@ -69,7 +70,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
       <div className={styles.overlay} onClick={()=>setShowModal(false)}/>
       <div className={styles.item}>
         <div>
-          <img src={props.elements[curSlide].avatar ? `https://ql.dotlic.ru/api/media/${props.elements[curSlide].avatar}` : ''} alt="" />
+          <img src={props.elements[curSlide].avatar ? `${ApiBaseUrl}/api/media/${props.elements[curSlide].avatar}` : ''} alt="" />
           <div>
             <h3 className="font-bold">{props.elements[curSlide].name}</h3>
             <h4>{props.elements[curSlide].about}</h4>

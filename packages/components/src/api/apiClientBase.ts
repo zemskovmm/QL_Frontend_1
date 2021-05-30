@@ -37,6 +37,7 @@ export class ApiClientBase {
         return <T>kostylAnswer
       }
     }
+    console.log(await res.text());
     throw new Error("Network error");
   }
 }

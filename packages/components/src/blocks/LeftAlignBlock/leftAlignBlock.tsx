@@ -1,6 +1,7 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./leftAlignBlock.module.css";
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 export interface LeftAlignBlockElement {
   elements: { title: string; text: string; img: number | null }[];
@@ -15,7 +16,7 @@ export const LeftAlignBlock = (props: LeftAlignBlockElement) => {
             {props.elements.map((el) => (
               <div className={styles.leftAlignBlock__item}>
                 <div className={styles.leftAlignBlock__icon}>
-                  <img src={`https://ql.dotlic.ru/api/media/${el.img}`} alt="" />
+                  <img src={`${ApiBaseUrl}/api/media/${el.img}`} alt="" />
                 </div>
                 <div className={`flex flex-col`}>
                   <div className={styles.leftAlignBlock__itemTitle}>{el.title}</div>

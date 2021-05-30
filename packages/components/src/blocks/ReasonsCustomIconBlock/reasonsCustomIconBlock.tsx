@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsCustomIconBlock.module.css";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 export interface ReasonsCustomIconBlockElement {
   header: string;
@@ -22,7 +23,7 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
             {props.elements.map((el) => (
               <div className={styles.reasonsCustomIconBlock__item}>
                 <div className={styles.reasonsCustomIconBlock__icon}>
-                  <img src={`https://ql.dotlic.ru/api/media/${el.image}`} alt="" />
+                  <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
                 </div>
                 <div className={`flex flex-col`}>
                   <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
