@@ -15,7 +15,7 @@ export interface ReasonsCustomIconBlockElement {
 export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => {
   // const [isOpen, Open] = useState(false);
   return (
-    <div className="py-2">
+    <div className="py-12">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.reasonsCustomIconBlock}>
           <div className={styles.reasonsCustomIconBlock__title}>{props.header}</div>

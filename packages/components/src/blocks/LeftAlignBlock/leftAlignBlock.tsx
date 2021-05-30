@@ -9,7 +9,7 @@ export interface LeftAlignBlockElement {
 
 export const LeftAlignBlock = (props: LeftAlignBlockElement) => {
   return (
-    <div className="py-28">
+    <div className="py-12">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.leftAlignBlock}>
           <div className={styles.leftAlignBlock__list}>

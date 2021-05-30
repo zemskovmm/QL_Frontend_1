@@ -12,7 +12,7 @@ export interface ArticleBeforeImageBlockElement {
 
 export const ArticleBeforeImageBlock = (props: ArticleBeforeImageBlockElement) => {
   return (
-    <div className="py-2">
+    <div className="py-12">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.articleBeforeImageBlock}>
           <div className={styles.articleBeforeImageBlock__title}>{props.title}</div>

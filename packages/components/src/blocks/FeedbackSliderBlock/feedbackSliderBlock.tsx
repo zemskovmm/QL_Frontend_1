@@ -36,7 +36,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
   };
 
   return (
-    <section className="py-20">
+    <div className="py-12">
       <h2 className={cn(styles.title,"max-w-screen-xl mx-auto w-full font-bold")}>{props.title}</h2>
       <div className="relative">
        <Carousel
@@ -79,7 +79,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
         <img className={styles.close} src={ClosePict} onClick={()=>setShowModal(false)}/>
       </div>
     </div>}
-    </section>
+    </div>
   );
 };
 

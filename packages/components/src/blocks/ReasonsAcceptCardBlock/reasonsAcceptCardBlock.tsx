@@ -16,7 +16,7 @@ export interface ReasonsAcceptCardBlockElement {
 
 export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => {
   return (
-    <div className="py-2">
+    <div className="py-12">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.reasonsAcceptCardBlock}>
           <div className={styles.reasonsAcceptCardBlock__title}>{props.header}</div>

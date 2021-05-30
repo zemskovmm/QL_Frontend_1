@@ -66,8 +66,8 @@
 .dots {
   height: 40px;
   width: 100%;
-  left: 50%;
-
+  left: 50% !important;
+  justify-content: flex-start !important;
   transform: translateX(-50%);
 }
 

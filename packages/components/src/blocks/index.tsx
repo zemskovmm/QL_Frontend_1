@@ -72,13 +72,13 @@ const RowPresenter = (props: PageBlockRowDto) => {
       {props.blocks.map((cell, i) => {
         if (cell.type !== "breadcrumbsBlock") {
           return (
-            <div
+            <section
               key={i}
               className={`inline-block ${grid["col-" + cell.size]} box-border`}
-              style={{ verticalAlign: "top", maxWidth: props.maxWidth }}
+              style={{ verticalAlign: "top", maxWidth: props.maxWidth ? props.maxWidth :'100%' }}
             >
               <BlockPresenter blockType={cell.type} blockData={cell.data} />
-            </div>
+            </section>
           );
         } else {
           return <BlockPresenter blockType={cell.type} blockData={cell.data} />;

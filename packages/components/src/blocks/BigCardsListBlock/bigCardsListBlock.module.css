@@ -1,7 +1,6 @@
 ﻿.bigCardsListBlock__container {
   display: flex;
   flex-direction: column;
-  padding: 69px 0 40px 0;
   width: 100%;
 }
 
@@ -14,9 +13,16 @@
 .bigCardsListBlock__list {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .bigCardsListBlock__list .bigCard {
+  max-width: 370px;
+  margin-bottom: 30px;
+}
+
+
+.bigCardsListBlock__list .bigCard:last-of-type {
   max-width: 370px;
   margin-bottom: 30px;
 }
