@@ -160,6 +160,30 @@ export class PageEditorRowStore {
     this.editor.rows = this.editor.rows.filter((x) => x != this);
   }
 
+  @computed get canMoveUp(): boolean {
+    return this.editor.rows.indexOf(this) > 0;
+  }
+
+  @computed get canMoveDown(): boolean {
+    const ind = this.editor.rows.indexOf(this);
+    return ind >= 0 && ind < this.editor.rows.length - 1;
+  }
+
+  moveTo(newIndex: number) {
+    const ind = this.editor.rows.indexOf(this);
+    const swapWith = this.editor.rows[newIndex];
+    this.editor.rows[ind] = swapWith;
+    this.editor.rows[newIndex] = this;
+  }
+
+  @action moveUp() {
+    this.moveTo(this.editor.rows.indexOf(this) - 1);
+  }
+
+  @action moveDown() {
+    this.moveTo(this.editor.rows.indexOf(this) + 1);
+  }
+
   serialize(): PageBlockRowDto {
     return {
       maxWidth: this.maxWidth,
@@ -229,8 +253,8 @@ export class PageEditorStore extends RequestTracking {
     }
   }
 
-  @action addLang(lang: string) {
-    this.langs[lang] = new PageLanguageEditorStore({
+  @action addLang(lang: string, copyFrom?: string) {
+    const initialData = {
       url: "url",
       title: "Title",
       pageData: {
@@ -248,7 +272,10 @@ export class PageEditorStore extends RequestTracking {
           },
         ],
       },
-    });
+    };
+    this.langs[lang] = new PageLanguageEditorStore(
+      copyFrom != null && this.langs[copyFrom] != null ? this.langs[copyFrom].serialize() : initialData
+    );
   }
 
   serialize(): AdminPageDto {
