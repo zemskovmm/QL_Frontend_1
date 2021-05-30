@@ -4,6 +4,7 @@ import {FilesListDto} from "src/interfaces/FilesDto";
 import {FilesApi} from "src/clients/filesApiClient";
 import {useObserver} from "mobx-react";
 import {AdminButton} from "src/components/common/AdminButton";
+import {ApiBaseUrl} from "@project/components/src/api/apiClientBase";
 
 interface IFilesStore {
   current: FilesListDto,
@@ -163,7 +164,7 @@ export const FileLoader = ({selectMedia}:IFileLoader) => {
                 <span onClick={()=>selectMedia ? selectMedia(id) : {}} className="cursor-pointer">
                   {title}
                 </span>
-                <img onClick={()=>selectMedia ? selectMedia(id) : {}} className="mr-2 cursor-pointer" src={`https://ql.dotlic.ru/api/media/scaled/${id}?dimension=128`} alt=""/>
+                <img onClick={()=>selectMedia ? selectMedia(id) : {}} className="mr-2 cursor-pointer" src={`${ApiBaseUrl}/api/media/scaled/${id}?dimension=128`} alt=""/>
               </div>
             ))}
           </>

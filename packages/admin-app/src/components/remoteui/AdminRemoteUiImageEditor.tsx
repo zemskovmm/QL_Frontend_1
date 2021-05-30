@@ -4,6 +4,7 @@ import {useObserver} from "mobx-react";
 import {IRemoteUiData} from "@kekekeks/remoteui/src";
 import {FileLoader} from "src/components/fileLoader/FileLoader";
 import {AdminButton} from "src/components/common/AdminButton";
+import {ApiBaseUrl} from "@project/components/src/api/apiClientBase";
 
 
 export class AdminRemoteUiImageFieldStore implements IRemoteUiData {
@@ -30,7 +31,7 @@ export const AdminRemoteUiImageFieldEditor = (props: { store: AdminRemoteUiImage
     <br />
     {props.store.value
       ? <div className="flex justify-between items-center w-full">
-          <img className="mr-2" src={`https://ql.dotlic.ru/api/media/scaled/${props.store.value}?dimension=128`} alt="file"/>
+          <img className="mr-2" src={`${ApiBaseUrl}/api/media/scaled/${props.store.value}?dimension=128`} alt="file"/>
         <AdminButton color={"danger"} onClick={()=>{props.store.value=null}}>
           remove image
         </AdminButton>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./articleBeforeImageBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 export interface ArticleBeforeImageBlockElement {
   title: string;
@@ -18,7 +19,7 @@ export const ArticleBeforeImageBlock = (props: ArticleBeforeImageBlockElement) =
           <div className={styles.articleBeforeImageBlock__text} dangerouslySetInnerHTML={{ __html: props.text }} />
           <img
             className={styles.articleBeforeImageBlock__img}
-            src={`https://ql.dotlic.ru/api/media/${props.img}`}
+            src={`${ApiBaseUrl}/api/media/${props.img}`}
             alt=""
           />
         </div>

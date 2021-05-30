@@ -52,10 +52,10 @@ const PageEditorCell = (props: { store: PageEditorCellStore }) => {
 const PageEditorRow = (props: { store: PageEditorRowStore }) => {
   return useObserver(() => (
     <div className="bg-gray-100 pt-2 pb-2">
-      <table style={{ width: "100%" }}>
-        <tbody>
-          <tr>
-            <td style={{ width: "100%" }} className={`p-4`}>
+      <div style={{ width: "100%" }}>
+        <div>
+          <div>
+            <div style={{ width: "100%" }} className={`p-4`}>
               <div className={`flex mb-3`}>
                 <label className={`flex flex-col mr-6`}>
                   <span className={`mb-3`}>MaxWidth</span>
@@ -91,15 +91,15 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   </AdminButton>
                 </div>
               </div>
-            </td>
+            </div>
             <td style={{ width: "0%", verticalAlign: "top" }}>
               <AdminButton color={"danger"} onClick={() => props.store.remove()}>
                 X
               </AdminButton>
             </td>
-          </tr>
-        </tbody>
-      </table>
+          </div>
+        </div>
+      </div>
     </div>
   ));
 };

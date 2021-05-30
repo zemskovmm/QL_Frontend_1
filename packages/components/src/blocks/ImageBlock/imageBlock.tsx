@@ -2,6 +2,7 @@ import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./buttonFormBlock.module.css";
 import cn from "classnames";
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 export interface ImageBlockElement {
   image: number | null;
@@ -12,7 +13,7 @@ export const ImageBlock = (props: ImageBlockElement) => {
 
   return (
     <div className={`flex w-full ${props.align}`} >
-        {props.image && <img src={`https://ql.dotlic.ru/api/media/${props.image}`} alt="" />}
+        {props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./imgAndTextEditorBlock.module.css";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
+import {ApiBaseUrl} from "../../api/apiClientBase";
 
 export interface ImgAndTextEditorBlockElement {
   align: boolean;
@@ -29,7 +30,7 @@ export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
             {props.showButton && <ButtonFormBlock class={`mt-6`} name={props.textButton} align={`justify-start`} />}
           </div>
           <img
-            src={`https://ql.dotlic.ru/api/media/${props.img}`}
+            src={`${ApiBaseUrl}/api/media/${props.img}`}
             style={{ maxWidth: props.imgWidth }}
             alt=""
             className={styles.imgAndTextEditorBlock__img}
