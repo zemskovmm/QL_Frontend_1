@@ -1,9 +1,9 @@
-import {IRemoteUiData} from "@kekekeks/remoteui/src";
-import { observable} from "mobx";
+import { IRemoteUiData } from "@kekekeks/remoteui/src";
+import { observable } from "mobx";
 import Draft, { EditorState } from "draft-js";
 import { stateFromHTML } from "draft-js-import-html";
 import { stateToHTML } from "draft-js-export-html";
-import React, {lazy, Suspense, useState} from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { useObserver } from "mobx-react";
 import styles from "src/components/remoteui/AdminRemoteUiHtmlEditor.module.css";
 import { PageBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
@@ -18,12 +18,12 @@ export class AdminRemoteUiRowsStore implements IRemoteUiData {
   @observable editor: PageRowsEditorStore;
 
   constructor(rows: PageBlockRowDto[]) {
-    if(rows == null) rows = [];
+    if (rows == null) rows = [];
     this.editor = new PageRowsEditorStore(rows);
   }
 
   getData(): any {
-    return this.editor.rows.map((r)=> r.serialize());
+    return this.editor.rows.map((r) => r.serialize());
   }
 }
 

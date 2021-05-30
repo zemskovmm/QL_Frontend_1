@@ -22,7 +22,7 @@ yarn-error.log*
 
 # vercel
 .vercel
-.idea.env.production.local
+.idea
 
 core
 core.*
