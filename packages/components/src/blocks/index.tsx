@@ -21,6 +21,7 @@ import { BreadcrumbsBlockInfo } from "./BreadcrumbsBlock/breadcrumbsBlock";
 import { TitleAndCallBackBlockInfo } from "./TitleAndCallBackBlock/titleAndCallBackBlock";
 import { ImgAndTextEditorBlockInfo } from "./ImgAndTextEditorBlock/imgAndTextEditorBlock";
 import { LeftTabsRightContentBlockInfo } from "./LeftTabsRightContentBlock/LeftTabsRightContentBlock";
+import { FeedbackSliderBlockInfo } from "./FeedbackSliderBlock/feedbackSliderBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -42,6 +43,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ImgAndTextEditorBlockInfo,
   LeftTabsRightContentBlockInfo,
   GoogleMapBlockInfo,
+  FeedbackSliderBlockInfo
 ];
 
 export interface IComponentHost {

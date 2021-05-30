@@ -7,6 +7,7 @@ import { ComponentHostContext } from "../index";
 
 export interface ButtonFormBlockElement {
   name: string;
+  iconLink?: string;
   icon?: number | null | string;
   link?: string;
   align: string;
@@ -15,12 +16,23 @@ export interface ButtonFormBlockElement {
 
 export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
   const cl = useContext(ComponentHostContext);
+  const icon = props.iconLink
+    ? props.iconLink
+    : props.icon
+      ? `https://ql.dotlic.ru/api/media/${props.icon}`
+    : null
   return (
     <div className={`flex mx-auto max-w-screen-xl w-full ${props.align} ${props.class}`}>
-      <button type={"button"} className={styles.button} onClick={() => cl?.showContactUsForm()}>
-        {props.icon && <img src={`https://ql.dotlic.ru/api/media/${props.icon}`} alt="" />}
-        <span>{props.name}</span>
-      </button>
+      {props.link
+        ? <a type={"button"} className={styles.button} href={props.link}>
+          {icon  && <img src={icon} alt="" />}
+          <span>{props.name}</span>
+        </a>
+        : <button type={"button"} className={styles.button} onClick={() => cl?.showContactUsForm()}>
+          {icon && <img src={icon} alt="" />}
+          <span>{props.name}</span>
+        </button>
+      }
     </div>
   );
 };
@@ -31,6 +43,7 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
   renderer: ButtonFormBlock,
   initialData: {
     name: "string",
+    iconLink: "string",
     icon: null,
     link: "string",
     align: "string",
@@ -41,6 +54,11 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
         id: "name",
         type: "String",
         name: "name",
+      },
+      {
+        id: "iconLink",
+        name: "IconLink",
+        type: "string",
       },
       {
         id: "icon",

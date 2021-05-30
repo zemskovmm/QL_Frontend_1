@@ -1,0 +1,142 @@
+.container {
+  padding-bottom: 40px;
+  overflow-y: visible;
+}
+
+
+.item > div {
+  padding: 30px;
+  width: 860px;
+  height: 245px;
+  margin: 0 auto;
+  background: #F9FAFD;
+  border-radius: 6px;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.item > div > img {
+  flex-shrink: 0;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-right: 33px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.item h3 {
+  line-height: 144%;
+  font-size: 1.125rem;
+  margin-bottom: 6px;
+}
+
+
+.item h4 {
+  line-height: 200%;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+}
+
+.item span {
+  font-size: 0.875rem;
+  line-height: 150%;
+  color: #567DD0;
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(75, 116, 205, 0.6);
+}
+
+.item p {
+  font-size: 1rem;
+  line-height: 150%;
+  color: #373737;
+  margin-bottom: 10px;
+}
+
+:global(.react-multi-carousel-item--active) > div  {
+  opacity: 1 !important;
+}
+
+.readall {
+  margin-top: 10px;
+}
+
+.dots {
+  height: 40px;
+  width: 100%;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+.dots li {
+  display: flex;
+}
+
+.dots li button {
+  width: 6px;
+  height: 6px;
+  margin: 2px 7px;
+  background: rgba(168, 181, 204, 0.3);
+  border: none;
+  border-radius: 3px;
+  outline: none;
+}
+
+.dots li:global(.react-multi-carousel-dot--active) button {
+  height: 9px;
+  background: #FF6768;
+}
+
+
+
+.title {
+  font-size: 1.875rem;
+  line-height: 140%;
+  color: #373737;
+  margin-bottom: 40px;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4000;
+}
+
+.modal .item > div {
+  opacity: 1 !important;
+  height: auto !important;
+  z-index: 4002;
+  position: relative;
+  max-height: 80vh;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  z-index: 4001;
+}
+
+.modal .item {
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 4003;
+}
