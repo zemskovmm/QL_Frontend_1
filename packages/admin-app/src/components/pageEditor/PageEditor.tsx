@@ -59,22 +59,52 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
           <div>
             <div style={{ width: "100%" }} className={`p-4`}>
               <div className={`flex mb-3`}>
-                <label className={`flex flex-col mr-6`}>
-                  <span className={`mb-3`}>MaxWidth</span>
-                  <input
-                    type={"text"}
-                    onChange={(e) => (props.store.maxWidth = e.target.value)}
-                    value={props.store.maxWidth}
-                  />
-                </label>
-                <label className={`flex flex-col`}>
-                  <span className={`mb-3`}>backGround</span>
-                  <input
-                    type={"text"}
-                    onChange={(e) => (props.store.backGround = e.target.value)}
-                    value={props.store.backGround}
-                  />
-                </label>
+                <div className={`flex flex-col mr-6`}>
+                  <span>MaxWidth</span>
+                  <label className={`flex items-center mr-6`}>
+                    <input
+                      type={"radio"}
+                      name={"width"}
+                      onChange={(e) => (props.store.maxWidth = e.target.value)}
+                      value={"100%"}
+                      checked={props.store.maxWidth === "100%"}
+                    />
+                    <span className={`ml-3`}>100%</span>
+                  </label>
+                  <label className={`flex items-center mr-6`}>
+                    <input
+                      type={"radio"}
+                      name={"width"}
+                      onChange={(e) => (props.store.maxWidth = e.target.value)}
+                      value={"1170px"}
+                      checked={props.store.maxWidth === "1170px"}
+                    />
+                    <span className={`ml-3`}>1170px</span>
+                  </label>
+                </div>
+                <div className={`flex flex-col`}>
+                  <span>backGround</span>
+                  <label className={`flex items-center mr-6`}>
+                    <input
+                      type={"radio"}
+                      name={"bg"}
+                      onChange={(e) => (props.store.backGround = e.target.value)}
+                      value={`#fff`}
+                      checked={props.store.backGround === "#fff"}
+                    />
+                    <span className={`ml-3`}>White</span>
+                  </label>
+                  <label className={`flex items-center mr-6`}>
+                    <input
+                      type={"radio"}
+                      name={"bg"}
+                      onChange={(e) => (props.store.backGround = e.target.value)}
+                      value={`#F9FAFD`}
+                      checked={props.store.backGround === "#F9FAFD"}
+                    />
+                    <span className={`ml-3`}>White-Gray</span>
+                  </label>
+                </div>
               </div>
               <div>
                 {props.store.cells.map((cell, i) => (
