@@ -1,0 +1,119 @@
+.legacy-web-color {
+  font-size: 14px;
+  border-collapse: collapse;
+  text-align: center;
+  border: 1px solid #d8d8d8;
+  width: 100%;
+  font-weight: bold;
+  margin: 30px 0 5px;
+}
+
+.legacy-web-color tr:first-of-type td {
+  color: #213F93;
+  text-transform: uppercase;
+}
+.legacy-web-color th, .legacy-web-color td:first-child, .legacy-web-color tr:first-child td {
+  padding: 5px 20px;
+}
+
+.legacy-web-color tr:nth-child(even) td {
+  background: #d9e2f3;
+}
+
+.legacy-web-color th, .legacy-web-color  td {
+  border-style: solid;
+  border-width: 0;
+  border-color: white;
+  border-left: 1px solid #d8d8d8;
+}
+
+.legacy-web-color p {
+  line-height: 1.42857143 !important;
+}
+
+.legacy-web-color p {
+  margin: 5px 0;
+}
+
+
+.legacy-web-color td:first-of-type {
+  text-align: left;
+}
+
+.legacy-web-color p.legacy-web-glyphiconok {
+  font-size: 20px;
+  color: #56e23e;
+  margin: 0;
+  text-align: center;
+  /* padding: 0; */
+}
+
+.legacy-web-color p a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.legacy-web-cost_step_arrow {
+  margin-right: 35px;
+}
+.legacy-web-cost_step {
+  border: 2px solid #01359a;
+  border-radius: 10px;
+  padding: 0 25px;
+  height: 80px;
+  width: 240px;
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: top;
+  justify-content: center;
+  position: relative;
+  color: #01359a;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.legacy-web-cost_step_arrow:after {
+  content: "";
+  position: absolute;
+  right: -25px;
+  top: 26px;
+  width: 30px;
+  height: 30px;
+  /* display: inline-block; */
+  /* transition: .25s; */
+  border: 2px solid grey;
+  border-top: 0;
+  border-right: 0;
+  transform: rotate(
+    -135deg
+  );
+}
+
+h2.legacy-web-article_icon {
+  font-size: 16px !important;
+  color: #01359a !important;
+  text-align: left !important;
+  margin: 10px 0 0 0 !important;
+}
+
+.h2.legacy-web-article_icon + ul {
+  margin-left: 30px;
+}
+
+.h2.legacy-web-article_icon + ul {
+  list-style: none;
+}
+
+.h2.legacy-web-article_icon + ul li {
+  padding-left: 1em;
+  text-indent: -.7em;
+}
+
+h2.legacy-web-article_icon + ul li::before {
+   content: "• ";
+   color: rgb(1, 53, 154);
+ }
