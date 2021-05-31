@@ -55,6 +55,22 @@ function navigateToCatalog(
   } else if (entityType == "housing") window.location.href = housingLangs[lang] + "?" + buildQueryString(query);
 }
 
+const allTranslate: { [key: string]: string } = {
+  ru: "Любой",
+  cn: "任何",
+  fr: "Quelconque",
+  en: "Any",
+  esp: "cualquier",
+};
+
+const searchTranslate: { [key: string]: string } = {
+  ru: "Найти",
+  cn: "搜索",
+  fr: "Rechercher",
+  en: "Search",
+  esp: "Buscar",
+};
+
 export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
   const router = useRouter();
   const appliedFilters: CatalogWidgetFilter[] = [];
@@ -78,7 +94,7 @@ export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
               setSelectedName({ ...selectedName, [filter.identifier]: value });
               setSelected({ ...selected, [filter.identifier]: String(ind) });
             }}
-            options={[filter.name, ...filter.options.map(({ name }) => name)]}
+            options={[{ name: allTranslate[cl?.lang ?? "en"], id: 0 }, ...filter.options]}
           />
         </div>
       ))}
@@ -90,7 +106,7 @@ export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
           navigateToCatalog(cl?.lang ?? "en", router, props.entityType, selected);
         }}
       >
-        search
+        {searchTranslate[cl?.lang ?? "en"]}
       </a>
     </div>
   );
