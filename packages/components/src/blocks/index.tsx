@@ -43,7 +43,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   ImgAndTextEditorBlockInfo,
   LeftTabsRightContentBlockInfo,
   GoogleMapBlockInfo,
-  FeedbackSliderBlockInfo
+  FeedbackSliderBlockInfo,
 ];
 
 export interface IComponentHost {
@@ -68,14 +68,17 @@ export const BlockPresenter = (props: { blockType: string; blockData: any }) => 
 
 const RowPresenter = (props: PageBlockRowDto) => {
   return (
-    <div style={{ background: props.background }} className={`relative`}>
+    <div
+      style={{ background: props.background, maxWidth: props.maxWidth ? props.maxWidth : "100%" }}
+      className={`relative mx-auto`}
+    >
       {props.blocks.map((cell, i) => {
         if (cell.type !== "breadcrumbsBlock") {
           return (
             <section
               key={i}
               className={`inline-block ${grid["col-" + cell.size]} box-border`}
-              style={{ verticalAlign: "top", maxWidth: props.maxWidth ? props.maxWidth :'100%', backgroundColor: props.background ? props.background : '' }}
+              style={{ verticalAlign: "top", backgroundColor: props.background ? props.background : "" }}
             >
               <BlockPresenter blockType={cell.type} blockData={cell.data} />
             </section>
