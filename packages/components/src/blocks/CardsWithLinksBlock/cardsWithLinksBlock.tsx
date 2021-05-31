@@ -12,8 +12,8 @@ export interface CardsWithLinksBlockElement {
 
 export const CardsWithLinksBlock = (props: CardsWithLinksBlockElement) => {
   return (
-    <div className="py-2">
-      <div className="flex justify-between mx-auto max-w-screen-xl w-full">
+    <div className="py-12">
+      <div className="px-10 flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.cardsWithLinksBlock}>
           <div className={styles.cardsWithLinksBlock__head}>
             <h2 className={styles.cardsWithLinksBlock__title} dangerouslySetInnerHTML={{ __html: props.title }} />

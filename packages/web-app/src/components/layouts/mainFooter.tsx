@@ -61,7 +61,7 @@ export const MainFooter = (props: FooterDataDto) => {
             <ContactUsFormButton footer={true}>
               <button className={styles.footer_writeus}>{props[lang].writeUs}</button>
             </ContactUsFormButton>
-            // <ButtonFormBlock icon={Mail} class={`w-full`} name={props[lang].writeUs} align={`flex-center`} />
+            // <ButtonFormBlock icon={Mail} myClass={`w-full`} name={props[lang].writeUs} align={`flex-center`} />
           )}
           <div className={styles.footer_social}>
             {props[lang].socials.map((link, i) =>

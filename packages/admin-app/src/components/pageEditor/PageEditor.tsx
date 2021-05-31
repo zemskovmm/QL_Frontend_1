@@ -32,7 +32,7 @@ const PageEditorCell = (props: { store: PageEditorCellStore }) => {
     <div>
       <div className="bg-white">
         <div className="relative">
-          <div className={`py-10`}>
+          <div className={`py-12`}>
             {s.blockData == null ? null : <BlockPresenter blockType={s.blockType} blockData={s.blockData} />}
           </div>
           <div className="absolute top-0 right-0">

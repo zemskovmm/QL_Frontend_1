@@ -10,21 +10,39 @@
   position: relative;
   padding-left: 40px;
   padding-right: 40px;
+  width: 100%;
+}
+
+.header_offer:first-of-type {
+  margin-left: -40px;
+  text-align: left;
+  flex-shrink: 2;
+}
+
+
+.header_offer:last-of-type{
+  margin-right: -40px;
+  text-align: right;
+  flex-shrink: 2;
 }
 
 .header_offer:hover {
   color: var(--color-hover);
 }
 
-.header_offer + .header_offer:before {
+.header_offer:after {
   content: '';
   height: 60px;
   width: 1px;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   background: linear-gradient(to top, #F9FAFD 0, #C9D5F0 50%, #F9FAFD 100%);
+}
+
+.header_offer:last-of-type:after {
+  display: none;
 }
 
 .footer_menu {

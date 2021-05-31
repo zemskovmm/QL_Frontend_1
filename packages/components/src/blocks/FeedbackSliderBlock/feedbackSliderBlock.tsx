@@ -36,8 +36,8 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
   };
 
   return (
-    <section className="py-20">
-      <h2 className={cn(styles.title,"max-w-screen-xl mx-auto w-full font-bold")}>{props.title}</h2>
+    <div className="py-12">
+      <h2 className={cn(styles.title,"px-10 max-w-screen-xl mx-auto w-full font-bold")}>{props.title}</h2>
       <div className="relative">
        <Carousel
           responsive={responsive}
@@ -63,7 +63,9 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
            </div>
          )}
         </Carousel>
-      <ButtonFormBlock name={props.allFeedbacksTitle} link={props.allFeedbacksLink} iconLink={ArrowPict} align={"justify-end"} />
+        <div className="px-10">
+          <ButtonFormBlock name={props.allFeedbacksTitle} link={props.allFeedbacksLink} iconLink={ArrowPict} align={"justify-end"} />
+        </div>
     </div>
     {isShowModal && <div className={cn(styles.modal,"flex")}>
       <div className={styles.overlay} onClick={()=>setShowModal(false)}/>
@@ -79,7 +81,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
         <img className={styles.close} src={ClosePict} onClick={()=>setShowModal(false)}/>
       </div>
     </div>}
-    </section>
+    </div>
   );
 };
 

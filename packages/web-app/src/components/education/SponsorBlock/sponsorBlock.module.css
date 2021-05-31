@@ -12,7 +12,6 @@
 .sponsorBlock__container {
   display: flex;
   flex-direction: column;
-  padding: 69px 0 40px 0;
 }
 
 .sponsorBlock__head {

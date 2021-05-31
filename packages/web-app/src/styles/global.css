@@ -25,6 +25,10 @@ body {
   color: var(--color-primary);
 }
 
+#__next > div:first-of-type > div:first-of-type > div:first-of-type > section:first-of-type > div:first-of-type {
+  padding-top: 80px !important;
+}
+
 img {
   object-fit: contain;
 }

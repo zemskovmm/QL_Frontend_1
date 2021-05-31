@@ -26,11 +26,11 @@ const LeftTabsRightContentBlock = ({ tabs, revers }: TabControlBlockProps) => {
   const effectiveActiveTab = Math.min(activeTab, tabs.length - 1);
 
   return (
-    <div className={`flex w-full ${revers ? "flex-row-reverse" : ""}`}>
+    <div className={`flex w-full mx-auto py-12 max-w-screen-xl ${revers ? "flex-row-reverse" : ""}`}>
       <div className={cn(styles.content, revers ? styles.contentRight : styles.contentLeft)}>
         <div>{effectiveActiveTab < 0 ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}</div>
       </div>
-      <div className={`flex flex-col w-full ml-auto ${styles.tab__elementList}`}>
+      <div className={`flex pr-10 flex-col w-full ml-auto ${styles.tab__elementList}`}>
         {tabs.map((tab, ind) => (
           <button
             type={"button"}

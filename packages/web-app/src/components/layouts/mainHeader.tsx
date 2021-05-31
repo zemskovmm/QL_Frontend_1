@@ -73,7 +73,7 @@ export const MainHeader = (props: MainHeaderProps) => {
           </div>
         </nav>
       </div>
-      <div className="flex justify-center items-center max-w-screen-xl w-full my-0 mx-auto py-1 px-10">
+      <div className="flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-1 px-10">
         {headerData[lang].offers.map(({ url, title }, i) => (
           <Link key={i + "headLink"} href={url}>
             <a className={cn(styles.header_offer, "py-5 whitespace-nowrap text-center")}>{title}</a>
