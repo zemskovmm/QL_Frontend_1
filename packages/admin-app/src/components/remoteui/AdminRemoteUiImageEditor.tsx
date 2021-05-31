@@ -5,6 +5,8 @@ import {IRemoteUiData} from "@kekekeks/remoteui/src";
 import {FileLoader} from "src/components/fileLoader/FileLoader";
 import {AdminButton} from "src/components/common/AdminButton";
 import {ApiBaseUrl} from "@project/components/src/api/apiClientBase";
+import {AdminOverlayDialog} from "../common/AdminOverlayDialog";
+import {PageRowsEditor} from "../pageEditor/PageEditor";
 
 
 export class AdminRemoteUiImageFieldStore implements IRemoteUiData {
@@ -40,8 +42,10 @@ export const AdminRemoteUiImageFieldEditor = (props: { store: AdminRemoteUiImage
           Set image
         </AdminButton>
     }
-    {isOpen && <Suspense fallback={<div>Loading...</div>}>
+    {isOpen && <AdminOverlayDialog cancel={() => setIsOpen(false)}>
+      <div style={{ width: "80vw", height: "80vh", overflow: "scroll" }}>
         <FileLoader selectMedia={(id)=>{props.store.value=id;setIsOpen(false)}} />
-    </Suspense>}
+      </div>
+    </AdminOverlayDialog>}
   </>));
 }
