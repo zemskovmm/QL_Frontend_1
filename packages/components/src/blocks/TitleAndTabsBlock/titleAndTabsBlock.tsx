@@ -45,19 +45,35 @@ export const TitleAndTabsBlockInfo: TypedBlockTypeInfo<TitleAndTabsBlockElement>
             possibleValues: [
               {
                 id: "city",
-                name: "city",
+                name: "City",
               },
               {
                 id: "instruction-language",
-                name: "instruction-language",
+                name: "Instruction-language",
               },
               {
                 id: "degree",
-                name: "degree",
+                name: "Degree",
               },
               {
                 id: "placement",
                 name: "Placement",
+              },
+              {
+                id: "accreditation",
+                name: "Accreditation",
+              },
+              {
+                id: "certification",
+                name: "Certification",
+              },
+              {
+                id: "price",
+                name: "Price",
+              },
+              {
+                id: "specialty-category",
+                name: "Specialty-category",
               },
             ],
             name: "filter",
