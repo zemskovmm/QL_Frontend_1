@@ -16,7 +16,7 @@ export interface ImgAndTextEditorBlockElement {
 export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
   return (
     <div className="py-12">
-      <div className="flex justify-center mx-auto max-w-screen-xl w-full">
+      <div className="px-10 flex justify-center mx-auto max-w-screen-xl w-full">
         <div className={`${styles.imgAndTextEditorBlock} w-full ${props.align ? "flex-row-reverse" : ""}`}>
           <div
             className={`${styles.imgAndTextEditorBlock__content} ${
@@ -27,7 +27,7 @@ export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
               className={styles.imgAndTextEditorBlock__contentText}
               dangerouslySetInnerHTML={{ __html: props.text }}
             />
-            {props.showButton && <ButtonFormBlock class={`mt-6`} name={props.textButton} align={`justify-start`} />}
+            {props.showButton && <ButtonFormBlock myClass={`mt-6`} name={props.textButton} align={`justify-start`} />}
           </div>
           <img
             src={`${ApiBaseUrl}/api/media/${props.img}`}

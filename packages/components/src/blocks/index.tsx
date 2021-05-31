@@ -75,7 +75,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
             <section
               key={i}
               className={`inline-block ${grid["col-" + cell.size]} box-border`}
-              style={{ verticalAlign: "top", maxWidth: props.maxWidth ? props.maxWidth :'100%' }}
+              style={{ verticalAlign: "top", maxWidth: props.maxWidth ? props.maxWidth :'100%', backgroundColor: props.background ? props.background : '' }}
             >
               <BlockPresenter blockType={cell.type} blockData={cell.data} />
             </section>

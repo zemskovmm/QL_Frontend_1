@@ -17,7 +17,7 @@ export interface ReasonsAcceptCardBlockElement {
 export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => {
   return (
     <div className="py-12">
-      <div className="flex justify-between mx-auto max-w-screen-xl w-full">
+      <div className="px-10 flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.reasonsAcceptCardBlock}>
           <div className={styles.reasonsAcceptCardBlock__title}>{props.header}</div>
           <div className={styles.reasonsAcceptCardBlock__list}>
@@ -40,7 +40,7 @@ export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => 
                     dangerouslySetInnerHTML={{ __html: props.textOverButton }}
                   />
                 )}
-                {props.showButton && <ButtonFormBlock name={props.textButton} class={`mt-3`} align={`flex-start`} />}
+                {props.showButton && <ButtonFormBlock name={props.textButton} myClass={`mt-3`} align={`flex-start`} />}
               </div>
             )}
           </div>

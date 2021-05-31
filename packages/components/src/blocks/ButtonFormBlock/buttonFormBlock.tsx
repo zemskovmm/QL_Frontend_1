@@ -9,10 +9,10 @@ import {ApiBaseUrl} from "../../api/apiClientBase";
 export interface ButtonFormBlockElement {
   name: string;
   iconLink?: string;
-  icon?: number | null | string;
+  icon?: number | null;
   link?: string;
   align: string;
-  class?: string;
+  myClass?: string;
 }
 
 export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
@@ -23,7 +23,7 @@ export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
       ? `${ApiBaseUrl}/api/media/${props.icon}`
     : null
   return (
-    <div className={`flex mx-auto max-w-screen-xl w-full ${props.align} ${props.class}`}>
+    <div className={`flex mx-auto max-w-screen-xl w-full ${props.align} ${props.myClass}`}>
       {props.link
         ? <a type={"button"} className={styles.button} href={props.link}>
           {icon  && <img src={icon} alt="" />}
@@ -46,8 +46,9 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
     name: "string",
     iconLink: "string",
     icon: null,
-    link: "string",
+    link: "",
     align: "string",
+    myClass: "",
   },
   definition: {
     fields: [
@@ -59,7 +60,7 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
       {
         id: "iconLink",
         name: "IconLink",
-        type: "string",
+        type: "String",
       },
       {
         id: "icon",
@@ -71,6 +72,11 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
         id: "link",
         type: "String",
         name: "link",
+      },
+      {
+        id: "myClass",
+        type: "String",
+        name: "myClass",
       },
       {
         id: "align",

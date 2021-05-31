@@ -30,7 +30,7 @@ const LeftTabsRightContentBlock = ({ tabs, revers }: TabControlBlockProps) => {
       <div className={cn(styles.content, revers ? styles.contentRight : styles.contentLeft)}>
         <div>{effectiveActiveTab < 0 ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}</div>
       </div>
-      <div className={`flex flex-col w-full ml-auto ${styles.tab__elementList}`}>
+      <div className={`flex pr-10 flex-col w-full ml-auto ${styles.tab__elementList}`}>
         {tabs.map((tab, ind) => (
           <button
             type={"button"}
