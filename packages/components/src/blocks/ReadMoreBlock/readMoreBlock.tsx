@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./readMoreBlock.module.css";
+import preview from "./preview.png";
 
 export interface ReadMoreBlockElement {
   header: string;
@@ -33,6 +34,7 @@ export const ReadMoreBlock = (props: ReadMoreBlockElement) => {
 export const ReadMoreBlockInfo: TypedBlockTypeInfo<ReadMoreBlockElement> = {
   id: "readMoreBlock",
   name: "ReadMoreBlock",
+  preview: preview,
   renderer: ReadMoreBlock,
   initialData: {
     header: "Header",

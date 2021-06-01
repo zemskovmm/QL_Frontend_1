@@ -5,6 +5,7 @@ import Tabs from "../../ui/Tabs/Tabs";
 import Search from "../../ui/search/Search";
 import { ServerCatalogWidget, CatalogWidget } from "../../ui/catalog/catalogWidget";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
+import preview from "./preview.png";
 
 enum TabsEnum {
   university,
@@ -35,6 +36,7 @@ export const TitleAndCallBackBlock = (props: TitleAndCallBackBlockElement) => {
 export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlockElement> = {
   id: "titleAndCallBackBlock",
   name: "TitleAndCallBackBlock",
+  preview: preview,
   renderer: TitleAndCallBackBlock,
   initialData: {
     title: "Title",

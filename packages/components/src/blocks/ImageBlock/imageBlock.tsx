@@ -2,7 +2,8 @@ import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./buttonFormBlock.module.css";
 import cn from "classnames";
-import {ApiBaseUrl} from "../../api/apiClientBase";
+import { ApiBaseUrl } from "../../api/apiClientBase";
+import preview from "./preview.png";
 
 export interface ImageBlockElement {
   image: number | null;
@@ -10,10 +11,9 @@ export interface ImageBlockElement {
 }
 
 export const ImageBlock = (props: ImageBlockElement) => {
-
   return (
-    <div className={`flex w-full ${props.align}`} >
-        {props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
+    <div className={`flex w-full ${props.align}`}>
+      {props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
     </div>
   );
 };
@@ -21,6 +21,7 @@ export const ImageBlock = (props: ImageBlockElement) => {
 export const ImageBlockInfo: TypedBlockTypeInfo<ImageBlockElement> = {
   id: "imageBlock",
   name: "ImageBlock",
+  preview: preview,
   renderer: ImageBlock,
   initialData: {
     image: null,
@@ -32,7 +33,7 @@ export const ImageBlockInfo: TypedBlockTypeInfo<ImageBlockElement> = {
         id: "image",
         name: "image",
         type: "Custom",
-        customType: "Image"
+        customType: "Image",
       },
       {
         id: "align",

@@ -3,6 +3,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import Tabs from "../../ui/Tabs/Tabs";
 import Search from "../../ui/search/Search";
 import { ServerCatalogWidget, CatalogWidget } from "../../ui/catalog/catalogWidget";
+import preview from "./preview.png";
 
 enum TabsEnum {
   university,
@@ -29,6 +30,7 @@ export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
 export const TitleAndTabsBlockInfo: TypedBlockTypeInfo<TitleAndTabsBlockElement> = {
   id: "titleAndTabsBlock",
   name: "TitleAndTabsBlock",
+  preview: preview,
   renderer: TitleAndTabsBlock,
   initialData: {
     title: "Title",

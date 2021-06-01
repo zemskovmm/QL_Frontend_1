@@ -1,7 +1,8 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./leftAlignBlock.module.css";
-import {ApiBaseUrl} from "../../api/apiClientBase";
+import { ApiBaseUrl } from "../../api/apiClientBase";
+import preview from "./preview.png";
 
 export interface LeftAlignBlockElement {
   elements: { title: string; text: string; img: number | null }[];
@@ -34,6 +35,7 @@ export const LeftAlignBlock = (props: LeftAlignBlockElement) => {
 export const LeftAlignBlockInfo: TypedBlockTypeInfo<LeftAlignBlockElement> = {
   id: "leftAlignBlock",
   name: "LeftAlignBlock",
+  preview: preview,
   renderer: LeftAlignBlock,
   initialData: {
     elements: [

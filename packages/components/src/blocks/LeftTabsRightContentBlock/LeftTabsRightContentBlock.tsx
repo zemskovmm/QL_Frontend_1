@@ -5,6 +5,7 @@ import styles from "./LeftTabsRightContentBlock.module.css";
 import { PageBlockRowDto } from "../../interfaces/pageSharedDto";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import { RowsPresenter } from "../index";
+import preview from "./preview.png";
 
 interface TabControlBlockTab {
   title: string;
@@ -49,6 +50,7 @@ const LeftTabsRightContentBlock = ({ tabs, revers }: TabControlBlockProps) => {
 export const LeftTabsRightContentBlockInfo: TypedBlockTypeInfo<TabControlBlockProps> = {
   id: "leftTabsRightContentBlock",
   name: "LeftTabsRightContentBlock",
+  preview: preview,
   renderer: LeftTabsRightContentBlock,
   initialData: {
     tabs: [

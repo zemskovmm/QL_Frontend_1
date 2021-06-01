@@ -3,6 +3,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import { ComponentHostContext } from "../index";
 import style from "./breadcrumbsBlock.module.css";
 import icon from "./arrow-left.svg";
+import preview from "./preview.png";
 
 export interface BreadcrumbsBlockElement {
   items: { name: string; link: string }[];
@@ -26,6 +27,7 @@ export const BreadcrumbsBlock = (props: BreadcrumbsBlockElement) => {
 export const BreadcrumbsBlockInfo: TypedBlockTypeInfo<BreadcrumbsBlockElement> = {
   id: "breadcrumbsBlock",
   name: "BreadcrumbsBlock",
+  preview: preview,
   renderer: BreadcrumbsBlock,
   initialData: {
     items: [

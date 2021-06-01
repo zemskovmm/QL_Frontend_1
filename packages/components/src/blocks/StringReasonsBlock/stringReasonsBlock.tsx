@@ -2,6 +2,7 @@ import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./stringReasonsBlock.module.css";
 import { ApiBaseUrl } from "../../api/apiClientBase";
+import preview from "./preview.png";
 
 export interface StringReasonsBlockElement {
   elements: { text: string; img: number | null }[];
@@ -31,6 +32,7 @@ export const StringReasonsBlock = (props: StringReasonsBlockElement) => {
 export const StringReasonsBlockInfo: TypedBlockTypeInfo<StringReasonsBlockElement> = {
   id: "stringReasonsBlock",
   name: "StringReasonsBlock",
+  preview: preview,
   renderer: StringReasonsBlock,
   initialData: {
     elements: [

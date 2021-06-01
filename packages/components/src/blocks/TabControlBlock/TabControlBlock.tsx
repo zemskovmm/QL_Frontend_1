@@ -5,6 +5,7 @@ import styles from "./TabsControlBlock.module.css";
 import { PageBlockRowDto } from "../../interfaces/pageSharedDto";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import { RowsPresenter } from "../index";
+import preview from "./preview.png";
 
 interface TabControlBlockTab {
   title: string;
@@ -36,9 +37,7 @@ const TabControl = ({ tabs }: TabControlBlockProps) => {
         </div>
       </div>
       <div className={cn(styles.content, "py-9 px-10")}>
-        <div>
-          {effectiveActiveTab < 0 ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}
-        </div>
+        <div>{effectiveActiveTab < 0 ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}</div>
       </div>
     </div>
   );
@@ -47,6 +46,7 @@ const TabControl = ({ tabs }: TabControlBlockProps) => {
 export const TabControlBlockInfo: TypedBlockTypeInfo<TabControlBlockProps> = {
   id: "tab-control",
   name: "Tabs with content",
+  preview: preview,
   renderer: TabControl,
   initialData: {
     tabs: [

@@ -4,6 +4,7 @@ import styles from "./reasonsAcceptIconBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
 import icon from "./acceptIcon.svg";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
+import preview from "./preview.png";
 
 export interface ReasonsAcceptIconBlockElement {
   header: string;
@@ -53,6 +54,7 @@ export const ReasonsAcceptIconBlock = (props: ReasonsAcceptIconBlockElement) => 
 export const ReasonsAcceptIconBlockInfo: TypedBlockTypeInfo<ReasonsAcceptIconBlockElement> = {
   id: "reasonsAcceptIconBlock",
   name: "ReasonsAcceptIconBlock",
+  preview: preview,
   renderer: ReasonsAcceptIconBlock,
   initialData: {
     header: "Header",

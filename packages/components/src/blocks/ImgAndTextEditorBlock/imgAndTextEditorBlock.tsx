@@ -2,7 +2,8 @@ import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./imgAndTextEditorBlock.module.css";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
-import {ApiBaseUrl} from "../../api/apiClientBase";
+import { ApiBaseUrl } from "../../api/apiClientBase";
+import preview from "./preview.png";
 
 export interface ImgAndTextEditorBlockElement {
   align: boolean;
@@ -44,6 +45,7 @@ export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
 export const ImgAndTextEditorBlockInfo: TypedBlockTypeInfo<ImgAndTextEditorBlockElement> = {
   id: "imgAndTextEditorBlock",
   name: "ImgAndTextEditorBlock",
+  preview: preview,
   renderer: ImgAndTextEditorBlock,
   initialData: {
     align: false,

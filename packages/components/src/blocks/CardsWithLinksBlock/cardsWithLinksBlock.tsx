@@ -3,6 +3,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./cardsWithLinksBlock.module.css";
 import Link from "next/link";
 import arrow from "./arrow-left.svg";
+import preview from "./preview.png";
 
 export interface CardsWithLinksBlockElement {
   title: string;
@@ -46,6 +47,7 @@ export const CardsWithLinksBlock = (props: CardsWithLinksBlockElement) => {
 export const CardsWithLinksBlockInfo: TypedBlockTypeInfo<CardsWithLinksBlockElement> = {
   id: "cardsWithLinksBlock",
   name: "CardsWithLinksBlock",
+  preview: preview,
   renderer: CardsWithLinksBlock,
   initialData: {
     title: "Header",
