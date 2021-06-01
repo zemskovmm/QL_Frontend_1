@@ -34,5 +34,7 @@ const fr: LocaleDefinition = {
   catalogItems_price_before: "avant que",
   catalogItems_price_week: "semaine",
   catalogItems_price_value: "€",
+  catalogList_show: "Voir tout",
+  catalogList_hide: "S'effondrer",
 };
 export default fr;

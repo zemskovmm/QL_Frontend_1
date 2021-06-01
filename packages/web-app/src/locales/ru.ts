@@ -34,5 +34,7 @@ const ru: LocaleDefinition = {
   catalogItems_price_before: "до",
   catalogItems_price_week: "нед.",
   catalogItems_price_value: "€",
+  catalogList_show: "Посмотреть все",
+  catalogList_hide: "Свернуть",
 };
 export default ru;

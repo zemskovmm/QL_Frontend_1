@@ -34,6 +34,8 @@ const cn: LocaleDefinition = {
   catalogItems_price_before: "前",
   catalogItems_price_week: "星期",
   catalogItems_price_value: "€",
+  catalogList_show: "查看全部",
+  catalogList_hide: "坍塌",
 };
 
 export default cn;

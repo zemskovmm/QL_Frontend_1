@@ -7,16 +7,26 @@ import img from "src/assets/images/courses/2.png";
 import education from "src/assets/icons/education.svg";
 import hotel from "src/assets/icons/hotel.svg";
 import { LocalizedText } from "../common/LocalizedText";
+import { useEffect, useState } from "react";
 
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
   seletedItems: number[];
   toggleFilter: (id: number, selected: boolean) => void;
 }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (props.seletedItems.length > 0) setShow(true);
+  });
+
   return (
     <div className={style.catalog__filterRow}>
       <h3 className={style.catalog__filterTitle}>{props.filter.name}</h3>
-      <div className={`flex flex-col`}>
+      <div
+        className={`flex flex-col relative ${props.filter.options.length > 5 ? style.filterList : ""} ${
+          show ? style.hideList : style.showList
+        }`}
+      >
         {props.filter.options.map((option) => (
           <label className={`${style.checkbox__label}`} key={option.id}>
             <span
@@ -38,6 +48,11 @@ function CatalogFilter(props: {
           </label>
         ))}
       </div>
+      {props.filter.options.length > 5 && (
+        <button className={style.showMore_button} type={"button"} onClick={() => setShow(!show)}>
+          {show ? <LocalizedText id={"catalogList_hide"} /> : <LocalizedText id={"catalogList_show"} />}
+        </button>
+      )}
     </div>
   );
 }

@@ -32,6 +32,8 @@ const en = {
   catalogItems_price_before: "before",
   catalogItems_price_week: "week",
   catalogItems_price_value: "€",
+  catalogList_show: "View all",
+  catalogList_hide: "Collapse",
 };
 
 export default en;
