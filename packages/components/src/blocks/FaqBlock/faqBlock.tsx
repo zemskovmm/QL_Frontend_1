@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./faqBlock.module.css";
 import arrow from "./arrow-down.svg";
+import preview from "./preview.jpg";
 
 export interface FaqBlockElement {
   title: string;
@@ -62,6 +63,7 @@ export const FaqBlock = (props: FaqBlockElement) => {
 export const FaqBlockInfo: TypedBlockTypeInfo<FaqBlockElement> = {
   id: "faqBlock",
   name: "FaqBlock",
+  preview: preview,
   renderer: FaqBlock,
   initialData: {
     title: "FAQ",
