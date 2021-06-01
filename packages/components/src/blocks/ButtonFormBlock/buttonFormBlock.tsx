@@ -4,7 +4,8 @@ import styles from "./buttonFormBlock.module.css";
 import { is } from "@babel/types/lib/index-legacy";
 import cn from "classnames";
 import { ComponentHostContext } from "../index";
-import {ApiBaseUrl} from "../../api/apiClientBase";
+import { ApiBaseUrl } from "../../api/apiClientBase";
+import preview from "./preview.png";
 
 export interface ButtonFormBlockElement {
   name: string;
@@ -17,23 +18,20 @@ export interface ButtonFormBlockElement {
 
 export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
   const cl = useContext(ComponentHostContext);
-  const icon = props.iconLink
-    ? props.iconLink
-    : props.icon
-      ? `${ApiBaseUrl}/api/media/${props.icon}`
-    : null
+  const icon = props.iconLink ? props.iconLink : props.icon ? `${ApiBaseUrl}/api/media/${props.icon}` : null;
   return (
     <div className={`flex mx-auto max-w-screen-xl w-full ${props.align} ${props.myClass}`}>
-      {props.link
-        ? <a type={"button"} className={styles.button} href={props.link}>
-          {icon  && <img src={icon} alt="" />}
+      {props.link ? (
+        <a type={"button"} className={styles.button} href={props.link}>
+          {icon && <img src={icon} alt="" />}
           <span>{props.name}</span>
         </a>
-        : <button type={"button"} className={styles.button} onClick={() => cl?.showContactUsForm()}>
+      ) : (
+        <button type={"button"} className={styles.button} onClick={() => cl?.showContactUsForm()}>
           {icon && <img src={icon} alt="" />}
           <span>{props.name}</span>
         </button>
-      }
+      )}
     </div>
   );
 };
@@ -41,6 +39,7 @@ export const ButtonFormBlock = (props: ButtonFormBlockElement) => {
 export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
   id: "buttonFormBlock",
   name: "ButtonFormBlock",
+  preview: preview,
   renderer: ButtonFormBlock,
   initialData: {
     name: "string",

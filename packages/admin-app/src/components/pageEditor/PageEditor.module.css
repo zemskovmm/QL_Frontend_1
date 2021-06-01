@@ -1,0 +1,24 @@
+.item {
+  display: flex;
+  align-items: stretch;
+}
+
+.item div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 500px;
+  user-select: none;
+  padding: 20px 0;
+}
+
+.item div:after {
+  content: '';
+}
+
+.item img {
+  max-height: 200px;
+  object-fit: contain;
+}

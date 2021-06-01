@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsCustomIconBlock.module.css";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
-import {ApiBaseUrl} from "../../api/apiClientBase";
+import { ApiBaseUrl } from "../../api/apiClientBase";
+import preview from "./preview.png";
 
 export interface ReasonsCustomIconBlockElement {
   header: string;
@@ -42,6 +43,7 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
 export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlockElement> = {
   id: "reasonsCustomIconBlock",
   name: "ReasonsCustomIconBlock",
+  preview: preview,
   renderer: ReasonsCustomIconBlock,
   initialData: {
     header: "Header",

@@ -10,6 +10,8 @@ import ArrowPict from "../../assets/img/arrow-left.svg";
 import ClosePict from "../../assets/img/close.svg";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 
+import preview from "./preview.png";
+
 export interface FeedbackSliderBlockElement {
   title: string;
   allFeedbacksTitle: string;
@@ -111,6 +113,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
 export const FeedbackSliderBlockInfo: TypedBlockTypeInfo<FeedbackSliderBlockElement> = {
   id: "feedbackSliderBlock",
   name: "FeedbackSliderBlock",
+  preview: preview,
   renderer: FeedbackSliderBlock,
   initialData: {
     title: "Header",

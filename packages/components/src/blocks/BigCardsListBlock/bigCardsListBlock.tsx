@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import style from "./bigCardsListBlock.module.css";
 import { TypedBlockTypeInfo } from "../blocks-info";
-import {ApiBaseUrl} from "../../api/apiClientBase";
+import { ApiBaseUrl } from "../../api/apiClientBase";
+import preview from "./preview.png";
 
 type BigCardProps = {
   card: {
@@ -51,6 +52,7 @@ export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({ elements, titl
 export const BigCardsListBlockInfo: TypedBlockTypeInfo<BigCardsListBlockElement> = {
   id: "bigCardsListBlock",
   name: "BigCardsListBlock",
+  preview: preview,
   renderer: BigCardsListBlock,
   initialData: {
     elements: [
