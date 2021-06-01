@@ -24,7 +24,31 @@ import { AdminTextBox } from "src/components/common/AdminTextBox";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Carousel from "react-multi-carousel";
+import styles from "./PageEditor.module.css";
+
+import GoogleMapBlockPreview from "src/assets/img/blocks/GoogleMapBlock.png";
+import FeedbackSliderBlockPreview from "src/assets/img/blocks/FeedbackSliderBlock.png";
+import CirclesPreview from "src/assets/img/blocks/Circles.png";
+import ImageBlockPreview from "src/assets/img/blocks/ImageBlock.png";
+import BasicHTMLPreview from "src/assets/img/blocks/BasicHTML.png";
+import ReadMoreBlockPreview from "src/assets/img/blocks/ReadMoreBlock.png";
+import ArticleBeforeImageBlockPreview from "src/assets/img/blocks/ArticleBeforeImageBlock.png";
+import BigCardsListBlockPreview from "src/assets/img/blocks/BigCardsListBlock.png";
+import BreadCrumbsBlockPreview from "src/assets/img/blocks/BreadCrumbsBlock.png";
+import ButtonFormBlockPreview from "src/assets/img/blocks/ButtonFormBlock.png";
+import CardsWithLinksBlockPreview from "src/assets/img/blocks/CardsWithLinksBlock.png";
+import LeftAlignBlockPreview from "src/assets/img/blocks/LeftAlignBlock.png";
+import LeftTabsRightContentBlockPreview from "src/assets/img/blocks/LeftTabsRightContentBlock.png";
+import ReasonsAcceptIconBlockPreview from "src/assets/img/blocks/ReasonsAcceptIconBlock.png";
+import ReasonsAcceptCardBlockPreview from "src/assets/img/blocks/ReasonsAcceptCardBlock.png";
+import ReasonsCustomIconBlockPreview from "src/assets/img/blocks/ReasonsCustomIconBlock.png";
+import TabsWithContentPreview from "src/assets/img/blocks/TabsWithContent.png";
+import ImgAndTextEditorBlockPreview from "src/assets/img/blocks/ImgAndTextEditorBlock.png";
+import TitleAndCallBackBlockPreview from "src/assets/img/blocks/TitleAndCallBackBlock.png";
+import TitleAndTabsBlockPreview from "src/assets/img/blocks/TitleAndTabsBlock.png";
+import StringReasonsBlockPreview from "src/assets/img/blocks/StringReasonsBlock.png";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -161,7 +185,83 @@ class RemoteUiCustomization implements IRemoteUiEditorCustomization {
   }
 }
 
+const PreviewChooser: React.FC<{ block: string }> = ({ block }) => {
+  switch (block) {
+    case "GoogleMapBlock":
+      return <img src={GoogleMapBlockPreview} alt={block} />;
+    case "FeedbackSliderBlock":
+      return <img src={FeedbackSliderBlockPreview} alt={block} />;
+    case "Circles":
+      return <img src={CirclesPreview} alt={block} />;
+    case "Basic HTML":
+      return <img src={BasicHTMLPreview} alt={block} />;
+    case "ImageBlock":
+      return <img src={ImageBlockPreview} alt={block} />;
+    case "ReadMoreBlock":
+      return <img src={ReadMoreBlockPreview} alt={block} />;
+    case "ArticleBeforeImageBlock":
+      return <img src={ArticleBeforeImageBlockPreview} alt={block} />;
+    case "BigCardsListBlock":
+      return <img src={BigCardsListBlockPreview} alt={block} />;
+    case "BreadcrumbsBlock":
+      return <img src={BreadCrumbsBlockPreview} alt={block} />;
+    case "ButtonFormBlock":
+      return <img src={ButtonFormBlockPreview} alt={block} />;
+    case "CardsWithLinksBlock":
+      return <img src={CardsWithLinksBlockPreview} alt={block} />;
+    case "ImageBlock":
+      return <img src={ImageBlockPreview} alt={block} />;
+    case "ImgAndTextEditorBlock":
+      return <img src={ImgAndTextEditorBlockPreview} alt={block} />;
+    case "LeftAlignBlock":
+      return <img src={LeftAlignBlockPreview} alt={block} />;
+    case "LeftTabsRightContentBlock":
+      return <img src={LeftTabsRightContentBlockPreview} alt={block} />;
+    case "ReasonsAcceptIconBlock":
+      return <img src={ReasonsAcceptIconBlockPreview} alt={block} />;
+    case "ReasonsAcceptCardBlock":
+      return <img src={ReasonsAcceptCardBlockPreview} alt={block} />;
+    case "ReasonsCustomIconBlock":
+      return <img src={ReasonsCustomIconBlockPreview} alt={block} />;
+    case "Tabs with content":
+      return <img src={TabsWithContentPreview} alt={block} />;
+    case "TitleAndCallBackBlock":
+      return <img src={TitleAndCallBackBlockPreview} alt={block} />;
+    case "TitleAndTabsBlock":
+      return <img src={TitleAndTabsBlockPreview} alt={block} />;
+    case "StringReasonsBlock":
+      return <img src={StringReasonsBlockPreview} alt={block} />;
+    default:
+      return <span>"Для этого блока нет превью"</span>;
+  }
+};
+
 const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 1920, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+  const slides = useRef<any>(null);
+  const [currentSlide, setCurrentSlide] = useState({});
+
+  useEffect(() => {
+    const ind = AvailableBlocks.findIndex((el) => {
+      return el.id === props.store.blockType;
+    });
+
+    slides?.current?.goToSlide(ind, true);
+  }, [props.store.blockType]);
+
   return useObserver(() => (
     <div>
       Size:
@@ -169,15 +269,26 @@ const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
       <AdminSlider min={1} max={12} value={props.store.size} onChange={(v) => (props.store.size = v)} />
       <br />
       Type:
-      <select value={props.store.blockType} onChange={(e) => (props.store.blockType = e.currentTarget.value)}>
-        <option value="">Select...</option>
-        {AvailableBlocks.map((b) => (
-          <option value={b.id}>{b.name}</option>
-        ))}
-      </select>
+      <div style={{ maxWidth: "90vw" }}>
+        <Carousel
+          ref={slides}
+          responsive={responsive}
+          itemClass={styles.item}
+          afterChange={(previousSlide, { currentSlide }) => {
+            props.store.blockType = AvailableBlocks[currentSlide].id;
+          }}
+        >
+          {AvailableBlocks.map((b, ind) => (
+            <div key={ind}>
+              {b.name}
+              <PreviewChooser block={b.name} />
+            </div>
+          ))}
+        </Carousel>
+      </div>
       {props.store.currentEditor == null ? null : (
         <div>
-          <div style={{ margin: "5px", width: 600, maxWidth: "90vh", maxHeight: "70vh", overflow: "scroll" }}>
+          <div style={{ margin: "5px", width: "100%", maxWidth: "90vw", maxHeight: "70vh", overflow: "scroll" }}>
             <RemoteUiEditor store={props.store.currentEditor} customization={new RemoteUiCustomization()} />
           </div>
           <br />
