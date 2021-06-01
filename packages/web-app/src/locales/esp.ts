@@ -33,6 +33,8 @@ const esp: LocaleDefinition = {
   catalogItems_price_before: "antes de",
   catalogItems_price_week: "semana",
   catalogItems_price_value: "€",
+  catalogList_show: "Ver todo",
+  catalogList_hide: "Colapso",
 };
 
 export default esp;

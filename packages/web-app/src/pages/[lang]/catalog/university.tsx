@@ -62,11 +62,13 @@ const UniversityCatalogElement = (item: CatalogUniversityDto) => (
 
 const UniversityCatalogPage = () => {
   return (
-    <div className={style.catalogWrapper}>
-      <div className={`mr-auto mb-7`}>
-        <Breadcrumbs items={[BreadcrumbMain, BreadcrumbUniversityCatalog]} />
+    <div style={{ backgroundColor: "#f9fafd" }}>
+      <div className={style.catalogWrapper}>
+        <div className={`mr-auto mb-7`}>
+          <Breadcrumbs items={[BreadcrumbMain, BreadcrumbUniversityCatalog]} />
+        </div>
+        <Catalog<CatalogUniversityDto> elementRenderer={UniversityCatalogElement} apiElementName="university" />;
       </div>
-      <Catalog<CatalogUniversityDto> elementRenderer={UniversityCatalogElement} apiElementName="university" />;
     </div>
   );
 };
