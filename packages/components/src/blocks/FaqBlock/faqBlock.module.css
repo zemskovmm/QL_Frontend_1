@@ -20,6 +20,10 @@
   border-radius: 6px;
 }
 
+.faqBlock__item:not(:last-child){
+  margin-bottom: 10px;
+}
+
 .faqBlock__itemText{
   font-size: 14px;
   line-height: 24px;
