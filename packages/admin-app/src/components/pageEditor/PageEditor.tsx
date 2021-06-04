@@ -24,8 +24,8 @@ import { AdminTextBox } from "src/components/common/AdminTextBox";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { useEffect, useRef, useState } from "react";
-import Carousel from "react-multi-carousel";
+import { useEffect, useState } from "react";
+
 import styles from "./PageEditor.module.css";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
@@ -164,28 +164,11 @@ class RemoteUiCustomization implements IRemoteUiEditorCustomization {
 }
 
 const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 1920, min: 1024 },
-      items: 1,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-  const slides = useRef<any>(null);
+  const [showTypes, setShowTypes] = useState(false);
+  const [currentType, setCurrentType] = useState(0);
 
   useEffect(() => {
-    const ind = AvailableBlocks.findIndex((el) => {
-      return el.id === props.store.blockType;
-    });
-
-    slides?.current?.goToSlide(ind, true);
+    setCurrentType(AvailableBlocks.findIndex((el) => el.id === props.store.blockType));
   }, [props.store.blockType]);
 
   return useObserver(() => (
@@ -194,27 +177,42 @@ const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
       <br />
       <AdminSlider min={1} max={12} value={props.store.size} onChange={(v) => (props.store.size = v)} />
       <br />
-      Type:
-      <div style={{ maxWidth: "90vw" }}>
-        <Carousel
-          ref={slides}
-          responsive={responsive}
-          itemClass={styles.item}
-          afterChange={(previousSlide, { currentSlide }) => {
-            props.store.blockType = AvailableBlocks[currentSlide].id;
-          }}
-        >
-          {AvailableBlocks.map((b, ind) => (
-            <div key={ind}>
-              {b.name}
-              {b.preview ? <img src={b.preview} alt={b.preview} /> : <span>No preview</span>}
-            </div>
-          ))}
-        </Carousel>
-      </div>
+      Type: {AvailableBlocks[currentType].name}
+      <br />
+      <AdminButton color={"primary"} onClick={() => setShowTypes(true)}>
+        Change Type
+      </AdminButton>
+      {showTypes && (
+        <AdminOverlayDialog cancel={() => setShowTypes(false)}>
+          <div className={styles.types}>
+            {AvailableBlocks.map((b, ind) => (
+              <div
+                key={ind}
+                className={`${AvailableBlocks[ind].id === props.store.blockType ? styles.active : ""}`}
+                onClick={() => {
+                  props.store.blockType = AvailableBlocks[ind].id;
+                  setShowTypes(false);
+                }}
+              >
+                {b.preview ? <img src={b.preview} alt={b.preview} /> : <span>No preview</span>}
+                <p>{b.name}</p>
+              </div>
+            ))}
+          </div>
+        </AdminOverlayDialog>
+      )}
       {props.store.currentEditor == null ? null : (
         <div>
-          <div style={{ margin: "5px", width: "100%", maxWidth: "90vw", maxHeight: "70vh", overflow: "scroll" }}>
+          <div
+            style={{
+              margin: "5px",
+              width: "100%",
+              maxWidth: "90vw",
+              minWidth: "600px",
+              maxHeight: "70vh",
+              overflow: "scroll",
+            }}
+          >
             <RemoteUiEditor store={props.store.currentEditor} customization={new RemoteUiCustomization()} />
           </div>
           <br />
