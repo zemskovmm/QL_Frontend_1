@@ -25,6 +25,7 @@ import { FeedbackSliderBlockInfo } from "./FeedbackSliderBlock/feedbackSliderBlo
 import { StringReasonsBlockInfo } from "./StringReasonsBlock/stringReasonsBlock";
 import { FaqBlockInfo } from "./FaqBlock/faqBlock";
 import { HtmlWithIconBlockInfo } from "./HtmlWithIconBlock/htmlWithIconBlock";
+import { FramesWithArrowBlockInfo } from "./FramesWithArrowBlock/framesWithArrowBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -50,6 +51,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   StringReasonsBlockInfo,
   FaqBlockInfo,
   HtmlWithIconBlockInfo,
+  FramesWithArrowBlockInfo,
 ];
 
 export interface IComponentHost {
