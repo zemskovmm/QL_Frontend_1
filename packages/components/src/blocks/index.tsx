@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BasicHtmlBlockInfo } from "./BasicHtmlBlock/basic-html";
 import { CirclesBlockInfo } from "./circles";
 import { ReadMoreBlockInfo } from "./ReadMoreBlock/readMoreBlock";
@@ -26,6 +26,8 @@ import { StringReasonsBlockInfo } from "./StringReasonsBlock/stringReasonsBlock"
 import { FaqBlockInfo } from "./FaqBlock/faqBlock";
 import { HtmlWithIconBlockInfo } from "./HtmlWithIconBlock/htmlWithIconBlock";
 import { FramesWithArrowBlockInfo } from "./FramesWithArrowBlock/framesWithArrowBlock";
+import { FixedHeightBlockInfo } from "./FixedHeightBlock/fixedHeightBlock";
+import cn from "classnames";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -52,6 +54,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   FaqBlockInfo,
   HtmlWithIconBlockInfo,
   FramesWithArrowBlockInfo,
+  FixedHeightBlockInfo,
 ];
 
 export interface IComponentHost {
@@ -75,27 +78,30 @@ export const BlockPresenter = (props: { blockType: string; blockData: any }) => 
 };
 
 const RowPresenter = (props: PageBlockRowDto) => {
+  const sortBlocks = [...props.blocks].sort(function (x, y) {
+    return x.type === "breadcrumbsBlock" ? -1 : y.type === "breadcrumbsBlock" ? 1 : 0;
+  });
   return (
-    <div
+    <section
       style={{ background: props.background, maxWidth: props.maxWidth ? props.maxWidth : "100%" }}
       className={`relative mx-auto`}
     >
-      {props.blocks.map((cell, i) => {
-        if (cell.type !== "breadcrumbsBlock") {
-          return (
-            <section
-              key={i}
-              className={`inline-block ${grid["col-" + cell.size]} box-border`}
-              style={{ verticalAlign: "top", backgroundColor: props.background ? props.background : "" }}
-            >
-              <BlockPresenter blockType={cell.type} blockData={cell.data} />
-            </section>
-          );
-        } else {
-          return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
-        }
+      {sortBlocks.map((cell, i) => {
+        if (cell.type === "breadcrumbsBlock") return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
+        return (
+          <div
+            key={i}
+            className={cn(
+              i === 1 && sortBlocks[0].type == "breadcrumbsBlock" ? "block-with-breadcrumbs" : "",
+              `inline-block ${grid["col-" + cell.size]} box-border`
+            )}
+            style={{ verticalAlign: "top", backgroundColor: props.background ? props.background : "" }}
+          >
+            <BlockPresenter blockType={cell.type} blockData={cell.data} />
+          </div>
+        );
       })}
-    </div>
+    </section>
   );
 };
 

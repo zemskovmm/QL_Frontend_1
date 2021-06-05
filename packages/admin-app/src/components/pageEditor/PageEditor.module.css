@@ -17,6 +17,7 @@
   border: 1px solid rgb(59, 130, 246);
   cursor: pointer;
   background: #fff;
+  user-select: none;
 }
 
 .types div.active {
