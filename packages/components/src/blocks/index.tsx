@@ -14,7 +14,6 @@ import { CardsWithLinksBlockInfo } from "./CardsWithLinksBlock/cardsWithLinksBlo
 import { GoogleMapBlockInfo } from "./GoogleMapBlock/googleMapBlock";
 import { BlockTypeInfo } from "./blocks-info";
 import { PageBlockRowDto } from "../interfaces/pageSharedDto";
-import grid from "../styles/grid.module.css";
 import { TabControlBlockInfo } from "./TabControlBlock/TabControlBlock";
 import { TitleAndTabsBlockInfo } from "./TitleAndTabsBlock/titleAndTabsBlock";
 import { BreadcrumbsBlockInfo } from "./BreadcrumbsBlock/breadcrumbsBlock";
@@ -27,7 +26,10 @@ import { FaqBlockInfo } from "./FaqBlock/faqBlock";
 import { HtmlWithIconBlockInfo } from "./HtmlWithIconBlock/htmlWithIconBlock";
 import { FramesWithArrowBlockInfo } from "./FramesWithArrowBlock/framesWithArrowBlock";
 import { FixedHeightBlockInfo } from "./FixedHeightBlock/fixedHeightBlock";
+import { TableBlockInfo } from "./TableBlock/TableBlock";
+
 import cn from "classnames";
+import grid from "../styles/grid.module.css";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -53,6 +55,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   StringReasonsBlockInfo,
   FaqBlockInfo,
   HtmlWithIconBlockInfo,
+  TableBlockInfo,
   FramesWithArrowBlockInfo,
   FixedHeightBlockInfo,
 ];
