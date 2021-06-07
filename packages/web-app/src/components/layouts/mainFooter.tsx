@@ -6,19 +6,25 @@ import Logo from "src/assets/images/logoFooter.svg";
 import Arrow from "src/assets/images/icons/arrow.svg";
 import { default as Social } from "src/assets/icons/socialFooter";
 import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
-import React from "react";
+import React, { useState } from "react";
 
 export const MainFooter = (props: FooterDataDto) => {
   const lang = useIntl().locale;
+  const [activeTab, setActiveTab] = useState("");
   return (
     <footer className="bg-bgsecondary text-third flex flex-col">
-      <div className={cn("flex justify-between max-w-screen-xl w-full my-0 mx-auto px-10 py-16", styles.footer_menu)}>
-        <div className="flex items-center">
-          <img className="mr-20" src={Logo} alt="Quartier Latin" />
-          <ul className="flex">
+      <div
+        className={cn(
+          "flex justify-between max-w-screen-xl w-full my-0 mx-auto px-4 lg:px-10 py-6 lg:py-16",
+          styles.footer_menu
+        )}
+      >
+        <div className="flex flex-col lg:flex-row lg:items-center mt-2">
+          <img className="mb-10 lg:mr-20" src={Logo} alt="Quartier Latin" />
+          <ul className="flex flex-col lg:flex-row">
             {props[lang].headLinks.map((link, i) => (
               <li key={i + "footerHeadLink"}>
-                <a className="flex mx-7 whitespace-nowrap font-bold" href={link.link.url}>
+                <a className={"flex lg:mx-7 whitespace-nowrap font-bold text-xs mb-5"} href={link.link.url}>
                   <img className="mr-3" src={link.icon} alt="" />
                   {link.link.title}
                 </a>
@@ -30,13 +36,27 @@ export const MainFooter = (props: FooterDataDto) => {
           <img src={Arrow} alt="" />
         </a>
       </div>
-      <div className="flex flex-wrap max-w-screen-xl w-full my-0 mx-auto mx-8 px-10 pt-14">
+      <div className="flex flex-wrap max-w-screen-xl w-full my-0 mx-auto lg:mx-8 lg:px-10 py-0 lg:pt-14">
         {props[lang].links.map(({ group, items }, index) => (
-          <div key={index + "MainFooter"} className={cn("w-1/3", styles.footer_column)}>
-            <a className="font-bold" href={group.url}>
+          <div
+            key={index + "MainFooter"}
+            className={cn(
+              "w-full lg:w-1/3",
+              styles.footer_column,
+              activeTab === `${index}MainFooter` ? styles.openFooterTab : styles.closeFooterTab
+            )}
+            onClick={() =>
+              window.innerWidth >= 1024
+                ? ""
+                : activeTab === `${index}MainFooter`
+                ? setActiveTab("")
+                : setActiveTab(index + "MainFooter")
+            }
+          >
+            <a className="font-bold mr-auto" href={group.url}>
               {group.title}
             </a>
-            <ul className="flex flex-col">
+            <ul className="flex flex-col overflow-hidden">
               {items.map((link, i) =>
                 link.title ? (
                   <li key={i + "MainFooterLink"}>
