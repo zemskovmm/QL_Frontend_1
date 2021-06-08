@@ -21,7 +21,8 @@ export const AppComponentHost: React.FC = ({ children }) => {
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
         <title>Quartier Latin</title>
-        <meta name="viewport" content="width=1024" />
+        {/*<meta name="viewport" content="width=1024" />*/}
+        <meta name="viewport" content="width=device-width, user-scalable=yes" />
       </Head>
       <IntlProvider locale={lang as string} defaultLocale="en" messages={getLocaleMessages(lang as string)}>
         <ComponentHostContext.Provider value={host}>

@@ -66,12 +66,12 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
           sendForm();
         }}
       >
-        <div className={"flex justify-between mb-7"}>
-          <div className={"flex flex-col w-6/12 mr-3"}>
-            <div className={styles.applyModal__formColTitle}>
+        <div className={"flex flex-col md:flex-row justify-between mb-0 md:mb-7"}>
+          <div className={"flex flex-col md:w-6/12 md:mr-3"}>
+            <div className={styles.applyModal__formColTitle + " hidden md:block"}>
               <LocalizedText id="contactUs_firstColTitle" />
             </div>
-            <label className={"w-full mb-4"}>
+            <label className={"w-full mb-2 md:mb-4"}>
               <div className={styles.applyModal__labelTitle}>
                 <LocalizedText id="contactUs_name" />
               </div>
@@ -82,7 +82,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
                 onChange={(e) => setName(e.target.value)}
               />
             </label>
-            <label className={"w-full mb-4"}>
+            <label className={"w-full mb-2 md:mb-4"}>
               <div className={styles.applyModal__labelTitle}>
                 <LocalizedText id="contactUs_lastname" />
               </div>
@@ -94,11 +94,11 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
               />
             </label>
           </div>
-          <div className={"flex flex-col w-6/12 ml-3"}>
-            <div className={styles.applyModal__formColTitle}>
+          <div className={"flex flex-col md:w-6/12 md:ml-3"}>
+            <div className={styles.applyModal__formColTitle + " hidden md:block"}>
               <LocalizedText id="contactUs_secondColTitle" />
             </div>
-            <label className={"w-full mb-4"}>
+            <label className={"w-full mb-2 md:mb-4"}>
               <div className={styles.applyModal__labelTitle}>
                 <LocalizedText id="contactUs_email" />
               </div>
@@ -109,7 +109,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
-            <label className={"w-full mb-4"}>
+            <label className={"w-full mb-2 md:mb-4"}>
               <div className={styles.applyModal__labelTitle}>
                 <LocalizedText id="contactUs_tel" />
               </div>
@@ -132,7 +132,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
             onChange={(e) => setCom(e.target.value)}
           />
         </label>
-        <div className={"flex justify-center items-center mt-11"}>
+        <div className={"flex flex-col mb:flex-row justify-center items-center mt-4 mb:mt-11"}>
           <div
             className={styles.applyModal__description}
             dangerouslySetInnerHTML={{ __html: useLocalizedText({ id: "contactUs_description" }, intl) }}
@@ -176,7 +176,7 @@ export const ContactUsFormButton = (props: { children: React.ReactNode; footer?:
           setIsOpen(true);
         }}
       >
-        {props.children}
+        <span className={`${props.footer ? "" : "hidden md:block"}`}>{props.children}</span>
       </button>
       {isOpen ? <ContactUsFormController onDismiss={() => setIsOpen(false)} /> : null}
     </>
