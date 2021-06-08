@@ -6,25 +6,37 @@ import preview from "./preview.png";
 import cn from "classnames";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 
-export interface TableRowElement {
+interface TableRowElement {
   cellWidth?: string;
   maxTextWidth?: string;
   vertical?: boolean;
   text?: string;
   info?: TableRowElement[];
-  titles?: string;
+  titles?: {
+    title: string;
+  }[];
   title?: number;
+  note?: number;
   image?: number | null;
 }
 
 export interface TableRow {
-  titles?: string;
+  titles: {
+    title: string;
+  }[];
   rows: TableRowElement[];
+  notes: {
+    note: string;
+  }[];
 }
 
 const TableRowBlock = (props: TableRowElement) => {
-  const titleText =
-    (props.image || props.text) && props.title && props.title > 0 ? props.titles?.split(";")[+props.title - 1] : "";
+  const titleText: string =
+    (props.image || props.text) && props.title && props.title > 0 && props.titles?.length
+      ? props.titles[+props.title - 1]
+        ? props.titles[+props.title - 1].title
+        : ""
+      : "";
   return (
     <div
       className={cn(styles.cell, props.vertical ? styles.vertical : "")}
@@ -34,7 +46,18 @@ const TableRowBlock = (props: TableRowElement) => {
         <>
           <div className={styles.text} style={{ maxWidth: props.maxTextWidth }}>
             {titleText && <span>{titleText}</span>}
-            {props.text}
+            {props.text?.includes("<red>") ? (
+              <p dangerouslySetInnerHTML={{ __html: props.text?.replaceAll("red>", "b>") }} />
+            ) : (
+              props.text
+            )}
+            {props.note && props.note > 0 ? (
+              <sup>
+                <a href={`#note${props.note}`}>{props.note}</a>
+              </sup>
+            ) : (
+              ""
+            )}
             {props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
           </div>
           <div className={styles.info}>
@@ -46,7 +69,18 @@ const TableRowBlock = (props: TableRowElement) => {
       ) : (
         <>
           {titleText && <span>{titleText}</span>}
-          {props.text}
+          {props.text?.includes("<red>") ? (
+            <p dangerouslySetInnerHTML={{ __html: props.text?.replaceAll("red>", "b>") }} />
+          ) : (
+            props.text
+          )}
+          {props.note && props.note > 0 ? (
+            <sup>
+              <a href={`#note${props.note}`}>{props.note}</a>
+            </sup>
+          ) : (
+            ""
+          )}
           {props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
         </>
       )}
@@ -57,12 +91,21 @@ const TableRowBlock = (props: TableRowElement) => {
 export const TableBlock = (props: TableRow) => {
   return (
     <div className="py-12">
-      <div className="px-10 flex justify-between mx-auto w-full">
+      <div className="px-10 flex flex-col justify-between mx-auto w-full">
         <div className={styles.table}>
           {props.rows.map((row, ind) => {
             return <TableRowBlock key={ind} {...row} titles={props.titles} />;
           })}
         </div>
+        {props.notes?.length > 0 && (
+          <div className={styles.notes}>
+            {props.notes.map(({ note }, ind) => (
+              <p key={ind} id={`note${ind + 1}`}>
+                ({ind + 1}) {note}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -74,15 +117,43 @@ export const TableBlockInfo: TypedBlockTypeInfo<TableRow> = {
   preview: preview,
   renderer: TableBlock,
   initialData: {
-    titles: "",
+    titles: [
+      {
+        title: "",
+      },
+    ],
     rows: [
       {
         text: "Text1",
       },
     ],
+    notes: [
+      {
+        note: "",
+      },
+    ],
   },
   definition: {
     subTypes: {
+      title: {
+        fields: [
+          {
+            id: "title",
+            type: "String",
+            name: "Title",
+          },
+        ],
+      },
+      note: {
+        fields: [
+          {
+            id: "note",
+            type: "String",
+            name: "Note",
+          },
+        ],
+      },
+
       element: {
         fields: [
           {
@@ -100,6 +171,11 @@ export const TableBlockInfo: TypedBlockTypeInfo<TableRow> = {
             name: "image",
             type: "Custom",
             customType: "Image",
+          },
+          {
+            id: "note",
+            name: "Note:",
+            type: "Number",
           },
           {
             id: "cellWidth",
@@ -129,13 +205,20 @@ export const TableBlockInfo: TypedBlockTypeInfo<TableRow> = {
       {
         id: "titles",
         name: "Titles",
-        type: "String",
+        type: "List",
+        listType: "title",
       },
       {
         id: "rows",
         name: "Rows",
         type: "List",
         listType: "element",
+      },
+      {
+        id: "notes",
+        name: "Notes",
+        type: "List",
+        listType: "note",
       },
     ],
   },

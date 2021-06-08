@@ -43,7 +43,7 @@ export const ButtonFormBlockInfo: TypedBlockTypeInfo<ButtonFormBlockElement> = {
   renderer: ButtonFormBlock,
   initialData: {
     name: "string",
-    iconLink: "string",
+    iconLink: "",
     icon: null,
     link: "",
     align: "string",
