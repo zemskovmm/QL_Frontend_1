@@ -176,7 +176,7 @@ export const ContactUsFormButton = (props: { children: React.ReactNode; footer?:
           setIsOpen(true);
         }}
       >
-        <span className={`hidden md:block`}>{props.children}</span>
+        <span className={`${props.footer ? "" : "hidden md:block"}`}>{props.children}</span>
       </button>
       {isOpen ? <ContactUsFormController onDismiss={() => setIsOpen(false)} /> : null}
     </>

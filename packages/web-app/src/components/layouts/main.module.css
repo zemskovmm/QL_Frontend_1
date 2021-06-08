@@ -96,6 +96,12 @@
   margin-bottom: 0.5rem;
 }
 
+@media (max-width: 1023px) {
+  .footer_column.footer_address li{
+    
+  }
+}
+
 
 .footer_column ul a {
   display: flex;
@@ -175,6 +181,12 @@
   max-width: 240px;
 }
 
+@media (max-width: 1023px) {
+  .footer_social{
+    margin: 0 auto;
+  }
+}
+
 .footer_social a {
   cursor: pointer;
   margin-left: 24px;
@@ -204,6 +216,12 @@
   height: 50px;
   margin: 0 24px 40px;
 }
+
+@media (max-width: 1023px) {
+  .footer_column button.footer_writeus {
+    margin: 0px auto 39px;
+  }
+  }
 
 .footer_column button.footer_writeus:before {
   content: '';

@@ -36,7 +36,7 @@ export const MainFooter = (props: FooterDataDto) => {
           <img src={Arrow} alt="" />
         </a>
       </div>
-      <div className="flex flex-wrap max-w-screen-xl w-full my-0 mx-auto lg:mx-8 lg:px-10 py-0 lg:pt-14">
+      <div className="flex flex-wrap max-w-screen-xl w-full my-0 lg:mx-auto lg:px-10 py-0 lg:pt-14">
         {props[lang].links.map(({ group, items }, index) => (
           <div
             key={index + "MainFooter"}
@@ -69,7 +69,7 @@ export const MainFooter = (props: FooterDataDto) => {
             </ul>
           </div>
         ))}
-        <div className={cn("w-1/3", styles.footer_column, styles.footer_address)}>
+        <div className={cn("w-full lg:w-1/3", styles.footer_column, styles.footer_address)}>
           <ul className="flex flex-col font-bold">
             <li>10 rue de la Lune</li>
             <li>75002 Paris</li>
@@ -81,7 +81,6 @@ export const MainFooter = (props: FooterDataDto) => {
             <ContactUsFormButton footer={true}>
               <button className={styles.footer_writeus}>{props[lang].writeUs}</button>
             </ContactUsFormButton>
-            // <ButtonFormBlock icon={Mail} myClass={`w-full`} name={props[lang].writeUs} align={`flex-center`} />
           )}
           <div className={styles.footer_social}>
             {props[lang].socials.map((link, i) =>
