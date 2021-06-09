@@ -1,38 +1,12 @@
-﻿.bigCardsListBlock__container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.bigCardsListBlock__title {
+﻿.bigCardsListBlock__title {
   max-width: 90%;
   margin: 0;
   margin-bottom: 40px;
 }
 
-.bigCardsListBlock__list {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.bigCardsListBlock__list .bigCard {
-  max-width: 370px;
-  margin-bottom: 30px;
-}
-
-
-.bigCardsListBlock__list .bigCard:last-of-type {
-  max-width: 370px;
-  margin-bottom: 30px;
-}
-
-.bigCardsListBlock__list .bigCard:nth-child(2), .bigCardsListBlock__list .bigCard:nth-child(3n + 2) {
-  margin: 0 30px;
-  margin-bottom: 30px;
-}
-
 .bigCard {
+  max-width: 370px;
+  margin-bottom: 30px;
   background: #FFFFFF;
   border: 1px solid #EFF3FA;
   box-sizing: border-box;
@@ -48,6 +22,16 @@
 .bigCard:hover {
   box-shadow: 0px 10px 30px rgba(0, 78, 255, 0.07), 0px 20px 50px rgba(0, 78, 255, 0.05);
   cursor: pointer;
+}
+
+.bigCard:last-of-type {
+  max-width: 370px;
+  margin-bottom: 30px;
+}
+
+.bigCard:nth-child(2), .bigCard:nth-child(3n + 2) {
+  margin: 0 30px;
+  margin-bottom: 30px;
 }
 
 .bigCard__img {
@@ -76,4 +60,25 @@
   color: #646F83;
   padding: 0 10px;
   margin-bottom: 18px;
+}
+
+@media (max-width: 1023px) {
+  .bigCardsListBlock__title{
+    max-width: none;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .bigCard{
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .bigCard:nth-child(2), .bigCard:nth-child(3n + 2) {
+    margin: 0 0px;
+    margin-bottom: 10px;
+  }
+  .bigCard__img{
+    height: 200px;
+    max-height: 200px;
+    margin-bottom: 13px;
+  }
 }

@@ -8,6 +8,12 @@
   margin-top: 10px;
 }
 
+@media (max-width: 1023px) {
+  .circleItem{
+    margin-bottom: 41px;
+  }
+}
+
 .circleArticle {
   position: absolute;
   top: -6px;

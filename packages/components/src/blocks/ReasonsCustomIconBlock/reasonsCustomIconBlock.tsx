@@ -14,13 +14,12 @@ export interface ReasonsCustomIconBlockElement {
 }
 
 export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => {
-  // const [isOpen, Open] = useState(false);
   return (
     <div className="py-12">
-      <div className="px-10 flex justify-between mx-auto max-w-screen-xl w-full">
-        <div className={styles.reasonsCustomIconBlock}>
+      <div className="px-4 lg:px-10 flex justify-between mx-auto max-w-screen-xl w-full">
+        <div className={"flex flex-col w-full"}>
           <div className={styles.reasonsCustomIconBlock__title}>{props.header}</div>
-          <div className={styles.reasonsCustomIconBlock__list}>
+          <div className={"flex flex-col lg:flex-row flex-wrap w-full"}>
             {props.elements.map((el) => (
               <div className={styles.reasonsCustomIconBlock__item}>
                 <div className={styles.reasonsCustomIconBlock__icon}>
@@ -33,7 +32,12 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
               </div>
             ))}
           </div>
-          {props.showButton && <ButtonFormBlock name={props.textButton} align={props.alignButton} />}
+          {props.showButton && (
+            <ButtonFormBlock
+              name={props.textButton}
+              align={window.innerWidth < 1024 ? "justify-center" : props.alignButton}
+            />
+          )}
         </div>
       </div>
     </div>

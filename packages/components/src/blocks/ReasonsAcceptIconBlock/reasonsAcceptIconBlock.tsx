@@ -15,13 +15,12 @@ export interface ReasonsAcceptIconBlockElement {
 }
 
 export const ReasonsAcceptIconBlock = (props: ReasonsAcceptIconBlockElement) => {
-  // const [isOpen, Open] = useState(false);
   return (
-    <div className="py-12">
+    <div className="py-12 px-4 lg:px-0">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
-        <div className={styles.reasonsAcceptIconBlock}>
+        <div className={"flex flex-col w-full"}>
           <div className={styles.reasonsAcceptIconBlock__title}>{props.header}</div>
-          <div className={styles.reasonsAcceptIconBlock__list}>
+          <div className={"flex flex-wrap w-full flex-col lg:flex-row"}>
             {props.elements.map((el) => (
               <div className={styles.reasonsAcceptIconBlock__item}>
                 <div className={styles.reasonsAcceptIconBlock__icon}>
@@ -34,7 +33,7 @@ export const ReasonsAcceptIconBlock = (props: ReasonsAcceptIconBlockElement) => 
               </div>
             ))}
             {props.showButton && (
-              <div className={styles.reasonsAcceptIconBlock__item + " flex-col"}>
+              <div className={styles.reasonsAcceptIconBlock__item + " flex-col px-10 lg:px-0"}>
                 {props.textOverButton && (
                   <div
                     className={styles.reasonsAcceptIconBlock__buttonText}

@@ -1,5 +1,5 @@
 import React from "react";
-import { TypedBlockTypeInfo } from "./blocks-info";
+import { TypedBlockTypeInfo } from ".././blocks-info";
 import styles from "./circles.module.css";
 import preview from "./circles.png";
 
@@ -16,7 +16,7 @@ export interface CirclesBlockProps {
 export const CirclesBlock = (props: CirclesBlockProps) => {
   return (
     <div className="py-28">
-      <div className="flex justify-between mx-auto max-w-screen-xl w-full">
+      <div className="flex flex-col lg:flex-row justify-between mx-auto max-w-screen-xl w-full">
         {props.elements.map((e, ind) => (
           <div key={ind} className={styles.circleItem}>
             <div className={styles.circleArticle}>{e.header}</div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BasicHtmlBlockInfo } from "./BasicHtmlBlock/basic-html";
-import { CirclesBlockInfo } from "./circles";
+import { CirclesBlockInfo } from "./CirclesBlock/circles";
 import { ReadMoreBlockInfo } from "./ReadMoreBlock/readMoreBlock";
 import { ReasonsAcceptIconBlockInfo } from "./ReasonsAcceptIconBlock/reasonsAcceptIconBlock";
 import { ReasonsCustomIconBlockInfo } from "./ReasonsCustomIconBlock/reasonsCustomIconBlock";

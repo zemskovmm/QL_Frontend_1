@@ -12,7 +12,7 @@ export interface ReadMoreBlockElement {
 export const ReadMoreBlock = (props: ReadMoreBlockElement) => {
   const [isOpen, Open] = useState(false);
   return (
-    <div className="py-12">
+    <div className="py-12 px-4 lg:px-0">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.readMoreBlock}>
           <div className={styles.readMoreBlock__title}>{props.header}</div>

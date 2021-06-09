@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsAcceptCardBlock.module.css";
-import { is } from "@babel/types/lib/index-legacy";
 import icon from "./acceptIcon.svg";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 import preview from "./preview.png";
@@ -18,33 +17,28 @@ export interface ReasonsAcceptCardBlockElement {
 export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => {
   return (
     <div className="py-12">
-      <div className="px-10 flex justify-between mx-auto max-w-screen-xl w-full">
-        <div className={styles.reasonsAcceptCardBlock}>
-          <div className={styles.reasonsAcceptCardBlock__title}>{props.header}</div>
-          <div className={styles.reasonsAcceptCardBlock__list}>
-            {props.elements.map((el) => (
-              <div className={styles.reasonsAcceptCardBlock__item + " " + styles.reasonsAcceptCardBlock__grid}>
-                <div className={styles.reasonsAcceptCardBlock__icon}>
-                  <img src={icon} alt="" />
-                </div>
+      <div className="px-4 lg:px-10 flex flex-col justify-between mx-auto max-w-screen-xl w-full">
+        <div className={styles.reasonsAcceptCardBlock__title}>{props.header}</div>
+        <div className={"flex flex-wrap w-full"}>
+          {props.elements.map((el) => (
+            <div className={styles.reasonsAcceptCardBlock__item + " " + styles.reasonsAcceptCardBlock__grid}>
+              <div className={styles.reasonsAcceptCardBlock__icon}>
+                <img src={icon} alt="" />
+              </div>
+              <div className={styles.reasonsAcceptCardBlock__itemTitle} dangerouslySetInnerHTML={{ __html: el.text }} />
+            </div>
+          ))}
+          {(props.showPostscript || props.showButton) && (
+            <div className={styles.reasonsAcceptCardBlock__blockText + " flex-col align"}>
+              {props.showPostscript && (
                 <div
-                  className={styles.reasonsAcceptCardBlock__itemTitle}
-                  dangerouslySetInnerHTML={{ __html: el.text }}
+                  className={styles.reasonsAcceptCardBlock__buttonText}
+                  dangerouslySetInnerHTML={{ __html: props.textOverButton }}
                 />
-              </div>
-            ))}
-            {(props.showPostscript || props.showButton) && (
-              <div className={styles.reasonsAcceptCardBlock__blockText + " flex-col align"}>
-                {props.showPostscript && (
-                  <div
-                    className={styles.reasonsAcceptCardBlock__buttonText}
-                    dangerouslySetInnerHTML={{ __html: props.textOverButton }}
-                  />
-                )}
-                {props.showButton && <ButtonFormBlock name={props.textButton} myClass={`mt-3`} align={`flex-start`} />}
-              </div>
-            )}
-          </div>
+              )}
+              {props.showButton && <ButtonFormBlock name={props.textButton} myClass={`mt-3`} align={`flex-start`} />}
+            </div>
+          )}
         </div>
       </div>
     </div>

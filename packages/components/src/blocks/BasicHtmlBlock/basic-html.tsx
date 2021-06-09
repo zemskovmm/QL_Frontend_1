@@ -24,5 +24,7 @@ export const BasicHtmlBlockInfo: TypedBlockTypeInfo<BasicHtmlBlockProps> = {
       },
     ],
   },
-  renderer: (props) => <div className={styles.htmlBlock} dangerouslySetInnerHTML={{ __html: props.html }} />,
+  renderer: (props) => (
+    <div className={styles.htmlBlock + " px-4 lg:px-0"} dangerouslySetInnerHTML={{ __html: props.html }} />
+  ),
 };
