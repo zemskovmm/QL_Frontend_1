@@ -1,21 +1,9 @@
-.reasonsAcceptCardBlock{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
 .reasonsAcceptCardBlock__title{
   font-weight: bold;
   font-size: 30px;
   line-height: 42px;
   margin-bottom: 57px;
   color: #373737;
-}
-
-.reasonsAcceptCardBlock__list{
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
 }
 
 .reasonsAcceptCardBlock__blockText{
@@ -101,4 +89,31 @@
   width: 35px;
   border-radius: 4px;
   display: flex;
+}
+
+@media (max-width: 1023px) {
+  .reasonsAcceptCardBlock__title{
+    margin-bottom: 22px;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+  }
+  .reasonsAcceptCardBlock__buttonText{
+    width: 100%;
+    max-width: none;
+    margin-bottom: 10px;
+  }
+  .reasonsAcceptCardBlock__grid{
+    max-width: none;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+  .reasonsAcceptCardBlock__buttonText{
+    margin-top: 25px;
+  }
+  .reasonsAcceptCardBlock__buttonText:before{
+    width: 30px;
+    margin-bottom: 20px;
+  }
 }

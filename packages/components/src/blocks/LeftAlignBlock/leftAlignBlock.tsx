@@ -11,22 +11,18 @@ export interface LeftAlignBlockElement {
 export const LeftAlignBlock = (props: LeftAlignBlockElement) => {
   return (
     <div className="py-12">
-      <div className="px-10 flex justify-between mx-auto max-w-screen-xl w-full">
-        <div className={styles.leftAlignBlock}>
-          <div className={styles.leftAlignBlock__list}>
-            {props.elements.map((el) => (
-              <div className={styles.leftAlignBlock__item}>
-                <div className={styles.leftAlignBlock__icon}>
-                  <img src={`${ApiBaseUrl}/api/media/${el.img}`} alt="" />
-                </div>
-                <div className={`flex flex-col`}>
-                  <div className={styles.leftAlignBlock__itemTitle}>{el.title}</div>
-                  <div className={styles.leftAlignBlock__text} dangerouslySetInnerHTML={{ __html: el.text }} />
-                </div>
-              </div>
-            ))}
+      <div className={"px-4 lg:px-10 mx-auto max-w-screen-xl flex flex-row flex-wrap w-full justify-between"}>
+        {props.elements.map((el) => (
+          <div className={styles.leftAlignBlock__item}>
+            <div className={styles.leftAlignBlock__icon}>
+              <img src={`${ApiBaseUrl}/api/media/${el.img}`} alt="" />
+            </div>
+            <div className={`flex flex-col`}>
+              <div className={styles.leftAlignBlock__itemTitle}>{el.title}</div>
+              <div className={styles.leftAlignBlock__text} dangerouslySetInnerHTML={{ __html: el.text }} />
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

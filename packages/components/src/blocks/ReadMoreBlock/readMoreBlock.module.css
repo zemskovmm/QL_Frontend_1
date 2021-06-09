@@ -10,6 +10,13 @@
   margin-bottom: 16px;
 }
 
+@media (max-width: 767px) {
+  .readMoreBlock__title{
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+}
+
 .readMoreBlock__text{
   font-size: 14px;
   line-height: 24px;
