@@ -30,6 +30,9 @@ import { TableBlockInfo } from "./TableBlock/TableBlock";
 
 import cn from "classnames";
 import grid from "../styles/grid.module.css";
+import { PartnersBlockInfo } from "./PartnersBlock/PartnersBlock";
+import { NewsBlockInfo } from "./NewsBlock/NewsBlock";
+import { SocialTabsBlockInfo } from "./SocialTabsBlock/SocialTabsBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -58,6 +61,9 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   TableBlockInfo,
   FramesWithArrowBlockInfo,
   FixedHeightBlockInfo,
+  PartnersBlockInfo,
+  NewsBlockInfo,
+  SocialTabsBlockInfo,
 ];
 
 export interface IComponentHost {
