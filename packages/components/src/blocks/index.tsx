@@ -32,7 +32,7 @@ import cn from "classnames";
 import grid from "../styles/grid.module.css";
 import { PartnersBlockInfo } from "./PartnersBlock/PartnersBlock";
 import { NewsBlockInfo } from "./NewsBlock/NewsBlock";
-import { SocialTabsBlockInfo } from "./SocialTabsBlock/SocialTabsBlock";
+import { SocialBlockInfo } from "./SocialBlock/SocialBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -63,7 +63,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   FixedHeightBlockInfo,
   PartnersBlockInfo,
   NewsBlockInfo,
-  SocialTabsBlockInfo,
+  SocialBlockInfo,
 ];
 
 export interface IComponentHost {

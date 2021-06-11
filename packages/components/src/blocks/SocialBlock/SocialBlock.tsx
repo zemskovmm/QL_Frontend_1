@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import styles from "./SocialTabsBlock.module.css";
+import styles from "./SocialBlock.module.css";
 import cn from "classnames";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import preview from "./preview.png";
@@ -10,7 +10,7 @@ interface SocialTabsProps {
   title2: string;
 }
 
-export const SocialTabsBlock: React.FC<SocialTabsProps> = ({ title1, title2 }) => {
+export const SocialBlock: React.FC<SocialTabsProps> = ({ title1, title2 }) => {
   const [activeTab, setActiveTab] = useState(1);
 
   return (
@@ -38,11 +38,11 @@ export const SocialTabsBlock: React.FC<SocialTabsProps> = ({ title1, title2 }) =
   );
 };
 
-export const SocialTabsBlockInfo: TypedBlockTypeInfo<SocialTabsProps> = {
-  id: "SocialTabsBlock",
-  name: "SocialTabsBlock",
+export const SocialBlockInfo: TypedBlockTypeInfo<SocialTabsProps> = {
+  id: "SocialBlock",
+  name: "SocialBlock",
   preview: preview,
-  renderer: SocialTabsBlock,
+  renderer: SocialBlock,
   initialData: {
     title1: "Instagram",
     title2: "YouTube",
