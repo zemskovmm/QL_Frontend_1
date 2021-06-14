@@ -70,7 +70,7 @@ const TableRowBlock = (props: TableRowElement) => {
         <>
           {titleText && <span>{titleText}</span>}
           {props.text?.includes("<red>") ? (
-            <p dangerouslySetInnerHTML={{ __html: props.text?.replaceAll("red>", "b>") }} />
+            <p dangerouslySetInnerHTML={{ __html: props.text?.replace(/red>/g, "b>") }} />
           ) : (
             props.text
           )}

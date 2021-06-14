@@ -5,7 +5,7 @@ import { CatalogWidget, ServerCatalogWidget } from "../../components/catalog/cat
 import { housingCatalogFilters } from "src/hardcoded/housingCatalogFilters";
 import mainPageData from "src/hardcoded/mainPageData";
 import Tabs from "src/components/ui/Tabs/Tabs";
-import { CirclesBlock } from "@project/components/src/blocks/circles";
+import { CirclesBlock } from "@project/components/src/blocks/CirclesBlock/circles";
 import Partners from "src/components/main/Partners/Partners";
 import Offers from "src/components/main/Offers/Offers";
 import bgSearch from "src/assets/images/search.png";
