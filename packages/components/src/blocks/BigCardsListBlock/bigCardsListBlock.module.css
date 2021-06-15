@@ -1,8 +1,26 @@
 ﻿.bigCardsListBlock__title {
   max-width: 90%;
-  margin: 0;
-  margin-bottom: 40px;
 }
+
+.bigCardsListBlock__subtitle{
+  display: flex;
+  margin-left: 56px;
+  font-size: 0.875rem;
+  line-height: 140%;
+  max-width: 440px;
+  font-weight: 600;
+}
+
+.bigCardsListBlock__subtitle:before {
+  content: '';
+  flex-shrink: 0;
+  margin-top: 6px;
+  width: 10px;
+  height: 9px;
+  margin-right: 16px;
+  background: url('./romb.svg') no-repeat center / contain;
+}
+
 
 .bigCard {
   max-width: 370px;
@@ -20,7 +38,7 @@
 }
 
 .bigCard:hover {
-  box-shadow: 0px 10px 30px rgba(0, 78, 255, 0.07), 0px 20px 50px rgba(0, 78, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
   cursor: pointer;
 }
 
@@ -62,6 +80,36 @@
   margin-bottom: 18px;
 }
 
+.main h2 {
+  font-size: 1.875rem;
+  line-height: 140%;
+  font-weight: 700;
+  white-space: nowrap;
+  padding-bottom: 8px;
+}
+
+.main a {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
+  border-radius: 6px;
+  width: 370px;
+  padding: 15px;
+}
+
+.main a > div:first-of-type {
+  font-weight: 700;
+  margin: 24px 10px;
+  font-size: 1.125rem;
+  line-height: 144%;
+}
+
+.main img {
+  max-height: none !important;
+  height: auto !important;
+}
+
 @media (max-width: 1023px) {
   .bigCardsListBlock__title{
     max-width: none;
@@ -73,8 +121,7 @@
     margin-bottom: 10px;
   }
   .bigCard:nth-child(2), .bigCard:nth-child(3n + 2) {
-    margin: 0 0px;
-    margin-bottom: 10px;
+    margin: 0 0 0 10px;
   }
   .bigCard__img{
     height: 200px;
