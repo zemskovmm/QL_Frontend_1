@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./cardsWithLinksBlock.module.css";
 import Link from "next/link";
@@ -13,32 +13,25 @@ export interface CardsWithLinksBlockElement {
 
 export const CardsWithLinksBlock = (props: CardsWithLinksBlockElement) => {
   return (
-    <div className="py-12">
-      <div className="px-10 flex justify-between mx-auto max-w-screen-xl w-full">
-        <div className={styles.cardsWithLinksBlock}>
-          <div className={styles.cardsWithLinksBlock__head}>
-            <h2 className={styles.cardsWithLinksBlock__title} dangerouslySetInnerHTML={{ __html: props.title }} />
-            <div
-              className={styles.cardsWithLinksBlock__subtitle}
-              dangerouslySetInnerHTML={{ __html: props.subtitle }}
-            />
-          </div>
-          <div className={styles.cardsWithLinksBlock__list}>
-            {props.elements.map((el) => (
-              <div className={styles.cardsWithLinksBlock__item + " " + styles.cardsWithLinksBlock__grid}>
-                <div className={styles.cardsWithLinksBlock__itemTitle} dangerouslySetInnerHTML={{ __html: el.title }} />
-                {el.links?.map((item) => (
-                  <Link href={item.link ?? "#"}>
-                    <a className={`flex`}>
-                      <img src={arrow} alt="" />
-                      {item.name}
-                    </a>
-                  </Link>
-                ))}
-              </div>
+    <div className="px-4 lg:px-10 py-12 flex flex-col justify-between mx-auto max-w-screen-xl w-full">
+      <div className={`flex flex-col lg:flex-row mb-3.5 lg:mb-10 lg:items-center`}>
+        <h2 className={styles.cardsWithLinksBlock__title} dangerouslySetInnerHTML={{ __html: props.title }} />
+        <div className={styles.cardsWithLinksBlock__subtitle} dangerouslySetInnerHTML={{ __html: props.subtitle }} />
+      </div>
+      <div className={"flex flex-wrap w-full"}>
+        {props.elements.map((el) => (
+          <div className={styles.cardsWithLinksBlock__item + " " + styles.cardsWithLinksBlock__grid}>
+            <div className={styles.cardsWithLinksBlock__itemTitle} dangerouslySetInnerHTML={{ __html: el.title }} />
+            {el.links?.map((item) => (
+              <Link href={item.link ?? "#"}>
+                <a className={`flex`}>
+                  <img src={arrow} alt="" />
+                  {item.name}
+                </a>
+              </Link>
             ))}
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
@@ -113,17 +106,6 @@ export const CardsWithLinksBlockInfo: TypedBlockTypeInfo<CardsWithLinksBlockElem
         name: "Elements",
         type: "List",
         listType: "element",
-      },
-      {
-        id: "textOverButton",
-        type: "Custom",
-        customType: "Html",
-        name: "Text Over Button",
-      },
-      {
-        id: "showPostscript",
-        type: "CheckBox",
-        name: "ShowPostscript",
       },
     ],
   },

@@ -7,10 +7,11 @@ import { Paginator } from "src/components/common/Paginator";
 import { dmap } from "src/utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { AdminPageListItemDto } from "src/interfaces/AdminPageDto";
+import { useObserver } from "mobx-react";
 
 export const PageListPage = () => {
-  var s = useRootStore().pageListPage;
-  return (
+  const s = useRootStore().pageListPage;
+  return useObserver(() => (
     <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -37,7 +38,7 @@ export const PageListPage = () => {
                   );
                 },
               }))}
-              rows={s.current.results}
+              rows={s.current.results.slice(s.currentPage * 10, (s.currentPage + 1) * 10)}
               idGetter={(r) => r.id.toString()}
             />
             <Paginator page={s.currentPage} totalPages={s.current.totalPages} setPage={(p) => s.load(p)} />
@@ -45,5 +46,5 @@ export const PageListPage = () => {
         </div>
       </div>
     </div>
-  );
+  ));
 };
