@@ -1,15 +1,3 @@
-.cardsWithLinksBlock{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.cardsWithLinksBlock__head {
-  margin-bottom: 40px;
-  display: flex;
-  align-items: center;
-}
-
 .cardsWithLinksBlock__title {
   margin: 0;
   max-width: 501px;
@@ -24,6 +12,7 @@
   line-height: 24px;
   color: #373737;
   position: relative;
+  padding-left: 25px;
 }
 
 .cardsWithLinksBlock__subtitle:before{
@@ -31,25 +20,11 @@
   margin-top: 8px;
   width: 7px;
   height: 7px;
-  margin-right: 16px;
   border: 1px solid #FF6768;
   box-sizing: border-box;
   transform: rotate(-45deg);
   position: absolute;
-  left: -25px;
-}
-
-.cardsWithLinksBlock__list{
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.cardsWithLinksBlock__blockText{
-  max-width: 69.2307692307%;
-  min-width: 69.2307692307%;
-  margin-bottom: 60px;
-  display: flex;
+  left: 0px;
 }
 
 .cardsWithLinksBlock__grid{
@@ -103,4 +78,27 @@
   width: 10px;
   min-width: 10px;
   margin-right: 13px;
+}
+
+@media (max-width: 1023px) {
+  .cardsWithLinksBlock__itemTitle{
+    margin-bottom: 8px;
+  }
+  .cardsWithLinksBlock__title{
+    max-width: none;
+    text-align: center;
+    margin-right: 0;
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 10px;
+  }
+  .cardsWithLinksBlock__grid{
+    max-width: none;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  .cardsWithLinksBlock__item{
+    padding: 23px 13px 21px 19px;
+  }
 }
