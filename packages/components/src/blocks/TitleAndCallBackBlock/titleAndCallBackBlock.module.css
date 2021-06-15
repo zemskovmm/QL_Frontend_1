@@ -12,3 +12,19 @@
   line-height: 24px;
   margin-bottom: 18px;
 }
+
+@media (max-width: 1023px) {
+  .callbackBlock{
+    margin-right: 0;
+    margin-left: 0;
+    max-width: none;
+  }
+  .callbackBlock button{
+    width: 100%;
+    justify-content: center;
+  }
+  .callbackBlockText{
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}

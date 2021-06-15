@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Search.module.css";
-import {ApiBaseUrl} from "../../api/apiClientBase";
+import { ApiBaseUrl } from "../../api/apiClientBase";
 
 interface SearchProps {
   title?: string;
@@ -20,9 +20,16 @@ const Search = ({ title, children, className, background, breadcrumbs, callback 
     className={styles.Search + ` ${breadcrumbs ? styles.SearchPadding__breadcrumbs : styles.SearchPadding}`}
     style={{ backgroundImage: `url(${ApiBaseUrl}/api/media/${background})` }}
   >
-    <div className={`flex items-start max-w-screen-xl w-full my-0 mx-auto px-10 ${callback ? "flex-row" : "flex-col"}`}>
+    <div
+      className={`flex flex-col justify-center lg:items-start max-w-screen-xl w-full my-0 mx-auto px-4 lg:px-10 ${
+        callback ? "lg:flex-row" : ""
+      }`}
+    >
       <h1>{title}</h1>
-      <div className={`${className}  ${callback ? "flex ml-auto" : styles.SearchBlock}`}>{children}</div>
+      <div className={`${className} hidden ${callback ? "flex flex-col lg:ml-auto" : styles.SearchBlock} lg:flex`}>
+        {children}
+      </div>
+      <div className={`${className}  flex flex-col lg:hidden`}>{children}</div>
     </div>
   </div>
 );

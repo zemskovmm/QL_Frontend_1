@@ -1,0 +1,17 @@
+.buttonMobile{
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 42px;
+  background: white;
+  border-radius: 3px;
+  border: 1px solid #EFF3FA;
+  padding: 5px 23px;
+  margin-bottom: 5px;
+}
+.buttonMobile img{
+  padding: 19px 0;
+  padding-right: 23px;
+  margin-right: 20px;
+  border-right: 1px solid #C9D5F0;
+}
