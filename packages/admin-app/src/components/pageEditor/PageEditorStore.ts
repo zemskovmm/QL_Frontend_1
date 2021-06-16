@@ -58,11 +58,13 @@ export class PageEditorCellDialogStore {
   @observable.ref blockDatas: { [name: string]: any } = {};
   @observable blockType: string = "";
   @observable size: number;
+  @observable hide: boolean;
 
   constructor(private cell: PageEditorCellStore, private dismiss: () => void) {
     this.blockType = cell.blockType;
     this.blockDatas[cell.blockType] = cell.blockData;
     this.size = cell.size;
+    this.hide = cell.hide;
   }
 
   @computed get currentEditor(): RemoteUiEditorStore | null {
@@ -88,6 +90,7 @@ export class PageEditorCellDialogStore {
     runInAction(() => {
       this.cell.blockType = this.blockType;
       this.cell.blockData = data;
+      this.cell.hide = this.hide;
       this.cell.size = this.size;
       this.dismiss();
     });
@@ -98,15 +101,18 @@ export class PageEditorCellStore {
   @observable blockType: string = "";
   @observable blockData: any = null;
   @observable size: number;
+  @observable hide: boolean;
 
   constructor(
     private editor: PageRowsEditorStore,
     private row: PageEditorRowStore,
     size: number,
+    hide: boolean,
     blockType: string,
     blockData: any
   ) {
     this.size = size;
+    this.hide = hide;
     const info = findBlockInfo(blockType);
     if (info != null) {
       this.blockData = blockData;
@@ -129,6 +135,7 @@ function editNewCell(editor: PageRowsEditorStore, row: PageEditorRowStore, cb: (
     editor,
     row,
     12,
+    false,
     AvailableBlocks[0].id,
     JSON.parse(JSON.stringify(AvailableBlocks[0].initialData))
   );
@@ -142,6 +149,7 @@ export class PageEditorRowStore {
   @observable cells: PageEditorCellStore[] = [];
   @observable maxWidth?: string;
   @observable backGround?: string;
+  @observable hide: boolean = false;
 
   constructor(private editor: PageRowsEditorStore) {}
 
@@ -151,8 +159,8 @@ export class PageEditorRowStore {
     });
   }
 
-  @action addCellWithData(type: string, data: any, size: number) {
-    this.cells.push(new PageEditorCellStore(this.editor, this, size, type, data));
+  @action addCellWithData(type: string, data: any, size: number, hide: boolean) {
+    this.cells.push(new PageEditorCellStore(this.editor, this, size, hide, type, data));
   }
 
   remove() {
@@ -188,7 +196,8 @@ export class PageEditorRowStore {
     return {
       maxWidth: this.maxWidth,
       background: this.backGround,
-      blocks: this.cells.map((c) => ({ type: c.blockType, data: c.blockData, size: c.size })),
+      hide: this.hide,
+      blocks: this.cells.map((c) => ({ type: c.blockType, data: c.blockData, size: c.size, hide: c.hide })),
     };
   }
 }
@@ -199,7 +208,8 @@ export class PageRowsEditorStore {
       const editor = new PageEditorRowStore(this);
       editor.maxWidth = row.maxWidth;
       editor.backGround = row.background;
-      for (const cell of row.blocks) editor.addCellWithData(cell.type, cell.data, cell.size);
+      editor.hide = row.hide;
+      for (const cell of row.blocks) editor.addCellWithData(cell.type, cell.data, cell.size, cell.hide);
       return editor;
     });
   }
@@ -262,9 +272,11 @@ export class PageEditorStore extends RequestTracking {
           {
             maxWidth: "",
             background: "",
+            hide: false,
             blocks: [
               {
                 size: 12,
+                hide: false,
                 type: AvailableBlocks[0].id,
                 data: JSON.parse(JSON.stringify(AvailableBlocks[0].initialData)),
               },
