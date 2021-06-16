@@ -26,3 +26,20 @@
   content: "• ";
   color: rgb(1, 53, 154);
 }
+
+
+@media screen and (max-width: 1023px) {
+  .block {
+    flex-direction: column;
+    align-items: center !important;
+  }
+
+  .block img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .block h3 {
+    text-align: center;
+  }
+}

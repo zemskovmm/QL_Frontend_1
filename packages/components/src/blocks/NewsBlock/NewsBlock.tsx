@@ -15,7 +15,7 @@ export interface NewsProps {
 
 export const NewsBlock: React.FC<NewsProps> = ({ title, url, num, news }) => (
   <section className={"py-24"}>
-    <div className="flex flex-col max-w-screen-xl w-full my-0 mx-auto">
+    <div className={cn(styles.container, "px-10 flex flex-col max-w-screen-xl w-full my-0 mx-auto")}>
       <h2 className={styles.title}>
         {url ? (
           <a className={styles.link} href={url}>

@@ -111,11 +111,28 @@
 }
 
 @media (max-width: 1023px) {
+
+  .titlepart{
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
   .bigCardsListBlock__title{
     max-width: none;
     text-align: center;
     margin-bottom: 12px;
+    font-size: 1.5rem;
   }
+
+  .bigCardsListBlock__subtitle{
+    margin-left: 0;
+  }
+
+  .main h2 {
+    font-size: 1.5rem;
+    white-space: normal;
+  }
+
   .bigCard{
     padding: 10px;
     margin-bottom: 10px;

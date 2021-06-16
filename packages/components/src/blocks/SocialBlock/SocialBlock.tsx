@@ -14,8 +14,8 @@ export const SocialBlock: React.FC<SocialTabsProps> = ({ title1, title2 }) => {
   const [activeTab, setActiveTab] = useState(1);
 
   return (
-    <div>
-      <div className="flex w-full">
+    <div className={"py-24"}>
+      <div className="px-10 flex w-full">
         <a
           className={cn(styles.link, activeTab === 1 ? styles.active : "")}
           href="#"
