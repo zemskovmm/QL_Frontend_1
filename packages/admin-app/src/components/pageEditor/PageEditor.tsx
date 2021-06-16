@@ -107,6 +107,27 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                     <span className={`ml-3`}>White-Gray</span>
                   </label>
                 </div>
+                <div className={`flex flex-col`}>
+                  <span>Show Row:</span>
+                  <label className={`flex items-center mr-6`}>
+                    <input
+                      type={"radio"}
+                      name={"hideRow"}
+                      onChange={(e) => (props.store.hide = !Boolean(e.target.value))}
+                      checked={!props.store.hide}
+                    />
+                    <span className={`ml-3`}>Show</span>
+                  </label>
+                  <label className={`flex items-center mr-6`}>
+                    <input
+                      type={"radio"}
+                      name={"hideRow"}
+                      onChange={(e) => (props.store.hide = Boolean(e.target.value))}
+                      checked={props.store.hide}
+                    />
+                    <span className={`ml-3`}>Hide</span>
+                  </label>
+                </div>
               </div>
               <div>
                 {props.store.cells.map((cell, i) => (
@@ -173,10 +194,34 @@ const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
 
   return useObserver(() => (
     <div>
-      Size:
-      <br />
-      <AdminSlider min={1} max={12} value={props.store.size} onChange={(v) => (props.store.size = v)} />
-      <br />
+      <div className={`flex`}>
+        <div className={`mr-10`}>
+          Size:
+          <br />
+          <AdminSlider min={1} max={12} value={props.store.size} onChange={(v) => (props.store.size = v)} />
+        </div>
+        <div className={`flex flex-col`}>
+          <span>Show block:</span>
+          <label className={`flex items-center mr-6`}>
+            <input
+              type={"radio"}
+              name={"hideCell"}
+              onChange={(e) => (props.store.hide = !Boolean(e.target.value))}
+              checked={!props.store.hide}
+            />
+            <span className={`ml-3`}>Show</span>
+          </label>
+          <label className={`flex items-center mr-6`}>
+            <input
+              type={"radio"}
+              name={"hideCell"}
+              onChange={(e) => (props.store.hide = Boolean(e.target.value))}
+              checked={props.store.hide}
+            />
+            <span className={`ml-3`}>Hide</span>
+          </label>
+        </div>
+      </div>
       Type: {AvailableBlocks[currentType].name}
       <br />
       <AdminButton color={"primary"} onClick={() => setShowTypes(true)}>

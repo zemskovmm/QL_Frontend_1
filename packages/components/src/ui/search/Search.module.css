@@ -20,12 +20,24 @@
   margin-bottom: 50px;
 }
 
+@media (max-width: 1023px) {
+  .SearchPadding{
+    padding: 56px 0 41px 0;
+  }
+  .Search h1{
+    font-size: 18px;
+    line-height: 28px;
+    max-width: none;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+}
+
 .SearchBlock{
   background: #FFFFFF;
   box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
   border-radius: 6px;
   width: 100%;
-  display: flex;
   justify-content: space-between;
 }
 
