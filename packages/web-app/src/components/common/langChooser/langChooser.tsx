@@ -19,11 +19,11 @@ export const LangChooser = ({ lang, urls }: langProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const curr: currType = {
+    en: "$",
+    fr: "€",
     ru: "RUB",
     cn: "¥",
     esp: "$",
-    en: "$",
-    fr: "€",
   };
 
   return (
