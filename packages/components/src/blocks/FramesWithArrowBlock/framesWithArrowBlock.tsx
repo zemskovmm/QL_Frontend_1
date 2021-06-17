@@ -2,6 +2,7 @@ import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./framesWithArrowBlock.module.css";
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface FramesWithArrowBlockElement {
   elements: { text: string }[];
@@ -11,7 +12,7 @@ export interface FramesWithArrowBlockElement {
 export const FramesWithArrowBlock = (props: FramesWithArrowBlockElement) => {
   return (
     <div className="px-10 mx-auto max-w-screen-xl w-full">
-      <div dangerouslySetInnerHTML={{ __html: props.text }} />
+      <HtmlPresenter text={props.text} />
       <div className="flex justify-start items-start flex-wrap">
         {props.elements.map((el, ind) => (
           <div className={styles.frame} key={ind}>

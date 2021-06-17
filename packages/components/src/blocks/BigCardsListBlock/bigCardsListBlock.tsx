@@ -4,6 +4,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
 import cn from "classnames";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 type BigCardProps = {
   card: {
@@ -19,7 +20,9 @@ const BigCard: FC<BigCardProps> = ({ card }) => {
     <a href={card.url} className={style.bigCard}>
       <img src={`${ApiBaseUrl}/api/media/${card.img}`} alt="" className={style.bigCard__img} />
       <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
-      <div className={style.bigCard__subtitle} dangerouslySetInnerHTML={{ __html: card.text }} />
+      <div className={style.bigCard__subtitle}>
+        <HtmlPresenter text={card.text} />
+      </div>
     </a>
   );
 };

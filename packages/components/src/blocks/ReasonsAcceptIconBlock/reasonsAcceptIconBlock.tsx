@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsAcceptIconBlock.module.css";
-import { is } from "@babel/types/lib/index-legacy";
 import icon from "./acceptIcon.svg";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface ReasonsAcceptIconBlockElement {
   header: string;
@@ -35,10 +35,9 @@ export const ReasonsAcceptIconBlock = (props: ReasonsAcceptIconBlockElement) => 
             {props.showButton && (
               <div className={styles.reasonsAcceptIconBlock__item + " flex-col px-10 lg:px-0"}>
                 {props.textOverButton && (
-                  <div
-                    className={styles.reasonsAcceptIconBlock__buttonText}
-                    dangerouslySetInnerHTML={{ __html: props.textOverButton }}
-                  />
+                  <div className={styles.reasonsAcceptIconBlock__buttonText}>
+                    <HtmlPresenter text={props.textOverButton} />
+                  </div>
                 )}
                 <ButtonFormBlock name={props.textButton} align={`center`} />
               </div>
