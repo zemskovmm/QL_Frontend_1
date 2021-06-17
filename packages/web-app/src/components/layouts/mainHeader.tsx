@@ -38,10 +38,10 @@ export const MainHeader = (props: MainHeaderProps) => {
         >
           <div className="flex">
             <Link href={`/${lang}`}>
-              <>
+              <a>
                 <img className="mr-6 cursor-pointer hidden lg:block" src={Logo} alt="Quartier Latin" />
                 <img className="mr-6 cursor-pointer lg:hidden" src={LogoMob} alt="Quartier Latin" />
-              </>
+              </a>
             </Link>
             <ul className="hidden lg:flex list-none ">
               {props.data[lang].links.map((l, index) => (
