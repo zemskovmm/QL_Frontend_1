@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import style from "./catalogInnerAbout.module.css";
 import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
 import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
+import { HtmlPresenter } from "@project/components/src/ui/HtmlPresenter/htmlPresenter";
 
 const CatalogCallBack = () => {
   return (
@@ -27,10 +28,7 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
       <div className={style.catalogInnerAbout__maxWidth}>
         <div className={style.catalogInnerAbout}>
           <h2 className={style.catalogInnerAbout__title}>{data.title}</h2>
-          <div
-            className={style.catalogInnerAbout__content}
-            dangerouslySetInnerHTML={{ __html: data.descriptionHtml }}
-          />
+          <HtmlPresenter text={data.descriptionHtml} />
           <div className={style.info__row}>
             <div className={`${style.info__columnItem} w-full`}>
               <span className={`${style.info__columnTitle}`}>Направления обучения:</span>

@@ -3,6 +3,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./faqBlock.module.css";
 import arrow from "./arrow-down.svg";
 import preview from "./preview.jpg";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface FaqBlockElement {
   title: string;
@@ -49,7 +50,9 @@ export const FaqBlock = (props: FaqBlockElement) => {
                     <div className={styles.faqBlock__itemTitle} dangerouslySetInnerHTML={{ __html: el.title }} />
                     <img className={`ml-auto ${styles.faqBlock__itemArrow}`} src={arrow} alt="" />
                   </div>
-                  <div className={`${styles.faqBlock__itemText}`} dangerouslySetInnerHTML={{ __html: el.text }} />
+                  <div className={`${styles.faqBlock__itemText}`}>
+                    <HtmlPresenter text={el.text} />
+                  </div>
                 </div>
               ))}
             </div>

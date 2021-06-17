@@ -1,7 +1,7 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
-import styles from "./basichtml.module.css";
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface BasicHtmlBlockProps {
   html: string;
@@ -25,6 +25,8 @@ export const BasicHtmlBlockInfo: TypedBlockTypeInfo<BasicHtmlBlockProps> = {
     ],
   },
   renderer: (props) => (
-    <div className={styles.htmlBlock + " px-4 lg:px-0"} dangerouslySetInnerHTML={{ __html: props.html }} />
+    <div className={`px-4 lg:px-0`}>
+      <HtmlPresenter text={props.html} />
+    </div>
   ),
 };
