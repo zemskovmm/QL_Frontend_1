@@ -150,6 +150,7 @@ export class PageEditorRowStore {
   @observable maxWidth?: string;
   @observable backGround?: string;
   @observable hide: boolean = false;
+  @observable vertical: string = "start";
 
   constructor(private editor: PageRowsEditorStore) {}
 
@@ -197,6 +198,7 @@ export class PageEditorRowStore {
       maxWidth: this.maxWidth,
       background: this.backGround,
       hide: this.hide,
+      vertical: this.vertical,
       blocks: this.cells.map((c) => ({ type: c.blockType, data: c.blockData, size: c.size, hide: c.hide })),
     };
   }
@@ -209,6 +211,7 @@ export class PageRowsEditorStore {
       editor.maxWidth = row.maxWidth;
       editor.backGround = row.background;
       editor.hide = row.hide;
+      editor.vertical = row.vertical;
       for (const cell of row.blocks) editor.addCellWithData(cell.type, cell.data, cell.size, cell.hide);
       return editor;
     });
@@ -273,6 +276,7 @@ export class PageEditorStore extends RequestTracking {
             maxWidth: "",
             background: "",
             hide: false,
+            vertical: "start",
             blocks: [
               {
                 size: 12,

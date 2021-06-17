@@ -14,7 +14,7 @@ export interface PartnersProps {
 }
 
 export const PartnersBlock: React.FC<PartnersProps> = ({ title, url, num, elements }) => (
-  <section className="py-24">
+  <div className="py-24">
     <div className="flex flex-col max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
       <h2 className={styles.title}>
         {url ? (
@@ -47,7 +47,7 @@ export const PartnersBlock: React.FC<PartnersProps> = ({ title, url, num, elemen
         ))}
       </div>
     </div>
-  </section>
+  </div>
 );
 
 export const PartnersBlockInfo: TypedBlockTypeInfo<PartnersProps> = {
