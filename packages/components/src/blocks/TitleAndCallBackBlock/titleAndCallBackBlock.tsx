@@ -1,9 +1,7 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./titleAndCallBackBlock.module.css";
-import Tabs from "../../ui/Tabs/Tabs";
 import Search from "../../ui/search/Search";
-import { ServerCatalogWidget, CatalogWidget } from "../../ui/catalog/catalogWidget";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 import preview from "./preview.png";
 
@@ -14,6 +12,8 @@ enum TabsEnum {
 
 export interface TitleAndCallBackBlockElement {
   title: string;
+  titleColor: "black" | "white";
+  titleShadow?: boolean;
   textButton: string;
   textAbove: string;
   background: number | null;
@@ -22,7 +22,13 @@ export interface TitleAndCallBackBlockElement {
 
 export const TitleAndCallBackBlock = (props: TitleAndCallBackBlockElement) => {
   return (
-    <Search title={props.title} background={props.background} callback={true}>
+    <Search
+      title={props.title}
+      titleColor={props.titleColor}
+      titleShadow={props.titleShadow}
+      background={props.background}
+      callback={true}
+    >
       {props.showButton && (
         <div className={`flex flex-col ${styles.callbackBlock}`}>
           <div className={`${styles.callbackBlockText}`} dangerouslySetInnerHTML={{ __html: props.textAbove }} />
@@ -40,6 +46,8 @@ export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlock
   renderer: TitleAndCallBackBlock,
   initialData: {
     title: "Title",
+    titleColor: "black",
+    titleShadow: false,
     textButton: "Title",
     textAbove: "Title",
     background: null,
@@ -51,6 +59,26 @@ export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlock
         id: "title",
         type: "String",
         name: "Title",
+      },
+      {
+        id: "titleColor",
+        type: "Radio",
+        name: "Title Color",
+        possibleValues: [
+          {
+            id: "black",
+            name: "Black",
+          },
+          {
+            id: "white",
+            name: "White",
+          },
+        ],
+      },
+      {
+        id: "titleShadow",
+        type: "CheckBox",
+        name: "Title with shadow",
       },
       {
         id: "textButton",

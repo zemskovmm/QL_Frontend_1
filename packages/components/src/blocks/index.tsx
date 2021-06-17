@@ -93,9 +93,10 @@ const RowPresenter = (props: PageBlockRowDto) => {
   return (
     <section
       style={{ background: props.background, maxWidth: props.maxWidth ? props.maxWidth : "100%" }}
-      className={`relative mx-auto`}
+      className={cn(`relative mx-auto`, props.vertical ? `flex items-${props.vertical} flex-adaptive` : "")}
     >
       {sortBlocks.map((cell, i) => {
+        if (cell.hide) return;
         if (cell.type === "breadcrumbsBlock") return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
         return (
           <div
@@ -117,9 +118,19 @@ const RowPresenter = (props: PageBlockRowDto) => {
 export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
   return (
     <>
-      {props.rows.map((row, i) => (
-        <RowPresenter key={i} blocks={row.blocks} maxWidth={row.maxWidth} background={row.background} />
-      ))}
+      {props.rows.map(
+        (row, i) =>
+          !row.hide && (
+            <RowPresenter
+              key={i}
+              blocks={row.blocks}
+              maxWidth={row.maxWidth}
+              background={row.background}
+              hide={row.hide}
+              vertical={row.vertical}
+            />
+          )
+      )}
     </>
   );
 };
