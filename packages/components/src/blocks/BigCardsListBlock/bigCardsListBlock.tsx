@@ -35,11 +35,11 @@ export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({ elements, titl
   return (
     <div className={cn(mainStyle ? style.main : "", "py-12")}>
       <div className="px-10 flex flex-col justify-between mx-auto max-w-screen-xl w-full">
-        <div className="flex items-end mb-10">
+        <div className={cn(style.titlepart, "flex items-end mb-10")}>
           <h2 className={style.bigCardsListBlock__title}>{title}</h2>
           {subtitle && <h3 className={style.bigCardsListBlock__subtitle}>{subtitle}</h3>}
         </div>
-        <div className={cn(mainStyle ? "" : "", "flex flex-wrap w-full")}>
+        <div className="flex flex-wrap w-full">
           {elements.map((el, ind) => (
             <BigCard key={ind} card={el} />
           ))}

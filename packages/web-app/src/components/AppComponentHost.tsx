@@ -19,7 +19,7 @@ export const AppComponentHost: React.FC = ({ children }) => {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href="/static/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <title>Quartier Latin</title>
         {/*<meta name="viewport" content="width=1024" />*/}
         <meta name="viewport" content="width=device-width, user-scalable=yes" />

@@ -54,3 +54,13 @@
   margin: 0;
   padding-top: 0;
 }
+
+@media screen and (max-width: 1023px){
+  .faqBlock__container  {
+    flex-direction: column;
+  }
+
+  .faqBlock__container > div {
+    margin-bottom: 10px;
+  }
+}

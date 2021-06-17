@@ -68,3 +68,22 @@
   color: #373737;
   max-width: 200px;
 }
+
+@media screen and (max-width: 1023px) {
+  .container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .title {
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .news a {
+    width: 100%;
+    max-width: 386px;
+    min-width: 0;
+    margin-right: 0;
+  }
+}

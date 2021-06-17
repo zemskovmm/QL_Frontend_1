@@ -16,7 +16,7 @@ export const FaqBlock = (props: FaqBlockElement) => {
   return (
     <div className="py-12">
       <div className="px-10 flex justify-between mx-auto max-w-screen-xl w-full">
-        <div className={`flex w-full flex-col ${styles.faqBlock}`}>
+        <div className={`flex w-full flex-col`}>
           <div className={styles.faqBlock__title}>{props.title}</div>
           <div className={`flex w-full ${styles.faqBlock__container}`}>
             <div className={`flex w-full flex-col pr-1`}>
