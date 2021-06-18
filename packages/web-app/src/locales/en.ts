@@ -34,6 +34,18 @@ const en = {
   catalogItems_price_value: "€",
   catalogList_show: "View all",
   catalogList_hide: "Collapse",
+  university_button: "I want to study here",
+  university_question: "Have questions?",
+  university_answer: "Our manager will answer them!",
+  university_year: "Year",
+  university_direction: "Directions of study:",
+  university_cost: "Cost of education:",
+  university_lang: "Language of education:",
+  university_city: "Cities:",
+  university_sert: "Certification:",
+  university_foundation: "Year of foundation:",
+  university_from: "From:",
+  university_upto: "Up to:",
 };
 
 export default en;

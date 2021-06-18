@@ -43,8 +43,8 @@ export const BigCardsListBlock: FC<BigCardsListBlockProps> = ({ cards, linksButt
         <div className={style.bigCardsListBlock__container}>
           <h2 className={style.bigCardsListBlock__title} dangerouslySetInnerHTML={{ __html: title }} />
           <div className={style.bigCardsListBlock__list}>
-            {cards.map((el) => (
-              <BigCard card={el} />
+            {cards.map((el, ind) => (
+              <BigCard key={ind} card={el} />
             ))}
           </div>
           <PostScript data={linksButton} />

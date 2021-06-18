@@ -5,6 +5,7 @@ import { ApiBaseUrl } from "../../api/apiClientBase";
 import cn from "classnames";
 
 interface SearchProps {
+  logo?: number | null;
   title?: string;
   titleColor?: "black" | "white";
   titleShadow?: boolean;
@@ -19,6 +20,7 @@ interface SearchProps {
 }
 
 const Search = ({
+  logo,
   title,
   children,
   className,
@@ -30,14 +32,15 @@ const Search = ({
 }: SearchProps) => (
   <div
     className={styles.Search + ` ${breadcrumbs ? styles.SearchPadding__breadcrumbs : styles.SearchPadding}`}
-    style={{ backgroundImage: `url(${ApiBaseUrl}/api/media/${background})` }}
+    style={{ backgroundImage: background ? `url(${ApiBaseUrl}/api/media/${background})` : undefined }}
   >
     <div
       className={`flex flex-col justify-center lg:items-start max-w-screen-xl w-full my-0 mx-auto px-4 lg:px-10 ${
-        callback ? "lg:flex-row" : ""
+        callback ? "lg:flex-row lg:items-center" : ""
       }`}
     >
       <h1 className={cn(titleColor === "white" ? styles.white_title : "", titleShadow ? styles.shadow_title : "")}>
+        {logo && <img src={`${ApiBaseUrl}/api/media/${logo}`} alt="" />}
         {title}
       </h1>
       <div className={`${className} hidden ${callback ? "flex flex-col lg:ml-auto" : styles.SearchBlock} lg:flex`}>
