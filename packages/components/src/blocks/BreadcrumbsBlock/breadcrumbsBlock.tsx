@@ -4,21 +4,22 @@ import { ComponentHostContext } from "../index";
 import style from "./breadcrumbsBlock.module.css";
 import icon from "./arrow-left.svg";
 import preview from "./preview.png";
+import Link from "next/link";
 
 export interface BreadcrumbsBlockElement {
-  items: { name: string; link: string }[];
+  items: { name: string | React.ReactNode; link: string }[];
 }
 
 export const BreadcrumbsBlock = (props: BreadcrumbsBlockElement) => {
   return (
     <div className={style.breadcrumbs + " flex"}>
       {props.items.map((el, index) => (
-        <>
-          <a href={el.link} className={style.breadcrumbs__items} key={`${index} bread`}>
+        <Link href={el.link ? el.link : "#"}>
+          <a className={style.breadcrumbs__items} key={`${index} bread`}>
             {el.name}
             {props.items.length - 1 > index && <img src={icon} alt="" />}
           </a>
-        </>
+        </Link>
       ))}
     </div>
   );

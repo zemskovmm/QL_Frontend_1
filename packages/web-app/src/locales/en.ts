@@ -29,7 +29,7 @@ const en = {
   catalogItems_language_all: "All language",
   catalogItems_price: "The cost",
   catalogItems_price_from: "from",
-  catalogItems_price_before: "before",
+  catalogItems_price_before: "begfore",
   catalogItems_price_week: "week",
   catalogItems_price_value: "€",
   catalogList_show: "View all",
