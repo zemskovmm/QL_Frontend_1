@@ -13,20 +13,6 @@
   margin-right: 20px;
 }
 
-.block ul {
-  list-style: none;
-}
-
-.block ul li {
-  padding-left: 1em;
-  text-indent: -.7em;
-}
-
-.block ul li::before {
-  content: "• ";
-  color: rgb(1, 53, 154);
-}
-
 
 @media screen and (max-width: 1023px) {
   .block {

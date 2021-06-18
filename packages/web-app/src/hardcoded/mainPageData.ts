@@ -18,56 +18,60 @@ const mainPageData: MainPageDataDto = {
     en: ["Education", "Accommodation"],
   },
   news: {
-      ru: [
-        {
+    ru: [
+      {
         link: "https://quartier-latin.com/blog/no-progress",
         img: "/images/news/1.jpg",
         description: "ПОЧЕМУ НЕТ ПРОГРЕССА ВО ФРАНЦУЗСКОМ",
         date: "04-02-2017",
-      },{
+      },
+      {
         link: "https://quartier-latin.com/blog/six-useful-french-exp",
         img: "/images/news/2.jpg",
         description: "ШЕСТЬ ПОЛЕЗНЫХ ФРАНЦУЗСКИХ ВЫРАЖЕНИЙ",
         date: "04-02-2017",
-      },{
+      },
+      {
         link: "https://quartier-latin.com/blog/frantsija/prigorod-ili-tsentr",
         img: "/images/news/3en.jpg",
         description: "ПРИГОРОД ИЛИ ЦЕНТР",
         date: "15-09-2016",
-      },{
+      },
+      {
         link: "https://quartier-latin.com/blog/frantsija/kak-bystro-razgovarivat",
         img: "/images/news/2cn.jpg",
         description: "КАК БЫСТРО ВЫУЧИТЬ ФРАНЦУЗСКИЙ",
         date: "15-09-2016",
-      }],
-      cn: [
-        {
+      },
+    ],
+    cn: [
+      {
         link: "https://quartier-latin.com/cn/blog/no-progress",
         img: "/images/news/1.jpg",
         description: "为什么您觉得法语水平没有提高的六个原因：",
         date: "31-03-2018",
       },
-        {
-          link: "https://quartier-latin.com/cn/blog/kak-bystro-zagovorit",
-          img: "/images/news/2cn.jpg",
-          description: "在短时间内学会说法语",
-          date: "31-03-2018",
-        },
-        {
-          link: "https://quartier-latin.com/cn/blog/prigorod-ili-tsentr",
-          img: "/images/news/3en.jpg",
-          description: "城市还是郊区？",
-          date: "31-03-2018",
-        },
-        {
-          link: "https://quartier-latin.com/cn/blog/six-useful-french-exp",
-          img: "/images/news/2.jpg",
-          description: "六句常用的法语口语",
-          date: "31-03-2018",
-        },
-      ],
-      fr: [
-        {
+      {
+        link: "https://quartier-latin.com/cn/blog/kak-bystro-zagovorit",
+        img: "/images/news/2cn.jpg",
+        description: "在短时间内学会说法语",
+        date: "31-03-2018",
+      },
+      {
+        link: "https://quartier-latin.com/cn/blog/prigorod-ili-tsentr",
+        img: "/images/news/3en.jpg",
+        description: "城市还是郊区？",
+        date: "31-03-2018",
+      },
+      {
+        link: "https://quartier-latin.com/cn/blog/six-useful-french-exp",
+        img: "/images/news/2.jpg",
+        description: "六句常用的法语口语",
+        date: "31-03-2018",
+      },
+    ],
+    fr: [
+      {
         link: "https://quartier-latin.com/fr/blog/no-progress",
         img: "/images/news/1.jpg",
         description:
@@ -92,60 +96,60 @@ const mainPageData: MainPageDataDto = {
         description: "PARLER FRANÇAIS RAPIDEMENT",
         date: "21-10-2016",
       },
-      ],
-      esp: [
+    ],
+    esp: [
       {
         link: "https://quartier-latin.com/en/blog/no-progress",
         img: "/images/news/1.jpg",
         description: "SIX REASONS WHY YOU DON'T FEEL PROGRESS WHEN LEARNING FRENCH",
         date: "06-02-2017",
       },
-        {
-          link: "https://quartier-latin.com/en/blog/six-useful-french-exp",
-          img: "/images/news/2.jpg",
-          description: "SIX USEFUL FRENCH PHRASES FOR EVERY DAY USE",
-          date: "06-02-2017",
-        },
-        {
-          link: "https://quartier-latin.com/en/blog/frantsija/downtown-or-in-the-suburbs",
-          img: "/images/news/3en.jpg",
-          description: "DOWNTOWN OR IN THE SUBURBS?",
-          date: "15-09-2016",
-        },
-        {
-          link: "https://quartier-latin.com/en/blog/frantsija/how-to-start-speaking-french",
-          img: "/images/news/2cn.jpg",
-          description: "HOW TO START SPEAKING FRENCH",
-          date: "15-09-2016",
-        },
-      ],
-      en: [
-        {
+      {
+        link: "https://quartier-latin.com/en/blog/six-useful-french-exp",
+        img: "/images/news/2.jpg",
+        description: "SIX USEFUL FRENCH PHRASES FOR EVERY DAY USE",
+        date: "06-02-2017",
+      },
+      {
+        link: "https://quartier-latin.com/en/blog/frantsija/downtown-or-in-the-suburbs",
+        img: "/images/news/3en.jpg",
+        description: "DOWNTOWN OR IN THE SUBURBS?",
+        date: "15-09-2016",
+      },
+      {
+        link: "https://quartier-latin.com/en/blog/frantsija/how-to-start-speaking-french",
+        img: "/images/news/2cn.jpg",
+        description: "HOW TO START SPEAKING FRENCH",
+        date: "15-09-2016",
+      },
+    ],
+    en: [
+      {
         link: "https://quartier-latin.com/en/blog/no-progress",
         img: "/images/news/1.jpg",
         description: "SIX REASONS WHY YOU DON'T FEEL PROGRESS WHEN LEARNING FRENCH",
         date: "06-02-2017",
       },
-        {
-          link: "https://quartier-latin.com/en/blog/six-useful-french-exp",
-          img: "/images/news/2.jpg",
-          description: "SIX USEFUL FRENCH PHRASES FOR EVERY DAY USE",
-          date: "06-02-2017",
-        },
-        {
-          link: "https://quartier-latin.com/en/blog/frantsija/downtown-or-in-the-suburbs",
-          img: "/images/news/3en.jpg",
-          description: "DOWNTOWN OR IN THE SUBURBS?",
-          date: "15-09-2016",
-        },
-        {
-          link: "https://quartier-latin.com/en/blog/frantsija/how-to-start-speaking-french",
-          img: "/images/news/2cn.jpg",
-          description: "HOW TO START SPEAKING FRENCH",
-          date: "15-09-2016",
-        },
-      ],
-    },
+      {
+        link: "https://quartier-latin.com/en/blog/six-useful-french-exp",
+        img: "/images/news/2.jpg",
+        description: "SIX USEFUL FRENCH PHRASES FOR EVERY DAY USE",
+        date: "06-02-2017",
+      },
+      {
+        link: "https://quartier-latin.com/en/blog/frantsija/downtown-or-in-the-suburbs",
+        img: "/images/news/3en.jpg",
+        description: "DOWNTOWN OR IN THE SUBURBS?",
+        date: "15-09-2016",
+      },
+      {
+        link: "https://quartier-latin.com/en/blog/frantsija/how-to-start-speaking-french",
+        img: "/images/news/2cn.jpg",
+        description: "HOW TO START SPEAKING FRENCH",
+        date: "15-09-2016",
+      },
+    ],
+  },
   utp: {
     ru: {
       items: [
@@ -200,7 +204,7 @@ const mainPageData: MainPageDataDto = {
         {
           titleWord: "depuis",
           total: "2012",
-          subtitle: "nous réalisons vos rêves de France",
+          subtitle: "Nous réalisons vos rêves de France",
         },
         {
           titleWord: "PLUS DE",
@@ -215,7 +219,7 @@ const mainPageData: MainPageDataDto = {
         {
           titleWord: "PLUS DE",
           total: "1 500",
-          subtitle: "cafés partagés dans notre confortable agence",
+          subtitle: "Cafés partagés dans notre confortable agence",
         },
       ],
     },
@@ -315,72 +319,92 @@ const mainPageData: MainPageDataDto = {
     },
   },
   offers: {
-      cn: [{
+    cn: [
+      {
         img: "/images/slider/1.png",
         title: "高等教育",
         url: "https://quartier-latin.com/cn/predlozhenija/stoimost-uslug",
-      },{
+      },
+      {
         img: "/images/slider/3.png",
         title: "签证申请",
         url: "https://quartier-latin.com/cn/predlozhenija/stoimost-uslug",
-      },{
+      },
+      {
         img: "/images/slider/2.png",
         title: "语言学习",
         url: "https://quartier-latin.com/cn/uslugi-po-adaptatsii/pakety-uslug-po-adaptatsii",
-      }],
-      ru: [{
+      },
+    ],
+    ru: [
+      {
         img: "/images/slider/1.png",
         title: "Поступление в ВУЗ",
         url: "https://quartier-latin.com/predlozhenija/stoimost-uslug",
-      },{
+      },
+      {
         img: "/images/slider/3.png",
         title: "Визовая поддержка",
         url: "https://quartier-latin.com/vizovaja-podderzhka/help-with-visa-package",
-      }, {
+      },
+      {
         img: "/images/slider/2.png",
         url: "https://quartier-latin.com/uslugi-po-adaptatsii/pakety-uslug-po-adaptatsii",
         title: "Услуги по адаптации",
-      }],
-      esp: [{
+      },
+    ],
+    esp: [
+      {
         img: "/images/slider/1.png",
         url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
         title: "ESTUDIOS",
-      }, {
+      },
+      {
         img: "/images/slider/3.png",
         url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
         title: "OBTENCIÓN DEL VISADO",
-      },{
+      },
+      {
         img: "/images/slider/2.png",
         url: "https://quartier-latin.com/en/uslugi-po-adaptatsii/adaptation-service-packages",
         title: "ADAPTACIÓN ",
-      }],
-      en: [{
+      },
+    ],
+    en: [
+      {
         img: "/images/slider/1.png",
         title: "EDUCATION",
         url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
-      },{
+      },
+      {
         img: "/images/slider/3.png",
         url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
         title: "VISA SUPPORT",
-      },{
+      },
+      {
         img: "/images/slider/2.png",
         url: "https://quartier-latin.com/en/uslugi-po-adaptatsii/adaptation-service-packages",
         title: "ADAPTATION SERVICES",
-      }],
-      fr: [{
+      },
+    ],
+    fr: [
+      {
         img: "/images/slider/1.png",
         url: "https://quartier-latin.com/fr/predlozhenija/tarifs-de-nos-services",
         title: "ENSEIGNEMENT",
-      },{
+      },
+      {
         img: "/images/slider/3.png",
         url: "https://quartier-latin.com/fr/predlozhenija/tarifs-de-nos-services",
         title: "AIDE À L’OBTENTION DU VISA",
-      },{
+      },
+      {
         img: "/images/slider/2.png",
         url: "https://quartier-latin.com/fr/uslugi-po-adaptatsii/pack-de-services-dadaptation",
         title: "SERVICES D'ADAPTATION",
-      }]
-    },
+      },
+    ],
+  },
   articles: {
     cn: {
       url: "https://quartier-latin.com/cn/blog",
@@ -405,30 +429,30 @@ const mainPageData: MainPageDataDto = {
   },
   assorted: {
     esp: [
-    {
-      title: "Instagram",
-      url: "https://www.instagram.com/p/CKdRgIEAqVX/embed",
-    },
-    {
-      title: "Facebook",
-      url: "https://www.facebook.com/QuartierLatinEN/",
-    }
+      {
+        title: "Instagram",
+        url: "https://www.instagram.com/p/CKdRgIEAqVX/embed",
+      },
+      {
+        title: "Facebook",
+        url: "https://www.facebook.com/QuartierLatinEN/",
+      },
     ],
     en: [
-    {
-      url: "https://www.instagram.com/p/CLBoWC2jO_D/embed",
-      title: "Instagram",
-    },
+      {
+        url: "https://www.instagram.com/p/CLBoWC2jO_D/embed",
+        title: "Instagram",
+      },
       {
         url: "https://www.facebook.com/QuartierLatinEN/",
         title: "Facebook",
-      }
+      },
     ],
     fr: [
-    {
-      url: "https://www.instagram.com/p/CKyLchbj34V/embed",
-      title: "Instagram",
-    },
+      {
+        url: "https://www.instagram.com/p/CKyLchbj34V/embed",
+        title: "Instagram",
+      },
       {
         title: "Facebook",
         url: "https://www.facebook.com/QuartierLatinFR/",
@@ -436,14 +460,14 @@ const mainPageData: MainPageDataDto = {
     ],
     ru: [
       {
-      url: "https://www.instagram.com/p/CKdRgIEAqVX/embed",
-      title: "Instagram",
-    },
-    {
-      title: "YouTube",
-      url: "https://www.youtube.com/channel/UCEfRnfb8l-Wp7WXHkG-gUZA",
-    }
-    ]
-  }
+        url: "https://www.instagram.com/p/CKdRgIEAqVX/embed",
+        title: "Instagram",
+      },
+      {
+        title: "YouTube",
+        url: "https://www.youtube.com/channel/UCEfRnfb8l-Wp7WXHkG-gUZA",
+      },
+    ],
+  },
 };
 export default mainPageData;
