@@ -42,21 +42,25 @@ const UniversityCatalogElement = (item: CatalogUniversityDto) => (
           </div>
         </div>
         <div className={style.card__rightPrice}>
-          <span className={style.card__rightSubtitle}>Стоимость:</span>
+          <span className={style.card__rightSubtitle}>
+            <LocalizedText id={"catalogItems_price"} />:
+          </span>
           <div className={style.card__rightPrice__list}>
-            <span className={style.card__rightPrice__listItem}>
-              <b>
-                <LocalizedText id={"catalogItems_price_from"} /> {item.priceFrom}{" "}
-                <LocalizedText id={"catalogItems_price_value"} />
-              </b>{" "}
-              / <LocalizedText id={"catalogItems_price_week"} />
-            </span>
+            {item.priceFrom > 0 && (
+              <span className={style.card__rightPrice__listItem}>
+                <b>
+                  <LocalizedText id={"catalogItems_price_from"} /> {item.priceFrom}{" "}
+                  <LocalizedText id={"catalogItems_price_value"} />
+                </b>{" "}
+                / <LocalizedText id={"catalogItems_price_year"} />
+              </span>
+            )}
             <span className={style.card__rightPrice__listItem}>
               <b>
                 <LocalizedText id={"catalogItems_price_before"} /> {item.priceTo}{" "}
                 <LocalizedText id={"catalogItems_price_value"} />
               </b>{" "}
-              / <LocalizedText id={"catalogItems_price_week"} />
+              / <LocalizedText id={"catalogItems_price_year"} />
             </span>
           </div>
         </div>
