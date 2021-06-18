@@ -36,5 +36,17 @@ const ru: LocaleDefinition = {
   catalogItems_price_value: "€",
   catalogList_show: "Посмотреть все",
   catalogList_hide: "Свернуть",
+  university_button: "Хочу учиться здесь",
+  university_question: "Есть вопросы?",
+  university_answer: "Наш менеджер на них ответит!",
+  university_year: "Год",
+  university_direction: "Направления обучения:",
+  university_cost: "Стоимость обучения:",
+  university_lang: "Язык обучения:",
+  university_city: "Города:",
+  university_sert: "Сертификация:",
+  university_foundation: "Год основания:",
+  university_from: "От:",
+  university_upto: "До:",
 };
 export default ru;

@@ -8,7 +8,7 @@ import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
 
 export interface ButtonFormBlockElement {
-  name: string;
+  name: string | React.ReactNode;
   iconLink?: string;
   icon?: number | null;
   link?: string;

@@ -35,6 +35,18 @@ const esp: LocaleDefinition = {
   catalogItems_price_value: "€",
   catalogList_show: "Ver todo",
   catalogList_hide: "Colapso",
+  university_button: "Quiero estudiar aqui",
+  university_question: "¿Tiene preguntas?",
+  university_answer: "¡Nuestro gerente les responderá!",
+  university_year: "Año",
+  university_direction: "Direcciones de estudio:",
+  university_cost: "Cost of education:",
+  university_lang: "Costo de la educación:",
+  university_city: "Ciudades:",
+  university_sert: "Certificación:",
+  university_foundation: "Año de fundación:",
+  university_from: "Hasta:",
+  university_upto: "Desde:",
 };
 
 export default esp;

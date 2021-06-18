@@ -78,8 +78,8 @@ export const MainFooter = (props: FooterDataDto) => {
             <li>Skype: QuartierLatinRU</li>
           </ul>
           {props[lang].writeUs && (
-            <ContactUsFormButton footer={true}>
-              <button className={styles.footer_writeus}>{props[lang].writeUs}</button>
+            <ContactUsFormButton className={styles.footer_writeus} footer={true}>
+              {props[lang].writeUs}
             </ContactUsFormButton>
           )}
           <div className={styles.footer_social}>
