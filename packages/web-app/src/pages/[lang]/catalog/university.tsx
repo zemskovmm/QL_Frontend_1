@@ -3,10 +3,10 @@ import { CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
 import Link from "next/link";
 import style from "src/components/catalog/style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
-import { Breadcrumbs } from "src/components/ui/Breadcrumbs/breadcrumbs";
-import { BreadcrumbMain, BreadcrumbUniversityCatalog } from "src/components/ui/Breadcrumbs/commonBreadcumbs";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
+import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
+import { useIntl } from "react-intl";
 
 const UniversityCatalogElement = (item: CatalogUniversityDto) => (
   <Link href={item.url}>
@@ -66,11 +66,24 @@ const UniversityCatalogElement = (item: CatalogUniversityDto) => (
 );
 
 const UniversityCatalogPage = () => {
+  const lang = useIntl().locale;
+
   return (
     <div style={{ backgroundColor: "#f9fafd" }}>
       <div className={style.catalogWrapper}>
         <div className={`mr-auto mb-7`}>
-          <Breadcrumbs items={[BreadcrumbMain, BreadcrumbUniversityCatalog]} />
+          <BreadcrumbsBlock
+            items={[
+              {
+                name: <LocalizedText id={"breadcrumbs_Main"} />,
+                link: `/${lang}`,
+              },
+              {
+                name: <LocalizedText id={"breadcrumbs_Catalog"} />,
+                link: ``,
+              },
+            ]}
+          />
         </div>
         <Catalog<CatalogUniversityDto> elementRenderer={UniversityCatalogElement} apiElementName="university" />
       </div>
