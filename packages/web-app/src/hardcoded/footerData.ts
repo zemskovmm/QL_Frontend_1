@@ -103,6 +103,10 @@ const footerData: FooterDataDto = {
             title: "Консультации",
             url: "https://quartier-latin.com/dopolnitelnye-uslugi/konsultatsii",
           },
+          {
+            url: "https://quartier-latin.com/predlozhenija/stoimost-uslug",
+            title: "Пакеты услуг по поступлению",
+          },
         ],
       },
       {
@@ -369,6 +373,10 @@ const footerData: FooterDataDto = {
             title: "Consultations",
             url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/consultations",
           },
+          {
+            url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
+            title: "Admission packages",
+          },
         ],
       },
       {
@@ -633,6 +641,10 @@ const footerData: FooterDataDto = {
           {
             title: "咨询",
             url: "https://quartier-latin.com/cn/dopolnitelnye-uslugi/konsultatsii",
+          },
+          {
+            title: "费用明细",
+            url: "https://quartier-latin.com/cn/predlozhenija/stoimost-uslug",
           },
         ],
       },
@@ -901,6 +913,10 @@ const footerData: FooterDataDto = {
             title: "Consultation",
             url: "https://quartier-latin.com/fr/dopolnitelnye-uslugi/consultation",
           },
+          {
+            url: "https://quartier-latin.com/fr/predlozhenija/tarifs-de-nos-services",
+            title: "Tarifs de nos services",
+          },
         ],
       },
       {
@@ -1167,6 +1183,10 @@ const footerData: FooterDataDto = {
           {
             url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/consultations",
             title: "Consultas",
+          },
+          {
+            url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
+            title: "Admission packages",
           },
         ],
       },
