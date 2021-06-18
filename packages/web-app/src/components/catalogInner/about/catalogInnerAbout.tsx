@@ -4,6 +4,10 @@ import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
 import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
 import { HtmlPresenter } from "@project/components/src/ui/HtmlPresenter/htmlPresenter";
 import { LocalizedText } from "../../common/LocalizedText";
+import styles from "@project/components/src/blocks/FeedbackSliderBlock/feedbackSliderBlock.module.css";
+import cn from "classnames";
+import Carousel from "react-multi-carousel";
+import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 
 const CatalogCallBack = () => {
   return (
@@ -30,6 +34,25 @@ type CatalogInnerAboutProps = {
 };
 
 export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 1920, min: 1024 },
+      items: 1,
+      partialVisibilityGutter: 1200,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      partialVisibilityGutter: 0,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      partialVisibilityGutter: 0,
+    },
+  };
+
+  console.log("asdfasdf", data);
   return (
     <div className={style.catalogInnerAbout__bg}>
       <div className={style.catalogInnerAbout__maxWidth}>
@@ -115,6 +138,18 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
         </div>
         <CatalogCallBack />
       </div>
+
+      {data.galleryList.length > 0 && (
+        <div className={style.catalogInnerAbout__maxWidth}>
+          <Carousel ssr responsive={responsive} renderDotsOutside slidesToSlide={1} containerClass={styles.container}>
+            {data.galleryList.map((img, ind) => (
+              <div key={ind}>
+                <img src={`${ApiBaseUrl}/api/media/${img}`} alt="" />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+      )}
     </div>
   );
 };
