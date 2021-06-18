@@ -26,7 +26,7 @@ export const MainFooter = (props: FooterDataDto) => {
               <li key={i + "footerHeadLink"}>
                 <a className={"flex lg:mx-7 whitespace-nowrap font-bold text-xs mb-5"} href={link.link.url}>
                   <img className="mr-3" src={link.icon} alt="" />
-                  {link.link.title}
+                  {link.link.title[0].toUpperCase() + link.link.title.slice(1, link.link.title.length).toLowerCase()}
                 </a>
               </li>
             ))}
@@ -93,6 +93,9 @@ export const MainFooter = (props: FooterDataDto) => {
               )
             )}
           </div>
+          {lang === "cn" && (
+            <img src="/WeChat.jpg" alt="" className={`w-full pl-6 mb-10`} style={{ maxWidth: "240px" }} />
+          )}
         </div>
       </div>
     </footer>
