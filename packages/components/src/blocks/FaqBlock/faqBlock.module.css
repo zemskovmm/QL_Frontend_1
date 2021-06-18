@@ -25,9 +25,6 @@
 }
 
 .faqBlock__itemText{
-  font-size: 14px;
-  line-height: 24px;
-  color: #646F83;
   transition: .3s;
   overflow: hidden;
   box-sizing: border-box;
@@ -53,4 +50,14 @@
   border: 0;
   margin: 0;
   padding-top: 0;
+}
+
+@media screen and (max-width: 1023px){
+  .faqBlock__container  {
+    flex-direction: column;
+  }
+
+  .faqBlock__container > div {
+    margin-bottom: 10px;
+  }
 }

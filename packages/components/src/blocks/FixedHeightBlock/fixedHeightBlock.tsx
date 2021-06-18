@@ -3,6 +3,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./fixedHeightBlock.module.css";
 import preview from "./preview.png";
 import cn from "classnames";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface FixedHeightBlockElement {
   header: string;
@@ -16,11 +17,9 @@ export const FixedHeightBlock = (props: FixedHeightBlockElement) => {
     <div className="py-12">
       <div className={cn(styles.block, "px-10 flex justify-between flex-col mx-auto max-w-screen-xl w-full")}>
         <div className={styles.title}>{props.header}</div>
-        <div
-          className={cn(styles.text, isOpen ? styles.open : "")}
-          style={{ maxHeight: +props.height }}
-          dangerouslySetInnerHTML={{ __html: props.text }}
-        />
+        <div className={cn(styles.text, isOpen ? styles.open : "")} style={{ maxHeight: +props.height }}>
+          <HtmlPresenter text={props.text} />
+        </div>
         <div className={cn(styles.arrow, isOpen ? styles.open : "")} onClick={() => Open((isOpen) => !isOpen)} />
       </div>
     </div>

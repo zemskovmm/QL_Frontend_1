@@ -36,7 +36,7 @@ export const GoogleMapBlock = (props: GoogleMapBlockElement) => {
 
   return (
     <div className={cn(styles.mapblock, "pt-12")}>
-      <div className="flex justify-center align-stretch">
+      <div className="flex flex-wrap justify-center align-stretch">
         {props.elements.map((el, ind) => (
           <div
             key={ind}

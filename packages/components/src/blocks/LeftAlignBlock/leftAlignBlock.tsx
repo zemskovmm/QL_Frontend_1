@@ -3,6 +3,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./leftAlignBlock.module.css";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface LeftAlignBlockElement {
   elements: { title: string; text: string; img: number | null }[];
@@ -19,7 +20,7 @@ export const LeftAlignBlock = (props: LeftAlignBlockElement) => {
             </div>
             <div className={`flex flex-col`}>
               <div className={styles.leftAlignBlock__itemTitle}>{el.title}</div>
-              <div className={styles.leftAlignBlock__text} dangerouslySetInnerHTML={{ __html: el.text }} />
+              <HtmlPresenter text={el.text} />
             </div>
           </div>
         ))}

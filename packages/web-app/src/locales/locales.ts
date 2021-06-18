@@ -13,7 +13,7 @@ export type LocaleDefinition = {
   [key in keyof typeof en]: string;
 };
 
-export const supportedLocales = ["en", "ru", "fr", "cn", "esp"];
+export const supportedLocales = ["en", "fr", "ru", "cn", "esp"];
 
 export function getLocaleMessages(locale: string): Record<string, string> | Record<string, MessageFormatElement[]> {
   if (locale == "ru") return ru;
@@ -28,9 +28,9 @@ export function getLanguageUrlsFromRouterState(router: NextRouter): { [key: stri
   const path = router.asPath.replace(/^\/[a-z]+\//, "");
 
   const urls: { [key: string]: string } = {};
-  if (path === '/' + lang) {
+  if (path === "/" + lang) {
     for (const l of supportedLocales) {
-      urls[l] = "/" + l
+      urls[l] = "/" + l;
     }
   } else {
     for (const l of supportedLocales) {

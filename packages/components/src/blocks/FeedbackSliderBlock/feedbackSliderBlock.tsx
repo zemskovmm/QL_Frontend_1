@@ -11,6 +11,7 @@ import ClosePict from "../../assets/img/close.svg";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface FeedbackSliderBlockElement {
   title: string;
@@ -26,14 +27,17 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
     desktop: {
       breakpoint: { max: 1920, min: 1024 },
       items: 1,
+      partialVisibilityGutter: 1200,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 1,
+      partialVisibilityGutter: 0,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
+      partialVisibilityGutter: 0,
     },
   };
 
@@ -42,11 +46,12 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
       <h2 className={cn(styles.title, "px-10 max-w-screen-xl mx-auto w-full font-bold")}>{props.title}</h2>
       <div className="relative">
         <Carousel
+          centerMode
+          //partialVisbile={true}
           responsive={responsive}
           itemClass={styles.item}
           arrows={false}
           infinite
-          centerMode
           showDots
           renderDotsOutside
           sliderClass={styles.slider}
@@ -54,7 +59,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
           slidesToSlide={1}
           containerClass={styles.container}
           autoPlaySpeed={3000}
-          autoPlay={true}
+          autoPlay
         >
           {props.elements.map((feedback, ind) => (
             <div key={ind}>
@@ -99,7 +104,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
               <div>
                 <h3 className="font-bold">{props.elements[curSlide].name}</h3>
                 <h4>{props.elements[curSlide].about}</h4>
-                <div dangerouslySetInnerHTML={{ __html: props.elements[curSlide].allText }} />
+                <HtmlPresenter text={props.elements[curSlide].allText} />
               </div>
             </div>
             <img className={styles.close} src={ClosePict} onClick={() => setShowModal(false)} />

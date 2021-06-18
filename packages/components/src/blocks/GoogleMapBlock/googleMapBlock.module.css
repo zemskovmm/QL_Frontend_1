@@ -6,6 +6,7 @@
 .block {
   min-height: 227px;
   width: 280px;
+  flex-shrink: 0;
   background: #FFFFFF;
   border: 1px solid #EFF3FA;
   border-radius: 6px;

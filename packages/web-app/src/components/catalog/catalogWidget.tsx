@@ -71,8 +71,8 @@ export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
 
   return (
     <div className="flex justify-between items-end w-full text-xs leading-relaxed">
-      {appliedFilters.map((filter) => (
-        <div className="w-full mr-7">
+      {appliedFilters.map((filter, ind) => (
+        <div key={ind} className="w-full mr-7">
           <Select
             label={filter.name}
             value={selectedName[filter.identifier] || filter.name}

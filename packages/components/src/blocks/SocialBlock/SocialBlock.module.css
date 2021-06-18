@@ -26,7 +26,13 @@
   border: 1px solid black;
   display: flex;
   overflow: hidden;
-  margin: 18px 14px;
+  margin: 18px auto;
   height: 300px;
+  max-width: 300px;
 }
+
+.frame_big {
+  max-width: 100% !important;
+}
+
 

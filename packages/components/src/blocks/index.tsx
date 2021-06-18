@@ -93,7 +93,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
   return (
     <section
       style={{ background: props.background, maxWidth: props.maxWidth ? props.maxWidth : "100%" }}
-      className={`relative mx-auto`}
+      className={cn(`relative mx-auto`, props.vertical ? `flex items-${props.vertical} flex-adaptive` : "")}
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;
@@ -119,15 +119,17 @@ export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
   return (
     <>
       {props.rows.map(
-        (row, i) =>
+        (row, ind) =>
           !row.hide && (
-            <RowPresenter
-              key={i}
-              blocks={row.blocks}
-              maxWidth={row.maxWidth}
-              background={row.background}
-              hide={row.hide}
-            />
+            <React.Fragment key={ind}>
+              <RowPresenter
+                blocks={row.blocks}
+                maxWidth={row.maxWidth}
+                background={row.background}
+                hide={row.hide}
+                vertical={row.vertical}
+              />
+            </React.Fragment>
           )
       )}
     </>

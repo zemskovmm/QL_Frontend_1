@@ -71,15 +71,15 @@ export const MainFooter = (props: FooterDataDto) => {
         ))}
         <div className={cn("w-full lg:w-1/3", styles.footer_column, styles.footer_address)}>
           <ul className="flex flex-col font-bold">
-            <li>10 rue de la Lune</li>
-            <li>75002 Paris</li>
+            <li>10 rue de la Lune 75002 Paris</li>
             <li>+33 144 829 031</li>
-            <li>Contact@quartier-latin.com</li>
+            <li>contact@quartier-latin.com</li>
             <li>Skype: QuartierLatinRU</li>
+            <li>WhatsApp: +33 6 26 63 86 27</li>
           </ul>
           {props[lang].writeUs && (
-            <ContactUsFormButton footer={true}>
-              <button className={styles.footer_writeus}>{props[lang].writeUs}</button>
+            <ContactUsFormButton className={styles.footer_writeus} footer={true}>
+              {props[lang].writeUs}
             </ContactUsFormButton>
           )}
           <div className={styles.footer_social}>

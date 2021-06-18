@@ -3,6 +3,7 @@ export interface PageBlockRowDto {
   maxWidth?: string;
   background?: string;
   hide: boolean;
+  vertical: string;
 }
 
 export interface PageBlockDto {

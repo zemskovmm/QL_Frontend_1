@@ -4,6 +4,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
 import cn from "classnames";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 type BigCardProps = {
   card: {
@@ -19,7 +20,9 @@ const BigCard: FC<BigCardProps> = ({ card }) => {
     <a href={card.url} className={style.bigCard}>
       <img src={`${ApiBaseUrl}/api/media/${card.img}`} alt="" className={style.bigCard__img} />
       <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
-      <div className={style.bigCard__subtitle} dangerouslySetInnerHTML={{ __html: card.text }} />
+      <div className={style.bigCard__subtitle}>
+        <HtmlPresenter text={card.text} />
+      </div>
     </a>
   );
 };
@@ -35,11 +38,11 @@ export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({ elements, titl
   return (
     <div className={cn(mainStyle ? style.main : "", "py-12")}>
       <div className="px-10 flex flex-col justify-between mx-auto max-w-screen-xl w-full">
-        <div className="flex items-end mb-10">
+        <div className={cn(style.titlepart, "flex items-end mb-10")}>
           <h2 className={style.bigCardsListBlock__title}>{title}</h2>
           {subtitle && <h3 className={style.bigCardsListBlock__subtitle}>{subtitle}</h3>}
         </div>
-        <div className={cn(mainStyle ? "" : "", "flex flex-wrap w-full")}>
+        <div className="flex flex-wrap w-full">
           {elements.map((el, ind) => (
             <BigCard key={ind} card={el} />
           ))}

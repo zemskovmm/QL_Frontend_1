@@ -4,6 +4,7 @@ import styles from "./imgAndTextEditorBlock.module.css";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface ImgAndTextEditorBlockElement {
   align: boolean;
@@ -24,10 +25,7 @@ export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
               props.align ? styles.imgAndTextEditorBlock__contentRight : styles.imgAndTextEditorBlock__contentLeft
             }`}
           >
-            <div
-              className={styles.imgAndTextEditorBlock__contentText}
-              dangerouslySetInnerHTML={{ __html: props.text }}
-            />
+            <HtmlPresenter text={props.text} />
             {props.showButton && <ButtonFormBlock myClass={`mt-6`} name={props.textButton} align={`justify-start`} />}
           </div>
           <img

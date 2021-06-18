@@ -28,10 +28,10 @@ const LeftTabsRightContentBlock = ({ tabs, revers }: TabControlBlockProps) => {
 
   return (
     <div className={`flex w-full mx-auto py-12 max-w-screen-xl ${revers ? "flex-row-reverse" : ""}`}>
-      <div className={cn(styles.content, revers ? styles.contentRight : styles.contentLeft)}>
+      <div className={cn(styles.desktop, styles.content, revers ? styles.contentRight : styles.contentLeft)}>
         <div>{effectiveActiveTab < 0 ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}</div>
       </div>
-      <div className={`flex pr-10 flex-col w-full ml-auto ${styles.tab__elementList}`}>
+      <div className={cn(styles.desktop, `flex pr-10 flex-col w-full ml-auto ${styles.tab__elementList}`)}>
         {tabs.map((tab, ind) => (
           <button
             type={"button"}
@@ -41,6 +41,21 @@ const LeftTabsRightContentBlock = ({ tabs, revers }: TabControlBlockProps) => {
           >
             {tab.title}
           </button>
+        ))}
+      </div>
+      <div className={styles.mobile}>
+        {tabs.map((tab, ind) => (
+          <div key={ind}>
+            <button
+              type={"button"}
+              key={ind}
+              className={cn(ind === activeTab ? styles.tab__elementActive : "", styles.tab__element, styles.mobiletab)}
+              onClick={() => setActiveTab(ind)}
+            >
+              {tab.title}
+            </button>
+            <div>{effectiveActiveTab !== ind ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}</div>
+          </div>
         ))}
       </div>
     </div>

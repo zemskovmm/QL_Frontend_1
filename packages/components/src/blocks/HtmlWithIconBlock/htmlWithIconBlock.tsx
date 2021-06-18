@@ -8,6 +8,7 @@ import LabelIcon from "./icons/label.png";
 
 import preview from "./preview.png";
 import cn from "classnames";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface HtmlWithIconBlockElement {
   title: string;
@@ -34,7 +35,7 @@ export const HtmlWithIconBlock = (props: HtmlWithIconBlockElement) => {
       <IconChooser icon={props.icon} />
       <div>
         {props.link ? <a href={props.link}>{props.title}</a> : <h3>{props.title}</h3>}
-        <div dangerouslySetInnerHTML={{ __html: props.html }} />
+        <HtmlPresenter text={props.html} />
       </div>
     </div>
   );

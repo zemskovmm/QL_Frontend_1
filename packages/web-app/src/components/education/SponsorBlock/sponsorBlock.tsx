@@ -15,13 +15,13 @@ export const SponsorBlock: FC<SponsorBlockProps> = ({ title }) => {
             <h2 className={style.sponsorBlock__title} dangerouslySetInnerHTML={{ __html: title }} />
           </div>
           <div className={style.sponsorBlock__list}>
-            {rangeMap(8).map((el) => (
-              <div className={style.sponsorBlock__sponsor}>
+            {rangeMap(8).map((el, ind) => (
+              <div key={ind} className={style.sponsorBlock__sponsor}>
                 <img src={`/images/partners/ (${el + 1}).png`} alt="" className={style.sponsorBlock__sponsorImg} />
               </div>
             ))}
-            {rangeMap(2).map((el) => (
-              <div className={style.sponsorBlock__sponsor}>
+            {rangeMap(2).map((el, ind) => (
+              <div key={ind} className={style.sponsorBlock__sponsor}>
                 <img src={`/images/partners/ (${el + 1}).jpg`} alt="" className={style.sponsorBlock__sponsorImg} />
               </div>
             ))}

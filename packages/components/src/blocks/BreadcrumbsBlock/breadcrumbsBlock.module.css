@@ -5,6 +5,7 @@
   left: 0;
   right: 0;
   max-width: 1200px;
+  flex-wrap: wrap;
 }
 .breadcrumbs__items {
   font-style: normal;
@@ -17,15 +18,20 @@
   position: relative;
 }
 
-.breadcrumbs__items:not(:first-child) {
-  padding-left: 38px;
-  margin-left: 16px;
+.breadcrumbs_white .breadcrumbs__items {
+  color: #fff !important;
+  text-shadow: 1px 1px 2px black;
+}
+
+.breadcrumbs__items:not(:last-child) {
+  padding-right: 38px;
+  margin-right: 16px;
 }
 
 .breadcrumbs__items img {
   right: 0;
   top: 0;
-  transform: translateY(-2px) translateX(37px);
+  transform: translateY(-2px);
   position: absolute;
   min-width: 20px;
   min-height: 20px;

@@ -3,6 +3,7 @@ import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./faqBlock.module.css";
 import arrow from "./arrow-down.svg";
 import preview from "./preview.jpg";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface FaqBlockElement {
   title: string;
@@ -16,7 +17,7 @@ export const FaqBlock = (props: FaqBlockElement) => {
   return (
     <div className="py-12">
       <div className="px-10 flex justify-between mx-auto max-w-screen-xl w-full">
-        <div className={`flex w-full flex-col ${styles.faqBlock}`}>
+        <div className={`flex w-full flex-col`}>
           <div className={styles.faqBlock__title}>{props.title}</div>
           <div className={`flex w-full ${styles.faqBlock__container}`}>
             <div className={`flex w-full flex-col pr-1`}>
@@ -49,7 +50,9 @@ export const FaqBlock = (props: FaqBlockElement) => {
                     <div className={styles.faqBlock__itemTitle} dangerouslySetInnerHTML={{ __html: el.title }} />
                     <img className={`ml-auto ${styles.faqBlock__itemArrow}`} src={arrow} alt="" />
                   </div>
-                  <div className={`${styles.faqBlock__itemText}`} dangerouslySetInnerHTML={{ __html: el.text }} />
+                  <div className={`${styles.faqBlock__itemText}`}>
+                    <HtmlPresenter text={el.text} />
+                  </div>
                 </div>
               ))}
             </div>

@@ -38,10 +38,10 @@ export const MainHeader = (props: MainHeaderProps) => {
         >
           <div className="flex">
             <Link href={`/${lang}`}>
-              <>
+              <a>
                 <img className="mr-6 cursor-pointer hidden lg:block" src={Logo} alt="Quartier Latin" />
                 <img className="mr-6 cursor-pointer lg:hidden" src={LogoMob} alt="Quartier Latin" />
-              </>
+              </a>
             </Link>
             <ul className="hidden lg:flex list-none ">
               {props.data[lang].links.map((l, index) => (
@@ -90,7 +90,9 @@ export const MainHeader = (props: MainHeaderProps) => {
       <div className="hidden lg:flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-1 px-10">
         {headerData[lang].offers.map(({ url, title }, i) => (
           <Link key={i + "headLink"} href={url}>
-            <a className={cn(styles.header_offer, "py-5 whitespace-nowrap text-center")}>{title}</a>
+            <a className={cn(styles.header_offer, "py-5 whitespace-nowrap text-center")}>
+              {title[0].toUpperCase() + title.slice(1, title.length).toLowerCase()}
+            </a>
           </Link>
         ))}
       </div>

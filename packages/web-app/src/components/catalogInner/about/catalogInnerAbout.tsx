@@ -2,16 +2,24 @@ import React, { FC } from "react";
 import style from "./catalogInnerAbout.module.css";
 import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
 import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
+import { HtmlPresenter } from "@project/components/src/ui/HtmlPresenter/htmlPresenter";
+import { LocalizedText } from "../../common/LocalizedText";
 
 const CatalogCallBack = () => {
   return (
     <div className={style.catalogCallBack + " w-full"}>
       <div className={style.catalogCallBack__top}>
-        <h3 className={style.catalogCallBack__title}>Есть вопросы?</h3>
-        <div className={style.catalogCallBack__subtitle}>Наш менеджер на них ответит!</div>
+        <h3 className={style.catalogCallBack__title}>
+          <LocalizedText id={"university_question"} />
+        </h3>
+        <div className={style.catalogCallBack__subtitle}>
+          <LocalizedText id={"university_answer"} />
+        </div>
       </div>
       <ContactUsFormButton footer={true}>
-        <button className={style.catalogCallBack__btn}>Хочу учиться здесь</button>
+        <button className={style.catalogCallBack__btn}>
+          <LocalizedText id={"university_button"} />
+        </button>
       </ContactUsFormButton>
     </div>
   );
@@ -27,13 +35,12 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
       <div className={style.catalogInnerAbout__maxWidth}>
         <div className={style.catalogInnerAbout}>
           <h2 className={style.catalogInnerAbout__title}>{data.title}</h2>
-          <div
-            className={style.catalogInnerAbout__content}
-            dangerouslySetInnerHTML={{ __html: data.descriptionHtml }}
-          />
+          <HtmlPresenter text={data.descriptionHtml} />
           <div className={style.info__row}>
             <div className={`${style.info__columnItem} w-full`}>
-              <span className={`${style.info__columnTitle}`}>Направления обучения:</span>
+              <span className={`${style.info__columnTitle}`}>
+                <LocalizedText id={"university_direction"} />
+              </span>
               <div className={style.info__columnItem__list}>
                 {data.traits.universitySpecialties.map((el) => (
                   <span>{el.name}</span>
@@ -41,15 +48,23 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
               </div>
             </div>
             <div className={`${style.info__columnItem} w-full`}>
-              <span className={`${style.info__columnTitle}`}>Направления обучения:</span>
+              <span className={`${style.info__columnTitle}`}>
+                <LocalizedText id={"university_cost"} />
+              </span>
               <div className={`flex flex-col w-full`}>
                 {data.traits.universityDegrees.map((el) => (
                   <div className={style.info__columnItem__priceList}>
                     <span>
-                      <b>от {el.costFrom} €</b> / год.
+                      <b>
+                        <LocalizedText id={"university_from"} /> {el.costFrom} €
+                      </b>{" "}
+                      / <LocalizedText id={"university_year"} />.
                     </span>
                     <span>
-                      <b>до {el.costTo} €</b> / год.
+                      <b>
+                        <LocalizedText id={"university_upto"} /> {el.costTo} €
+                      </b>{" "}
+                      / <LocalizedText id={"university_year"} />.
                     </span>
                     <span>
                       <b> {el.name}</b>
@@ -59,7 +74,9 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
               </div>
             </div>
             <div className={`${style.info__columnItem} w-6/12`}>
-              <span className={`${style.info__columnTitle}`}>Язык обучения:</span>
+              <span className={`${style.info__columnTitle}`}>
+                <LocalizedText id={"university_lang"} />
+              </span>
               <div className={style.info__columnItem__list}>
                 {data.traits.namedTraits["instruction-language"].map((el) => (
                   <span>{el.name}</span>
@@ -67,7 +84,9 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
               </div>
             </div>
             <div className={`${style.info__columnItem} w-6/12`}>
-              <span className={`${style.info__columnTitle}`}>Сертификация:</span>
+              <span className={`${style.info__columnTitle}`}>
+                <LocalizedText id={"university_sert"} />
+              </span>
               <div className={style.info__columnItem__list}>
                 {data.traits.namedTraits["certification"].map((el) => (
                   <span>{el.name}</span>
@@ -75,7 +94,9 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
               </div>
             </div>
             <div className={`${style.info__columnItem} w-6/12`}>
-              <span className={`${style.info__columnTitle}`}>Города:</span>
+              <span className={`${style.info__columnTitle}`}>
+                <LocalizedText id={"university_city"} />
+              </span>
               <div className={style.info__columnItem__list}>
                 {data.traits.namedTraits["city"].map((el) => (
                   <span>{el.name}</span>
@@ -83,7 +104,9 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
               </div>
             </div>
             <div className={`${style.info__columnItem} w-6/12`}>
-              <span className={`${style.info__columnTitle}`}>Год основания:</span>
+              <span className={`${style.info__columnTitle}`}>
+                <LocalizedText id={"university_foundation"} />
+              </span>
               <div className={style.info__columnItem__list}>
                 <span>{data.foundationYear}</span>
               </div>

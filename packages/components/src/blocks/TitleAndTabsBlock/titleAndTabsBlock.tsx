@@ -27,7 +27,7 @@ export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
   const lang = useContext(ComponentHostContext)?.lang;
   return (
     <Search title={props.title} background={props.background}>
-      <div className={`hidden lg:block`}>
+      <div className={`hidden lg:flex w-full`}>
         <Tabs titles={props.tabs?.map((el) => el.title)} components={tabsComponent} />
       </div>
       <div className={`flex flex-col lg:hidden`}>
