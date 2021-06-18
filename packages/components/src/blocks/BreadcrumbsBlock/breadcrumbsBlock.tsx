@@ -6,7 +6,7 @@ import icon from "./arrow-left.svg";
 import preview from "./preview.png";
 
 export interface BreadcrumbsBlockElement {
-  items: { name: string; link: string }[];
+  items: { name: string | React.ReactNode; link: string }[];
 }
 
 export const BreadcrumbsBlock = (props: BreadcrumbsBlockElement) => {
