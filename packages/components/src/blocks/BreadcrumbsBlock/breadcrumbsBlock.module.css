@@ -18,6 +18,11 @@
   position: relative;
 }
 
+.breadcrumbs_white .breadcrumbs__items {
+  color: #fff !important;
+  text-shadow: 1px 1px 2px black;
+}
+
 .breadcrumbs__items:not(:last-child) {
   padding-right: 38px;
   margin-right: 16px;

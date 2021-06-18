@@ -11,6 +11,7 @@ export const UniversityModule = (props: ClientUniversityDto) => {
     <>
       <section style={{ background: "#F9FAFD", maxWidth: "100%" }} className="relative mx-auto">
         <BreadcrumbsBlock
+          whiteColor={true}
           items={[
             { name: <LocalizedText id={"breadcrumbs_Main"} />, link: `/${lang}` },
             { name: <LocalizedText id={"breadcrumbs_Catalog"} />, link: `/${lang}/catalog/university` },
@@ -24,7 +25,7 @@ export const UniversityModule = (props: ClientUniversityDto) => {
           titleShadow={true}
           background={props.bannerId}
           textButton={<LocalizedText id={"university_button"} />}
-          showButton={true}
+          showButton={false}
           textAbove={""}
         />
       </section>
