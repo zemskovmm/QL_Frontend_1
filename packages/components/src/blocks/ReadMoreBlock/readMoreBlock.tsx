@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./readMoreBlock.module.css";
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface ReadMoreBlockElement {
   header: string;
@@ -16,15 +17,13 @@ export const ReadMoreBlock = (props: ReadMoreBlockElement) => {
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.readMoreBlock}>
           <div className={styles.readMoreBlock__title}>{props.header}</div>
-          <div className={styles.readMoreBlock__text} dangerouslySetInnerHTML={{ __html: props.textBefore }} />
+          <HtmlPresenter text={props.textBefore} />
           {props.textAfter && !isOpen && (
             <button className={styles.readMoreBlock__button} type={"button"} onClick={() => Open(true)}>
               Читать полностью
             </button>
           )}
-          {isOpen && (
-            <div className={styles.readMoreBlock__text} dangerouslySetInnerHTML={{ __html: props.textAfter }} />
-          )}
+          {isOpen && <HtmlPresenter text={props.textAfter} />}
         </div>
       </div>
     </div>

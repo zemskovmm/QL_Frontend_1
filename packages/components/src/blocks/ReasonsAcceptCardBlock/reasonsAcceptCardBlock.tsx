@@ -4,6 +4,7 @@ import styles from "./reasonsAcceptCardBlock.module.css";
 import icon from "./acceptIcon.svg";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface ReasonsAcceptCardBlockElement {
   header: string;
@@ -31,10 +32,9 @@ export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => 
           {(props.showPostscript || props.showButton) && (
             <div className={styles.reasonsAcceptCardBlock__blockText + " flex-col align"}>
               {props.showPostscript && (
-                <div
-                  className={styles.reasonsAcceptCardBlock__buttonText}
-                  dangerouslySetInnerHTML={{ __html: props.textOverButton }}
-                />
+                <div className={styles.reasonsAcceptCardBlock__buttonText}>
+                  <HtmlPresenter text={props.textOverButton} />
+                </div>
               )}
               {props.showButton && <ButtonFormBlock name={props.textButton} myClass={`mt-3`} align={`flex-start`} />}
             </div>

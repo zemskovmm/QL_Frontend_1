@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./articleBeforeImageBlock.module.css";
-import { is } from "@babel/types/lib/index-legacy";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface ArticleBeforeImageBlockElement {
   title: string;
@@ -16,7 +16,7 @@ export const ArticleBeforeImageBlock = (props: ArticleBeforeImageBlockElement) =
     <div className="py-12">
       <div className="px-4 lg:px-10 flex flex-col width justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.articleBeforeImageBlock__title}>{props.title}</div>
-        <div className={styles.articleBeforeImageBlock__text} dangerouslySetInnerHTML={{ __html: props.text }} />
+        <HtmlPresenter text={props.text} />
         <img className={"w-full rounded-md"} src={`${ApiBaseUrl}/api/media/${props.img}`} alt="" />
       </div>
     </div>

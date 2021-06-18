@@ -11,6 +11,7 @@ import ClosePict from "../../assets/img/close.svg";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 
 import preview from "./preview.png";
+import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface FeedbackSliderBlockElement {
   title: string;
@@ -103,7 +104,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
               <div>
                 <h3 className="font-bold">{props.elements[curSlide].name}</h3>
                 <h4>{props.elements[curSlide].about}</h4>
-                <div dangerouslySetInnerHTML={{ __html: props.elements[curSlide].allText }} />
+                <HtmlPresenter text={props.elements[curSlide].allText} />
               </div>
             </div>
             <img className={styles.close} src={ClosePict} onClick={() => setShowModal(false)} />

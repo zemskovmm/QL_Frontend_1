@@ -25,9 +25,6 @@
 }
 
 .faqBlock__itemText{
-  font-size: 14px;
-  line-height: 24px;
-  color: #646F83;
   transition: .3s;
   overflow: hidden;
   box-sizing: border-box;
