@@ -31,8 +31,8 @@ const cn: LocaleDefinition = {
   catalogItems_language_all: "所有语言",
   catalogItems_price: "成本",
   catalogItems_price_from: "从",
-  catalogItems_price_before: "前",
-  catalogItems_price_week: "星期",
+  catalogItems_price_before: "到",
+  catalogItems_price_year: "年",
   catalogItems_price_value: "€",
   catalogList_show: "查看全部",
   catalogList_hide: "坍塌",
@@ -46,8 +46,8 @@ const cn: LocaleDefinition = {
   university_city: "城市:",
   university_sert: "认证:",
   university_foundation: "成立年份:",
-  university_from: "from:",
-  university_upto: "Up to:",
+  university_from: "从 ",
+  university_upto: "到 ",
 };
 
 export default cn;
