@@ -14,15 +14,17 @@ export interface TitleAndCallBackBlockElement {
   title: string;
   titleColor: "black" | "white";
   titleShadow?: boolean;
-  textButton: string;
+  textButton: string | React.ReactNode;
   textAbove: string;
   background: number | null;
+  logo: number | null;
   showButton: boolean;
 }
 
 export const TitleAndCallBackBlock = (props: TitleAndCallBackBlockElement) => {
   return (
     <Search
+      logo={props.logo}
       title={props.title}
       titleColor={props.titleColor}
       titleShadow={props.titleShadow}
@@ -32,7 +34,7 @@ export const TitleAndCallBackBlock = (props: TitleAndCallBackBlockElement) => {
       {props.showButton && (
         <div className={`flex flex-col ${styles.callbackBlock}`}>
           <div className={`${styles.callbackBlockText}`} dangerouslySetInnerHTML={{ __html: props.textAbove }} />
-          <ButtonFormBlock name={props.textButton} align={`center`} />
+          <ButtonFormBlock name={props.textButton || ""} align={`center`} />
         </div>
       )}
     </Search>
@@ -51,10 +53,17 @@ export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlock
     textButton: "Title",
     textAbove: "Title",
     background: null,
+    logo: null,
     showButton: false,
   },
   definition: {
     fields: [
+      {
+        id: "logo",
+        type: "Custom",
+        customType: "Image",
+        name: "Logo",
+      },
       {
         id: "title",
         type: "String",

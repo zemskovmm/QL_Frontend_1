@@ -119,16 +119,17 @@ export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
   return (
     <>
       {props.rows.map(
-        (row, i) =>
+        (row, ind) =>
           !row.hide && (
-            <RowPresenter
-              key={i}
-              blocks={row.blocks}
-              maxWidth={row.maxWidth}
-              background={row.background}
-              hide={row.hide}
-              vertical={row.vertical}
-            />
+            <React.Fragment key={ind}>
+              <RowPresenter
+                blocks={row.blocks}
+                maxWidth={row.maxWidth}
+                background={row.background}
+                hide={row.hide}
+                vertical={row.vertical}
+              />
+            </React.Fragment>
           )
       )}
     </>

@@ -36,5 +36,17 @@ const fr: LocaleDefinition = {
   catalogItems_price_value: "€",
   catalogList_show: "Voir tout",
   catalogList_hide: "S'effondrer",
+  university_button: "je veux étudier ici",
+  university_question: "Avoir des questions?",
+  university_answer: "Notre manager y répondra !",
+  university_year: "An",
+  university_direction: "Orientations d'étude:",
+  university_cost: "Coût de l'éducation:",
+  university_lang: "Langue d'enseignement:",
+  university_city: "Villes:",
+  university_sert: "Attestation:",
+  university_foundation: "Année de fondation:",
+  university_from: "À partir de:",
+  university_upto: "Jusqu'à:",
 };
 export default fr;

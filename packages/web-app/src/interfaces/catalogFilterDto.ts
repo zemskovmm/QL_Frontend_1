@@ -18,6 +18,7 @@ export interface CatalogResponseDto<T> {
 export interface CatalogUniversityDto {
   url: string;
   name: string;
+  logoId: number;
   priceFrom: number;
   priceTo: number;
   instructionLanguages: string[];

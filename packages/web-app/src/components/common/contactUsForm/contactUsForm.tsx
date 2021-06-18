@@ -152,7 +152,7 @@ export const ContactUsFormController = (props: { onDismiss: () => void }) => {
   return <ContactUsForm onDismiss={props.onDismiss} onSuccess={() => setIsSuccess(true)} />;
 };
 
-export const ContactUsFormButton = (props: { children: React.ReactNode; footer?: boolean }) => {
+export const ContactUsFormButton = (props: { children: React.ReactNode; footer?: boolean; className?: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -161,7 +161,9 @@ export const ContactUsFormButton = (props: { children: React.ReactNode; footer?:
         type={"button"}
         className={
           props.footer
-            ? ""
+            ? props.className
+              ? props.className
+              : ""
             : cn(
                 styles.button,
                 "bg-bgprimary",
@@ -169,7 +171,8 @@ export const ContactUsFormButton = (props: { children: React.ReactNode; footer?:
                 "font-medium",
                 "flex",
                 "items-center",
-                "text-secondary"
+                "text-secondary",
+                props.className ? props.className : ""
               )
         }
         onClick={() => {

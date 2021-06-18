@@ -36,6 +36,18 @@ const cn: LocaleDefinition = {
   catalogItems_price_value: "€",
   catalogList_show: "查看全部",
   catalogList_hide: "坍塌",
+  university_button: "我想在这里学习",
+  university_question: "有问题吗？",
+  university_answer: "我们的经理会回答他们！",
+  university_year: "年",
+  university_direction: "学习方向：",
+  university_cost: "教育费用：",
+  university_lang: "教育语言：:",
+  university_city: "城市:",
+  university_sert: "认证:",
+  university_foundation: "成立年份:",
+  university_from: "from:",
+  university_upto: "Up to:",
 };
 
 export default cn;
