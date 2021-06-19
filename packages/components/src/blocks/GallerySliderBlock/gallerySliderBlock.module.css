@@ -3,21 +3,24 @@
   overflow-y: visible;
 }
 
-.item {
-  position: relative;
+.slider {
+  align-items: stretch;
+}
+
+.item > div {
   padding: 30px;
-  width: 95%;
-  max-width: 880px;
+  width: 100%;
+  max-width: 860px;
   margin: 0 auto;
   background: #F9FAFD;
   border-radius: 6px;
   opacity: 0.6;
-  display: flex !important;
+  display: flex;
   align-items: flex-start;
   user-select: none;
 }
 
-.avatar {
+.item > div > img {
   flex-shrink: 0;
   width: 180px;
   height: 180px;
@@ -55,8 +58,8 @@
   margin-bottom: 10px;
 }
 
-:global(.slick-current) .item {
-  opacity: 1;
+:global(.react-multi-carousel-item--active).item > div  {
+  opacity: 1 !important;
 }
 
 .readall {
@@ -64,13 +67,12 @@
 }
 
 .dots {
-  height: 50px;
+  height: 40px;
   width: 100%;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  position: absolute;
-  left: 50%;
-  display: flex !important;
+  left: 50% !important;
+  justify-content: flex-start !important;
   transform: translateX(-50%);
 }
 
@@ -86,10 +88,9 @@
   border: none;
   border-radius: 3px;
   outline: none;
-  font-size: 0;
 }
 
-.dots li:global(.slick-active) button {
+.dots li:global(.react-multi-carousel-dot--active) button {
   height: 9px;
   background: #FF6768;
 }
@@ -115,7 +116,7 @@
   z-index: 10000;
 }
 
-.modal .item {
+.modal .item > div {
   opacity: 1 !important;
   z-index: 100002;
   position: relative;
@@ -141,49 +142,24 @@
   position: absolute;
   top: 20px;
   right: 20px;
-
   cursor: pointer;
   z-index: 100003;
 }
 
-.slider :global(.slick-list) {
-  overflow-x: hidden;
-}
-
-.slider :global(.slick-track) {
-  display: flex;
-  padding-bottom: 40px;
-}
-
-.slider :global(.slick-slide) {
-
-}
-
-
-
-
-
-
 @media screen and (max-width: 1024px) {
-  .item  {
+  .item > div {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  .avatar {
+  .item > div > img {
     margin-right: 0;
     margin-bottom: 20px;
   }
 
-  .modal .avatar {
+  .modal .item > div > img {
     display: none;
   }
 
-}
-
-@media screen and (max-width: 600px) {
-  .slider {
-    margin-bottom: 40px;
-  }
 }
