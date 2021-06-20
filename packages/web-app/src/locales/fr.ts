@@ -31,8 +31,8 @@ const fr: LocaleDefinition = {
   catalogItems_language_all: "Toutes les langues",
   catalogItems_price: "Le coût",
   catalogItems_price_from: "de",
-  catalogItems_price_before: "avant que",
-  catalogItems_price_week: "semaine",
+  catalogItems_price_before: "à",
+  catalogItems_price_year: "an",
   catalogItems_price_value: "€",
   catalogList_show: "Voir tout",
   catalogList_hide: "S'effondrer",
@@ -46,8 +46,8 @@ const fr: LocaleDefinition = {
   university_city: "Villes:",
   university_sert: "Attestation:",
   university_foundation: "Année de fondation:",
-  university_from: "À partir de:",
-  university_upto: "Jusqu'à:",
+  university_from: "de ",
+  university_upto: "à ",
   university_gallery: "Galerie",
 };
 export default fr;

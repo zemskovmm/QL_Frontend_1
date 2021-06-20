@@ -30,8 +30,8 @@ const esp: LocaleDefinition = {
   catalogItems_language_all: "Todos los idiomas",
   catalogItems_price: "El costo",
   catalogItems_price_from: "de",
-  catalogItems_price_before: "antes de",
-  catalogItems_price_week: "semana",
+  catalogItems_price_before: "a",
+  catalogItems_price_year: "año",
   catalogItems_price_value: "€",
   catalogList_show: "Ver todo",
   catalogList_hide: "Colapso",
@@ -45,8 +45,8 @@ const esp: LocaleDefinition = {
   university_city: "Ciudades:",
   university_sert: "Certificación:",
   university_foundation: "Año de fundación:",
-  university_from: "Hasta:",
-  university_upto: "Desde:",
+  university_from: "de ",
+  university_upto: "a ",
   university_gallery: "Galería",
 };
 

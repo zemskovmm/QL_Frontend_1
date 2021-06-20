@@ -28,9 +28,9 @@ const en = {
   catalogItems_language: "Language",
   catalogItems_language_all: "All language",
   catalogItems_price: "The cost",
-  catalogItems_price_from: "from",
-  catalogItems_price_before: "before",
-  catalogItems_price_week: "week",
+  catalogItems_price_from: "from ",
+  catalogItems_price_before: "to ",
+  catalogItems_price_year: "year",
   catalogItems_price_value: "€",
   catalogList_show: "View all",
   catalogList_hide: "Collapse",
@@ -44,8 +44,8 @@ const en = {
   university_city: "Cities:",
   university_sert: "Certification:",
   university_foundation: "Year of foundation:",
-  university_from: "From:",
-  university_upto: "Up to:",
+  university_from: "from ",
+  university_upto: "to ",
   university_gallery: "Gallery",
 };
 
