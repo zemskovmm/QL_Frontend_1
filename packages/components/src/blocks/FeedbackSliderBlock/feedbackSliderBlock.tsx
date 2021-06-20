@@ -18,6 +18,7 @@ export interface FeedbackSliderBlockElement {
   title: string;
   allFeedbacksTitle: string;
   allFeedbacksLink: string;
+  readMore: string;
   elements: { avatar: number | null; name: string; about: string; text: string; allText: string }[];
 }
 
@@ -70,7 +71,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
                   setShowModal(true);
                 }}
               >
-                Читать полностью
+                {props.readMore}
               </span>
             </div>
           </div>
@@ -115,6 +116,7 @@ export const FeedbackSliderBlockInfo: TypedBlockTypeInfo<FeedbackSliderBlockElem
     title: "Header",
     allFeedbacksTitle: "All Feedbacks",
     allFeedbacksLink: "#",
+    readMore: "Read more",
     elements: [
       {
         name: "Name",
@@ -182,6 +184,11 @@ export const FeedbackSliderBlockInfo: TypedBlockTypeInfo<FeedbackSliderBlockElem
         id: "allFeedbacksLink",
         type: "String",
         name: "AllFeedbacksLink",
+      },
+      {
+        id: "readMore",
+        type: "String",
+        name: "ReadMore",
       },
       {
         id: "elements",
