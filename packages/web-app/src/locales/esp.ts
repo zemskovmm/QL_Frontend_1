@@ -47,6 +47,7 @@ const esp: LocaleDefinition = {
   university_foundation: "Año de fundación:",
   university_from: "Hasta:",
   university_upto: "Desde:",
+  university_gallery: "Galería",
 };
 
 export default esp;

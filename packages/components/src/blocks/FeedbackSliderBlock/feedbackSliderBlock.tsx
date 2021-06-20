@@ -8,6 +8,7 @@ import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 
 import ArrowPict from "./icon/arrow-left.svg";
 import ClosePict from "./icon/close.svg";
+
 import { ApiBaseUrl } from "../../api/apiClientBase";
 
 import preview from "./preview.png";
@@ -24,26 +25,15 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
   const [curSlide, setCurSlide] = useState(0);
   const [isShowModal, setShowModal] = useState(false);
 
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 1920, min: 1024 },
-      items: 1,
-      partialVisibilityGutter: 1200,
-    },
-    mobile: {
-      breakpoint: { max: 1024, min: 0 },
-      items: 1,
-      partialVisibilityGutter: -130,
-    },
-  };
-
   const settings = {
     dots: true,
     arrows: false,
     centerMode: true,
     infinite: true,
     centerPadding: "25%",
+    autoplay: true,
     speed: 500,
+    autoplaySpeed: 10000,
     slidesToShow: 1,
     slidesToScroll: 1,
     className: cn(styles.slider, "relative"),

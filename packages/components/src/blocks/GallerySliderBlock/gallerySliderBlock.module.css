@@ -1,107 +1,69 @@
-.container {
-  padding-bottom: 40px;
-  overflow-y: visible;
-}
-
 .slider {
-  align-items: stretch;
+  padding-top: 40px;
+  margin: 0 2.5rem;
 }
 
-.item > div {
-  padding: 30px;
-  width: 100%;
-  max-width: 860px;
-  margin: 0 auto;
-  background: #F9FAFD;
-  border-radius: 6px;
-  opacity: 0.6;
+.slider :global(.slick-list) {
+  overflow-x: hidden;
+
+}
+
+.slider :global(.slick-track) {
   display: flex;
-  align-items: flex-start;
-  user-select: none;
+  padding-bottom: 40px;
 }
 
-.item > div > img {
-  flex-shrink: 0;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  margin-right: 33px;
+.slider :global(.slick-slide) {
+  padding-right: 20px;
+}
+
+.slider img {
+  width: 370px;
   object-fit: cover;
   object-position: center;
+  user-select: none;
+  flex-shrink: 0;
 }
 
-.item h3 {
-  line-height: 144%;
-  font-size: 1.125rem;
-  margin-bottom: 6px;
-}
-
-
-.item h4 {
-  line-height: 200%;
-  font-size: 0.75rem;
-  margin-bottom: 10px;
-}
-
-.item span {
-  font-size: 0.875rem;
-  line-height: 150%;
-  color: #567DD0;
+.slider :global(.slick-arrow) {
+  width: 30px;
+  height: 30px;
+  background: #C9D5F0;
   cursor: pointer;
-  border-bottom: 1px dashed rgba(75, 116, 205, 0.6);
-}
-
-.item p {
-  font-size: 1rem;
-  line-height: 150%;
-  color: #373737;
-  margin-bottom: 10px;
-}
-
-:global(.react-multi-carousel-item--active).item > div  {
-  opacity: 1 !important;
-}
-
-.readall {
-  margin-top: 10px;
-}
-
-.dots {
-  height: 40px;
-  width: 100%;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-  left: 50% !important;
-  justify-content: flex-start !important;
-  transform: translateX(-50%);
-}
-
-.dots li {
+  border-radius: 50%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+  position: absolute;
+  right: 30px;
+  bottom: calc(100% - 2px);
 }
 
-.dots li button {
-  width: 6px;
-  height: 6px;
-  margin: 2px 7px;
-  background: rgba(168, 181, 204, 0.3);
-  border: none;
-  border-radius: 3px;
-  outline: none;
+.slider :global(.slick-arrow) img {
+  width: 20px;
+  height: 20px;
 }
 
-.dots li:global(.react-multi-carousel-dot--active) button {
-  height: 9px;
-  background: #FF6768;
+.slider :global(.slick-arrow):hover {
+  background: #567DD0;
 }
 
 
+.slider :global(.slick-prev) {
+  right: 70px;
+  transform: rotate(180deg);
+}
 
-.title {
-  font-size: 1.875rem;
-  line-height: 140%;
-  color: #373737;
-  margin-bottom: 40px;
+.counter {
+  color: #A8B5CC;
+  font-size: 0.75rem;
+  margin-right: 130px;
+}
+
+.counter b {
+  color: #567DD0;
+  font-size: 1rem;
 }
 
 .modal {
@@ -116,12 +78,17 @@
   z-index: 10000;
 }
 
-.modal .item > div {
-  opacity: 1 !important;
+.modalcontent {
+  display: flex;
   z-index: 100002;
   position: relative;
   max-height: 80vh !important;
-  overflow-y: auto;
+  max-width: calc(95% - 30px);
+}
+
+.modalcontent img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .overlay {
@@ -134,31 +101,42 @@
   z-index: 100001;
 }
 
-.modal .item {
-  position: relative;
-}
-
 .close {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
+
   cursor: pointer;
   z-index: 100003;
 }
 
-@media screen and (max-width: 1024px) {
-  .item > div {
-    flex-direction: column;
-    align-items: center;
+.zoom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 60px !important;
+}
+
+
+@media screen and (max-width: 550px) {
+  .slider {
+    margin: 0;
+  }
+
+  .titlepart {
+    justify-content: center !important;
+  }
+
+  .titlepart h2 {
     text-align: center;
   }
 
-  .item > div > img {
-    margin-right: 0;
-    margin-bottom: 20px;
+  .slider :global(.slick-list) {
+    padding-left: 0 !important;
   }
 
-  .modal .item > div > img {
+  .counter {
     display: none;
   }
 

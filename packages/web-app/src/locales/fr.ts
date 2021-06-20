@@ -48,5 +48,6 @@ const fr: LocaleDefinition = {
   university_foundation: "Année de fondation:",
   university_from: "À partir de:",
   university_upto: "Jusqu'à:",
+  university_gallery: "Galerie",
 };
 export default fr;

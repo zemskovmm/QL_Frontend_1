@@ -1,113 +1,113 @@
 import React, { useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
-import styles from "./feedbackSliderBlock.module.css";
+import styles from "./gallerySliderBlock.module.css";
 
-import Carousel from "react-multi-carousel";
+import Slider, { Settings } from "react-slick";
 import cn from "classnames";
-import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 
-import ArrowPict from "../../assets/img/arrow-left.svg";
-import ClosePict from "../../assets/img/close.svg";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 
+import ArrowPict from "./icon/arrow.svg";
+import ZoomPict from "./icon/zoom.svg";
 import preview from "./preview.png";
-import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
+import ClosePict from "../FeedbackSliderBlock/icon/close.svg";
 
-export interface FeedbackSliderBlockElement {
-  title: string;
-  allFeedbacksTitle: string;
-  allFeedbacksLink: string;
-  elements: { avatar: number | null; name: string; about: string; text: string; allText: string }[];
+export interface GallerySliderBlockElement {
+  title: string | React.ReactNode;
+  elements: { image: number | null }[];
 }
 
-export const GallerySliderBlock = (props: FeedbackSliderBlockElement) => {
-  const [curSlide, setCurSlide] = useState(0);
+interface GallerySliderArrow {
+  onClick: () => void;
+  className?: string;
+}
+
+const SliderArrow = ({ className, onClick }: GallerySliderArrow) => {
+  return (
+    <div className={className} onClick={onClick}>
+      <img src={ArrowPict} alt="" />
+    </div>
+  );
+};
+
+export const GallerySliderBlock = (props: GallerySliderBlockElement) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [choosenSlide, setChoosenSlide] = useState(0);
   const [isShowModal, setShowModal] = useState(false);
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 1920, min: 1024 },
-      items: 1,
-      partialVisibilityGutter: 1200,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-      partialVisibilityGutter: 0,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-      partialVisibilityGutter: 0,
-    },
+
+  const settings: Settings = {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    infinite: props.elements.length > 3,
+    lazyLoad: "ondemand",
+    className: cn(styles.slider, "relative"),
+    prevArrow: <SliderArrow onClick={() => onclick} />,
+    nextArrow: <SliderArrow onClick={() => onclick} />,
+    afterChange: (ind) => setCurrentSlide(ind),
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          infinite: props.elements.length > 2,
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          infinite: props.elements.length > 1,
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 550,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          arrows: false,
+          centerPadding: "30px",
+        },
+      },
+    ],
   };
+
+  if (props.elements.length === 0) return null;
 
   return (
     <div className="py-12">
-      <h2 className={cn(styles.title, "px-10 max-w-screen-xl mx-auto w-full font-bold")}>{props.title}</h2>
-      <div className="relative">
-        <Carousel
-          centerMode
-          //partialVisbile={true}
-          responsive={responsive}
-          itemClass={styles.item}
-          arrows={false}
-          infinite
-          showDots
-          renderDotsOutside
-          sliderClass={styles.slider}
-          dotListClass={cn(styles.dots, "justify-start items-start max-w-screen-xl")}
-          slidesToSlide={1}
-          containerClass={styles.container}
-          autoPlaySpeed={3000}
-          autoPlay
-        >
-          {props.elements.map((feedback, ind) => (
+      <div className="max-w-screen-xl mx-auto w-full">
+        <div className={cn(styles.titlepart, "px-10 flex justify-between")}>
+          <h2 className={cn(styles.title, "font-bold")}>{props.title}</h2>
+          <span className={styles.counter}>
+            <b>{currentSlide + 1}</b>/{props.elements.length}
+          </span>
+        </div>
+
+        <Slider {...settings}>
+          {props.elements.map(({ image }, ind) => (
             <div key={ind}>
-              <img src={feedback.avatar ? `${ApiBaseUrl}/api/media/${feedback.avatar}` : ""} alt="" />
-              <div>
-                <h3 className="font-bold">{feedback.name}</h3>
-                <h4>{feedback.about}</h4>
-                <div dangerouslySetInnerHTML={{ __html: feedback.text }} />
-                <span
-                  className={styles.readall}
+              <div className="inline-block relative">
+                <img src={`${ApiBaseUrl}/api/media/scaled/${image}?dimension=370`} alt="" />
+                <img
                   onClick={() => {
-                    setCurSlide(ind);
+                    setChoosenSlide(ind);
                     setShowModal(true);
                   }}
-                >
-                  Читать полностью
-                </span>
+                  className={styles.zoom}
+                  src={ZoomPict}
+                  alt=""
+                />
               </div>
             </div>
           ))}
-        </Carousel>
-        <div className="px-10">
-          <ButtonFormBlock
-            name={props.allFeedbacksTitle}
-            link={props.allFeedbacksLink}
-            iconLink={ArrowPict}
-            align={"justify-end"}
-          />
-        </div>
+        </Slider>
       </div>
       {isShowModal && (
         <div className={cn(styles.modal, "flex")}>
           <div className={styles.overlay} onClick={() => setShowModal(false)} />
-          <div className={styles.item}>
-            <div>
-              <img
-                src={
-                  props.elements[curSlide].avatar ? `${ApiBaseUrl}/api/media/${props.elements[curSlide].avatar}` : ""
-                }
-                alt=""
-              />
-              <div>
-                <h3 className="font-bold">{props.elements[curSlide].name}</h3>
-                <h4>{props.elements[curSlide].about}</h4>
-                <HtmlPresenter text={props.elements[curSlide].allText} />
-              </div>
-            </div>
-            <img className={styles.close} src={ClosePict} onClick={() => setShowModal(false)} />
+          <div className={styles.modalcontent}>
+            <img src={`${ApiBaseUrl}/api/media/${props.elements[choosenSlide].image}`} alt="" />
+            <img className={styles.close} src={ClosePict} alt="" onClick={() => setShowModal(false)} />
           </div>
         </div>
       )}
@@ -115,29 +115,16 @@ export const GallerySliderBlock = (props: FeedbackSliderBlockElement) => {
   );
 };
 
-export const FeedbackSliderBlockInfo: TypedBlockTypeInfo<FeedbackSliderBlockElement> = {
-  id: "feedbackSliderBlock",
-  name: "FeedbackSliderBlock",
+export const GallerySliderBlockInfo: TypedBlockTypeInfo<GallerySliderBlockElement> = {
+  id: "gallerySliderBlock",
+  name: "GallerySliderBlock",
   preview: preview,
   renderer: GallerySliderBlock,
   initialData: {
     title: "Header",
-    allFeedbacksTitle: "All Feedbacks",
-    allFeedbacksLink: "#",
     elements: [
       {
-        name: "Name",
-        avatar: null,
-        about: "About",
-        text: "Text",
-        allText: "All text",
-      },
-      {
-        name: "Name",
-        avatar: null,
-        about: "About",
-        text: "Text",
-        allText: "All text",
+        image: null,
       },
     ],
   },
@@ -146,32 +133,10 @@ export const FeedbackSliderBlockInfo: TypedBlockTypeInfo<FeedbackSliderBlockElem
       element: {
         fields: [
           {
-            id: "avatar",
-            name: "Avatar",
+            id: "image",
+            name: "Image",
             type: "Custom",
             customType: "Image",
-          },
-          {
-            id: "name",
-            type: "String",
-            name: "Name",
-          },
-          {
-            id: "about",
-            type: "String",
-            name: "About",
-          },
-          {
-            id: "text",
-            type: "Custom",
-            customType: "Html",
-            name: "Text",
-          },
-          {
-            id: "allText",
-            type: "Custom",
-            customType: "Html",
-            name: "All Text",
           },
         ],
       },
@@ -181,16 +146,6 @@ export const FeedbackSliderBlockInfo: TypedBlockTypeInfo<FeedbackSliderBlockElem
         id: "title",
         type: "String",
         name: "Title",
-      },
-      {
-        id: "allFeedbacksTitle",
-        type: "String",
-        name: "AllFeedbacksTitle",
-      },
-      {
-        id: "allFeedbacksLink",
-        type: "String",
-        name: "AllFeedbacksLink",
       },
       {
         id: "elements",

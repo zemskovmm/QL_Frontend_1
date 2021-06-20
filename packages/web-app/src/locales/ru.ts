@@ -48,5 +48,6 @@ const ru: LocaleDefinition = {
   university_foundation: "Год основания:",
   university_from: "От:",
   university_upto: "До:",
+  university_gallery: "Галерея",
 };
 export default ru;
