@@ -3,7 +3,7 @@ import style from "./catalogInnerAbout.module.css";
 import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
 import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
 import { HtmlPresenter } from "@project/components/src/ui/HtmlPresenter/htmlPresenter";
-import { LocalizedText } from "../../common/LocalizedText";
+import { LocalizedText } from "src/components/common/LocalizedText";
 
 const CatalogCallBack = () => {
   return (

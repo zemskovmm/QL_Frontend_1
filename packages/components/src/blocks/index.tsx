@@ -33,6 +33,7 @@ import grid from "../styles/grid.module.css";
 import { PartnersBlockInfo } from "./PartnersBlock/PartnersBlock";
 import { NewsBlockInfo } from "./NewsBlock/NewsBlock";
 import { SocialBlockInfo } from "./SocialBlock/SocialBlock";
+import { GallerySliderBlockInfo } from "./GallerySliderBlock/gallerySliderBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -64,6 +65,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   PartnersBlockInfo,
   NewsBlockInfo,
   SocialBlockInfo,
+  GallerySliderBlockInfo,
 ];
 
 export interface IComponentHost {

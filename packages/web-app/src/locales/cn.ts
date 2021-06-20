@@ -48,6 +48,7 @@ const cn: LocaleDefinition = {
   university_foundation: "成立年份:",
   university_from: "从 ",
   university_upto: "到 ",
+  university_gallery: "画廊",
 };
 
 export default cn;

@@ -46,6 +46,7 @@ const en = {
   university_foundation: "Year of foundation:",
   university_from: "from ",
   university_upto: "to ",
+  university_gallery: "Gallery",
 };
 
 export default en;
