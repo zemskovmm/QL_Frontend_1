@@ -124,7 +124,7 @@ export const MobileMenu: FC<MobileMenuProps> = ({ close, linkBottom, linkTop, li
       <div className={`flex flex-col`}>
         {linkTop.map((l, index) => (
           <li key={index + l.url} className={"uppercase flex " + styles.mobileMenu__topLink}>
-            <a className="text-xs font-bold hover:text-hover" href={l.url}>
+            <a className="text-xs font-bold hover:text-hover" href={l.url} onClick={() => close()}>
               {l.title}
             </a>
           </li>
@@ -133,7 +133,9 @@ export const MobileMenu: FC<MobileMenuProps> = ({ close, linkBottom, linkTop, li
       <div className={`flex flex-col`}>
         {linkBottom.map(({ url, title }, i) => (
           <Link key={i + "headLink"} href={url}>
-            <a className={styles.mobileMenu__bottomLink}>{title}</a>
+            <a className={styles.mobileMenu__bottomLink} onClick={() => close()}>
+              {title}
+            </a>
           </Link>
         ))}
       </div>
