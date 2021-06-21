@@ -96,6 +96,10 @@
   margin-bottom: 0.5rem;
 }
 
+.footer_linkspan:first-letter {
+  text-transform: uppercase;
+}
+
 @media (max-width: 1023px) {
   .footer_column.footer_address li{
     
