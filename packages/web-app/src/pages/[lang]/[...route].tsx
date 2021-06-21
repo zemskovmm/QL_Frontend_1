@@ -17,10 +17,7 @@ const ServerRouted = (props: ClientRouteDto) => {
 };
 
 export const getServerSideProps: AppGetServerSideProps = async (context) => {
-  let { lang, route } = context.query;
-  if (route?.length == 0) {
-    route = ["main"];
-  }
+  const { lang, route } = context.query;
   const data = await siteApi.route(lang as string, route as string[]);
 
   const redirect = handleLanguageAndRedirects(context, data.urls);
