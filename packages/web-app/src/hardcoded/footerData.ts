@@ -588,7 +588,7 @@ const footerData: FooterDataDto = {
     links: [
       {
         group: {
-          url: "/cn/training",
+          url: "/cn/education",
           title: "高等教育",
         },
         items: [
@@ -851,7 +851,7 @@ const footerData: FooterDataDto = {
       {
         group: {
           title: "Enseignement",
-          url: "/fr/training",
+          url: "/fr/education",
         },
         items: [
           {
@@ -1114,7 +1114,7 @@ const footerData: FooterDataDto = {
       {
         group: {
           title: "ESTUDIOS",
-          url: "/esp/training",
+          url: "/esp/education",
         },
         items: [
           {
