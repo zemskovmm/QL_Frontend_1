@@ -27,11 +27,11 @@ export interface CatalogWidgetProps {
 }
 
 const housingLangs: { [key: string]: string } = {
-  ru: "https://housing.quartier-latin.com/housing",
-  en: "https://housing.quartier-latin.com/en/housing",
-  cn: "https://housing.quartier-latin.com/cn/housing",
-  fr: "https://housing.quartier-latin.com/fr/housing",
-  esp: "https://housing.quartier-latin.com/en/housing",
+  ru: "/ru/housing",
+  en: "/en/housing",
+  cn: "/cn/housing",
+  fr: "/fr/housing",
+  esp: "/en/housing",
 };
 
 function navigateToCatalog(

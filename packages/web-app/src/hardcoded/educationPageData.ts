@@ -37,32 +37,32 @@ const educationPageData: educationPageDataType = {
       {
         img: "./../images/bigCards/1.jpg",
         title: "Заверенный перевод документов",
-        url: "https://quartier-latin.com/dopolnitelnye-uslugi/zaverennyj-perevod-dokumentov",
+        url: "/ru/dopolnitelnye-uslugi/zaverennyj-perevod-dokumentov",
       },
       {
         img: "./../images/bigCards/2.jpg",
         title: "Составление и перевод резюме",
-        url: "https://quartier-latin.com/dopolnitelnye-uslugi/sostavlenie-i-perevod-rezjume",
+        url: "/ru/dopolnitelnye-uslugi/sostavlenie-i-perevod-rezjume",
       },
       {
         img: "./../images/bigCards/3.jpg",
-        url: "https://quartier-latin.com/dopolnitelnye-uslugi/sostavlenie-motivatsionnyh-pisem",
+        url: "/ru/dopolnitelnye-uslugi/sostavlenie-motivatsionnyh-pisem",
         title: "Составление мотивационных писем",
       },
       {
         img: "./../images/bigCards/4.jpg",
         title: "Подбор и запись на стипендию",
-        url: "https://quartier-latin.com/dopolnitelnye-uslugi/podbor-i-zapis-na-stipendiju",
+        url: "/ru/dopolnitelnye-uslugi/podbor-i-zapis-na-stipendiju",
       },
       {
         img: "./../images/bigCards/5.jpg",
         title: "Подготовка к собеседованию в ВУЗе",
-        url: "https://quartier-latin.com/dopolnitelnye-uslugi/podgotovka-k-sobesedovaniju-na-postuplenie",
+        url: "/ru/dopolnitelnye-uslugi/podgotovka-k-sobesedovaniju-na-postuplenie",
       },
       {
         img: "./../images/bigCards/6.jpg",
         title: "Заполнение анкет",
-        url: "https://quartier-latin.com/dopolnitelnye-uslugi/zapolnenie-anket",
+        url: "/ru/dopolnitelnye-uslugi/zapolnenie-anket",
       },
     ],
     linksButton: {
@@ -115,7 +115,7 @@ const educationPageData: educationPageDataType = {
         "<h2>Знакомьтесь, это Александра!</h2><p>Мы помогли ей осуществить давнюю мечту поступить в один из лучших ВУЗов Франции!</p><br><blockquote>Хочу поблагодарить Латинский Квартал за то, что прошли со мной эти два безумных года. Ребята общались с ВУЗом, помогли быстро сделать титр, страховку и поступить в магистратуру именитой школы, минуя все формальные процедуры, на специальных условиях. <br><br> Это просто ВАУ! <br><br> У ребят всегда есть два с половиной плана на любой случай. Они на каждом шагу остаются рядом: будь то перевод досье на французский или текста моей свадебной церемонии, уже на русский язык. Но это уже совсем другая история :)</blockquote><br><h3>Александра</h3>",
       button: {
         title: "Все отзывы",
-        url: "https://quartier-latin.com/zhivaja-lenta-otzyvov",
+        url: "/ru/zhivaja-lenta-otzyvov",
       },
     },
     wideCards: {
@@ -185,33 +185,32 @@ const educationPageData: educationPageDataType = {
     links: [
       {
         img: "./../images/bigCards/1.jpg",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/certified-translation-of-documents",
+        url: "/en/dopolnitelnye-uslugi/certified-translation-of-documents",
         title: "Certified translation of documents",
       },
       {
         img: "./../images/bigCards/2.jpg",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/assistance-in-preparing-and-translating-your-cv",
+        url: "/en/dopolnitelnye-uslugi/assistance-in-preparing-and-translating-your-cv",
         title: "Assistance in preparing and translating your CV",
       },
       {
         img: "./../images/bigCards/3.jpg",
-        url:
-          "https://quartier-latin.com/en/dopolnitelnye-uslugi/assistance-in-preparing-and-writing-motivation-letters",
+        url: "/en/dopolnitelnye-uslugi/assistance-in-preparing-and-writing-motivation-letters",
         title: "Assistance in preparing and writing motivation letters",
       },
       {
         img: "./../images/bigCards/4.jpg",
         title: "Selecting and applying for a scholarship",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/selecting-and-applying-for-a-scholarship",
+        url: "/en/dopolnitelnye-uslugi/selecting-and-applying-for-a-scholarship",
       },
       {
         img: "./../images/bigCards/5.jpg",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/preparing-for-a-university-interview",
+        url: "/en/dopolnitelnye-uslugi/preparing-for-a-university-interview",
         title: "Preparing for a university interview",
       },
       {
         img: "./../images/bigCards/6.jpg",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/filling-in-the-application-form",
+        url: "/en/dopolnitelnye-uslugi/filling-in-the-application-form",
         title: "Filling in the application form",
       },
     ],
@@ -265,7 +264,7 @@ const educationPageData: educationPageDataType = {
         "<h2>MEET ALEXANDRA!</h2><p>With our help, her dream of studying at one of the best universities in France came true!</p><br><blockquote>I want to thank Quartier Latin for being by my side during these two years. They contacted the university, helped me to get a residence permit, health insurance and, thanks to them, I went to a prestigious university, where I studied the master's degree that best suited my wishes. But most importantly, I didn’t have to go through all the paperwork on my own. <br><br> There’s only one thing I can say: Wow! <br><br> These guys always have an ace up their sleeve when it comes to planning everything. They guided me every step of the way and, if their help with official translations wasn’t enough, they even helped me to translate my wedding vows. But that's an entirely different story 😊</blockquote><br><h3>ALEXANDRA</h3>",
       button: {
         title: "All reviews",
-        url: "https://quartier-latin.com/en/zhivaja-lenta-otzyvov",
+        url: "/en/zhivaja-lenta-otzyvov",
       },
     },
     wideCards: {
@@ -333,33 +332,33 @@ const educationPageData: educationPageDataType = {
     links: [
       {
         img: "./../images/bigCards/1.jpg",
-        url: "https://quartier-latin.com/cn/dopolnitelnye-uslugi/zaverennyj-perevod-dokumentov",
+        url: "/cn/dopolnitelnye-uslugi/zaverennyj-perevod-dokumentov",
         title: "翻译公证文件",
       },
       {
         img: "./../images/bigCards/2.jpg",
-        url: "https://quartier-latin.com/cn/dopolnitelnye-uslugi/sostavlenie-i-perevod-rezjume",
+        url: "/cn/dopolnitelnye-uslugi/sostavlenie-i-perevod-rezjume",
         title: "修改简历",
       },
       {
         img: "./../images/bigCards/3.jpg",
         title: "修改动机信",
-        url: "https://quartier-latin.com/cn/dopolnitelnye-uslugi/sostavlenie-motivatsionnyh-pisem",
+        url: "/cn/dopolnitelnye-uslugi/sostavlenie-motivatsionnyh-pisem",
       },
       {
         img: "./../images/bigCards/4.jpg",
         title: "申请奖学金",
-        url: "https://quartier-latin.com/cn/dopolnitelnye-uslugi/podbor-i-zapis-na-stipendiju",
+        url: "/cn/dopolnitelnye-uslugi/podbor-i-zapis-na-stipendiju",
       },
       {
         img: "./../images/bigCards/5.jpg",
         title: "准备学校面试",
-        url: "https://quartier-latin.com/cn/dopolnitelnye-uslugi/podgotovka-k-sobesedovaniju-na-postuplenie",
+        url: "/cn/dopolnitelnye-uslugi/podgotovka-k-sobesedovaniju-na-postuplenie",
       },
       {
         img: "./../images/bigCards/6.jpg",
         title: "行政支持",
-        url: "https://quartier-latin.com/cn/dopolnitelnye-uslugi/zapolnenie-anket",
+        url: "/cn/dopolnitelnye-uslugi/zapolnenie-anket",
       },
     ],
     linksButton: {
@@ -410,7 +409,7 @@ const educationPageData: educationPageDataType = {
         "<h2>来了解一下ALEXANDRA的经历</h2><p>我们曾经帮助她完成了在顶尖法国院校就读的梦想。</p><br><blockquote>我要感谢拉丁区教育再这两年里给我的帮助，在他们的帮助下我成功申请到了法国学校，并在最短的时间内拿到了居留卡和学生保险。 <br><br> 他们的服务实在是简单又有效！ <br><br> 无论我向他们提出什么要求，他们都能拿出解决的办法并且一步步的陪我解决问题，例如首先需要翻译公证我的学校录取和结婚证明之类的。</blockquote><br><h3>ALEXANDRA</h3>",
       button: {
         title: "所有評論",
-        url: "https://quartier-latin.com/cn/zhivaja-lenta-otzyvov",
+        url: "/cn/zhivaja-lenta-otzyvov",
       },
     },
     wideCards: {
@@ -479,33 +478,31 @@ const educationPageData: educationPageDataType = {
       {
         img: "./../images/bigCards/1.jpg",
         title: "Traduction notariée de documents",
-        url: "https://quartier-latin.com/fr/dopolnitelnye-uslugi/traduction-notariee-de-documents",
+        url: "/fr/dopolnitelnye-uslugi/traduction-notariee-de-documents",
       },
       {
         img: "./../images/bigCards/2.jpg",
         title: "Aide à la rédaction d'un CV",
-        url: "https://quartier-latin.com/fr/dopolnitelnye-uslugi/aide-a-la-redaction-et-a-la-traduction-dun-cv",
+        url: "/fr/dopolnitelnye-uslugi/aide-a-la-redaction-et-a-la-traduction-dun-cv",
       },
       {
         img: "./../images/bigCards/3.jpg",
         title: "Aide à la rédaction d'une lettre de motivation",
-        url:
-          "https://quartier-latin.com/fr/dopolnitelnye-uslugi/aide-a-la-redaction-et-a-la-mise-en-forme-dune-lettre-de-motivation",
+        url: "/fr/dopolnitelnye-uslugi/aide-a-la-redaction-et-a-la-mise-en-forme-dune-lettre-de-motivation",
       },
       {
         img: "./../images/bigCards/4.jpg",
         title: "Candidature à une bourse",
-        url: "https://quartier-latin.com/fr/dopolnitelnye-uslugi/selection-et-candidature-a-une-bourse",
+        url: "/fr/dopolnitelnye-uslugi/selection-et-candidature-a-une-bourse",
       },
       {
         img: "./../images/bigCards/5.jpg",
         title: "Préparation à l'entretien d'admission à un établissement",
-        url:
-          "https://quartier-latin.com/fr/dopolnitelnye-uslugi/preparation-a-lentretien-dadmission-a-un-etablissement-denseignement-superieur",
+        url: "/fr/dopolnitelnye-uslugi/preparation-a-lentretien-dadmission-a-un-etablissement-denseignement-superieur",
       },
       {
         img: "./../images/bigCards/6.jpg",
-        url: "https://quartier-latin.com/fr/dopolnitelnye-uslugi/soutien-administratif",
+        url: "/fr/dopolnitelnye-uslugi/soutien-administratif",
         title: "Soutien administratif",
       },
     ],
@@ -559,7 +556,7 @@ const educationPageData: educationPageDataType = {
         "<h2>FAITES CONNAISSANCE AVEC ALEXANDRA!</h2><p>Nous l’avons aidée à exaucer son vieux rêve d’entrer dans l’une des plus prestigieuses universités de France !</p><br><blockquote>J'aimerais remercier Quartier Latin d’avoir passé à mes côtés ces deux dernières années de folie. Ils ont échangé avec les établissements d'enseignement supérieur, m'ont aidé à obtenir rapidement un titre de séjour, une assurance et à entrer en master dans une école réputée, en évitant toutes les formalités habituelles, sur dérogation.<br><br> C'était tout simplement génial ! <br><br> Ces gars ont toujours plus d'un tour dans leur sac dans n'importe quelle situation. Ils m'ont accompagnée à chaque étape : qu'il faille traduire en français mon dossier d'admission ou le texte de ma cérémonie de mariage, en russe cette fois. Mais ça, c'est une autre histoire 😊</blockquote><br><h3>ALEXANDRA</h3>",
       button: {
         title: "Tous les avis",
-        url: "https://quartier-latin.com/fr/zhivaja-lenta-otzyvov",
+        url: "/fr/zhivaja-lenta-otzyvov",
       },
     },
     wideCards: {
@@ -627,33 +624,32 @@ const educationPageData: educationPageDataType = {
     links: [
       {
         img: "./../images/bigCards/1.jpg",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/certified-translation-of-documents",
+        url: "/en/dopolnitelnye-uslugi/certified-translation-of-documents",
         title: "Traducción jurada de documentos",
       },
       {
         img: "./../images/bigCards/2.jpg",
         title: "Asistencia para la preparación y traducción del CV",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/assistance-in-preparing-and-translating-your-cv",
+        url: "/en/dopolnitelnye-uslugi/assistance-in-preparing-and-translating-your-cv",
       },
       {
         img: "./../images/bigCards/3.jpg",
         title: "Asistencia para la redacción de cartas de motivación",
-        url:
-          "https://quartier-latin.com/en/dopolnitelnye-uslugi/assistance-in-preparing-and-writing-motivation-letters",
+        url: "/en/dopolnitelnye-uslugi/assistance-in-preparing-and-writing-motivation-letters",
       },
       {
         img: "./../images/bigCards/4.jpg",
         title: "Selección y solicitud de una beca",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/selecting-and-applying-for-a-scholarship",
+        url: "/en/dopolnitelnye-uslugi/selecting-and-applying-for-a-scholarship",
       },
       {
         img: "./../images/bigCards/5.jpg",
         title: "Preparación para entrevistas de admisión a la universidad",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/preparing-for-a-university-interview",
+        url: "/en/dopolnitelnye-uslugi/preparing-for-a-university-interview",
       },
       {
         img: "./../images/bigCards/6.jpg",
-        url: "https://quartier-latin.com/en/dopolnitelnye-uslugi/filling-in-the-application-form",
+        url: "/en/dopolnitelnye-uslugi/filling-in-the-application-form",
         title: "Cumplimentación de formularios",
       },
     ],
@@ -708,7 +704,7 @@ const educationPageData: educationPageDataType = {
         "<h2>CONOZCA A ALEXANDRA</h2><p>Le hemos ayudado a cumplir su sueño de estudiar en una de las mejores universidades de Francia.</p><br><blockquote>Quiero dar las gracias a Quartier Latin por haber estado conmigo durante estos dos años. Hablaron con la universidad, me ayudaron a conseguir el permiso de residencia, el seguro médico y, gracias a ellos, entré en una universidad de prestigio, donde estudié el máster que mejor se adaptaba a mis deseos sin tener que hacer todo el papeleo por mi cuenta. <br><br> Solo puedo decir una cosa: ¡WOW! <br><br> El equipo de Quartier Latin siempre tiene un as en la manga cuando se trata de planificarlo todo. Me acompañaron en cada etapa del camino y, por si fuera poca su ayuda con las traducciones juradas, hasta me ayudaron a traducir mis votos matrimoniales. Pero eso ya es una historia aparte :)</blockquote><br><h3>ALEXANDRA</h3>",
       button: {
         title: "Todas las reseñas",
-        url: "https://quartier-latin.com/en/zhivaja-lenta-otzyvov",
+        url: "/en/zhivaja-lenta-otzyvov",
       },
     },
     wideCards: {

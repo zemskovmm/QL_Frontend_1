@@ -3,7 +3,7 @@ import { ClientRouteDto } from "src/interfaces/clientRouteDto";
 import { PageModule } from "src/components/modules/pageModule";
 import { UniversityModule } from "src/components/modules/universityModule";
 import { handleLanguageAndRedirects } from "src/utilities/localeHandler";
-import {AppGetServerSideProps} from "src/interfaces/AppGetServerSideProps";
+import { AppGetServerSideProps } from "src/interfaces/AppGetServerSideProps";
 
 const GetModule = (props: ClientRouteDto) => {
   const name = props.moduleName;
@@ -17,7 +17,10 @@ const ServerRouted = (props: ClientRouteDto) => {
 };
 
 export const getServerSideProps: AppGetServerSideProps = async (context) => {
-  const { lang, route } = context.query;
+  let { lang, route } = context.query;
+  if (route?.length == 0) {
+    route = ["main"];
+  }
   const data = await siteApi.route(lang as string, route as string[]);
 
   const redirect = handleLanguageAndRedirects(context, data.urls);
