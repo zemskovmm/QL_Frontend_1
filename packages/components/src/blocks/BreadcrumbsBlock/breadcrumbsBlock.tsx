@@ -15,7 +15,7 @@ export interface BreadcrumbsBlockElement {
 
 export const BreadcrumbsBlock = (props: BreadcrumbsBlockElement) => {
   return (
-    <div className={cn(style.breadcrumbs, "flex", props.whiteColor ? style.breadcrumbs_white : "")}>
+    <div className={cn(style.breadcrumbs, "flex", "px-5", props.whiteColor ? style.breadcrumbs_white : "")}>
       {props.items.map((el, index) => (
         <Link href={el.link ? el.link : "#"}>
           <a className={style.breadcrumbs__items} key={`${index} bread`}>
