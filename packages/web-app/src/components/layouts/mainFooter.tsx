@@ -24,9 +24,13 @@ export const MainFooter = (props: FooterDataDto) => {
           <ul className="flex flex-col lg:flex-row">
             {props[lang].headLinks.map((link, i) => (
               <li key={i + "footerHeadLink"}>
-                <a className={"flex lg:mx-7 whitespace-nowrap font-bold text-xs mb-5"} href={link.link.url}>
+                <a className={cn("flex lg:mx-7 whitespace-nowrap font-bold text-xs mb-5")} href={link.link.url}>
                   <img className="mr-3" src={link.icon} alt="" />
-                  {link.link.title[0].toUpperCase() + link.link.title.slice(1, link.link.title.length).toLowerCase()}
+                  <span className={styles.footer_linkspan}>
+                    {link.link.title.toLowerCase() === "faq"
+                      ? link.link.title.toUpperCase()
+                      : link.link.title.toLowerCase()}
+                  </span>
                 </a>
               </li>
             ))}
