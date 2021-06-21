@@ -20,6 +20,15 @@ export interface TitleAndTabsBlockElement {
   tabs: { title: string; filters: { filter: string }[]; type: string }[];
 }
 
+//TODO: Remove copy-paste
+const housingLangs: { [key: string]: string } = {
+  ru: "https://housing.quartier-latin.com/housing",
+  en: "https://housing.quartier-latin.com/en/housing",
+  cn: "https://housing.quartier-latin.com/cn/housing",
+  fr: "https://housing.quartier-latin.com/fr/housing",
+  esp: "https://housing.quartier-latin.com/en/housing",
+};
+
 export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
   const tabsComponent = props.tabs.map((el, index) => (
     <ServerCatalogWidget key={index + el.type} filterIds={el.filters.map((el) => el.filter)} entityType={el.type} />
@@ -32,7 +41,7 @@ export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
       </div>
       <div className={`flex flex-col lg:hidden`}>
         {props.tabs.map((el) => (
-          <Link href={el.type === "university" ? `/${lang}/catalog/university` : `/${lang}/housing`}>
+          <Link href={el.type === "university" ? `/${lang}/catalog/university` : housingLangs[lang!]}>
             <a className={style.buttonMobile}>
               <img src={el.type === "university" ? education : hotel} alt="" />
               {el.title}
