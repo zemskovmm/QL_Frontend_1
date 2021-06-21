@@ -85,7 +85,7 @@ const UniversityCatalogPage = () => {
   return (
     <div style={{ backgroundColor: "#f9fafd" }}>
       <div className={style.catalogWrapper}>
-        <div className={`mr-auto mb-7`}>
+        <div className={`mr-auto mb-7 ` + style.catalog__bread}>
           <BreadcrumbsBlock
             items={[
               {
