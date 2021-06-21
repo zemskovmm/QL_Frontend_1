@@ -29,8 +29,9 @@ const esp: LocaleDefinition = {
   catalogItems_language: "Idioma",
   catalogItems_language_all: "Todos los idiomas",
   catalogItems_price: "El costo",
-  catalogItems_price_from: "de",
-  catalogItems_price_before: "a",
+  catalogItems_price_from: "de ",
+  catalogItems_price_before: "a ",
+  catalogItems_price_upto: "A ",
   catalogItems_price_year: "año",
   catalogItems_price_value: "€",
   catalogList_show: "Ver todo",
@@ -46,7 +47,8 @@ const esp: LocaleDefinition = {
   university_sert: "Certificación:",
   university_foundation: "Año de fundación:",
   university_from: "de ",
-  university_upto: "a ",
+  university_to: "a ",
+  university_upto: "A ",
   university_gallery: "Galería",
 };
 

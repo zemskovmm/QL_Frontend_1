@@ -54,18 +54,32 @@ export const CatalogInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
               <div className={`flex flex-col w-full`}>
                 {data.traits.universityDegrees.map((el) => (
                   <div className={style.info__columnItem__priceList}>
-                    <span>
-                      <b>
-                        <LocalizedText id={"university_from"} /> {el.costFrom} €
-                      </b>{" "}
-                      / <LocalizedText id={"university_year"} />.
-                    </span>
-                    <span>
-                      <b>
-                        <LocalizedText id={"university_upto"} /> {el.costTo} €
-                      </b>{" "}
-                      / <LocalizedText id={"university_year"} />.
-                    </span>
+                    {+el.costFrom > 0 ? (
+                      <>
+                        <span>
+                          <b>
+                            <LocalizedText id={"university_from"} /> {el.costFrom} €
+                          </b>{" "}
+                          / <LocalizedText id={"university_year"} />.
+                        </span>
+                        <span>
+                          <b>
+                            <LocalizedText id={"university_to"} /> {el.costTo} €
+                          </b>{" "}
+                          / <LocalizedText id={"university_year"} />.
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span>
+                          <b>
+                            <LocalizedText id={"university_upto"} /> {el.costTo} €
+                          </b>{" "}
+                          / <LocalizedText id={"university_year"} />.
+                        </span>
+                        <span />
+                      </>
+                    )}
                     <span>
                       <b> {el.name}</b>
                     </span>

@@ -30,8 +30,9 @@ const ru: LocaleDefinition = {
   catalogItems_language: "Язык",
   catalogItems_language_all: "Все языки",
   catalogItems_price: "Стоимость",
-  catalogItems_price_from: "от",
-  catalogItems_price_before: "до",
+  catalogItems_price_from: "от ",
+  catalogItems_price_before: "до ",
+  catalogItems_price_upto: "До ",
   catalogItems_price_year: "год",
   catalogItems_price_value: "€",
   catalogList_show: "Посмотреть все",
@@ -47,7 +48,8 @@ const ru: LocaleDefinition = {
   university_sert: "Сертификация:",
   university_foundation: "Год основания:",
   university_from: "от ",
-  university_upto: "до ",
+  university_to: "до ",
+  university_upto: "До ",
   university_gallery: "Галерея",
 };
 export default ru;
