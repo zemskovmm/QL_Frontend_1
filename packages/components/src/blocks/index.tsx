@@ -72,6 +72,7 @@ export interface IComponentHost {
   showContactUsForm: () => void;
   filters: any;
   lang: string;
+  linkComponent: (props: {href: string, children: any}) => React.ReactElement;
 }
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);

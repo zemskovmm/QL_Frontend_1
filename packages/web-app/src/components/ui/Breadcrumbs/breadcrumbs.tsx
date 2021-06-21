@@ -4,7 +4,6 @@ import { LocaleKeys } from "src/locales/locales";
 import { useLocalizedText } from "src/components/common/LocalizedText";
 import { IntlShape, useIntl } from "react-intl";
 import { hasOwnProperty } from "src/utilities/utils";
-import Link from "next/link";
 
 export interface LocaleBreadcrumbItem {
   url?: string;

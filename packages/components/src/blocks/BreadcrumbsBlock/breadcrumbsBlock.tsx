@@ -5,8 +5,8 @@ import style from "./breadcrumbsBlock.module.css";
 import icon from "./arrow-left.svg";
 import icon_white from "./arrow-left-white.svg";
 import preview from "./preview.png";
-import Link from "next/link";
 import cn from "classnames";
+import { ComponentLink } from "../../component-link";
 
 export interface BreadcrumbsBlockElement {
   whiteColor?: boolean;
@@ -17,12 +17,12 @@ export const BreadcrumbsBlock = (props: BreadcrumbsBlockElement) => {
   return (
     <div className={cn(style.breadcrumbs, "flex", "px-5", props.whiteColor ? style.breadcrumbs_white : "")}>
       {props.items.map((el, index) => (
-        <Link href={el.link ? el.link : "#"}>
+        <ComponentLink href={el.link ? el.link : "#"}>
           <a className={style.breadcrumbs__items} key={`${index} bread`}>
             {el.name}
             {props.items.length - 1 > index && <img src={props.whiteColor ? icon_white : icon} alt="" />}
           </a>
-        </Link>
+        </ComponentLink>
       ))}
     </div>
   );

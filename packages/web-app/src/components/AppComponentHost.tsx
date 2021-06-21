@@ -6,6 +6,7 @@ import { getLocaleMessages } from "../locales/locales";
 import { ContactUsFormController } from "./common/contactUsForm/contactUsForm";
 import { siteApi } from "../clients/siteApiClient";
 import Head from "next/head";
+import Link from "next/link";
 
 export const AppComponentHost: React.FC = ({ children }) => {
   const [isContactUsFormShown, setContactUsFormShown] = useState(false);
@@ -15,6 +16,7 @@ export const AppComponentHost: React.FC = ({ children }) => {
     showContactUsForm: () => setContactUsFormShown(true),
     filters: siteApi,
     lang: lang as string,
+    linkComponent: Link
   };
   return (
     <>
