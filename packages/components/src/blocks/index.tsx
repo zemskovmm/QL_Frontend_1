@@ -95,7 +95,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
   return (
     <section
       style={{ background: props.background, maxWidth: props.maxWidth ? props.maxWidth : "100%" }}
-      className={cn(`relative mx-auto`, props.vertical ? `flex items-${props.vertical} flex-adaptive` : "")}
+      className="relative mx-auto flex-wrap"
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;
