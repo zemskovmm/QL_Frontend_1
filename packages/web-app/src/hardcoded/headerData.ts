@@ -208,29 +208,29 @@ const headerData: { [key: string]: HeaderDataDto } = {
         url: "/esp/education",
       },
       {
-        url: "/en/izuchenie-jazyka",
+        url: "/esp/izuchenie-jazyka",
         title: "Aprendizaje de francés",
       },
       {
-        url: "/en/uslugi-po-adaptatsii",
+        url: "/esp/uslugi-po-adaptatsii",
         title: "Adaptación",
       },
       {
         title: "Alojamiento",
-        url: "/en/arenda-zhilja",
+        url: "/esp/arenda-zhilja",
       },
       {
         title: "Obtención del visado",
-        url: "/en/vizovaja-podderzhka",
+        url: "/esp/vizovaja-podderzhka",
       },
     ],
     links: [
       {
-        url: "/en/o-kompanii",
+        url: "/esp/o-kompanii",
         title: "¿QUIÉNES SOMOS?",
       },
       {
-        url: "/en/faq",
+        url: "/esp/faq",
         title: "PREGUNTAS FRECUENTES ",
       },
     ],
