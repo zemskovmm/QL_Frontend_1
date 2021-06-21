@@ -72,7 +72,7 @@ export interface IComponentHost {
   showContactUsForm: () => void;
   filters: any;
   lang: string;
-  linkComponent: (props: {href: string, children: any}) => React.ReactElement;
+  linkComponent: (props: { href: string; children: any }) => React.ReactElement;
 }
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);
@@ -95,8 +95,12 @@ const RowPresenter = (props: PageBlockRowDto) => {
   });
   return (
     <section
-      style={{ background: props.background, maxWidth: props.maxWidth ? props.maxWidth : "100%" }}
-      className="relative mx-auto flex-wrap"
+      style={{
+        background: props.background,
+        maxWidth: props.maxWidth ? props.maxWidth : "100%",
+        alignItems: props.vertical,
+      }}
+      className="relative mx-auto flex-wrap flex"
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;
