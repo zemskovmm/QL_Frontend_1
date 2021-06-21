@@ -1,7 +1,7 @@
 ﻿.catalogInnerAbout__maxWidth{
   width: 100%;
   max-width: 1170px;
-  padding: 34px 0;
+  padding: 34px 10px;
   margin: auto;
   display: flex;
 }
@@ -191,4 +191,45 @@
 .catalogCallBack__btn:hover{
   background: #f78989;
   border-color: #f78989;
+}
+
+@media screen and (max-width: 1023px) {
+  .catalogInnerAbout__maxWidth {
+    flex-direction: column;
+  }
+
+  .catalogInnerAbout{
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .catalogCallBack{
+    margin: 0 auto;
+  }
+
+  .info__columnItem__priceList {
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: #d9e2f3;
+  }
+
+  .info__columnItem__priceList span {
+    width: 50%;
+    flex-shrink: 0;
+    justify-content: center;
+  }
+
+  .info__columnItem__priceList span:last-of-type {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .info__columnItem__priceList span {
+    width: 100%;
+  }
+
+  .info__columnItem {
+    width: 100% !important;
+  }
 }
