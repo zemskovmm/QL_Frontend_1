@@ -64,7 +64,7 @@ const footerData: FooterDataDto = {
     links: [
       {
         group: {
-          url: "/ru/training",
+          url: "/ru/education",
           title: "Обучение",
         },
         items: [
@@ -97,7 +97,7 @@ const footerData: FooterDataDto = {
             url: "/ru/dopolnitelnye-uslugi/konsultatsii",
           },
           {
-            url: "https://quartier-latin.com/predlozhenija/stoimost-uslug",
+            url: "/ru/predlozhenija/stoimost-uslug",
             title: "Пакеты услуг по поступлению",
           },
         ],
@@ -327,7 +327,7 @@ const footerData: FooterDataDto = {
       {
         group: {
           title: "EDUCATION",
-          url: "/en/training",
+          url: "/en/education",
         },
         items: [
           {
@@ -359,7 +359,7 @@ const footerData: FooterDataDto = {
             url: "/en/dopolnitelnye-uslugi/consultations",
           },
           {
-            url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
+            url: "/en/predlozhenija/cost-of-services",
             title: "Admission packages",
           },
         ],
@@ -588,7 +588,7 @@ const footerData: FooterDataDto = {
     links: [
       {
         group: {
-          url: "/cn/training",
+          url: "/cn/education",
           title: "高等教育",
         },
         items: [
@@ -622,7 +622,7 @@ const footerData: FooterDataDto = {
           },
           {
             title: "费用明细",
-            url: "https://quartier-latin.com/cn/predlozhenija/stoimost-uslug",
+            url: "/cn/predlozhenija/stoimost-uslug",
           },
         ],
       },
@@ -851,7 +851,7 @@ const footerData: FooterDataDto = {
       {
         group: {
           title: "Enseignement",
-          url: "/fr/training",
+          url: "/fr/education",
         },
         items: [
           {
@@ -884,7 +884,7 @@ const footerData: FooterDataDto = {
             url: "/fr/dopolnitelnye-uslugi/consultation",
           },
           {
-            url: "https://quartier-latin.com/fr/predlozhenija/tarifs-de-nos-services",
+            url: "/fr/predlozhenija/tarifs-de-nos-services",
             title: "Tarifs de nos services",
           },
         ],
@@ -1090,7 +1090,7 @@ const footerData: FooterDataDto = {
       {
         icon: "/images/icons/chain.svg",
         link: {
-          url: "/en/dlja-partnerov",
+          url: "/esp/dlja-partnerov",
           title: "PARA SOCIOS",
         },
       },
@@ -1098,13 +1098,13 @@ const footerData: FooterDataDto = {
         icon: "/images/icons/equals.svg",
         link: {
           title: "¿QUIÉNES SOMOS?",
-          url: "/en/o-kompanii",
+          url: "/esp/o-kompanii",
         },
       },
       {
         icon: "/images/icons/information.svg",
         link: {
-          url: "/en/faq",
+          url: "/esp/faq",
           title: "PREGUNTAS FRECUENTES ",
         },
       },
@@ -1114,39 +1114,39 @@ const footerData: FooterDataDto = {
       {
         group: {
           title: "ESTUDIOS",
-          url: "/esp/training",
+          url: "/esp/education",
         },
         items: [
           {
             title: "Traducción jurada de documentos",
-            url: "/en/dopolnitelnye-uslugi/certified-translation-of-documents",
+            url: "/esp/dopolnitelnye-uslugi/certified-translation-of-documents",
           },
           {
-            url: "/en/dopolnitelnye-uslugi/assistance-in-preparing-and-translating-your-cv",
+            url: "/esp/dopolnitelnye-uslugi/assistance-in-preparing-and-translating-your-cv",
             title: "Asistencia para la preparación y traducción del CV",
           },
           {
             title: "Asistencia para la redacción de cartas de motivación",
-            url: "/en/dopolnitelnye-uslugi/assistance-in-preparing-and-writing-motivation-letters",
+            url: "/esp/dopolnitelnye-uslugi/assistance-in-preparing-and-writing-motivation-letters",
           },
           {
-            url: "/en/dopolnitelnye-uslugi/selecting-and-applying-for-a-scholarship",
+            url: "/esp/dopolnitelnye-uslugi/selecting-and-applying-for-a-scholarship",
             title: "Selección y solicitud de una beca",
           },
           {
-            url: "/en/dopolnitelnye-uslugi/preparing-for-a-university-interview",
+            url: "/esp/dopolnitelnye-uslugi/preparing-for-a-university-interview",
             title: "Preparación para entrevistas de admisión a la universidad",
           },
           {
-            url: "/en/dopolnitelnye-uslugi/filling-in-the-application-form",
+            url: "/esp/dopolnitelnye-uslugi/filling-in-the-application-form",
             title: "Cumplimentación de formularios ",
           },
           {
-            url: "/en/dopolnitelnye-uslugi/consultations",
+            url: "/esp/dopolnitelnye-uslugi/consultations",
             title: "Consultas",
           },
           {
-            url: "https://quartier-latin.com/en/predlozhenija/cost-of-services",
+            url: "/esp/predlozhenija/cost-of-services",
             title: "Admission packages",
           },
         ],
@@ -1154,79 +1154,79 @@ const footerData: FooterDataDto = {
       {
         items: [
           {
-            url: "/en/arenda-zhilja/accommodation-in-a-host-family",
+            url: "/esp/arenda-zhilja/accommodation-in-a-host-family",
             title: "Familias de acogida",
           },
           {
-            url: "/en/arenda-zhilja/joint-tenancy",
+            url: "/esp/arenda-zhilja/joint-tenancy",
             title: "Pisos compartidos ",
           },
           {
-            url: "/en/arenda-zhilja/apartment-rental",
+            url: "/esp/arenda-zhilja/apartment-rental",
             title: "Alquiler de pisos ",
           },
           {
             title: "Residencias de estudiantes",
-            url: "/en/arenda-zhilja/student-residences",
+            url: "/esp/arenda-zhilja/student-residences",
           },
           {
             title: "Adquisición de bienes inmuebles",
-            url: "/en/arenda-zhilja/buying-real-estate",
+            url: "/esp/arenda-zhilja/buying-real-estate",
           },
           {
             title: "Contrato de alquiler",
-            url: "/en/arenda-zhilja/registering-residence-permits",
+            url: "/esp/arenda-zhilja/registering-residence-permits",
           },
           {
             title: "Redes domésticas y servicios públicos ",
-            url: "/en/arenda-zhilja/utility-connections",
+            url: "/esp/arenda-zhilja/utility-connections",
           },
           {
-            url: "/en/arenda-zhilja/registration-of-the-caf-tax-deduction",
+            url: "/esp/arenda-zhilja/registration-of-the-caf-tax-deduction",
             title: "Ayuda personalizada para la vivienda (CAF)",
           },
           {
-            url: "/en/arenda-zhilja/searching-for-a-guarantor-in-france",
+            url: "/esp/arenda-zhilja/searching-for-a-guarantor-in-france",
             title: "Búsqueda de un garante en Francia",
           },
         ],
         group: {
-          url: "/en/arenda-zhilja",
+          url: "/esp/arenda-zhilja",
           title: "ALOJAMIENTO",
         },
       },
       {
         group: {
-          url: "/en/izuchenie-jazyka",
+          url: "/esp/izuchenie-jazyka",
           title: "APRENDIZAJE DEL FRANCÉS ",
         },
         items: [
           {
             title: "Escuelas de idiomas",
-            url: "/en/izuchenie-jazyka/language-schools",
+            url: "/esp/izuchenie-jazyka/language-schools",
           },
           {
             title: "Francés en la universidad",
-            url: "/en/izuchenie-jazyka/french-at-universities",
+            url: "/esp/izuchenie-jazyka/french-at-universities",
           },
           {
             title: "Cursos de francés por Skype",
-            url: "/en/izuchenie-jazyka/french-via-skype",
+            url: "/esp/izuchenie-jazyka/french-via-skype",
           },
           {
             title: "Clases particulares",
-            url: "/en/izuchenie-jazyka/private-classes",
+            url: "/esp/izuchenie-jazyka/private-classes",
           },
           {
-            url: "/en/izuchenie-jazyka/au-pair-programs",
+            url: "/esp/izuchenie-jazyka/au-pair-programs",
             title: "Programas Au Pair",
           },
           {
-            url: "/en/izuchenie-jazyka/work-and-travel-en",
+            url: "/esp/izuchenie-jazyka/work-and-travel-en",
             title: "Work and Travel",
           },
           {
-            url: "/en/izuchenie-jazyka/professional-internships",
+            url: "/esp/izuchenie-jazyka/professional-internships",
             title: "Prácticas profesionales",
           },
           {
@@ -1238,27 +1238,27 @@ const footerData: FooterDataDto = {
       {
         items: [
           {
-            url: "/en/vizovaja-podderzhka/invitations-for-students-and-parents",
+            url: "/esp/vizovaja-podderzhka/invitations-for-students-and-parents",
             title: "Invitación para estudiantes y padres",
           },
           {
             title: "Preparación de la cita en el consulado ",
-            url: "/en/vizovaja-podderzhka/preparing-for-your-visa-interview",
+            url: "/esp/vizovaja-podderzhka/preparing-for-your-visa-interview",
           },
           {
             title: "Asistencia para la redacción de cartas de presentación",
-            url: "/en/vizovaja-podderzhka/assistance-in-drafting-cover-letters",
+            url: "/esp/vizovaja-podderzhka/assistance-in-drafting-cover-letters",
           },
           {
-            url: "/en/vizovaja-podderzhka/search-for-a-guardian-for-minors",
+            url: "/esp/vizovaja-podderzhka/search-for-a-guardian-for-minors",
             title: "Búsqueda de un tutor para menores",
           },
           {
-            url: "/en/vizovaja-podderzhka/checking-documents-before-submission",
+            url: "/esp/vizovaja-podderzhka/checking-documents-before-submission",
             title: "Revisión de los documentos antes de la solicitud",
           },
           {
-            url: "/en/vizovaja-podderzhka/getting-a-visa-after-a-refusal",
+            url: "/esp/vizovaja-podderzhka/getting-a-visa-after-a-refusal",
             title: "Obtención del visado tras una denegación ",
           },
           {
@@ -1267,47 +1267,47 @@ const footerData: FooterDataDto = {
           },
           {
             title: "Prórroga del visado de estudiante",
-            url: "/en/vizovaja-podderzhka/student-visa-extension",
+            url: "/esp/vizovaja-podderzhka/student-visa-extension",
           },
         ],
         group: {
           title: "GESTIÓN DEL VISADO",
-          url: "/en/vizovaja-podderzhka",
+          url: "/esp/vizovaja-podderzhka",
         },
       },
       {
         group: {
-          url: "/en/uslugi-po-adaptatsii",
+          url: "/esp/uslugi-po-adaptatsii",
           title: "ADAPTACIÓN ",
         },
         items: [
           {
             title: "Cuenta bancaria",
-            url: "/en/uslugi-po-adaptatsii/opening-a-bank-account",
+            url: "/esp/uslugi-po-adaptatsii/opening-a-bank-account",
           },
           {
             title: "Seguro médico",
-            url: "/en/uslugi-po-adaptatsii/obtaining-medical-insurance",
+            url: "/esp/uslugi-po-adaptatsii/obtaining-medical-insurance",
           },
           {
             title: "Procedimiento OFII",
-            url: "/en/vizovaja-podderzhka/ofii-procedure",
+            url: "/esp/vizovaja-podderzhka/ofii-procedure",
           },
           {
-            url: "/en/uslugi-po-adaptatsii/first-doctors-appointment",
+            url: "/esp/uslugi-po-adaptatsii/first-doctors-appointment",
             title: "Primera cita con el médico",
           },
           {
-            url: "/en/uslugi-po-adaptatsii/mobile-phones",
+            url: "/esp/uslugi-po-adaptatsii/mobile-phones",
             title: "Teléfono móvil e Internet ",
           },
           {
             title: "Abono de transporte ",
-            url: "/en/uslugi-po-adaptatsii/travel-pass",
+            url: "/esp/uslugi-po-adaptatsii/travel-pass",
           },
           {
             title: "Paquetes de servicios de adaptación",
-            url: "/en/uslugi-po-adaptatsii/adaptation-service-packages",
+            url: "/esp/uslugi-po-adaptatsii/adaptation-service-packages",
           },
         ],
       },
