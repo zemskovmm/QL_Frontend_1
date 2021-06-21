@@ -30,6 +30,7 @@ const en = {
   catalogItems_price: "The cost",
   catalogItems_price_from: "from ",
   catalogItems_price_before: "to ",
+  catalogItems_price_upto: "Up to ",
   catalogItems_price_year: "year",
   catalogItems_price_value: "€",
   catalogList_show: "View all",
@@ -45,7 +46,8 @@ const en = {
   university_sert: "Certification:",
   university_foundation: "Year of foundation:",
   university_from: "from ",
-  university_upto: "to ",
+  university_to: "to ",
+  university_upto: "Up to ",
   university_gallery: "Gallery",
 };
 
