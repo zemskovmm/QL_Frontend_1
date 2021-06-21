@@ -72,7 +72,6 @@ const UniversityCatalogElement = (item: CatalogUniversityDto) => (
                 / <LocalizedText id={"catalogItems_price_year"} />
               </span>
             )}
-            )
           </div>
         </div>
       </div>
