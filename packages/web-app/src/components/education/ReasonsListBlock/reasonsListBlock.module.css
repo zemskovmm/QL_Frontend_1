@@ -63,3 +63,11 @@
   text-align: center;
   color: #646F83;
 }
+
+@media screen and (max-width: 1023px) {
+  .reasonsListBlock__title {
+    max-width: 500px;
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+}

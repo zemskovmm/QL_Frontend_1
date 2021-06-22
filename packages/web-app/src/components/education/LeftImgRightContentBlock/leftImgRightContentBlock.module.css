@@ -27,8 +27,7 @@
   font-weight: bold;
   font-size: 30px;
   line-height: 42px;
-  margin: 0;
-  margin-bottom: 13px;
+  margin: 0 0 13px;
 }
 
 .leftImgRightContentBlock__contentText h3 {
@@ -66,7 +65,7 @@
 
 .leftImgRightContentBlock__buttonMore i {
   border-right: 1px solid #e0e7f6;
-  padding: 7px 11px 7px 0px;
+  padding: 7px 11px 7px 0;
   margin-right: 17px;
 }
 
@@ -75,4 +74,21 @@
   max-width: 55%;
   object-fit: cover;
   width: 100%;
+}
+
+
+@media screen and (max-width: 1023px) {
+  .leftImgRightContentBlock__container {
+    flex-direction: column-reverse;
+    padding: 40px 10px 0;
+  }
+
+  .leftImgRightContentBlock__contentText {
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .leftImgRightContentBlock__img {
+    max-width: none
+  }
 }
