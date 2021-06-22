@@ -9,6 +9,7 @@ import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 export interface ImgAndTextEditorBlockElement {
   align: boolean;
   text: string;
+  titlePart?: string;
   img: number | null;
   imgWidth: string;
   textButton: string;
@@ -17,14 +18,22 @@ export interface ImgAndTextEditorBlockElement {
 
 export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
   return (
-    <div className="py-12">
-      <div className="px-10 flex justify-center mx-auto max-w-screen-xl w-full">
+    <div className="lg:py-12">
+      <div className="lg:px-10 px-4 flex justify-center mx-auto max-w-screen-xl w-full">
         <div className={`${styles.imgAndTextEditorBlock} w-full ${props.align ? "flex-row-reverse" : ""}`}>
           <div
             className={`${styles.imgAndTextEditorBlock__content} ${
               props.align ? styles.imgAndTextEditorBlock__contentRight : styles.imgAndTextEditorBlock__contentLeft
             }`}
           >
+            {props.titlePart && <HtmlPresenter text={props.titlePart} />}
+            {props.img && (
+              <img
+                src={`${ApiBaseUrl}/api/media/${props.img}`}
+                alt=""
+                className={styles.imgAndTextEditorBlock__imgmobile}
+              />
+            )}
             <HtmlPresenter text={props.text} />
             {props.showButton && <ButtonFormBlock myClass={`mt-6`} name={props.textButton} align={`justify-start`} />}
           </div>
@@ -50,6 +59,7 @@ export const ImgAndTextEditorBlockInfo: TypedBlockTypeInfo<ImgAndTextEditorBlock
   initialData: {
     align: false,
     text: "string",
+    titlePart: "Title",
     img: null,
     imgWidth: "400px",
     textButton: "",
@@ -57,6 +67,12 @@ export const ImgAndTextEditorBlockInfo: TypedBlockTypeInfo<ImgAndTextEditorBlock
   },
   definition: {
     fields: [
+      {
+        id: "titlePart",
+        type: "Custom",
+        customType: "Html",
+        name: "Title Part",
+      },
       {
         id: "text",
         type: "Custom",
