@@ -28,10 +28,21 @@ const TabControl = ({ tabs }: TabControlBlockProps) => {
   return (
     <div className="flex flex-col w-full">
       <div className={cn(styles.tabs, "flex p-2.5")}>
-        <div className="flex mx-auto">
+        <div className="flex flex-wrap justify-center mx-auto">
           {tabs.map((tab, ind) => (
             <div key={ind} className={cn(ind === activeTab ? styles.active : "")} onClick={() => setActiveTab(ind)}>
               {tab.title}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className={cn(styles.tabs, styles.mobiletabs, "p-2.5")}>
+        <div className="flex flex-col  mx-auto">
+          {tabs.map((tab, ind) => (
+            <div key={ind} onClick={() => setActiveTab(ind)}>
+              <div className={cn(ind === activeTab ? styles.active : "")}>{tab.title}</div>
+
+              <div>{activeTab === ind ? <RowsPresenter rows={tabs[effectiveActiveTab].rows} /> : null}</div>
             </div>
           ))}
         </div>
