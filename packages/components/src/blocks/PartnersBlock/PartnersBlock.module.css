@@ -23,6 +23,14 @@
   padding: 0 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.partner img {
+  max-height: 200px;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 @media screen and (max-width: 1024px) {
