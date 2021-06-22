@@ -4,10 +4,14 @@
   border-bottom: 1px solid rgba(201, 213, 240, 0.25);
 }
 
+.tabs.mobiletabs {
+  display: none;
+}
+
 .tabs > div > div {
   cursor: pointer;
   user-select: none;
-  margin: 0 24px;
+  margin: 24px 24px 0;
   padding: 0 16px;
   position: relative;
 }
@@ -32,4 +36,28 @@
 
 .tabs > div > div.active:after {
   width: 100%;
+}
+
+
+@media screen and (max-width: 1023px) {
+  .tabs {
+    display: none !important;
+  }
+
+  .mobiletabs {
+    display: block !important;
+    flex-direction: column;
+    border: none !important;
+  }
+
+  .mobiletabs > div > div {
+    background: #FFFFFF;
+    border: 1px solid #EFF3FA;
+    border-radius: 3px;
+  }
+
+
+  .content {
+    display: none;
+  }
 }
