@@ -11,6 +11,7 @@ import sort from "src/assets/icons/sort.svg";
 import close from "src/assets/icons/cross-remove.svg";
 import { LocalizedText } from "../common/LocalizedText";
 import { useEffect, useState } from "react";
+import { useIntl } from "react-intl";
 
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
@@ -104,7 +105,8 @@ function CatalogItems<T>(props: {
       {!props.widthInner && (
         <div className={style.buttonRow}>
           <button onClick={props.clickFilter} className={`flex w-full text-xs flex px-4 py-1 items-center`}>
-            <img src={filter} alt="filter" className={`mr-3`} /> Категории и фильтры
+            <img src={filter} alt="filter" className={`mr-3`} />
+            <LocalizedText id={"catalogEducation_mobile_filterButton"} />
           </button>
           {/*<button onClick={props.clickSort} className={`flex ml-auto`}>*/}
           {/*  <img src={sort} alt="sort" />*/}
@@ -120,6 +122,14 @@ function CatalogItems<T>(props: {
     </div>
   );
 }
+
+const linkHousing: { [key: string]: string } = {
+  en: "https://housing.quartier-latin.com/en/housing",
+  ru: "https://housing.quartier-latin.com/housing",
+  cn: "https://housing.quartier-latin.com/cn/housing",
+  fr: "https://housing.quartier-latin.com/fr/housing",
+  esp: "",
+};
 
 export function CatalogView<T>(props: {
   elementRenderer: (element: T) => JSX.Element;
@@ -137,6 +147,7 @@ export function CatalogView<T>(props: {
     setWidthInner(window.innerWidth > 1023);
     return;
   });
+  const lang = useIntl().locale;
   return (
     <div className={`flex w-full`}>
       {!widthInner && openFilter && (
@@ -156,12 +167,14 @@ export function CatalogView<T>(props: {
                     <LocalizedText id={"catalogEducation_education"} />
                   </span>
                 </a>
-                <a href="#" className={`${style.toggle__switch}`}>
-                  <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
-                  <span className={`${style.toggle__switchName}`}>
-                    <LocalizedText id={"catalogEducation_accommodationn"} />
-                  </span>
-                </a>
+                {linkHousing[lang] && (
+                  <a href={linkHousing[lang]} className={`${style.toggle__switch}`}>
+                    <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
+                    <span className={`${style.toggle__switchName}`}>
+                      <LocalizedText id={"catalogEducation_accommodationn"} />
+                    </span>
+                  </a>
+                )}
               </div>
             </div>
             <CatalogFilters
@@ -172,7 +185,7 @@ export function CatalogView<T>(props: {
           </div>
           <div className={`fixed bottom-4 flex items-center z-30 left-4 right-4`}>
             <button className={style.buttonSearch} onClick={() => setOpenFilter(false)}>
-              Искать
+              <LocalizedText id={"catalogWidget_search"} />
             </button>
           </div>
         </div>
@@ -190,12 +203,14 @@ export function CatalogView<T>(props: {
                   <LocalizedText id={"catalogEducation_education"} />
                 </span>
               </a>
-              <a href="#" className={`${style.toggle__switch}`}>
-                <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
-                <span className={`${style.toggle__switchName}`}>
-                  <LocalizedText id={"catalogEducation_accommodationn"} />
-                </span>
-              </a>
+              {linkHousing[lang] && (
+                <a href={linkHousing[lang]} className={`${style.toggle__switch}`}>
+                  <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
+                  <span className={`${style.toggle__switchName}`}>
+                    <LocalizedText id={"catalogEducation_accommodationn"} />
+                  </span>
+                </a>
+              )}
             </div>
           </div>
           <CatalogFilters

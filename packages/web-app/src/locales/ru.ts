@@ -26,6 +26,7 @@ const ru: LocaleDefinition = {
   catalogEducation_categories: "Категории",
   catalogEducation_education: "Образование",
   catalogEducation_accommodationn: "Проживание",
+  catalogEducation_mobile_filterButton: "Категории и фильтры",
   catalogItems_degree: "Уровень",
   catalogItems_language: "Язык",
   catalogItems_language_all: "Все языки",
