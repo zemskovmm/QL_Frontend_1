@@ -25,6 +25,14 @@
   margin-bottom: 20px;
 }
 
+.text p {
+  margin-bottom: 10px;
+}
+
+.text li {
+  margin-bottom: 5px;
+}
+
 @media (max-width: 1023px) {
   .text h1{
     font-size: 24px;

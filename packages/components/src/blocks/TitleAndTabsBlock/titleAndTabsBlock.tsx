@@ -4,11 +4,11 @@ import Tabs from "../../ui/Tabs/Tabs";
 import Search from "../../ui/search/Search";
 import { ServerCatalogWidget } from "../../ui/catalog/catalogWidget";
 import preview from "./preview.png";
-import Link from "next/link";
 import education from "./education.svg";
 import hotel from "./hotel.svg";
 import style from "./titleAndTabsBlock.module.css";
 import { ComponentHostContext } from "../index";
+import { ComponentLink } from "../../component-link";
 enum TabsEnum {
   university,
   housing,
@@ -19,6 +19,15 @@ export interface TitleAndTabsBlockElement {
   background: number | null;
   tabs: { title: string; filters: { filter: string }[]; type: string }[];
 }
+
+//TODO: Remove copy-paste
+const housingLangs: { [key: string]: string } = {
+  ru: "https://housing.quartier-latin.com/housing",
+  en: "https://housing.quartier-latin.com/en/housing",
+  cn: "https://housing.quartier-latin.com/cn/housing",
+  fr: "https://housing.quartier-latin.com/fr/housing",
+  esp: "https://housing.quartier-latin.com/en/housing",
+};
 
 export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
   const tabsComponent = props.tabs.map((el, index) => (
@@ -32,12 +41,12 @@ export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
       </div>
       <div className={`flex flex-col lg:hidden`}>
         {props.tabs.map((el) => (
-          <Link href={el.type === "university" ? `/${lang}/catalog/university` : `/${lang}/housing`}>
+          <ComponentLink href={el.type === "university" ? `/${lang}/catalog/university` : housingLangs[lang!]}>
             <a className={style.buttonMobile}>
               <img src={el.type === "university" ? education : hotel} alt="" />
               {el.title}
             </a>
-          </Link>
+          </ComponentLink>
         ))}
       </div>
     </Search>

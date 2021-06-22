@@ -4,7 +4,7 @@
 }
 
 .bigCardsListBlock__maxWidth {
-  max-width: 1170px;
+  max-width: 1200px;
   margin: auto;
   padding: 0 20px;
   box-sizing: content-box;
@@ -17,23 +17,18 @@
 
 .bigCardsListBlock__title {
   max-width: 90%;
-  margin: 0;
-  margin-bottom: 40px;
+  margin: 0 15px 40px;
 }
 
 .bigCardsListBlock__list {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .bigCardsListBlock__list .bigCard {
   max-width: 370px;
-  margin-bottom: 30px;
-}
-
-.bigCardsListBlock__list .bigCard:nth-child(2), .bigCardsListBlock__list .bigCard:nth-child(3n + 2) {
-  margin: 0 30px;
-  margin-bottom: 30px;
+  margin: 0 15px 30px;
 }
 
 .bigCard {
@@ -49,7 +44,7 @@
 }
 
 .bigCard:hover {
-  box-shadow: 0px 10px 30px rgba(0, 78, 255, 0.07), 0px 20px 50px rgba(0, 78, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
   cursor: pointer;
 }
 
@@ -79,4 +74,21 @@
   color: #646F83;
   padding: 0 10px;
   margin-bottom: 18px;
+}
+
+@media screen and (max-width: 1023px) {
+  .bigCardsListBlock__list .bigCard {
+    margin: 0 15px 30px;
+  }
+  .bigCardsListBlock__title {
+    max-width: 500px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .bigCardsListBlock__list .bigCard {
+    margin: 0 0 30px;
+  }
 }

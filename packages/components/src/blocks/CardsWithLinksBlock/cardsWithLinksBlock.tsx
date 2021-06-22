@@ -1,9 +1,9 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./cardsWithLinksBlock.module.css";
-import Link from "next/link";
 import arrow from "./arrow-left.svg";
 import preview from "./preview.png";
+import {ComponentLink} from "../../component-link";
 
 export interface CardsWithLinksBlockElement {
   title: string;
@@ -23,12 +23,12 @@ export const CardsWithLinksBlock = (props: CardsWithLinksBlockElement) => {
           <div className={styles.cardsWithLinksBlock__item + " " + styles.cardsWithLinksBlock__grid}>
             <div className={styles.cardsWithLinksBlock__itemTitle} dangerouslySetInnerHTML={{ __html: el.title }} />
             {el.links?.map((item) => (
-              <Link href={item.link ?? "#"}>
+              <ComponentLink href={item.link ?? "#"}>
                 <a className={`flex`}>
                   <img src={arrow} alt="" />
                   {item.name}
                 </a>
-              </Link>
+              </ComponentLink>
             ))}
           </div>
         ))}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsCustomIconBlock.module.css";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
@@ -14,6 +14,11 @@ export interface ReasonsCustomIconBlockElement {
 }
 
 export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => {
+  const [widthInner, setWidthInner] = useState(true);
+  useEffect(() => {
+    setWidthInner(window.innerWidth < 1024);
+    return;
+  });
   return (
     <div className="py-12">
       <div className="px-4 lg:px-10 flex justify-between mx-auto max-w-screen-xl w-full">
@@ -35,7 +40,7 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
           {props.showButton && (
             <ButtonFormBlock
               name={props.textButton}
-              align={window.innerWidth < 1024 ? "justify-center" : props.alignButton}
+              align={widthInner ? "justify-center" : props.alignButton}
             />
           )}
         </div>

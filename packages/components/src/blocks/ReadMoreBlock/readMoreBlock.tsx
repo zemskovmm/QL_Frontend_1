@@ -6,6 +6,7 @@ import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 
 export interface ReadMoreBlockElement {
   header: string;
+  readMore: string;
   textBefore: string;
   textAfter: string;
 }
@@ -20,7 +21,7 @@ export const ReadMoreBlock = (props: ReadMoreBlockElement) => {
           <HtmlPresenter text={props.textBefore} />
           {props.textAfter && !isOpen && (
             <button className={styles.readMoreBlock__button} type={"button"} onClick={() => Open(true)}>
-              Читать полностью
+              {props.readMore}
             </button>
           )}
           {isOpen && <HtmlPresenter text={props.textAfter} />}
@@ -37,6 +38,7 @@ export const ReadMoreBlockInfo: TypedBlockTypeInfo<ReadMoreBlockElement> = {
   renderer: ReadMoreBlock,
   initialData: {
     header: "Header",
+    readMore: "Read more",
     textBefore: "9000",
     textAfter: "Text",
   },
@@ -46,6 +48,11 @@ export const ReadMoreBlockInfo: TypedBlockTypeInfo<ReadMoreBlockElement> = {
         id: "header",
         type: "String",
         name: "Header",
+      },
+      {
+        id: "readMore",
+        type: "String",
+        name: "ReadMore",
       },
       {
         id: "textBefore",

@@ -17,7 +17,7 @@ export const ArticleBeforeImageBlock = (props: ArticleBeforeImageBlockElement) =
       <div className="px-4 lg:px-10 flex flex-col width justify-between mx-auto max-w-screen-xl w-full">
         <div className={styles.articleBeforeImageBlock__title}>{props.title}</div>
         <HtmlPresenter text={props.text} />
-        <img className={"w-full rounded-md"} src={`${ApiBaseUrl}/api/media/${props.img}`} alt="" />
+        {props.img && <img className={"w-full rounded-md"} src={`${ApiBaseUrl}/api/media/${props.img}`} alt="" />}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { TitleAndCallBackBlock } from "@project/components/src/blocks/TitleAndCa
 import { LocalizedText } from "../common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { useIntl } from "react-intl";
+import { GallerySliderBlock } from "@project/components/src/blocks/GallerySliderBlock/gallerySliderBlock";
 
 export const UniversityModule = (props: ClientUniversityDto) => {
   const lang = useIntl().locale;
@@ -30,6 +31,10 @@ export const UniversityModule = (props: ClientUniversityDto) => {
         />
       </section>
       <CatalogInnerAbout data={props} />
+      <GallerySliderBlock
+        title={<LocalizedText id={"university_gallery"} />}
+        elements={props.galleryList.map((image) => ({ image }))}
+      />
     </>
   );
 };

@@ -1,26 +1,18 @@
-.container {
-  padding-bottom: 40px;
-  overflow-y: visible;
-}
-
-.slider {
-  align-items: stretch;
-}
-
-.item > div {
+.item {
+  position: relative;
   padding: 30px;
-  width: 100%;
-  max-width: 860px;
+  width: 95%;
+  max-width: 880px;
   margin: 0 auto;
   background: #F9FAFD;
   border-radius: 6px;
   opacity: 0.6;
-  display: flex;
+  display: flex !important;
   align-items: flex-start;
   user-select: none;
 }
 
-.item > div > img {
+.avatar {
   flex-shrink: 0;
   width: 180px;
   height: 180px;
@@ -58,8 +50,8 @@
   margin-bottom: 10px;
 }
 
-:global(.react-multi-carousel-item--active).item > div  {
-  opacity: 1 !important;
+:global(.slick-current) .item {
+  opacity: 1;
 }
 
 .readall {
@@ -67,12 +59,13 @@
 }
 
 .dots {
-  height: 40px;
+  height: 50px;
   width: 100%;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  left: 50% !important;
-  justify-content: flex-start !important;
+  position: absolute;
+  left: 50%;
+  display: flex !important;
   transform: translateX(-50%);
 }
 
@@ -88,9 +81,10 @@
   border: none;
   border-radius: 3px;
   outline: none;
+  font-size: 0;
 }
 
-.dots li:global(.react-multi-carousel-dot--active) button {
+.dots li:global(.slick-active) button {
   height: 9px;
   background: #FF6768;
 }
@@ -116,7 +110,7 @@
   z-index: 10000;
 }
 
-.modal .item > div {
+.modal .item {
   opacity: 1 !important;
   z-index: 100002;
   position: relative;
@@ -134,32 +128,41 @@
   z-index: 100001;
 }
 
-.modal .item {
-  position: relative;
-}
-
 .close {
   position: absolute;
   top: 20px;
   right: 20px;
+
   cursor: pointer;
   z-index: 100003;
 }
 
+.slider :global(.slick-list) {
+  overflow-x: hidden;
+}
+
+.slider :global(.slick-track) {
+  display: flex;
+  padding-bottom: 40px;
+}
+
 @media screen and (max-width: 1024px) {
-  .item > div {
+  .slider {
+    margin-bottom: 40px;
+  }
+
+  .item  {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  .item > div > img {
+  .avatar {
     margin-right: 0;
     margin-bottom: 20px;
   }
 
-  .modal .item > div > img {
+  .modal .avatar {
     display: none;
   }
-
 }

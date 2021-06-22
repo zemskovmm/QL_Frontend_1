@@ -23,5 +23,6 @@ export interface ClientUniversityDto {
   descriptionHtml: string;
   foundationYear: string;
   bannerId: number;
+  galleryList: number[];
   traits: ClientUniversityTraitsDto;
 }

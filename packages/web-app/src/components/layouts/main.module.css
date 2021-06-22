@@ -96,6 +96,10 @@
   margin-bottom: 0.5rem;
 }
 
+.footer_linkspan:first-letter {
+  text-transform: uppercase;
+}
+
 @media (max-width: 1023px) {
   .footer_column.footer_address li{
     
@@ -259,6 +263,9 @@
   z-index: 9999999;
   display: flex;
   flex-direction: column;
+  max-width: 340px;
+  max-height: 620px;
+  margin: auto;
 }
 
 .mobileMenu__close{

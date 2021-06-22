@@ -33,6 +33,7 @@ import grid from "../styles/grid.module.css";
 import { PartnersBlockInfo } from "./PartnersBlock/PartnersBlock";
 import { NewsBlockInfo } from "./NewsBlock/NewsBlock";
 import { SocialBlockInfo } from "./SocialBlock/SocialBlock";
+import { GallerySliderBlockInfo } from "./GallerySliderBlock/gallerySliderBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -64,12 +65,14 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   PartnersBlockInfo,
   NewsBlockInfo,
   SocialBlockInfo,
+  GallerySliderBlockInfo,
 ];
 
 export interface IComponentHost {
   showContactUsForm: () => void;
   filters: any;
   lang: string;
+  linkComponent: (props: { href: string; children: any }) => React.ReactElement;
 }
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);
@@ -92,8 +95,12 @@ const RowPresenter = (props: PageBlockRowDto) => {
   });
   return (
     <section
-      style={{ background: props.background, maxWidth: props.maxWidth ? props.maxWidth : "100%" }}
-      className={cn(`relative mx-auto`, props.vertical ? `flex items-${props.vertical} flex-adaptive` : "")}
+      style={{
+        background: props.background,
+        maxWidth: props.maxWidth ? props.maxWidth : "100%",
+        alignItems: props.vertical,
+      }}
+      className="relative mx-auto flex-wrap flex"
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;

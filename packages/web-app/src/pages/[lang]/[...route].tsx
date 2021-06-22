@@ -3,7 +3,7 @@ import { ClientRouteDto } from "src/interfaces/clientRouteDto";
 import { PageModule } from "src/components/modules/pageModule";
 import { UniversityModule } from "src/components/modules/universityModule";
 import { handleLanguageAndRedirects } from "src/utilities/localeHandler";
-import {AppGetServerSideProps} from "src/interfaces/AppGetServerSideProps";
+import { AppGetServerSideProps } from "src/interfaces/AppGetServerSideProps";
 
 const GetModule = (props: ClientRouteDto) => {
   const name = props.moduleName;

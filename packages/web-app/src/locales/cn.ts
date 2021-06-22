@@ -25,13 +25,15 @@ const cn: LocaleDefinition = {
   catalogEducation_search_result: "程式",
   catalogEducation_categories: "分类",
   catalogEducation_education: "教育",
+  catalogEducation_mobile_filterButton: "类别和过滤器",
   catalogEducation_accommodationn: "住宿",
   catalogItems_degree: "等级",
   catalogItems_language: "语",
   catalogItems_language_all: "所有语言",
   catalogItems_price: "成本",
-  catalogItems_price_from: "从",
-  catalogItems_price_before: "到",
+  catalogItems_price_from: "从 ",
+  catalogItems_price_before: "到 ",
+  catalogItems_price_upto: "到 ",
   catalogItems_price_year: "年",
   catalogItems_price_value: "€",
   catalogList_show: "查看全部",
@@ -47,7 +49,9 @@ const cn: LocaleDefinition = {
   university_sert: "认证:",
   university_foundation: "成立年份:",
   university_from: "从 ",
+  university_to: "到 ",
   university_upto: "到 ",
+  university_gallery: "画廊",
 };
 
 export default cn;
