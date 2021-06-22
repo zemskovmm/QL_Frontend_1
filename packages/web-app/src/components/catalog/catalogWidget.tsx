@@ -1,4 +1,3 @@
-import { CatalogFilterDto } from "src/interfaces/catalogFilterDto";
 import React, { FC, useEffect, useState } from "react";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { NextRouter, useRouter } from "next/router";

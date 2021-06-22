@@ -25,6 +25,7 @@ const fr: LocaleDefinition = {
   catalogEducation_search_result: "programmes",
   catalogEducation_categories: "Catégories",
   catalogEducation_education: "Éducation",
+  catalogEducation_mobile_filterButton: "Catégories et filtres",
   catalogEducation_accommodationn: "Hébergement",
   catalogItems_degree: "Niveau",
   catalogItems_language: "Langue",

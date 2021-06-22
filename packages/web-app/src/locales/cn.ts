@@ -25,6 +25,7 @@ const cn: LocaleDefinition = {
   catalogEducation_search_result: "程式",
   catalogEducation_categories: "分类",
   catalogEducation_education: "教育",
+  catalogEducation_mobile_filterButton: "类别和过滤器",
   catalogEducation_accommodationn: "住宿",
   catalogItems_degree: "等级",
   catalogItems_language: "语",

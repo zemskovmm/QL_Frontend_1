@@ -24,6 +24,7 @@ const esp: LocaleDefinition = {
   catalogEducation_search_result: "programas",
   catalogEducation_categories: "Categorías",
   catalogEducation_education: "Educación",
+  catalogEducation_mobile_filterButton: "Categorías y filtros",
   catalogEducation_accommodationn: "Alojamiento",
   catalogItems_degree: "Nivel",
   catalogItems_language: "Idioma",

@@ -23,6 +23,7 @@ const en = {
   catalogEducation_search_result: "programs",
   catalogEducation_categories: "Сategories",
   catalogEducation_education: "Education",
+  catalogEducation_mobile_filterButton: "Categories and Filters",
   catalogEducation_accommodationn: "Accommodation",
   catalogItems_degree: "Level",
   catalogItems_language: "Language",
