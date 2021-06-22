@@ -29,7 +29,7 @@ const educationPageData: educationPageDataType = {
       },
       {
         title: "Обучение",
-        url: "/training",
+        url: "/education",
       },
     ],
     firstScreen: "МЫ НА СОБСТВЕННОМ ОПЫТЕ ЗНАЕМ, КАК СЛОЖНО ПОДОБРАТЬ И ПОСТУПИТЬ В ЖЕЛАЕМОЕ УЧЕБНОЕ ЗАВЕДЕНИЕ",
@@ -173,11 +173,11 @@ const educationPageData: educationPageDataType = {
     breadcrumbs: [
       {
         title: "Main",
-        url: "/",
+        url: "/en",
       },
       {
         title: "EDUCATION",
-        url: "/training",
+        url: "/en/education",
       },
     ],
     firstScreen:
@@ -321,11 +321,11 @@ const educationPageData: educationPageDataType = {
     breadcrumbs: [
       {
         title: "主要的",
-        url: "/",
+        url: "/cn",
       },
       {
         title: "高等教育",
-        url: "/training",
+        url: "/cn/education",
       },
     ],
     firstScreen: "如果您在选择或者注册法国高等院校时遇到了困难",
@@ -465,11 +465,11 @@ const educationPageData: educationPageDataType = {
     breadcrumbs: [
       {
         title: "Principal",
-        url: "/",
+        url: "/fr",
       },
       {
         title: "ENSEIGNEMENT",
-        url: "/training",
+        url: "/fr/education",
       },
     ],
     firstScreen:
@@ -613,11 +613,11 @@ const educationPageData: educationPageDataType = {
     breadcrumbs: [
       {
         title: "el principal",
-        url: "/",
+        url: "/esp",
       },
       {
         title: "ESTUDIOS",
-        url: "/training",
+        url: "/esp/education",
       },
     ],
     firstScreen: "SABEMOS POR EXPERIENCIA LO DIFÍCIL QUE PUEDE SER ENTRAR EN LA UNIVERSIDAD QUE UNO QUIERE.",
