@@ -10,7 +10,7 @@ export const LeftImgRightContentBlock: FC<LeftImgRightContentBlockProps> = ({ da
     <div className={style.leftImgRightContentBlock__background}>
       <div className={style.leftImgRightContentBlock__maxWidth}>
         <div className={style.leftImgRightContentBlock__container}>
-          <embed
+          <iframe
             className={style.leftImgRightContentBlock__img}
             width="100%"
             height="315"
