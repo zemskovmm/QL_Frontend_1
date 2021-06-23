@@ -24,6 +24,7 @@
 .frame {
   border-radius: 4px;
   border: 1px solid black;
+  padding: 5px;
   display: flex;
   overflow: hidden;
   margin: 18px auto;
@@ -32,7 +33,7 @@
 }
 
 .frame_big {
-  max-width: 100% !important;
+  max-width: calc(100% - 10px) !important;
 }
 
 
