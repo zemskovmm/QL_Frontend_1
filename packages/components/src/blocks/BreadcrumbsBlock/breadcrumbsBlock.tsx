@@ -7,7 +7,7 @@ import icon_white from "./arrow-left-white.svg";
 import preview from "./preview.png";
 import cn from "classnames";
 import { ComponentLink } from "../../component-link";
-
+22;
 export interface BreadcrumbsBlockElement {
   whiteColor?: boolean;
   items: { name: string | React.ReactNode; link: string }[];
@@ -18,7 +18,7 @@ export const BreadcrumbsBlock = (props: BreadcrumbsBlockElement) => {
     <div className={cn(style.breadcrumbs, "flex", "px-5", props.whiteColor ? style.breadcrumbs_white : "")}>
       {props.items.map((el, index) => (
         <ComponentLink href={el.link ? el.link : "#"}>
-          <a className={style.breadcrumbs__items} key={`${index} bread`}>
+          <a className={"flex"} key={`${index}`}>
             {el.name}
             {props.items.length - 1 > index && <img src={props.whiteColor ? icon_white : icon} alt="" />}
           </a>
