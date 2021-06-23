@@ -28,12 +28,14 @@ export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
             <HtmlPresenter text={props.text} />
             {props.showButton && <ButtonFormBlock myClass={`mt-6`} name={props.textButton} align={`justify-start`} />}
           </div>
-          <img
-            src={`${ApiBaseUrl}/api/media/${props.img}`}
-            style={{ maxWidth: props.imgWidth }}
-            alt=""
-            className={styles.imgAndTextEditorBlock__img}
-          />
+          {props.img && (
+            <img
+              src={`${ApiBaseUrl}/api/media/${props.img}`}
+              style={{ maxWidth: props.imgWidth }}
+              alt=""
+              className={styles.imgAndTextEditorBlock__img}
+            />
+          )}
         </div>
       </div>
     </div>
