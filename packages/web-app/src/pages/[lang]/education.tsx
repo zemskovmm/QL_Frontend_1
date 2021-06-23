@@ -19,7 +19,7 @@ const EducationLangingPage = (props: EducationPageDataDto) => {
     <div>
       <section style={{ background: "#F9FAFD", maxWidth: "100%" }} className="relative mx-auto">
         <BreadcrumbsBlock
-          whiteColor={true}
+          whiteColor={false}
           items={[
             { name: educationPageData[lang].breadcrumbs[0].title, link: educationPageData[lang].breadcrumbs[0].url },
             { name: educationPageData[lang].breadcrumbs[1].title, link: educationPageData[lang].breadcrumbs[1].url },
@@ -27,7 +27,7 @@ const EducationLangingPage = (props: EducationPageDataDto) => {
         />
         <TitleAndTabsBlock
           title={educationPageData[lang].firstScreen}
-          background={null}
+          background={2532}
           tabs={[
             {
               type: "university",

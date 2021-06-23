@@ -13,6 +13,7 @@ interface SearchProps {
   className?: string;
   background?: number | null;
   callback?: boolean;
+  backgroundShadow?: string;
   breadcrumbs?: {
     url: string;
     title: string;
@@ -27,12 +28,16 @@ const Search = ({
   background,
   breadcrumbs,
   callback,
+  backgroundShadow = "0%",
   titleColor = "black",
   titleShadow = false,
 }: SearchProps) => (
   <div
     className={styles.Search + ` ${breadcrumbs ? styles.SearchPadding__breadcrumbs : styles.SearchPadding}`}
-    style={{ backgroundImage: background ? `url(${ApiBaseUrl}/api/media/${background})` : undefined }}
+    style={{
+      backgroundImage: background ? `url(${ApiBaseUrl}/api/media/${background})` : undefined,
+      backgroundColor: `rgba(0,0,0,${backgroundShadow})`,
+    }}
   >
     <div
       className={`flex flex-col justify-center lg:items-start max-w-screen-xl w-full my-0 mx-auto px-4 lg:px-10 ${
