@@ -18,11 +18,13 @@ type BigCardProps = {
 const BigCard: FC<BigCardProps> = ({ card }) => {
   return (
     <a href={card.url} className={style.bigCard}>
-      <img src={`${ApiBaseUrl}/api/media/${card.img}`} alt="" className={style.bigCard__img} />
-      <div className={style.bigCard__title} dangerouslySetInnerHTML={{ __html: card.title }} />
-      <div className={style.bigCard__subtitle}>
-        <HtmlPresenter text={card.text} />
-      </div>
+      {card.img && <img src={`${ApiBaseUrl}/api/media/${card.img}`} alt="" className={style.bigCard__img} />}
+      <div className={style.bigCard__title}>{card.title}</div>
+      {card.text && (
+        <div className={style.bigCard__subtitle}>
+          <HtmlPresenter text={card.text} />
+        </div>
+      )}
     </a>
   );
 };
@@ -37,16 +39,14 @@ type BigCardsListBlockElement = {
 export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({ elements, title, subtitle, mainStyle }) => {
   return (
     <div className={cn(mainStyle ? style.main : "", "py-12")}>
-      <div className="px-10 flex flex-col justify-between mx-auto max-w-screen-xl w-full">
-        <div className={cn(style.titlepart, "flex items-end mb-10")}>
-          <h2 className={style.bigCardsListBlock__title}>{title}</h2>
-          {subtitle && <h3 className={style.bigCardsListBlock__subtitle}>{subtitle}</h3>}
-        </div>
-        <div className="flex flex-wrap w-full">
-          {elements.map((el, ind) => (
-            <BigCard key={ind} card={el} />
-          ))}
-        </div>
+      <div className={cn(style.titlepart, "lg:px-10 px-4 flex items-end mx-auto mb-10 max-w-screen-xl w-full")}>
+        <h2 className={style.bigCardsListBlock__title}>{title}</h2>
+        {subtitle && <h3 className={style.bigCardsListBlock__subtitle}>{subtitle}</h3>}
+      </div>
+      <div className="lg:px-10 px-4 flex flex-wrap items-stretch w-ful mx-auto max-w-screen-xl w-full">
+        {elements.map((el, ind) => (
+          <BigCard key={ind} card={el} />
+        ))}
       </div>
     </div>
   );

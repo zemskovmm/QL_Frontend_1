@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./reasonsCustomIconBlock.module.css";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
@@ -30,7 +30,7 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
                 <div className={styles.reasonsCustomIconBlock__icon}>
                   <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
                 </div>
-                <div className={`flex flex-col`}>
+                <div className={`flex flex-col w-full items-center`}>
                   <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
                   <div className={styles.reasonsCustomIconBlock__text} dangerouslySetInnerHTML={{ __html: el.text }} />
                 </div>
@@ -38,10 +38,7 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
             ))}
           </div>
           {props.showButton && (
-            <ButtonFormBlock
-              name={props.textButton}
-              align={widthInner ? "justify-center" : props.alignButton}
-            />
+            <ButtonFormBlock name={props.textButton} align={widthInner ? "justify-center" : props.alignButton} />
           )}
         </div>
       </div>

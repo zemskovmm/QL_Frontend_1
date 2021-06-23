@@ -71,8 +71,6 @@
 
 .leftImgRightContentBlock__img {
   border-radius: 6px;
-  max-width: 55%;
-  object-fit: cover;
   width: 100%;
 }
 
@@ -89,6 +87,6 @@
   }
 
   .leftImgRightContentBlock__img {
-    max-width: none
+    max-width: 100% !important;
   }
 }

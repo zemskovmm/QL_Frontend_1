@@ -29,14 +29,34 @@
   width: 100%;
 }
 
+.imgAndTextEditorBlock__imgmobile {
+  display: none;
+}
+
 @media screen and (max-width: 1023px) {
   .imgAndTextEditorBlock {
     flex-direction: column-reverse !important;
   }
 
-  .imgAndTextEditorBlock__img {
-    margin-bottom: 20px;
+  .imgAndTextEditorBlock__content {
+    align-items: center;
+    width: 100%;
   }
+
+  .imgAndTextEditorBlock__img {
+    display: none;
+  }
+
+
+  .imgAndTextEditorBlock__imgmobile {
+    display: block;
+    width: calc(100% + 2rem);
+    max-width: 470px;
+    align-self: center;
+    margin-bottom: 18px;
+  }
+
+
 
   .imgAndTextEditorBlock__contentLeft {
     margin-right: 0;
