@@ -17,6 +17,7 @@ export interface TitleAndCallBackBlockElement {
   textButton: string | React.ReactNode;
   textAbove: string;
   background: number | null;
+  backgroundShadow?: string;
   logo: number | null;
   showButton: boolean;
 }
@@ -29,6 +30,7 @@ export const TitleAndCallBackBlock = (props: TitleAndCallBackBlockElement) => {
       titleColor={props.titleColor}
       titleShadow={props.titleShadow}
       background={props.background}
+      backgroundShadow={props.backgroundShadow}
       callback={true}
     >
       {props.showButton && (
@@ -53,6 +55,7 @@ export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlock
     textButton: "Title",
     textAbove: "Title",
     background: null,
+    backgroundShadow: "0%",
     logo: null,
     showButton: false,
   },
@@ -105,6 +108,11 @@ export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlock
         type: "Custom",
         customType: "Image",
         name: "Background",
+      },
+      {
+        id: "backgroundShadow",
+        type: "String",
+        name: "Background Shadow",
       },
       {
         id: "showButton",
