@@ -8,9 +8,8 @@
 }
 
 .reasonsCustomIconBlock__item{
-  max-width: 29.6006944444%;
-  min-width: 29.6006944444%;
-  margin-right: 5.12152777778%;
+  width: 33.33%;
+  padding: 0 10px;
   margin-bottom: 60px;
   display: flex;
   flex-direction: column;
@@ -18,16 +17,8 @@
   align-items: center;
 }
 
-.reasonsCustomIconBlock__item:nth-child(3n){
-  margin-right: 0;
-}
 
 .reasonsCustomIconBlock__icon{
-  max-width: 60px;
-  min-width: 60px;
-  max-height: 60px;
-  min-height: 60px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,11 +26,9 @@
 }
 
 .reasonsCustomIconBlock__icon img{
-  max-width: 60px;
-  min-width: 60px;
-  max-height: 60px;
-  min-height: 60px;
-  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
 }
 
 .reasonsCustomIconBlock__itemTitle{
@@ -50,31 +39,10 @@
   margin-bottom: 10px;
 }
 
-@media (max-width: 1023px) {
-  .reasonsCustomIconBlock__title{
-    font-size: 18px;
-    line-height: 28px;
-    margin-bottom: 22px;
-    text-align: center;
-  }
-  .reasonsCustomIconBlock__item{
-    max-width: none;
-    min-width: 100%;
-    margin-right: 0;
-    margin-bottom: 24px;
-  }
-  .reasonsCustomIconBlock__icon{
-    margin-bottom: 13px;
-  }
-  .reasonsCustomIconBlock__itemTitle{
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-}
-
 .reasonsCustomIconBlock__text{
   font-size: 14px;
   line-height: 30px;
+  max-width: 240px;
   color: #646F83;
 }
 
@@ -91,16 +59,9 @@
 
 
 @media (max-width: 1023px) {
-  .reasonsCustomIconBlock__title{
-    font-size: 18px;
-    line-height: 28px;
-    margin-bottom: 22px;
-    text-align: center;
-  }
   .reasonsCustomIconBlock__item{
     max-width: none;
     min-width: 100%;
-    margin-right: 0;
     margin-bottom: 24px;
   }
   .reasonsCustomIconBlock__icon{
@@ -110,4 +71,12 @@
     font-size: 14px;
     margin-bottom: 5px;
   }
+
+  .reasonsCustomIconBlock__title{
+    font-size: 18px;
+    line-height: 28px;
+    margin:  0 auto 22px;
+    text-align: center;
+  }
+
 }
