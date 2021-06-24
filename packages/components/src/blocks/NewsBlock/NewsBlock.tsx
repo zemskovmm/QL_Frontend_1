@@ -1,5 +1,4 @@
 import React from "react";
-
 import styles from "./NewsBlock.module.css";
 import cn from "classnames";
 import { ApiBaseUrl } from "../../api/apiClientBase";
