@@ -7,7 +7,6 @@ import icon_white from "./arrow-left-white.svg";
 import preview from "./preview.png";
 import cn from "classnames";
 import { ComponentLink } from "../../component-link";
-22;
 export interface BreadcrumbsBlockElement {
   whiteColor?: boolean;
   items: { name: string | React.ReactNode; link: string }[];
