@@ -15,8 +15,8 @@ const Navbar = () => (
         <RouterLink routeName={RouteNames.fileList}>
           <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">Files</a>
         </RouterLink>
-        <RouterLink routeName={RouteNames.directoryList}>
-          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">Directory</a>
+        <RouterLink routeName={RouteNames.traitList}>
+          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">Traits</a>
         </RouterLink>
       </div>
     </div>

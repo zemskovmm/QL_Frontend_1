@@ -14,15 +14,16 @@ export interface AdminPageDto {
   languages: { [lang: string]: AdminPageLanguageDto };
 }
 
-export interface AdminDirectoryListItemDto {
+export interface AdminTraitListItemDto {
   id: number;
-  title: string;
+  names: { [name: string]: string };
+  identifier: string;
 }
 
-export interface AdminDirectoryListDto {
-  title: string | null;
-  partnerId: number | null;
-  directories: AdminDirectoryListItemDto[];
-  media: AdminDirectoryListItemDto[];
-  id: string;
+export interface AdminTraitItemDto {
+  traitTypeId: number;
+  names: { [name: string]: string };
+  iconId: number | null;
+  order: number | null;
+  parentId: number | null;
 }

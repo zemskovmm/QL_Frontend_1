@@ -5,7 +5,9 @@ import { IndexPage } from "src/pages/indexPage";
 import { PageEditorPage } from "src/pages/pageEditorPage";
 import { PageListPage } from "src/pages/pageListPage";
 import { FilesPage } from "src/pages/filesPage";
-import { DirectoryListPage } from "../pages/directoryListPage";
+import { TraitListPage } from "../pages/trait/traitListPage";
+import { TraitPage } from "../pages/trait/traitPage";
+import { TraitItemPage } from "../pages/trait/traitItemPage";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -14,7 +16,9 @@ export enum RouteNames {
   editPage = "editPage",
   newPage = "newPage",
   fileList = "fileList",
-  directoryList = "handbookList",
+  traitList = "traitList",
+  traitPage = "traitPage",
+  traitItemPage = "traitItemPage",
 }
 
 export const RouteViewMap = {
@@ -24,7 +28,9 @@ export const RouteViewMap = {
   [RouteNames.editPage]: <PageEditorPage />,
   [RouteNames.pageList]: <PageListPage />,
   [RouteNames.fileList]: <FilesPage />,
-  [RouteNames.directoryList]: <DirectoryListPage />,
+  [RouteNames.traitList]: <TraitListPage />,
+  [RouteNames.traitPage]: <TraitPage />,
+  [RouteNames.traitItemPage]: <TraitItemPage />,
 };
 
 export const Routes: Route[] = convertRoutes([
@@ -56,8 +62,18 @@ export const Routes: Route[] = convertRoutes([
     name: RouteNames.fileList,
   },
   {
-    pattern: "/directory",
-    name: RouteNames.directoryList,
-    onEnter: (root) => root.directoryListPage.load(),
+    pattern: "/traits",
+    name: RouteNames.traitList,
+    onEnter: (root) => root.traitListPage.load(),
+  },
+  {
+    pattern: "/traits/:id",
+    name: RouteNames.traitPage,
+    onEnter: (root, to) => root.traitPage.load(to.params.id),
+  },
+  {
+    pattern: "/traits/item/:id",
+    name: RouteNames.traitItemPage,
+    onEnter: (root, to) => root.traitItemPage.load(to.params.id),
   },
 ]);
