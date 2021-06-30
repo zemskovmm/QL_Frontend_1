@@ -159,6 +159,19 @@
   text-decoration: underline;
 }
 
+.footer_address ul {
+  list-style: none !important;
+}
+
+.footer_title {
+  text-transform: lowercase;
+}
+
+.footer_title:first-letter {
+  text-transform: uppercase;
+}
+
+
 .footer_column ul a:hover:before {
   opacity: 1;
 }
