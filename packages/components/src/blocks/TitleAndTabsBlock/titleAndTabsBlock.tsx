@@ -17,6 +17,7 @@ enum TabsEnum {
 export interface TitleAndTabsBlockElement {
   title: string;
   background: number | null;
+  backgroundShadow?: string;
   tabs: { title: string; filters: { filter: string }[]; type: string }[];
 }
 
@@ -35,7 +36,7 @@ export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
   ));
   const lang = useContext(ComponentHostContext)?.lang;
   return (
-    <Search title={props.title} background={props.background}>
+    <Search title={props.title} background={props.background} backgroundShadow={props.backgroundShadow}>
       <div className={`hidden lg:flex w-full`}>
         <Tabs titles={props.tabs?.map((el) => el.title)} components={tabsComponent} />
       </div>
@@ -61,6 +62,7 @@ export const TitleAndTabsBlockInfo: TypedBlockTypeInfo<TitleAndTabsBlockElement>
   initialData: {
     title: "Title",
     background: null,
+    backgroundShadow: "0%",
     tabs: [],
   },
   definition: {
@@ -150,6 +152,11 @@ export const TitleAndTabsBlockInfo: TypedBlockTypeInfo<TitleAndTabsBlockElement>
         type: "Custom",
         customType: "Image",
         name: "Background",
+      },
+      {
+        id: "backgroundShadow",
+        type: "String",
+        name: "Background Shadow",
       },
       {
         id: "tabs",

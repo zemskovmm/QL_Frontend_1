@@ -25,6 +25,7 @@ export const UniversityModule = (props: ClientUniversityDto) => {
           titleColor={"white"}
           titleShadow={true}
           background={props.bannerId}
+          backgroundShadow={"20%"}
           textButton={<LocalizedText id={"university_button"} />}
           showButton={false}
           textAbove={""}

@@ -1,6 +1,6 @@
 export const loadMapApi = () => {
-  const mapsURL = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDvW5-5pUX6a1CWaP_BlbbSNuZsO-8Zeio&libraries=places&language=no&region=NO&v=quarterly`;
-  const scripts = document.getElementsByTagName('script');
+  const mapsURL = `https://maps.googleapis.com/maps/api/js?key=${process.env["NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"]}&libraries=places&language=no&region=NO&v=quarterly`;
+  const scripts = document.getElementsByTagName("script");
   // Go through existing script tags, and return google maps api tag when found.
   for (let i = 0; i < scripts.length; i++) {
     if (scripts[i].src.indexOf(mapsURL) === 0) {
@@ -8,7 +8,7 @@ export const loadMapApi = () => {
     }
   }
 
-  const googleMapScript = document.createElement('script');
+  const googleMapScript = document.createElement("script");
   googleMapScript.src = mapsURL;
   googleMapScript.async = true;
   googleMapScript.defer = true;
@@ -18,8 +18,8 @@ export const loadMapApi = () => {
 };
 
 export const unloadMapApi = () => {
-  const mapsURL = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDvW5-5pUX6a1CWaP_BlbbSNuZsO-8Zeio&libraries=places&language=no&region=NO&v=quarterly`;
-  const scripts = document.getElementsByTagName('script');
+  const mapsURL = `https://maps.googleapis.com/maps/api/js?key=${process.env["NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"]}&libraries=places&language=no&region=NO&v=quarterly`;
+  const scripts = document.getElementsByTagName("script");
   // Go through existing script tags, and return google maps api tag when found.
   for (let i = 0; i < scripts.length; i++) {
     if (scripts[i].src.indexOf(mapsURL) === 0) {

@@ -77,14 +77,14 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
           </div>
         ))}
       </Slider>
-      <div className="px-10">
+      {/*      <div className="px-10">
         <ButtonFormBlock
           name={props.allFeedbacksTitle}
           link={props.allFeedbacksLink}
           iconLink={ArrowPict}
           align={"justify-end"}
         />
-      </div>
+      </div>*/}
       {isShowModal && (
         <div className={cn(styles.modal, "flex")}>
           <div className={styles.overlay} onClick={() => setShowModal(false)} />

@@ -3,7 +3,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url('./default.png');
-  background-color: rgba(0,0,0,0.2);
   background-blend-mode: multiply;
 }
 
