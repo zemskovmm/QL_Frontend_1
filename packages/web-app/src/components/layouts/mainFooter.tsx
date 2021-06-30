@@ -57,7 +57,7 @@ export const MainFooter = (props: FooterDataDto) => {
                 : setActiveTab(index + "MainFooter")
             }
           >
-            <a className="font-bold mr-auto" href={group.url}>
+            <a className={cn("font-bold mr-auto", styles.footer_title)} href={group.url}>
               {group.title}
             </a>
             <ul className="flex flex-col overflow-hidden">
