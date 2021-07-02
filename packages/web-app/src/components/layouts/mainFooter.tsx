@@ -79,7 +79,7 @@ export const MainFooter = (props: FooterDataDto) => {
             <li>+33 144 829 031</li>
             <li>contact@quartier-latin.com</li>
             <li>Skype: QuartierLatinRU</li>
-            <li>WhatsApp: +33 6 26 63 86 27</li>
+            <li>WhatsApp:&nbsp;+33 6 26 63 86 27</li>
           </ul>
           {props[lang].writeUs && (
             <ContactUsFormButton className={styles.footer_writeus} footer={true}>
