@@ -9,6 +9,7 @@ import { TraitItemPageStore } from "./pages/trait/traitItemPageStore";
 import { UniversityListPageStore } from "./pages/university/universityListPageStore";
 import { UniversityPageStore } from "./pages/university/universityPageStore";
 import { UniversityCreatePageStore } from "./pages/university/universityCreatePageStore";
+import { UniversityTraitEditPageStore } from "./pages/university/universityTraitEditPageStore";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -20,4 +21,5 @@ export class RootStore {
   @observable universityListPage = new UniversityListPageStore(this);
   @observable universityPage = new UniversityPageStore(this);
   @observable universityCreatePage = new UniversityCreatePageStore(this);
+  @observable universityTraitEditPage = new UniversityTraitEditPageStore(this);
 }
