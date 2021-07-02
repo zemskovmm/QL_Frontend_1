@@ -39,9 +39,9 @@ export class AdminApiClient extends ApiClientBase {
     this.sendRequest<AdminUniversityItemPostDto>("admin/universities/" + id, data, "PUT");
   getUniversityTraitHave = (id: string) => this.sendRequest<number[]>("/admin/entity-traits-university/" + id);
   postUniversityTrait = (id: string, traitId: string) =>
-    this.sendRequest(`/admin/entity-traits-university/${id}/${traitId}`, "POST");
+    this.sendRequest(`/admin/entity-traits-university/${id}/${traitId}`, "", "POST");
   deleteUniversityTrait = (id: string, traitId: string) =>
-    this.sendRequest(`/admin/entity-traits-university/${id}/${traitId}`, "DELETE");
+    this.sendRequest(`/admin/entity-traits-university/${id}/${traitId}`, "", "DELETE");
 }
 
 export const AdminApi = new AdminApiClient();
