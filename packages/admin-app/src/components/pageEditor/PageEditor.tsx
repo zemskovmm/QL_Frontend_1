@@ -368,7 +368,7 @@ const CreatePage = (props: {
   );
 };
 
-export const PageEditor = (props: { store: PageEditorStore }) => {
+export const PageEditor = (props: { store: PageEditorStore | any }) => {
   const s = props.store;
   return useObserver(() => {
     const availableLangs = dmap(AllLanguages, (id, lang) => ({

@@ -9,6 +9,8 @@ import { TraitListPage } from "../pages/trait/traitListPage";
 import { TraitPage } from "../pages/trait/traitPage";
 import { TraitItemPage } from "../pages/trait/traitItemPage";
 import { UniversityListPage } from "../pages/university/universityListPage";
+import { UniversityPage } from "../pages/university/universityPage";
+import { UniversityCreatePage } from "../pages/university/universityCreatePage";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -21,6 +23,8 @@ export enum RouteNames {
   traitPage = "traitPage",
   traitItemPage = "traitItemPage",
   universityList = "universityList",
+  universityPage = "universityPage",
+  universityCreatePage = "universityCreatePage",
 }
 
 export const RouteViewMap = {
@@ -34,6 +38,8 @@ export const RouteViewMap = {
   [RouteNames.traitPage]: <TraitPage />,
   [RouteNames.traitItemPage]: <TraitItemPage />,
   [RouteNames.universityList]: <UniversityListPage />,
+  [RouteNames.universityPage]: <UniversityPage />,
+  [RouteNames.universityCreatePage]: <UniversityCreatePage />,
 };
 
 export const Routes: Route[] = convertRoutes([
@@ -83,5 +89,14 @@ export const Routes: Route[] = convertRoutes([
     pattern: "/universities",
     name: RouteNames.universityList,
     onEnter: (root) => root.universityListPage.load(),
+  },
+  {
+    pattern: "/universities/create",
+    name: RouteNames.universityCreatePage,
+  },
+  {
+    pattern: "/universities/:id",
+    name: RouteNames.universityPage,
+    onEnter: (root, to) => root.universityPage.load(to.params.id),
   },
 ]);

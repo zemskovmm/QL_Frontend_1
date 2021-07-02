@@ -19,5 +19,5 @@ export interface AdminUniversityItemDto {
   logoId: number | null;
   bannerId: number | null;
   languages: { [lang: string]: AdminUniversityPageLanguageDto };
-  galleryList: number | string[];
+  galleryList: (number | string)[];
 }
