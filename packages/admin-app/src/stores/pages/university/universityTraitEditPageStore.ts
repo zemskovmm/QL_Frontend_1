@@ -59,7 +59,7 @@ export class UniversityTraitEditPageStore extends RequestTracking {
   async removeTrait(traitId: string) {
     try {
       await AdminApi.deleteUniversityTrait(this.id, traitId);
-      this.traitHave.slice(this.traitHave.indexOf(Number(traitId)), 1);
+      this.traitHave = this.traitHave.filter((el) => el !== Number(traitId));
       this.sortTraitsLoad();
     } catch (e) {
       alert(e);
