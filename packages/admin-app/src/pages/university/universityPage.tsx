@@ -44,6 +44,13 @@ export const UniversityPage = () => {
           <RouterLink className={"d-flex mb-2 text-muted"} routeName={RouteNames.universityList}>
             &#8592; back in list
           </RouterLink>
+          <RouterLink
+            className={"d-flex mb-2 text-muted"}
+            routeName={RouteNames.universityTraitEditPage}
+            params={{ id: s.id }}
+          >
+            Trait Edit
+          </RouterLink>
           <button
             onClick={async () => {
               if (onEdit) await s.save();
