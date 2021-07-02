@@ -15,7 +15,6 @@ export class TraitPageStore extends RequestTracking {
 
   async load(id: string) {
     this.items = await this.track(() => AdminApi.getTrait(id));
-    console.log(this.items);
     this.totalPages = AdminApi.getTotalPages(this.items.length);
   }
 }
