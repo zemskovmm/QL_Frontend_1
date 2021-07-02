@@ -2,6 +2,7 @@ import { AdminPageDto, AdminPageListDto, IdResponseDto } from "src/interfaces/Ad
 import { encodeQueryString } from "src/utils/urlUtil";
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { AdminTraitListItemDto, AdminTraitItemDto } from "../interfaces/TraitPageDto";
+import { AdminUniversityItemDto, AdminUniversityItemPostDto } from "../interfaces/UniversityPageDto";
 
 export class AdminApiClient extends ApiClientBase {
   getTotalPages = (length: number) => (length % 10 ? Math.floor(length / 10) + 1 : Math.floor(length / 10));
@@ -24,7 +25,17 @@ export class AdminApiClient extends ApiClientBase {
   getTraitList = () => this.sendRequest<AdminTraitListItemDto[]>("admin/trait-types");
   getTrait = (id: string) => this.sendRequest<AdminTraitListItemDto[]>("admin/traits/of-type/" + id);
   getTraitItem = (id: string) => this.sendRequest<AdminTraitItemDto>("admin/traits/" + id);
-  putTraitItem = (id: string, data: any) => this.sendRequest<AdminTraitItemDto>("admin/traits/" + id, data, "PUT");
+  putTraitItem = (id: string, data: AdminTraitItemDto) =>
+    this.sendRequest<AdminTraitItemDto>("admin/traits/" + id, data, "PUT");
+
+  /* University */
+
+  getUniversityList = () => this.sendRequest<AdminUniversityItemDto[]>("admin/universities");
+  getUniversity = (id: string) => this.sendRequest<AdminUniversityItemDto>("admin/universities/" + id);
+  postUniversity = (data: AdminUniversityItemPostDto) =>
+    this.sendRequest<AdminUniversityItemPostDto>("admin/universities", data);
+  putUniversity = (id: string, data: AdminUniversityItemPostDto) =>
+    this.sendRequest<AdminUniversityItemPostDto>("admin/universities/" + id, data, "PUT");
 }
 
 export const AdminApi = new AdminApiClient();

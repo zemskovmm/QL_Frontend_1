@@ -1,11 +1,11 @@
 ﻿import { observable } from "mobx";
-import { AdminTraitListItemDto } from "src/interfaces/TraitPageDto";
+import { AdminUniversityItemDto } from "src/interfaces/UniversityPageDto";
 import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { RootStore } from "src/stores/RootStore";
 
-export class TraitPageStore extends RequestTracking {
-  @observable items: AdminTraitListItemDto[] = [];
+export class UniversityListPageStore extends RequestTracking {
+  @observable items: AdminUniversityItemDto[] = [];
   @observable totalPages: number = 0;
   @observable currentPage: number = 0;
 
@@ -13,8 +13,8 @@ export class TraitPageStore extends RequestTracking {
     super();
   }
 
-  async load(id: string) {
-    this.items = await this.track(() => AdminApi.getTrait(id));
+  async load() {
+    this.items = await this.track(() => AdminApi.getUniversityList());
     this.totalPages = AdminApi.getTotalPages(this.items.length);
   }
 }
