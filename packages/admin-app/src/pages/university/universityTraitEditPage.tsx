@@ -16,14 +16,27 @@ export const UniversityTraitEditPage = () => {
     <div className="container mx-auto px-4 sm:px-8 max-w-/xl">
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto flex flex-col">
-          <RouterLink className={"d-flex mb-2 text-muted"} routeName={RouteNames.universityPage} params={{ id: s.id }}>
-            &#8592; back in university
+          <RouterLink
+            className={
+              "d-flex mb-4 mr-auto text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+            }
+            routeName={RouteNames.universityPage}
+            params={{ id: s.id }}
+          >
+            back in university
           </RouterLink>
           <div className={`mb-4`}>ID: {s.id}</div>
-          <div className={`flex`}>
+          <div className={`mb-4 flex items-center flex-wrap`}>
             Traits:{" "}
             {s.traitAvailable.map((el) => (
-              <button onClick={async () => await s.traitLoad(el.id.toString())}>{el.names["en"]}</button>
+              <button
+                className={
+                  "d-flex ml-4 text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+                }
+                onClick={async () => await s.traitLoad(el.id.toString())}
+              >
+                {el.names["en"]}
+              </button>
             ))}
           </div>
           <div className={`flex`}>
