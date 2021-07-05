@@ -12,10 +12,24 @@ export const UniversityCreatePage = () => {
     <div className="container mx-auto px-4 sm:px-8 max-w-/xl">
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto flex flex-col">
-          <RouterLink className={"d-flex mb-2 text-muted"} routeName={RouteNames.universityList}>
-            &#8592; back in list
-          </RouterLink>
-          <button onClick={async () => await s.save()}>Save</button>
+          <div className={`flex`}>
+            <RouterLink
+              className={
+                "d-flex mb-4 text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+              }
+              routeName={RouteNames.universityList}
+            >
+              back in list
+            </RouterLink>
+            <button
+              onClick={async () => await s.save()}
+              className={
+                "d-flex mb-4 ml-auto text-white font-bold py-2 px-4 rounded inline-block bg-green-400 hover:bg-green-100 hover:text-black"
+              }
+            >
+              Save
+            </button>
+          </div>
           <div className={`flex flex-col`}>
             <div className={`mb-4`}>LogoID:</div>
             <input type="number" />

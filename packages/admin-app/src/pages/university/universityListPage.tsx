@@ -15,7 +15,14 @@ export const UniversityListPage = () => {
     <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <RouterLink routeName={RouteNames.universityCreatePage}>Create</RouterLink>
+          <RouterLink
+            routeName={RouteNames.universityCreatePage}
+            className={
+              "d-flex mb-4 mr text-white font-bold py-2 px-4 rounded inline-block bg-green-400 hover:bg-green-100 hover:text-black"
+            }
+          >
+            Create
+          </RouterLink>
           <AdminTable<AdminUniversityItemDto>
             columns={dmap(AllLanguages, (l) => ({
               id: l,
