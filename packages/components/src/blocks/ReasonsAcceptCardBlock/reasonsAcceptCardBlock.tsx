@@ -5,12 +5,15 @@ import icon from "./acceptIcon.svg";
 import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 import preview from "./preview.png";
 import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
+import cn from "classnames";
 
 export interface ReasonsAcceptCardBlockElement {
   header: string;
+  subtitle: string;
   textOverButton: string;
   elements: { title: string; text: string }[];
   showPostscript: boolean;
+  fullWidthPostscrip: boolean;
   textButton: string;
   showButton: boolean;
 }
@@ -19,7 +22,11 @@ export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => 
   return (
     <div className="py-12">
       <div className="px-4 lg:px-10 flex flex-col justify-between mx-auto max-w-screen-xl w-full">
-        <div className={styles.reasonsAcceptCardBlock__title}>{props.header}</div>
+        <div className={styles.reasonsAcceptCardBlock__titleblock}>
+          <div className={styles.reasonsAcceptCardBlock__title}>{props.header}</div>
+          {props.subtitle && <span className={styles.reasonsAcceptCardBlock__subtitle}>{props.subtitle}</span>}
+        </div>
+
         <div className={"flex flex-wrap w-full"}>
           {props.elements.map((el) => (
             <div className={styles.reasonsAcceptCardBlock__item + " " + styles.reasonsAcceptCardBlock__grid}>
@@ -30,13 +37,24 @@ export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => 
             </div>
           ))}
           {(props.showPostscript || props.showButton) && (
-            <div className={styles.reasonsAcceptCardBlock__blockText + " flex-col align"}>
+            <div
+              className={cn(
+                styles.reasonsAcceptCardBlock__blockText,
+                props.fullWidthPostscrip ? styles.reasonsAcceptCardBlock__blockTextFullWidth : "flex-col align"
+              )}
+            >
               {props.showPostscript && (
                 <div className={styles.reasonsAcceptCardBlock__buttonText}>
                   <HtmlPresenter text={props.textOverButton} />
                 </div>
               )}
-              {props.showButton && <ButtonFormBlock name={props.textButton} myClass={`mt-3`} align={`flex-start`} />}
+              {props.showButton && (
+                <ButtonFormBlock
+                  name={props.textButton}
+                  myClass={props.fullWidthPostscrip ? "" : `mt-3`}
+                  align={props.fullWidthPostscrip ? "flex-end" : `flex-start`}
+                />
+              )}
             </div>
           )}
         </div>
@@ -52,6 +70,7 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
   renderer: ReasonsAcceptCardBlock,
   initialData: {
     header: "Header",
+    subtitle: "",
     textOverButton: "9000",
     elements: [
       {
@@ -60,6 +79,7 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
       },
     ],
     showPostscript: true,
+    fullWidthPostscrip: false,
     showButton: true,
     textButton: "search",
   },
@@ -83,6 +103,11 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
         name: "Header",
       },
       {
+        id: "subtitle",
+        type: "String",
+        name: "Subtitle",
+      },
+      {
         id: "elements",
         name: "Elements",
         type: "List",
@@ -98,6 +123,11 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
         id: "showPostscript",
         type: "CheckBox",
         name: "ShowPostscript",
+      },
+      {
+        id: "fullWidthPostscrip",
+        type: "CheckBox",
+        name: "FullWidthPostscrip",
       },
       {
         id: "textButton",

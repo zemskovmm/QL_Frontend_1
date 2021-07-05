@@ -7,6 +7,7 @@ import preview from "./preview.png";
 
 export interface ReasonsCustomIconBlockElement {
   header: string;
+  subtitle?: string;
   elements: { title: string; text: string; image: number | null }[];
   showButton: boolean;
   textButton: string;
@@ -24,6 +25,7 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
       <div className="px-4 lg:px-10 flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={"flex flex-col w-full"}>
           <div className={styles.reasonsCustomIconBlock__title}>{props.header}</div>
+          {props.subtitle && <h2 className={styles.reasonsCustomIconBlock__subtitle}>{props.subtitle}</h2>}
           <div className={"flex flex-col lg:flex-row flex-wrap w-full"}>
             {props.elements.map((el) => (
               <div className={styles.reasonsCustomIconBlock__item}>
@@ -53,6 +55,7 @@ export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlo
   renderer: ReasonsCustomIconBlock,
   initialData: {
     header: "Header",
+    subtitle: "",
     elements: [
       {
         title: "string",
@@ -92,6 +95,11 @@ export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlo
         id: "header",
         type: "String",
         name: "Header",
+      },
+      {
+        id: "subtitle",
+        type: "String",
+        name: "Subtitle",
       },
       {
         id: "elements",

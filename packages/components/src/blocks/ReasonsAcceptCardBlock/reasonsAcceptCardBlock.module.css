@@ -1,9 +1,21 @@
+.reasonsAcceptCardBlock__titleblock{
+  margin-bottom: 40px;
+}
+
 .reasonsAcceptCardBlock__title{
   font-weight: bold;
   font-size: 30px;
   line-height: 42px;
-  margin-bottom: 57px;
+  margin-bottom: 17px;
   color: #373737;
+}
+
+.reasonsAcceptCardBlock__subtitle{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #646F83;
 }
 
 .reasonsAcceptCardBlock__blockText{
@@ -11,6 +23,30 @@
   min-width: 69.2307692307%;
   margin-bottom: 60px;
   display: flex;
+}
+
+.reasonsAcceptCardBlock__blockText.reasonsAcceptCardBlock__blockTextFullWidth{
+  max-width: 100%;
+  min-width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+
+.reasonsAcceptCardBlock__blockTextFullWidth div:first-child {
+  flex-shrink: 1;
+  width: 100%;
+  margin-right: 25px;
+  text-align: right;
+}
+
+.reasonsAcceptCardBlock__blockTextFullWidth div:first-child:before {
+  content: none;
+}
+
+.reasonsAcceptCardBlock__blockTextFullWidth div:last-child {
+  flex-shrink: 4;
 }
 
 .reasonsAcceptCardBlock__grid{
@@ -36,7 +72,7 @@
 }
 
 .reasonsAcceptCardBlock__item:hover{
-  box-shadow: 0px 10px 30px rgba(0, 78, 255, 0.07), 0px 20px 50px rgba(0, 78, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
 }
 
 .reasonsAcceptCardBlock__grid:nth-child(4n){
@@ -92,8 +128,13 @@
 }
 
 @media (max-width: 1023px) {
+
+  .reasonsAcceptCardBlock__titleblock{
+    margin-bottom: 12px;
+  }
+
   .reasonsAcceptCardBlock__title{
-    margin-bottom: 22px;
+    margin-bottom: 10px;
     font-size: 18px;
     line-height: 28px;
     text-align: center;
