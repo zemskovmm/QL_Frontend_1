@@ -85,7 +85,7 @@ const Map: React.FC<IMap> = ({
     if (ref.current) {
       setMap(
         new google.maps.Map(ref.current, {
-          zoom: mapAddresses[0].zoom,
+          zoom: +mapAddresses[0].zoom,
           center: { lat: +mapAddresses[0].lat, lng: +mapAddresses[0].lng },
           mapTypeControl: mapTypeControl,
           streetViewControl: false,

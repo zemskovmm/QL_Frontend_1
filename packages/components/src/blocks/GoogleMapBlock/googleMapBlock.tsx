@@ -12,7 +12,7 @@ export interface GoogleMapBlockElement {
 
 export const GoogleMapBlock = (props: GoogleMapBlockElement) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
-  const addresses = props.elements.map(({ lat, lng, zoom }) => ({ lat, lng, zoom }));
+  const addresses = props.elements.map(({ lat, lng, zoom }) => ({ lat, lng, zoom: +zoom }));
   const [activeAddress, setActiveAddress] = useState(0);
 
   useEffect(() => {
