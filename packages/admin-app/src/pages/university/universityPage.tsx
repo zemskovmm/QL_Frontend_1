@@ -101,7 +101,11 @@ export const UniversityPage = () => {
           </div>
           <div className={`flex justify-between mb-4`}>
             {lang.map((el) => (
-              <button onClick={() => setLangState(el)} type={"button"} className={`px-3 bb-1`}>
+              <button
+                onClick={() => setLangState(el)}
+                type={"button"}
+                className={`px-3 border-b w-full ${langState === el ? "border-blue-400" : "border-gray"}`}
+              >
                 {el}
               </button>
             ))}
