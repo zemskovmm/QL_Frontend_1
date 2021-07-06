@@ -6,14 +6,15 @@ import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 import preview from "./preview.png";
 import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
 import cn from "classnames";
+import { ApiBaseUrl } from "../../api/apiClientBase";
 
 export interface ReasonsAcceptCardBlockElement {
   header: string;
   subtitle: string;
   textOverButton: string;
-  elements: { title: string; text: string }[];
+  elements: { text: string; icon?: number | null }[];
   showPostscript: boolean;
-  fullWidthPostscrip: boolean;
+  fullWidthPostscript: boolean;
   textButton: string;
   showButton: boolean;
 }
@@ -31,33 +32,32 @@ export const ReasonsAcceptCardBlock = (props: ReasonsAcceptCardBlockElement) => 
           {props.elements.map((el) => (
             <div className={styles.reasonsAcceptCardBlock__item + " " + styles.reasonsAcceptCardBlock__grid}>
               <div className={styles.reasonsAcceptCardBlock__icon}>
-                <img src={icon} alt="" />
+                {el.icon ? <img src={`${ApiBaseUrl}/api/media/${el.icon}`} alt="" /> : <img src={icon} alt="" />}
               </div>
               <div className={styles.reasonsAcceptCardBlock__itemTitle} dangerouslySetInnerHTML={{ __html: el.text }} />
             </div>
           ))}
-          {(props.showPostscript || props.showButton) && (
-            <div
-              className={cn(
-                styles.reasonsAcceptCardBlock__blockText,
-                props.fullWidthPostscrip ? styles.reasonsAcceptCardBlock__blockTextFullWidth : "flex-col align"
-              )}
-            >
+          {(props.showPostscript || props.showButton) && !props.fullWidthPostscript && (
+            <div className={cn(styles.reasonsAcceptCardBlock__blockText, "flex-col align")}>
               {props.showPostscript && (
                 <div className={styles.reasonsAcceptCardBlock__buttonText}>
                   <HtmlPresenter text={props.textOverButton} />
                 </div>
               )}
-              {props.showButton && (
-                <ButtonFormBlock
-                  name={props.textButton}
-                  myClass={props.fullWidthPostscrip ? "" : `mt-3`}
-                  align={props.fullWidthPostscrip ? "flex-end" : `flex-start`}
-                />
-              )}
+              {props.showButton && <ButtonFormBlock name={props.textButton} myClass={`mt-3`} align={`flex-start`} />}
             </div>
           )}
         </div>
+        {(props.showPostscript || props.showButton) && props.fullWidthPostscript && (
+          <div className={styles.postScriptButton}>
+            {props.showPostscript && (
+              <div className={styles.postScriptButton__description}>
+                <HtmlPresenter text={props.textOverButton} />
+              </div>
+            )}
+            {props.showButton && <ButtonFormBlock name={props.textButton} align={"justify-end"} />}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -74,12 +74,11 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
     textOverButton: "9000",
     elements: [
       {
-        title: "string",
         text: "string",
       },
     ],
     showPostscript: true,
-    fullWidthPostscrip: false,
+    fullWidthPostscript: false,
     showButton: true,
     textButton: "search",
   },
@@ -91,7 +90,13 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
             id: "text",
             type: "Custom",
             customType: "Html",
-            name: "Text Over Button",
+            name: "Text",
+          },
+          {
+            id: "icon",
+            type: "Custom",
+            customType: "Image",
+            name: "Icon",
           },
         ],
       },
@@ -125,9 +130,9 @@ export const ReasonsAcceptCardBlockInfo: TypedBlockTypeInfo<ReasonsAcceptCardBlo
         name: "ShowPostscript",
       },
       {
-        id: "fullWidthPostscrip",
+        id: "fullWidthPostscript",
         type: "CheckBox",
-        name: "FullWidthPostscrip",
+        name: "FullWidthPostscript",
       },
       {
         id: "textButton",

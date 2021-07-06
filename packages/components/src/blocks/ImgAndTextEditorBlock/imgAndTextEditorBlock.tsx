@@ -5,11 +5,13 @@ import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
 import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
+import cn from "classnames";
 
 export interface ImgAndTextEditorBlockElement {
   align: boolean;
   text: string;
   titlePart?: string;
+  videoLink?: string;
   img: number | null;
   imgWidth: string;
   textButton: string;
@@ -20,14 +22,30 @@ export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
   return (
     <div className="lg:py-12">
       <div className="lg:px-10 px-4 flex justify-center mx-auto max-w-screen-xl w-full">
-        <div className={`${styles.imgAndTextEditorBlock} w-full ${props.align ? "flex-row-reverse" : ""}`}>
+        <div
+          className={cn(
+            styles.imgAndTextEditorBlock,
+            "w-full",
+            props.align ? "flex-row-reverse" : "",
+            props.videoLink ? "items-stretch" : "items-center"
+          )}
+        >
           <div
             className={`${styles.imgAndTextEditorBlock__content} ${
               props.align ? styles.imgAndTextEditorBlock__contentRight : styles.imgAndTextEditorBlock__contentLeft
             }`}
           >
             {props.titlePart && <HtmlPresenter text={props.titlePart} />}
-            {props.img && (
+            {props.videoLink && (
+              <iframe
+                className={styles.imgAndTextEditorBlock__imgmobile}
+                src={props.videoLink}
+                title="YouTube video player"
+                width="100%"
+                height="315"
+              />
+            )}
+            {props.img && !props.videoLink && (
               <img
                 src={`${ApiBaseUrl}/api/media/${props.img}`}
                 alt=""
@@ -37,7 +55,16 @@ export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
             <HtmlPresenter text={props.text} />
             {props.showButton && <ButtonFormBlock myClass={`mt-6`} name={props.textButton} align={`justify-start`} />}
           </div>
-          {props.img && (
+          {props.videoLink && (
+            <iframe
+              className={styles.imgAndTextEditorBlock__img}
+              src={props.videoLink}
+              title="YouTube video player"
+              width={props.imgWidth}
+              height="auto"
+            />
+          )}
+          {props.img && !props.videoLink && (
             <img
               src={`${ApiBaseUrl}/api/media/${props.img}`}
               style={{ maxWidth: props.imgWidth }}
@@ -60,6 +87,7 @@ export const ImgAndTextEditorBlockInfo: TypedBlockTypeInfo<ImgAndTextEditorBlock
     align: false,
     text: "string",
     titlePart: "Title",
+    videoLink: "",
     img: null,
     imgWidth: "400px",
     textButton: "",
@@ -78,6 +106,11 @@ export const ImgAndTextEditorBlockInfo: TypedBlockTypeInfo<ImgAndTextEditorBlock
         type: "Custom",
         customType: "Html",
         name: "Text",
+      },
+      {
+        id: "videoLink",
+        type: "String",
+        name: "Video Link:",
       },
       {
         id: "img",
