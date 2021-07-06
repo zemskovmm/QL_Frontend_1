@@ -1,20 +1,21 @@
 import React from "react";
 
 import styles from "./PartnersBlock.module.css";
-import cn from "classnames";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import preview from "./preview.png";
+import cn from "classnames";
 
 export interface PartnersProps {
   title: string;
   url?: string;
   num?: number;
+  whiteElements: boolean;
   elements: { img: number | null; link?: string }[];
 }
 
-export const PartnersBlock: React.FC<PartnersProps> = ({ title, url, num, elements }) => (
-  <div className="py-24">
+export const PartnersBlock: React.FC<PartnersProps> = ({ title, url, num, whiteElements, elements }) => (
+  <div className="py-12">
     <div className="flex flex-col max-w-screen-xl w-full my-0 mx-auto py-6 px-10">
       <h2 className={styles.title}>
         {url ? (
@@ -33,9 +34,9 @@ export const PartnersBlock: React.FC<PartnersProps> = ({ title, url, num, elemen
           ""
         )}
       </h2>
-      <div className="flex flex-wrap items-center">
+      <div className={cn("flex flex-wrap", whiteElements ? "items-stretch" : "items-center")}>
         {elements.map(({ img, link }, ind) => (
-          <div className={styles.partner} key={ind}>
+          <div className={cn(styles.partner, whiteElements ? styles.white : "")} key={ind}>
             {link ? (
               <a href={link} target="_blank">
                 <img src={`${ApiBaseUrl}/api/media/${img}`} alt="" />
@@ -59,6 +60,7 @@ export const PartnersBlockInfo: TypedBlockTypeInfo<PartnersProps> = {
     title: "Header",
     url: "",
     num: 0,
+    whiteElements: false,
     elements: [
       {
         img: null,
@@ -100,7 +102,11 @@ export const PartnersBlockInfo: TypedBlockTypeInfo<PartnersProps> = {
         type: "Number",
         name: "Num:",
       },
-
+      {
+        id: "whiteElements",
+        type: "CheckBox",
+        name: "White Elements:",
+      },
       {
         id: "elements",
         name: "Elements",

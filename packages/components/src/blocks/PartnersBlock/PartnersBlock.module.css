@@ -26,6 +26,15 @@
   align-items: center;
 }
 
+.partner.white {
+  background: #fff;
+  border: 1px solid #E5E5E5;
+  padding: 28px;
+  max-width: 214px;
+  width: 100%;
+  margin: 0 12px 24px;
+}
+
 .partner img {
   max-height: 200px;
   max-width: 100%;
@@ -39,4 +48,10 @@
     width: 50%;
     margin-bottom: 20px;
   }
+
+  .title {
+    font-size: 1.125rem;
+  }
 }
+
+

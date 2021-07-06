@@ -5,6 +5,7 @@ import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
 import cn from "classnames";
 import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";
+import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
 
 type BigCardProps = {
   card: {
@@ -34,20 +35,43 @@ type BigCardsListBlockElement = {
   title: string;
   subtitle?: string;
   mainStyle: boolean;
+  showPostscript: boolean;
+  textButton: string;
+  textOverButton: string;
+  showButton: boolean;
 };
 
-export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({ elements, title, subtitle, mainStyle }) => {
+export const BigCardsListBlock: FC<BigCardsListBlockElement> = ({
+  elements,
+  title,
+  subtitle,
+  mainStyle,
+  showPostscript,
+  textButton,
+  textOverButton,
+  showButton,
+}) => {
   return (
     <div className={cn(mainStyle ? style.main : "", "py-12")}>
       <div className={cn(style.titlepart, "lg:px-10 px-4 flex items-end mx-auto mb-10 max-w-screen-xl w-full")}>
         <h2 className={style.bigCardsListBlock__title}>{title}</h2>
         {subtitle && <h3 className={style.bigCardsListBlock__subtitle}>{subtitle}</h3>}
       </div>
-      <div className="lg:px-10 px-4 flex flex-wrap items-stretch w-ful mx-auto max-w-screen-xl w-full">
+      <div className="lg:px-10 px-4 flex flex-wrap items-stretch mx-auto max-w-screen-xl w-full">
         {elements.map((el, ind) => (
           <BigCard key={ind} card={el} />
         ))}
       </div>
+      {(showPostscript || showButton) && (
+        <div className={cn(style.postScriptButton, "lg:px-10 px-4 mx-auto max-w-screen-xl w-full")}>
+          {showPostscript && (
+            <div className={style.postScriptButton__description}>
+              <HtmlPresenter text={textOverButton} />
+            </div>
+          )}
+          {showButton && <ButtonFormBlock name={textButton} align={"justify-end"} />}
+        </div>
+      )}
     </div>
   );
 };
@@ -81,6 +105,10 @@ export const BigCardsListBlockInfo: TypedBlockTypeInfo<BigCardsListBlockElement>
     title: "string",
     subtitle: "string",
     mainStyle: false,
+    showPostscript: true,
+    showButton: true,
+    textButton: "search",
+    textOverButton: "",
   },
   definition: {
     subTypes: {
@@ -132,6 +160,27 @@ export const BigCardsListBlockInfo: TypedBlockTypeInfo<BigCardsListBlockElement>
         name: "Elements",
         type: "List",
         listType: "element",
+      },
+      {
+        id: "showPostscript",
+        type: "CheckBox",
+        name: "ShowPostscript",
+      },
+      {
+        id: "textOverButton",
+        type: "Custom",
+        customType: "Html",
+        name: "Text Over Button",
+      },
+      {
+        id: "showButton",
+        type: "CheckBox",
+        name: "Show button",
+      },
+      {
+        id: "textButton",
+        type: "String",
+        name: "Text button",
       },
     ],
   },
