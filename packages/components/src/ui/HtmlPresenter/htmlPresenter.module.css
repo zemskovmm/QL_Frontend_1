@@ -1,8 +1,8 @@
 ﻿.text h1{
   color: #373737;
   font-weight: bold;
-  font-size: 30px;
-  line-height: 42px;
+  font-size: 1.875rem;
+  line-height: 140%;
   margin-top: 40px;
   margin-bottom: 20px;
 }
@@ -10,8 +10,8 @@
 .text h2{
   color: #373737;
   font-weight: bold;
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 1.125rem;
+  line-height: 144%;
   margin-top: 40px;
   margin-bottom: 20px;
 }
@@ -19,14 +19,10 @@
 .text h3, .text h4{
   color: #373737;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 150%;
   margin-top: 40px;
   margin-bottom: 20px;
-}
-
-.text p {
-  margin-bottom: 10px;
 }
 
 .text li {
@@ -35,19 +31,20 @@
 
 .text p{
   color: #373737;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 150%;
+  margin-bottom: 10px;
 }
 
 .text blockquote {
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 150%;
   color: #373737;
 }
 
 .text a{
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 150%;
   text-decoration-line: underline;
   color: #567DD0;
 }
