@@ -46,11 +46,7 @@ const TableRowBlock = (props: TableRowElement) => {
         <>
           <div className={styles.text} style={{ maxWidth: props.maxTextWidth }}>
             {titleText && <span>{titleText}</span>}
-            {props.text?.includes("<red>") ? (
-              <p dangerouslySetInnerHTML={{ __html: props.text?.replace(/red>/g, "b>") }} />
-            ) : (
-              props.text
-            )}
+            {props.text?.includes("<br/>") ? <p dangerouslySetInnerHTML={{ __html: props.text }} /> : props.text}
             {props.note && props.note > 0 ? (
               <sup>
                 <a href={`#note${props.note}`}>{props.note}</a>
@@ -69,11 +65,7 @@ const TableRowBlock = (props: TableRowElement) => {
       ) : (
         <>
           {titleText && <span>{titleText}</span>}
-          {props.text?.includes("<red>") ? (
-            <p dangerouslySetInnerHTML={{ __html: props.text?.replace(/red>/g, "b>") }} />
-          ) : (
-            props.text
-          )}
+          {props.text?.includes("<br/>") ? <p dangerouslySetInnerHTML={{ __html: props.text }} /> : props.text}
           {props.note && props.note > 0 ? (
             <sup>
               <a href={`#note${props.note}`}>{props.note}</a>
