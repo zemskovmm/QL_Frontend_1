@@ -155,6 +155,10 @@
   .info > div {
     width: 100% !important;
   }
+
+  .info > div:nth-child(odd) {
+    border-right: none;
+  }
 }
 
 
