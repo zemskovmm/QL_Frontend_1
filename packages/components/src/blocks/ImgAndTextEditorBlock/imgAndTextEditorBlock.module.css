@@ -1,6 +1,5 @@
 .imgAndTextEditorBlock {
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -24,6 +23,7 @@
 }
 
 .imgAndTextEditorBlock__img {
+  border-radius: 6px;
   max-width: 470px;
   object-fit: cover;
   width: 100%;

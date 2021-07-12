@@ -41,24 +41,36 @@ export const UniversityPage = () => {
     <div className="container mx-auto px-4 sm:px-8 max-w-/xl">
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto flex flex-col">
-          <RouterLink className={"d-flex mb-2 text-muted"} routeName={RouteNames.universityList}>
-            &#8592; back in list
-          </RouterLink>
-          <RouterLink
-            className={"d-flex mb-2 text-muted"}
-            routeName={RouteNames.universityTraitEditPage}
-            params={{ id: s.id }}
-          >
-            Trait Edit
-          </RouterLink>
-          <button
-            onClick={async () => {
-              if (onEdit) await s.save();
-              setOnEdit(!onEdit);
-            }}
-          >
-            {onEdit ? "Save" : "Edit"}
-          </button>
+          <div className={`flex`}>
+            <RouterLink
+              className={
+                "d-flex mb-4 mr-auto text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+              }
+              routeName={RouteNames.universityList}
+            >
+              back in list
+            </RouterLink>
+            <RouterLink
+              className={
+                "d-flex mb-4 mr-4 text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+              }
+              routeName={RouteNames.universityTraitEditPage}
+              params={{ id: s.id }}
+            >
+              Trait Edit
+            </RouterLink>
+            <button
+              className={
+                "d-flex mb-4 text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+              }
+              onClick={async () => {
+                if (onEdit) await s.save();
+                setOnEdit(!onEdit);
+              }}
+            >
+              {onEdit ? "Save" : "Edit"}
+            </button>
+          </div>
           <div className={`mb-4`}>ID: {s.id}</div>
           <div className={`mb-4`}>
             LogoID:
@@ -89,7 +101,11 @@ export const UniversityPage = () => {
           </div>
           <div className={`flex justify-between mb-4`}>
             {lang.map((el) => (
-              <button onClick={() => setLangState(el)} type={"button"} className={`px-3 bb-1`}>
+              <button
+                onClick={() => setLangState(el)}
+                type={"button"}
+                className={`px-3 border-b w-full ${langState === el ? "border-blue-400" : "border-gray"}`}
+              >
                 {el}
               </button>
             ))}

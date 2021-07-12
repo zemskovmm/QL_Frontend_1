@@ -15,10 +15,14 @@ export const TraitPage = () => {
     <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto flex flex-col">
-          <RouterLink className={"d-flex mb-2 text-muted"} routeName={RouteNames.traitList}>
-            &#8592; back in list
+          <RouterLink
+            className={
+              "d-flex mb-4 mr-auto text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+            }
+            routeName={RouteNames.traitList}
+          >
+            back in list
           </RouterLink>
-          <div className={`mb-4`}>Type:</div>
           <AdminTable<AdminTraitListItemDto>
             columns={dmap(AllLanguages, (l) => ({
               id: l,

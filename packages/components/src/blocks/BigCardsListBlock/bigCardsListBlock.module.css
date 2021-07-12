@@ -99,6 +99,45 @@
   height: 338px !important;
 }
 
+
+.postScriptButton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.postScriptButton div {
+  width: auto;
+  margin: 0 20px 0 0;
+}
+
+
+.postScriptButton__description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  margin-right: 25px;
+  color: #646F83;
+  padding-left: 23px;
+  margin-left: auto;
+  position: relative;
+}
+
+.postScriptButton__description:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  border: 1px solid #FF6768;
+  width: 8.5px;
+  height: 8.5px;
+  box-sizing: border-box;
+  top: 7px;
+  transform: rotate(45deg);
+  transition: border 0.3s;
+}
+
+
 @media (max-width: 1023px) {
 
   .titlepart{
@@ -131,5 +170,15 @@
     height: 200px;
     max-height: 200px;
     margin-bottom: 13px;
+  }
+}
+
+@media (max-width: 767px) {
+  .postScriptButton {
+    flex-direction: column;
+  }
+
+  .postScriptButton__description {
+    margin-bottom: 20px;
   }
 }

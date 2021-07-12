@@ -7,6 +7,11 @@
   max-width: 640px;
 }
 
+.reasonsCustomIconBlock__subtitle{
+  margin-bottom: 50px;
+  max-width: 80%;
+}
+
 .reasonsCustomIconBlock__item{
   width: 33.33%;
   padding: 0 10px;

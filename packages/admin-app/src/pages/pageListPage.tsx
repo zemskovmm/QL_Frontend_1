@@ -8,6 +8,7 @@ import { dmap } from "src/utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { AdminPageListItemDto } from "src/interfaces/AdminPageDto";
 import { useObserver } from "mobx-react";
+import { AdminSearch } from "../components/common/AdminSearch";
 
 export const PageListPage = () => {
   const s = useRootStore().pageListPage;
@@ -16,10 +17,18 @@ export const PageListPage = () => {
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <div className="m-4">
-              <RouterLink routeName={RouteNames.newPage}>
-                <AdminButton color={"primary"}>Create Page</AdminButton>
-              </RouterLink>
+            <div className={`flex items-center justify-between`}>
+              <div className="m-4 flex w-full">
+                <RouterLink routeName={RouteNames.newPage} className={`mr-auto`}>
+                  <AdminButton color={"primary"}>Create Page</AdminButton>
+                </RouterLink>
+                <AdminSearch
+                  searchLang={s.searchLang}
+                  searchQuery={s.searchQuery}
+                  action={() => s.search()}
+                  findCount={s.current.length}
+                />
+              </div>
             </div>
             <AdminTable<AdminPageListItemDto>
               columns={dmap(AllLanguages, (l) => ({
@@ -38,10 +47,10 @@ export const PageListPage = () => {
                   );
                 },
               }))}
-              rows={s.current.results.slice(s.currentPage * 10, (s.currentPage + 1) * 10)}
+              rows={s.current.slice(s.currentPage * 10, (s.currentPage + 1) * 10)}
               idGetter={(r) => r.id.toString()}
             />
-            <Paginator page={s.currentPage} totalPages={s.current.totalPages} setPage={(p) => s.load(p)} />
+            <Paginator page={s.currentPage} totalPages={s.totalPages} setPage={(p) => s.load(p)} />
           </div>
         </div>
       </div>
