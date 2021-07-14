@@ -52,7 +52,6 @@
   line-height: 42px;
   color: #373737;
   margin-top: 0;
-  margin-bottom: 12px;
 }
 
 .catalog__count{
@@ -476,4 +475,12 @@
   border-top: 1px solid #C9D5F0;
   border-bottom: 1px solid #C9D5F0;
   margin-bottom: 15px;
+}
+
+.pinText{
+  color: #0C389A;
+}
+
+.pinText:hover{
+  color: #373737;
 }

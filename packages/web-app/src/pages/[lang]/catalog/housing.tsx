@@ -4,9 +4,9 @@ import style from "src/components/catalog/style/catalogView.module.css";
 import { LocalizedText, useLocalizedText } from "src/components/common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { useIntl } from "react-intl";
-import { UniversityCatalogElement } from "./catalogElement";
+import { HousingCatalogElement } from "./catalogElement";
 
-const UniversityCatalogPage = () => {
+const HousingCatalogPage = () => {
   const lang = useIntl().locale;
   const intl = useIntl();
   return (
@@ -20,15 +20,15 @@ const UniversityCatalogPage = () => {
                 link: `/${lang}`,
               },
               {
-                name: <LocalizedText id={"breadcrumbs_Education"} />,
-                link: `/${lang}/catalog/university`,
+                name: <LocalizedText id={"breadcrumbs_Housing"} />,
+                link: `/${lang}/catalog/housing`,
               },
             ]}
           />
         </div>
         <Catalog<CatalogUniversityDto>
-          title={useLocalizedText({ id: "catalogEducation_title" }, intl)}
-          elementRenderer={UniversityCatalogElement}
+          title={useLocalizedText({ id: "catalogHousing_title" }, intl)}
+          elementRenderer={HousingCatalogElement}
           apiElementName="university"
         />
       </div>
@@ -36,4 +36,4 @@ const UniversityCatalogPage = () => {
   );
 };
 
-export default UniversityCatalogPage;
+export default HousingCatalogPage;
