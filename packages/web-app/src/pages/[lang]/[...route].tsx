@@ -9,7 +9,8 @@ import { HousingModule } from "../../components/modules/housingModule";
 const GetModule = (props: ClientRouteDto) => {
   const name = props.moduleName;
   if (props.moduleName == "page") return <PageModule {...props.module.page} />;
-  if (props.moduleName == "university") return <UniversityModule {...props.module} />;
+  if (props.moduleName == "university") return <HousingModule {...props.module} />;
+  // if (props.moduleName == "university") return <UniversityModule {...props.module} />;
   if (props.moduleName == "housing") return <HousingModule {...props.module} />;
   return <div>Error: unknown module {name}</div>;
 };
