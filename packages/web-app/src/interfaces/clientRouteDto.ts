@@ -17,9 +17,4 @@ interface RoutedAsUniversity {
   module: ClientUniversityDto;
 }
 
-interface RoutedAsHousing {
-  moduleName: "housing";
-  module: ClientUniversityDto;
-}
-
-export type ClientRouteDto = RouteDataBase & (RoutedAsPage | RoutedAsUniversity | RoutedAsHousing);
+export type ClientRouteDto = RouteDataBase & (RoutedAsPage | RoutedAsUniversity);
