@@ -27,6 +27,7 @@ import { HtmlWithIconBlockInfo } from "./HtmlWithIconBlock/htmlWithIconBlock";
 import { FramesWithArrowBlockInfo } from "./FramesWithArrowBlock/framesWithArrowBlock";
 import { FixedHeightBlockInfo } from "./FixedHeightBlock/fixedHeightBlock";
 import { TableBlockInfo } from "./TableBlock/TableBlock";
+import { NewsletterBlockInfo } from "./NewsletterBlock/NewsletterBlock";
 
 import cn from "classnames";
 import grid from "../styles/grid.module.css";
@@ -66,6 +67,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   NewsBlockInfo,
   SocialBlockInfo,
   GallerySliderBlockInfo,
+  NewsletterBlockInfo,
 ];
 
 export interface IComponentHost {
