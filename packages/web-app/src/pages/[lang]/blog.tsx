@@ -6,7 +6,7 @@ const BlogPage = () => {
 
   return (
     <>
-      <NewsletterBlock />
+      <NewsletterBlock title={""} buttonName={""} description={""} />
     </>
   );
 };
