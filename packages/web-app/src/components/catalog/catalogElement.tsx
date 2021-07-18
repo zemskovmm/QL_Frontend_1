@@ -7,7 +7,7 @@ import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 import { FC } from "react";
 import pin from "src/assets/icons/pin.svg";
 
-const ElementCatalog: FC<{ item: CatalogUniversityDto }> = ({ item, children }) => (
+const ElementCatalog: FC<{ item: CatalogUniversityDto }> = ({ children, item }) => (
   <Link href={item.url}>
     <a className={style.card}>
       <div className={style.card__left}>

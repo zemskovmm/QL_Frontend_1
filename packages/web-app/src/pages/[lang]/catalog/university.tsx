@@ -4,7 +4,7 @@ import style from "src/components/catalog/style/catalogView.module.css";
 import { LocalizedText, useLocalizedText } from "src/components/common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { useIntl } from "react-intl";
-import { UniversityCatalogElement } from "./catalogElement";
+import { UniversityCatalogElement } from "src/components/catalog/catalogElement";
 
 const UniversityCatalogPage = () => {
   const lang = useIntl().locale;
