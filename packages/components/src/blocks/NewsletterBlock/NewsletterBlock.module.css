@@ -76,7 +76,7 @@
 
 @media (min-width: 900px) {
   .newsletter__bg{
-    max-width: 1170px;
+    max-width: none;
     margin: auto;
     background-position: -10% 100%;
     background-size: 39%;

@@ -28,6 +28,8 @@ import { FramesWithArrowBlockInfo } from "./FramesWithArrowBlock/framesWithArrow
 import { FixedHeightBlockInfo } from "./FixedHeightBlock/fixedHeightBlock";
 import { TableBlockInfo } from "./TableBlock/TableBlock";
 import { NewsletterBlockInfo } from "./NewsletterBlock/NewsletterBlock";
+import { HistoryClientsBlockInfo } from "./Blog/HistoryClients/historyClientsBlock";
+import { FirstArticleBlockInfo } from "./Blog/FirstArticle/firstArticleBlock";
 
 import cn from "classnames";
 import grid from "../styles/grid.module.css";
@@ -68,6 +70,8 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   SocialBlockInfo,
   GallerySliderBlockInfo,
   NewsletterBlockInfo,
+  HistoryClientsBlockInfo,
+  FirstArticleBlockInfo,
 ];
 
 export interface IComponentHost {
