@@ -1,0 +1,128 @@
+.newsletter__bg{
+  box-shadow: 0px 10px 30px rgba(0, 78, 255, 0.07), 0px 20px 50px rgba(0, 78, 255, 0.05);
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #567DD0;
+  background-image: url("newsletterbg.svg");
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  max-width: 400px;
+  margin: auto;
+}
+
+.newsletter__content{
+  border: 2px solid #EFF3FA1A;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 10px 30px rgba(0, 78, 255, 0.07)), drop-shadow(0px 20px 50px rgba(0, 78, 255, 0.05));
+  padding: 26px 10px 30px 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+}
+
+.newsletter__title{
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.newsletter__desc{
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  color: #C9D5F0;
+  margin-bottom: 25px;
+}
+
+.newsletter__input{
+  width: 100%;
+  background: #F9FAFD;
+  border: 2px solid #C9D5F0;
+  box-sizing: border-box;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 36px;
+  color: #646F83;
+  padding: 3px 15px;
+  margin-bottom: 10px;
+}
+
+.newsletter__form{
+  position: relative;
+}
+
+.newsletter__form:before{
+  content:url("message.svg");
+  right: 0;
+  top: -55px;
+  position: absolute;
+}
+
+.newsletter__button{
+  background: #FF6768;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  width: 100%;
+  padding: 11px;
+}
+
+
+@media (min-width: 900px) {
+  .newsletter__bg{
+    max-width: 1170px;
+    margin: auto;
+    background-position: -10% 100%;
+    background-size: 39%;
+  }
+  .newsletter__content{
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 46px 70px;
+  }
+  .newsletter__title{
+    text-align: left;
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 9px;
+  }
+  .newsletter__desc{
+    margin-bottom: 0;
+    text-align: left;
+  }
+  .newsletter__form{
+    display: flex;
+  }
+  .newsletter__input{
+    margin-bottom: 0;
+    margin-right: 30px;
+    width: 250px;
+  }
+  .newsletter__button{
+    width: auto;
+    padding: 11px 45px;
+  }
+  .newsletter__form:before{
+    display: none;
+  }
+  .newsletter__textBlock{
+    position: relative;
+    margin-right: 45px;
+  }
+  .newsletter__textBlock:before{
+    content:url("message.svg");
+    left: -55px;
+    top: -12px;
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+  }
+}

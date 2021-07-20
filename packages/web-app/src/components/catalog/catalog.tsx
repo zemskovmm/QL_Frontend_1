@@ -12,6 +12,7 @@ import { CatalogView } from "src/components/catalog/catalogView";
 export interface CatalogProps<T> {
   elementRenderer: (element: T) => JSX.Element;
   apiElementName: string;
+  title: string;
 }
 
 interface CatalogQuery {
@@ -87,6 +88,7 @@ export function Catalog<T>(props: CatalogProps<T>) {
       setPage={setPage}
       setFilter={setFilter}
       elementRenderer={props.elementRenderer}
+      title={props.title}
     />
   );
 }

@@ -88,16 +88,15 @@ function CatalogItems<T>(props: {
   widthInner: boolean;
   clickFilter: () => void;
   clickSort: () => void;
+  title: string;
 }) {
   return (
     <div className={`flex flex-col w-full`}>
-      <div className={`flex items-center justify-between px-4 lg:px-0`}>
-        <h1 className={`${style.catalog__h1}`}>
-          <LocalizedText id={"catalogEducation_title"} />
-        </h1>
+      <div className={`flex items-center px-4 lg:px-0 mb-3`}>
+        <h1 className={`${style.catalog__h1}`}>{props.title}</h1>
         <div className={`${style.catalog__count}`}>
           {props.data.totalItems}{" "}
-          <span className={`hidden lg:block`}>
+          <span className={`hidden lg:inline`}>
             <LocalizedText id={"catalogEducation_search_result"} />
           </span>
         </div>
@@ -139,6 +138,7 @@ export function CatalogView<T>(props: {
   page: number;
   setPage: (p: number) => void;
   setFilter: (identifier: string, item: number, value: boolean) => void;
+  title: string;
 }): JSX.Element {
   const [widthInner, setWidthInner] = useState(true);
   const [openFilter, setOpenFilter] = useState(false);
@@ -231,6 +231,7 @@ export function CatalogView<T>(props: {
               widthInner={widthInner}
               clickFilter={() => setOpenFilter(true)}
               clickSort={() => setOpenSort(true)}
+              title={props.title}
             />
           )}
         </LoadingIf>
