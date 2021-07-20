@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
-import { ComponentHostContext } from "../index";
 import style from "./breadcrumbsBlock.module.css";
 import icon from "./arrow-left.svg";
 import icon_white from "./arrow-left-white.svg";
