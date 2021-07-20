@@ -37,6 +37,7 @@ import { PartnersBlockInfo } from "./PartnersBlock/PartnersBlock";
 import { NewsBlockInfo } from "./NewsBlock/NewsBlock";
 import { SocialBlockInfo } from "./SocialBlock/SocialBlock";
 import { GallerySliderBlockInfo } from "./GallerySliderBlock/gallerySliderBlock";
+import { CommentsBlockInfo } from "./CommentsBlock/commentsBlock";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -72,6 +73,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   NewsletterBlockInfo,
   HistoryClientsBlockInfo,
   FirstArticleBlockInfo,
+  CommentsBlockInfo,
 ];
 
 export interface IComponentHost {
