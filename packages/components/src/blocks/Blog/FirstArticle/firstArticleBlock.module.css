@@ -59,6 +59,32 @@
   margin-right: 10px;
 }
 
+.firstArticle__blog{
+  margin: 0;
+}
+
+.firstArticle__blog .firstArticle{
+  border: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.firstArticle__blog .firstArticle__img{
+  border-radius: 0;
+}
+
+.firstArticle__blog .firstArticle__date{
+  position: relative;
+  padding: 0;
+  background: transparent;
+  margin-bottom: 10px;
+}
+
+.firstArticle__blog .firstArticle__tag{
+  margin-right: 10px;
+}
+
 @media (min-width: 1200px) {
   .firstArticle__width{
     margin: 0;
@@ -77,5 +103,12 @@
   .firstArticle__title{
     font-size: 18px;
     line-height: 26px;
+  }
+  .firstArticle__blog .firstArticle__date{
+    margin-bottom: 0;
+  }
+  .firstArticle__blog .firstArticle:hover{
+    box-shadow: none;
+    cursor: default;
   }
 }
