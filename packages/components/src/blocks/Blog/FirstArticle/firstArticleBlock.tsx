@@ -11,21 +11,34 @@ export interface FirstArticleBlockElement {
   img: string | null;
   date: string;
   tags: { name: string; link: string }[];
+  blog: boolean;
 }
 
 export const FirstArticleBlock = (props: FirstArticleBlockElement) => {
   return (
-    <div className={`${styles.firstArticle__width} py-12`}>
+    <div className={`${styles.firstArticle__width} ${props.blog ?? styles.firstArticle__blog} py-12`}>
       <div className={styles.firstArticle}>
         <div className={`flex flex-col relative mb-3`}>
           <img className={styles.firstArticle__img} src={test} alt="" />
-          <div className={styles.firstArticle__date}>
-            <img src={calendary} alt="" /> 04.02.2017
-          </div>
+          {props.blog && (
+            <div className={styles.firstArticle__date}>
+              <img src={calendary} alt="" /> {props.date}
+            </div>
+          )}
         </div>
-        <div className={`lg:flex justify-between lg:px-2.5 lg:mt-4`}>
-          <div className={styles.firstArticle__title}>Почему нет прогресса во французском</div>
-          <div className={`flex flex-wrap`}>
+        <div
+          className={`${
+            props.blog ?? "items-center md:items-start flex flex-col md:flex-row lg:pr-1"
+          } lg:flex justify-between lg:px-2.5 lg:mt-4`}
+        >
+          {props.blog ? (
+            <div className={styles.firstArticle__title}>{props.title}</div>
+          ) : (
+            <div className={styles.firstArticle__date}>
+              <img src={calendary} alt="" /> {props.date}
+            </div>
+          )}
+          <div className={`${props.blog ?? "justify-center md:justify-start"} flex flex-wrap`}>
             <span className={styles.firstArticle__tag}>Изучение языка</span>
             <span className={styles.firstArticle__tag}>Изучение языка</span>
             <span className={styles.firstArticle__tag}>Изучение языка</span>
@@ -47,6 +60,7 @@ export const FirstArticleBlockInfo: TypedBlockTypeInfo<FirstArticleBlockElement>
     date: "20.04.2017",
     img: null,
     tags: [],
+    blog: false,
   },
   definition: {
     subTypes: {
@@ -81,6 +95,11 @@ export const FirstArticleBlockInfo: TypedBlockTypeInfo<FirstArticleBlockElement>
         type: "Custom",
         customType: "Image",
         name: "Img",
+      },
+      {
+        id: "blog",
+        type: "CheckBox",
+        name: "Blog",
       },
       {
         id: "tags",
