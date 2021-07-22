@@ -9,9 +9,21 @@ import { AllLanguages } from "@project/components/src/utils/langs";
 import { AdminPageListItemDto } from "src/interfaces/AdminPageDto";
 import { useObserver } from "mobx-react";
 import { AdminSearch } from "../components/common/AdminSearch";
+import { useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 export const PageListPage = () => {
   const s = useRootStore().pageListPage;
+  const params = new URLSearchParams(window.location.search);
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    s.search = params.get("search") || "";
+    s.currentPage = Number(params.get("page") || 0);
+    s.load();
+  }, [location]);
+
   return useObserver(() => (
     <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
       <div className="py-8">
@@ -23,10 +35,12 @@ export const PageListPage = () => {
                   <AdminButton color={"primary"}>Create Page</AdminButton>
                 </RouterLink>
                 <AdminSearch
-                  searchLang={s.searchLang}
-                  searchQuery={s.searchQuery}
-                  action={() => s.search()}
-                  findCount={s.current.length}
+                  search={s.search}
+                  action={(search: string) => {
+                    params.set("page", "0");
+                    params.set("search", search);
+                    history.push(window.location.pathname + "?" + params.toString());
+                  }}
                 />
               </div>
             </div>
@@ -47,10 +61,17 @@ export const PageListPage = () => {
                   );
                 },
               }))}
-              rows={s.current.slice(s.currentPage * 10, (s.currentPage + 1) * 10)}
+              rows={s.current}
               idGetter={(r) => r.id.toString()}
             />
-            <Paginator page={s.currentPage} totalPages={s.totalPages} setPage={(p) => s.load(p)} />
+            <Paginator
+              page={s.currentPage}
+              totalPages={s.totalPages}
+              setPage={(p) => {
+                params.set("page", p.toString());
+                history.push(window.location.pathname + "?" + params.toString());
+              }}
+            />
           </div>
         </div>
       </div>
