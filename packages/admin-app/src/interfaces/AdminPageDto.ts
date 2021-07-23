@@ -1,7 +1,7 @@
-import {PageDataDto} from "@project/components/src/interfaces/pageSharedDto";
+import { PageDataDto } from "@project/components/src/interfaces/pageSharedDto";
 
 export interface IdResponseDto {
-  id: number
+  id: number;
 }
 
 export interface AdminPageLanguageDto {

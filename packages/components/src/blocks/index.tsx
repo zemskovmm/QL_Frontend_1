@@ -105,7 +105,6 @@ const RowPresenter = (props: PageBlockRowDto) => {
     <section
       style={{
         background: props.background,
-        maxWidth: props.maxWidth ? props.maxWidth : "100%",
         alignItems: props.vertical,
       }}
       className="relative mx-auto flex-wrap flex"
@@ -118,9 +117,13 @@ const RowPresenter = (props: PageBlockRowDto) => {
             key={i}
             className={cn(
               i === 1 && sortBlocks[0].type == "breadcrumbsBlock" ? "block-with-breadcrumbs" : "",
-              `inline-block ${grid["col-" + cell.size]} box-border`
+              `inline-block ${grid["col-" + cell.size]} box-border mx-auto`
             )}
-            style={{ verticalAlign: "top", backgroundColor: props.background ? props.background : "" }}
+            style={{
+              verticalAlign: "top",
+              maxWidth: props.maxWidth ? props.maxWidth : "100%",
+              backgroundColor: props.background ? props.background : "",
+            }}
           >
             <BlockPresenter blockType={cell.type} blockData={cell.data} />
           </div>
