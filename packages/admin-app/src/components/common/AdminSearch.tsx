@@ -1,31 +1,32 @@
-import { useThrottle } from "../../utils/throttle-effect";
+import { useState } from "react";
 
-export const AdminSearch = (props: {
-  searchQuery: string;
-  searchLang: string;
-  action: () => Promise<void>;
-  findCount: number;
-}) => {
-  useThrottle({ action: () => props.action(), timeout: 300, data: null }, [props.searchQuery, props.searchLang]);
+export const AdminSearch = (props: { search: string; action: (s: string) => void }) => {
+  const [searchString, setSearchString] = useState(props.search);
+
   return (
     <div className={`flex flex-col`}>
-      <label className={`flex`}>
-        <div className={`mr-4`}>Search:</div>
+      <label className={`flex items-center`}>
         <input
-          value={props.searchQuery}
-          onChange={(e) => (props.searchQuery = e.target.value)}
+          value={searchString}
+          onChange={(e) => setSearchString(e.target.value)}
           type="text"
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              props.action(searchString);
+            }
+          }}
           className={`border-2 border-black`}
+          // do something here [enter pressed]
         />
-        <select onChange={(e) => (props.searchLang = e.target.value)} value={props.searchLang}>
-          <option value="en">en</option>
-          <option value="ru">rus</option>
-          <option value="fr">fr</option>
-          <option value="cn">cn</option>
-          <option value="esp">esp</option>
-        </select>
+        <button
+          onClick={() => {
+            props.action(searchString);
+          }}
+          className={`text-white font-bold py-2 px-4 ml-2 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
+        >
+          Search
+        </button>
       </label>
-      <div className={`flex`}>Find: {props.findCount}</div>
     </div>
   );
 };

@@ -57,7 +57,6 @@ export const Routes: Route[] = convertRoutes([
   {
     pattern: "/pages",
     name: RouteNames.pageList,
-    onEnter: (root) => root.pageListPage.load(0),
   },
   {
     pattern: "/pages/new",
