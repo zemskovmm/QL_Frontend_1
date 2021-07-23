@@ -133,7 +133,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   <label className={`flex items-center mr-6`}>
                     <input
                       type={"radio"}
-                      name={"start"}
+                      name={"verticalAlign"}
                       value={"start"}
                       onChange={(e) => (props.store.vertical = e.target.value)}
                       checked={props.store.vertical === "start"}
@@ -143,7 +143,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   <label className={`flex items-center mr-6`}>
                     <input
                       type={"radio"}
-                      name={"center"}
+                      name={"verticalAlign"}
                       value={"center"}
                       onChange={(e) => (props.store.vertical = e.target.value)}
                       checked={props.store.vertical === "center"}
@@ -153,7 +153,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   <label className={`flex items-center mr-6`}>
                     <input
                       type={"radio"}
-                      name={"end"}
+                      name={"verticalAlign"}
                       value={"end"}
                       onChange={(e) => (props.store.vertical = e.target.value)}
                       checked={props.store.vertical === "end"}
@@ -328,7 +328,7 @@ export const PageRowsEditor = (props: { store: PageRowsEditorStore }) => {
 
 export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) => {
   return useObserver(() => (
-    <div>
+    <div className={`flex flex-col`}>
       <AdminTextBox id={"title"} label="Title" {...bind(props.store, "title")} />
       <AdminTextBox id={"url"} label="Url" {...bind(props.store, "url")} />
       <br />

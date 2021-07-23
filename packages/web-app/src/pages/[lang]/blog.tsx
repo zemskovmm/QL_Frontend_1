@@ -24,7 +24,7 @@ const BlogPage = () => {
           </Link>
         </div>
       </div>
-      <FirstArticleBlock title={""} img={""} date={""} tags={[]} />
+      <FirstArticleBlock title={""} img={""} date={""} tags={[]} blog={false} />
       <FiltersBlock items={[]} />
       <ArticleListBlock items={[]} />
       <NewsletterBlock title={""} buttonName={""} description={""} />

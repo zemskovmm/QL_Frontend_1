@@ -147,8 +147,8 @@ function editNewCell(editor: PageRowsEditorStore, row: PageEditorRowStore, cb: (
 
 export class PageEditorRowStore {
   @observable cells: PageEditorCellStore[] = [];
-  @observable maxWidth?: string;
-  @observable backGround?: string;
+  @observable maxWidth: string = "100%";
+  @observable backGround: string = "#fff";
   @observable hide: boolean = false;
   @observable vertical: string = "start";
 
