@@ -55,5 +55,8 @@ const ru: LocaleDefinition = {
   university_to: "до ",
   university_upto: "До ",
   university_gallery: "Галерея",
+  blog_blog: "Блог",
+  blog_historyClients: "Отзывы",
+  blog_liveJournal: "Живая лента",
 };
 export default ru;

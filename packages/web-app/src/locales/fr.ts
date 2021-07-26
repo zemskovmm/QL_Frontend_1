@@ -55,5 +55,8 @@ const fr: LocaleDefinition = {
   university_to: "à ",
   university_upto: "Moins de ",
   university_gallery: "Galerie",
+  blog_blog: "Blog",
+  blog_historyClients: "Historique Clients",
+  blog_liveJournal: "Journal en direct",
 };
 export default fr;

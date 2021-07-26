@@ -53,6 +53,9 @@ const en = {
   university_to: "to ",
   university_upto: "Up to ",
   university_gallery: "Gallery",
+  blog_blog: "Blog",
+  blog_historyClients: "History Clients",
+  blog_liveJournal: "Live Journal",
 };
 
 export default en;
