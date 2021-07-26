@@ -1,4 +1,5 @@
 import { PageDataDto } from "@project/components/src/interfaces/pageSharedDto";
+import { observable } from "mobx";
 
 export interface IdResponseDto {
   id: number;
@@ -8,6 +9,9 @@ export interface AdminPageLanguageDto {
   pageData: PageDataDto;
   url: string;
   title: string;
+  previewImageId?: number;
+  smallPreviewImageId?: number;
+  widePreviewImageId?: number;
 }
 
 export interface AdminPageDto {

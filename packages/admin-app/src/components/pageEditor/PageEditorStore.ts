@@ -232,16 +232,27 @@ export class PageRowsEditorStore {
 export class PageLanguageEditorStore extends PageRowsEditorStore {
   @observable title: string;
   @observable url: string;
+  @observable previewImage: AdminRemoteUiImageFieldStore;
+  @observable smallPreviewImage: AdminRemoteUiImageFieldStore;
+  @observable widePreviewImage: AdminRemoteUiImageFieldStore;
+
   constructor(data: AdminPageLanguageDto) {
     super(data.pageData.rows);
     this.title = data.title;
     this.url = data.url;
+    this.previewImage = new AdminRemoteUiImageFieldStore(data.previewImageId ?? null);
+    this.smallPreviewImage = new AdminRemoteUiImageFieldStore(data.smallPreviewImageId ?? null);
+    this.widePreviewImage = new AdminRemoteUiImageFieldStore(data.widePreviewImageId ?? null);
   }
 
   serialize(): AdminPageLanguageDto {
+    const { title, url, previewImage, smallPreviewImage, widePreviewImage } = this;
     return {
-      title: this.title,
-      url: this.url,
+      title,
+      url,
+      previewImageId: previewImage?.value ?? undefined,
+      widePreviewImageId: widePreviewImage?.value ?? undefined,
+      smallPreviewImageId: smallPreviewImage?.value ?? undefined,
       pageData: {
         rows: this.rows.map((r) => r.serialize()),
       },

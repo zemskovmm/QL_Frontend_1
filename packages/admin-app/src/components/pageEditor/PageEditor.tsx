@@ -11,6 +11,7 @@ import { AdminRemoteUiHtmlEditor, AdminRemoteUiHtmlEditorStore } from "src/compo
 import {
   AdminRemoteUiImageFieldEditor,
   AdminRemoteUiImageFieldStore,
+  ImagePickerWithLabel,
 } from "src/components/remoteui/AdminRemoteUiImageEditor";
 import { AvailableBlocks, BlockPresenter } from "@project/components/src/blocks";
 import { AdminButton } from "src/components/common/AdminButton";
@@ -24,7 +25,7 @@ import { AdminTextBox } from "src/components/common/AdminTextBox";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import styles from "./PageEditor.module.css";
 
@@ -331,6 +332,9 @@ export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) =>
     <div className={`flex flex-col`}>
       <AdminTextBox id={"title"} label="Title" {...bind(props.store, "title")} />
       <AdminTextBox id={"url"} label="Url" {...bind(props.store, "url")} />
+      <ImagePickerWithLabel store={props.store.previewImage} title={"Preview image:"} />
+      <ImagePickerWithLabel store={props.store.smallPreviewImage} title={"Small Preview image:"} />
+      <ImagePickerWithLabel store={props.store.widePreviewImage} title={"Wide Preview image:"} />
       <br />
       <PageRowsEditor store={props.store} />
     </div>
