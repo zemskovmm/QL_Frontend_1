@@ -21,7 +21,7 @@ export const CommentsBlock = ({ widgetId, href, xid, lang }: CommentsBlockElemen
     />
   ) : (
     <IframeResizer
-      src={`http://localhost:3000/hyppercomments.html?widgetId=${widgetId}&lang=${
+      ssrc={`${ApiBaseUrl}//hyppercomments.html?widgetId=${widgetId}&lang=${
         lang !== "cn" ? lang : "en"
       }&xid=${xid}`}
       style={{ minWidth: "100%" }}
