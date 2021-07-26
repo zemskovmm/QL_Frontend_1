@@ -16,6 +16,7 @@ export interface AdminPageLanguageDto {
 
 export interface AdminPageDto {
   languages: { [lang: string]: AdminPageLanguageDto };
+  pageType: number;
 }
 
 export interface AdminPageListItemDto {

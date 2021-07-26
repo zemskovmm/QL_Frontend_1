@@ -28,6 +28,7 @@ import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/
 import { FC, useEffect, useState } from "react";
 
 import styles from "./PageEditor.module.css";
+import { AdminRemoteUiDropdownEditor, AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -214,6 +215,7 @@ class RemoteUiCustomization implements IRemoteUiEditorCustomization {
     if (store instanceof AdminRemoteUiHtmlEditorStore) return <AdminRemoteUiHtmlEditor store={store} />;
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
     if (store instanceof AdminRemoteUiRowsStore) return <AdminRemoteUiRowsEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownEditorStore) return <AdminRemoteUiDropdownEditor store={store} />;
     return null;
   }
 }
@@ -386,6 +388,7 @@ export const PageEditor = (props: { store: PageEditorStore | any }) => {
           Save
         </AdminButton>
         <br />
+        <AdminRemoteUiDropdownEditor store={props.store.pageType} label={"Page type: "} />
         <AdminTabControl
           tabs={dmap(AllLanguages, (lang, data) => ({
             id: lang,
