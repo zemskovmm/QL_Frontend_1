@@ -54,6 +54,9 @@ const esp: LocaleDefinition = {
   university_to: "a ",
   university_upto: "A ",
   university_gallery: "Galería",
+  blog_blog: "Blog",
+  blog_historyClients: "Clientes de historia",
+  blog_liveJournal: "Diario en vivo",
 };
 
 export default esp;

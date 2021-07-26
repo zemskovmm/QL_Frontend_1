@@ -55,6 +55,9 @@ const cn: LocaleDefinition = {
   university_to: "到 ",
   university_upto: "到 ",
   university_gallery: "画廊",
+  blog_blog: "博客",
+  blog_historyClients: "历史客户",
+  blog_liveJournal: "实时日志",
 };
 
 export default cn;
