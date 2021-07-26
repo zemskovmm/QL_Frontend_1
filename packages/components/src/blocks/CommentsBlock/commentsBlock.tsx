@@ -15,7 +15,7 @@ export const CommentsBlock = ({ widgetId, xid, lang }: CommentsBlockElement) => 
   if (cl == null) return <b style={{ padding: 10, color: "red" }}>hyppercomments</b>;
   return (
     <IframeResizer
-      src={`${ApiBaseUrl}/hyppercomments.html?widgetId=${widgetId}&lang=${lang}&xid=${xid}`}
+      src={`${ApiBaseUrl}/hyppercomments.html?widgetId=${widgetId}&lang=${lang !== "cn" ? lang : "en"}&xid=${xid}`}
       style={{ minWidth: "100%" }}
     />
   );
