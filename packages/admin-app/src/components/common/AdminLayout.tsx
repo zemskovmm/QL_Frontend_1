@@ -21,6 +21,9 @@ const Navbar = () => (
         <RouterLink routeName={RouteNames.universityList}>
           <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Universities</a>
         </RouterLink>
+        <RouterLink routeName={RouteNames.schoolList}>
+          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Schools</a>
+        </RouterLink>
       </div>
     </div>
   </nav>

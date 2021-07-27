@@ -3,6 +3,7 @@ import { encodeQueryString } from "src/utils/urlUtil";
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { AdminTraitListItemDto, AdminTraitItemDto } from "../interfaces/TraitPageDto";
 import { AdminUniversityItemDto, AdminUniversityItemPostDto } from "../interfaces/UniversityPageDto";
+import { AdminSchoolDto } from "../stores/pages/school/schoolPageStore";
 
 export class AdminApiClient extends ApiClientBase {
   getTotalPages = (length: number) => (length % 10 ? Math.floor(length / 10) + 1 : Math.floor(length / 10));
@@ -42,6 +43,9 @@ export class AdminApiClient extends ApiClientBase {
     this.sendRequest(`/admin/entity-traits-university/${id}/${traitId}`, "", "POST");
   deleteUniversityTrait = (id: string, traitId: string) =>
     this.sendRequest(`/admin/entity-traits-university/${id}/${traitId}`, "", "DELETE");
+
+  /* School */
+  getSchoolList = () => this.sendRequest<AdminSchoolDto<unknown>[]>("admin/schools");
 }
 
 export const AdminApi = new AdminApiClient();
