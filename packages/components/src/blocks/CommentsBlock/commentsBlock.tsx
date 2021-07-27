@@ -7,11 +7,11 @@ import { ApiBaseUrl } from "../../api/apiClientBase";
 export interface CommentsBlockElement {
   widgetId: number;
   href?: string;
-  xid: string;
+  xid?: string;
   lang: string;
 }
 
-export const CommentsBlock = ({ widgetId, href, xid, lang }: CommentsBlockElement) => {
+export const CommentsBlock = ({ widgetId, href, xid = "xid", lang }: CommentsBlockElement) => {
   const cl = useContext(ComponentHostContext);
   if (cl == null) return <b style={{ padding: 10, color: "red" }}>hyppercomments</b>;
   return href ? (
