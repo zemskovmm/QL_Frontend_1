@@ -21,11 +21,11 @@ export const SuccessMessage = (props: { onDismiss: () => void }) => {
 };
 
 export type ContactUsFormType = {
-  name: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  tel: string;
-  com: string;
+  phone: string;
+  comment: string;
   url: string;
 };
 
@@ -41,11 +41,11 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
   const [isBusy, sendForm] = useAsyncBusy(async () => {
     try {
       await siteApi.sendCallback({
-        name: name,
-        lastname: lastname,
+        firstName: name,
+        lastName: lastname,
         email: email,
-        tel: tel,
-        com: com,
+        phone: tel,
+        comment: com,
         url: window.location.href,
       });
       props.onSuccess();
