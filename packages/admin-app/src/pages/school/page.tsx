@@ -14,7 +14,7 @@ import {
 } from "../../components/remoteui/AdminLanguageDictionaryEditor";
 import { AdminButton } from "../../components/common/AdminButton";
 
-class SchoolEditorCustomization implements IRemoteUiEditorCustomization {
+export class AdminLanguageDictionaryEditorCustomization implements IRemoteUiEditorCustomization {
   getEditorFor(store: IRemoteUiData): any {
     if (store instanceof AdminLanguageDictionaryEditorStore)
       return <AdminRemoteUiLanguageDictionaryEditor store={store} />;
@@ -37,7 +37,6 @@ const Column: FC<{ item: AdminSchoolLanguageDto<unknown>; id: string; l: string 
 export const SchoolListPage = () => {
   const { schoolListPage } = useRootStore();
 
-  const columns = schoolListPage.items;
   return useObserver(() => (
     <>
       <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
@@ -62,7 +61,7 @@ export const SchoolListPage = () => {
   ));
 };
 
-const customize = new SchoolEditorCustomization();
+const customize = new AdminLanguageDictionaryEditorCustomization();
 
 export const SchoolPage = () => {
   const { schoolPage } = useRootStore();

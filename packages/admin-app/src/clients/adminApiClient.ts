@@ -5,6 +5,7 @@ import { AdminTraitListItemDto, AdminTraitItemDto } from "../interfaces/TraitPag
 import { AdminUniversityItemDto, AdminUniversityItemPostDto } from "../interfaces/UniversityPageDto";
 import { AdminSchoolDto } from "../stores/pages/school/schoolPageStore";
 import { RemoteUiDefinition, RemoteUiEditorConfiguration } from "@kekekeks/remoteui/src";
+import { AdminCourseDto } from "../stores/pages/course/coursePageStore";
 
 export class AdminApiClient extends ApiClientBase {
   getTotalPages = (length: number) => (length % 10 ? Math.floor(length / 10) + 1 : Math.floor(length / 10));
@@ -52,6 +53,13 @@ export class AdminApiClient extends ApiClientBase {
   updateSchool = (id: number, data: AdminSchoolDto<unknown>) => this.sendRequest(`admin/schools/${id}`, data, "PUT");
   createSchool = (data: AdminSchoolDto<unknown>) => this.sendRequest(`admin/schools/`, data, "POST");
   definitionSchool = () => this.sendRequest<RemoteUiDefinition>("admin/schools/definition");
+
+  /* Course */
+  getCourseList = () => this.sendRequest<AdminCourseDto<unknown>[]>("admin/courses");
+  getCourse = (id: number) => this.sendRequest<AdminCourseDto<unknown>>(`admin/courses/${id}`);
+  updateCourse = (id: number, data: AdminCourseDto<unknown>) => this.sendRequest(`admin/courses/${id}`, data, "PUT");
+  createCourse = (data: AdminCourseDto<unknown>) => this.sendRequest(`admin/courses/`, data, "POST");
+  definitionCourses = () => this.sendRequest<RemoteUiDefinition>("admin/courses/definition");
 }
 
 export const AdminApi = new AdminApiClient();

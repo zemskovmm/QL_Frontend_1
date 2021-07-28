@@ -3,7 +3,8 @@ import { RootStore } from "../../RootStore";
 import { action, observable } from "mobx";
 import { AdminApi } from "../../../clients/adminApiClient";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
-import { SchoolPageCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
+import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
+import { Dictionary } from "../../../utils/types";
 
 const emptyModel = ({ languages: { en: {} } } as unknown) as AdminSchoolDto<unknown>;
 
@@ -14,7 +15,7 @@ export type AdminSchoolLanguageDto<T extends unknown> = {
   metadata?: T;
 };
 
-export type AdminSchoolDtoLanguagesDict = { [id: string]: AdminSchoolLanguageDto<unknown> };
+export type AdminSchoolDtoLanguagesDict = Dictionary<AdminSchoolLanguageDto<unknown>>;
 
 export type AdminSchoolDto<T extends unknown> = {
   id: string;
@@ -55,7 +56,11 @@ export class CreateSchoolPageStore extends Loadable {
 
   @action async load(): Promise<void> {
     const def = await AdminApi.definitionSchool();
-    this.remoteUiStore = new RemoteUiEditorStore(def, emptyModel, new SchoolPageCustomize(emptyModel));
+    this.remoteUiStore = new RemoteUiEditorStore(
+      def,
+      emptyModel,
+      new LanguageDictionaryCustomize(emptyModel.languages)
+    );
   }
 }
 
@@ -82,6 +87,6 @@ export class SchoolPageStore extends Loadable {
 
   async load(): Promise<void> {
     const { value, definition } = await this.track(() => AdminApi.getSchool(this.id));
-    this.remoteUiStore = new RemoteUiEditorStore(definition, value, new SchoolPageCustomize(value));
+    this.remoteUiStore = new RemoteUiEditorStore(definition, value, new LanguageDictionaryCustomize(value.languages));
   }
 }

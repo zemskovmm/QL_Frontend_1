@@ -7,16 +7,13 @@ import {
   RemoteUiEditorStore,
 } from "@kekekeks/remoteui/src";
 import { action, observable } from "mobx";
-import {
-  AdminSchoolDto,
-  AdminSchoolDtoLanguagesDict,
-  AdminSchoolLanguageDto,
-} from "../../stores/pages/school/schoolPageStore";
+import { AdminSchoolDtoLanguagesDict, AdminSchoolLanguageDto } from "../../stores/pages/school/schoolPageStore";
 import { FC, useState } from "react";
 import Select from "@project/components/src/ui/Select/Select";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { AdminButton } from "../common/AdminButton";
 import { useObserver } from "mobx-react";
+import { Dictionary } from "../../utils/types";
 
 const createDefinition = (name: string): RemoteUiDefinition => ({
   groups: [
@@ -55,23 +52,22 @@ const selectItems = [
   { id: "CN", name: AllLanguages.cn.title },
 ];
 
-export class SchoolPageCustomize implements IRemoteUiEditorStoreCustomization {
-  // TODO AdminSchoolDto в пропах - является костылем, что бы подпереть недогенерированные филды из за типа Dictionary'2 вместо LanguageDictionary
-  constructor(public item: AdminSchoolDto<unknown>) {}
+export class LanguageDictionaryCustomize<T extends Dictionary<unknown>> implements IRemoteUiEditorStoreCustomization {
+  // TODO Dictionary<unknown> (оно же T) в пропах - является костылем, что бы подпереть недогенерированные филды из за типа Dictionary'2 вместо LanguageDictionary
+  constructor(public item: T) {}
 
   getCustomStore(config: RemoteUiEditorConfiguration, type: string, data: any): IRemoteUiData {
-    if (type === "LanguageDictionary")
-      return new AdminLanguageDictionaryEditorStore(config.definition, this.item.languages);
+    if (type === "LanguageDictionary") return new AdminLanguageDictionaryEditorStore(config.definition, this.item);
     return null!;
   }
 }
 
-export class AdminLanguageDictionaryEditorStore implements IRemoteUiData {
+export class AdminLanguageDictionaryEditorStore<T extends Dictionary<unknown>> implements IRemoteUiData {
   isValid = true;
-  @observable items: AdminSchoolDtoLanguagesDict;
-  @observable itemsStores: { [id: string]: RemoteUiEditorStore };
+  @observable items: T;
+  @observable itemsStores: Dictionary<RemoteUiEditorStore>;
 
-  constructor(definition: RemoteUiDefinition, items: AdminSchoolDtoLanguagesDict) {
+  constructor(definition: RemoteUiDefinition, items: T) {
     const reduceToRemoteUiStores = (acc: {}, x: string) => ({
       ...acc,
       [x]: new RemoteUiEditorStore(createDefinition(x), items[x]),
@@ -84,9 +80,9 @@ export class AdminLanguageDictionaryEditorStore implements IRemoteUiData {
 
   async getData() {
     const keys = Object.keys(this.itemsStores);
-    const res: AdminSchoolDtoLanguagesDict = {};
+    const res: Dictionary<unknown> = {};
 
-    for (const key of keys) res[key] = (await this.itemsStores[key]?.getDataAsync()) as AdminSchoolLanguageDto<unknown>;
+    for (const key of keys) res[key] = await this.itemsStores[key]?.getDataAsync();
     return res;
   }
 
@@ -111,7 +107,9 @@ export class AdminLanguageDictionaryEditorStore implements IRemoteUiData {
   }
 }
 
-export const AdminRemoteUiLanguageDictionaryEditor: FC<{ store: AdminLanguageDictionaryEditorStore }> = ({ store }) => {
+export const AdminRemoteUiLanguageDictionaryEditor: FC<{
+  store: AdminLanguageDictionaryEditorStore<AdminSchoolDtoLanguagesDict>;
+}> = ({ store }) => {
   const [lang, setLang] = useState({ id: "RU", name: AllLanguages.ru.title });
   const keys = Object.keys(store.itemsStores);
   return useObserver(() => (
