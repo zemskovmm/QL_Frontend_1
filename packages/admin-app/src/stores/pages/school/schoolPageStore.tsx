@@ -2,112 +2,9 @@ import { Loadable, RequestTracking } from "../../../utils/Loadable";
 import { RootStore } from "../../RootStore";
 import { observable } from "mobx";
 import { AdminApi } from "../../../clients/adminApiClient";
-import { RemoteUiDefinition, RemoteUiEditorStore } from "@kekekeks/remoteui/src";
+import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { SchoolPageCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
-
-const def: RemoteUiDefinition = {
-  groups: [
-    {
-      name: "",
-      fields: [
-        {
-          name: "id",
-          id: "id",
-          type: "Integer",
-          alwaysExpanded: false,
-        },
-        {
-          name: "foundationYear",
-          id: "foundationYear",
-          type: "Integer",
-          alwaysExpanded: false,
-          nullable: true,
-        },
-        {
-          name: "languages",
-          id: "languages",
-          type: "Custom",
-          alwaysExpanded: false,
-          customType: "LanguageDictionary",
-          possibleValues: [],
-        },
-      ],
-    },
-  ],
-  types: {
-    SchoolAdminDto: {
-      groups: [
-        {
-          name: "",
-          fields: [
-            {
-              name: "id",
-              id: "id",
-              type: "Integer",
-              alwaysExpanded: false,
-            },
-            {
-              name: "foundationYear",
-              id: "foundationYear",
-              type: "Integer",
-              alwaysExpanded: false,
-              nullable: true,
-            },
-            {
-              name: "languages",
-              id: "languages",
-              type: "Custom",
-              alwaysExpanded: false,
-              customType: "LanguageDictionary",
-              possibleValues: [],
-            },
-          ],
-        },
-      ],
-    },
-    "Dictionary`2": {
-      groups: [
-        {
-          name: "",
-          fields: [],
-        },
-      ],
-    },
-    SchoolLanguageAdminDto: {
-      groups: [
-        {
-          name: "",
-          fields: [
-            {
-              name: "name",
-              id: "name",
-              type: "String",
-              alwaysExpanded: false,
-            },
-            {
-              name: "htmlDescription",
-              id: "htmlDescription",
-              type: "String",
-              alwaysExpanded: false,
-            },
-            {
-              name: "url",
-              id: "url",
-              type: "String",
-              alwaysExpanded: false,
-            },
-            {
-              name: "metadata",
-              id: "Metadata",
-              type: "TextArea",
-              alwaysExpanded: false,
-            },
-          ],
-        },
-      ],
-    },
-  },
-};
+import { AdminPageDto } from "../../../interfaces/AdminPageDto";
 
 export type AdminSchoolLanguageDto<T extends unknown> = {
   name: string;
@@ -155,9 +52,14 @@ export class SchoolPageStore extends Loadable {
     await this.load();
   }
 
+  async save() {
+    const data = await this.remoteUiStore?.getDataAsync();
+    if (data) await AdminApi.updateSchool(this.id, data as AdminSchoolDto<unknown>);
+    alert("Entity updated");
+  }
+
   async load(): Promise<void> {
     const { value, definition } = await this.track(() => AdminApi.getSchool(this.id));
-    debugger;
-    this.remoteUiStore = new RemoteUiEditorStore(def, value, new SchoolPageCustomize(value));
+    this.remoteUiStore = new RemoteUiEditorStore(definition, value, new SchoolPageCustomize(value));
   }
 }

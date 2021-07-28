@@ -12,6 +12,7 @@ import {
   AdminLanguageDictionaryEditorStore,
   AdminRemoteUiLanguageDictionaryEditor,
 } from "../../components/remoteui/AdminLanguageDictionaryEditor";
+import { AdminButton } from "../../components/common/AdminButton";
 
 class SchoolEditorCustomization implements IRemoteUiEditorCustomization {
   getEditorFor(store: IRemoteUiData): any {
@@ -64,12 +65,15 @@ export const SchoolPage = () => {
   const { schoolPage } = useRootStore();
 
   return useObserver(() => (
-    <>
+    <div>
+      <AdminButton color={"primary"} onClick={() => schoolPage.save()}>
+        Save
+      </AdminButton>
       {schoolPage.remoteUiStore ? (
         <RemoteUiEditor store={schoolPage.remoteUiStore} customization={customize} />
       ) : (
         <>loading...</>
       )}
-    </>
+    </div>
   ));
 };

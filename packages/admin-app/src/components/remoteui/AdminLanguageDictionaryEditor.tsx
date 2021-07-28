@@ -6,7 +6,7 @@ import {
   RemoteUiEditorConfiguration,
   RemoteUiEditorStore,
 } from "@kekekeks/remoteui/src";
-import { observable } from "mobx";
+import { action, observable } from "mobx";
 import {
   AdminSchoolDto,
   AdminSchoolDtoLanguagesDict,
@@ -24,27 +24,21 @@ const createDefinition = (name: string): RemoteUiDefinition => ({
       name,
       fields: [
         {
-          name: "Name",
+          name: "name",
           id: "name",
           type: "String",
           alwaysExpanded: false,
         },
         {
-          name: "HtmlDescription",
+          name: "htmlDescription",
           id: "htmlDescription",
           type: "String",
           alwaysExpanded: false,
         },
         {
-          name: "Url",
+          name: "url",
           id: "url",
           type: "String",
-          alwaysExpanded: false,
-        },
-        {
-          name: "Metadata",
-          id: "metadata",
-          type: "TextArea",
           alwaysExpanded: false,
         },
       ],
@@ -78,19 +72,42 @@ export class AdminLanguageDictionaryEditorStore implements IRemoteUiData {
   @observable itemsStores: { [id: string]: RemoteUiEditorStore };
 
   constructor(definition: RemoteUiDefinition, items: AdminSchoolDtoLanguagesDict) {
+    const reduceToRemoteUiStores = (acc: {}, x: string) => ({
+      ...acc,
+      [x]: new RemoteUiEditorStore(createDefinition(x), items[x]),
+    });
+
     this.items = items;
     const keys = Object.keys(items);
-    this.itemsStores = keys.reduce(
-      (acc, x) => ({ ...acc, [x]: new RemoteUiEditorStore(createDefinition(x), items[x]) }),
-      {} as any
-    );
+    this.itemsStores = keys.reduce(reduceToRemoteUiStores, {} as any);
   }
 
   async getData() {
     const keys = Object.keys(this.itemsStores);
     const res: AdminSchoolDtoLanguagesDict = {};
-    for (const key in keys) res[key] = (await this.itemsStores[key].getDataAsync()) as AdminSchoolLanguageDto<unknown>;
+
+    for (const key of keys) res[key] = (await this.itemsStores[key]?.getDataAsync()) as AdminSchoolLanguageDto<unknown>;
     return res;
+  }
+
+  @action insertLanguageField(lang: string) {
+    const keys = Object.keys(this.itemsStores);
+    const langKeys = Object.keys(AllLanguages);
+    const langLower = lang.toLowerCase();
+    if (keys.find((x) => x === langLower) && langKeys.find((x) => x === langLower)) return;
+    this.itemsStores = { ...this.itemsStores, [langLower]: new RemoteUiEditorStore(createDefinition(langLower), {}) };
+  }
+
+  @action removeLanguageField(lang: string) {
+    const langLower = lang.toLowerCase();
+    const objKeys = Object.keys(this.itemsStores);
+
+    if (objKeys.length === 1) return;
+
+    this.itemsStores = objKeys.reduce(
+      (acc, x) => (x === langLower ? { ...acc } : { ...acc, [x]: this.itemsStores[x] }),
+      {}
+    );
   }
 }
 
@@ -110,12 +127,19 @@ export const AdminRemoteUiLanguageDictionaryEditor: FC<{ store: AdminLanguageDic
             />
           </div>
 
-          <AdminButton color={"default"}>Add</AdminButton>
+          <AdminButton color={"default"} onClick={() => store.insertLanguageField(lang.id)}>
+            Add
+          </AdminButton>
         </div>
       </div>
       <div>
         {keys.map((x) => (
-          <RemoteUiEditor store={store.itemsStores[x]} />
+          <div>
+            <RemoteUiEditor store={store.itemsStores[x]} />
+            <AdminButton color={"danger"} onClick={() => store.removeLanguageField(x)}>
+              Remove
+            </AdminButton>
+          </div>
         ))}
       </div>
     </div>
