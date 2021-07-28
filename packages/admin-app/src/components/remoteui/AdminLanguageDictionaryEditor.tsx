@@ -56,7 +56,7 @@ const selectItems = [
 ];
 
 export class SchoolPageCustomize implements IRemoteUiEditorStoreCustomization {
-  // TODO AdminSchoolDto в пропах - является костылем что бы подпереть недогенерированные филды из за типа Dictionary'2 вместо LanguageDictionary
+  // TODO AdminSchoolDto в пропах - является костылем, что бы подпереть недогенерированные филды из за типа Dictionary'2 вместо LanguageDictionary
   constructor(public item: AdminSchoolDto<unknown>) {}
 
   getCustomStore(config: RemoteUiEditorConfiguration, type: string, data: any): IRemoteUiData {

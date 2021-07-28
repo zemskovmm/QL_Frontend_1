@@ -50,6 +50,8 @@ export class AdminApiClient extends ApiClientBase {
   getSchool = (id: number) =>
     this.sendRequest<{ value: AdminSchoolDto<unknown>; definition: RemoteUiDefinition }>(`admin/schools/${id}`);
   updateSchool = (id: number, data: AdminSchoolDto<unknown>) => this.sendRequest(`admin/schools/${id}`, data, "PUT");
+  createSchool = (data: AdminSchoolDto<unknown>) => this.sendRequest(`admin/schools/`, data, "POST");
+  definitionSchool = () => this.sendRequest<RemoteUiDefinition>("admin/schools/definition");
 }
 
 export const AdminApi = new AdminApiClient();

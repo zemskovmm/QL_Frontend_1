@@ -42,6 +42,9 @@ export const SchoolListPage = () => {
     <>
       <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
         <div className="py-8">
+          <RouterLink routeName={RouteNames.schoolCreate}>
+            <AdminButton color={"primary"}>Create school</AdminButton>
+          </RouterLink>
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <AdminTable<AdminSchoolDto<unknown>>
               columns={dmap(AllLanguages, (l) => ({
@@ -71,6 +74,23 @@ export const SchoolPage = () => {
       </AdminButton>
       {schoolPage.remoteUiStore ? (
         <RemoteUiEditor store={schoolPage.remoteUiStore} customization={customize} />
+      ) : (
+        <>loading...</>
+      )}
+    </div>
+  ));
+};
+
+export const CreateSchoolPage = () => {
+  const { schoolPageCreate } = useRootStore();
+
+  return useObserver(() => (
+    <div>
+      <AdminButton color={"primary"} onClick={() => schoolPageCreate.save()}>
+        Save
+      </AdminButton>
+      {schoolPageCreate.remoteUiStore ? (
+        <RemoteUiEditor store={schoolPageCreate.remoteUiStore} customization={customize} />
       ) : (
         <>loading...</>
       )}

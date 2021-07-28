@@ -12,7 +12,7 @@ import { UniversityListPage } from "../pages/university/universityListPage";
 import { UniversityPage } from "../pages/university/universityPage";
 import { UniversityCreatePage } from "../pages/university/universityCreatePage";
 import { UniversityTraitEditPage } from "../pages/university/universityTraitEditPage";
-import { SchoolListPage, SchoolPage } from "../pages/school/page";
+import { CreateSchoolPage, SchoolListPage, SchoolPage } from "../pages/school/page";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -52,7 +52,7 @@ export const RouteViewMap = {
 
   [RouteNames.schoolList]: <SchoolListPage />,
   [RouteNames.schoolPage]: <SchoolPage />,
-  [RouteNames.schoolCreate]: <>todo</>,
+  [RouteNames.schoolCreate]: <CreateSchoolPage />,
 };
 
 export const Routes: Route[] = convertRoutes([
@@ -121,6 +121,11 @@ export const Routes: Route[] = convertRoutes([
     pattern: "/school",
     name: RouteNames.schoolList,
     onEnter: (root, to) => root.schoolListPage.load(),
+  },
+  {
+    pattern: "/school/create",
+    name: RouteNames.schoolCreate,
+    onEnter: (root) => root.schoolPageCreate.load(),
   },
   {
     pattern: "/school/:id",

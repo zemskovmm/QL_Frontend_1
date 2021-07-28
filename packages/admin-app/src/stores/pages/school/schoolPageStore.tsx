@@ -1,10 +1,11 @@
 import { Loadable, RequestTracking } from "../../../utils/Loadable";
 import { RootStore } from "../../RootStore";
-import { observable } from "mobx";
+import { action, observable } from "mobx";
 import { AdminApi } from "../../../clients/adminApiClient";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { SchoolPageCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
-import { AdminPageDto } from "../../../interfaces/AdminPageDto";
+
+const emptyModel = ({ languages: { en: {} } } as unknown) as AdminSchoolDto<unknown>;
 
 export type AdminSchoolLanguageDto<T extends unknown> = {
   name: string;
@@ -34,6 +35,27 @@ export class SchoolListPageStore extends Loadable {
 
   async load(): Promise<void> {
     this.items = await this.track(() => AdminApi.getSchoolList());
+  }
+}
+
+export class CreateSchoolPageStore extends Loadable {
+  @observable.ref remoteUiStore?: RemoteUiEditorStore;
+  @observable root: RootStore;
+
+  constructor(public rootStore: RootStore) {
+    super();
+    this.root = rootStore;
+  }
+
+  async save() {
+    const data = await this.remoteUiStore?.getDataAsync();
+    if (data) await AdminApi.createSchool(data as AdminSchoolDto<unknown>);
+    alert("Entity created");
+  }
+
+  @action async load(): Promise<void> {
+    const def = await AdminApi.definitionSchool();
+    this.remoteUiStore = new RemoteUiEditorStore(def, emptyModel, new SchoolPageCustomize(emptyModel));
   }
 }
 
