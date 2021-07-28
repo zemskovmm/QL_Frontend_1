@@ -1,12 +1,24 @@
 import { AdminTable } from "../../components/common/AdminTable";
 import { useRootStore } from "../../utils/rootStoreUtils";
-import { AdminSchoolDto, AdminSchoolLanguageDto } from "../../stores/pages/school/schoolPageStore";
-import { useObserver } from "mobx-react";
+import { AdminSchoolDto, AdminSchoolLanguageDto, SchoolPageStore } from "../../stores/pages/school/schoolPageStore";
+import { observer, useObserver } from "mobx-react";
 import { dmap } from "../../utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { FC } from "react";
 import { RouterLink } from "mobx-state-router";
 import { RouteNames } from "../../routing/routes";
+import { IRemoteUiData, IRemoteUiEditorCustomization, RemoteUiEditor } from "@kekekeks/remoteui/src";
+import {
+  AdminLanguageDictionaryEditorStore,
+  AdminRemoteUiLanguageDictionaryEditor,
+} from "../../components/remoteui/AdminLanguageDictionaryEditor";
+
+class SchoolEditorCustomization implements IRemoteUiEditorCustomization {
+  getEditorFor(store: IRemoteUiData): any {
+    if (store instanceof AdminLanguageDictionaryEditorStore)
+      return <AdminRemoteUiLanguageDictionaryEditor store={store} />;
+  }
+}
 
 const Column: FC<{ item: AdminSchoolLanguageDto<unknown>; id: string; l: string }> = ({ item, id, l }) =>
   item ? (
@@ -18,7 +30,7 @@ const Column: FC<{ item: AdminSchoolLanguageDto<unknown>; id: string; l: string 
       </a>
     </RouterLink>
   ) : (
-    <></>
+    <>...</>
   );
 
 export const SchoolListPage = () => {
@@ -42,6 +54,22 @@ export const SchoolListPage = () => {
           </div>
         </div>
       </div>
+    </>
+  ));
+};
+
+const customize = new SchoolEditorCustomization();
+
+export const SchoolPage = () => {
+  const { schoolPage } = useRootStore();
+
+  return useObserver(() => (
+    <>
+      {schoolPage.remoteUiStore ? (
+        <RemoteUiEditor store={schoolPage.remoteUiStore} customization={customize} />
+      ) : (
+        <>loading...</>
+      )}
     </>
   ));
 };

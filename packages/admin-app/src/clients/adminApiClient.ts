@@ -4,6 +4,7 @@ import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { AdminTraitListItemDto, AdminTraitItemDto } from "../interfaces/TraitPageDto";
 import { AdminUniversityItemDto, AdminUniversityItemPostDto } from "../interfaces/UniversityPageDto";
 import { AdminSchoolDto } from "../stores/pages/school/schoolPageStore";
+import { RemoteUiDefinition, RemoteUiEditorConfiguration } from "@kekekeks/remoteui/src";
 
 export class AdminApiClient extends ApiClientBase {
   getTotalPages = (length: number) => (length % 10 ? Math.floor(length / 10) + 1 : Math.floor(length / 10));
@@ -46,6 +47,8 @@ export class AdminApiClient extends ApiClientBase {
 
   /* School */
   getSchoolList = () => this.sendRequest<AdminSchoolDto<unknown>[]>("admin/schools");
+  getSchool = (id: number) =>
+    this.sendRequest<{ value: AdminSchoolDto<unknown>; definition: RemoteUiDefinition }>(`admin/schools/${id}`);
 }
 
 export const AdminApi = new AdminApiClient();
