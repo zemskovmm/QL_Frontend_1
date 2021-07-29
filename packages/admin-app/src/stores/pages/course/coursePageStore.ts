@@ -5,6 +5,8 @@ import { AdminApi } from "../../../clients/adminApiClient";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
 import { Dictionary } from "../../../utils/types";
+import { TraitLoader } from "../../../components/traitEditor";
+import { AdminTraitListItemDto } from "../../../interfaces/TraitPageDto";
 
 const emptyModel = ({ languages: { en: {} } } as unknown) as AdminCourseDto<unknown>;
 
@@ -22,6 +24,41 @@ export type AdminCourseDto<T extends unknown> = {
   schoolId?: number;
   languages: AdminSchoolDtoLanguagesDict;
 };
+
+export class CourseTraitLoader implements TraitLoader {
+  @observable courseId?: number;
+  @observable traitCache: AdminTraitListItemDto[] = [];
+  @observable traitTypes: AdminTraitListItemDto[] = [];
+  @observable traitTypesIds: number[] = [];
+  @observable activeType: number = 0;
+
+  @action async addTraitToItem(traitId: number) {}
+
+  @action async deleteTraitToItem(traitId: number): Promise<void> {
+    return Promise.resolve(undefined);
+  }
+
+  @action async getActiveTraits(): Promise<number[]> {
+    return Promise.resolve([]);
+  }
+
+  @action async getAvailableTraits(): Promise<AdminTraitListItemDto[]> {
+    AdminApi.getTraitList();
+    return Promise.resolve([]);
+  }
+
+  @action private async fetchLists() {
+    this.traitTypes = await AdminApi.getTraitList();
+    this.traitTypesIds = await AdminApi.getTraitAvailable(`${this.activeType}`);
+    this.traitCache = this.traitTypes.filter((x) => this.traitTypesIds.includes(x.id));
+  }
+
+  @action async reload(): Promise<void> {
+    this.traitCache = [];
+    this.traitTypes = [];
+    await this.fetchLists();
+  }
+}
 
 export class CourseEditPageStore extends Loadable {
   @observable.ref remoteUiStore?: RemoteUiEditorStore;

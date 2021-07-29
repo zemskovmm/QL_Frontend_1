@@ -87,3 +87,7 @@ export const CourseListPage = () => {
     </>
   ));
 };
+
+export const CourseTraitEditor = () => {
+  return <>todo</>;
+};

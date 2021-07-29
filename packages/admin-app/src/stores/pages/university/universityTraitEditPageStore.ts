@@ -2,12 +2,7 @@
 import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { RootStore } from "src/stores/RootStore";
-import {
-  AdminUniversityItemDto,
-  AdminUniversityItemPostDto,
-  AdminUniversityPageLanguageDto,
-} from "../../../interfaces/UniversityPageDto";
-import { AdminTraitItemDto, AdminTraitListItemDto } from "../../../interfaces/TraitPageDto";
+import { AdminTraitListItemDto } from "../../../interfaces/TraitPageDto";
 
 export class UniversityTraitEditPageStore extends RequestTracking {
   @observable items: AdminTraitListItemDto[] = [];
