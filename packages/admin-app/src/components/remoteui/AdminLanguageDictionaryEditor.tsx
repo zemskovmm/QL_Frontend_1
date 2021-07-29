@@ -29,7 +29,7 @@ const createDefinition = (name: string): RemoteUiDefinition => ({
         {
           name: "htmlDescription",
           id: "htmlDescription",
-          type: "String",
+          type: "TextArea",
           alwaysExpanded: false,
         },
         {
