@@ -89,7 +89,7 @@ export const CourseListPage = () => {
   ));
 };
 
-export const CourseTraitEditor = () => {
+export const CourseTraitEditorPage = () => {
   const { courseTraitEditor } = useRootStore();
   return useObserver(() => <TraitEditor store={courseTraitEditor.traitStore} />);
 };

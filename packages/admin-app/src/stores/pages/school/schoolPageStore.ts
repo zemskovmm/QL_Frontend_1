@@ -5,6 +5,8 @@ import { AdminApi } from "../../../clients/adminApiClient";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
 import { Dictionary } from "../../../utils/types";
+import { TraitEditorStore, TraitLoaderWithCache } from "../../../components/traitEditor";
+import { CourseTraitLoader } from "../course/coursePageStore";
 
 const emptyModel = ({ languages: { en: {} } } as unknown) as AdminSchoolDto<unknown>;
 
@@ -22,6 +24,27 @@ export type AdminSchoolDto<T extends unknown> = {
   foundationYear?: number;
   languages: AdminSchoolDtoLanguagesDict;
 };
+
+export class SchoolTraitLoader extends TraitLoaderWithCache {
+  @observable schoolId = 0;
+
+  @action async setSchoolId(id: number) {
+    this.schoolId = id;
+    await this.reload();
+  }
+
+  async addTraitToItem(traitId: number) {
+    await AdminApi.addTraitToSchool(this.schoolId, traitId);
+  }
+
+  async deleteTraitToItem(traitId: number) {
+    await AdminApi.removeTraitFromSchool(this.schoolId, traitId);
+  }
+
+  async loadActiveTraits() {
+    return await AdminApi.getActiveTraitsBySchoolId(this.schoolId);
+  }
+}
 
 export class SchoolListPageStore extends Loadable {
   @observable items: AdminSchoolDto<unknown>[] = [];
@@ -88,5 +111,21 @@ export class SchoolPageStore extends Loadable {
   async load(): Promise<void> {
     const { value, definition } = await this.track(() => AdminApi.getSchool(this.id));
     this.remoteUiStore = new RemoteUiEditorStore(definition, value, new LanguageDictionaryCustomize(value.languages));
+  }
+}
+
+export class SchoolTraitEditorStore {
+  @observable root: RootStore;
+  @observable traitStore: TraitEditorStore<SchoolTraitLoader>;
+
+  constructor(public rootStore: RootStore) {
+    this.root = rootStore;
+    this.traitStore = new TraitEditorStore(new SchoolTraitLoader());
+  }
+
+  @action async loadStore(id: number) {
+    this.traitStore.page = 0;
+    await this.traitStore.traitLoader.setSchoolId(id);
+    await this.traitStore.refresh({});
   }
 }

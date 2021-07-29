@@ -10,7 +10,12 @@ import { UniversityListPageStore } from "./pages/university/universityListPageSt
 import { UniversityPageStore } from "./pages/university/universityPageStore";
 import { UniversityCreatePageStore } from "./pages/university/universityCreatePageStore";
 import { UniversityTraitEditPageStore } from "./pages/university/universityTraitEditPageStore";
-import { CreateSchoolPageStore, SchoolListPageStore, SchoolPageStore } from "./pages/school/schoolPageStore";
+import {
+  CreateSchoolPageStore,
+  SchoolListPageStore,
+  SchoolPageStore,
+  SchoolTraitEditorStore,
+} from "./pages/school/schoolPageStore";
 import {
   CourseEditPageStore,
   CourseListStore,
@@ -33,6 +38,7 @@ export class RootStore {
   @observable schoolListPage = new SchoolListPageStore(this);
   @observable schoolPage = new SchoolPageStore(this);
   @observable schoolPageCreate = new CreateSchoolPageStore(this);
+  @observable schoolTraitEditor = new SchoolTraitEditorStore(this);
 
   @observable courseListPage = new CourseListStore(this);
   @observable courseCreate = new CreateCoursePageStore(this);

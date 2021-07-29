@@ -13,6 +13,7 @@ import {
   AdminRemoteUiLanguageDictionaryEditor,
 } from "../../components/remoteui/AdminLanguageDictionaryEditor";
 import { AdminButton } from "../../components/common/AdminButton";
+import { TraitEditor } from "../../components/traitEditor";
 
 export class AdminLanguageDictionaryEditorCustomization implements IRemoteUiEditorCustomization {
   getEditorFor(store: IRemoteUiData): any {
@@ -95,4 +96,9 @@ export const CreateSchoolPage = () => {
       )}
     </div>
   ));
+};
+
+export const SchoolTraitEditorPage = () => {
+  const { schoolTraitEditor } = useRootStore();
+  return <TraitEditor store={schoolTraitEditor.traitStore} />;
 };

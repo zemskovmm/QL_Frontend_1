@@ -28,12 +28,20 @@ export class AdminApiClient extends ApiClientBase {
   getTraitTypeList = () => this.sendRequest<AdminTraitTypeDto[]>("admin/trait-types");
   getTraitsListOfType = (id: number) => this.sendRequest<AdminTraitTypeDto[]>(`admin/traits/of-type/${id}`);
   getActiveTraitsByCourseId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-course/${id}`);
+  getActiveTraitsBySchoolId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-school/${id}`);
 
+  /* Trait adders */
   addTraitToCourse = (id: number, traitId: number) =>
     this.sendRequest<void>(`admin/entity-traits-course/${id}/${traitId}`, "", "POST");
 
   removeTraitFromCourse = (id: number, traitId: number) =>
     this.sendRequest<void>(`admin/entity-traits-course/${id}/${traitId}`, "", "DELETE");
+
+  addTraitToSchool = (id: number, traitId: number) =>
+    this.sendRequest<void>(`admin/entity-traits-school/${id}/${traitId}`, "", "POST");
+
+  removeTraitFromSchool = (id: number, traitId: number) =>
+    this.sendRequest<void>(`admin/entity-traits-school/${id}/${traitId}`, "", "DELETE");
 
   // TODO remove this!
   getTraitList = () => this.sendRequest<AdminTraitListItemDto[]>("admin/trait-types");
