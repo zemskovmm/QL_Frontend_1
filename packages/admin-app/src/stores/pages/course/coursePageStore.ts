@@ -1,12 +1,12 @@
 import { Loadable } from "../../../utils/Loadable";
-import { action, observable } from "mobx";
+import { action, observable, runInAction } from "mobx";
 import { RootStore } from "../../RootStore";
 import { AdminApi } from "../../../clients/adminApiClient";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
 import { Dictionary } from "../../../utils/types";
-import { TraitLoader } from "../../../components/traitEditor";
-import { AdminTraitListItemDto } from "../../../interfaces/TraitPageDto";
+import { TraitEditorStore, TraitLoader, TraitLoaderWithCache } from "../../../components/traitEditor";
+import { AdminTraitTypeDto } from "../../../interfaces/TraitPageDto";
 
 const emptyModel = ({ languages: { en: {} } } as unknown) as AdminCourseDto<unknown>;
 
@@ -25,38 +25,24 @@ export type AdminCourseDto<T extends unknown> = {
   languages: AdminSchoolDtoLanguagesDict;
 };
 
-export class CourseTraitLoader implements TraitLoader {
-  @observable courseId?: number;
-  @observable traitCache: AdminTraitListItemDto[] = [];
-  @observable traitTypes: AdminTraitListItemDto[] = [];
-  @observable traitTypesIds: number[] = [];
-  @observable activeType: number = 0;
+export class CourseTraitLoader extends TraitLoaderWithCache {
+  @observable courseId = 0;
 
-  @action async addTraitToItem(traitId: number) {}
-
-  @action async deleteTraitToItem(traitId: number): Promise<void> {
-    return Promise.resolve(undefined);
+  @observable async setCourseId(id: number) {
+    this.courseId = id;
+    await this.reload();
   }
 
-  @action async getActiveTraits(): Promise<number[]> {
-    return Promise.resolve([]);
+  async addTraitToItem(traitId: number) {
+    await AdminApi.addTraitToCourse(this.courseId, traitId);
   }
 
-  @action async getAvailableTraits(): Promise<AdminTraitListItemDto[]> {
-    AdminApi.getTraitList();
-    return Promise.resolve([]);
+  async deleteTraitToItem(traitId: number) {
+    await AdminApi.removeTraitFromCourse(this.courseId, traitId);
   }
 
-  @action private async fetchLists() {
-    this.traitTypes = await AdminApi.getTraitList();
-    this.traitTypesIds = await AdminApi.getTraitAvailable(`${this.activeType}`);
-    this.traitCache = this.traitTypes.filter((x) => this.traitTypesIds.includes(x.id));
-  }
-
-  @action async reload(): Promise<void> {
-    this.traitCache = [];
-    this.traitTypes = [];
-    await this.fetchLists();
+  async loadActiveTraits(): Promise<number[]> {
+    return await AdminApi.getActiveTraitsByCourseId(this.courseId);
   }
 }
 
@@ -126,5 +112,20 @@ export class CourseListStore extends Loadable {
 
   @action async load(): Promise<void> {
     this.items = await this.track(() => AdminApi.getCourseList());
+  }
+}
+export class CourseTraitEditorStore {
+  @observable root: RootStore;
+  @observable traitStore: TraitEditorStore<CourseTraitLoader>;
+
+  constructor(public rootStore: RootStore) {
+    this.root = rootStore;
+    this.traitStore = new TraitEditorStore<CourseTraitLoader>(new CourseTraitLoader());
+  }
+
+  @action async loadStore(id: number) {
+    this.traitStore.page = 0;
+    await this.traitStore.traitLoader.setCourseId(id);
+    await this.traitStore.refresh({});
   }
 }

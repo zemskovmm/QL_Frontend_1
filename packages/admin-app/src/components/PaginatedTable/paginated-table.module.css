@@ -60,3 +60,7 @@
 .pagination__item__active {
     background-color: aliceblue;
 }
+
+.pagination__flex {
+  display: flex;
+}

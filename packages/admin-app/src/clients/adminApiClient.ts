@@ -1,7 +1,7 @@
 import { AdminPageDto, AdminPageListDto, IdResponseDto } from "src/interfaces/AdminPageDto";
 import { encodeQueryString } from "src/utils/urlUtil";
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
-import { AdminTraitListItemDto, AdminTraitItemDto } from "../interfaces/TraitPageDto";
+import { AdminTraitListItemDto, AdminTraitItemDto, AdminTraitTypeDto } from "../interfaces/TraitPageDto";
 import { AdminUniversityItemDto, AdminUniversityItemPostDto } from "../interfaces/UniversityPageDto";
 import { AdminSchoolDto } from "../stores/pages/school/schoolPageStore";
 import { RemoteUiDefinition, RemoteUiEditorConfiguration } from "@kekekeks/remoteui/src";
@@ -25,8 +25,21 @@ export class AdminApiClient extends ApiClientBase {
 
   /* Trait */
 
+  getTraitTypeList = () => this.sendRequest<AdminTraitTypeDto[]>("admin/trait-types");
+  getTraitsListOfType = (id: number) => this.sendRequest<AdminTraitTypeDto[]>(`admin/traits/of-type/${id}`);
+  getActiveTraitsByCourseId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-course/${id}`);
+
+  addTraitToCourse = (id: number, traitId: number) =>
+    this.sendRequest<void>(`admin/entity-traits-course/${id}/${traitId}`, "", "POST");
+
+  removeTraitFromCourse = (id: number, traitId: number) =>
+    this.sendRequest<void>(`admin/entity-traits-course/${id}/${traitId}`, "", "DELETE");
+
+  // TODO remove this!
   getTraitList = () => this.sendRequest<AdminTraitListItemDto[]>("admin/trait-types");
   getTrait = (id: string) => this.sendRequest<AdminTraitListItemDto[]>("admin/traits/of-type/" + id);
+  // REMOVE END
+
   getTraitItem = (id: string) => this.sendRequest<AdminTraitItemDto>("admin/traits/" + id);
   putTraitItem = (id: string, data: AdminTraitItemDto) =>
     this.sendRequest<AdminTraitItemDto>("admin/traits/" + id, data, "PUT");

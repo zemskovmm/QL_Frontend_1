@@ -11,7 +11,12 @@ import { UniversityPageStore } from "./pages/university/universityPageStore";
 import { UniversityCreatePageStore } from "./pages/university/universityCreatePageStore";
 import { UniversityTraitEditPageStore } from "./pages/university/universityTraitEditPageStore";
 import { CreateSchoolPageStore, SchoolListPageStore, SchoolPageStore } from "./pages/school/schoolPageStore";
-import { CourseEditPageStore, CourseListStore, CreateCoursePageStore } from "./pages/course/coursePageStore";
+import {
+  CourseEditPageStore,
+  CourseListStore,
+  CourseTraitEditorStore,
+  CreateCoursePageStore,
+} from "./pages/course/coursePageStore";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -32,4 +37,5 @@ export class RootStore {
   @observable courseListPage = new CourseListStore(this);
   @observable courseCreate = new CreateCoursePageStore(this);
   @observable courseEdit = new CourseEditPageStore(this);
+  @observable courseTraitEditor = new CourseTraitEditorStore(this);
 }

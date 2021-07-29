@@ -11,6 +11,7 @@ import { dmap } from "../../utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { FC } from "react";
 import { AdminCourseDto, AdminCourseLanguageDto } from "../../stores/pages/course/coursePageStore";
+import { TraitEditor } from "../../components/traitEditor";
 
 const customize = new AdminLanguageDictionaryEditorCustomization();
 
@@ -89,5 +90,6 @@ export const CourseListPage = () => {
 };
 
 export const CourseTraitEditor = () => {
-  return <>todo</>;
+  const { courseTraitEditor } = useRootStore();
+  return useObserver(() => <TraitEditor store={courseTraitEditor.traitStore} />);
 };

@@ -13,7 +13,7 @@ import { UniversityPage } from "../pages/university/universityPage";
 import { UniversityCreatePage } from "../pages/university/universityCreatePage";
 import { UniversityTraitEditPage } from "../pages/university/universityTraitEditPage";
 import { CreateSchoolPage, SchoolListPage, SchoolPage } from "../pages/school/page";
-import { CourseCreatePage, CourseEditPage, CourseListPage } from "../pages/course/page";
+import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditor } from "../pages/course/page";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -37,6 +37,7 @@ export enum RouteNames {
   courseList = "courseList",
   coursePage = "coursePage",
   courseCreate = "courseCreate",
+  courseTraitEditor = "courseTraitEditor",
 }
 
 export const RouteViewMap = {
@@ -52,7 +53,7 @@ export const RouteViewMap = {
   [RouteNames.universityList]: <UniversityListPage />,
   [RouteNames.universityPage]: <UniversityPage />,
   [RouteNames.universityCreatePage]: <UniversityCreatePage />,
-  [RouteNames.universityTraitEditPage]: <UniversityTraitEditPage />,
+  [RouteNames.universityTraitEditPage]: <>todo</>,
 
   [RouteNames.schoolList]: <SchoolListPage />,
   [RouteNames.schoolPage]: <SchoolPage />,
@@ -61,6 +62,7 @@ export const RouteViewMap = {
   [RouteNames.courseCreate]: <CourseCreatePage />,
   [RouteNames.coursePage]: <CourseEditPage />,
   [RouteNames.courseList]: <CourseListPage />,
+  [RouteNames.courseTraitEditor]: <CourseTraitEditor />,
 };
 
 export const Routes: Route[] = convertRoutes([
@@ -158,5 +160,10 @@ export const Routes: Route[] = convertRoutes([
     onEnter: async (root, to) => {
       await root.courseEdit.loadById(Number(to.params.id));
     },
+  },
+  {
+    pattern: "/course/:id/traits",
+    name: RouteNames.courseTraitEditor,
+    onEnter: async (root, to) => await root.courseTraitEditor.loadStore(Number(to.params.id)),
   },
 ]);
