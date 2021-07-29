@@ -6,6 +6,8 @@ import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 import { slice } from "lodash";
 import { AdminApi } from "../../clients/adminApiClient";
 
+type TraitListItem = { active: boolean; item: AdminTraitTypeDto };
+
 export type TraitLoader = {
   getCurrentTraitType(): number;
   getTraitTypes(): AdminTraitTypeDto[];
@@ -63,8 +65,6 @@ export abstract class TraitLoaderWithCache implements TraitLoader {
     await this.reload();
   }
 }
-
-type TraitListItem = { active: boolean; item: AdminTraitTypeDto };
 
 export class TraitEditorStore<T extends TraitLoader> extends ReactTableStore<TraitListItem> {
   @observable traitLoader: T;

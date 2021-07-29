@@ -29,6 +29,7 @@ export class AdminApiClient extends ApiClientBase {
   getTraitsListOfType = (id: number) => this.sendRequest<AdminTraitTypeDto[]>(`admin/traits/of-type/${id}`);
   getActiveTraitsByCourseId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-course/${id}`);
   getActiveTraitsBySchoolId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-school/${id}`);
+  getActiveUniversityTraits = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-university/${id}`);
 
   /* Trait adders */
   addTraitToCourse = (id: number, traitId: number) =>
@@ -42,6 +43,12 @@ export class AdminApiClient extends ApiClientBase {
 
   removeTraitFromSchool = (id: number, traitId: number) =>
     this.sendRequest<void>(`admin/entity-traits-school/${id}/${traitId}`, "", "DELETE");
+
+  addTraitToUniversity = (id: number, traitId: number) =>
+    this.sendRequest(`admin/entity-traits-university/${id}/${traitId}`, "", "POST");
+
+  removeTraitFromUniversity = (id: number, traitId: number) =>
+    this.sendRequest(`admin/entity-traits-university/${id}/${traitId}`, "", "DELETE");
 
   // TODO remove this!
   getTraitList = () => this.sendRequest<AdminTraitListItemDto[]>("admin/trait-types");
@@ -61,11 +68,6 @@ export class AdminApiClient extends ApiClientBase {
     this.sendRequest<AdminUniversityItemPostDto>("admin/universities", data);
   putUniversity = (id: string, data: AdminUniversityItemPostDto) =>
     this.sendRequest<AdminUniversityItemPostDto>("admin/universities/" + id, data, "PUT");
-  getUniversityTraitHave = (id: string) => this.sendRequest<number[]>("/admin/entity-traits-university/" + id);
-  postUniversityTrait = (id: string, traitId: string) =>
-    this.sendRequest(`/admin/entity-traits-university/${id}/${traitId}`, "", "POST");
-  deleteUniversityTrait = (id: string, traitId: string) =>
-    this.sendRequest(`/admin/entity-traits-university/${id}/${traitId}`, "", "DELETE");
 
   /* School */
   getSchoolList = () => this.sendRequest<AdminSchoolDto<unknown>[]>("admin/schools");

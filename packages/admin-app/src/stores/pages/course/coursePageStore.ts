@@ -120,7 +120,7 @@ export class CourseTraitEditorStore {
 
   constructor(public rootStore: RootStore) {
     this.root = rootStore;
-    this.traitStore = new TraitEditorStore<CourseTraitLoader>(new CourseTraitLoader());
+    this.traitStore = new TraitEditorStore(new CourseTraitLoader());
   }
 
   @action async loadStore(id: number) {
