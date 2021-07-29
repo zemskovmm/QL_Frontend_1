@@ -40,6 +40,9 @@ export const CourseEditPage = () => {
       <AdminButton color={"primary"} onClick={() => courseEdit.save()}>
         Save
       </AdminButton>
+      <RouterLink routeName={RouteNames.courseTraitEditor} params={{ id: `${courseEdit.id}` }}>
+        <AdminButton color={"primary"}> Traits editor </AdminButton>
+      </RouterLink>
       {courseEdit.remoteUiStore ? (
         <RemoteUiEditor store={courseEdit.remoteUiStore} customization={customize} />
       ) : (

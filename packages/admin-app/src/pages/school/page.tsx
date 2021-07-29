@@ -72,6 +72,9 @@ export const SchoolPage = () => {
       <AdminButton color={"primary"} onClick={() => schoolPage.save()}>
         Save
       </AdminButton>
+      <RouterLink routeName={RouteNames.schoolTraitEditor} params={{ id: `${schoolPage.id}` }}>
+        <AdminButton color={"primary"}> Traits editor </AdminButton>
+      </RouterLink>
       {schoolPage.remoteUiStore ? (
         <RemoteUiEditor store={schoolPage.remoteUiStore} customization={customize} />
       ) : (
