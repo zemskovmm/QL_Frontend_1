@@ -274,10 +274,10 @@ export class PageEditorStore extends RequestTracking {
 
   constructor(private onSave: (id: number) => void, id: number | null, data: AdminPageDto | null) {
     super();
+    this.pageType = new AdminRemoteUiDropdownEditorStore(`${data?.pageType ?? "Page"}`, PageItems);
     if (id) {
       if (!data) throw new Error("id is set but data is missing");
       this.id = id;
-      this.pageType = new AdminRemoteUiDropdownEditorStore(`${data?.pageType ?? "Page"}`, PageItems);
       for (const l in data.languages) {
         this.langs[l] = new PageLanguageEditorStore(data.languages[l]);
       }
