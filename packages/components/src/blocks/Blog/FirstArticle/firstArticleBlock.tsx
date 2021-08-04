@@ -5,10 +5,11 @@ import preview from "./preview.png";
 import test from "./test.png";
 import calendary from "./calendary.svg";
 import { ComponentLink } from "../../../component-link";
+import { ApiBaseUrl } from "../../../api/apiClientBase";
 
 export interface FirstArticleBlockElement {
   title: string;
-  img: string | null;
+  img: number | null;
   date: string;
   tags: { name: string; link: string }[];
   blog: boolean;
@@ -19,8 +20,12 @@ export const FirstArticleBlock = (props: FirstArticleBlockElement) => {
     <div className={`${styles.firstArticle__width} ${props.blog ? styles.firstArticle__blog : ""} py-12`}>
       <div className={styles.firstArticle}>
         <div className={`flex flex-col relative mb-3`}>
-          <img className={styles.firstArticle__img} src={test} alt="" />
-          {!props.blog && (
+          <img
+            className={styles.firstArticle__img}
+            src={props.img ? `${ApiBaseUrl}/api/media/${props.img}` : test}
+            alt=""
+          />
+          {!props.blog && props.date && (
             <div className={styles.firstArticle__date}>
               <img src={calendary} alt="" /> {props.date}
             </div>

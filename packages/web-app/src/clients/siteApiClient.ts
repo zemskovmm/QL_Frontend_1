@@ -3,6 +3,7 @@ import { ClientRouteDto } from "src/interfaces/clientRouteDto";
 import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilterDto";
 import { useData } from "@project/components/src/utils/dataEffect";
 import { ContactUsFormType } from "src/components/common/contactUsForm/contactUsForm";
+import { PageListDto } from "src/interfaces/pagesDto";
 
 export interface CatalogFilterRequestDto {
   identifier: string;
@@ -68,6 +69,25 @@ export class SiteApiClient extends ApiClientBase {
         filters: filters,
       },
       (req) => this.getCatalogItems(req.lang, req.entityType, req.pageSize, req.pageNumber, req.filters)
+    );
+  }
+
+  async getBlogPages(page?: number, search?: string, pageType?: string): Promise<PageListDto> {
+    let url = `admin/pages?`;
+    if (page && page > 1) url += `page=${page}&`;
+    if (search) url += `search=${search}&`;
+    if (pageType) url += `pageType=${pageType}&`;
+    return await this.sendRequest<PageListDto>(url);
+  }
+
+  useBlogPages(page?: number, search?: string, pageType?: string): PageListDto | undefined {
+    return useData(
+      {
+        page: page,
+        search: search,
+        pageType: pageType,
+      },
+      (req) => this.getBlogPages(req.page, req.search, req.pageType)
     );
   }
 }
