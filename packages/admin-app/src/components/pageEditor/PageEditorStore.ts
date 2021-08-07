@@ -17,6 +17,7 @@ import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
 import { PageBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
+import { AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
 function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -232,16 +233,27 @@ export class PageRowsEditorStore {
 export class PageLanguageEditorStore extends PageRowsEditorStore {
   @observable title: string;
   @observable url: string;
+  @observable previewImage: AdminRemoteUiImageFieldStore;
+  @observable smallPreviewImage: AdminRemoteUiImageFieldStore;
+  @observable widePreviewImage: AdminRemoteUiImageFieldStore;
+
   constructor(data: AdminPageLanguageDto) {
     super(data.pageData.rows);
     this.title = data.title;
     this.url = data.url;
+    this.previewImage = new AdminRemoteUiImageFieldStore(data.previewImageId ?? null);
+    this.smallPreviewImage = new AdminRemoteUiImageFieldStore(data.smallPreviewImageId ?? null);
+    this.widePreviewImage = new AdminRemoteUiImageFieldStore(data.widePreviewImageId ?? null);
   }
 
   serialize(): AdminPageLanguageDto {
+    const { title, url, previewImage, smallPreviewImage, widePreviewImage } = this;
     return {
-      title: this.title,
-      url: this.url,
+      title,
+      url,
+      previewImageId: previewImage?.value ?? undefined,
+      widePreviewImageId: widePreviewImage?.value ?? undefined,
+      smallPreviewImageId: smallPreviewImage?.value ?? undefined,
       pageData: {
         rows: this.rows.map((r) => r.serialize()),
       },
@@ -249,12 +261,20 @@ export class PageLanguageEditorStore extends PageRowsEditorStore {
   }
 }
 
+const PageItems = [
+  { id: "0", name: "Page" },
+  { id: "1", name: "BlogEntry" },
+  { id: "2", name: "UserReview" },
+];
+
 export class PageEditorStore extends RequestTracking {
   @observable langs: { [lang: string]: PageLanguageEditorStore } = {};
   @observable id: number | null = null;
+  @observable pageType?: AdminRemoteUiDropdownEditorStore;
 
   constructor(private onSave: (id: number) => void, id: number | null, data: AdminPageDto | null) {
     super();
+    this.pageType = new AdminRemoteUiDropdownEditorStore(`${data?.pageType ?? "Page"}`, PageItems);
     if (id) {
       if (!data) throw new Error("id is set but data is missing");
       this.id = id;
@@ -295,8 +315,11 @@ export class PageEditorStore extends RequestTracking {
   }
 
   serialize(): AdminPageDto {
+    const pageType = this.pageType?.getData() ?? "Page";
+    const pageTypeModel = PageItems.find((x) => x.name == pageType);
     return {
       languages: dictMap(this.langs, (k, v) => v.serialize()),
+      pageType: Number(pageTypeModel?.id ?? 0),
     };
   }
 

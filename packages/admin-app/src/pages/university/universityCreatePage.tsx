@@ -1,7 +1,7 @@
 import { useRootStore } from "src/utils/rootStoreUtils";
 import { useObserver } from "mobx-react";
 import { RouteNames } from "src/routing/routes";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { RouterLink } from "mobx-state-router";
 
 export const UniversityCreatePage = () => {

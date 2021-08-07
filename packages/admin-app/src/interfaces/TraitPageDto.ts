@@ -1,3 +1,5 @@
+import { Dictionary } from "../utils/types";
+
 export interface AdminTraitListItemDto {
   id: number;
   names: { [name: string]: string };
@@ -12,3 +14,9 @@ export interface AdminTraitItemDto {
   parentId: number | null;
 }
 
+export interface AdminTraitTypeDto {
+  id: number;
+  names: Dictionary<string>;
+  identifier: string;
+  order: number;
+}

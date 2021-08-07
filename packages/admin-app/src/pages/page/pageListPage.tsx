@@ -8,7 +8,7 @@ import { dmap } from "src/utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { AdminPageListItemDto } from "src/interfaces/AdminPageDto";
 import { useObserver } from "mobx-react";
-import { AdminSearch } from "../components/common/AdminSearch";
+import { AdminSearch } from "../../components/common/AdminSearch";
 import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 

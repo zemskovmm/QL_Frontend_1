@@ -11,6 +11,7 @@ import { AdminRemoteUiHtmlEditor, AdminRemoteUiHtmlEditorStore } from "src/compo
 import {
   AdminRemoteUiImageFieldEditor,
   AdminRemoteUiImageFieldStore,
+  ImagePickerWithLabel,
 } from "src/components/remoteui/AdminRemoteUiImageEditor";
 import { AvailableBlocks, BlockPresenter } from "@project/components/src/blocks";
 import { AdminButton } from "src/components/common/AdminButton";
@@ -24,9 +25,12 @@ import { AdminTextBox } from "src/components/common/AdminTextBox";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import styles from "./PageEditor.module.css";
+import { AdminRemoteUiDropdownEditor, AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
+import { RouterLink } from "mobx-state-router";
+import { RouteNames } from "../../routing/routes";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -213,6 +217,7 @@ class RemoteUiCustomization implements IRemoteUiEditorCustomization {
     if (store instanceof AdminRemoteUiHtmlEditorStore) return <AdminRemoteUiHtmlEditor store={store} />;
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
     if (store instanceof AdminRemoteUiRowsStore) return <AdminRemoteUiRowsEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownEditorStore) return <AdminRemoteUiDropdownEditor store={store} />;
     return null;
   }
 }
@@ -331,6 +336,9 @@ export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) =>
     <div className={`flex flex-col`}>
       <AdminTextBox id={"title"} label="Title" {...bind(props.store, "title")} />
       <AdminTextBox id={"url"} label="Url" {...bind(props.store, "url")} />
+      <ImagePickerWithLabel store={props.store.previewImage} title={"Preview image:"} />
+      <ImagePickerWithLabel store={props.store.smallPreviewImage} title={"Small Preview image:"} />
+      <ImagePickerWithLabel store={props.store.widePreviewImage} title={"Wide Preview image:"} />
       <br />
       <PageRowsEditor store={props.store} />
     </div>
@@ -380,8 +388,12 @@ export const PageEditor = (props: { store: PageEditorStore | any }) => {
       <div>
         <AdminButton color="primary" onClick={() => s.save()}>
           Save
-        </AdminButton>
+        </AdminButton>{" "}
+        <RouterLink routeName={RouteNames.pageTraitEditPage} params={{ id: s.id }}>
+          <AdminButton color={"primary"}> Traits editor </AdminButton>
+        </RouterLink>
         <br />
+        <AdminRemoteUiDropdownEditor store={props.store.pageType} label={"Page type: "} />
         <AdminTabControl
           tabs={dmap(AllLanguages, (lang, data) => ({
             id: lang,

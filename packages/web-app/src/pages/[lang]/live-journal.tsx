@@ -3,6 +3,18 @@ import Link from "next/link";
 import { CommentsBlock } from "@project/components/src/blocks/CommentsBlock/commentsBlock";
 import { LocalizedText } from "src/components/common/LocalizedText";
 
+type hrefsType = {
+  [key in string]: string;
+};
+
+const hrefs: hrefsType = {
+  ru: "/zhivaja-lenta-otzyvov",
+  en: "/en/zhivaja-lenta-otzyvov",
+  fr: "/fr/zhivaja-lenta-otzyvov",
+  esp: "/esp/zhivaja-lenta-otzyvov",
+  cn: "/cn/zhivaja-lenta-otzyvov",
+};
+
 const LiveJournalPage = () => {
   const lang = useIntl().locale;
 
@@ -30,11 +42,7 @@ const LiveJournalPage = () => {
           </Link>
         </div>
       </div>
-      <CommentsBlock
-        lang={lang}
-        widgetId={78694}
-        xid={(process.env.NEXT_HC_PREFIX || "test-") + "live-reviews-" + lang}
-      />
+      <CommentsBlock lang={lang} widgetId={78694} href={"quartier-latin.com" + hrefs[lang]} />
     </div>
   );
 };
