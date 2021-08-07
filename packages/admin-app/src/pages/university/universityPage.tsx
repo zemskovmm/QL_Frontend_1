@@ -2,13 +2,7 @@ import { useRootStore } from "src/utils/rootStoreUtils";
 import { useObserver } from "mobx-react";
 import { RouteNames } from "src/routing/routes";
 import React, { ChangeEvent, useState } from "react";
-import { AdminTable } from "src/components/common/AdminTable";
-import { AdminTraitListItemDto } from "src/interfaces/TraitPageDto";
-import { dmap } from "src/utils/util";
-import { AllLanguages } from "@project/components/src/utils/langs";
 import { RouterLink } from "mobx-state-router";
-import { Paginator } from "src/components/common/Paginator";
-import { PageEditor } from "../../components/pageEditor/PageEditor";
 
 const EditStringRow = (props: {
   editOn: boolean;

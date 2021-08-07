@@ -30,6 +30,7 @@ export class AdminApiClient extends ApiClientBase {
   getActiveTraitsByCourseId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-course/${id}`);
   getActiveTraitsBySchoolId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-school/${id}`);
   getActiveUniversityTraits = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-university/${id}`);
+  getActivePageTraits = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-page/${id}`);
 
   /* Trait adders */
   addTraitToCourse = (id: number, traitId: number) =>
@@ -49,6 +50,12 @@ export class AdminApiClient extends ApiClientBase {
 
   removeTraitFromUniversity = (id: number, traitId: number) =>
     this.sendRequest(`admin/entity-traits-university/${id}/${traitId}`, "", "DELETE");
+
+  addTraitToPage = (id: number, traitId: number) =>
+    this.sendRequest(`admin/entity-traits-page/${id}/${traitId}`, "", "POST");
+
+  removeTraitFromPage = (id: number, traitId: number) =>
+    this.sendRequest(`admin/entity-traits-page/${id}/${traitId}`, "", "DELETE");
 
   // TODO remove this!
   getTraitList = () => this.sendRequest<AdminTraitListItemDto[]>("admin/trait-types");

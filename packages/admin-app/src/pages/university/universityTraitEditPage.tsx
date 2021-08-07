@@ -1,5 +1,5 @@
 import { useRootStore } from "src/utils/rootStoreUtils";
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 import { TraitEditor } from "../../components/traitEditor";
 
 export const UniversityTraitEditorPage = () => {

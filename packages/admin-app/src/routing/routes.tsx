@@ -2,9 +2,10 @@ import React from "react";
 import { Route } from "mobx-state-router";
 import { convertRoutes } from "./route";
 import { IndexPage } from "src/pages/indexPage";
-import { PageEditorPage } from "src/pages/pageEditorPage";
-import { PageListPage } from "src/pages/pageListPage";
-import { FilesPage } from "src/pages/filesPage";
+import { PageEditorPage } from "src/pages/page/pageEditorPage";
+import { PageListPage } from "src/pages/page/pageListPage";
+import { PageTraitEditorPage } from "../pages/page/pageTraitEditPage";
+import { FilesPage } from "src/pages/files/filesPage";
 import { TraitListPage } from "../pages/trait/traitListPage";
 import { TraitPage } from "../pages/trait/traitPage";
 import { TraitItemPage } from "../pages/trait/traitItemPage";
@@ -21,10 +22,14 @@ export enum RouteNames {
   pageList = "pageList",
   editPage = "editPage",
   newPage = "newPage",
+  pageTraitEditPage = "pageTraitEditPage",
+
   fileList = "fileList",
+
   traitList = "traitList",
   traitPage = "traitPage",
   traitItemPage = "traitItemPage",
+
   universityList = "universityList",
   universityPage = "universityPage",
   universityCreatePage = "universityCreatePage",
@@ -47,10 +52,14 @@ export const RouteViewMap = {
   [RouteNames.newPage]: <PageEditorPage />,
   [RouteNames.editPage]: <PageEditorPage />,
   [RouteNames.pageList]: <PageListPage />,
+  [RouteNames.pageTraitEditPage]: <PageTraitEditorPage />,
+
   [RouteNames.fileList]: <FilesPage />,
+
   [RouteNames.traitList]: <TraitListPage />,
   [RouteNames.traitPage]: <TraitPage />,
   [RouteNames.traitItemPage]: <TraitItemPage />,
+
   [RouteNames.universityList]: <UniversityListPage />,
   [RouteNames.universityPage]: <UniversityPage />,
   [RouteNames.universityCreatePage]: <UniversityCreatePage />,
@@ -89,6 +98,11 @@ export const Routes: Route[] = convertRoutes([
     pattern: "/pages/:id",
     name: RouteNames.editPage,
     onEnter: (root, to) => root.pageEditorPage.load(parseInt(to.params["id"])),
+  },
+  {
+    pattern: "/pages/:id/traits",
+    name: RouteNames.pageTraitEditPage,
+    onEnter: async (root, to) => await root.pageTraitEditPage.loadStore(Number(to.params.id)),
   },
   {
     pattern: "/files",

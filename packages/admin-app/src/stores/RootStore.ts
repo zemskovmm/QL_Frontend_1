@@ -1,8 +1,9 @@
 import { observable } from "mobx";
 import { RouterState, RouterStore } from "mobx-state-router";
 import { Routes } from "src/routing/routes";
-import { PageEditorPageStore } from "src/stores/pages/pageEditorPageStore";
-import { PageListPageStore } from "src/stores/pages/pageListPageStore";
+import { PageEditorPageStore } from "src/stores/pages/page/pageEditorPageStore";
+import { PageListPageStore } from "src/stores/pages/page/pageListPageStore";
+import { PageTraitEditPageStore } from "./pages/page/pageTraitEditPageStore";
 import { TraitListPageStore } from "./pages/trait/traitListPageStore";
 import { TraitPageStore } from "./pages/trait/traitPageStore";
 import { TraitItemPageStore } from "./pages/trait/traitItemPageStore";
@@ -27,9 +28,12 @@ export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
   @observable pageEditorPage = new PageEditorPageStore(this);
   @observable pageListPage = new PageListPageStore();
+  @observable pageTraitEditPage = new PageTraitEditPageStore(this);
+
   @observable traitListPage = new TraitListPageStore(this);
   @observable traitPage = new TraitPageStore(this);
   @observable traitItemPage = new TraitItemPageStore(this);
+
   @observable universityListPage = new UniversityListPageStore(this);
   @observable universityPage = new UniversityPageStore(this);
   @observable universityCreatePage = new UniversityCreatePageStore(this);

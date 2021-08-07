@@ -29,6 +29,8 @@ import { FC, useEffect, useState } from "react";
 
 import styles from "./PageEditor.module.css";
 import { AdminRemoteUiDropdownEditor, AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
+import { RouterLink } from "mobx-state-router";
+import { RouteNames } from "../../routing/routes";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -386,7 +388,10 @@ export const PageEditor = (props: { store: PageEditorStore | any }) => {
       <div>
         <AdminButton color="primary" onClick={() => s.save()}>
           Save
-        </AdminButton>
+        </AdminButton>{" "}
+        <RouterLink routeName={RouteNames.pageTraitEditPage} params={{ id: s.id }}>
+          <AdminButton color={"primary"}> Traits editor </AdminButton>
+        </RouterLink>
         <br />
         <AdminRemoteUiDropdownEditor store={props.store.pageType} label={"Page type: "} />
         <AdminTabControl
