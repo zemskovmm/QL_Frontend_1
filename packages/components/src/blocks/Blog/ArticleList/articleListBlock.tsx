@@ -3,6 +3,7 @@ import styles from "./articleListBlock.module.css";
 import test from "./test.png";
 import calendary from "./calendary.svg";
 import { ApiBaseUrl } from "../../../api/apiClientBase";
+import { PageTraitDto } from "web-app/src/interfaces/pagesDto";
 
 export const rangeMap = (count: number) =>
   Array(count)
@@ -13,7 +14,7 @@ export interface articleListBlockElement {
   title: string;
   img: number | null;
   date: string;
-  tags: { name: string; link: string }[];
+  tags: PageTraitDto[] | null;
 }
 
 export const ArticleBlock = (props: articleListBlockElement) => {
@@ -35,11 +36,7 @@ export const ArticleBlock = (props: articleListBlockElement) => {
         <div className={`lg:flex-col lg:flex justify-between lg:px-2.5 lg:mt-4`}>
           <div className={styles.articleList__title}>{props.title}</div>
           <div className={`flex flex-wrap`}>
-            {props.date && <span className={styles.articleList__tag}>Изучение языка</span>}
-            <span className={styles.articleList__tag}>Изучение языка</span>
-            <span className={styles.articleList__tag}>Изучение языка</span>
-            <span className={styles.articleList__tag}>Изучение языка</span>
-            <span className={styles.articleList__tag}>Изучение языка</span>
+            {props.tags && props.tags.map((tag) => <span className={styles.articleList__tag}>{tag.name}</span>)}
           </div>
         </div>
       </div>

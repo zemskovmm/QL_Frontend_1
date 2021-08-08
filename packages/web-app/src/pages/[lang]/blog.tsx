@@ -13,13 +13,10 @@ import { Paginator } from "src/components/utilities/Paginator";
 const BlogPage = () => {
   const lang = useIntl().locale;
 
-  const [page, setPage] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
 
-  const articles = siteApi.useBlogPages(page, "", "blog");
-
-  const firstArticle = siteApi.useBlogPages(0, "", "blog")?.results[0];
-
-  console.log(firstArticle);
+  const firstArticle = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber: 0, pageSize: 1 })?.items[0];
+  const articles = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber, pageSize: 9 });
 
   return (
     <div className={`container mx-auto py-12`}>
@@ -45,13 +42,13 @@ const BlogPage = () => {
           </Link>
         </div>
       </div>
-      <Link href={firstArticle?.urls[lang] || ""}>
+      <Link href={""}>
         <a>
           <FirstArticleBlock
-            title={firstArticle?.titles[lang] || ""}
-            img={firstArticle?.widePreviewImages[lang] || null}
-            date={firstArticle?.date[lang] || ""}
-            tags={[]}
+            title={firstArticle?.title || ""}
+            img={firstArticle?.widePreviewImageId || null}
+            date={firstArticle?.date || ""}
+            tags={firstArticle?.namedTraits["instruction-language"] || null}
             blog={false}
           />
         </a>
@@ -59,16 +56,16 @@ const BlogPage = () => {
       <FiltersBlock items={[]} />
 
       {articles && (
-        <LoadingIf isLoading={articles == undefined}>
+        <LoadingIf isLoading={articles?.totalPages === undefined}>
           <div className={`flex flex-col lg:flex-row lg:flex-wrap`}>
-            {articles.results.map((item) => (
-              <Link href={item.urls[lang] || ""}>
+            {articles.items.map((item) => (
+              <Link href={""}>
                 <a className={`flex flex-col lg:w-4/12 lg:px-10`}>
                   <ArticleBlock
-                    title={item.titles[lang] || ""}
-                    img={item.previewImages[lang] || null}
-                    date={item.date[lang] || ""}
-                    tags={[]}
+                    title={item.title || ""}
+                    img={item.previewImageId || null}
+                    date={item.date || ""}
+                    tags={item.namedTraits["instruction-language"] || null}
                   />
                 </a>
               </Link>
@@ -76,7 +73,7 @@ const BlogPage = () => {
           </div>
         </LoadingIf>
       )}
-      {articles && <Paginator page={page} totalPages={articles?.totalPages || 0} setPage={setPage} />}
+      {articles && <Paginator page={pageNumber} totalPages={articles?.totalPages || 0} setPage={setPageNumber} />}
       <NewsletterBlock title={""} buttonName={""} description={""} />
     </div>
   );

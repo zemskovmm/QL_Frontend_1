@@ -72,22 +72,34 @@ export class SiteApiClient extends ApiClientBase {
     );
   }
 
-  async getBlogPages(page?: number, search?: string, pageType?: string): Promise<PageListDto> {
-    let url = `admin/pages?`;
-    if (page && page > 1) url += `page=${page}&`;
-    if (search) url += `search=${search}&`;
-    if (pageType) url += `pageType=${pageType}&`;
-    return await this.sendRequest<PageListDto>(url);
+  async getBlogPages(
+    lang: string,
+    params: { pageType?: string; pageSize?: number; pageNumber?: number; filters?: [number] }
+  ): Promise<PageListDto> {
+    const data = {
+      pageType: params.pageType || 0,
+      pageSize: params.pageSize || 10,
+      pageNumber: params.pageNumber || 0,
+      filters: params.filters || [],
+    };
+    return await this.sendRequest<PageListDto>(`/pages/search/` + lang, data, "POST");
   }
 
-  useBlogPages(page?: number, search?: string, pageType?: string): PageListDto | undefined {
+  useBlogPages(
+    lang: string,
+    params: { pageType?: string; pageSize?: number; pageNumber?: number; filters?: [number] }
+  ): PageListDto | undefined {
     return useData(
       {
-        page: page,
-        search: search,
-        pageType: pageType,
+        lang: lang,
+        params: {
+          pageType: params.pageType,
+          pageSize: params.pageSize,
+          pageNumber: params.pageNumber,
+          filters: params.filters,
+        },
       },
-      (req) => this.getBlogPages(req.page, req.search, req.pageType)
+      (req) => this.getBlogPages(lang, params)
     );
   }
 }

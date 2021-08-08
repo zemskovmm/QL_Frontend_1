@@ -1,15 +1,23 @@
 export interface PageListItemDto {
+  title: string;
+  block: any;
+  previewImageId: number | null;
+  smallPreviewImageId: number | null;
+  widePreviewImageId: number | null;
+  date: string | null;
+  pageType: string;
+  namedTraits: { [name: string]: PageTraitDto[] };
+}
+
+export interface PageTraitDto {
   id: number;
-  urls: { [name: string]: string };
-  titles: { [name: string]: string };
-  previewImages: { [name: string]: number | null };
-  smallPreviewImages: { [name: string]: number | null };
-  widePreviewImages: { [name: string]: number | null };
-  metadata: { [name: string]: string | null };
-  date: { [name: string]: string | null };
+  name: string;
+  identifier: string;
+  iconId: number | null;
 }
 
 export interface PageListDto {
   totalPages: number;
-  results: PageListItemDto[];
+  items: PageListItemDto[];
+  totalItems: number;
 }
