@@ -5,6 +5,7 @@ import React, { FC, useState } from "react";
 import { RouterLink } from "mobx-state-router";
 import { TraitItemPageStore } from "../../stores/pages/trait/traitItemPageStore";
 import { RemoteUiEditor } from "@kekekeks/remoteui/src";
+import { AdminLanguageDictionaryEditorCustomization } from "../school/page";
 
 const lang = ["en", "fr", "ru", "esp", "cn"];
 
@@ -12,6 +13,8 @@ type TraitViewModeProps = {
   s: TraitItemPageStore;
   editOn: boolean;
 };
+
+const customize = new AdminLanguageDictionaryEditorCustomization();
 
 const TraitViewMode: FC<TraitViewModeProps> = ({ s, editOn }) => (
   <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto flex flex-col">
@@ -94,7 +97,11 @@ export const TraitItemPage = () => {
               </button>
             )}
           </div>
-          {!editOn ? <TraitViewMode s={s} editOn={editOn} /> : <RemoteUiEditor store={s.remoteUi!} />}
+          {!editOn ? (
+            <TraitViewMode s={s} editOn={editOn} />
+          ) : (
+            <RemoteUiEditor store={s.remoteUi!} customization={customize} />
+          )}
         </div>
       </div>
     </div>

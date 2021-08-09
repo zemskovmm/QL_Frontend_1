@@ -15,7 +15,24 @@ import { AdminButton } from "../common/AdminButton";
 import { useObserver } from "mobx-react";
 import { Dictionary } from "../../utils/types";
 
-const createDefinition = (name: string): RemoteUiDefinition => ({
+export type PageDefinitionBuilder = (name: string) => RemoteUiDefinition;
+export const traitEditLanguageDefinition: PageDefinitionBuilder = (name) => ({
+  groups: [
+    {
+      name,
+      fields: [
+        {
+          name: "name",
+          id: "name",
+          type: "String",
+          alwaysExpanded: false,
+        },
+      ],
+    },
+  ],
+  types: {},
+});
+export const pageLanguageDefinition: PageDefinitionBuilder = (name) => ({
   groups: [
     {
       name,
@@ -57,20 +74,24 @@ export class LanguageDictionaryCustomize<T extends Dictionary<unknown>> implemen
   constructor(public item: T) {}
 
   getCustomStore(config: RemoteUiEditorConfiguration, type: string, data: any): IRemoteUiData {
-    if (type === "LanguageDictionary") return new AdminLanguageDictionaryEditorStore(config.definition, this.item);
+    if (type === "LanguageDictionary") return new AdminLanguageDictionaryEditorStore(pageLanguageDefinition, this.item);
+    if (type === "TraitLanguageDictionary")
+      return new AdminLanguageDictionaryEditorStore(traitEditLanguageDefinition, this.item);
     return null!;
   }
 }
 
 export class AdminLanguageDictionaryEditorStore<T extends Dictionary<unknown>> implements IRemoteUiData {
   isValid = true;
+  @observable definition: PageDefinitionBuilder;
   @observable items: T;
   @observable itemsStores: Dictionary<RemoteUiEditorStore>;
 
-  constructor(definition: RemoteUiDefinition, items: T) {
+  constructor(definition: PageDefinitionBuilder, items: T) {
+    this.definition = definition;
     const reduceToRemoteUiStores = (acc: {}, x: string) => ({
       ...acc,
-      [x]: new RemoteUiEditorStore(createDefinition(x), items[x]),
+      [x]: new RemoteUiEditorStore(definition(x), items[x]),
     });
 
     this.items = items;
@@ -91,7 +112,10 @@ export class AdminLanguageDictionaryEditorStore<T extends Dictionary<unknown>> i
     const langKeys = Object.keys(AllLanguages);
     const langLower = lang.toLowerCase();
     if (keys.find((x) => x === langLower) && langKeys.find((x) => x === langLower)) return;
-    this.itemsStores = { ...this.itemsStores, [langLower]: new RemoteUiEditorStore(createDefinition(langLower), {}) };
+    this.itemsStores = {
+      ...this.itemsStores,
+      [langLower]: new RemoteUiEditorStore(this.definition(langLower), {}),
+    };
   }
 
   @action removeLanguageField(lang: string) {

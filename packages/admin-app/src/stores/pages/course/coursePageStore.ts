@@ -6,7 +6,6 @@ import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
 import { Dictionary } from "../../../utils/types";
 import { TraitEditorStore, TraitLoader, TraitLoaderWithCache } from "../../../components/traitEditor";
-import { AdminTraitTypeDto } from "../../../interfaces/TraitPageDto";
 
 const emptyModel = ({ languages: { en: {} } } as unknown) as AdminCourseDto<unknown>;
 
