@@ -11,43 +11,21 @@ const lang = ["en", "fr", "ru", "esp", "cn"];
 
 type TraitViewModeProps = {
   s: TraitItemPageStore;
-  editOn: boolean;
 };
 
 const customize = new AdminLanguageDictionaryEditorCustomization();
 
-const TraitViewMode: FC<TraitViewModeProps> = ({ s, editOn }) => (
+const TraitViewMode: FC<TraitViewModeProps> = ({ s }) => (
   <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto flex flex-col">
     <div className={`mb-4`}>ID: {s.id} </div>
     <div className={`mb-4`}>TypeID: {s.typeId} </div>
-    <div className={`mb-4`}>
-      partnerID:{" "}
-      {editOn ? (
-        <input
-          className={editOn ? "border-red-600 border-2" : ""}
-          onChange={(e) => (s.partnerId = Number(e.target.value))}
-          value={s.partnerId ?? ""}
-        />
-      ) : (
-        s.partnerId
-      )}
-    </div>
+    <div className={`mb-4`}>partnerID: {s.partnerId}</div>
     <table className={"border-separate border border-green-800 w-full mb-6"}>
       <tbody>
         {lang.map((el) => (
           <tr>
             <td className={`border-2 border-emerald-600 px-4 py-2 font-flow text-emerald-400`}>{el}:</td>
-            <td className={`border-2 border-emerald-600 px-4 py-2 font-flow text-emerald-400`}>
-              {editOn ? (
-                <input
-                  className={editOn ? "border-red-600 border-2" : ""}
-                  onChange={(e) => (s.names[el] = e.target.value)}
-                  value={s.names[el]}
-                />
-              ) : (
-                s.names[el]
-              )}
-            </td>
+            <td className={`border-2 border-emerald-600 px-4 py-2 font-flow text-emerald-400`}>{s.names[el]}</td>
           </tr>
         ))}
       </tbody>
@@ -97,11 +75,7 @@ export const TraitItemPage = () => {
               </button>
             )}
           </div>
-          {!editOn ? (
-            <TraitViewMode s={s} editOn={editOn} />
-          ) : (
-            <RemoteUiEditor store={s.remoteUi!} customization={customize} />
-          )}
+          {!editOn ? <TraitViewMode s={s} /> : <RemoteUiEditor store={s.remoteUi!} customization={customize} />}
         </div>
       </div>
     </div>
