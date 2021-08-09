@@ -76,14 +76,6 @@ export class TraitItemPageStore extends RequestTracking {
   }
 
   async save() {
-    const data: AdminTraitItemDto = {
-      traitTypeId: this.typeId,
-      parentId: this.partnerId,
-      names: this.names,
-      order: this.order,
-      iconId: this.iconId,
-    };
-
     const value = (await this.remoteUi?.getDataAsync()) as any;
     if (!value) return;
     const unmapNames = Object.keys(value.names).reduce((acc, x) => ({ ...acc, [x]: value.names[x].name }), {});

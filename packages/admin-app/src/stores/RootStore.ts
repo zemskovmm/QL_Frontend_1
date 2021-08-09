@@ -23,6 +23,7 @@ import {
   CourseTraitEditorStore,
   CreateCoursePageStore,
 } from "./pages/course/coursePageStore";
+import { CreateTraitTypePageStore, EditTraitTypePageStore } from "./pages/trait/createTraitTypePageStore";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -34,6 +35,9 @@ export class RootStore {
   @observable traitPage = new TraitPageStore(this);
   @observable traitItemPage = new TraitItemPageStore(this);
   @observable traitNewItemPage = new NewTraitItemPageStore(this);
+
+  @observable traitTypeNewPage = new CreateTraitTypePageStore(this);
+  @observable traitTypeEditPage = new EditTraitTypePageStore(this);
 
   @observable universityListPage = new UniversityListPageStore(this);
   @observable universityPage = new UniversityPageStore(this);
