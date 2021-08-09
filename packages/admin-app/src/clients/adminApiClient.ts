@@ -64,7 +64,8 @@ export class AdminApiClient extends ApiClientBase {
 
   createTrait = (typeId: number, data: AdminTraitItemDto) =>
     this.sendRequest(`admin/traits/of-type/${typeId}`, data, "POST");
-  definitionTrait = () => this.sendRequest<RemoteUiDefinition>("admin/trait-types/definition");
+  definitionTrait = () => this.sendRequest<RemoteUiDefinition>("admin/trait/definition");
+  definitionTraitType = () => this.sendRequest<RemoteUiDefinition>("admin/trait-type/definition");
   getTraitItem = (id: string) => this.sendRequest<AdminTraitItemDto>("admin/traits/" + id);
   putTraitItem = (id: string, data: AdminTraitItemDto) =>
     this.sendRequest<AdminTraitItemDto>("admin/traits/" + id, data, "PUT");
