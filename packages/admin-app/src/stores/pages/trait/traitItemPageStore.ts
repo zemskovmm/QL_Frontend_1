@@ -5,6 +5,39 @@ import { AdminApi } from "src/clients/adminApiClient";
 import { RootStore } from "src/stores/RootStore";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
+import { Loadable } from "../../table/LoadableStore";
+import { RouteNames } from "../../../routing/routes";
+
+export class NewTraitItemPageStore extends Loadable {
+  @observable remoteUi?: RemoteUiEditorStore;
+  @observable traitTypeId = 0;
+  @observable root: RootStore;
+
+  constructor(root: RootStore) {
+    super();
+    this.root = root;
+  }
+
+  @action async load(): Promise<void> {
+    const def = await this.track(() => AdminApi.definitionTrait());
+    const trait = {
+      traitTypeId: this.traitTypeId,
+      names: { en: {} },
+      order: null,
+      iconId: null,
+      parentId: null,
+    };
+    this.remoteUi = new RemoteUiEditorStore(def, trait, new LanguageDictionaryCustomize(trait.names));
+  }
+
+  @action async save() {
+    const value = (await this.remoteUi?.getDataAsync()) as any;
+    if (!value) return;
+    const unmapNames = Object.keys(value.names).reduce((acc, x) => ({ ...acc, [x]: value.names[x].name }), {});
+    await this.track(() => AdminApi.createTrait(this.traitTypeId, { ...value, names: unmapNames }));
+    await this.root.routerStore.goTo(RouteNames.traitPage, { id: `${this.traitTypeId}` });
+  }
+}
 
 export class TraitItemPageStore extends RequestTracking {
   @observable id: string = "";

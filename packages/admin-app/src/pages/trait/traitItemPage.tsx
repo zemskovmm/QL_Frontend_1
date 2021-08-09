@@ -50,7 +50,7 @@ export const TraitItemPage = () => {
               routeName={RouteNames.traitPage}
               params={{ id: s.typeId.toString() }}
             >
-              back in trait
+              Back to list
             </RouterLink>
             {!editOn ? (
               <button
@@ -76,6 +76,40 @@ export const TraitItemPage = () => {
             )}
           </div>
           {!editOn ? <TraitViewMode s={s} /> : <RemoteUiEditor store={s.remoteUi!} customization={customize} />}
+        </div>
+      </div>
+    </div>
+  ));
+};
+
+export const NewTraitPage = () => {
+  const s = useRootStore().traitNewItemPage;
+  return useObserver(() => (
+    <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
+      <div className="py-8">
+        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto flex flex-col">
+          <div className={`flex justify-between`}>
+            <RouterLink
+              className={
+                "d-flex mb-4 mr-auto text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+              }
+              routeName={RouteNames.traitPage}
+              params={{ id: s.traitTypeId.toString() }}
+            >
+              back in trait
+            </RouterLink>
+            <button
+              onClick={async () => {
+                await s.save();
+              }}
+              className={
+                "d-flex mb-4 text-white font-bold py-2 px-4 rounded inline-block bg-green-400 hover:bg-green-100 hover:text-black"
+              }
+            >
+              Save
+            </button>
+          </div>
+          <RemoteUiEditor store={s.remoteUi!} customization={customize} />
         </div>
       </div>
     </div>

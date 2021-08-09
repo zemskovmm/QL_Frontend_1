@@ -6,7 +6,7 @@ import { PageListPageStore } from "src/stores/pages/page/pageListPageStore";
 import { PageTraitEditPageStore } from "./pages/page/pageTraitEditPageStore";
 import { TraitListPageStore } from "./pages/trait/traitListPageStore";
 import { TraitPageStore } from "./pages/trait/traitPageStore";
-import { TraitItemPageStore } from "./pages/trait/traitItemPageStore";
+import { NewTraitItemPageStore, TraitItemPageStore } from "./pages/trait/traitItemPageStore";
 import { UniversityListPageStore } from "./pages/university/universityListPageStore";
 import { UniversityPageStore } from "./pages/university/universityPageStore";
 import { UniversityCreatePageStore } from "./pages/university/universityCreatePageStore";
@@ -33,6 +33,7 @@ export class RootStore {
   @observable traitListPage = new TraitListPageStore(this);
   @observable traitPage = new TraitPageStore(this);
   @observable traitItemPage = new TraitItemPageStore(this);
+  @observable traitNewItemPage = new NewTraitItemPageStore(this);
 
   @observable universityListPage = new UniversityListPageStore(this);
   @observable universityPage = new UniversityPageStore(this);

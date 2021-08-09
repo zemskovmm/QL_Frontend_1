@@ -8,7 +8,7 @@ import { PageTraitEditorPage } from "../pages/page/pageTraitEditPage";
 import { FilesPage } from "src/pages/files/filesPage";
 import { TraitListPage } from "../pages/trait/traitListPage";
 import { TraitPage } from "../pages/trait/traitPage";
-import { TraitItemPage } from "../pages/trait/traitItemPage";
+import { NewTraitPage, TraitItemPage } from "../pages/trait/traitItemPage";
 import { UniversityListPage } from "../pages/university/universityListPage";
 import { UniversityPage } from "../pages/university/universityPage";
 import { UniversityCreatePage } from "../pages/university/universityCreatePage";
@@ -28,6 +28,7 @@ export enum RouteNames {
 
   traitList = "traitList",
   traitPage = "traitPage",
+  traitCreate = "traitCreate",
   traitItemPage = "traitItemPage",
 
   universityList = "universityList",
@@ -58,6 +59,7 @@ export const RouteViewMap = {
 
   [RouteNames.traitList]: <TraitListPage />,
   [RouteNames.traitPage]: <TraitPage />,
+  [RouteNames.traitCreate]: <NewTraitPage />,
   [RouteNames.traitItemPage]: <TraitItemPage />,
 
   [RouteNames.universityList]: <UniversityListPage />,
@@ -117,6 +119,14 @@ export const Routes: Route[] = convertRoutes([
     pattern: "/traits/:id",
     name: RouteNames.traitPage,
     onEnter: (root, to) => root.traitPage.load(to.params.id),
+  },
+  {
+    pattern: "/traits/:id/new",
+    name: RouteNames.traitCreate,
+    async onEnter(root, to) {
+      root.traitNewItemPage.traitTypeId = Number(to.params.id);
+      await root.traitNewItemPage.load();
+    },
   },
   {
     pattern: "/traits/item/:id",
