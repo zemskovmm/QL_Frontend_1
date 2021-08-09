@@ -1,10 +1,58 @@
 import { useRootStore } from "src/utils/rootStoreUtils";
 import { useObserver } from "mobx-react";
 import { RouteNames } from "src/routing/routes";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { RouterLink } from "mobx-state-router";
+import { TraitItemPageStore } from "../../stores/pages/trait/traitItemPageStore";
+import { RemoteUiEditor } from "@kekekeks/remoteui/src";
 
 const lang = ["en", "fr", "ru", "esp", "cn"];
+
+type TraitViewModeProps = {
+  s: TraitItemPageStore;
+  editOn: boolean;
+};
+
+const TraitViewMode: FC<TraitViewModeProps> = ({ s, editOn }) => (
+  <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto flex flex-col">
+    <div className={`mb-4`}>ID: {s.id} </div>
+    <div className={`mb-4`}>TypeID: {s.typeId} </div>
+    <div className={`mb-4`}>
+      partnerID:{" "}
+      {editOn ? (
+        <input
+          className={editOn ? "border-red-600 border-2" : ""}
+          onChange={(e) => (s.partnerId = Number(e.target.value))}
+          value={s.partnerId ?? ""}
+        />
+      ) : (
+        s.partnerId
+      )}
+    </div>
+    <table className={"border-separate border border-green-800 w-full mb-6"}>
+      <tbody>
+        {lang.map((el) => (
+          <tr>
+            <td className={`border-2 border-emerald-600 px-4 py-2 font-flow text-emerald-400`}>{el}:</td>
+            <td className={`border-2 border-emerald-600 px-4 py-2 font-flow text-emerald-400`}>
+              {editOn ? (
+                <input
+                  className={editOn ? "border-red-600 border-2" : ""}
+                  onChange={(e) => (s.names[el] = e.target.value)}
+                  value={s.names[el]}
+                />
+              ) : (
+                s.names[el]
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <div className={`mb-4`}>Order: {s.order} </div>
+    <div className={`mb-4`}>IconID: {s.iconId} </div>
+  </div>
+);
 
 export const TraitItemPage = () => {
   const [editOn, setEditOn] = useState(false);
@@ -46,42 +94,7 @@ export const TraitItemPage = () => {
               </button>
             )}
           </div>
-          <div className={`mb-4`}>ID: {s.id} </div>
-          <div className={`mb-4`}>TypeID: {s.typeId} </div>
-          <div className={`mb-4`}>
-            partnerID:{" "}
-            {editOn ? (
-              <input
-                className={editOn ? "border-red-600 border-2" : ""}
-                onChange={(e) => (s.partnerId = Number(e.target.value))}
-                value={s.partnerId ?? ""}
-              />
-            ) : (
-              s.partnerId
-            )}
-          </div>
-          <table className={"border-separate border border-green-800 w-full mb-6"}>
-            <tbody>
-              {lang.map((el) => (
-                <tr>
-                  <td className={`border-2 border-emerald-600 px-4 py-2 font-flow text-emerald-400`}>{el}:</td>
-                  <td className={`border-2 border-emerald-600 px-4 py-2 font-flow text-emerald-400`}>
-                    {editOn ? (
-                      <input
-                        className={editOn ? "border-red-600 border-2" : ""}
-                        onChange={(e) => (s.names[el] = e.target.value)}
-                        value={s.names[el]}
-                      />
-                    ) : (
-                      s.names[el]
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className={`mb-4`}>Order: {s.order} </div>
-          <div className={`mb-4`}>IconID: {s.iconId} </div>
+          {!editOn ? <TraitViewMode s={s} editOn={editOn} /> : <RemoteUiEditor store={s.remoteUi!} />}
         </div>
       </div>
     </div>

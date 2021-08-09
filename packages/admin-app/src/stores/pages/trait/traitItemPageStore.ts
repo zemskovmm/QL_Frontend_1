@@ -1,8 +1,9 @@
-﻿import { observable } from "mobx";
+﻿import { action, observable } from "mobx";
 import { AdminTraitItemDto } from "src/interfaces/TraitPageDto";
 import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { RootStore } from "src/stores/RootStore";
+import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 
 export class TraitItemPageStore extends RequestTracking {
   @observable id: string = "";
@@ -11,12 +12,17 @@ export class TraitItemPageStore extends RequestTracking {
   @observable names: { [name: string]: string } = {};
   @observable order: number | null = 0;
   @observable iconId: number | null = 0;
+
+  @observable remoteUi?: RemoteUiEditorStore;
+
   constructor(public rootStore: RootStore) {
     super();
   }
 
-  async load(id: string) {
+  @action async load(id: string) {
     const req = await this.track(() => AdminApi.getTraitItem(id));
+    const def = await this.track(() => AdminApi.definitionTrait());
+    this.remoteUi = new RemoteUiEditorStore(def, req);
     this.typeId = req.traitTypeId;
     this.partnerId = req.parentId;
     this.names = req.names;
