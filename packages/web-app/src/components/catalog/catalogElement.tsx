@@ -1,4 +1,4 @@
-import { CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
+import { CatalogCourseDto, CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
 import Link from "next/link";
 import style from "src/components/catalog/style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
@@ -69,6 +69,34 @@ export const HousingCatalogElement = (item: CatalogUniversityDto) => (
 );
 
 export const UniversityCatalogElement = (item: CatalogUniversityDto) => (
+  <ElementCatalog item={item}>
+    <div className={style.card__rightLevel}>
+      <span className={style.card__rightSubtitle}>
+        <LocalizedText id={"catalogItems_degree"} />:{" "}
+      </span>
+      {item.degrees?.map((el, ind) => (
+        <span key={ind} className={style.card__rightLevel_degree}>
+          {el}
+        </span>
+      ))}
+    </div>
+    <div className={style.card__rightLanguage}>
+      <span className={style.card__rightSubtitle}>
+        <LocalizedText id={"catalogItems_language"} />:
+      </span>
+      <div className={style.card__rightLanguage_list}>
+        <b>
+          <img src="`../../images/catalogFlags/${lang}.svg`" alt="" />
+          <span>
+            <LocalizedText id={"catalogItems_language_all"} />
+          </span>
+        </b>
+      </div>
+    </div>
+  </ElementCatalog>
+);
+
+export const CourseCatalogElement = (item: CatalogCourseDto) => (
   <ElementCatalog item={item}>
     <div className={style.card__rightLevel}>
       <span className={style.card__rightSubtitle}>

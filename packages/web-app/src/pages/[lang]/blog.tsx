@@ -9,6 +9,7 @@ import { siteApi } from "src/clients/siteApiClient";
 import { useState } from "react";
 import { LoadingIf } from "src/components/utilities/Loading";
 import { Paginator } from "src/components/utilities/Paginator";
+import { PageListItemDto } from "../../interfaces/pagesDto";
 
 const BlogPage = () => {
   const lang = useIntl().locale;
@@ -58,7 +59,7 @@ const BlogPage = () => {
       {articles && (
         <LoadingIf isLoading={articles?.totalPages === undefined}>
           <div className={`flex flex-col lg:flex-row lg:flex-wrap`}>
-            {articles.items.map((item) => (
+            {articles.items.map((item: PageListItemDto) => (
               <Link href={""}>
                 <a className={`flex flex-col lg:w-4/12 lg:px-10`}>
                   <ArticleBlock
