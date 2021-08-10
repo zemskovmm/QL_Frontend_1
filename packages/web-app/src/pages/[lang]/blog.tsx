@@ -1,13 +1,22 @@
 import { useIntl } from "react-intl";
 import { NewsletterBlock } from "@project/components/src/blocks/NewsletterBlock/NewsletterBlock";
 import { FirstArticleBlock } from "@project/components/src/blocks/Blog/FirstArticle/firstArticleBlock";
-import { ArticleListBlock } from "@project/components/src/blocks/Blog/ArticleList/articleListBlock";
+import { ArticleBlock } from "@project/components/src/blocks/Blog/ArticleList/articleListBlock";
 import { FiltersBlock } from "@project/components/src/blocks/Blog/Filters/filtersBlock";
 import Link from "next/link";
 import { LocalizedText } from "src/components/common/LocalizedText";
+import { siteApi } from "src/clients/siteApiClient";
+import { useState } from "react";
+import { LoadingIf } from "src/components/utilities/Loading";
+import { Paginator } from "src/components/utilities/Paginator";
 
 const BlogPage = () => {
   const lang = useIntl().locale;
+
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const firstArticle = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber: 0, pageSize: 1 })?.items[0];
+  const articles = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber, pageSize: 9 });
 
   return (
     <div className={`container mx-auto py-12`}>
@@ -33,9 +42,38 @@ const BlogPage = () => {
           </Link>
         </div>
       </div>
-      <FirstArticleBlock title={""} img={""} date={""} tags={[]} blog={false} />
+      <Link href={""}>
+        <a>
+          <FirstArticleBlock
+            title={firstArticle?.title || ""}
+            img={firstArticle?.widePreviewImageId || null}
+            date={firstArticle?.date || ""}
+            tags={firstArticle?.namedTraits["instruction-language"] || null}
+            blog={false}
+          />
+        </a>
+      </Link>
       <FiltersBlock items={[]} />
-      <ArticleListBlock items={[]} />
+
+      {articles && (
+        <LoadingIf isLoading={articles?.totalPages === undefined}>
+          <div className={`flex flex-col lg:flex-row lg:flex-wrap`}>
+            {articles.items.map((item) => (
+              <Link href={""}>
+                <a className={`flex flex-col lg:w-4/12 lg:px-10`}>
+                  <ArticleBlock
+                    title={item.title || ""}
+                    img={item.previewImageId || null}
+                    date={item.date || ""}
+                    tags={item.namedTraits["instruction-language"] || null}
+                  />
+                </a>
+              </Link>
+            ))}{" "}
+          </div>
+        </LoadingIf>
+      )}
+      {articles && <Paginator page={pageNumber} totalPages={articles?.totalPages || 0} setPage={setPageNumber} />}
       <NewsletterBlock title={""} buttonName={""} description={""} />
     </div>
   );
