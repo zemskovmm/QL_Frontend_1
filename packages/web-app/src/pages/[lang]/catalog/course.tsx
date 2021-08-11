@@ -1,12 +1,12 @@
 import { Catalog } from "src/components/catalog/catalog";
-import { CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
+import { CatalogCourseDto, CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
 import style from "src/components/catalog/style/catalogView.module.css";
 import { LocalizedText, useLocalizedText } from "src/components/common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { useIntl } from "react-intl";
-import { UniversityCatalogElement } from "src/components/catalog/catalogElement";
+import { CourseCatalogElement } from "src/components/catalog/catalogElement";
 
-const UniversityCatalogPage = () => {
+const CourseCatalogPage = () => {
   const lang = useIntl().locale;
   const intl = useIntl();
   return (
@@ -26,14 +26,14 @@ const UniversityCatalogPage = () => {
             ]}
           />
         </div>
-        <Catalog<CatalogUniversityDto>
-          title={useLocalizedText({ id: "catalogEducation_title" }, intl)}
-          elementRenderer={UniversityCatalogElement}
-          apiElementName="university"
+        <Catalog<CatalogCourseDto>
+          title={useLocalizedText({ id: "catalogCourses_title" }, intl)}
+          elementRenderer={CourseCatalogElement}
+          apiElementName="course"
         />
       </div>
     </div>
   );
 };
 
-export default UniversityCatalogPage;
+export default CourseCatalogPage;

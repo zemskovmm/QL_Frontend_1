@@ -1,13 +1,14 @@
-import { CatalogCourseDto, CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
+import { CatalogCourseDto, CatalogItemDto, CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
 import Link from "next/link";
 import style from "src/components/catalog/style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
+import TempSchoolLogo from "src/assets/icons/tempSchoolLogo.svg";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 import { FC } from "react";
 import pin from "src/assets/icons/pin.svg";
 
-const ElementCatalog: FC<{ item: CatalogUniversityDto }> = ({ children, item }) => (
+const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
   <Link href={item.url}>
     <a className={style.card}>
       <div className={style.card__left}>
@@ -100,26 +101,18 @@ export const CourseCatalogElement = (item: CatalogCourseDto) => (
   <ElementCatalog item={item}>
     <div className={style.card__rightLevel}>
       <span className={style.card__rightSubtitle}>
-        <LocalizedText id={"catalogItems_degree"} />:{" "}
+        <LocalizedText id={"catalogItems_school"} />:{" "}
       </span>
-      {item.degrees?.map((el, ind) => (
-        <span key={ind} className={style.card__rightLevel_degree}>
-          {el}
-        </span>
-      ))}
+      <p className={style.card__school}>
+        <span>Alliance Française Rouen</span>
+        <img src={TempSchoolLogo} alt="" />
+      </p>
     </div>
-    <div className={style.card__rightLanguage}>
+    <div className={style.card__rightLevel}>
       <span className={style.card__rightSubtitle}>
-        <LocalizedText id={"catalogItems_language"} />:
+        <LocalizedText id={"catalogItems_duration"} />:{" "}
       </span>
-      <div className={style.card__rightLanguage_list}>
-        <b>
-          <img src="`../../images/catalogFlags/${lang}.svg`" alt="" />
-          <span>
-            <LocalizedText id={"catalogItems_language_all"} />
-          </span>
-        </b>
-      </div>
+      <LocalizedText id={"catalogItems_week"} />
     </div>
   </ElementCatalog>
 );
