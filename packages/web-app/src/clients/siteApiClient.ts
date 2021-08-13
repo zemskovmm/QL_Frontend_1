@@ -82,7 +82,7 @@ export class SiteApiClient extends ApiClientBase {
       pageNumber: params.pageNumber || 0,
       filters: params.filters || [],
     };
-    return await this.sendRequest<PageListDto>(`/pages/search/` + lang, data, "POST");
+    return await this.sendRequest<PageListDto>(`pages/search/${lang}`, data, "POST");
   }
 
   useBlogPages(
