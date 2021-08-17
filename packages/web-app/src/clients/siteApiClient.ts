@@ -4,6 +4,7 @@ import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilt
 import { useData } from "@project/components/src/utils/dataEffect";
 import { ContactUsFormType } from "src/components/common/contactUsForm/contactUsForm";
 import { PageListDto } from "src/interfaces/pagesDto";
+import { TraitDto } from "src/interfaces/traitsDto";
 
 export interface CatalogFilterRequestDto {
   identifier: string;
@@ -100,6 +101,19 @@ export class SiteApiClient extends ApiClientBase {
         },
       },
       (req) => this.getBlogPages(lang, params)
+    );
+  }
+
+  async getTraitByType(typeName: string): Promise<TraitDto[]> {
+    return await this.sendRequest<TraitDto[]>(`traits/by-type/${typeName}`);
+  }
+
+  useTraitByType(typeName: string): TraitDto[] | undefined {
+    return useData(
+      {
+        typeName: typeName,
+      },
+      (req) => this.getTraitByType(typeName)
     );
   }
 }

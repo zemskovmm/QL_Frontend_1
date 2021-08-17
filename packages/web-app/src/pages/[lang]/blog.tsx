@@ -10,13 +10,23 @@ import { useState } from "react";
 import { LoadingIf } from "src/components/utilities/Loading";
 import { Paginator } from "src/components/utilities/Paginator";
 
+const traitNameMap: { [key: string]: string } = {
+  en: "Tags",
+  fr: "Mots clés",
+  ru: "Теги",
+  esp: "Etiquetas",
+  cn: "标签",
+};
+
 const BlogPage = () => {
   const lang = useIntl().locale;
 
   const [pageNumber, setPageNumber] = useState(0);
 
-  const firstArticle = siteApi.useBlogPages(lang, { pageType: "Page", pageNumber: 0, pageSize: 1 })?.items[0];
-  const articles = siteApi.useBlogPages(lang, { pageType: "Page", pageNumber, pageSize: 9 });
+  const firstArticle = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber: 0, pageSize: 1 })?.items[0];
+  const articles = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber, pageSize: 9 });
+  const tags = siteApi.useTraitByType(traitNameMap[lang]);
+  alert(lang);
 
   return (
     <div className={`container mx-auto py-12`}>
@@ -55,7 +65,7 @@ const BlogPage = () => {
           </a>
         </Link>
       )}
-      <FiltersBlock items={[]} />
+      <FiltersBlock tags={tags?.map(({ names }) => names[lang])} />
 
       {articles && (
         <LoadingIf isLoading={articles?.totalPages === undefined}>
