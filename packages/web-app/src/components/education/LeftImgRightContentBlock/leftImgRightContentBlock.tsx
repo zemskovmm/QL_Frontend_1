@@ -12,11 +12,10 @@ export const LeftImgRightContentBlock: FC<LeftImgRightContentBlockProps> = ({ da
         <div className={style.leftImgRightContentBlock__container}>
           <iframe
             className={style.leftImgRightContentBlock__img}
-            width="560"
+            width="100%"
             height="315"
             src="https://www.youtube.com/embed/XSups4cXLpQ"
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           />
           {/*<img src="content.img" alt="" class="leftImgRightContentBlock__img" v-else>*/}
           <div className={style.leftImgRightContentBlock__content}>

@@ -1,0 +1,91 @@
+﻿.text h1{
+  color: #373737;
+  font-weight: bold;
+  font-size: 1.875rem;
+  line-height: 140%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.text h2{
+  color: #373737;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 144%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.text h3, .text h4{
+  color: #373737;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 150%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.text li {
+  margin-bottom: 5px;
+}
+
+.text p{
+  color: #373737;
+  font-size: 1rem;
+  line-height: 150%;
+  margin-bottom: 10px;
+}
+
+.text blockquote {
+  font-size: 1rem;
+  line-height: 150%;
+  color: #373737;
+}
+
+.text a{
+  font-size: 1rem;
+  line-height: 150%;
+  text-decoration-line: underline;
+  color: #567DD0;
+}
+
+.text ul{
+  padding-left: 22px;
+}
+
+.text ul li{
+  list-style: none;
+  position: relative;
+}
+
+.text ul li:before{
+  content: "";
+  position: absolute;
+  left: -20px;
+  border: 1px solid #6D4B86;
+  width: 6.5px;
+  height: 6.5px;
+  box-sizing: border-box;
+  top: 8px;
+  transform: rotate(45deg);
+  transition: border 0.3s;
+}
+
+
+@media (max-width: 1023px) {
+  .text h1, .text h2{
+    font-size: 1.125rem;
+    line-height: 156%;
+    margin: 0 0 7px !important;
+    text-align: center;
+  }
+
+  .text h3, .text h4{
+    font-size: 0.875rem;
+    line-height: 143%;
+    margin: 0 auto 20px !important;
+    text-align: center;
+    font-weight: 400;
+    max-width: 470px;
+  }
+}

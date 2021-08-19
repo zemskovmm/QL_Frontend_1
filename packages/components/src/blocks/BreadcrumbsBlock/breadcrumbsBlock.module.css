@@ -1,0 +1,41 @@
+﻿.breadcrumbs{
+  position: absolute;
+  top: 36px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+.breadcrumbs a {
+  font-size: 12px;
+  line-height: 18px;
+  text-decoration: underline;
+  color: #A8B5CC;
+  text-transform: capitalize;
+}
+
+.breadcrumbs_white a {
+  color: #fff !important;
+  text-shadow: 1px 1px 2px black;
+}
+
+.breadcrumbs a:not(:last-child) {
+  margin-right: 16px;
+}
+
+.breadcrumbs a > img {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.breadcrumbs > a:last-child {
+  text-decoration: none;
+  color: #646F83;
+}
+
+.breadcrumbs > a:last-child > a {
+  text-decoration: none;
+  color: #646F83;
+}

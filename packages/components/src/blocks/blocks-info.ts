@@ -10,7 +10,7 @@ enum PredefinedTypes {
   FileBase64 = "FileBase64",
   Custom = "Custom",
   TextArea = "TextArea",
-  OrderedMultiSelect = "OrderedMultiSelect"
+  OrderedMultiSelect = "OrderedMultiSelect",
 }
 
 export interface BlockUiPossibleValue {
@@ -25,12 +25,11 @@ export interface BlockUiFieldDefinition {
   placeholder?: string;
   type: string | PredefinedTypes;
   listType?: string;
-  possibleValues?: BlockUiPossibleValue[],
-  nullable?: boolean,
-  customType?: string,
-  alwaysExpanded?: boolean
+  possibleValues?: BlockUiPossibleValue[];
+  nullable?: boolean;
+  customType?: string;
+  alwaysExpanded?: boolean;
 }
-
 
 export interface BlockSubTypeDefinition {
   fields: BlockUiFieldDefinition[];
@@ -38,12 +37,13 @@ export interface BlockSubTypeDefinition {
 
 export interface BlockUiDefinition extends BlockSubTypeDefinition {
   fields: BlockUiFieldDefinition[];
-  subTypes?: { [name: string]: BlockSubTypeDefinition }
+  subTypes?: { [name: string]: BlockSubTypeDefinition };
 }
 
 export interface BlockTypeInfo {
-  id: string,
+  id: string;
   name: string;
+  preview?: string;
   definition: BlockUiDefinition;
   renderer: (props: any) => any;
   initialData: any;
@@ -52,4 +52,3 @@ export interface BlockTypeInfo {
 export interface TypedBlockTypeInfo<T> extends BlockTypeInfo {
   initialData: T;
 }
-

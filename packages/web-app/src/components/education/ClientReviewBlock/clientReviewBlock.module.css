@@ -75,3 +75,21 @@
   object-fit: cover;
   width: 100%;
 }
+
+@media screen and (max-width: 1023px) {
+  .clientReviewBlock__container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .clientReviewBlock__img {
+    margin-bottom: 20px;
+    max-height: 50vh;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .clientReviewBlock__contentText {
+    margin-right: 0;
+  }
+}

@@ -21,8 +21,8 @@ export const WideCardsBlock: FC<WideCardsBlockProps> = ({ data }) => {
             <span className={style.wideCardsBlock__subtitle} dangerouslySetInnerHTML={{ __html: data.subtitle }} />
           </div>
           <div className={style.wideCardsBlock__list}>
-            {data.items.map((el) => (
-              <div className={style.wideCardsBlock__card}>
+            {data.items.map((el, ind) => (
+              <div key={ind} className={style.wideCardsBlock__card}>
                 <img src={el.img} alt="" className={style.wideCardsBlock__cardImg} />
                 <div dangerouslySetInnerHTML={{ __html: el.name }} className={style.wideCardsBlock__cardName} />
               </div>

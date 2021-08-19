@@ -7,18 +7,42 @@ import { Paginator } from "src/components/common/Paginator";
 import { dmap } from "src/utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { AdminPageListItemDto } from "src/interfaces/AdminPageDto";
+import { useObserver } from "mobx-react";
+import { AdminSearch } from "../components/common/AdminSearch";
+import { useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 export const PageListPage = () => {
-  var s = useRootStore().pageListPage;
-  return (
+  const s = useRootStore().pageListPage;
+  const params = new URLSearchParams(window.location.search);
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    s.search = params.get("search") || "";
+    s.currentPage = Number(params.get("page") || 0);
+    s.load();
+  }, [location]);
+
+  return useObserver(() => (
     <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <div className="m-4">
-              <RouterLink routeName={RouteNames.newPage}>
-                <AdminButton color={"primary"}>Create Page</AdminButton>
-              </RouterLink>
+            <div className={`flex items-center justify-between`}>
+              <div className="m-4 flex w-full">
+                <RouterLink routeName={RouteNames.newPage} className={`mr-auto`}>
+                  <AdminButton color={"primary"}>Create Page</AdminButton>
+                </RouterLink>
+                <AdminSearch
+                  search={s.search}
+                  action={(search: string) => {
+                    params.set("page", "0");
+                    params.set("search", search);
+                    history.push(window.location.pathname + "?" + params.toString());
+                  }}
+                />
+              </div>
             </div>
             <AdminTable<AdminPageListItemDto>
               columns={dmap(AllLanguages, (l) => ({
@@ -37,13 +61,20 @@ export const PageListPage = () => {
                   );
                 },
               }))}
-              rows={s.current.results}
+              rows={s.current}
               idGetter={(r) => r.id.toString()}
             />
-            <Paginator page={s.currentPage} totalPages={s.current.totalPages} setPage={(p) => s.load(p)} />
+            <Paginator
+              page={s.currentPage}
+              totalPages={s.totalPages}
+              setPage={(p) => {
+                params.set("page", p.toString());
+                history.push(window.location.pathname + "?" + params.toString());
+              }}
+            />
           </div>
         </div>
       </div>
     </div>
-  );
+  ));
 };

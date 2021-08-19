@@ -1,0 +1,30 @@
+.callbackBlock{
+  max-width: 270px;
+  width: 100%;
+  margin-right: 115px;
+  margin-left: auto;
+}
+
+.callbackBlockText{
+  color: #373737;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 1023px) {
+  .callbackBlock{
+    margin-right: 0;
+    margin-left: 0;
+    max-width: none;
+  }
+  .callbackBlock button{
+    width: 100%;
+    justify-content: center;
+  }
+  .callbackBlockText{
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}

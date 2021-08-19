@@ -1,17 +1,17 @@
 import { HeaderDataDto } from "src/interfaces/headerDataDto";
 import { FooterDataDto } from "src/interfaces/footerDataDto";
 import { MainHeader } from "src/components/layouts/mainHeader";
-import {MainFooter} from "src/components/layouts/mainFooter";
+import { MainFooter } from "src/components/layouts/mainFooter";
 
 export interface MainLayoutProps {
   header: {
-    [key: string]: HeaderDataDto
+    [key: string]: HeaderDataDto;
   };
   footer: FooterDataDto;
   children: any;
   urls: {
-    [key: string] : string
-  }
+    [key: string]: string;
+  };
 }
 
 export const MainLayout = (props: MainLayoutProps) => {

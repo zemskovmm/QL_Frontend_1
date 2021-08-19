@@ -1,0 +1,23 @@
+.articleBeforeImageBlock__title{
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 42px;
+  color: #373737;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 1023px) {
+  .articleBeforeImageBlock__title{
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+.articleBeforeImageBlock__text p{
+  font-size: 14px;
+  line-height: 24px;
+  color: #373737;
+  margin-bottom: 21px;
+}

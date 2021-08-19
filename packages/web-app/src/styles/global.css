@@ -25,10 +25,39 @@ body {
   color: var(--color-primary);
 }
 
+.block-with-breadcrumbs > div:first-of-type{
+  padding-top: 80px !important;
+}
+
 img {
   object-fit: contain;
 }
 
+h1{
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 42px;
+  color: #373737;
+}
+
+h2{
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+  color: #373737;
+}
+
+h3{
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #373737;
+}
+
 button:focus{
   outline: none;
+}
+
+footer {
+  margin-top: 50px;
 }

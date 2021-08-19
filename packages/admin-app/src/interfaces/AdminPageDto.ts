@@ -23,5 +23,4 @@ export interface AdminPageListItemDto {
 export interface AdminPageListDto {
   totalPages: number;
   results: AdminPageListItemDto[];
-
 }

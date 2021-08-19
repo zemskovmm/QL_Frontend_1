@@ -3,7 +3,7 @@
 }
 
 .sponsorBlock__maxWidth {
-  max-width: 1170px;
+  max-width: 1194px;
   margin: auto;
   padding: 0 20px;
   box-sizing: content-box;
@@ -12,10 +12,10 @@
 .sponsorBlock__container {
   display: flex;
   flex-direction: column;
-  padding: 69px 0 40px 0;
 }
 
 .sponsorBlock__head {
+  margin-left: 10px;
   margin-bottom: 40px;
   display: flex;
   justify-content: space-between;
@@ -38,18 +38,24 @@
   width: 100%;
   box-sizing: border-box;
   height: 175px;
-  margin-bottom: 25px;
-  margin-right: 25px;
+  margin: 0 12px 24px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.sponsorBlock__sponsor:nth-child(5n) {
-  margin-right: 0;
-}
-
 .sponsorBlock__sponsorImg {
   object-fit: contain;
   width: 100%;
+}
+
+@media screen and (max-width: 1023px) {
+  .sponsorBlock__title{
+    max-width: none;
+    text-align: center;
+  }
+
+  .sponsorBlock__list {
+    justify-content: center;
+  }
 }

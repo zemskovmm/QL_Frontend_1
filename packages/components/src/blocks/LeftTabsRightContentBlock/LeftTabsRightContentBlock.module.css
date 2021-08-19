@@ -1,0 +1,58 @@
+.tab__element{
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #EFF3FA;
+  box-sizing: border-box;
+  padding: 20px 30px 21px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #373737;
+  text-align: left;
+  transition: .3s;
+}
+
+.tab__element:not(:last-child){
+  margin-bottom: 5px;
+}
+
+.tab__elementActive, .tab__element:hover{
+  background: #EFF3FA;
+  color: #646F83;
+}
+
+.tab__elementList{
+  max-width: 370px;
+}
+
+.content div {
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.contentLeft{
+  padding-right: 100px;
+}
+
+.contentRight{
+  padding-left: 100px;
+}
+
+.mobile {
+  display: none;
+}
+
+
+@media screen and (max-width: 1023px) {
+  .desktop {
+    display: none !important;
+  }
+  .mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .mobile button {
+    width: 100%;
+  }
+
+}

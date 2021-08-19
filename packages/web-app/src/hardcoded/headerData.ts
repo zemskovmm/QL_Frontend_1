@@ -27,32 +27,28 @@ const headerData: { [key: string]: HeaderDataDto } = {
       },
       {
         title: "Изучение французского",
-        url: "https://quartier-latin.com/izuchenie-jazyka",
+        url: "/ru/izuchenie-jazyka",
       },
       {
         title: "Адаптация на месте",
-        url: "https://quartier-latin.com/uslugi-po-adaptatsii",
+        url: "/ru/uslugi-po-adaptatsii",
       },
       {
         title: "Аренда жилья",
-        url: "https://quartier-latin.com/arenda-zhilja",
+        url: "/ru/arenda-zhilja",
       },
       {
-        url: "https://quartier-latin.com/vizovaja-podderzhka",
+        url: "/ru/vizovaja-podderzhka",
         title: "Визовая поддержка",
       },
     ],
     links: [
       {
-        url: "https://quartier-latin.com/o-kompanii",
+        url: "/ru/o-kompanii",
         title: "О компании",
       },
       {
-        url: "https://quartier-latin.com/blog",
-        title: "Блог",
-      },
-      {
-        url: "https://quartier-latin.com/faq",
+        url: "/ru/faq",
         title: "FAQ",
       },
     ],
@@ -79,32 +75,28 @@ const headerData: { [key: string]: HeaderDataDto } = {
       },
       {
         title: "LEARNING THE LANGUAGE",
-        url: "https://quartier-latin.com/en/izuchenie-jazyka",
+        url: "/en/izuchenie-jazyka",
       },
       {
         title: "Adaptation services",
-        url: "https://quartier-latin.com/en/uslugi-po-adaptatsii",
+        url: "/en/uslugi-po-adaptatsii",
       },
       {
-        url: "https://quartier-latin.com/en/arenda-zhilja",
+        url: "/en/arenda-zhilja",
         title: "RENTING",
       },
       {
         title: "VISA SUPPORT",
-        url: "https://quartier-latin.com/en/vizovaja-podderzhka",
+        url: "/en/vizovaja-podderzhka",
       },
     ],
     links: [
       {
         title: "ABOUT US",
-        url: "https://quartier-latin.com/en/o-kompanii",
+        url: "/en/o-kompanii",
       },
       {
-        url: "https://quartier-latin.com/en/blog",
-        title: "BLOG",
-      },
-      {
-        url: "https://quartier-latin.com/en/faq",
+        url: "/en/faq",
         title: "FAQ",
       },
     ],
@@ -116,34 +108,30 @@ const headerData: { [key: string]: HeaderDataDto } = {
         title: "高等教育",
       },
       {
-        url: "https://quartier-latin.com/cn/uslugi-po-adaptatsii",
+        url: "/cn/uslugi-po-adaptatsii",
         title: "协助办理法国行政手续",
       },
       {
-        url: "https://quartier-latin.com/cn/izuchenie-jazyka",
+        url: "/cn/izuchenie-jazyka",
         title: "语言学习",
       },
       {
-        url: "https://quartier-latin.com/cn/arenda-zhilja",
+        url: "/cn/arenda-zhilja",
         title: "住房业务",
       },
       {
-        url: "https://quartier-latin.com/cn/vizovaja-podderzhka",
+        url: "/cn/vizovaja-podderzhka",
         title: "签证申请",
       },
     ],
     links: [
       {
         title: " 我们是谁？",
-        url: "https://quartier-latin.com/cn/o-kompanii",
-      },
-      {
-        title: "博客",
-        url: "https://quartier-latin.com/cn/blog",
+        url: "/cn/o-kompanii",
       },
       {
         title: "问答",
-        url: "https://quartier-latin.com/cn/faq",
+        url: "/cn/faq",
       },
     ],
   },
@@ -169,33 +157,29 @@ const headerData: { [key: string]: HeaderDataDto } = {
       },
       {
         title: "Apprentissage de la langue",
-        url: "https://quartier-latin.com/fr/izuchenie-jazyka",
+        url: "/fr/izuchenie-jazyka",
       },
       {
         title: "Services d'adaptation",
-        url: "https://quartier-latin.com/fr/uslugi-po-adaptatsii",
+        url: "/fr/uslugi-po-adaptatsii",
       },
       {
         title: "Hébergement",
-        url: "https://quartier-latin.com/fr/arenda-zhilja",
+        url: "/fr/arenda-zhilja",
       },
       {
-        url: "https://quartier-latin.com/fr/vizovaja-podderzhka",
+        url: "/fr/vizovaja-podderzhka",
         title: "Aide à l’obtention du visa",
       },
     ],
     links: [
       {
-        url: "https://quartier-latin.com/fr/o-kompanii",
+        url: "/fr/o-kompanii",
         title: "QUI SOMMES-NOUS?",
       },
       {
-        url: "https://quartier-latin.com/fr/blog",
-        title: "BLOG",
-      },
-      {
         title: "FAQ",
-        url: "https://quartier-latin.com/fr/faq",
+        url: "/fr/faq",
       },
     ],
   },
@@ -224,33 +208,29 @@ const headerData: { [key: string]: HeaderDataDto } = {
         url: "/esp/education",
       },
       {
-        url: "https://quartier-latin.com/en/izuchenie-jazyka",
+        url: "/esp/izuchenie-jazyka",
         title: "Aprendizaje de francés",
       },
       {
-        url: "https://quartier-latin.com/en/uslugi-po-adaptatsii",
+        url: "/esp/uslugi-po-adaptatsii",
         title: "Adaptación",
       },
       {
         title: "Alojamiento",
-        url: "https://quartier-latin.com/en/arenda-zhilja",
+        url: "/esp/arenda-zhilja",
       },
       {
         title: "Obtención del visado",
-        url: "https://quartier-latin.com/en/vizovaja-podderzhka",
+        url: "/esp/vizovaja-podderzhka",
       },
     ],
     links: [
       {
-        url: "https://quartier-latin.com/en/o-kompanii",
+        url: "/esp/o-kompanii",
         title: "¿QUIÉNES SOMOS?",
       },
       {
-        url: "https://quartier-latin.com/en/blog",
-        title: "BLOG ",
-      },
-      {
-        url: "https://quartier-latin.com/en/faq",
+        url: "/esp/faq",
         title: "PREGUNTAS FRECUENTES ",
       },
     ],

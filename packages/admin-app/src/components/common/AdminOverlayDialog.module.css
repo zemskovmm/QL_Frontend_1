@@ -9,11 +9,9 @@
   -moz-opacity: 0.5;
   -khtml-opacity: 0.5;
   opacity: 0.5;
-  z-index: 8000;
 }
 
 .overlayDialogContainerMargin {
-  z-index: 8001;
   position: fixed;
   left: 0px;
   right: 0px;
@@ -38,6 +36,7 @@
   height: auto;
   margin: auto;
   margin-top: 40px;
+  max-height: calc(100vh - 80px);
   overflow-x: auto;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch !important;

@@ -1,0 +1,64 @@
+.circleItem {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 10px;
+}
+
+@media (max-width: 1023px) {
+  .circleItem{
+    margin-bottom: 41px;
+  }
+}
+
+.circleArticle {
+  position: absolute;
+  top: -6px;
+  background-color: white;
+  padding: 2px 8px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #567DD0;
+}
+
+.circleCount {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 20px;
+  color: #FF6768;
+  padding: 40px 13px 36px 12px;
+  border-radius: 50%;
+  border: 1px dashed #567DD0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.circleText {
+  flex-basis: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #373737;
+  max-width: 210px;
+}

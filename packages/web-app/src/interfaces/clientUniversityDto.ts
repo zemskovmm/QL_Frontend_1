@@ -18,8 +18,11 @@ export interface ClientUniversityTraitsDto {
 }
 
 export interface ClientUniversityDto {
+  logoId: number | null;
   title: string;
   descriptionHtml: string;
   foundationYear: string;
+  bannerId: number;
+  galleryList: number[];
   traits: ClientUniversityTraitsDto;
 }

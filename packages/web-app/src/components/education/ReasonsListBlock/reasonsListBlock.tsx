@@ -12,8 +12,8 @@ export const ReasonsListBlock: FC<ReasonsListBlockProps> = ({ data }) => {
         <div className={style.reasonsListBlock__container}>
           <h2 className={style.reasonsListBlock__title} dangerouslySetInnerHTML={{ __html: data.title }} />
           <div className={style.reasonsListBlock__list}>
-            {data.items.map((el) => (
-              <div className={style.reasonsListBlock__item} key="item.title + index">
+            {data.items.map((el, ind) => (
+              <div className={style.reasonsListBlock__item} key={ind}>
                 <img src={el.img} alt="" className={style.reasonsListBlock__itemImg} />
                 <div className={style.reasonsListBlock__itemTitle}>
                   {el.title.toUpperCase()[0] + el.title.toLowerCase().slice(1)}

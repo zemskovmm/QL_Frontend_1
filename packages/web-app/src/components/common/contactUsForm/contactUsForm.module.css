@@ -16,6 +16,19 @@
   font-weight: 500;
 }
 
+@media (max-width: 767px) {
+  .button:before{
+    border-right: 0;
+    margin-right: 0;
+    width: 16px;
+    height: 20px;
+    background: url('src/assets/images/icons/call.svg') no-repeat 0 center / 16px 20px;
+  }
+  .button{
+    padding: 5px 7px;
+  }
+}
+
 .applyModal__title{
   font-style: normal;
   font-weight: bold;
@@ -23,6 +36,13 @@
   line-height: 42px;
   color: #373737;
   margin-bottom: 25px;
+}
+
+@media (max-width: 767px) {
+  .applyModal__title{
+    font-size: 24px;
+    margin-bottom: 2px;
+  }
 }
 
 .applyModal__formColTitle{
@@ -81,6 +101,13 @@
   margin-right: 25px;
 }
 
+@media (max-width: 767px) {
+  .applyModal__description{
+    margin-right: 0;
+    margin-bottom: 13px;
+  }
+}
+
 .applyModal__description a{
   text-decoration-line: underline;
   color: #0C389A;
@@ -100,8 +127,29 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 1023px) {
+  .postScriptButton {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .applyModal__buttonApply{
+    width: 100%;
+  }
+
+  .postScriptButton {
+    flex-direction: column;
+  }
+
+  .postScriptButton__description {
+    margin-bottom: 20px;
+  }
+}
+
 .postScriptButton {
   margin-top: 20px;
+  margin-right: 20px;
   display: flex;
   align-items: center;
 }

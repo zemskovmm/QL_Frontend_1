@@ -1,0 +1,31 @@
+.block > div {
+  margin: 10px 0 20px;
+}
+
+.block h3, .block a {
+  font-size: 1rem;
+  color: #01359a;
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.block img {
+  margin-right: 20px;
+}
+
+
+@media screen and (max-width: 1023px) {
+  .block {
+    flex-direction: column;
+    align-items: center !important;
+  }
+
+  .block img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .block h3 {
+    text-align: center;
+  }
+}

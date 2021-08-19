@@ -1,0 +1,50 @@
+.mapblock {
+  position: relative;
+  padding-bottom: 600px;
+}
+
+.block {
+  min-height: 227px;
+  width: 280px;
+  flex-shrink: 0;
+  background: #FFFFFF;
+  border: 1px solid #EFF3FA;
+  border-radius: 6px;
+  color: #373737;
+  line-height: 150%;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.block:hover, .block.active {
+  background: #EFF3FA;
+}
+
+.block:hover .pin, .block.active .pin {
+  background: #FFFFFF;
+}
+
+.block h3 {
+  margin-bottom: 6px;
+}
+
+.pin {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #EFF3FA;
+  margin-bottom: 13px;
+  position: relative;
+}
+
+.pin:before {
+  position: absolute;
+  left: 50%;
+  top: -8px;
+  width: 30px;
+  height: 30px;
+  transform: translateX(-50%);
+  content: '';
+  background: url("../../assets/img/pin.svg") no-repeat center / 30px 30px;
+}

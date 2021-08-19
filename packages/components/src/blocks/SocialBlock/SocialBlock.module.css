@@ -1,0 +1,39 @@
+.link {
+  background: #3A5898;
+  font-weight: bold;
+  color: white;
+  width: 50%;
+  text-align: center;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.link:first-child {
+  border-radius: 4px 0 0 0;
+}
+
+.link:last-child {
+  border-radius: 0 4px 0 0;
+}
+
+.link.active {
+  text-decoration: underline;
+  background-color: #5978B8;
+}
+
+.frame {
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 5px;
+  display: flex;
+  overflow: hidden;
+  margin: 18px auto;
+  height: 300px;
+  max-width: 300px;
+}
+
+.frame_big {
+  max-width: calc(100% - 10px) !important;
+}
+
+

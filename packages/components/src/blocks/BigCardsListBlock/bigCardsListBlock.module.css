@@ -1,0 +1,184 @@
+﻿.bigCardsListBlock__title {
+  max-width: 90%;
+  margin-left: 10px;
+}
+
+.bigCardsListBlock__subtitle{
+  display: flex;
+  margin-left: 56px;
+  font-size: 0.875rem;
+  line-height: 171%;
+  max-width: 440px;
+  font-weight: 400;
+}
+
+.bigCardsListBlock__subtitle:before {
+  content: '';
+  flex-shrink: 0;
+  margin-top: 6px;
+  width: 10px;
+  height: 9px;
+  margin-right: 16px;
+  background: url('./romb.svg') no-repeat center / contain;
+}
+
+
+
+.bigCard {
+  max-width: 370px;
+  margin: 0 15px 30px;
+  background: #FFFFFF;
+  border: 1px solid #EFF3FA;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 15px;
+  transition: box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  width: 100%;
+}
+
+.bigCard:hover {
+  box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
+  cursor: pointer;
+}
+
+
+.bigCard__img {
+  width: 100%;
+  object-fit: cover;
+  max-height: 240px;
+  margin-bottom: 23px;
+  height: 240px;
+}
+
+
+.bigCard__title {
+  padding: 0 10px;
+  margin-bottom: 10px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #373737;
+}
+
+.bigCard__subtitle {
+  padding: 0 10px;
+  margin-bottom: 18px;
+}
+
+.main h2 {
+  font-size: 1.875rem;
+  line-height: 140%;
+  font-weight: 700;
+  white-space: nowrap;
+  padding-bottom: 8px;
+}
+
+.main a {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(0, 78, 255, 0.07), 0 20px 50px rgba(0, 78, 255, 0.05);
+  border-radius: 6px;
+  width: 370px;
+  padding: 15px;
+}
+
+.main a > div:first-of-type {
+  font-weight: 700;
+  margin: 24px 10px;
+  font-size: 1.125rem;
+  line-height: 144%;
+}
+
+.main img {
+  max-height: 338px !important;
+  height: 338px !important;
+}
+
+
+.postScriptButton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.postScriptButton div {
+  width: auto;
+  margin: 0 20px 0 0;
+}
+
+
+.postScriptButton__description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  margin-right: 25px;
+  color: #646F83;
+  padding-left: 23px;
+  margin-left: auto;
+  position: relative;
+}
+
+.postScriptButton__description:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  border: 1px solid #FF6768;
+  width: 8.5px;
+  height: 8.5px;
+  box-sizing: border-box;
+  top: 7px;
+  transform: rotate(45deg);
+  transition: border 0.3s;
+}
+
+
+@media (max-width: 1023px) {
+
+  .titlepart{
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .bigCardsListBlock__title{
+    max-width: none;
+    text-align: center;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+  }
+
+  .bigCardsListBlock__subtitle{
+    margin-left: 0;
+  }
+
+  .main h2 {
+    font-size: 1.5rem;
+    white-space: normal;
+  }
+
+  .bigCard{
+    padding: 10px;
+    margin: 0 5px 10px;
+  }
+
+  .bigCard__img{
+    height: 200px;
+    max-height: 200px;
+    margin-bottom: 13px;
+  }
+}
+
+@media (max-width: 767px) {
+  .postScriptButton {
+    flex-direction: column;
+  }
+
+  .postScriptButton__description {
+    margin-bottom: 20px;
+  }
+}
