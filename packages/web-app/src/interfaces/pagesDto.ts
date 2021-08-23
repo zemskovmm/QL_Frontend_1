@@ -6,6 +6,7 @@ export interface PageListItemDto {
   widePreviewImageId: number | null;
   date: string | null;
   pageType: string;
+  url: string;
   namedTraits: { [name: string]: PageTraitDto[] };
 }
 

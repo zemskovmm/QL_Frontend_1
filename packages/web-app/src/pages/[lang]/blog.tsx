@@ -10,6 +10,14 @@ import { useState } from "react";
 import { LoadingIf } from "src/components/utilities/Loading";
 import { Paginator } from "src/components/utilities/Paginator";
 
+const traitNameMap: { [key: string]: string } = {
+  en: "Tags",
+  fr: "Mots clés",
+  ru: "Теги",
+  esp: "Etiquetas",
+  cn: "标签",
+};
+
 const BlogPage = () => {
   const lang = useIntl().locale;
 
@@ -17,6 +25,8 @@ const BlogPage = () => {
 
   const firstArticle = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber: 0, pageSize: 1 })?.items[0];
   const articles = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber, pageSize: 9 });
+  const tags = siteApi.useTraitByType(traitNameMap[lang]);
+  alert(lang);
 
   return (
     <div className={`container mx-auto py-12`}>
@@ -42,30 +52,32 @@ const BlogPage = () => {
           </Link>
         </div>
       </div>
-      <Link href={""}>
-        <a>
-          <FirstArticleBlock
-            title={firstArticle?.title || ""}
-            img={firstArticle?.widePreviewImageId || null}
-            date={firstArticle?.date || ""}
-            tags={firstArticle?.namedTraits["instruction-language"] || null}
-            blog={false}
-          />
-        </a>
-      </Link>
-      <FiltersBlock items={[]} />
+      {firstArticle && (
+        <Link href={firstArticle?.url || ""}>
+          <a>
+            <FirstArticleBlock
+              title={firstArticle?.title || ""}
+              img={firstArticle?.widePreviewImageId || null}
+              date={firstArticle?.date || ""}
+              tags={firstArticle?.namedTraits["blog-tags"] || null}
+              blog={false}
+            />
+          </a>
+        </Link>
+      )}
+      <FiltersBlock tags={tags?.map(({ names }) => names[lang])} />
 
       {articles && (
         <LoadingIf isLoading={articles?.totalPages === undefined}>
           <div className={`flex flex-col lg:flex-row lg:flex-wrap`}>
             {articles.items.map((item) => (
-              <Link href={""}>
+              <Link href={item.url || ""}>
                 <a className={`flex flex-col lg:w-4/12 lg:px-10`}>
                   <ArticleBlock
                     title={item.title || ""}
                     img={item.previewImageId || null}
                     date={item.date || ""}
-                    tags={item.namedTraits["instruction-language"] || null}
+                    tags={item.namedTraits["blog-tags"] || null}
                   />
                 </a>
               </Link>
@@ -73,7 +85,9 @@ const BlogPage = () => {
           </div>
         </LoadingIf>
       )}
-      {articles && <Paginator page={pageNumber} totalPages={articles?.totalPages || 0} setPage={setPageNumber} />}
+      {articles && articles?.totalPages > 1 && (
+        <Paginator page={pageNumber} totalPages={articles?.totalPages || 0} setPage={setPageNumber} />
+      )}
       <NewsletterBlock title={""} buttonName={""} description={""} />
     </div>
   );
