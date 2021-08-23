@@ -9,6 +9,7 @@ import { siteApi } from "src/clients/siteApiClient";
 import { useState } from "react";
 import { LoadingIf } from "src/components/utilities/Loading";
 import { Paginator } from "src/components/utilities/Paginator";
+import { PageListItemDto } from "../../interfaces/pagesDto";
 
 const traitNameMap: { [key: string]: string } = {
   en: "Tags",

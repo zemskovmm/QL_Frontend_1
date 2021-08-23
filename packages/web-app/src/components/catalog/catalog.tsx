@@ -89,6 +89,7 @@ export function Catalog<T>(props: CatalogProps<T>) {
       setFilter={setFilter}
       elementRenderer={props.elementRenderer}
       title={props.title}
+      type={props.apiElementName}
     />
   );
 }

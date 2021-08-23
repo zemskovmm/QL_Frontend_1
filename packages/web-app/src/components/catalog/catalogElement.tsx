@@ -1,13 +1,14 @@
-import { CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
+import { CatalogCourseDto, CatalogItemDto, CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
 import Link from "next/link";
 import style from "src/components/catalog/style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
+import TempSchoolLogo from "src/assets/icons/tempSchoolLogo.svg";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 import { FC } from "react";
 import pin from "src/assets/icons/pin.svg";
 
-const ElementCatalog: FC<{ item: CatalogUniversityDto }> = ({ children, item }) => (
+const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
   <Link href={item.url}>
     <a className={style.card}>
       <div className={style.card__left}>
@@ -92,6 +93,26 @@ export const UniversityCatalogElement = (item: CatalogUniversityDto) => (
           </span>
         </b>
       </div>
+    </div>
+  </ElementCatalog>
+);
+
+export const CourseCatalogElement = (item: CatalogCourseDto) => (
+  <ElementCatalog item={item}>
+    <div className={style.card__rightLevel}>
+      <span className={style.card__rightSubtitle}>
+        <LocalizedText id={"catalogItems_school"} />:{" "}
+      </span>
+      <p className={style.card__school}>
+        <span>Alliance Française Rouen</span>
+        <img src={TempSchoolLogo} alt="" />
+      </p>
+    </div>
+    <div className={style.card__rightLevel}>
+      <span className={style.card__rightSubtitle}>
+        <LocalizedText id={"catalogItems_duration"} />:{" "}
+      </span>
+      <LocalizedText id={"catalogItems_week"} />
     </div>
   </ElementCatalog>
 );
