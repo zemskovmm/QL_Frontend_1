@@ -65,7 +65,7 @@ const selectItems = [
   { id: "RU", name: AllLanguages.ru.title },
   { id: "EN", name: AllLanguages.en.title },
   { id: "FR", name: AllLanguages.fr.title },
-  { id: "SP", name: AllLanguages.esp.title },
+  { id: "ESP", name: AllLanguages.esp.title },
   { id: "CN", name: AllLanguages.cn.title },
 ];
 

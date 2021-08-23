@@ -389,9 +389,11 @@ export const PageEditor = (props: { store: PageEditorStore | any }) => {
         <AdminButton color="primary" onClick={() => s.save()}>
           Save
         </AdminButton>{" "}
-        <RouterLink routeName={RouteNames.pageTraitEditPage} params={{ id: s.id }}>
-          <AdminButton color={"primary"}> Traits editor </AdminButton>
-        </RouterLink>
+        {s.id && (
+          <RouterLink routeName={RouteNames.pageTraitEditPage} params={{ id: s.id }}>
+            <AdminButton color={"primary"}> Traits editor </AdminButton>
+          </RouterLink>
+        )}
         <br />
         <AdminRemoteUiDropdownEditor store={props.store.pageType} label={"Page type: "} />
         <AdminTabControl
