@@ -11,7 +11,7 @@ import { AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemot
 import { AdminRemoteUiImageFieldStore } from "src/components/remoteui/AdminRemoteUiImageEditor";
 import { action, computed, observable, runInAction } from "mobx";
 import { AvailableBlocks, findBlockInfo } from "@project/components/src/blocks";
-import { AdminPageDto, AdminPageLanguageDto } from "src/interfaces/AdminPageDto";
+import { AdminPageDto, AdminPageLanguageDto, AdminPageMetaDto } from "src/interfaces/AdminPageDto";
 import { RequestTracking } from "src/utils/Loadable";
 import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
@@ -236,21 +236,40 @@ export class PageLanguageEditorStore extends PageRowsEditorStore {
   @observable previewImage: AdminRemoteUiImageFieldStore;
   @observable smallPreviewImage: AdminRemoteUiImageFieldStore;
   @observable widePreviewImage: AdminRemoteUiImageFieldStore;
+  @observable metadata?: AdminPageMetaDto | null;
 
   constructor(data: AdminPageLanguageDto) {
     super(data.pageData.rows);
     this.title = data.title;
     this.url = data.url;
+    this.metadata = data.metadata;
     this.previewImage = new AdminRemoteUiImageFieldStore(data.previewImageId ?? null);
     this.smallPreviewImage = new AdminRemoteUiImageFieldStore(data.smallPreviewImageId ?? null);
     this.widePreviewImage = new AdminRemoteUiImageFieldStore(data.widePreviewImageId ?? null);
   }
 
+  @action addMeta() {
+    if (this.metadata === null) {
+      this.metadata = { meta: [] };
+    }
+    if (this.metadata?.meta === null) {
+      this.metadata.meta = [];
+    }
+    const data = { name: "", property: "", content: "" };
+    this.metadata?.meta.push(data);
+    console.log(this.metadata?.meta);
+  }
+
+  @action removeMeta(index: number) {
+    this.metadata?.meta.splice(index, 1);
+  }
+
   serialize(): AdminPageLanguageDto {
-    const { title, url, previewImage, smallPreviewImage, widePreviewImage } = this;
+    const { title, url, previewImage, smallPreviewImage, widePreviewImage, metadata } = this;
     return {
       title,
       url,
+      metadata,
       previewImageId: previewImage?.value ?? undefined,
       widePreviewImageId: widePreviewImage?.value ?? undefined,
       smallPreviewImageId: smallPreviewImage?.value ?? undefined,
@@ -290,6 +309,7 @@ export class PageEditorStore extends RequestTracking {
     const initialData = {
       url: "url",
       title: "Title",
+      metadata: null,
       pageData: {
         rows: [
           {

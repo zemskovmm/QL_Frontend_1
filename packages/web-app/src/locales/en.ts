@@ -62,6 +62,7 @@ const en = {
   blog_blog: "Blog",
   blog_historyClients: "History Clients",
   blog_liveJournal: "Live Journal",
+  readMore: "Read more",
 };
 
 export default en;

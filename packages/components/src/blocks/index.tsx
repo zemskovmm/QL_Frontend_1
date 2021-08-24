@@ -38,6 +38,7 @@ import { NewsBlockInfo } from "./NewsBlock/NewsBlock";
 import { SocialBlockInfo } from "./SocialBlock/SocialBlock";
 import { GallerySliderBlockInfo } from "./GallerySliderBlock/gallerySliderBlock";
 import { CommentsBlockInfo } from "./CommentsBlock/commentsBlock";
+import { SkipHistoryBlockInfo } from "./SkipHistoryBlock/skip-history";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -74,6 +75,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   HistoryClientsBlockInfo,
   FirstArticleBlockInfo,
   CommentsBlockInfo,
+  SkipHistoryBlockInfo,
 ];
 
 export interface IComponentHost {
@@ -101,6 +103,8 @@ const RowPresenter = (props: PageBlockRowDto) => {
   const sortBlocks = [...props.blocks].sort(function (x, y) {
     return x.type === "breadcrumbsBlock" ? -1 : y.type === "breadcrumbsBlock" ? 1 : 0;
   });
+  const findSkip = [...props.blocks].findIndex((x) => x.type === "skipHistoryBlock");
+
   return (
     <section
       style={{
@@ -111,6 +115,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;
+        if (props.hideHistory && i >= findSkip) return;
         if (cell.type === "breadcrumbsBlock") return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
         return (
           <div
@@ -133,7 +138,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
   );
 };
 
-export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
+export const RowsPresenter = (props: { rows: PageBlockRowDto[]; hideHistory?: boolean }) => {
   return (
     <>
       {props.rows.map(
@@ -146,6 +151,7 @@ export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
                 background={row.background}
                 hide={row.hide}
                 vertical={row.vertical}
+                hideHistory={props.hideHistory}
               />
             </React.Fragment>
           )

@@ -173,6 +173,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                       grid["col-" + cell.size]
                     } border border-blue-400 box-border relative py-10`}
                     style={{ verticalAlign: "top" }}
+                    key={cell.blockType + i}
                   >
                     <PageEditorCell key={i.toString()} store={cell} />
                   </div>
@@ -184,7 +185,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                 </div>
               </div>
             </div>
-            <td style={{ width: "0%", verticalAlign: "top" }}>
+            <div style={{ width: "0%", verticalAlign: "top" }}>
               <AdminButton color={"danger"} onClick={() => props.store.remove()}>
                 X
               </AdminButton>
@@ -204,7 +205,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   </AdminButton>
                 </>
               ) : null}
-            </td>
+            </div>
           </div>
         </div>
       </div>
@@ -334,6 +335,24 @@ export const PageRowsEditor = (props: { store: PageRowsEditorStore }) => {
 export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) => {
   return useObserver(() => (
     <div className={`flex flex-col`}>
+      {props.store.metadata?.meta.map((el, index) => (
+        <div key={index + "metadata"}>
+          <label>
+            <span>Name</span>
+            <input type="text" value={el.name} onChange={(e) => (el.name = e.target.value)} />
+          </label>
+          <label>
+            <span>Property</span>
+            <input type="text" value={el.property} onChange={(e) => (el.property = e.target.value)} />
+          </label>
+          <label>
+            <span>Content</span>
+            <input type="text" value={el.content} onChange={(e) => (el.content = e.target.value)} />
+          </label>
+          <button onClick={() => props.store.removeMeta(index)}>Remove</button>
+        </div>
+      ))}
+      <button onClick={() => props.store.addMeta()}>Add meta</button>
       <AdminTextBox id={"title"} label="Title" {...bind(props.store, "title")} />
       <AdminTextBox id={"url"} label="Url" {...bind(props.store, "url")} />
       <ImagePickerWithLabel store={props.store.previewImage} title={"Preview image:"} />
