@@ -20,7 +20,7 @@ export const FiltersBlock = (props: { tags?: string[]; tags2?: string[] }) => {
             {props.tags &&
               props.tags.map((tag) => {
                 return tag ? (
-                  <label className={`mb-4 mr-3`}>
+                  <label className={`mb-4 mr-3`} key={tag}>
                     <input type={"checkbox"} name={"hi"} />
                     <span>{tag}</span>
                   </label>
@@ -32,7 +32,7 @@ export const FiltersBlock = (props: { tags?: string[]; tags2?: string[] }) => {
           <div className={`flex flex-wrap ${styles.filter__blue} md:w-6/12 md:justify-end`}>
             {props.tags2 &&
               props.tags2.map((tag) => (
-                <label className={`mb-4 mr-3`}>
+                <label className={`mb-4 mr-3`} key={tag + "2"}>
                   <input type={"checkbox"} name={"hi"} />
                   <span>{tag}</span>
                 </label>

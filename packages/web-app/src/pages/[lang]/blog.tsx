@@ -27,7 +27,6 @@ const BlogPage = () => {
   const firstArticle = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber: 0, pageSize: 1 })?.items[0];
   const articles = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber, pageSize: 9 });
   const tags = siteApi.useTraitByType(traitNameMap[lang]);
-  alert(lang);
 
   return (
     <div className={`container mx-auto py-12`}>

@@ -12,6 +12,15 @@ export interface AdminPageLanguageDto {
   previewImageId?: number;
   smallPreviewImageId?: number;
   widePreviewImageId?: number;
+  metadata?: AdminPageMetaDto | null;
+}
+
+export interface AdminPageMetaDto {
+  meta: {
+    name?: string;
+    content: string;
+    property?: string;
+  }[];
 }
 
 export interface AdminPageDto {

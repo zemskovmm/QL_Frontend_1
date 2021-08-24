@@ -11,12 +11,12 @@ import { AppComponentHost } from "src/components/AppComponentHost";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  let { urls } = pageProps;
+  let { urls, title, module } = pageProps;
   if (urls == null) urls = getLanguageUrlsFromRouterState(router);
 
   return (
     <>
-      <AppComponentHost>
+      <AppComponentHost headTitle={title} headMeta={module?.page.Metadata?.meta}>
         <MainLayout header={headerData} footer={footerData} urls={urls}>
           <Component {...pageProps} />
         </MainLayout>
