@@ -75,7 +75,15 @@ export class SiteApiClient extends ApiClientBase {
 
   async getBlogPages(
     lang: string,
-    params: { pageType?: string; pageSize?: number; pageNumber?: number; filters?: [number] }
+    params: {
+      pageType?: string;
+      pageSize?: number;
+      pageNumber?: number;
+      filters?: {
+        identifier: string;
+        values: number[];
+      }[];
+    }
   ): Promise<PageListDto> {
     const data = {
       pageType: params.pageType || 0,
@@ -88,7 +96,15 @@ export class SiteApiClient extends ApiClientBase {
 
   useBlogPages(
     lang: string,
-    params: { pageType?: string; pageSize?: number; pageNumber?: number; filters?: [number] }
+    params: {
+      pageType?: string;
+      pageSize?: number;
+      pageNumber?: number;
+      filters?: {
+        identifier: string;
+        values: number[];
+      }[];
+    }
   ): PageListDto | undefined {
     return useData(
       {
@@ -100,7 +116,7 @@ export class SiteApiClient extends ApiClientBase {
           filters: params.filters,
         },
       },
-      (req) => this.getBlogPages(lang, params)
+      async (req) => await this.getBlogPages(lang, params)
     );
   }
 

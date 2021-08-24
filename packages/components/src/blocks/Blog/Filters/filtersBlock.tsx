@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./filtersBlock.module.css";
 
-export const FiltersBlock = (props: { tags?: string[]; tags2?: string[] }) => {
+export const FiltersBlock = (props: { tags?: any[]; tags2?: string[]; click: (id: number) => void }) => {
   const [openMenu, setOpenMenu] = useState(false);
   return (
     <div className={`py-12 mx-4`}>
@@ -20,9 +20,9 @@ export const FiltersBlock = (props: { tags?: string[]; tags2?: string[] }) => {
             {props.tags &&
               props.tags.map((tag) => {
                 return tag ? (
-                  <label className={`mb-4 mr-3`} key={tag}>
-                    <input type={"checkbox"} name={"hi"} />
-                    <span>{tag}</span>
+                  <label className={`mb-4 mr-3`} key={tag.id}>
+                    <input type={"checkbox"} name={"hi"} onChange={(e) => props.click(tag.id)} />
+                    <span>{tag.names["en"]}</span>
                   </label>
                 ) : (
                   ""
