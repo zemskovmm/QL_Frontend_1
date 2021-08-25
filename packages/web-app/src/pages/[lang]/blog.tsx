@@ -8,8 +8,9 @@ import { siteApi } from "src/clients/siteApiClient";
 import { useEffect, useMemo, useReducer, useState } from "react";
 import { LoadingIf } from "src/components/utilities/Loading";
 import { Paginator } from "src/components/utilities/Paginator";
-import { observer, useObserver } from "mobx-react";
-import { PageListDto, PageListItemDto } from "../../interfaces/pagesDto";
+import { useObserver } from "mobx-react";
+import { PageListItemDto } from "../../interfaces/pagesDto";
+import { computed } from "mobx";
 
 const traitNameMap: { [key: string]: string } = {
   en: "blog-tags",
