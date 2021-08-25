@@ -5,10 +5,11 @@ import { FiltersBlock } from "@project/components/src/blocks/Blog/Filters/filter
 import Link from "next/link";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { siteApi } from "src/clients/siteApiClient";
-import { useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import { LoadingIf } from "src/components/utilities/Loading";
 import { Paginator } from "src/components/utilities/Paginator";
 import { observer, useObserver } from "mobx-react";
+import { PageListDto, PageListItemDto } from "../../interfaces/pagesDto";
 
 const traitNameMap: { [key: string]: string } = {
   en: "blog-tags",
@@ -20,9 +21,8 @@ const traitNameMap: { [key: string]: string } = {
 
 const BlogPage = () => {
   const lang = useIntl().locale;
-
   const [pageNumber, setPageNumber] = useState(0);
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState<number[] | []>([]);
 
   const articles = siteApi.useBlogPages(lang, {
     pageType: "BlogEntry",
@@ -50,24 +50,25 @@ const BlogPage = () => {
 
   const tags = siteApi.useTraitByType(traitNameMap[lang]);
 
-  // const setFilter = (id: number) => {
-  //   const newFilters = filters;
-  //   if (!newFilters.find((el: number) => el === id)) {
-  //     newFilters.push(id);
-  //   } else {
-  //     newFilters.splice(
-  //       newFilters.findIndex((el) => el === id),
-  //       1
-  //     );
-  //   }
-  //   setFilters(newFilters);
-  // };
+  const setFilter = (id: number) => {
+    const newFilters: number[] = filters;
+    if (!newFilters.find((el: number) => el === id)) {
+      newFilters.push(id);
+    } else {
+      newFilters.splice(
+        newFilters.findIndex((el) => el === id),
+        1
+      );
+    }
+    setFilters(newFilters);
+  };
 
   return useObserver(() => (
     <div className={`container mx-auto py-12`}>
       <div className={`flex flex-col md:flex-row items-center`}>
         <h1 className={`md:mr-10 whitespace-nowrap`}>
           <LocalizedText id={"blog_blog"} />
+          {filters}
         </h1>
         <div className={`flex w-full md:ml-10`}>
           <Link href={`blog`}>
@@ -106,8 +107,8 @@ const BlogPage = () => {
       {articles && (
         <LoadingIf isLoading={articles?.totalPages === undefined}>
           <div className={`flex flex-col lg:flex-row lg:flex-wrap`}>
-            {articles.items.map((item) => (
-              <Link href={item.url || ""}>
+            {articles.items?.map((item: PageListItemDto) => (
+              <Link href={item.url || ""} key={item.url}>
                 <a className={`flex flex-col lg:w-4/12 lg:px-10`}>
                   <ArticleBlock
                     title={item.title || ""}

@@ -16,7 +16,7 @@ export const FiltersBlock = (props: { tags?: any[]; tags2?: string[]; click: (id
           </button>
         </div>
         <div className={`flex flex-col overflow-y-scroll md:overflow-y-visible md:flex-row	md:justify-between`}>
-          <div className={`flex flex-wrap ${styles.filter__red} md:w-6/12`}>
+          <form className={`flex flex-wrap ${styles.filter__red} md:w-6/12`}>
             {props.tags &&
               props.tags.map((tag) => {
                 return tag ? (
@@ -28,7 +28,7 @@ export const FiltersBlock = (props: { tags?: any[]; tags2?: string[]; click: (id
                   ""
                 );
               })}
-          </div>
+          </form>
           <div className={`flex flex-wrap ${styles.filter__blue} md:w-6/12 md:justify-end`}>
             {props.tags2 &&
               props.tags2.map((tag) => (

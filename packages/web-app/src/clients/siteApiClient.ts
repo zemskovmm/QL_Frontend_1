@@ -105,7 +105,7 @@ export class SiteApiClient extends ApiClientBase {
         values: number[];
       }[];
     }
-  ): PageListDto | undefined {
+  ): PageListDto | any {
     return useData(
       {
         lang: lang,
