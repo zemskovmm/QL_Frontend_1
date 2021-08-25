@@ -1,5 +1,4 @@
 import { useIntl } from "react-intl";
-import { NewsletterBlock } from "@project/components/src/blocks/NewsletterBlock/NewsletterBlock";
 import { FirstArticleBlock } from "@project/components/src/blocks/Blog/FirstArticle/firstArticleBlock";
 import { ArticleBlock } from "@project/components/src/blocks/Blog/ArticleList/articleListBlock";
 import { FiltersBlock } from "@project/components/src/blocks/Blog/Filters/filtersBlock";
@@ -12,21 +11,51 @@ import { Paginator } from "src/components/utilities/Paginator";
 import { PageListItemDto } from "../../interfaces/pagesDto";
 
 const traitNameMap: { [key: string]: string } = {
-  en: "Tags",
-  fr: "Mots clés",
-  ru: "Теги",
-  esp: "Etiquetas",
-  cn: "标签",
+  en: "blog-tags",
+  fr: "blog-tags",
+  ru: "blog-tags",
+  esp: "blog-tags",
+  cn: "blog-tags",
 };
 
 const BlogPage = () => {
   const lang = useIntl().locale;
-
   const [pageNumber, setPageNumber] = useState(0);
+  const [filters, setFilters] = useState<number[]>([]);
 
-  const firstArticle = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber: 0, pageSize: 1 })?.items[0];
-  const articles = siteApi.useBlogPages(lang, { pageType: "BlogEntry", pageNumber, pageSize: 9 });
+  const articles = siteApi.useBlogPages(lang, {
+    pageType: "BlogEntry",
+    pageNumber,
+    pageSize: 9,
+    filters: [
+      {
+        identifier: "string",
+        values: filters,
+      },
+    ],
+  });
+
+  const firstArticle = siteApi.useBlogPages(lang, {
+    pageType: "BlogEntry",
+    pageNumber: 0,
+    pageSize: 1,
+    filters: [
+      {
+        identifier: "string",
+        values: filters,
+      },
+    ],
+  })?.items[0];
+
   const tags = siteApi.useTraitByType(traitNameMap[lang]);
+
+  const toggleFilter = (id: number) => {
+    const exists = filters != null && filters.indexOf(id) != -1;
+    let newFilters = [...filters];
+    if (exists) newFilters = newFilters.filter((v) => v != id);
+    else newFilters.push(id);
+    setFilters(newFilters);
+  };
 
   return (
     <div className={`container mx-auto py-12`}>
@@ -65,13 +94,14 @@ const BlogPage = () => {
           </a>
         </Link>
       )}
-      <FiltersBlock tags={tags?.map(({ names }) => names[lang])} />
+      {/*{filters.map((el) => el)}*/}
+      <FiltersBlock tags={tags} click={(id: number) => toggleFilter(id)} />
 
       {articles && (
         <LoadingIf isLoading={articles?.totalPages === undefined}>
           <div className={`flex flex-col lg:flex-row lg:flex-wrap`}>
-            {articles.items.map((item) => (
-              <Link href={item.url || ""}>
+            {articles.items?.map((item: PageListItemDto) => (
+              <Link href={item.url || ""} key={item.url}>
                 <a className={`flex flex-col lg:w-4/12 lg:px-10`}>
                   <ArticleBlock
                     title={item.title || ""}
@@ -88,7 +118,6 @@ const BlogPage = () => {
       {articles && articles?.totalPages > 1 && (
         <Paginator page={pageNumber} totalPages={articles?.totalPages || 0} setPage={setPageNumber} />
       )}
-      <NewsletterBlock title={""} buttonName={""} description={""} />
     </div>
   );
 };
