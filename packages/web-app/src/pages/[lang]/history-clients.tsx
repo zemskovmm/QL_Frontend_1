@@ -4,6 +4,7 @@ import { LocalizedText } from "src/components/common/LocalizedText";
 import { siteApi } from "../../clients/siteApiClient";
 import { RowsPresenter } from "@project/components/src/blocks";
 import React, { FC } from "react";
+import { PageListDto, PageListItemDto } from "../../interfaces/pagesDto";
 
 type HistoryItemType = {
   title: string;
@@ -66,7 +67,7 @@ const HistoryClientsPage = () => {
         </div>
       </div>
       <div className={`flex flex-col`}>
-        {historyList?.items.map((el) => (
+        {historyList?.items.map((el: PageListItemDto) => (
           <div key={el.url}>
             <HistoryItem title={el.title} link={el.url} date={el.date ?? ""}>
               <RowsPresenter rows={el.block.rows} hideHistory={true} />
