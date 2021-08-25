@@ -21,7 +21,25 @@ export const TraitPage = () => {
             }
             routeName={RouteNames.traitList}
           >
-            back in list
+            Back to list
+          </RouterLink>
+          <RouterLink
+            className={
+              "d-flex mb-4 mr-auto text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+            }
+            routeName={RouteNames.traitTypeEdit}
+            params={{ id: s.traitTypeId }}
+          >
+            Edit Trait Type
+          </RouterLink>
+          <RouterLink
+            className={
+              "d-flex mb-4 mr-auto text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
+            }
+            routeName={RouteNames.traitCreate}
+            params={{ id: s.traitTypeId }}
+          >
+            Create new
           </RouterLink>
           <AdminTable<AdminTraitListItemDto>
             columns={dmap(AllLanguages, (l) => ({

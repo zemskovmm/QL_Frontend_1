@@ -8,7 +8,12 @@ import { siteApi } from "../clients/siteApiClient";
 import Head from "next/head";
 import Link from "next/link";
 
-export const AppComponentHost: React.FC = ({ children }) => {
+type appComponentHostType = {
+  headTitle: string;
+  headMeta?: { name: string; content: string; property: string }[] | null;
+};
+
+export const AppComponentHost: React.FC<appComponentHostType> = ({ headTitle, headMeta, children }) => {
   const [isContactUsFormShown, setContactUsFormShown] = useState(false);
   const router = useRouter();
   const lang = router.query.lang || "en";
@@ -16,15 +21,16 @@ export const AppComponentHost: React.FC = ({ children }) => {
     showContactUsForm: () => setContactUsFormShown(true),
     filters: siteApi,
     lang: lang as string,
-    linkComponent: Link
+    linkComponent: Link,
   };
   return (
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <title>Quartier Latin</title>
-        {/*<meta name="viewport" content="width=1024" />*/}
+        <title>Quartier Latin {headTitle && `| ${headTitle}`}</title>
+        <meta name="viewport" content="width=1600" />
         <meta name="viewport" content="width=device-width, user-scalable=yes" />
+        {headMeta && headMeta.map((el) => <meta name={el.name} content={el.content} property={el.property} />)}
       </Head>
       <IntlProvider locale={lang as string} defaultLocale="en" messages={getLocaleMessages(lang as string)}>
         <ComponentHostContext.Provider value={host}>

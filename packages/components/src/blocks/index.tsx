@@ -27,6 +27,9 @@ import { HtmlWithIconBlockInfo } from "./HtmlWithIconBlock/htmlWithIconBlock";
 import { FramesWithArrowBlockInfo } from "./FramesWithArrowBlock/framesWithArrowBlock";
 import { FixedHeightBlockInfo } from "./FixedHeightBlock/fixedHeightBlock";
 import { TableBlockInfo } from "./TableBlock/TableBlock";
+import { NewsletterBlockInfo } from "./NewsletterBlock/NewsletterBlock";
+import { HistoryClientsBlockInfo } from "./Blog/HistoryClients/historyClientsBlock";
+import { FirstArticleBlockInfo } from "./Blog/FirstArticle/firstArticleBlock";
 
 import cn from "classnames";
 import grid from "../styles/grid.module.css";
@@ -34,6 +37,8 @@ import { PartnersBlockInfo } from "./PartnersBlock/PartnersBlock";
 import { NewsBlockInfo } from "./NewsBlock/NewsBlock";
 import { SocialBlockInfo } from "./SocialBlock/SocialBlock";
 import { GallerySliderBlockInfo } from "./GallerySliderBlock/gallerySliderBlock";
+import { CommentsBlockInfo } from "./CommentsBlock/commentsBlock";
+import { SkipHistoryBlockInfo } from "./SkipHistoryBlock/skip-history";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -66,6 +71,11 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   NewsBlockInfo,
   SocialBlockInfo,
   GallerySliderBlockInfo,
+  NewsletterBlockInfo,
+  HistoryClientsBlockInfo,
+  FirstArticleBlockInfo,
+  CommentsBlockInfo,
+  SkipHistoryBlockInfo,
 ];
 
 export interface IComponentHost {
@@ -93,26 +103,32 @@ const RowPresenter = (props: PageBlockRowDto) => {
   const sortBlocks = [...props.blocks].sort(function (x, y) {
     return x.type === "breadcrumbsBlock" ? -1 : y.type === "breadcrumbsBlock" ? 1 : 0;
   });
+  const findSkip = [...props.blocks].findIndex((x) => x.type === "skipHistoryBlock");
+
   return (
     <section
       style={{
         background: props.background,
-        maxWidth: props.maxWidth ? props.maxWidth : "100%",
         alignItems: props.vertical,
       }}
       className="relative mx-auto flex-wrap flex"
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;
+        if (props.hideHistory && i >= findSkip) return;
         if (cell.type === "breadcrumbsBlock") return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
         return (
           <div
             key={i}
             className={cn(
               i === 1 && sortBlocks[0].type == "breadcrumbsBlock" ? "block-with-breadcrumbs" : "",
-              `inline-block ${grid["col-" + cell.size]} box-border`
+              `inline-block ${grid["col-" + cell.size]} box-border mx-auto`
             )}
-            style={{ verticalAlign: "top", backgroundColor: props.background ? props.background : "" }}
+            style={{
+              verticalAlign: "top",
+              maxWidth: props.maxWidth ? props.maxWidth : "100%",
+              backgroundColor: props.background ? props.background : "",
+            }}
           >
             <BlockPresenter blockType={cell.type} blockData={cell.data} />
           </div>
@@ -122,7 +138,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
   );
 };
 
-export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
+export const RowsPresenter = (props: { rows: PageBlockRowDto[]; hideHistory?: boolean }) => {
   return (
     <>
       {props.rows.map(
@@ -135,6 +151,7 @@ export const RowsPresenter = (props: { rows: PageBlockRowDto[] }) => {
                 background={row.background}
                 hide={row.hide}
                 vertical={row.vertical}
+                hideHistory={props.hideHistory}
               />
             </React.Fragment>
           )

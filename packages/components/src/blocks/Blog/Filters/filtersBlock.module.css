@@ -1,0 +1,73 @@
+﻿.filter{
+}
+
+.filter__button{
+  background: #EFF3FA;
+  border-radius: 3px;
+  padding: 12px 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  justify-content: center;
+  color: #567DD0;
+}
+
+
+.filter__modal{
+  background: #E5E5E5;
+  z-index: 9999999;
+  padding: 10px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 10px;
+  box-shadow: 0 0 100px 10px black;
+}
+
+.filter__blue span, .filter__red span{
+  padding: 3px 11px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter__blue input, .filter__red input{
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  
+}
+
+.filter__blue span{
+  border: 1px solid #C9D5F099;
+  color: #A8B5CC;
+}
+
+.filter__blue label input:checked + span{
+  color: #567DD0B3;
+  background: #C9D5F04D;
+  border: 1px solid #C9D5F04D;
+}
+
+.filter__red span{
+  border: 1px solid #FF67684D;
+  color: #FF676880;
+}
+
+.filter__red label input:checked + span{
+  color: #FF6768;
+  background: #FF67681A;
+  border: 1px solid #FF67681A;
+}
+
+@media (min-width: 768px) {
+  .filter__modal{
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+}

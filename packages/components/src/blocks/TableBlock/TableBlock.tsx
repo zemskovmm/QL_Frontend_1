@@ -37,6 +37,10 @@ const TableRowBlock = (props: TableRowElement) => {
         ? props.titles[+props.title - 1].title
         : ""
       : "";
+  const text: string =
+    props.note && props.note > 0
+      ? props.text + `<sup><a href="#note${props.note}">${props.note}</a></sup>`
+      : props.text + "";
   return (
     <div
       className={cn(styles.cell, props.vertical ? styles.vertical : "")}
@@ -46,14 +50,7 @@ const TableRowBlock = (props: TableRowElement) => {
         <>
           <div className={styles.text} style={{ maxWidth: props.maxTextWidth }}>
             {titleText && <span>{titleText}</span>}
-            {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
-            {props.note && props.note > 0 ? (
-              <sup>
-                <a href={`#note${props.note}`}>{props.note}</a>
-              </sup>
-            ) : (
-              ""
-            )}
+            {props.text && <p dangerouslySetInnerHTML={{ __html: text }} />}
             {props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
           </div>
           <div className={styles.info}>
@@ -65,14 +62,7 @@ const TableRowBlock = (props: TableRowElement) => {
       ) : (
         <>
           {titleText && <span>{titleText}</span>}
-          {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
-          {props.note && props.note > 0 ? (
-            <sup>
-              <a href={`#note${props.note}`}>{props.note}</a>
-            </sup>
-          ) : (
-            ""
-          )}
+          {props.text && <p dangerouslySetInnerHTML={{ __html: text }} />}
           {props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
         </>
       )}

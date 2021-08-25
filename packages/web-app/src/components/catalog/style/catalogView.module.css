@@ -52,7 +52,6 @@
   line-height: 42px;
   color: #373737;
   margin-top: 0;
-  margin-bottom: 12px;
 }
 
 .catalog__count{
@@ -313,6 +312,19 @@
   color: #373737;
 }
 
+.card__school {
+  display: flex;
+}
+
+.card__school span {
+  color: #0C389A;
+  border-bottom: 1px solid #0C389A;
+}
+
+.card__school img {
+  margin-left: 10px;
+}
+
 .catalogWrapper {
   justify-content: center;
   flex-direction: column;
@@ -476,4 +488,12 @@
   border-top: 1px solid #C9D5F0;
   border-bottom: 1px solid #C9D5F0;
   margin-bottom: 15px;
+}
+
+.pinText{
+  color: #0C389A;
+}
+
+.pinText:hover{
+  color: #373737;
 }

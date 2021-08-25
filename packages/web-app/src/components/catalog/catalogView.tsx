@@ -5,6 +5,7 @@ import { LoadingIf } from "src/components/utilities/Loading";
 import style from "./style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
 import education from "src/assets/icons/education.svg";
+import course from "src/assets/icons/course.svg";
 import hotel from "src/assets/icons/hotel.svg";
 import filter from "src/assets/icons/filter.svg";
 import sort from "src/assets/icons/sort.svg";
@@ -12,6 +13,7 @@ import close from "src/assets/icons/cross-remove.svg";
 import { LocalizedText } from "../common/LocalizedText";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
+import cn from "classnames";
 
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
@@ -61,6 +63,42 @@ function CatalogFilter(props: {
   );
 }
 
+const CatalogCategories = ({ lang = "en", type = "university" }) => (
+  <div className={style.catalog__filterRow}>
+    <h3 className={style.catalog__filterTitle}>
+      <LocalizedText id={"catalogEducation_categories"} />
+    </h3>
+    <div>
+      {/*<a*/}
+      {/*  href={`/${lang}/catalog/course`}*/}
+      {/*  className={cn(style.toggle__switch, type !== "university" ? style.toggle__switch_active : "")}*/}
+      {/*>*/}
+      {/*  <img src={course} alt="" className={`${style.toggle__switchImg}`} />*/}
+      {/*  <span className={`${style.toggle__switchName}`}>*/}
+      {/*    <LocalizedText id={"catalogEducation_courses"} />*/}
+      {/*  </span>*/}
+      {/*</a>*/}
+      <a
+        href={`/${lang}/catalog/universtiy`}
+        className={cn(style.toggle__switch, type === "university" ? style.toggle__switch_active : "")}
+      >
+        <img src={education} alt="" className={`${style.toggle__switchImg}`} />
+        <span className={`${style.toggle__switchName}`}>
+          <LocalizedText id={"catalogEducation_education"} />
+        </span>
+      </a>
+      {linkHousing[lang] && (
+        <a href={linkHousing[lang]} className={`${style.toggle__switch}`}>
+          <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
+          <span className={`${style.toggle__switchName}`}>
+            <LocalizedText id={"catalogEducation_accommodationn"} />
+          </span>
+        </a>
+      )}
+    </div>
+  </div>
+);
+
 function CatalogFilters(props: {
   filters: CatalogFilterDto[];
   parsedFilters: CatalogFilterRequestDto[];
@@ -88,16 +126,15 @@ function CatalogItems<T>(props: {
   widthInner: boolean;
   clickFilter: () => void;
   clickSort: () => void;
+  title: string;
 }) {
   return (
     <div className={`flex flex-col w-full`}>
-      <div className={`flex items-center justify-between px-4 lg:px-0`}>
-        <h1 className={`${style.catalog__h1}`}>
-          <LocalizedText id={"catalogEducation_title"} />
-        </h1>
+      <div className={`flex items-center px-4 lg:px-0 mb-3`}>
+        <h1 className={`${style.catalog__h1}`}>{props.title}</h1>
         <div className={`${style.catalog__count}`}>
           {props.data.totalItems}{" "}
-          <span className={`hidden lg:block`}>
+          <span className={`hidden lg:inline`}>
             <LocalizedText id={"catalogEducation_search_result"} />
           </span>
         </div>
@@ -139,6 +176,8 @@ export function CatalogView<T>(props: {
   page: number;
   setPage: (p: number) => void;
   setFilter: (identifier: string, item: number, value: boolean) => void;
+  title: string;
+  type: string;
 }): JSX.Element {
   const [widthInner, setWidthInner] = useState(true);
   const [openFilter, setOpenFilter] = useState(false);
@@ -156,27 +195,7 @@ export function CatalogView<T>(props: {
             <img src={close} alt="" />
           </button>
           <div className={`${style.catalog__filterCol} align-top`}>
-            <div className={style.catalog__filterRow}>
-              <h3 className={style.catalog__filterTitle}>
-                <LocalizedText id={"catalogEducation_categories"} />
-              </h3>
-              <div>
-                <a href="#" className={`${style.toggle__switch} ${style.toggle__switch_active}`}>
-                  <img src={education} alt="" className={`${style.toggle__switchImg}`} />
-                  <span className={`${style.toggle__switchName}`}>
-                    <LocalizedText id={"catalogEducation_education"} />
-                  </span>
-                </a>
-                {linkHousing[lang] && (
-                  <a href={linkHousing[lang]} className={`${style.toggle__switch}`}>
-                    <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
-                    <span className={`${style.toggle__switchName}`}>
-                      <LocalizedText id={"catalogEducation_accommodationn"} />
-                    </span>
-                  </a>
-                )}
-              </div>
-            </div>
+            <CatalogCategories lang={lang} />
             <CatalogFilters
               filters={props.filters || []}
               parsedFilters={props.parsedFilters}
@@ -192,27 +211,7 @@ export function CatalogView<T>(props: {
       )}
       {widthInner && (
         <div className={`${style.catalog__filterCol} align-top`}>
-          <div className={style.catalog__filterRow}>
-            <h3 className={style.catalog__filterTitle}>
-              <LocalizedText id={"catalogEducation_categories"} />
-            </h3>
-            <div>
-              <a href="#" className={`${style.toggle__switch} ${style.toggle__switch_active}`}>
-                <img src={education} alt="" className={`${style.toggle__switchImg}`} />
-                <span className={`${style.toggle__switchName}`}>
-                  <LocalizedText id={"catalogEducation_education"} />
-                </span>
-              </a>
-              {linkHousing[lang] && (
-                <a href={linkHousing[lang]} className={`${style.toggle__switch}`}>
-                  <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
-                  <span className={`${style.toggle__switchName}`}>
-                    <LocalizedText id={"catalogEducation_accommodationn"} />
-                  </span>
-                </a>
-              )}
-            </div>
-          </div>
+          <CatalogCategories lang={lang} type={props.type} />
           <CatalogFilters
             filters={props.filters || []}
             parsedFilters={props.parsedFilters}
@@ -231,6 +230,7 @@ export function CatalogView<T>(props: {
               widthInner={widthInner}
               clickFilter={() => setOpenFilter(true)}
               clickSort={() => setOpenSort(true)}
+              title={props.title}
             />
           )}
         </LoadingIf>

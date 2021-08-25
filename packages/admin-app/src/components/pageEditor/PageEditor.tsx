@@ -11,6 +11,7 @@ import { AdminRemoteUiHtmlEditor, AdminRemoteUiHtmlEditorStore } from "src/compo
 import {
   AdminRemoteUiImageFieldEditor,
   AdminRemoteUiImageFieldStore,
+  ImagePickerWithLabel,
 } from "src/components/remoteui/AdminRemoteUiImageEditor";
 import { AvailableBlocks, BlockPresenter } from "@project/components/src/blocks";
 import { AdminButton } from "src/components/common/AdminButton";
@@ -24,9 +25,12 @@ import { AdminTextBox } from "src/components/common/AdminTextBox";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import styles from "./PageEditor.module.css";
+import { AdminRemoteUiDropdownEditor, AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
+import { RouterLink } from "mobx-state-router";
+import { RouteNames } from "../../routing/routes";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -133,7 +137,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   <label className={`flex items-center mr-6`}>
                     <input
                       type={"radio"}
-                      name={"start"}
+                      name={"verticalAlign"}
                       value={"start"}
                       onChange={(e) => (props.store.vertical = e.target.value)}
                       checked={props.store.vertical === "start"}
@@ -143,7 +147,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   <label className={`flex items-center mr-6`}>
                     <input
                       type={"radio"}
-                      name={"center"}
+                      name={"verticalAlign"}
                       value={"center"}
                       onChange={(e) => (props.store.vertical = e.target.value)}
                       checked={props.store.vertical === "center"}
@@ -153,7 +157,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   <label className={`flex items-center mr-6`}>
                     <input
                       type={"radio"}
-                      name={"end"}
+                      name={"verticalAlign"}
                       value={"end"}
                       onChange={(e) => (props.store.vertical = e.target.value)}
                       checked={props.store.vertical === "end"}
@@ -169,6 +173,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                       grid["col-" + cell.size]
                     } border border-blue-400 box-border relative py-10`}
                     style={{ verticalAlign: "top" }}
+                    key={cell.blockType + i}
                   >
                     <PageEditorCell key={i.toString()} store={cell} />
                   </div>
@@ -180,7 +185,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                 </div>
               </div>
             </div>
-            <td style={{ width: "0%", verticalAlign: "top" }}>
+            <div style={{ width: "0%", verticalAlign: "top" }}>
               <AdminButton color={"danger"} onClick={() => props.store.remove()}>
                 X
               </AdminButton>
@@ -200,7 +205,7 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
                   </AdminButton>
                 </>
               ) : null}
-            </td>
+            </div>
           </div>
         </div>
       </div>
@@ -213,6 +218,7 @@ class RemoteUiCustomization implements IRemoteUiEditorCustomization {
     if (store instanceof AdminRemoteUiHtmlEditorStore) return <AdminRemoteUiHtmlEditor store={store} />;
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
     if (store instanceof AdminRemoteUiRowsStore) return <AdminRemoteUiRowsEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownEditorStore) return <AdminRemoteUiDropdownEditor store={store} />;
     return null;
   }
 }
@@ -328,9 +334,57 @@ export const PageRowsEditor = (props: { store: PageRowsEditorStore }) => {
 
 export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) => {
   return useObserver(() => (
-    <div>
+    <div className={`flex flex-col`}>
+      <div className={`my-4`}>
+        {props.store.metadata?.meta.map((el, index) => (
+          <div key={index + "metadata"} className={`flex items-end`}>
+            <label className={`mr-2`}>
+              <span>Name</span>
+              <input
+                type="text"
+                className={`form-control`}
+                value={el.name}
+                onChange={(e) => (el.name = e.target.value)}
+              />
+            </label>
+            <label className={`mr-2`}>
+              <span>Property</span>
+              <input
+                type="text"
+                className={`form-control`}
+                value={el.property}
+                onChange={(e) => (el.property = e.target.value)}
+              />
+            </label>
+            <label className={`mr-2`}>
+              <span>Content</span>
+              <input
+                type="text"
+                className={`form-control`}
+                value={el.content}
+                onChange={(e) => (el.content = e.target.value)}
+              />
+            </label>
+            <button
+              onClick={() => props.store.removeMeta(index)}
+              className={`text-white  font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+        <button
+          onClick={() => props.store.addMeta()}
+          className={`text-white mt-4 font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
+        >
+          Add meta
+        </button>
+      </div>
       <AdminTextBox id={"title"} label="Title" {...bind(props.store, "title")} />
       <AdminTextBox id={"url"} label="Url" {...bind(props.store, "url")} />
+      <ImagePickerWithLabel store={props.store.previewImage} title={"Preview image:"} />
+      <ImagePickerWithLabel store={props.store.smallPreviewImage} title={"Small Preview image:"} />
+      <ImagePickerWithLabel store={props.store.widePreviewImage} title={"Wide Preview image:"} />
       <br />
       <PageRowsEditor store={props.store} />
     </div>
@@ -380,8 +434,14 @@ export const PageEditor = (props: { store: PageEditorStore | any }) => {
       <div>
         <AdminButton color="primary" onClick={() => s.save()}>
           Save
-        </AdminButton>
+        </AdminButton>{" "}
+        {s.id && (
+          <RouterLink routeName={RouteNames.pageTraitEditPage} params={{ id: s.id }}>
+            <AdminButton color={"primary"}> Traits editor </AdminButton>
+          </RouterLink>
+        )}
         <br />
+        <AdminRemoteUiDropdownEditor store={props.store.pageType} label={"Page type: "} />
         <AdminTabControl
           tabs={dmap(AllLanguages, (lang, data) => ({
             id: lang,

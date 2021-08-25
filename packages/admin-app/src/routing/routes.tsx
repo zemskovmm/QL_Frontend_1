@@ -2,16 +2,20 @@ import React from "react";
 import { Route } from "mobx-state-router";
 import { convertRoutes } from "./route";
 import { IndexPage } from "src/pages/indexPage";
-import { PageEditorPage } from "src/pages/pageEditorPage";
-import { PageListPage } from "src/pages/pageListPage";
-import { FilesPage } from "src/pages/filesPage";
+import { PageEditorPage } from "src/pages/page/pageEditorPage";
+import { PageListPage } from "src/pages/page/pageListPage";
+import { PageTraitEditorPage } from "../pages/page/pageTraitEditPage";
+import { FilesPage } from "src/pages/files/filesPage";
 import { TraitListPage } from "../pages/trait/traitListPage";
 import { TraitPage } from "../pages/trait/traitPage";
-import { TraitItemPage } from "../pages/trait/traitItemPage";
+import { NewTraitPage, TraitItemPage } from "../pages/trait/traitItemPage";
 import { UniversityListPage } from "../pages/university/universityListPage";
 import { UniversityPage } from "../pages/university/universityPage";
 import { UniversityCreatePage } from "../pages/university/universityCreatePage";
-import { UniversityTraitEditPage } from "../pages/university/universityTraitEditPage";
+import { UniversityTraitEditorPage } from "../pages/university/universityTraitEditPage";
+import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } from "../pages/school/page";
+import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "../pages/course/page";
+import { TraitTypeEditPage, TraitTypeNewPage } from "../pages/trait/traitTypeNewPage";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -19,14 +23,31 @@ export enum RouteNames {
   pageList = "pageList",
   editPage = "editPage",
   newPage = "newPage",
+  pageTraitEditPage = "pageTraitEditPage",
+
   fileList = "fileList",
+
   traitList = "traitList",
+  traitTypeCreate = "traitTypeCreate",
+  traitTypeEdit = "traitTypeEdit",
   traitPage = "traitPage",
+  traitCreate = "traitCreate",
   traitItemPage = "traitItemPage",
+
   universityList = "universityList",
   universityPage = "universityPage",
   universityCreatePage = "universityCreatePage",
   universityTraitEditPage = "universityTraitEditPage",
+
+  schoolList = "schoolList",
+  schoolPage = "schoolPage",
+  schoolCreate = "schoolCreate",
+  schoolTraitEditor = "schoolTraitEditor",
+
+  courseList = "courseList",
+  coursePage = "coursePage",
+  courseCreate = "courseCreate",
+  courseTraitEditor = "courseTraitEditor",
 }
 
 export const RouteViewMap = {
@@ -35,14 +56,31 @@ export const RouteViewMap = {
   [RouteNames.newPage]: <PageEditorPage />,
   [RouteNames.editPage]: <PageEditorPage />,
   [RouteNames.pageList]: <PageListPage />,
+  [RouteNames.pageTraitEditPage]: <PageTraitEditorPage />,
+
   [RouteNames.fileList]: <FilesPage />,
+
   [RouteNames.traitList]: <TraitListPage />,
   [RouteNames.traitPage]: <TraitPage />,
+  [RouteNames.traitCreate]: <NewTraitPage />,
+  [RouteNames.traitTypeEdit]: <TraitTypeEditPage />,
+  [RouteNames.traitTypeCreate]: <TraitTypeNewPage />,
   [RouteNames.traitItemPage]: <TraitItemPage />,
+
   [RouteNames.universityList]: <UniversityListPage />,
   [RouteNames.universityPage]: <UniversityPage />,
   [RouteNames.universityCreatePage]: <UniversityCreatePage />,
-  [RouteNames.universityTraitEditPage]: <UniversityTraitEditPage />,
+  [RouteNames.universityTraitEditPage]: <UniversityTraitEditorPage />,
+
+  [RouteNames.schoolList]: <SchoolListPage />,
+  [RouteNames.schoolPage]: <SchoolPage />,
+  [RouteNames.schoolCreate]: <CreateSchoolPage />,
+  [RouteNames.schoolTraitEditor]: <SchoolTraitEditorPage />,
+
+  [RouteNames.courseCreate]: <CourseCreatePage />,
+  [RouteNames.coursePage]: <CourseEditPage />,
+  [RouteNames.courseList]: <CourseListPage />,
+  [RouteNames.courseTraitEditor]: <CourseTraitEditorPage />,
 };
 
 export const Routes: Route[] = convertRoutes([
@@ -69,6 +107,11 @@ export const Routes: Route[] = convertRoutes([
     onEnter: (root, to) => root.pageEditorPage.load(parseInt(to.params["id"])),
   },
   {
+    pattern: "/pages/:id/traits",
+    name: RouteNames.pageTraitEditPage,
+    onEnter: async (root, to) => await root.pageTraitEditPage.loadStore(Number(to.params.id)),
+  },
+  {
     pattern: "/files",
     name: RouteNames.fileList,
   },
@@ -78,9 +121,32 @@ export const Routes: Route[] = convertRoutes([
     onEnter: (root) => root.traitListPage.load(),
   },
   {
+    pattern: "/traits/new",
+    name: RouteNames.traitTypeCreate,
+    async onEnter(root, to) {
+      await root.traitTypeNewPage.load();
+    },
+  },
+  {
     pattern: "/traits/:id",
     name: RouteNames.traitPage,
     onEnter: (root, to) => root.traitPage.load(to.params.id),
+  },
+  {
+    pattern: "/traits/:id/edit",
+    name: RouteNames.traitTypeEdit,
+    async onEnter(root, to) {
+      root.traitTypeEditPage.traitTypeId = to.params.id;
+      await root.traitTypeEditPage.load();
+    },
+  },
+  {
+    pattern: "/traits/:id/new",
+    name: RouteNames.traitCreate,
+    async onEnter(root, to) {
+      root.traitNewItemPage.traitTypeId = Number(to.params.id);
+      await root.traitNewItemPage.load();
+    },
   },
   {
     pattern: "/traits/item/:id",
@@ -104,6 +170,51 @@ export const Routes: Route[] = convertRoutes([
   {
     pattern: "/universities/:id/trait",
     name: RouteNames.universityTraitEditPage,
-    onEnter: (root, to) => root.universityTraitEditPage.load(to.params.id),
+    onEnter: (root, to) => root.universityTraitEditPage.loadStore(Number(to.params.id)),
+  },
+
+  {
+    pattern: "/school",
+    name: RouteNames.schoolList,
+    onEnter: (root, to) => root.schoolListPage.load(),
+  },
+  {
+    pattern: "/school/create",
+    name: RouteNames.schoolCreate,
+    onEnter: (root) => root.schoolPageCreate.load(),
+  },
+  {
+    pattern: "/school/:id",
+    name: RouteNames.schoolPage,
+    onEnter: async (root, to) => {
+      await root.schoolPage.loadById(Number(to.params.id));
+    },
+  },
+  {
+    pattern: "/school/:id/traits",
+    name: RouteNames.schoolTraitEditor,
+    onEnter: async (root, to) => await root.schoolTraitEditor.loadStore(Number(to.params.id)),
+  },
+  {
+    pattern: "/course",
+    name: RouteNames.courseList,
+    onEnter: (root, to) => root.courseListPage.load(),
+  },
+  {
+    pattern: "/course/create",
+    name: RouteNames.courseCreate,
+    onEnter: (root) => root.courseCreate.load(),
+  },
+  {
+    pattern: "/course/:id",
+    name: RouteNames.coursePage,
+    onEnter: async (root, to) => {
+      await root.courseEdit.loadById(Number(to.params.id));
+    },
+  },
+  {
+    pattern: "/course/:id/traits",
+    name: RouteNames.courseTraitEditor,
+    onEnter: async (root, to) => await root.courseTraitEditor.loadStore(Number(to.params.id)),
   },
 ]);

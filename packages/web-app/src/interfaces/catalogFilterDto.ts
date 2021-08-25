@@ -15,6 +15,14 @@ export interface CatalogResponseDto<T> {
   items: T[];
 }
 
+export interface CatalogItemDto {
+  url: string;
+  name: string;
+  logoId: number;
+  priceFrom: number;
+  priceTo: number;
+}
+
 export interface CatalogUniversityDto {
   url: string;
   name: string;
@@ -23,4 +31,14 @@ export interface CatalogUniversityDto {
   priceTo: number;
   instructionLanguages: string[];
   degrees: string[];
+}
+
+export interface CatalogCourseDto {
+  url: string;
+  name: string;
+  logoId: number;
+  priceFrom: number;
+  priceTo: number;
+  term: string;
+  school: string;
 }
