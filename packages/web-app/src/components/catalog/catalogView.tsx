@@ -69,15 +69,15 @@ const CatalogCategories = ({ lang = "en", type = "university" }) => (
       <LocalizedText id={"catalogEducation_categories"} />
     </h3>
     <div>
-      {/*<a*/}
-      {/*  href={`/${lang}/catalog/course`}*/}
-      {/*  className={cn(style.toggle__switch, type !== "university" ? style.toggle__switch_active : "")}*/}
-      {/*>*/}
-      {/*  <img src={course} alt="" className={`${style.toggle__switchImg}`} />*/}
-      {/*  <span className={`${style.toggle__switchName}`}>*/}
-      {/*    <LocalizedText id={"catalogEducation_courses"} />*/}
-      {/*  </span>*/}
-      {/*</a>*/}
+      <a
+        href={`/${lang}/catalog/course`}
+        className={cn(style.toggle__switch, type !== "university" ? style.toggle__switch_active : "")}
+      >
+        <img src={course} alt="" className={`${style.toggle__switchImg}`} />
+        <span className={`${style.toggle__switchName}`}>
+          <LocalizedText id={"catalogEducation_courses"} />
+        </span>
+      </a>
       <a
         href={`/${lang}/catalog/universtiy`}
         className={cn(style.toggle__switch, type === "university" ? style.toggle__switch_active : "")}
