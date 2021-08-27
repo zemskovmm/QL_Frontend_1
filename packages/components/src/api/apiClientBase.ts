@@ -1,5 +1,3 @@
-import { hasOwnProperty } from "web-app/src/utilities/utils";
-
 const removeLastSlash = (url: string) => url.replace(/\/+$/, "");
 
 export const ApiBaseUrl = removeLastSlash(

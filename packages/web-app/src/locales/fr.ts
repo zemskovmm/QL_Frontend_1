@@ -64,6 +64,7 @@ const fr: LocaleDefinition = {
   blog_blog: "Blog",
   blog_historyClients: "Historique Clients",
   blog_liveJournal: "Journal en direct",
+  trait_accreditation: "Accréditation",
   readMore: "Lire la suite",
 };
 export default fr;

@@ -46,5 +46,6 @@ export function getUrlsForStaticRoute(route: string): { [key: string]: string } 
   for (const l of supportedLocales) {
     urls[l] = "/" + l + "/" + route.replace(/^\//, "");
   }
+  debugger;
   return urls;
 }

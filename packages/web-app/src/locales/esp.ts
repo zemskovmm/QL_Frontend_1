@@ -63,6 +63,7 @@ const esp: LocaleDefinition = {
   blog_blog: "Blog",
   blog_historyClients: "Clientes de historia",
   blog_liveJournal: "Diario en vivo",
+  trait_accreditation: "Acreditación",
   readMore: "Lee mas",
 };
 

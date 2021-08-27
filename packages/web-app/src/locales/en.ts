@@ -62,6 +62,7 @@ const en = {
   blog_blog: "Blog",
   blog_historyClients: "History Clients",
   blog_liveJournal: "Live Journal",
+  trait_accreditation: "Accreditation",
   readMore: "Read more",
 };
 

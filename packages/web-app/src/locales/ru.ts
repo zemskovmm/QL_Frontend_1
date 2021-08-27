@@ -64,6 +64,7 @@ const ru: LocaleDefinition = {
   blog_blog: "Блог",
   blog_historyClients: "Отзывы",
   blog_liveJournal: "Живая лента",
+  trait_accreditation: "Аккредитация",
   readMore: "Читать дальше",
 };
 export default ru;
