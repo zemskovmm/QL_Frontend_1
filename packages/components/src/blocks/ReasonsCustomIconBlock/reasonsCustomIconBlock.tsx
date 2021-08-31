@@ -8,7 +8,7 @@ import preview from "./preview.png";
 export interface ReasonsCustomIconBlockElement {
   header: string;
   subtitle?: string;
-  elements: { title: string; text: string; image: number | null }[];
+  elements: { title: string; text: string; image: number | null; link?: string }[];
   showButton: boolean;
   textButton: string;
   alignButton: string;
@@ -27,17 +27,29 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
           <div className={styles.reasonsCustomIconBlock__title}>{props.header}</div>
           {props.subtitle && <h2 className={styles.reasonsCustomIconBlock__subtitle}>{props.subtitle}</h2>}
           <div className={"flex flex-col lg:flex-row flex-wrap w-full"}>
-            {props.elements.map((el) => (
-              <div className={styles.reasonsCustomIconBlock__item}>
-                <div className={styles.reasonsCustomIconBlock__icon}>
-                  <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
-                </div>
-                <div className={`flex flex-col w-full items-center`}>
-                  <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
-                  <div className={styles.reasonsCustomIconBlock__text} dangerouslySetInnerHTML={{ __html: el.text }} />
-                </div>
-              </div>
-            ))}
+            {props.elements.map((el) => {
+              return el.link
+                  ? <a href={el.link} className={styles.reasonsCustomIconBlock__item}>
+                    <div className={styles.reasonsCustomIconBlock__icon}>
+                      <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
+                    </div>
+                    <div className={`flex flex-col w-full items-center`}>
+                      <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
+                      <div className={styles.reasonsCustomIconBlock__text}
+                           dangerouslySetInnerHTML={{ __html: el.text }} />
+                    </div>
+                  </a>
+                  : <div className={styles.reasonsCustomIconBlock__item}>
+                    <div className={styles.reasonsCustomIconBlock__icon}>
+                      <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
+                    </div>
+                    <div className={`flex flex-col w-full items-center`}>
+                      <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
+                      <div className={styles.reasonsCustomIconBlock__text}
+                           dangerouslySetInnerHTML={{ __html: el.text }} />
+                    </div>
+                  </div>
+            })}
           </div>
           {props.showButton && (
             <ButtonFormBlock name={props.textButton} align={widthInner ? "justify-center" : props.alignButton} />
@@ -86,6 +98,11 @@ export const ReasonsCustomIconBlockInfo: TypedBlockTypeInfo<ReasonsCustomIconBlo
             name: "image",
             type: "Custom",
             customType: "Image",
+          },
+          {
+            id: "link",
+            type: "String",
+            name: "Link",
           },
         ],
       },

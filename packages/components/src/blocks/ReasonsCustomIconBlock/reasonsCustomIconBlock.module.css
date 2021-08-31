@@ -14,13 +14,21 @@
 
 .reasonsCustomIconBlock__item{
   width: 33.33%;
-  padding: 0 10px;
+  padding: 10px;
   margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
+  border-radius: 10px;
 }
+
+a.reasonsCustomIconBlock__item:hover {
+  cursor: pointer;
+  transition: 0.3s;
+  background: rgb(239, 243, 250);
+}
+
 
 
 .reasonsCustomIconBlock__icon{
