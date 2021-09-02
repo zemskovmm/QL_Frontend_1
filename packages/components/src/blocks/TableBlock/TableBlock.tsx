@@ -72,8 +72,8 @@ const TableRowBlock = (props: TableRowElement) => {
 
 export const TableBlock = (props: TableRow) => {
   return (
-    <div className="py-12">
-      <div className="px-10 flex flex-col justify-between mx-auto w-full">
+    <div className="pb-12">
+      <div className="px-10 flex flex-col justify-between mx-auto w-full max-w-screen-xl">
         <div className={styles.table}>
           {props.rows.map((row, ind) => {
             return <TableRowBlock key={ind} {...row} titles={props.titles} />;
