@@ -15,7 +15,10 @@ import { RouteNames } from "../../routing/routes";
 const GlobalSocialLink: FC<{ value: SocialLinkDto[]; name: string }> = ({ value, name }) => {
   return useObserver(() => (
     <div className={`flex justify-between pb-4 mb-4 border-b-2	`}>
-      <span className="text-gray-700 text-xl pr-4">{name}</span>
+      <span className="text-gray-700 text-xl pr-4 flex flex-col">
+        {name}
+        <span>We have: telegram, vk, facebook, instagram, linkedIn, G+, twitter, youtube</span>
+      </span>
       <div className={`flex flex-col w-3/4`}>
         {value &&
           value.map((el, index) => (
@@ -221,7 +224,7 @@ export const AdminGlobalSettingEditor = () => {
       <AdminButton color={`save`} onClick={() => s.save()}>
         Save
       </AdminButton>
-      {s.alert && <AlertComponent text={`save`} />}
+      {/*{s.alert && <AlertComponent text={`save`} />}*/}
     </div>
   ));
 };

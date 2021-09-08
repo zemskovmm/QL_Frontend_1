@@ -65,5 +65,6 @@ const ru: LocaleDefinition = {
   blog_historyClients: "Отзывы",
   blog_liveJournal: "Живая лента",
   readMore: "Читать дальше",
+  request_button: "Написать нам",
 };
 export default ru;

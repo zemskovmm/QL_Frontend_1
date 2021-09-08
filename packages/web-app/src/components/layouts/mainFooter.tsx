@@ -6,9 +6,11 @@ import Logo from "src/assets/images/logoFooter.svg";
 import Arrow from "src/assets/images/icons/arrow.svg";
 import { default as Social } from "src/assets/icons/socialFooter";
 import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
+import { FooterDto } from "admin-app/src/interfaces/GlobalSettingsDto";
+import { LocalizedText } from "../common/LocalizedText";
 
-export const MainFooter = (props: FooterDataDto) => {
+export const MainFooter: FC<{ s: FooterDto }> = ({ s }) => {
   const lang = useIntl().locale;
   const [activeTab, setActiveTab] = useState("");
   return (
@@ -22,15 +24,11 @@ export const MainFooter = (props: FooterDataDto) => {
         <div className="flex flex-col lg:flex-row lg:items-center mt-2">
           <img className="mb-10 lg:mr-20" src={Logo} alt="Quartier Latin" />
           <ul className="flex flex-col lg:flex-row">
-            {props[lang].headLinks.map((link, i) => (
+            {s.footerTopLink.map((el, i) => (
               <li key={i + "footerHeadLink"}>
-                <a className={cn("flex lg:mx-7 whitespace-nowrap font-bold text-xs mb-5")} href={link.link.url}>
-                  <img className="mr-3" src={link.icon} alt="" />
-                  <span className={styles.footer_linkspan}>
-                    {link.link.title.toLowerCase() === "faq"
-                      ? link.link.title.toUpperCase()
-                      : link.link.title.toLowerCase()}
-                  </span>
+                <a className={cn("flex lg:mx-7 whitespace-nowrap font-bold text-xs mb-5")} href={el.link}>
+                  <img className="mr-3" src={"/images/icons/chain.svg"} alt="" />
+                  <span className={styles.footer_linkspan}>{el.name}</span>
                 </a>
               </li>
             ))}
@@ -41,7 +39,7 @@ export const MainFooter = (props: FooterDataDto) => {
         </a>
       </div>
       <div className="flex flex-wrap max-w-screen-xl w-full my-0 lg:mx-auto lg:px-10 py-0 lg:pt-14">
-        {props[lang].links.map(({ group, items }, index) => (
+        {s.footerLinkList.map((el, index) => (
           <div
             key={index + "MainFooter"}
             className={cn(
@@ -57,14 +55,14 @@ export const MainFooter = (props: FooterDataDto) => {
                 : setActiveTab(index + "MainFooter")
             }
           >
-            <a className={cn("font-bold mr-auto", styles.footer_title)} href={group.url}>
-              {group.title}
+            <a className={cn("font-bold mr-auto", styles.footer_title)} href={el.url}>
+              {el.title}
             </a>
             <ul className="flex flex-col overflow-hidden">
-              {items.map((link, i) =>
-                link.title ? (
+              {el.list.map((link, i) =>
+                link.name ? (
                   <li key={i + "MainFooterLink"}>
-                    <a href={link.url}>{link.title}</a>
+                    <a href={link.link}>{link.name}</a>
                   </li>
                 ) : (
                   ""
@@ -74,23 +72,17 @@ export const MainFooter = (props: FooterDataDto) => {
           </div>
         ))}
         <div className={cn("w-full lg:w-1/3", styles.footer_column, styles.footer_address)}>
-          <ul className="flex flex-col font-bold">
-            <li>10 rue de la Lune 75002 Paris</li>
-            <li>+33 144 829 031</li>
-            <li>contact@quartier-latin.com</li>
-            <li>Skype: QuartierLatinRU</li>
-            <li>WhatsApp:&nbsp;+33 6 26 63 86 27</li>
-          </ul>
-          {props[lang].writeUs && (
+          <ul className="flex flex-col font-bold" dangerouslySetInnerHTML={{ __html: s.footerContactText }} />
+          {s.footerContactText && (
             <ContactUsFormButton className={styles.footer_writeus} footer={true}>
-              {props[lang].writeUs}
+              <LocalizedText id={"request_button"} />
             </ContactUsFormButton>
           )}
           <div className={styles.footer_social}>
-            {props[lang].socials.map((link, i) =>
-              link.title ? (
-                <a key={i + "footerSocial"} href={link.url}>
-                  <Social icon={link.title} />
+            {s.footerSocialLink.map((el, i) =>
+              el.icon ? (
+                <a key={i + "footerSocial"} href={el.link}>
+                  <Social icon={el.icon.toLowerCase()} />
                 </a>
               ) : (
                 ""

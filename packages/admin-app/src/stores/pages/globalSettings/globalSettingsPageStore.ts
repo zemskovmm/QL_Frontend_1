@@ -87,6 +87,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
     try {
       await this.track(() => AdminApi.putGlobalSettings("en", data));
       this.alert = true;
+      alert("saved");
     } catch (e) {
       alert(e);
     }

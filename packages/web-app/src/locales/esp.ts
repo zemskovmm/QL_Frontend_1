@@ -64,6 +64,7 @@ const esp: LocaleDefinition = {
   blog_historyClients: "Clientes de historia",
   blog_liveJournal: "Diario en vivo",
   readMore: "Lee mas",
+  request_button: "Escríbenos",
 };
 
 export default esp;

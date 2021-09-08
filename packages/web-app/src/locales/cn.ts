@@ -65,6 +65,7 @@ const cn: LocaleDefinition = {
   blog_historyClients: "历史客户",
   blog_liveJournal: "实时日志",
   readMore: "阅读更多",
+  request_button: "写信给我们",
 };
 
 export default cn;
