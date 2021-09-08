@@ -28,7 +28,7 @@ function MyApp({
         headMeta={module?.page.Metadata?.meta}
       >
         <MainLayout globalSettings={globalSettings} urls={urls}>
-          <Component {...appProps} />
+          <Component {...pageProps} />
         </MainLayout>
       </AppComponentHost>
     </>
@@ -40,7 +40,7 @@ function MyApp({
 // server-side locales to work
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
-  const globalSettings = await siteApi.sendRequest(`global`);
+  const globalSettings = await siteApi.sendRequest(`global`, "en");
   return { appProps, globalSettings };
 };
 
