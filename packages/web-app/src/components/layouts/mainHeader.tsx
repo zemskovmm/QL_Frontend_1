@@ -19,10 +19,9 @@ export interface MainHeaderProps {
   urls: {
     [key: string]: string;
   };
-  s: HeaderDto;
 }
 
-export const MainHeader: FC<MainHeaderProps> = ({ urls, s }) => {
+export const MainHeader: FC<MainHeaderProps & { s: HeaderDto }> = ({ urls, s }) => {
   const lang = useIntl().locale;
   const [menuOpen, setMenuOpen] = useState(false);
   return (

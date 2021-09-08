@@ -10,39 +10,25 @@ import App from "next/app";
 import { siteApi } from "../clients/siteApiClient";
 import { GlobalSettingsDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 
-function MyApp({ Component, pageProps, globalSettings }: AppProps & { globalSettings: GlobalSettingsDto }) {
+function MyApp({
+  Component,
+  pageProps,
+  appProps,
+  globalSettings,
+}: AppProps & { globalSettings: GlobalSettingsDto; appProps: any }) {
   const router = useRouter();
-  let { urls, title, module } = pageProps;
+  let { urls, title, module } = appProps;
   if (urls == null) urls = getLanguageUrlsFromRouterState(router);
-  const data = {
-    header: {
-      headerTopLink: [],
-      headerSocialLink: [],
-      headerBottomLink: [],
-    },
-    requestForm: {
-      requestFormTitle: "",
-      requestFormLeftTitle: "",
-      requestFormRightTitle: "",
-      requestFormPostScriptText: "",
-    },
-    footer: {
-      footerTopLink: [],
-      footerLinkList: [],
-      footerContactText: "",
-      footerSocialLink: [],
-    },
-  };
 
   return (
     <>
       <AppComponentHost
-        requestSetting={globalSettings.requestForm ?? data.requestForm}
+        requestSetting={globalSettings.requestForm}
         headTitle={title}
         headMeta={module?.page.Metadata?.meta}
       >
-        <MainLayout globalSettings={globalSettings ?? data} urls={urls}>
-          <Component {...pageProps} />
+        <MainLayout globalSettings={globalSettings} urls={urls}>
+          <Component {...appProps} />
         </MainLayout>
       </AppComponentHost>
     </>
@@ -54,9 +40,8 @@ function MyApp({ Component, pageProps, globalSettings }: AppProps & { globalSett
 // server-side locales to work
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
-  // const globalSettings = await siteApi.sendRequest(`https://ql.dotlic.ru/api/global/ql/en`);
-
-  return appProps;
+  const globalSettings = await siteApi.sendRequest(`global`);
+  return { appProps, globalSettings };
 };
 
 export default MyApp;

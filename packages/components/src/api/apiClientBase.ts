@@ -19,7 +19,7 @@ export class ApiClientBase {
       headers: headers,
       body: data == null ? undefined : formData ? data : JSON.stringify(data),
     };
-    const url = SsrCompatibleApiBaseUrl + "/api/" + path;
+    const url = path === "global" ? "https://ql.dotlic.ru/api/global/ql/en" : SsrCompatibleApiBaseUrl + "/api/" + path;
     const res = await fetch(url, init);
 
     if (res.ok) {
