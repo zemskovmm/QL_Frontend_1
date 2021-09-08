@@ -9,6 +9,7 @@ import { AppComponentHost } from "src/components/AppComponentHost";
 import App from "next/app";
 import { siteApi } from "../clients/siteApiClient";
 import { GlobalSettingsDto } from "admin-app/src/interfaces/GlobalSettingsDto";
+import { EditorState } from "draft-js";
 
 function MyApp({ Component, pageProps, globalSettings }: AppProps & { globalSettings: GlobalSettingsDto }) {
   const router = useRouter();
@@ -37,7 +38,27 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   // const appProps = await App.getInitialProps(appContext);
   // return appProps;
   const globalSettings = await siteApi.sendRequest(`global/ql/${appContext.router.query["lang"]}`);
-  return { globalSettings };
+  const data = {
+    header: {
+      headerTopLink: [],
+      headerSocialLink: [],
+      headerBottomLink: [],
+    },
+    requestForm: {
+      requestFormTitle: "",
+      requestFormLeftTitle: "",
+      requestFormRightTitle: "",
+      requestFormPostScriptText: "",
+    },
+    footer: {
+      footerTopLink: [],
+      footerLinkList: [],
+      footerContactText: "",
+      footerSocialLink: [],
+    },
+  };
+
+  return { globalSettings: globalSettings ?? data };
 };
 
 export default MyApp;
