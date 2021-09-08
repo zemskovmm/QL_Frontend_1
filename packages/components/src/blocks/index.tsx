@@ -39,6 +39,7 @@ import { SocialBlockInfo } from "./SocialBlock/SocialBlock";
 import { GallerySliderBlockInfo } from "./GallerySliderBlock/gallerySliderBlock";
 import { CommentsBlockInfo } from "./CommentsBlock/commentsBlock";
 import { SkipHistoryBlockInfo } from "./SkipHistoryBlock/skip-history";
+import { RequestFormDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -83,6 +84,7 @@ export interface IComponentHost {
   filters: any;
   lang: string;
   linkComponent: (props: { href: string; children: any }) => React.ReactElement;
+  requestSetting: RequestFormDto;
 }
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);

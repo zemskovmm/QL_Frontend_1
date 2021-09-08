@@ -43,6 +43,7 @@
   margin-top: 29px;
   padding-top: 27px;
   border-top: 1px solid #EFF3FA;
+  overflow: visible;
 }
 
 .hideItem .faqBlock__itemText{

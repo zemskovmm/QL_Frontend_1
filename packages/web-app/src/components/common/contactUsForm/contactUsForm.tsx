@@ -1,12 +1,13 @@
 import { OverlayDialog } from "src/components/common/dialog/OverlayDialog";
 import { LocalizedText, useLocalizedText } from "src/components/common/LocalizedText";
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import { useIntl } from "react-intl";
 import cn from "classnames";
 import { siteApi } from "src/clients/siteApiClient";
 import { useAsyncBusy } from "@project/components/src/utils/asyncBusyEffect";
 
 import styles from "./contactUsForm.module.css";
+import { ComponentHostContext } from "@project/components/src/blocks";
 
 export const SuccessMessage = (props: { onDismiss: () => void }) => {
   const intl = useIntl();
@@ -21,16 +22,17 @@ export const SuccessMessage = (props: { onDismiss: () => void }) => {
 };
 
 export type ContactUsFormType = {
-  name: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  tel: string;
-  com: string;
+  phone: string;
+  comment: string;
   url: string;
 };
 
 export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => void }) => {
   const intl = useIntl();
+  const cl = useContext(ComponentHostContext);
 
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
@@ -41,11 +43,11 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
   const [isBusy, sendForm] = useAsyncBusy(async () => {
     try {
       await siteApi.sendCallback({
-        name: name,
-        lastname: lastname,
+        firstName: name,
+        lastName: lastname,
         email: email,
-        tel: tel,
-        com: com,
+        phone: tel,
+        comment: com,
         url: window.location.href,
       });
       props.onSuccess();
@@ -56,9 +58,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
 
   return (
     <OverlayDialog cancel={props.onDismiss}>
-      <h3 className={styles.applyModal__title}>
-        <LocalizedText id="contactUs_title" />
-      </h3>
+      <h3 className={styles.applyModal__title}>{cl?.requestSetting.requestFormTitle}</h3>
       <form
         className={"flex flex-col"}
         onSubmit={(e) => {
@@ -69,7 +69,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
         <div className={"flex flex-col md:flex-row justify-between mb-0 md:mb-7"}>
           <div className={"flex flex-col md:w-6/12 md:mr-3"}>
             <div className={styles.applyModal__formColTitle + " hidden md:block"}>
-              <LocalizedText id="contactUs_firstColTitle" />
+              {cl?.requestSetting.requestFormLeftTitle}
             </div>
             <label className={"w-full mb-2 md:mb-4"}>
               <div className={styles.applyModal__labelTitle}>
@@ -96,7 +96,7 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
           </div>
           <div className={"flex flex-col md:w-6/12 md:ml-3"}>
             <div className={styles.applyModal__formColTitle + " hidden md:block"}>
-              <LocalizedText id="contactUs_secondColTitle" />
+              {cl?.requestSetting.requestFormRightTitle}
             </div>
             <label className={"w-full mb-2 md:mb-4"}>
               <div className={styles.applyModal__labelTitle}>
@@ -134,8 +134,8 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
         </label>
         <div className={"flex flex-col mb:flex-row justify-center items-center mt-4 mb:mt-11"}>
           <div
-            className={styles.applyModal__description}
-            dangerouslySetInnerHTML={{ __html: useLocalizedText({ id: "contactUs_description" }, intl) }}
+            className={`${styles.applyModal__description} mb-4`}
+            dangerouslySetInnerHTML={{ __html: cl?.requestSetting.requestFormPostScriptText || "" }}
           />
           <button disabled={isBusy} className={styles.applyModal__buttonApply} type="submit">
             <LocalizedText id="contactUs_applyButton" />

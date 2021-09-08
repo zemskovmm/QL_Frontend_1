@@ -12,20 +12,17 @@ import { LangChooser } from "src/components/common/langChooser/langChooser";
 import IconMagnify from "src/assets/icons/IconMagnify";
 import styles from "./main.module.css";
 import cn from "classnames";
-import headerData from "../../hardcoded/headerData";
 import React, { FC, useState } from "react";
-import { LocalizedLinkLocale } from "../../interfaces/localizedLinkDto";
+import { HeaderDto, LinkDto, SocialLinkDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 
 export interface MainHeaderProps {
-  data: {
-    [key: string]: HeaderDataDto;
-  };
   urls: {
     [key: string]: string;
   };
+  s: HeaderDto;
 }
 
-export const MainHeader = (props: MainHeaderProps) => {
+export const MainHeader: FC<MainHeaderProps> = ({ urls, s }) => {
   const lang = useIntl().locale;
   const [menuOpen, setMenuOpen] = useState(false);
   return (
@@ -44,10 +41,10 @@ export const MainHeader = (props: MainHeaderProps) => {
               </a>
             </Link>
             <ul className="hidden lg:flex list-none ">
-              {props.data[lang].links.map((l, index) => (
-                <li key={index + l.url} className="mx-4 uppercase flex items-center">
-                  <a className="text-xs font-bold hover:text-hover" href={l.url}>
-                    {l.title}
+              {s.headerTopLink.map((el, index) => (
+                <li key={index + el.link} className="mx-4 uppercase flex items-center">
+                  <a className="text-xs font-bold hover:text-hover" href={el.link}>
+                    {el.name}
                   </a>
                 </li>
               ))}
@@ -55,10 +52,10 @@ export const MainHeader = (props: MainHeaderProps) => {
           </div>
           <div className="flex items-center">
             <div className="hidden lg:flex justify-end items-center mr-4">
-              {props.data[lang].social?.map(({ title, url }) => {
-                return title ? (
-                  <a key={title + url} className={cn("mx-3 cursor-pointer", styles.header_social)} href={url}>
-                    <Social icon={title} />
+              {s.headerSocialLink.map((el, index) => {
+                return el ? (
+                  <a key={el.link + index} className={cn("mx-3 cursor-pointer", styles.header_social)} href={el.link}>
+                    <Social icon={el.icon} />
                   </a>
                 ) : (
                   ""
@@ -79,7 +76,7 @@ export const MainHeader = (props: MainHeaderProps) => {
               <IconMagnify />
             </div>
             <div className={"ml-2 md:ml-2.5"}>
-              <LangChooser lang={lang} urls={props.urls} />
+              <LangChooser lang={lang} urls={urls} />
             </div>
             <button onClick={() => setMenuOpen(true)} className={styles.btnMenu + " lg:hidden ml-2"}>
               <img src={Menu} alt="Menu" />
@@ -88,20 +85,18 @@ export const MainHeader = (props: MainHeaderProps) => {
         </nav>
       </div>
       <div className="hidden lg:flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-1 px-10">
-        {headerData[lang].offers.map(({ url, title }, i) => (
-          <Link key={i + "headLink"} href={url}>
-            <a className={cn(styles.header_offer, "py-5 whitespace-nowrap text-center")}>
-              {title[0].toUpperCase() + title.slice(1, title.length).toLowerCase()}
-            </a>
+        {s.headerBottomLink.map((el, i) => (
+          <Link key={i + "headLink"} href={el.link}>
+            <a className={cn(styles.header_offer, "py-5 whitespace-nowrap text-center")}>{el.name}</a>
           </Link>
         ))}
       </div>
       {menuOpen && (
         <MobileMenu
           close={() => setMenuOpen(false)}
-          linkTop={props.data[lang].links}
-          linkBottom={props.data[lang].offers}
-          linkSocial={props.data[lang].social}
+          LinkTop={s.headerTopLink}
+          LinkBottom={s.headerBottomLink}
+          LinkSocial={s.headerSocialLink}
         />
       )}
     </header>
@@ -110,40 +105,40 @@ export const MainHeader = (props: MainHeaderProps) => {
 
 type MobileMenuProps = {
   close: () => void;
-  linkTop: LocalizedLinkLocale[];
-  linkBottom: LocalizedLinkLocale[];
-  linkSocial?: LocalizedLinkLocale[];
+  LinkTop: LinkDto[];
+  LinkBottom: LinkDto[];
+  LinkSocial: SocialLinkDto[];
 };
 
-export const MobileMenu: FC<MobileMenuProps> = ({ close, linkBottom, linkTop, linkSocial }) => {
+export const MobileMenu: FC<MobileMenuProps> = ({ close, LinkBottom, LinkTop, LinkSocial }) => {
   return (
     <div className={styles.mobileMenu}>
       <button className={styles.mobileMenu__close} onClick={() => close()}>
         <img src={CloseIcon} alt="Close" />
       </button>
       <div className={`flex flex-col`}>
-        {linkTop.map((l, index) => (
-          <li key={index + l.url} className={"uppercase flex " + styles.mobileMenu__topLink}>
-            <a className="text-xs font-bold hover:text-hover" href={l.url} onClick={() => close()}>
-              {l.title}
+        {LinkTop.map((el, index) => (
+          <li key={index + el.link} className={"uppercase flex " + styles.mobileMenu__topLink}>
+            <a className="text-xs font-bold hover:text-hover" href={el.link} onClick={() => close()}>
+              {el.name}
             </a>
           </li>
         ))}
       </div>
       <div className={`flex flex-col`}>
-        {linkBottom.map(({ url, title }, i) => (
-          <Link key={i + "headLink"} href={url}>
+        {LinkBottom.map((el, i) => (
+          <Link key={i + "headLink"} href={el.link}>
             <a className={styles.mobileMenu__bottomLink} onClick={() => close()}>
-              {title}
+              {el.name}
             </a>
           </Link>
         ))}
       </div>
       <div className={`flex mt-auto justify-between	`}>
-        {linkSocial?.map(({ title, url }) => {
-          return title ? (
-            <a key={title + url} className={cn(styles.mobileMenu__social, styles.header_social)} href={url}>
-              <Social icon={title} />
+        {LinkSocial.map((el, index) => {
+          return el.icon ? (
+            <a key={index + el.icon} className={cn(styles.mobileMenu__social, styles.header_social)} href={el.link}>
+              <Social icon={el.icon} />
             </a>
           ) : (
             ""

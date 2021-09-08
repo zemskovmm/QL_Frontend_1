@@ -8,27 +8,27 @@ import Vk from "src/assets/images/social/vk.svg";
 import Youtube from "src/assets/images/social/youtube.svg";
 
 export interface socialProps {
-  icon: string
+  icon: string;
 }
 
-export default ({icon}:socialProps) => {
-   switch (icon) {
-    case 'facebook':
-      return <img src={Facebook} alt={icon} />
-    case 'instagram':
-      return <img src={Instagram} alt={icon} />
-    case 'telegram':
-      return <img src={Telegram} alt={icon} />
-    case 'linkedIn':
-      return <img src={Linkedin} alt={icon} />
-    case 'G+':
-      return <img src={Google} alt={icon} />
-    case 'twitter':
-      return <img src={Twitter} alt={icon} />
-    case 'youtube':
-       return <img src={Youtube} alt={icon} />
-    case 'vk':
+export default ({ icon }: socialProps) => {
+  switch (icon) {
+    case "facebook":
+      return <img src={Facebook} alt={icon} />;
+    case "instagram":
+      return <img src={Instagram} alt={icon} />;
+    case "telegram":
+      return <img src={Telegram} alt={icon} />;
+    case "linkedin":
+      return <img src={Linkedin} alt={icon} />;
+    case "g+":
+      return <img src={Google} alt={icon} />;
+    case "twitter":
+      return <img src={Twitter} alt={icon} />;
+    case "youtube":
+      return <img src={Youtube} alt={icon} />;
+    case "vk":
     default:
-      return <img src={Vk} alt={icon} />
+      return <img src={Vk} alt={icon} />;
   }
-}
+};

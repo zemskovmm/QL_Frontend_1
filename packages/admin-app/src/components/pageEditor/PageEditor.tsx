@@ -20,7 +20,7 @@ import { AdminSlider } from "src/components/common/AdminSlider";
 import { AdminOverlayDialog } from "src/components/common/AdminOverlayDialog";
 import { bind, dmap } from "src/utils/util";
 import { AdminTabControl } from "src/components/common/AdminTabControl";
-import "@kekekeks/remoteui/src/RemoteUiEditor.css";
+import "@kekekeks/remoteui/src/styles/RemoteUiEditor.css";
 import { AdminTextBox } from "src/components/common/AdminTextBox";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
@@ -432,7 +432,7 @@ export const PageEditor = (props: { store: PageEditorStore | any }) => {
     })).filter((l) => l.isAvailable);
     return (
       <div>
-        <AdminButton color="primary" onClick={() => s.save()}>
+        <AdminButton color="save" onClick={() => s.save()}>
           Save
         </AdminButton>{" "}
         {s.id && (

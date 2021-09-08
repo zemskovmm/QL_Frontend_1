@@ -27,7 +27,7 @@ function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
           groups: [
             {
               name: "",
-              fields: definition.subTypes[typeName].fields,
+              fields: definition.subTypes[typeName].fields as any,
             },
           ],
         };
@@ -38,7 +38,7 @@ function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
     groups: [
       {
         name: "",
-        fields: definition.fields,
+        fields: definition.fields as any,
       },
     ],
     types: subTypes,

@@ -65,5 +65,6 @@ const fr: LocaleDefinition = {
   blog_historyClients: "Historique Clients",
   blog_liveJournal: "Journal en direct",
   readMore: "Lire la suite",
+  request_button: "Écrivez-nous",
 };
 export default fr;
