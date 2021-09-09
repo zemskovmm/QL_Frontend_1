@@ -40,7 +40,8 @@ function MyApp({
 // server-side locales to work
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
-  const globalSettings = await siteApi.sendRequest(`global`, "en");
+  const routeLang = appContext.router.query["lang"];
+  const globalSettings = await siteApi.sendRequest(`global`, routeLang ? routeLang : "en");
   return { appProps, globalSettings };
 };
 

@@ -24,6 +24,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
 
   @observable alert: boolean = false;
   @observable buttonDisabled: boolean = false;
+  @observable lang: string = "";
 
   constructor(public rootStore: RootStore) {
     super();
@@ -45,6 +46,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
 
   @action async load(lang: string) {
     this.resetState();
+    this.lang = lang;
     try {
       const req: GlobalSettingsDto = await this.track(() => AdminApi.getGlobalSettings(lang));
       this.headerTopLink = req.header.headerTopLink ?? [];
@@ -85,7 +87,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
       },
     };
     try {
-      await this.track(() => AdminApi.putGlobalSettings("en", data));
+      await this.track(() => AdminApi.putGlobalSettings(this.lang, data));
       this.alert = true;
       alert("saved");
     } catch (e) {
