@@ -1,7 +1,7 @@
 module.exports = {
   purge: [
-    "./public/index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "public/index.html",
+    "src/**/*.{js,ts,jsx,tsx}",
     "src/components/**/*.{js,ts,jsx,tsx}",
     "../components/src/**/*.{js,ts,jsx,tsx}",
   ],
@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        128: '32rem',
+        128: "32rem",
       },
     },
   },
@@ -17,4 +17,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};

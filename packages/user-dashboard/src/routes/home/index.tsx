@@ -1,4 +1,4 @@
-import { h, FunctionalComponent } from "preact";
+import { FunctionalComponent } from "preact";
 import { Router, Route } from "preact-router";
 import { AppBar, Toolbar } from "@material-ui/core";
 import { Root } from "./login";

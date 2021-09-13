@@ -19,7 +19,7 @@
     "react-hook-form": "7.15.3"
   },
   "devDependencies": {
-    "preact-cli-tailwind": "3.0.0",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
     "@types/enzyme": "^3.10.5",
     "@types/jest": "^26.0.8",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
