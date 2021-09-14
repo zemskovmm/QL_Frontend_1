@@ -147,19 +147,36 @@ const FooterSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
           </button>
         </div>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <div className={`flex flex-col`}>
-          <span className="text-gray-700 text-xl pr-4 text-center mb-3">Post script</span>
-          <Editor
-            toolbarClassName={styles.rdwStorybookToolbar}
-            wrapperClassName={styles.rdwStorybookWrapper}
-            editorClassName={styles.rdwStorybookEditor}
-            editorState={s.footerContactText}
-            onEditorStateChange={(w) => (s.footerContactText = w)}
-            placeholder="Lorem ipsum dolor sit amet"
-          />
+      <div className="text-gray-700 text-xl py-4">We have: call, email, facebook, instagram, telegram, linkedin, location, skype, g+, twitter, vk, whatsapp, youtube
+      </div>
+      <div className={`flex justify-between pb-4 mb-4 border-b-2	`}>
+        <span className="text-gray-700 text-xl pr-4 flex-col">Contact list
+        </span>
+        
+        <div className={`flex flex-col w-3/4`}>
+          {s.footerContactLinkList &&
+            s.footerContactLinkList.map((el, index) => (
+              <div key={index} className={`flex flex-col`}>
+                <AdminInputBox value={el.icon} label={"Icon"} onChange={(e) => (el.icon = e.target.value)} />
+                <AdminInputBox value={el.link} label={"Url"} onChange={(e) => (el.link = e.target.value)} />
+                <AdminInputBox value={el.text} label={"Text"} onChange={(e) => (el.text = e.target.value)} />
+                <button
+                  onClick={() => s.footerContactLinkList.splice(index, 1)}
+                  className={`text-white font-bold py-2 px-4 rounded inline-block bg-red-600 hover:bg-red-900 mb-4`}
+                >
+                  remove
+                </button>
+              </div>
+            ))}
+          <button
+            onClick={() => s.footerContactLinkList.push({ icon: "", link: "", text: "" })}
+            className={`text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
+          >
+            Add
+          </button>
         </div>
-      </Suspense>
+      </div>
+
       <GlobalSocialLink value={s.footerSocialLink} name={`Social Link`} />
     </div>
   ));

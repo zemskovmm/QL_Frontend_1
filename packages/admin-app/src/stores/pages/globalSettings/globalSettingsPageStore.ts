@@ -2,7 +2,7 @@ import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { action, observable } from "mobx";
 import { RootStore } from "src/stores/RootStore";
-import { GlobalSettingsDto, LinkDto, SocialLinkDto, LinkListDto } from "src/interfaces/GlobalSettingsDto";
+import { GlobalSettingsDto, LinkDto, SocialLinkDto, LinkListDto, ContactLinkDto } from "src/interfaces/GlobalSettingsDto";
 import { EditorState } from "draft-js";
 import { stateFromHTML } from "draft-js-import-html";
 import { stateToHTML } from "draft-js-export-html";
@@ -14,7 +14,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
 
   @observable footerTopLink: LinkDto[] = [];
   @observable footerLinkList: LinkListDto[] = [];
-  @observable.ref footerContactText: EditorState = EditorState.createWithContent(stateFromHTML(""));
+  @observable footerContactLinkList: ContactLinkDto[] = [];
   @observable footerSocialLink: SocialLinkDto[] = [];
 
   @observable requestFormTitle: string = "";
@@ -36,7 +36,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
     this.headerBottomLink = [];
     this.footerTopLink = [];
     this.footerLinkList = [];
-    this.footerContactText = EditorState.createWithContent(stateFromHTML(""));
+    this.footerContactLinkList = [];
     this.footerSocialLink = [];
     this.requestFormTitle = "";
     this.requestFormLeftTitle = "";
@@ -54,7 +54,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
       this.headerBottomLink = req.header.headerBottomLink ?? [];
       this.footerTopLink = req.footer.footerTopLink ?? [];
       this.footerLinkList = req.footer.footerLinkList ?? [];
-      this.footerContactText = EditorState.createWithContent(stateFromHTML(req.footer.footerContactText));
+      this.footerContactLinkList = req.footer.footerContactLinkList ?? [];
       this.footerSocialLink = req.footer.footerSocialLink ?? [];
       this.requestFormTitle = req.requestForm.requestFormTitle;
       this.requestFormLeftTitle = req.requestForm.requestFormLeftTitle;
@@ -82,7 +82,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
       footer: {
         footerTopLink: this.footerTopLink,
         footerLinkList: this.footerLinkList,
-        footerContactText: stateToHTML(this.footerContactText.getCurrentContent()),
+        footerContactLinkList: this.footerContactLinkList,
         footerSocialLink: this.footerSocialLink,
       },
     };

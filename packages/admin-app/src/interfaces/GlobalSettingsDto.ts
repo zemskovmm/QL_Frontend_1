@@ -5,6 +5,12 @@ export interface SocialLinkDto {
   link: string;
 }
 
+export interface ContactLinkDto {
+  icon: string;
+  link: string;
+  text: string;
+}
+
 export interface LinkDto {
   name: string;
   link: string;
@@ -33,7 +39,7 @@ export interface FooterDto {
   footerTopLink: LinkDto[];
   footerLinkList: LinkListDto[];
   footerSocialLink: SocialLinkDto[];
-  footerContactText: string;
+  footerContactLinkList: ContactLinkDto[];
 }
 
 export interface GlobalSettingsDto {
