@@ -76,7 +76,7 @@ export const MainFooter: FC<{ s: FooterDto }> = ({ s }) => {
 
           <div className="py-4">
             {s.footerContactLinkList && s.footerContactLinkList.map(({link,text,icon}, i) =>
-              <div className="relative p-1 pl-6" key={i + "MainFooterLink"}>
+              <div className="relative p-1 pl-6" key={i + "MainFooterContactLinkList"}>
                 <a className="absolute top-1 left-0 w-5 h-5" href={link}>
                   <Social className={styles.footer_icon}  icon={icon.toLowerCase()} />
                 </a>
