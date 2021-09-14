@@ -13,6 +13,7 @@ import { LocalizedText } from "../common/LocalizedText";
 export const MainFooter: FC<{ s: FooterDto }> = ({ s }) => {
   const lang = useIntl().locale;
   const [activeTab, setActiveTab] = useState("");
+
   return (
     <footer className="bg-bgsecondary text-third flex flex-col">
       <div
@@ -72,12 +73,24 @@ export const MainFooter: FC<{ s: FooterDto }> = ({ s }) => {
           </div>
         ))}
         <div className={cn("w-full lg:w-1/3", styles.footer_column, styles.footer_address)}>
-          <ul className="flex flex-col font-bold" dangerouslySetInnerHTML={{ __html: s.footerContactText }} />
-          {s.footerContactText && (
+
+          <div className="py-4">
+            {s.footerContactLinkList && s.footerContactLinkList.map(({link,text,icon}, i) =>
+              <div className="relative p-1 pl-6" key={i + "MainFooterLink"}>
+                <a className="absolute top-1 left-0 w-5 h-5" href={link}>
+                  <Social className={styles.footer_icon}  icon={icon.toLowerCase()} />
+                </a>
+                <a href={link}>{text}</a>
+              </div>
+            )}
+          </div>
+
+          {s.footerContactLinkList && (
             <ContactUsFormButton className={styles.footer_writeus} footer={true}>
               <LocalizedText id={"request_button"} />
             </ContactUsFormButton>
           )}
+
           <div className={styles.footer_social}>
             {s.footerSocialLink.map((el, i) =>
               el.icon ? (
