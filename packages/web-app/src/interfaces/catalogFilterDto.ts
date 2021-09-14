@@ -42,3 +42,13 @@ export interface CatalogCourseDto {
   term: string;
   school: string;
 }
+
+export interface CatalogHousingDto {
+  url: string;
+  name: string;
+  logoId: number;
+  priceFrom: number;
+  priceTo: number;
+  instructionLanguages: string[];
+  degrees: string[];
+}
