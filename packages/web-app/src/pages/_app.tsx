@@ -1,4 +1,4 @@
-import type {AppContext, AppProps} from "next/app";
+import type { AppContext, AppProps } from "next/app";
 import "src/styles/global.css";
 import "src/styles/legacy.css";
 import { MainLayout } from "src/components/layouts/mainLayout";
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <AppComponentHost headTitle={title} headMeta={module?.page.Metadata?.meta}>
+      <AppComponentHost headTitle={title} headMeta={module?.page?.Metadata?.meta ?? null}>
         <MainLayout header={headerData} footer={footerData} urls={urls}>
           <Component {...pageProps} />
         </MainLayout>
@@ -30,8 +30,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 // but we need to disable automatic static optimization for
 // server-side locales to work
 MyApp.getInitialProps = async (appContext: AppContext) => {
-   const appProps = await App.getInitialProps(appContext);
-   return appProps;
-}
+  const appProps = await App.getInitialProps(appContext);
+  return appProps;
+};
 
 export default MyApp;
