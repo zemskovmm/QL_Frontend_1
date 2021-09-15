@@ -1,3 +1,5 @@
+import { ClientCommonTraitLanguageDto } from "./clientCommonTraitLanguageDto";
+
 export interface ClientCatalogFilterOptionDto {
   id: number;
   name: string;
@@ -44,11 +46,11 @@ export interface CatalogCourseDto {
 }
 
 export interface CatalogHousingDto {
-  url: string;
+  galleryList: number[];
+  imageId: number | null;
+  langlessUrl: string;
   name: string;
-  logoId: number;
-  priceFrom: number;
-  priceTo: number;
-  instructionLanguages: string[];
-  degrees: string[];
+  price: number;
+  url: string;
+  namedTraits: { [key: string]: ClientCommonTraitLanguageDto[] };
 }

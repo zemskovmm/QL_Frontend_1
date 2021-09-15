@@ -9,11 +9,19 @@ import { ComponentLink } from "../../component-link";
 export interface BreadcrumbsBlockElement {
   whiteColor?: boolean;
   items: { name: string | React.ReactNode; link: string }[];
+  relative?: boolean;
 }
 
 export const BreadcrumbsBlock = (props: BreadcrumbsBlockElement) => {
   return (
-    <div className={cn(style.breadcrumbs, "flex", "px-5", props.whiteColor ? style.breadcrumbs_white : "")}>
+    <div
+      className={cn(
+        style.breadcrumbs,
+        "flex",
+        props.whiteColor ? style.breadcrumbs_white : "",
+        props.relative ? "py-6 px-0" : "absolute px-5"
+      )}
+    >
       {props.items.map((el, index) => (
         <ComponentLink href={el.link ? el.link : "#"}>
           <a className={"flex"} key={`${index}`}>

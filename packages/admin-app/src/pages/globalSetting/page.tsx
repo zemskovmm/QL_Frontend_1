@@ -99,11 +99,8 @@ const RequestFormSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
             toolbarClassName={styles.rdwStorybookToolbar}
             wrapperClassName={styles.rdwStorybookWrapper}
             editorClassName={styles.rdwStorybookEditor}
-            editorState={s.requestFormPostScriptText.}
-            onEditorStateChange={(w) => {
-              console.log(stateToHTML(w));
-              return (s.requestFormPostScriptText = w);
-            }}
+            editorState={s.requestFormPostScriptText}
+            onEditorStateChange={(w) => (s.requestFormPostScriptText = w)}
             placeholder="Lorem ipsum dolor sit amet"
           />
         </div>

@@ -67,42 +67,29 @@ export const HousingCatalogElement = (item: CatalogHousingDto) => (
     <a className={style.card}>
       <div className={style.card__left}>
         <div className={style.card__leftImg}>
-          {item.logoId ? <img src={`${ApiBaseUrl}/api/media/${item.logoId}`} alt="" /> : <img src={img} alt="" />}
+          {item.galleryList ? (
+            <img src={`${ApiBaseUrl}/api/media/${item.galleryList[0]}`} alt="" />
+          ) : (
+            <img src={img} alt="" />
+          )}
         </div>
       </div>
       <div className={style.card__right}>
-        <div className={style.card__rightTitle}>{item.name}</div>
-        <div className={style.card__rightPrice}>
+        <div className={style.card__rightTitle}>
+          {item.name} {item.namedTraits.city && item.namedTraits.city[0]?.name}
+        </div>
+        <div className={`${style.card__rightPrice} mt-auto`}>
           <span className={style.card__rightSubtitle}>
             <LocalizedText id={"catalogItems_price"} />:
           </span>
-          <div className={style.card__rightPrice__list}>
-            {item.priceFrom > 0 ? (
-              <>
-                <span className={style.card__rightPrice__listItem}>
-                  <b>
-                    <LocalizedText id={"catalogItems_price_from"} /> {item.priceFrom}{" "}
-                    <LocalizedText id={"catalogItems_price_value"} />
-                  </b>{" "}
-                  / <LocalizedText id={"catalogItems_price_year"} />
-                </span>
-                <span className={style.card__rightPrice__listItem}>
-                  <b>
-                    <LocalizedText id={"catalogItems_price_before"} /> {item.priceTo}{" "}
-                    <LocalizedText id={"catalogItems_price_value"} />
-                  </b>{" "}
-                  / <LocalizedText id={"catalogItems_price_year"} />
-                </span>
-              </>
-            ) : (
-              <span className={style.card__rightPrice__listItem}>
-                <b>
-                  <LocalizedText id={"catalogItems_price_upto"} /> {item.priceTo}{" "}
-                  <LocalizedText id={"catalogItems_price_value"} />
-                </b>{" "}
-                / <LocalizedText id={"catalogItems_price_year"} />
-              </span>
-            )}
+          <div className={`${style.card__rightPrice__list}`}>
+            <span className={style.card__rightPrice__listItem}>
+              <b>
+                <LocalizedText id={"catalogItems_price_upto"} /> {item.price}{" "}
+                <LocalizedText id={"catalogItems_price_value"} />
+              </b>{" "}
+              / <LocalizedText id={"catalogItems_price_month"} />
+            </span>
           </div>
         </div>
       </div>

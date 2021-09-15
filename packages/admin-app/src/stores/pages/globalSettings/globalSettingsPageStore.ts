@@ -3,7 +3,7 @@ import { AdminApi } from "src/clients/adminApiClient";
 import { action, observable } from "mobx";
 import { RootStore } from "src/stores/RootStore";
 import { GlobalSettingsDto, LinkDto, SocialLinkDto, LinkListDto } from "src/interfaces/GlobalSettingsDto";
-import { EditorState, ContentState } from "draft-js";
+import { EditorState } from "draft-js";
 import { stateFromHTML } from "draft-js-import-html";
 import { stateToHTML } from "draft-js-export-html";
 
@@ -20,7 +20,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
   @observable requestFormTitle: string = "";
   @observable requestFormLeftTitle: string = "";
   @observable requestFormRightTitle: string = "";
-  @observable.ref requestFormPostScriptText: ContentState = ContentState.createFromText("");
+  @observable.ref requestFormPostScriptText: EditorState = EditorState.createWithContent(stateFromHTML(""));
 
   @observable alert: boolean = false;
   @observable buttonDisabled: boolean = false;
@@ -41,7 +41,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
     this.requestFormTitle = "";
     this.requestFormLeftTitle = "";
     this.requestFormRightTitle = "";
-    this.requestFormPostScriptText = ContentState.createFromText("");
+    this.requestFormPostScriptText = EditorState.createWithContent(stateFromHTML(""));
   }
 
   @action async load(lang: string) {
