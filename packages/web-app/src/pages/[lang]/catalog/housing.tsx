@@ -1,12 +1,12 @@
 import { Catalog } from "src/components/catalog/catalog";
-import { CatalogCourseDto, CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
+import { CatalogHousingDto } from "src/interfaces/catalogFilterDto";
 import style from "src/components/catalog/style/catalogView.module.css";
 import { LocalizedText, useLocalizedText } from "src/components/common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { useIntl } from "react-intl";
-import { CourseCatalogElement } from "src/components/catalog/catalogElement";
+import { HousingCatalogElement } from "src/components/catalog/catalogElement";
 
-const CourseCatalogPage = () => {
+const UniversityCatalogPage = () => {
   const lang = useIntl().locale;
   const intl = useIntl();
   return (
@@ -20,21 +20,21 @@ const CourseCatalogPage = () => {
                 link: `/${lang}`,
               },
               {
-                name: <LocalizedText id={"breadcrumbs_courses"} />,
-                link: `/${lang}/catalog/course`,
+                name: <LocalizedText id={"breadcrumbs_Education"} />,
+                link: `/${lang}/catalog/university`,
               },
             ]}
           />
         </div>
-        <Catalog<CatalogCourseDto>
-          title={useLocalizedText({ id: "catalogCourses_title" }, intl)}
-          searchTitle={useLocalizedText({ id: "catalogEducation_search_result" }, intl)}
-          elementRenderer={CourseCatalogElement}
-          apiElementName="course"
+        <Catalog<CatalogHousingDto>
+          title={useLocalizedText({ id: "catalogHousing_title" }, intl)}
+          searchTitle={useLocalizedText({ id: "catalogHousing_titleSearch" }, intl)}
+          elementRenderer={HousingCatalogElement}
+          apiElementName="housing"
         />
       </div>
     </div>
   );
 };
 
-export default CourseCatalogPage;
+export default UniversityCatalogPage;

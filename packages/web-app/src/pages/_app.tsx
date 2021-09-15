@@ -26,7 +26,7 @@ function MyApp({
       <AppComponentHost
         requestSetting={globalSettings.requestForm}
         headTitle={title}
-        headMeta={module?.page.Metadata?.meta}
+        headMeta={module?.page?.Metadata?.meta ?? null}
       >
         <MainLayout globalSettings={globalSettings} urls={urls}>
           <Component {...pageProps} />

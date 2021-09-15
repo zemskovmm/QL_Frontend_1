@@ -69,17 +69,8 @@ const CatalogCategories = ({ lang = "en", type = "university" }) => (
       <LocalizedText id={"catalogEducation_categories"} />
     </h3>
     <div>
-      {/*<a*/}
-      {/*  href={`/${lang}/catalog/course`}*/}
-      {/*  className={cn(style.toggle__switch, type !== "university" ? style.toggle__switch_active : "")}*/}
-      {/*>*/}
-      {/*  <img src={course} alt="" className={`${style.toggle__switchImg}`} />*/}
-      {/*  <span className={`${style.toggle__switchName}`}>*/}
-      {/*    <LocalizedText id={"catalogEducation_courses"} />*/}
-      {/*  </span>*/}
-      {/*</a>*/}
       <a
-        href={`/${lang}/catalog/universtiy`}
+        href={`/${lang}/catalog/university`}
         className={cn(style.toggle__switch, type === "university" ? style.toggle__switch_active : "")}
       >
         <img src={education} alt="" className={`${style.toggle__switchImg}`} />
@@ -87,14 +78,15 @@ const CatalogCategories = ({ lang = "en", type = "university" }) => (
           <LocalizedText id={"catalogEducation_education"} />
         </span>
       </a>
-      {linkHousing[lang] && (
-        <a href={linkHousing[lang]} className={`${style.toggle__switch}`}>
-          <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
-          <span className={`${style.toggle__switchName}`}>
-            <LocalizedText id={"catalogEducation_accommodationn"} />
-          </span>
-        </a>
-      )}
+      <a
+        href={`/${lang}/catalog/housing`}
+        className={cn(style.toggle__switch, type !== "university" ? style.toggle__switch_active : "")}
+      >
+        <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
+        <span className={`${style.toggle__switchName}`}>
+          <LocalizedText id={"catalogHousing_title"} />
+        </span>
+      </a>
     </div>
   </div>
 );
@@ -127,16 +119,14 @@ function CatalogItems<T>(props: {
   clickFilter: () => void;
   clickSort: () => void;
   title: string;
+  searchTitle: string;
 }) {
   return (
     <div className={`flex flex-col w-full`}>
       <div className={`flex items-center px-4 lg:px-0 mb-3`}>
         <h1 className={`${style.catalog__h1}`}>{props.title}</h1>
         <div className={`${style.catalog__count}`}>
-          {props.data.totalItems}{" "}
-          <span className={`hidden lg:inline`}>
-            <LocalizedText id={"catalogEducation_search_result"} />
-          </span>
+          {props.data.totalItems} <span className={`hidden lg:inline`}>{props.searchTitle}</span>
         </div>
       </div>
       {!props.widthInner && (
@@ -178,6 +168,7 @@ export function CatalogView<T>(props: {
   setFilter: (identifier: string, item: number, value: boolean) => void;
   title: string;
   type: string;
+  searchTitle: string;
 }): JSX.Element {
   const [widthInner, setWidthInner] = useState(true);
   const [openFilter, setOpenFilter] = useState(false);
@@ -231,6 +222,7 @@ export function CatalogView<T>(props: {
               clickFilter={() => setOpenFilter(true)}
               clickSort={() => setOpenSort(true)}
               title={props.title}
+              searchTitle={props.searchTitle}
             />
           )}
         </LoadingIf>
