@@ -3,9 +3,6 @@ import { AdminApi } from "src/clients/adminApiClient";
 import { action, observable } from "mobx";
 import { RootStore } from "src/stores/RootStore";
 import { GlobalSettingsDto, LinkDto, SocialLinkDto, LinkListDto, ContactLinkDto } from "src/interfaces/GlobalSettingsDto";
-import { EditorState } from "draft-js";
-import { stateFromHTML } from "draft-js-import-html";
-import { stateToHTML } from "draft-js-export-html";
 
 export class GlobalSettingsPageStore extends RequestTracking {
   @observable headerTopLink: LinkDto[] = [];

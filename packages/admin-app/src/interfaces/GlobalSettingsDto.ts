@@ -1,4 +1,3 @@
-import { EditorState } from "draft-js";
 
 export interface SocialLinkDto {
   icon: string;

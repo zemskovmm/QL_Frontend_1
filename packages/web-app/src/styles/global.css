@@ -73,47 +73,47 @@ footer {
   padding: 14px 0;
 }
 
-.HtmlEditorView {
+.BasicHtmlBlockInfo {
   width: 100%;
 }
 
-.HtmlEditorView h2 {
+.BasicHtmlBlockInfo h2 {
   font-weight: 400;
   color: #373737;
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
 
-.HtmlEditorView h3 {
+.BasicHtmlBlockInfo h3 {
   font-weight: 400;
   color: #373737;
   font-size: 1.5rem;
   line-height: 2rem;
 }
 
-.HtmlEditorView h4 {
+.BasicHtmlBlockInfo h4 {
   font-weight: 400;
   color: #373737;
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
-.HtmlEditorView .text-tiny {
+.BasicHtmlBlockInfo .text-tiny {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
-.HtmlEditorView .text-small {
+.BasicHtmlBlockInfo .text-small {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
-.HtmlEditorView .text-big {
+.BasicHtmlBlockInfo .text-big {
   font-size: 1.5rem;
   line-height: 2rem;
 }
 
-.HtmlEditorView .text-huge {
+.BasicHtmlBlockInfo .text-huge {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }

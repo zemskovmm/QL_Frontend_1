@@ -8,7 +8,7 @@ type PropsType = {
 
 export const HtmlEditorView: FunctionComponent<PropsType> = ({ className, data }) => {
     return (
-        <div className={`HtmlEditorView ${className}`} 
+        <div className={`BasicHtmlBlockInfo ${className}`} 
             dangerouslySetInnerHTML={{ __html: data || "" }}>
         </div>
     )

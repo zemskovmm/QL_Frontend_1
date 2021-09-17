@@ -6,12 +6,10 @@ import { GlobalSettingsPageStore } from "../../stores/pages/globalSettings/globa
 import { AdminButton } from "../../components/common/AdminButton";
 import { AlertComponent } from "../../components/common/AlertComponent";
 import { DropDownList } from "@project/components/src/blocks/FaqBlock/faqBlock";
-import { Editor } from "../../components/remoteui/AdminRemoteUiHtmlEditor";
 import styles from "../../components/remoteui/AdminRemoteUiHtmlEditor.module.css";
 import { LinkDto, SocialLinkDto } from "../../interfaces/GlobalSettingsDto";
 import { RouterLink } from "mobx-state-router";
 import { RouteNames } from "../../routing/routes";
-import { stateToHTML } from "draft-js-export-html";
 import { HtmlEditor } from "src/components/HtmlEditor/HtmlEditor";
 
 const GlobalSocialLink: FC<{ value: SocialLinkDto[]; name: string }> = ({ value, name }) => {

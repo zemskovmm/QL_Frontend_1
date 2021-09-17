@@ -1,7 +1,3 @@
-declare module '@ckeditor/ckeditor5-build-classic' { 
-	const ClassicEditor: any;
-	export = ClassicEditor;
-}
 
 declare module '@ckeditor/ckeditor5-build-decoupled-document' { 
 	const DecoupledEditor: any;

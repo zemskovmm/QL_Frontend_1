@@ -12,7 +12,7 @@ type PropsType = {
 export const HtmlEditor: FunctionComponent<PropsType> = observer( 
     ( {className, data, onChange} ) => {
         return (
-            <div className={`HtmlEditor ${className}`}>
+            <div className={`BasicHtmlBlockInfo ${className}`}>
                 <CKEditor
                     editor={ DecoupledEditor }
                     data={ data }
@@ -27,9 +27,6 @@ export const HtmlEditor: FunctionComponent<PropsType> = observer(
                         );
                     }}
                 />
-                <div>
-                    {data}
-                </div>
             </div>
             
         )

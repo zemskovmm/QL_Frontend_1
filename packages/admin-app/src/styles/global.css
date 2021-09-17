@@ -81,47 +81,47 @@ button:focus {
   outline: none;
 }
 
-.HtmlEditor {
+.BasicHtmlBlockInfo {
   width: 100%;
 }
 
-.HtmlEditor h2 {
+.BasicHtmlBlockInfo h2 {
   font-weight: 400;
   color: #373737;
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
 
-.HtmlEditor h3 {
+.BasicHtmlBlockInfo h3 {
   font-weight: 400;
   color: #373737;
   font-size: 1.5rem;
   line-height: 2rem;
 }
 
-.HtmlEditor h4 {
+.BasicHtmlBlockInfo h4 {
   font-weight: 400;
   color: #373737;
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
-.HtmlEditor .text-tiny {
+.BasicHtmlBlockInfo .text-tiny {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
-.HtmlEditor .text-small {
+.BasicHtmlBlockInfo .text-small {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
-.HtmlEditor .text-big {
+.BasicHtmlBlockInfo .text-big {
   font-size: 1.5rem;
   line-height: 2rem;
 }
 
-.HtmlEditor .text-huge {
+.BasicHtmlBlockInfo .text-huge {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
