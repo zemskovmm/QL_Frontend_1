@@ -32,10 +32,10 @@
   font-size: 16px;
 }
 
-input.form-control, select.form-control {
+input.form-control,
+select.form-control {
   margin: 1px;
 }
-
 
 .form-control {
   display: block;
@@ -77,9 +77,53 @@ textarea.form-control {
   margin-bottom: 15px;
 }
 
-button:focus{
+button:focus {
   outline: none;
 }
 
+.HtmlEditor {
+  width: 100%;
+}
+
+.HtmlEditor h2 {
+  font-weight: 400;
+  color: #373737;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.HtmlEditor h3 {
+  font-weight: 400;
+  color: #373737;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.HtmlEditor h4 {
+  font-weight: 400;
+  color: #373737;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.HtmlEditor .text-tiny {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.HtmlEditor .text-small {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.HtmlEditor .text-big {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.HtmlEditor .text-huge {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
 
 @tailwind utilities;

@@ -1,14 +1,14 @@
 :root {
   --color-primary: #373737;
-  --color-secondary: #567DD0;
-  --color-third: #FFFFFF;
-  --color-bg-primary: #EFF3FA;
-  --color-bg-secondary: #0C389A;
-  --color-bd-primary: #C9D5F0;
-  --color-hover: #567DD0
+  --color-secondary: #567dd0;
+  --color-third: #ffffff;
+  --color-bg-primary: #eff3fa;
+  --color-bg-secondary: #0c389a;
+  --color-bd-primary: #c9d5f0;
+  --color-hover: #567dd0;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 
 @tailwind base;
 
@@ -21,11 +21,11 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: var(--color-primary);
 }
 
-.block-with-breadcrumbs > div:first-of-type{
+.block-with-breadcrumbs > div:first-of-type {
   padding-top: 80px !important;
 }
 
@@ -33,28 +33,28 @@ img {
   object-fit: contain;
 }
 
-h1{
+h1 {
   font-weight: bold;
   font-size: 30px;
   line-height: 42px;
   color: #373737;
 }
 
-h2{
+h2 {
   font-weight: bold;
   font-size: 18px;
   line-height: 26px;
   color: #373737;
 }
 
-h3{
+h3 {
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   color: #373737;
 }
 
-button:focus{
+button:focus {
   outline: none;
 }
 
@@ -62,13 +62,58 @@ footer {
   margin-top: 50px;
 }
 
-.blogNav{
-  border-bottom: 1px solid #C9D5F0;
+.blogNav {
+  border-bottom: 1px solid #c9d5f0;
   opacity: 0.4;
   padding: 14px 0;
 }
 
-.blogNav_active{
-  border-bottom: 3px solid #567DD0;
+.blogNav_active {
+  border-bottom: 3px solid #567dd0;
   padding: 14px 0;
+}
+
+.HtmlEditorView {
+  width: 100%;
+}
+
+.HtmlEditorView h2 {
+  font-weight: 400;
+  color: #373737;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.HtmlEditorView h3 {
+  font-weight: 400;
+  color: #373737;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.HtmlEditorView h4 {
+  font-weight: 400;
+  color: #373737;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.HtmlEditorView .text-tiny {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.HtmlEditorView .text-small {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.HtmlEditorView .text-big {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.HtmlEditorView .text-huge {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }

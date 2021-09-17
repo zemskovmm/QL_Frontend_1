@@ -26,7 +26,7 @@ export interface RequestFormDto {
   requestFormTitle: string;
   requestFormLeftTitle: string;
   requestFormRightTitle: string;
-  requestFormPostScriptText: string;
+  requestFormPostText: string;
 }
 
 export interface HeaderDto {

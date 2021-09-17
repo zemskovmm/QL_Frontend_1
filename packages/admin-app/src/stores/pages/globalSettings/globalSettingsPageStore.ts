@@ -20,7 +20,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
   @observable requestFormTitle: string = "";
   @observable requestFormLeftTitle: string = "";
   @observable requestFormRightTitle: string = "";
-  @observable.ref requestFormPostScriptText: EditorState = EditorState.createWithContent(stateFromHTML(""));
+  @observable requestFormPostText: string = "";
 
   @observable alert: boolean = false;
   @observable buttonDisabled: boolean = false;
@@ -41,7 +41,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
     this.requestFormTitle = "";
     this.requestFormLeftTitle = "";
     this.requestFormRightTitle = "";
-    this.requestFormPostScriptText = EditorState.createWithContent(stateFromHTML(""));
+    this.requestFormPostText = "";
   }
 
   @action async load(lang: string) {
@@ -59,9 +59,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
       this.requestFormTitle = req.requestForm.requestFormTitle;
       this.requestFormLeftTitle = req.requestForm.requestFormLeftTitle;
       this.requestFormRightTitle = req.requestForm.requestFormRightTitle;
-      this.requestFormPostScriptText = EditorState.createWithContent(
-        stateFromHTML(req.requestForm.requestFormPostScriptText)
-      );
+      this.requestFormPostText = req.requestForm.requestFormPostText;
     } catch (e) {}
   }
 
@@ -77,7 +75,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
         requestFormLeftTitle: this.requestFormLeftTitle,
         requestFormRightTitle: this.requestFormRightTitle,
         requestFormTitle: this.requestFormTitle,
-        requestFormPostScriptText: stateToHTML(this.requestFormPostScriptText.getCurrentContent()),
+        requestFormPostText: this.requestFormPostText,
       },
       footer: {
         footerTopLink: this.footerTopLink,

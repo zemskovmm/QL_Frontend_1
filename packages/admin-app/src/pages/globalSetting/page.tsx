@@ -12,6 +12,7 @@ import { LinkDto, SocialLinkDto } from "../../interfaces/GlobalSettingsDto";
 import { RouterLink } from "mobx-state-router";
 import { RouteNames } from "../../routing/routes";
 import { stateToHTML } from "draft-js-export-html";
+import { HtmlEditor } from "src/components/HtmlEditor/HtmlEditor";
 
 const GlobalSocialLink: FC<{ value: SocialLinkDto[]; name: string }> = ({ value, name }) => {
   return useObserver(() => (
@@ -95,13 +96,9 @@ const RequestFormSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
       <Suspense fallback={<div>Loading...</div>}>
         <div className={`flex flex-col`}>
           <span className="text-gray-700 text-xl pr-4 text-center mb-3">Post script</span>
-          <Editor
-            toolbarClassName={styles.rdwStorybookToolbar}
-            wrapperClassName={styles.rdwStorybookWrapper}
-            editorClassName={styles.rdwStorybookEditor}
-            editorState={s.requestFormPostScriptText}
-            onEditorStateChange={(w) => (s.requestFormPostScriptText = w)}
-            placeholder="Lorem ipsum dolor sit amet"
+          <HtmlEditor 
+            data={s.requestFormPostText}
+            onChange={ (value) => {s.requestFormPostText = value} }
           />
         </div>
       </Suspense>
