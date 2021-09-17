@@ -4,7 +4,7 @@ import React, { FunctionComponent} from "react";
 import { observer } from "mobx-react";
 import styles from "./AdminRemoteUiHtmlEditor.module.css";
 import { IRemoteUiData } from "@kekekeks/remoteui/src";
-import { HtmlEditor } from "src/components/HtmlEditor";
+import { HtmlEditor } from "src/components";
 
 
 

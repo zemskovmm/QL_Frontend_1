@@ -8,7 +8,7 @@ import { useAsyncBusy } from "@project/components/src/utils/asyncBusyEffect";
 
 import styles from "./contactUsForm.module.css";
 import { ComponentHostContext } from "@project/components/src/blocks";
-import { HtmlEditorView } from "src/components/HtmlEditorVeiw/HtmlEditorView";
+import { HtmlEditorView } from "src/components";
 
 export const SuccessMessage = (props: { onDismiss: () => void }) => {
   const intl = useIntl();
