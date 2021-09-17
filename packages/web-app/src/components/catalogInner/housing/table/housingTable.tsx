@@ -1,15 +1,19 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import style from "./housingTable.module.css";
 import { ClientHousingAccommodationTypesDto } from "../../../../interfaces/clientHousingDto";
-import { LocalizedText } from "../../../common/LocalizedText";
+import { LocalizedText, useLocalizedText } from "../../../common/LocalizedText";
 import { OverlayDialog } from "../../../common/dialog/OverlayDialog";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 import notIcon from "../../../../assets/icons/done_outline.svg";
 import { ClientCommonTraitLanguageDto } from "../../../../interfaces/clientCommonTraitLanguageDto";
+import { ComponentHostContext } from "@project/components/src/blocks";
+import { useIntl } from "react-intl";
 
 export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = ({ data }) => {
   const [dialog, setDialog] = useState(false);
   const [dialogData, setDialogData] = useState<ClientCommonTraitLanguageDto[]>([]);
+  const cl = useContext(ComponentHostContext);
+  const intl = useIntl();
   return (
     <>
       {dialog && (
@@ -52,19 +56,29 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
         <tbody>
           {data.map((el, index) => (
             <tr key={index + " tableHousing"}>
-              <td className={style.tablePlans__title + " my-1"}>Type of allocation</td>
+              <td
+                className={style.tablePlans__title + " my-1"}
+                data-name={useLocalizedText({ id: "housing_tableTitle_type" }, intl)}
+              >
+                Type of allocation
+              </td>
               <td
                 className={style.tablePlans__area + " lg:text-center my-1"}
+                data-name={useLocalizedText({ id: "housing_tableTitle_area" }, intl)}
                 style={{ borderLeft: "1px solid #EFF3FA", borderRight: "1px solid #EFF3FA" }}
               >
                 {el.square} m&sup2;
               </td>
-              <td className={style.tablePlans__area + " lg:text-center my-1"}>
+              <td
+                className={style.tablePlans__area + " lg:text-center my-1"}
+                data-name={useLocalizedText({ id: "housing_tableTitle_residents" }, intl)}
+              >
                 {el.residents} <LocalizedText id={"housing_tableTitle_residents"} />
               </td>
               <td
                 className={style.tablePlans__learnMore + " lg:text-center my-1 cursor-pointer"}
                 style={{ borderLeft: "1px solid #EFF3FA", borderRight: "1px solid #EFF3FA" }}
+                data-name={useLocalizedText({ id: "housing_tableTitle_equipment" }, intl)}
                 onClick={() => {
                   setDialogData(el.traits.namedTraits["housing-equipment"]);
                   setDialog(true);
@@ -72,14 +86,17 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
               >
                 <LocalizedText id={"housing_tableTitle_more"} />
               </td>
-              <td className={style.tablePlans__area + " lg:text-center my-1"}>
+              <td
+                className={style.tablePlans__area + " lg:text-center my-1"}
+                data-name={useLocalizedText({ id: "housing_tableTitle_price" }, intl)}
+              >
                 <LocalizedText id={"catalogItems_price_upto"} /> {el.price}{" "}
                 <LocalizedText id={"catalogItems_price_value"} /> / <LocalizedText id={"catalogItems_price_month"} />
               </td>
               <td className={style.tablePlans__order}>
-                <a href="#" className={style.button}>
+                <button onClick={() => cl?.showContactUsForm()} className={style.button}>
                   <LocalizedText id={"housing_tableTitle_order"} />
-                </a>
+                </button>
               </td>
             </tr>
           ))}

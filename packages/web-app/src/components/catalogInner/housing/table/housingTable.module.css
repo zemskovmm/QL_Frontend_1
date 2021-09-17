@@ -64,7 +64,7 @@
   padding: 25px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .tablePlans tbody tr{
     grid-template-columns: auto auto auto auto 1fr
   }
@@ -109,7 +109,7 @@
   grid-column: span 2;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .tablePlans__title{
     grid-column: span 5
   }
@@ -121,12 +121,13 @@
   }
 }
 
-.tablePlans__area:before, .tablePlans__people:before, .tablePlans__price:before{
+.tablePlans__area:before, .tablePlans__learnMore:before, .tablePlans__title:before, .tablePlans__price:before{
   content: attr(data-name);
   display: block;
   font-size: 12px;
   color: #646f83;
   margin-bottom: 0px;
+  text-decoration: none !important;
 }
 
 @media screen and (min-width: 992px) {
