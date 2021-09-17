@@ -8,6 +8,8 @@
     margin-right: 20.5px;
     overflow-y: scroll;
     max-height: 360px;
+    overflow-x: hidden;
+    max-width: none;
   }
 }
 
@@ -26,20 +28,14 @@
 }
 
 @media (min-width: 768px) {
-  .multiImg__list{
-    margin-right: 20.5px;
-    overflow-y: scroll;
-    max-height: 360px;
-  }
   .multiImg__list_item{
     max-width: 112.5px;
     max-height: 112.5px;
     min-width: 112.5px;
     min-height: 112.5px;
-    object-fit: cover;
-    width: 100%;
     margin-bottom: 11.25px;
     border-radius: 3px;
+    margin-right: 0;
   }
 }
 

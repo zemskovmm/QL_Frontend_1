@@ -15,9 +15,9 @@ export const MultiImgBlock: FC<MultiImgBlockProps> = ({ img, text, title, city }
   const [current, setCurrent] = useState(img[0]);
 
   return (
-    <div className={`px-0 lg:px-4 flex flex-col lg:flex-row w-full mx-auto max-w-screen-xl w-full`}>
-      <div className={`flex w-full mb-5 lb:mb-0 lg:mr-20`}>
-        <div className={`${style.multiImg__list} flex lg:flex-col`}>
+    <div className={`px-0 md:px-4 flex flex-col lg:flex-row w-full mx-auto max-w-screen-xl w-full`}>
+      <div className={`flex w-full mb-5 lg:mb-0 lg:mr-20`}>
+        <div className={`${style.multiImg__list} flex md:flex-col`}>
           {img.map((el, index) => (
             <img
               src={`${ApiBaseUrl}/api/media/scaled/${el}?dimension=290`}
@@ -31,7 +31,7 @@ export const MultiImgBlock: FC<MultiImgBlockProps> = ({ img, text, title, city }
         <img
           src={`${ApiBaseUrl}/api/media/scaled/${current}`}
           alt=""
-          className={`${style.multiImg__list_setItem} hidden lg:block`}
+          className={`${style.multiImg__list_setItem} hidden md:block`}
         />
       </div>
       <div className={`${style.multiImg__content} px-4 lg:px-0 flex flex-col justify-between w-full`}>

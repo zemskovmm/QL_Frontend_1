@@ -12,7 +12,7 @@ export const HousingModule = (props: ClientHousingDto) => {
   const lang = useIntl().locale;
   return (
     <div className={`max-w-screen-xl mx-auto`}>
-      <div className={`px-3 lg:px-16`}>
+      <div className={`px-4 lg:px-16`}>
         <BreadcrumbsBlock
           whiteColor={false}
           relative={true}
@@ -23,7 +23,7 @@ export const HousingModule = (props: ClientHousingDto) => {
           ]}
         />
       </div>
-      <div className={`mb-16 px-0 lg:px-16`}>
+      <div className={`mb-6 lg:mb-16 px-0 lg:px-16`}>
         <MultiImgBlock
           img={props.galleryList}
           text={``}
@@ -31,10 +31,10 @@ export const HousingModule = (props: ClientHousingDto) => {
           city={props.traits.namedTraits["city"][0].name}
         />
       </div>
-      <div className={`mb-6 flex flex-wrap px-3 lg:px-16`}>
+      <div className={`mb-6 flex flex-wrap px-4 lg:px-16`}>
         {props.traits.namedTraits["housing-accommodation"].map((el, index) => (
           <div className={`flex items-center mr-40 w-40 mb-10`} key={el.name + index}>
-            <div className={`p-2 w-10 h-10 rounded-full mr-10`} style={{ backgroundColor: "#EFF3FA" }}>
+            <div className={`p-2 w-10 h-10 rounded-full mr-8 lg:mr-10`} style={{ backgroundColor: "#EFF3FA" }}>
               <img src={el.iconId ? `${ApiBaseUrl}/api/media/scaled/${el.iconId}` : notIcon} alt="" />
             </div>
             <span style={{ color: "#373737" }} className={`text-sm`}>
@@ -43,8 +43,8 @@ export const HousingModule = (props: ClientHousingDto) => {
           </div>
         ))}
       </div>
-      <div className={`flex flex-col px-3 lg:px-16`}>
-        <h3 className={`mb-10`}>
+      <div className={`flex flex-col px-4 lg:px-16`}>
+        <h3 className={`text-center lg:text-left mb-10`}>
           <LocalizedText id={"housing_accommodationTypes_title"} />
         </h3>
         <HousingTable data={props.housingAccommodationTypes} />
