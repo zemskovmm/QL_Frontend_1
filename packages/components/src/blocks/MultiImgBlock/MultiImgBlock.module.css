@@ -1,7 +1,14 @@
 .multiImg__list{
-  margin-right: 20.5px;
-  overflow-y: scroll;
-  max-height: 360px;
+  overflow-x: scroll;
+  max-width: 100vw;
+}
+
+@media (min-width: 768px) {
+  .multiImg__list{
+    margin-right: 20.5px;
+    overflow-y: scroll;
+    max-height: 360px;
+  }
 }
 
 .multiImg__list::-webkit-scrollbar {

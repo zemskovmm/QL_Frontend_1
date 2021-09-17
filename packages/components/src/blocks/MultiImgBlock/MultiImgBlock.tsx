@@ -13,9 +13,9 @@ interface MultiImgBlockProps {
 export const MultiImgBlock: FC<MultiImgBlockProps> = ({ img, html }) => {
   const [current, setCurrent] = useState(img[0].id);
   return (
-    <div className={`lg:px-0 px-4 flex w-full mx-auto max-w-screen-xl w-full`}>
+    <div className={`lg:px-0 px-4 flex flex-col lg:flex-row w-full mx-auto max-w-screen-xl w-full`}>
       <div className={`flex w-full mr-20`}>
-        <div className={`${style.multiImg__list} flex flex-col`}>
+        <div className={`${style.multiImg__list} flex lg:flex-col`}>
           {img.map((el, index) => (
             <img
               src={`${ApiBaseUrl}/api/media/scaled/${el.id}?dimension=200`}
@@ -26,9 +26,13 @@ export const MultiImgBlock: FC<MultiImgBlockProps> = ({ img, html }) => {
             />
           ))}
         </div>
-        <img src={`${ApiBaseUrl}/api/media/scaled/${current}`} alt="" className={style.multiImg__list_setItem} />
+        <img
+          src={`${ApiBaseUrl}/api/media/scaled/${current}`}
+          alt=""
+          className={`${style.multiImg__list_setItem} hidden lg:block`}
+        />
       </div>
-      <div className={`${style.multiImg__content} flex flex-col justify-between`}>
+      <div className={`${style.multiImg__content} flex flex-col justify-between w-full`}>
         <HtmlPresenter text={html} />
       </div>
     </div>

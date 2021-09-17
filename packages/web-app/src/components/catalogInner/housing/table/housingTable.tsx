@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import style from "./housingTable.module.css";
 import { ClientHousingAccommodationTypesDto } from "../../../../interfaces/clientHousingDto";
 import { LocalizedText } from "../../../common/LocalizedText";
@@ -6,10 +6,12 @@ import { OverlayDialog } from "../../../common/dialog/OverlayDialog";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 import notIcon from "../../../../assets/icons/done_outline.svg";
 import { ClientCommonTraitLanguageDto } from "../../../../interfaces/clientCommonTraitLanguageDto";
+import { ComponentHostContext } from "@project/components/src/blocks";
 
 export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = ({ data }) => {
   const [dialog, setDialog] = useState(false);
   const [dialogData, setDialogData] = useState<ClientCommonTraitLanguageDto[]>([]);
+  const cl = useContext(ComponentHostContext);
   return (
     <>
       {dialog && (
@@ -77,9 +79,9 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
                 <LocalizedText id={"catalogItems_price_value"} /> / <LocalizedText id={"catalogItems_price_month"} />
               </td>
               <td className={style.tablePlans__order}>
-                <a href="#" className={style.button}>
+                <button onClick={() => cl?.showContactUsForm()} className={style.button}>
                   <LocalizedText id={"housing_tableTitle_order"} />
-                </a>
+                </button>
               </td>
             </tr>
           ))}
