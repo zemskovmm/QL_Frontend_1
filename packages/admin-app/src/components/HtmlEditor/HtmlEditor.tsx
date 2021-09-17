@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { observer } from 'mobx-react';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import  HtmlPresenterStyle from '@project/components/src/ui/HtmlPresenter/htmlPresenter.module.css';
 
 type PropsType = {
     className?: string;
@@ -12,7 +13,7 @@ type PropsType = {
 export const HtmlEditor: FunctionComponent<PropsType> = observer( 
     ( {className, data, onChange} ) => {
         return (
-            <div className={`BasicHtmlBlockInfo ${className}`}>
+            <div className={`${HtmlPresenterStyle.text} ${className}`}>
                 <CKEditor
                     editor={ DecoupledEditor }
                     data={ data }

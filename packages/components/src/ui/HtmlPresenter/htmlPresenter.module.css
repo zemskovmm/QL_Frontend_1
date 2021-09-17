@@ -1,4 +1,8 @@
-﻿.text h1{
+﻿.text {
+  width: 100%;
+}
+
+.text h1 {
   color: #373737;
   font-weight: bold;
   font-size: 1.875rem;
@@ -7,7 +11,7 @@
   margin-bottom: 20px;
 }
 
-.text h2{
+.text h2 {
   color: #373737;
   font-weight: bold;
   font-size: 1.125rem;
@@ -16,7 +20,8 @@
   margin-bottom: 20px;
 }
 
-.text h3, .text h4{
+.text h3,
+.text h4 {
   color: #373737;
   font-weight: 600;
   font-size: 1rem;
@@ -29,7 +34,7 @@
   margin-bottom: 5px;
 }
 
-.text p{
+.text p {
   color: #373737;
   font-size: 1rem;
   line-height: 150%;
@@ -42,27 +47,27 @@
   color: #373737;
 }
 
-.text a{
+.text a {
   font-size: 1rem;
   line-height: 150%;
   text-decoration-line: underline;
-  color: #567DD0;
+  color: #567dd0;
 }
 
-.text ul{
+.text ul {
   padding-left: 22px;
 }
 
-.text ul li{
+.text ul li {
   list-style: none;
   position: relative;
 }
 
-.text ul li:before{
+.text ul li:before {
   content: "";
   position: absolute;
   left: -20px;
-  border: 1px solid #6D4B86;
+  border: 1px solid #6d4b86;
   width: 6.5px;
   height: 6.5px;
   box-sizing: border-box;
@@ -71,16 +76,21 @@
   transition: border 0.3s;
 }
 
+.text td {
+  border: 1px solid #d8d8d8;
+}
 
 @media (max-width: 1023px) {
-  .text h1, .text h2{
+  .text h1,
+  .text h2 {
     font-size: 1.125rem;
     line-height: 156%;
     margin: 0 0 7px !important;
     text-align: center;
   }
 
-  .text h3, .text h4{
+  .text h3,
+  .text h4 {
     font-size: 0.875rem;
     line-height: 143%;
     margin: 0 auto 20px !important;
