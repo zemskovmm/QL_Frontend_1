@@ -8,6 +8,8 @@ import { useAsyncBusy } from "@project/components/src/utils/asyncBusyEffect";
 
 import styles from "./contactUsForm.module.css";
 import { ComponentHostContext } from "@project/components/src/blocks";
+import { HtmlPresenter } from "@project/components/src/ui/HtmlPresenter/htmlPresenter";
+
 
 export const SuccessMessage = (props: { onDismiss: () => void }) => {
   const intl = useIntl();
@@ -133,10 +135,9 @@ export const ContactUsForm = (props: { onDismiss: () => void; onSuccess: () => v
           />
         </label>
         <div className={"flex flex-col mb:flex-row justify-center items-center mt-4 mb:mt-11"}>
-          <div
-            className={`${styles.applyModal__description} mb-4`}
-            dangerouslySetInnerHTML={{ __html: cl?.requestSetting.requestFormPostScriptText || "" }}
-          />
+          <div className="mb-4 w-full">
+            <HtmlPresenter text={cl?.requestSetting.requestFormPostText || ""} />
+          </div>
           <button disabled={isBusy} className={styles.applyModal__buttonApply} type="submit">
             <LocalizedText id="contactUs_applyButton" />
           </button>

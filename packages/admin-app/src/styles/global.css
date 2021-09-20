@@ -32,10 +32,10 @@
   font-size: 16px;
 }
 
-input.form-control, select.form-control {
+input.form-control,
+select.form-control {
   margin: 1px;
 }
-
 
 .form-control {
   display: block;
@@ -77,9 +77,28 @@ textarea.form-control {
   margin-bottom: 15px;
 }
 
-button:focus{
+button:focus {
   outline: none;
 }
 
+.text-tiny {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-small {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-big {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-huge {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
 
 @tailwind utilities;

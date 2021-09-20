@@ -6,11 +6,11 @@ import { GlobalSettingsPageStore } from "../../stores/pages/globalSettings/globa
 import { AdminButton } from "../../components/common/AdminButton";
 import { AlertComponent } from "../../components/common/AlertComponent";
 import { DropDownList } from "@project/components/src/blocks/FaqBlock/faqBlock";
-import { Editor } from "../../components/remoteui/AdminRemoteUiHtmlEditor";
 import styles from "../../components/remoteui/AdminRemoteUiHtmlEditor.module.css";
 import { LinkDto, SocialLinkDto } from "../../interfaces/GlobalSettingsDto";
 import { RouterLink } from "mobx-state-router";
 import { RouteNames } from "../../routing/routes";
+import { HtmlEditor } from "src/components";
 
 const GlobalSocialLink: FC<{ value: SocialLinkDto[]; name: string }> = ({ value, name }) => {
   return useObserver(() => (
@@ -94,13 +94,9 @@ const RequestFormSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
       <Suspense fallback={<div>Loading...</div>}>
         <div className={`flex flex-col`}>
           <span className="text-gray-700 text-xl pr-4 text-center mb-3">Post script</span>
-          <Editor
-            toolbarClassName={styles.rdwStorybookToolbar}
-            wrapperClassName={styles.rdwStorybookWrapper}
-            editorClassName={styles.rdwStorybookEditor}
-            editorState={s.requestFormPostScriptText}
-            onEditorStateChange={(w) => (s.requestFormPostScriptText = w)}
-            placeholder="Lorem ipsum dolor sit amet"
+          <HtmlEditor 
+            data={s.requestFormPostText}
+            onChange={ (value) => {s.requestFormPostText = value} }
           />
         </div>
       </Suspense>
