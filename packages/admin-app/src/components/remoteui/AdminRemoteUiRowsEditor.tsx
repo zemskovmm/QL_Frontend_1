@@ -1,17 +1,12 @@
 import { IRemoteUiData } from "@kekekeks/remoteui/src";
 import { observable } from "mobx";
-import Draft, { EditorState } from "draft-js";
-import { stateFromHTML } from "draft-js-import-html";
-import { stateToHTML } from "draft-js-export-html";
-import React, { lazy, Suspense, useState } from "react";
-import { useObserver } from "mobx-react";
-import styles from "src/components/remoteui/AdminRemoteUiHtmlEditor.module.css";
+
+import React, { useState } from "react";
 import { PageBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
 import { PageRowsEditorStore } from "src/components/pageEditor/PageEditorStore";
 import { AdminButton } from "src/components/common/AdminButton";
 import { AdminOverlayDialog } from "src/components/common/AdminOverlayDialog";
 import { PageRowsEditor } from "src/components/pageEditor/PageEditor";
-import { IntlProvider } from "react-intl";
 
 export class AdminRemoteUiRowsStore implements IRemoteUiData {
   isValid: boolean = true;

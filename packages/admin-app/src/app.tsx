@@ -7,7 +7,6 @@ import "mobx-react-lite/batchingForReactDom";
 import { RouteViewMap } from "src/routing/routes";
 import "src/styles/global.css";
 import "src/styles/legacy.css";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { LoadingIf } from "src/components/common/Loading";
 import AdminLayout from "src/components/common/AdminLayout";
 let root: RootStore;
