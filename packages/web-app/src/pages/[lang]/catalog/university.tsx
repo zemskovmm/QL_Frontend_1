@@ -27,6 +27,7 @@ const UniversityCatalogPage = () => {
           />
         </div>
         <Catalog<CatalogUniversityDto>
+          searchTitle={useLocalizedText({ id: "catalogEducation_search_result" }, intl)}
           title={useLocalizedText({ id: "catalogEducation_title" }, intl)}
           elementRenderer={UniversityCatalogElement}
           apiElementName="university"

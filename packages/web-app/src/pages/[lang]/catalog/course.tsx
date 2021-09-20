@@ -28,6 +28,7 @@ const CourseCatalogPage = () => {
         </div>
         <Catalog<CatalogCourseDto>
           title={useLocalizedText({ id: "catalogCourses_title" }, intl)}
+          searchTitle={useLocalizedText({ id: "catalogEducation_search_result" }, intl)}
           elementRenderer={CourseCatalogElement}
           apiElementName="course"
         />

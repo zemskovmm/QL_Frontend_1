@@ -7,13 +7,25 @@ import preview from "./preview.png";
 
 export interface ImageBlockElement {
   image: number | null;
+  videoLink?: string;
+  videoWidth?: string;
+  videoHeight?: string;
   align: string;
 }
 
 export const ImageBlock = (props: ImageBlockElement) => {
   return (
     <div className={`flex w-full ${props.align}`}>
-      {props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
+      {props.videoLink && (
+              <iframe
+                src={props.videoLink}
+                title="YouTube video player"
+                width={props.videoWidth || "100%"}
+                height={props.videoHeight || "300px"}
+              />
+            )
+      }
+      {!props.videoLink && props.image && <img src={`${ApiBaseUrl}/api/media/${props.image}`} alt="" />}
     </div>
   );
 };
@@ -25,7 +37,10 @@ export const ImageBlockInfo: TypedBlockTypeInfo<ImageBlockElement> = {
   renderer: ImageBlock,
   initialData: {
     image: null,
-    align: "string",
+    videoLink: "",
+    videoWidth: "100%",
+    videoHeight: "300px",
+    align: "center",
   },
   definition: {
     fields: [
@@ -34,6 +49,21 @@ export const ImageBlockInfo: TypedBlockTypeInfo<ImageBlockElement> = {
         name: "image",
         type: "Custom",
         customType: "Image",
+      },
+      {
+        id: "videoLink",
+        name: "Video Link:",
+        type: "String",
+      },
+      {
+        id: "videoWidth",
+        name: "Video Width:",
+        type: "String",
+      },
+      {
+        id: "videoHeight",
+        name: "Video Height:",
+        type: "String",
       },
       {
         id: "align",

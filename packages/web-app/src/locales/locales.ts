@@ -5,7 +5,6 @@ import fr from "./fr";
 import esp from "./esp";
 import { MessageFormatElement } from "@formatjs/icu-messageformat-parser";
 import { NextRouter } from "next/router";
-import { buildQueryString } from "src/utilities/utils";
 
 type EngLocaleKeys = keyof typeof en;
 export type LocaleKeys = EngLocaleKeys;

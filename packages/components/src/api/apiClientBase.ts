@@ -13,11 +13,12 @@ export class ApiClientBase {
       headers.append("Content-Type", "application/json");
     }
     const init: RequestInit = {
-      method: method || (data == null ? "GET" : "POST"),
+      method: method || (data == null || path === "global" ? "GET" : "POST"),
       headers: headers,
-      body: data == null ? undefined : formData ? data : JSON.stringify(data),
+      body: data == null || path === "global" ? undefined : formData ? data : JSON.stringify(data),
     };
-    const url = SsrCompatibleApiBaseUrl + "/api/" + path;
+    const url =
+      path === "global" ? `https://ql.dotlic.ru/api/global/ql/${data}` : SsrCompatibleApiBaseUrl + "/api/" + path;
     const res = await fetch(url, init);
 
     if (res.ok) {

@@ -4,8 +4,9 @@ import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { AdminTraitListItemDto, AdminTraitItemDto, AdminTraitTypeDto } from "../interfaces/TraitPageDto";
 import { AdminUniversityItemDto, AdminUniversityItemPostDto } from "../interfaces/UniversityPageDto";
 import { AdminSchoolDto } from "../stores/pages/school/schoolPageStore";
-import { RemoteUiDefinition, RemoteUiEditorConfiguration } from "@kekekeks/remoteui/src";
+import { RemoteUiDefinition } from "@kekekeks/remoteui/src";
 import { AdminCourseDto } from "../stores/pages/course/coursePageStore";
+import { GlobalSettingsDto } from "src/interfaces/GlobalSettingsDto";
 
 export class AdminApiClient extends ApiClientBase {
   getTotalPages = (length: number) => (length % 10 ? Math.floor(length / 10) + 1 : Math.floor(length / 10));
@@ -22,6 +23,9 @@ export class AdminApiClient extends ApiClientBase {
   updatePage = (page: number, data: AdminPageDto) =>
     this.sendRequest<IdResponseDto>("admin/pages/" + page, data, "PUT");
   createPage = (data: AdminPageDto) => this.sendRequest<IdResponseDto>("admin/pages", data);
+  getGlobalSettings = (lang: string) => this.sendRequest<GlobalSettingsDto>(`global/ql/${lang}`);
+  putGlobalSettings = (lang: string, data: any) =>
+    this.sendRequest<GlobalSettingsDto>(`admin/global/ql/${lang}`, data, "PUT");
 
   /* Trait */
 

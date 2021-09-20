@@ -1,24 +1,10 @@
-import {
-  LocalizedLinkGroupDto,
-  LocalizedLinkLocale,
-  LocalizedLinkWithIconDto
-} from "src/interfaces/localizedLinkDto";
-
-
-/*export interface FooterHeadLinks {
-  forPartners: LocalizedLinkWithIconDto;
-  about: LocalizedLinkWithIconDto;
-  blog: LocalizedLinkWithIconDto;
-  faq: LocalizedLinkWithIconDto;
-}*/
+import { LocalizedLinkGroupDto, LocalizedLinkLocale, LocalizedLinkWithIconDto } from "src/interfaces/localizedLinkDto";
 
 export interface FooterDataDto {
   [key: string]: {
-    socials: LocalizedLinkLocale[],
-    headLinks: LocalizedLinkWithIconDto[],
-    writeUs: string,
-    links: LocalizedLinkGroupDto[]
-  }
-
+    socials: LocalizedLinkLocale[];
+    headLinks: LocalizedLinkWithIconDto[];
+    writeUs: string;
+    links: LocalizedLinkGroupDto[];
+  };
 }
-

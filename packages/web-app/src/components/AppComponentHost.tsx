@@ -7,13 +7,15 @@ import { ContactUsFormController } from "./common/contactUsForm/contactUsForm";
 import { siteApi } from "../clients/siteApiClient";
 import Head from "next/head";
 import Link from "next/link";
+import { RequestFormDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 
 type appComponentHostType = {
   headTitle: string;
   headMeta?: { name: string; content: string; property: string }[] | null;
+  requestSetting: RequestFormDto;
 };
 
-export const AppComponentHost: React.FC<appComponentHostType> = ({ headTitle, headMeta, children }) => {
+export const AppComponentHost: React.FC<appComponentHostType> = ({ headTitle, headMeta, requestSetting, children }) => {
   const [isContactUsFormShown, setContactUsFormShown] = useState(false);
   const router = useRouter();
   const lang = router.query.lang || "en";
@@ -22,6 +24,7 @@ export const AppComponentHost: React.FC<appComponentHostType> = ({ headTitle, he
     filters: siteApi,
     lang: lang as string,
     linkComponent: Link,
+    requestSetting: requestSetting,
   };
   return (
     <>
