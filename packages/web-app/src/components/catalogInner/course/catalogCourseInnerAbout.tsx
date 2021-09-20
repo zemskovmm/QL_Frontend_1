@@ -71,7 +71,7 @@ export const CatalogCourseInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) =>
             </div>
             <div className={`${style.info__columnItem} w-6/12`}>
               <span className={`${style.info__columnTitle}`}>
-                <LocalizedText id={"trait_accreditation"} />
+                <LocalizedText id={"housing_tableTitle_equipment"} />
               </span>
               <div className={style.info__columnItem__list}>
                 {data.traits.namedTraits["accreditation"].map((el) => (

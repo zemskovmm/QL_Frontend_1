@@ -132,8 +132,7 @@ export const CourseCatalogElement = (item: CatalogCourseDto) => (
         <LocalizedText id={"catalogItems_school"} />:{" "}
       </span>
       <p className={style.card__school}>
-        <span>Alliance Française Rouen</span>
-        <img src={TempSchoolLogo} alt="" />
+        <span>{item.schoolName}</span>
       </p>
     </div>
     <div className={style.card__rightLevel}>

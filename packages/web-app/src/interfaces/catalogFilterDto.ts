@@ -42,7 +42,7 @@ export interface CatalogCourseDto {
   priceFrom: number;
   priceTo: number;
   term: string;
-  school: string;
+  schoolName: string;
 }
 
 export interface CatalogHousingDto {
