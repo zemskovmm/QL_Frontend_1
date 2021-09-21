@@ -55,6 +55,7 @@ const en = {
   university_cost: "Cost of education:",
   university_lang: "Language of education:",
   university_city: "Cities:",
+  university_accreditation: "Accreditation:",
   university_sert: "Certification:",
   university_foundation: "Year of foundation:",
   university_from: "from ",

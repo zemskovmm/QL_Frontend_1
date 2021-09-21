@@ -57,6 +57,7 @@ const ru: LocaleDefinition = {
   university_cost: "Стоимость обучения:",
   university_lang: "Язык обучения:",
   university_city: "Города:",
+  university_accreditation: "Аккредитация:",
   university_sert: "Сертификация:",
   university_foundation: "Год основания:",
   university_from: "от ",

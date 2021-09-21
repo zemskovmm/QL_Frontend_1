@@ -31,7 +31,7 @@ export const CourseModule = (props: ClientCourseDto) => {
           ]}
         />
         <TitleAndCallBackBlock
-          logo={null}
+          logo={props.imageId}
           title={props.title}
           titleColor={"black"}
           titleShadow={false}
@@ -43,15 +43,15 @@ export const CourseModule = (props: ClientCourseDto) => {
         />
       </section>
       <div className="flex flex-col w-full">
-        <div className={cn(styles.tabs, "flex px-2.5 pb-2.5")}>
-          <div className="flex flex-wrap justify-center mx-auto">
-            {tabs.map((tab, ind) => (
-              <div key={ind} className={cn(ind === activeTab ? styles.active : "")} onClick={() => setActiveTab(ind)}>
-                {tab}
-              </div>
-            ))}
-          </div>
-        </div>
+        {/*<div className={cn(styles.tabs, "flex px-2.5 pb-2.5")}>*/}
+        {/*  <div className="flex flex-wrap justify-center mx-auto">*/}
+        {/*    {tabs.map((tab, ind) => (*/}
+        {/*      <div key={ind} className={cn(ind === activeTab ? styles.active : "")} onClick={() => setActiveTab(ind)}>*/}
+        {/*        {tab}*/}
+        {/*      </div>*/}
+        {/*    ))}*/}
+        {/*  </div>*/}
+        {/*</div>*/}
         <div className={cn(styles.tabs, styles.mobiletabs, "p-2.5")}>
           <div className="flex flex-col  mx-auto">
             {tabs.map((tab, ind) => (
