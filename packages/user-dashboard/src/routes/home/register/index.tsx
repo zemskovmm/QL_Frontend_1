@@ -10,7 +10,7 @@ import {
   Link,
 } from "@material-ui/core";
 import { useForm, Controller, Control, FieldValues } from "react-hook-form";
-import { qlClient, QlClientRegisterProps } from "../../../API/ql-client";
+import { qlClient, QlClientRegisterProps} from "../../../API/ql-client";
 import { FunctionalComponent } from "preact";
 import { QLInput } from "../../../components/QLInput";
 import { SchemaOf,object,string } from 'yup';
@@ -32,7 +32,8 @@ export const Register:FunctionalComponent = () => {
   });
 
   const handleSubmitRegister = async (data: QlClientRegisterProps) =>{
-    console.log(data)
+    const result = await qlClient.register(data);
+    console.log("result",result)
   };
 
   return (

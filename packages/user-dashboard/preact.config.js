@@ -1,7 +1,13 @@
+import envVars from 'preact-cli-plugin-env-vars';
+
 module.exports = (config, env, helpers) => {
+
   if (!config) throw new Error(notFoundError("config"));
   if (!env) throw new Error(notFoundError("env"));
   if (!helpers) throw new Error(notFoundError("helpers"));
+
+  envVars(config, env, helpers);
+
   const purgecss = require("@fullhuman/postcss-purgecss")({
     // Specify the paths to all of the template files in your project
     content: [

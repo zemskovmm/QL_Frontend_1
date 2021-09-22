@@ -6,13 +6,13 @@
   "scripts": {
     "build": "preact build",
     "serve": "sirv build --port 8080 --cors --single",
-    "dev": "preact watch",
+    "dev": "cross-env preact watch",
     "test": "jest ./tests"
   },
   "dependencies": {
-    "@project/components": "*",
     "@hookform/resolvers": "^2.8.1",
     "@material-ui/core": "4.12.3",
+    "@project/components": "*",
     "nanostores": "0.4.8",
     "preact": "^10.3.1",
     "preact-render-to-string": "^5.1.4",
@@ -33,6 +33,7 @@
     "jest": "^26.2.2",
     "jest-preset-preact": "^4.0.2",
     "preact-cli": "^3.0.0",
+    "preact-cli-plugin-env-vars": "^1.2.1",
     "sirv-cli": "^1.0.0-next.3",
     "typescript": "4.4.3"
   },

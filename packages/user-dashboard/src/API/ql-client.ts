@@ -1,5 +1,6 @@
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 
+
 export type QlClientLoginProps = {
   email: string;
   password: string;
@@ -15,9 +16,7 @@ export type QlClientRegisterProps = {
 
 export class QlClient extends ApiClientBase {
   login = async (props: QlClientLoginProps) => this.sendRequest("/api/portal/login", props, "POST");
-  register = async (props: QlClientRegisterProps) => {
-    return this.sendRequest("/api​/portal​/register", props, "POST");
-  }
+  register = async (props: QlClientRegisterProps) => this.sendRequest("portal​/register", props, "POST");
 }
 
 
