@@ -5,35 +5,46 @@ import {
   CardContent,
   FormControl,
   FormGroup,
-  Input,
-  InputLabel,
   Link,
 } from "@material-ui/core";
-import { useForm, Controller, Control, FieldValues } from "react-hook-form";
-import { qlClient, QlClientRegisterProps} from "../../../API/ql-client";
+import { useForm} from "react-hook-form";
+import { qlClient} from "../../../API/ql-client";
 import { FunctionalComponent } from "preact";
 import { QLInput } from "../../../components/QLInput";
 import { SchemaOf,object,string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-const schema:SchemaOf<QlClientRegisterProps> = object({
+export type FormFields = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  password: string;
+  passwordConfirmation: string;
+};
+
+const schema:SchemaOf<FormFields> = object({
   firstName: string().matches(/^([^0-9]*)$/,'Must not contain numbers').required("Required to fill"),
   lastName: string().matches(/^([^0-9]*)$/,'Must not contain numbers').required("Required to fill"),
   email: string().required("Required to fill"),
   phone: string().required("Required to fill"),
   password: string().required("Required to fill"),
+  passwordConfirmation: string().test('passwords-match', 'Passwords must match', function(value){
+    return this.parent.password === value
+  }).required("Required to fill"),
 })
 
 
 export const Register:FunctionalComponent = () => {
-  const { handleSubmit, control} = useForm<QlClientRegisterProps>({
+  const { handleSubmit, control} = useForm<FormFields>({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
 
-  const handleSubmitRegister = async (data: QlClientRegisterProps) =>{
-    const result = await qlClient.register(data);
-    console.log("result",result)
+  const handleSubmitRegister = async ({firstName,lastName,email,phone,password}: FormFields) =>{
+    const result = await qlClient.register({
+      firstName,lastName,email,phone,password,personalInfo:{}
+    });
   };
 
   return (
@@ -48,6 +59,7 @@ export const Register:FunctionalComponent = () => {
           <QLInput name="email" label="Email" control={control} type="email"/>
           <QLInput name="phone" label="Phone" control={control} type="tel"/>
           <QLInput name="password" label="Password" control={control} type="password"/>
+          <QLInput name="passwordConfirmation" label="Password confirmation" control={control} type="password"/>
           
         </CardContent>
         <CardActions>
