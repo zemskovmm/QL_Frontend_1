@@ -8,11 +8,14 @@ import {
   Link,
 } from "@material-ui/core";
 import { useForm} from "react-hook-form";
-import { qlClient} from "api/ql-client";
+
 import { FunctionalComponent } from "preact";
-import { QLInput } from "components/QLInput";
+
 import { SchemaOf,object,string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { qlClient } from "api/ql-client";
+import { QLInput } from "components/QLInput";
+
 
 export type FormFields = {
   firstName: string;
