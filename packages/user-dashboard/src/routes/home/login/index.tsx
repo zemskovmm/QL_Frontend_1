@@ -10,7 +10,7 @@ import {
   Link,
 } from "@material-ui/core";
 import { useForm, Controller, Control, FieldValues } from "react-hook-form";
-import { QlClientLoginProps } from "../../../API/ql-client";
+import { QlClientLoginProps } from "api/ql-client";
 import { FunctionalComponent } from "preact";
 
 type ControlledInput<T extends FieldValues, TExtra> = FunctionalComponent<TExtra & { control: Control<T, object> }>;

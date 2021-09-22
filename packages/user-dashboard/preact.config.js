@@ -1,4 +1,5 @@
 import envVars from 'preact-cli-plugin-env-vars';
+import path from 'path';
 
 function updateProcessEnv(config,helpers){
   const { plugin } = helpers.getPluginsByName(config, 'DefinePlugin')[0];
@@ -20,6 +21,12 @@ module.exports = (config, env, helpers) => {
   if (!config) throw new Error(notFoundError("config"));
   if (!env) throw new Error(notFoundError("env"));
   if (!helpers) throw new Error(notFoundError("helpers"));
+
+  config.resolve.alias["api"] = path.resolve(__dirname, 'src/API')
+  config.resolve.alias["assets"] = path.resolve(__dirname, 'src/assets')
+  config.resolve.alias["components"] = path.resolve(__dirname, 'src/components')
+  config.resolve.alias["routes"] = path.resolve(__dirname, 'src/routes')
+  config.resolve.alias["style"] = path.resolve(__dirname, 'src/style')
 
   envVars(config, env, helpers);
 

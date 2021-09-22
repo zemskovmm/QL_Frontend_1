@@ -8,9 +8,9 @@ import {
   Link,
 } from "@material-ui/core";
 import { useForm} from "react-hook-form";
-import { qlClient} from "../../../API/ql-client";
+import { qlClient} from "api/ql-client";
 import { FunctionalComponent } from "preact";
-import { QLInput } from "../../../components/QLInput";
+import { QLInput } from "components/QLInput";
 import { SchemaOf,object,string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 

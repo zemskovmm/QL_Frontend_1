@@ -1,5 +1,4 @@
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
-import { EnzymeAdapter } from "enzyme";
 
 export type QlClientLoginProps = {
   email: string;
