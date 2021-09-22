@@ -2,6 +2,7 @@ import { FunctionalComponent } from "preact";
 import { Router, Route } from "preact-router";
 import { AppBar, Toolbar } from "@material-ui/core";
 import { Root } from "./login";
+import { Register } from "./register";
 
 const EmptyHeader = () => (
   <AppBar>
@@ -18,7 +19,7 @@ export const Home: FunctionalComponent = () => {
       <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Router>
           <Route path="/login" component={Root} />
-          <Route path={"/register"} component={() => <>placeholder</>} />
+          <Route path={"/register"} component={Register} />
         </Router>
       </div>
     </div>
