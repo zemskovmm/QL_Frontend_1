@@ -11,13 +11,13 @@ import styles from "src/components/catalogInner/course/TabsControlBlock.module.c
 import { RowsPresenter } from "@project/components/src/blocks";
 import React, { useState } from "react";
 import { siteApi } from "../../clients/siteApiClient";
+import Link from "next/link";
 
 const tabs = ["course"]; /* "all course", "housing", "school" */
 
 export const CourseModule = (props: ClientCourseDto) => {
   const lang = useIntl().locale;
   const [activeTab, setActiveTab] = useState(0);
-  const effectiveActiveTab = Math.min(activeTab, tabs.length - 1);
 
   return (
     <>
@@ -43,15 +43,14 @@ export const CourseModule = (props: ClientCourseDto) => {
         />
       </section>
       <div className="flex flex-col w-full">
-        {/*<div className={cn(styles.tabs, "flex px-2.5 pb-2.5")}>*/}
-        {/*  <div className="flex flex-wrap justify-center mx-auto">*/}
-        {/*    {tabs.map((tab, ind) => (*/}
-        {/*      <div key={ind} className={cn(ind === activeTab ? styles.active : "")} onClick={() => setActiveTab(ind)}>*/}
-        {/*        {tab}*/}
-        {/*      </div>*/}
-        {/*    ))}*/}
-        {/*  </div>*/}
-        {/*</div>*/}
+        <div className={cn(styles.tabs, "flex px-2.5 pb-2.5")}>
+          <div className="flex flex-wrap justify-center mx-auto">
+            {/*<Link key={ind} className={cn(ind === activeTab ? styles.active : "")} href={} }>*/}
+            {/*  {tab}*/}
+            {/*</Link>*/}
+            {/*<Link href={""}></Link>*/}
+          </div>
+        </div>
         <div className={cn(styles.tabs, styles.mobiletabs, "p-2.5")}>
           <div className="flex flex-col  mx-auto">
             {tabs.map((tab, ind) => (

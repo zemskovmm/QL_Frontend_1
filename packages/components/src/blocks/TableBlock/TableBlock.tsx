@@ -74,20 +74,22 @@ export const TableBlock = (props: TableRow) => {
   return (
     <div className="pb-12">
       <div className="px-10 flex flex-col justify-between mx-auto w-full max-w-screen-xl">
-        <div className={styles.table}>
-          {props.rows.map((row, ind) => {
-            return <TableRowBlock key={ind} {...row} titles={props.titles} />;
-          })}
-        </div>
-        {props.notes?.length > 0 && (
-          <div className={styles.notes}>
-            {props.notes.map(({ note }, ind) => (
-              <p key={ind} id={`note${ind + 1}`}>
-                ({ind + 1}) {note}
-              </p>
-            ))}
+        <div className={styles.tableMax}>
+          <div className={styles.table}>
+            {props.rows.map((row, ind) => {
+              return <TableRowBlock key={ind} {...row} titles={props.titles} />;
+            })}
           </div>
-        )}
+          {props.notes?.length > 0 && (
+            <div className={styles.notes}>
+              {props.notes.map(({ note }, ind) => (
+                <p key={ind} id={`note${ind + 1}`}>
+                  ({ind + 1}) {note}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
