@@ -40,7 +40,7 @@ const Search = ({
     }}
   >
     <div
-      className={`flex flex-col justify-center lg:items-start max-w-screen-xl w-full my-0 mx-auto px-4 lg:px-10 ${
+      className={`flex flex-col justify-center lg:items-start max-w-screen-xl w-full my-0 mx-auto px-4 lg:px-14 ${
         callback ? "lg:flex-row lg:items-center" : ""
       }`}
     >
