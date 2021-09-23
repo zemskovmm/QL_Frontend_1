@@ -45,7 +45,7 @@ export const SchoolModule = (props: ClientSchoolDto) => {
       </section>
       <div className="flex flex-col w-full">
         <div className={cn(styles.tabs, "flex px-2.5 pb-2.5")}>
-          <div className="flex flex-wrap justify-left max-w-screen-xl w-full mx-auto px-10">
+          <div className="flex flex-wrap justify-left max-w-screen-xl w-full mx-auto px-5">
             <Link href={`#`}>
               <div className={styles.active}>
                 <LocalizedText id={"courses_tab_about_school"} />

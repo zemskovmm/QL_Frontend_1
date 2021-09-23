@@ -49,10 +49,15 @@ export const CourseModule = (props: ClientCourseDto) => {
       </section>
       <div className="flex flex-col w-full">
         <div className={cn(styles.tabs, "flex px-2.5 pb-2.5")}>
-          <div className="flex flex-wrap justify-left max-w-screen-xl w-full mx-auto px-10">
+          <div className="flex flex-wrap justify-left max-w-screen-xl w-full mx-auto px-5">
             <Link href={{ pathname: `/en/school/1233211321` }}>
               <div>
                 <LocalizedText id={"courses_tab_about_school"} />
+              </div>
+            </Link>
+            <Link href={`/en/1233211321/courses` ?? "#"}>
+              <div>
+                <LocalizedText id={"courses_tab_all_course"} />
               </div>
             </Link>
             <Link href={`#`}>

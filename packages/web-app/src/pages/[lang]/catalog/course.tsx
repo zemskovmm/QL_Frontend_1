@@ -1,5 +1,5 @@
 import { Catalog } from "src/components/catalog/catalog";
-import { CatalogCourseDto, CatalogUniversityDto } from "src/interfaces/catalogFilterDto";
+import { CatalogCourseDto } from "src/interfaces/catalogFilterDto";
 import style from "src/components/catalog/style/catalogView.module.css";
 import { LocalizedText, useLocalizedText } from "src/components/common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";

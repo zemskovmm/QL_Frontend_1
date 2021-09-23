@@ -1,18 +1,20 @@
-import { CatalogInnerAbout } from "src/components/catalogInner/about/catalogInnerAbout";
 import { TitleAndCallBackBlock } from "@project/components/src/blocks/TitleAndCallBackBlock/titleAndCallBackBlock";
 import { LocalizedText, useLocalizedText } from "../common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { useIntl } from "react-intl";
-import { GallerySliderBlock } from "@project/components/src/blocks/GallerySliderBlock/gallerySliderBlock";
-import { ClientSchoolDto } from "../../interfaces/clientSchoolDto";
 import cn from "classnames";
 import styles from "../catalogInner/course/TabsControlBlock.module.css";
-import { CatalogSchoolInnerAbout } from "../catalogInner/school/catalogSchoolInnerAbout";
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { ClientSchoolAndCourseDto } from "../../interfaces/clientSchoolAndCourseDto";
+import style from "../catalog/style/catalogView.module.css";
+import { Catalog } from "../catalog/catalog";
+import { CatalogUniversityDto } from "../../interfaces/catalogFilterDto";
+import { UniversityCatalogElement } from "../catalog/catalogElement";
+import { CatalogView } from "../catalog/catalogView";
+import { CourseCatalogElement } from "src/components/catalog/catalogElement";
 
-export const SchoolModule = (props: ClientSchoolDto) => {
+export const SchoolAndCourseModule = (props: ClientSchoolAndCourseDto) => {
   const lang = useIntl().locale;
   const intl = useIntl();
   return (
@@ -22,13 +24,13 @@ export const SchoolModule = (props: ClientSchoolDto) => {
           whiteColor={false}
           items={[
             { name: <LocalizedText id={"breadcrumbs_Main"} />, link: `/${lang}` },
-            { name: <LocalizedText id={"breadcrumbs_Catalog"} />, link: `/${lang}/catalog/course` },
-            { name: props.title, link: `#` },
+            { name: props.school.title, link: `/${lang}/school/${props.urls.split("/")[2]}` },
+            { name: <LocalizedText id={"courses_tab_all_course"} />, link: `#` },
           ]}
         />
         <TitleAndCallBackBlock
-          logo={props.logoId}
-          title={props.title}
+          logo={props.school.logoId}
+          title={props.school.title}
           titleColor={"black"}
           titleShadow={false}
           background={null}
@@ -36,7 +38,7 @@ export const SchoolModule = (props: ClientSchoolDto) => {
           textButton={""}
           showButton={false}
           textAbove={`
-            ${useLocalizedText({ id: "courses_title1" }, intl)} ${props.title}${useLocalizedText(
+            ${useLocalizedText({ id: "courses_title1" }, intl)} ${props.school.title}${useLocalizedText(
             { id: "courses_title2" },
             intl
           )}`}
@@ -45,14 +47,14 @@ export const SchoolModule = (props: ClientSchoolDto) => {
       </section>
       <div className="flex flex-col w-full">
         <div className={cn(styles.tabs, "flex px-2.5 pb-2.5")}>
-          <div className="flex flex-wrap justify-left max-w-screen-xl w-full mx-auto px-10">
-            <Link href={`#`}>
-              <div className={styles.active}>
+          <div className="flex flex-wrap justify-left max-w-screen-xl w-full mx-auto px-5">
+            <Link href={`/${lang}/school/${props.urls.split("/")[2]}`}>
+              <div>
                 <LocalizedText id={"courses_tab_about_school"} />
               </div>
             </Link>
-            <Link href={`/${lang}/${props.urls.split("/")[3]}/courses` ?? "#"}>
-              <div>
+            <Link href={"#"}>
+              <div className={styles.active}>
                 <LocalizedText id={"courses_tab_all_course"} />
               </div>
             </Link>
@@ -60,20 +62,25 @@ export const SchoolModule = (props: ClientSchoolDto) => {
         </div>
         <div className={cn(styles.tabs, styles.mobiletabs, "p-2.5")}>
           <div className="flex flex-col  mx-auto">
-            <Link href={`#`}>
+            <Link href={`/${lang}/school/${props.urls.split("/")[2]}`}>
               <div className={styles.active}>
                 <LocalizedText id={"courses_tab_about_school"} />
               </div>
             </Link>
-            <Link href={`/${lang}/${props.urls.split("/")[3]}/courses` ?? "#"}>
+            <Link href={"#"}>
               <div className={styles.active}>
                 <LocalizedText id={"courses_tab_all_course"} />
               </div>
             </Link>
           </div>
         </div>
-        <div className={cn("py-9 px-10")}>
-          <CatalogSchoolInnerAbout data={props} />
+        <div className={`max-w-screen-xl w-full mx-auto my-10 px-10`}>
+          <div className={`mb-8`}>Вы сможете забронировать вариант проживания в процессе покупки курса</div>
+          <div className={`w-6/12`}>
+            {props.courses.map((el) => (
+              <CourseCatalogElement {...el} schoolName={props.school.title} />
+            ))}
+          </div>
         </div>
       </div>
     </>
