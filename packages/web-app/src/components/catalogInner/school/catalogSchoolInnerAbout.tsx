@@ -1,11 +1,9 @@
 import React, { FC } from "react";
-import style from "./catalogCourseInnerAbout.module.css";
-import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
+import style from "../course/catalogCourseInnerAbout.module.css";
 import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
 import { HtmlPresenter } from "@project/components/src/ui/HtmlPresenter/htmlPresenter";
 import { LocalizedText } from "src/components/common/LocalizedText";
-import { ClientCourseDto } from "../../../interfaces/clientCourseDto";
-import Link from "next/link";
+import { ClientSchoolDto } from "../../../interfaces/clientSchoolDto";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 import notIcon from "../../../assets/icons/done_outline.svg";
 
@@ -29,17 +27,17 @@ const CatalogCallBack = () => {
   );
 };
 
-type CatalogInnerAboutProps = {
-  data: ClientCourseDto;
+type CatalogInnerSchoolAboutProps = {
+  data: ClientSchoolDto;
 };
 
-export const CatalogCourseInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) => {
+export const CatalogSchoolInnerAbout: FC<CatalogInnerSchoolAboutProps> = ({ data }) => {
   return (
     <div className={style.catalogInnerAbout__bg}>
       <div className={style.catalogInnerAbout__maxWidth}>
         <div className={style.catalogInnerAbout}>
           <h2 className={style.catalogInnerAbout__title}>
-            <LocalizedText id={"courses_tab_about_course"} />
+            <LocalizedText id={"courses_tab_about_school"} />
           </h2>
           <HtmlPresenter text={data.descriptionHtml} />
           <div className={style.info__row}>
@@ -53,65 +51,41 @@ export const CatalogCourseInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) =>
                 ))}
               </div>
             </div>
-            <div className={`${style.info__columnItem} w-full`}>
+            <div className={`${style.info__columnItem} w-6/12`}>
               <span className={`${style.info__columnTitle}`}>
-                <LocalizedText id={"trait_learning_outcome"} />
+                <LocalizedText id={"university_lang"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["learning-outcome"]?.map((el) => (
+                {data.traits.namedTraits["instruction-language"]?.map((el) => (
                   <span>{el.name}</span>
                 ))}
               </div>
             </div>
             <div className={`${style.info__columnItem} w-6/12`}>
-              <span className={`${style.info__columnTitle}`}>
-                <LocalizedText id={"trait_start_dates"} />
-              </span>
-              <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["start-dates"]?.map((el) => (
-                  <span>{el.name}</span>
-                ))}
-              </div>
-            </div>
-            <div className={`${style.info__columnItem} w-4/12`}>
-              <span className={`${style.info__columnTitle}`}>
-                <LocalizedText id={"university_city"} />
-              </span>
-              <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["city"].map((el) => (
-                  <span>{el.name}</span>
-                ))}
-              </div>
-            </div>
-            <div className={`${style.info__columnItem} w-2/12`}>
               <span className={`${style.info__columnTitle}`}>
                 <LocalizedText id={"trait_age"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["Age"].map((el) => (
+                {data.traits.namedTraits["Age"]?.map((el) => (
                   <span>{el.name}</span>
                 ))}
               </div>
             </div>
             <div className={`${style.info__columnItem} w-6/12`}>
               <span className={`${style.info__columnTitle}`}>
-                <LocalizedText id={"trait_level_preparation"} />
+                <LocalizedText id={"trait_sites"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["training-level"]?.map((el) => (
-                  <span>{el.name}</span>
+                {data.traits.namedTraits["sites"]?.map((el) => (
+                  <a href={el.name}>{el.name}</a>
                 ))}
               </div>
             </div>
-            <div className={`${style.info__columnItem} w-4/12`}>
+            <div className={`${style.info__columnItem} w-6/12`}>
               <span className={`${style.info__columnTitle}`}>
-                <LocalizedText id={"trait_size_class"} />
+                <LocalizedText id={"university_foundation"} />
               </span>
-              <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["size-class"]?.map((el) => (
-                  <span>{el.name}</span>
-                ))}
-              </div>
+              <div className={style.info__columnItem__list}>{data.foundationYear}</div>
             </div>
           </div>
           <div className={`mb-6 flex flex-wrap px-4 lg:px-16`}>

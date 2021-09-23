@@ -20,6 +20,7 @@ export interface TitleAndCallBackBlockElement {
   backgroundShadow?: string;
   logo: number | null;
   showButton: boolean;
+  school?: boolean;
 }
 
 export const TitleAndCallBackBlock = (props: TitleAndCallBackBlockElement) => {
@@ -36,7 +37,12 @@ export const TitleAndCallBackBlock = (props: TitleAndCallBackBlockElement) => {
       {props.showButton && (
         <div className={`flex flex-col ${styles.callbackBlock}`}>
           <div className={`${styles.callbackBlockText}`} dangerouslySetInnerHTML={{ __html: props.textAbove }} />
-          <ButtonFormBlock name={props.textButton || ""} align={`center`} />
+          {props.textButton && <ButtonFormBlock name={props.textButton} align={`center`} />}
+        </div>
+      )}
+      {props.school && (
+        <div className={`flex flex-col ${styles.school}`}>
+          <div className={`${styles.callbackBlockText}`} dangerouslySetInnerHTML={{ __html: props.textAbove }} />
         </div>
       )}
     </Search>
@@ -58,6 +64,7 @@ export const TitleAndCallBackBlockInfo: TypedBlockTypeInfo<TitleAndCallBackBlock
     backgroundShadow: "0%",
     logo: null,
     showButton: false,
+    school: false,
   },
   definition: {
     fields: [

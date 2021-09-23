@@ -4,6 +4,7 @@
   padding: 34px 10px;
   margin: auto;
   display: flex;
+  padding-top: 0;
 }
 
 .catalogInnerAbout{
@@ -18,6 +19,7 @@
   line-height: 42px;
   color: #373737;
   margin-bottom: 16px;
+  padding-top: 34px;
 }
 
 .catalogInnerAbout__content p{
