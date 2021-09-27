@@ -178,8 +178,8 @@ export const FileLoader = ({ selectMedia }: IFileLoader) => {
               .sort((a, b) => b.id - a.id)
               .map(({ title, id }) => (
                 <div key={id} className="py-2 flex justify-between items-center">
-                  <span onClick={() => (selectMedia ? selectMedia(id) : {})} className="cursor-pointer">
-                    {title}
+                  <span onClick={() => (selectMedia ? selectMedia(id) : {})} className="cursor-pointer" title={title}>
+                    id = {id}
                   </span>
                   <img
                     onClick={() => (selectMedia ? selectMedia(id) : {})}
