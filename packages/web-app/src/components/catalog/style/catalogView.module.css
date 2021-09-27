@@ -294,6 +294,18 @@
   line-height: 20px;
 }
 
+.card__housingDesc{
+  font-size: 14px;
+  /*line-height: 20px;*/
+  color: #646F83;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.3em;
+  height: 3.9em;
+}
+
 .card__rightPrice__list{
   display: flex;
   justify-content: flex-start;
