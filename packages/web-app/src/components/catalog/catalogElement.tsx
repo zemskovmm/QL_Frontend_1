@@ -10,7 +10,7 @@ import img from "src/assets/images/courses/2.png";
 import TempSchoolLogo from "src/assets/icons/tempSchoolLogo.svg";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
-import { FC } from "react";
+import React, { FC } from "react";
 import pin from "src/assets/icons/pin.svg";
 
 const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
@@ -78,6 +78,13 @@ export const HousingCatalogElement = (item: CatalogHousingDto) => (
         <div className={style.card__rightTitle}>
           {item.name} {item.namedTraits.city && item.namedTraits.city[0]?.name}
         </div>
+        <a
+          className={`flex items-start ${style.multiImg__contentMap}`}
+          href={`https://www.google.com/maps/@${item.location.lat},${item.location.lng},20z`}
+          target={`_blank`}
+        >
+          <img src={pin} alt="" /> <span className={`ml-2 underline`}>{item.location.address}</span>
+        </a>
         <div className={`${style.card__rightPrice} mt-auto`}>
           <span className={style.card__rightSubtitle}>
             <LocalizedText id={"catalogItems_price"} />:

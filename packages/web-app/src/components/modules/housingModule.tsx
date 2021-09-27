@@ -25,8 +25,9 @@ export const HousingModule = (props: ClientHousingDto) => {
       </div>
       <div className={`mb-6 lg:mb-16 px-0 lg:px-16`}>
         <MultiImgBlock
+          location={props.location}
           img={props.galleryList}
-          text={``}
+          text={props.htmlDescription}
           title={props.title}
           city={props.traits.namedTraits["city"][0].name}
         />

@@ -1,4 +1,5 @@
 import { ClientCommonTraitLanguageDto } from "./clientCommonTraitLanguageDto";
+import { LocationDto } from "./clientHousingDto";
 
 export interface ClientCatalogFilterOptionDto {
   id: number;
@@ -48,6 +49,8 @@ export interface CatalogCourseDto {
 export interface CatalogHousingDto {
   galleryList: number[];
   imageId: number | null;
+  htmlDescription: string;
+  location: LocationDto;
   langlessUrl: string;
   name: string;
   price: number;
