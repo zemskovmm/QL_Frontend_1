@@ -85,6 +85,7 @@ export const HousingCatalogElement = (item: CatalogHousingDto) => (
         >
           <img src={pin} alt="" /> <span className={`ml-2 underline`}>{item.location.address}</span>
         </a>
+        <div dangerouslySetInnerHTML={{ __html: item.htmlDescription }} className={`${style.card__housingDesc} py-5`} />
         <div className={`${style.card__rightPrice} mt-auto`}>
           <span className={style.card__rightSubtitle}>
             <LocalizedText id={"catalogItems_price"} />:
