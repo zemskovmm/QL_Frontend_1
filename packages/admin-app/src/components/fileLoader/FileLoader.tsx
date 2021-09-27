@@ -184,8 +184,9 @@ export const FileLoader = ({ selectMedia }: IFileLoader) => {
                   <img
                     onClick={() => (selectMedia ? selectMedia(id) : {})}
                     className="mr-2 cursor-pointer"
-                    src={`${ApiBaseUrl}/api/media/scaled/${id}?dimension=128`}
+                    src={`${ApiBaseUrl}/api/media/scaled/${id}`}
                     alt=""
+                    style={{ maxWidth: "300px" }}
                   />
                 </div>
               ))}
