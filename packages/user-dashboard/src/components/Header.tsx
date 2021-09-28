@@ -1,19 +1,28 @@
 
 import { FunctionalComponent } from "preact";
 import QuarterLatinIcon from "assets/quarter-latin.png";
-
+import { Continer } from "components/Continer";
+import { useRootContext } from "components/RootContext";
+import { Link } from "preact-router";
+import { SIGN_IN_ROUTE } from "constants/Routes";
+import { observer } from 'mobx-react-lite';
 
 type PropsType = {
     title: string;
 };
 
+export const Header: FunctionalComponent<PropsType> = observer(({ title }) => {
+    const { isLogined, isUnlogined } = useRootContext();
 
-export const Header: FunctionalComponent<PropsType> = ({ title }) => {
     return (
-        <div className="p-6 px-20 shadow">
-            
-            <img src={QuarterLatinIcon} />
-            
-        </div>
+        <Continer className="shadow flex justify-between">
+            <img className="object-none" src={QuarterLatinIcon} />
+            { isLogined && <button>Logout</button> }
+            { isUnlogined && 
+                <Link href={SIGN_IN_ROUTE}>
+                    <button className="m-2">login</button>
+                </Link>
+            }
+        </Continer>
     );
-};
+});

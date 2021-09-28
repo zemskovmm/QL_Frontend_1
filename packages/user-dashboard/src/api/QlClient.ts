@@ -6,19 +6,16 @@ export type QlClientLoginProps = {
 };
 
 export type QlClientRegisterProps = {
-  firstName: string;
-  lastName: string;
   email: string;
-  phone: string;
   password: string;
-  personalInfo: any;
 };
 
 export class QlClient extends ApiClientBase {
   login = async (props: QlClientLoginProps) => this.sendRequest("portal/login", props, "POST");
   register = async (props: QlClientRegisterProps) => this.sendRequest("portal/register", props, "POST");
+  heartbeat = async () => this.sendRequest("portal/heartbeat", {}, "POST");
+  logout = async () => this.sendRequest("portal/logout", {}, "GET");
 }
-
 
 
 export const qlClient = new QlClient();

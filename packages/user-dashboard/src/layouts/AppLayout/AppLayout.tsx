@@ -1,5 +1,6 @@
 
 
+import { Continer } from "components/Continer";
 import { Header } from "components/Header";
 import { ComponentChildren, FunctionalComponent } from "preact";
 
@@ -8,11 +9,11 @@ type PropsType = {
 };
 
 export const AppLayout: FunctionalComponent<PropsType> = ({ children }) => {
-    return (<div className="flex flex-col h-full p-4">
+    return (<div className="flex flex-col h-full">
         <Header title="Quartier-Latin dashboard" />
-        <div className="flex-grow "> 
+        <Continer className="flex-grow "> 
             { children }
-        </div>
+        </Continer>
     </div>);
 };
 
