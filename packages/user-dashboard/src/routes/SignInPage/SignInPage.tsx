@@ -12,15 +12,21 @@ import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { QlClientLoginProps } from "api/QlClient";
 import { Button } from "components/Button";
+import { SchemaOf, object, string } from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 
+const schema: SchemaOf<QlClientLoginProps> = object({
+  email: string().required("Required to fill"),
+  password: string().required("Required to fill")
+})
 
-type ControlledInput<T extends FieldValues, TExtra> = FunctionalComponent<TExtra & { control: Control<T, object> }>;
-type JustControlledInput<T extends FieldValues> = ControlledInput<T, unknown>;
 
-
-const SignInPage: FunctionalComponent = observer(() => {
-  const { handleSubmit, control } = useForm<QlClientLoginProps>();
+export const SignInPage: FunctionalComponent = observer(() => {
+  const { handleSubmit, control } = useForm<QlClientLoginProps>({
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
   const rootState = useRootContext();
   const {isLogined} = rootState
   const { loginAction, isLoading } = useMemo(() => new SignInStore(rootState), [rootState]);
@@ -45,5 +51,3 @@ const SignInPage: FunctionalComponent = observer(() => {
     </div>
   );
 });
-
-export default SignInPage;

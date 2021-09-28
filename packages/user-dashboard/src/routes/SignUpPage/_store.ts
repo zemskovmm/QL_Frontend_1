@@ -1,11 +1,12 @@
-import { qlClient, QlClientLoginProps } from "api/QlClient";
+import { qlClient, QlClientLoginProps, QlClientRegisterProps } from "api/QlClient";
 import { RootStore, UserStatus } from "components/RootContext";
 import { makeAutoObservable } from "mobx";
 
 
-export class SignInStore{
+export class SignUpStore{
     rootStor:RootStore;
     isLoading = false;
+    isRegistred = false;
 
     constructor(rootStor:RootStore) {
         this.rootStor = rootStor;
@@ -14,12 +15,14 @@ export class SignInStore{
     }
 
     //computed
-    async loginAction(data:QlClientLoginProps){
+
+    async registerAction(data:QlClientRegisterProps){
+        this.isRegistred = false;
         this.isLoading = true;
         try{
-            const result = await qlClient.login(data)
-            this.rootStor.notification.addSuccessAction("Login successful");
-            this.rootStor.heartbeatAction(UserStatus.LOGINED_PROFILE_STATUS);
+            const result = await qlClient.register(data)
+            this.rootStor.notification.addSuccessAction("Register successful");
+            this.isRegistred = true;
         }catch(e){
             this.rootStor.notification.addErrorAction(e);
         }

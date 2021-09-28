@@ -43,7 +43,6 @@ type PropsType = {
     size?: TextSizeType;
     /** Тег который добавится в html */
     tag?: TextTagType;
-    
 };
 
 export const Text:FunctionalComponent<PropsType> = 

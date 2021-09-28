@@ -2,11 +2,12 @@ import { FunctionalComponent } from "preact";
 import { Router } from "preact-router";
 import HomePage from "routes/HomePage";
 import Notfound from "routes/NotFoundPage";
-import SignUpPage from "routes/SignUpPage";
-import SignInPage from "routes/SignInPage/SignInPage";
 import { AppLayout } from "layouts/AppLayout";
 import { HOME_ROUTE, SIGN_UP_ROUTE, SIGN_IN_ROUTE } from "constants/Routes";
 import { RootContextProvider } from "components/RootContext";
+import SignUpPage from "routes/SignUpPage";
+import SignInPage from "routes/SignInPage";
+import { ObservedNotification } from "components/ObservedNotification";
 
 export const Application: FunctionalComponent = () => {
     return (
@@ -20,6 +21,7 @@ export const Application: FunctionalComponent = () => {
                         <Notfound default />
                     </Router>
                 </AppLayout>
+                <ObservedNotification/>
             </RootContextProvider>
         </div>
     );
