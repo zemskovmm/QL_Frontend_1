@@ -8,7 +8,7 @@ import { SIGN_IN_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
 import { Card } from "components/Card";
 import { Button } from "components/Button";
-import { useRootContext } from "components/RootContext";
+import { useRootContext } from "components/RootContextProvider";
 import { SignUpStore } from "./_store";
 import { observer } from "mobx-react-lite";
 import SignInPage from "routes/SignInPage";

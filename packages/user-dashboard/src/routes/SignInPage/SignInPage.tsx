@@ -6,7 +6,7 @@ import { HOME_ROUTE, SIGN_UP_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
 import { InputControlled } from "components/InputControlled";
 import { Card } from "components/Card";
-import { useRootContext } from "components/RootContext";
+import { useRootContext } from "components/RootContextProvider";
 import { SignInStore } from "./_store";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";

@@ -1,5 +1,5 @@
 import { Button } from "components/Button";
-import { useRootContext } from "components/RootContext";
+import { useRootContext } from "components/RootContextProvider";
 import { observer } from "mobx-react-lite";
 import { FunctionalComponent } from "preact";
 import { useEffect } from "preact/hooks";

@@ -1,5 +1,5 @@
-import { qlClient, QlClientLoginProps, QlClientRegisterProps } from "api/QlClient";
-import { RootStore, UserStatus } from "components/RootContext";
+import { qlClient, QlClientRegisterProps } from "api/QlClient";
+import { RootStore} from "stores/RootStore";
 import { makeAutoObservable } from "mobx";
 
 

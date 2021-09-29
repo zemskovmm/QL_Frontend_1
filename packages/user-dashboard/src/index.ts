@@ -1,4 +1,4 @@
 import "style/index.css";
-import { Application } from "./layouts/Application";
+import { Application } from "./Application";
 
 export default Application;
