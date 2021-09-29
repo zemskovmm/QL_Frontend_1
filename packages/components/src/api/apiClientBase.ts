@@ -8,8 +8,29 @@ export const ApiBaseUrl = removeLastSlash(
 
 export const SsrCompatibleApiBaseUrl = removeLastSlash(process.env["API_BASE_URL"] || ApiBaseUrl);
 
+export class QLRequest<T>{
+  readonly isOk: boolean;
+  readonly status: number;
+  readonly url: string;
+  readonly requestMethod: string;
+  readonly requestBody: any;
+  readonly body?:T;
+  readonly error:string;
+
+  constructor( isOk: boolean,status:number,url: string,requestMethod: string="", requestBody: any, body?:T, error:string=""){
+    this.isOk = isOk;
+    this.status = status;
+    this.url = url;
+    this.requestMethod = requestMethod;
+    this.requestBody = requestBody;
+    this.body = body;
+    this.error = error;
+  }
+}
+
 export class ApiClientBase {
-  async sendRequest<T>(path: string, data?: any, method?: string, formData?: boolean) {
+
+  async request<T>(path: string, data?: any, method?: string, formData?: boolean): Promise< QLRequest<T> >{
     const headers = new Headers();
     if (data != null && !formData) {
       headers.append("Content-Type", "application/json");
@@ -18,23 +39,41 @@ export class ApiClientBase {
       method: method || (data == null || path === "global" ? "GET" : "POST"),
       headers: headers,
       body: data == null || path === "global" ? undefined : formData ? data : JSON.stringify(data),
+      credentials: "include",
     };
+    
     const url =
       path === "global" ? `https://ql.dotlic.ru/api/global/ql/${data}` : SsrCompatibleApiBaseUrl + "/api/" + path;
+
     const res = await fetch(url, init);
+    const resText = await res.text();
 
     if (res.ok) {
-      const resText = await res.text();
-
       if (resText.length) {
-        return <T>JSON.parse(resText);
+        return new QLRequest<T>(true,res.status,url,init.method,init.body,<T>JSON.parse(resText));
       } else {
-        const kostylAnswer: unknown = true;
-        return <T>kostylAnswer;
+        return new QLRequest<T>(true,res.status,url,init.method,init.body);
       }
     }
-    const errorText = await res.text();
-    console.error(`Network error for request ${init.method} ${url}\n${init.body}\nError: ${res.status} ${errorText}`);
-    throw new Error(`Network error: ${res.status} ${errorText}`);
+    return new QLRequest<T>(false,res.status,url,init.method,init.body, undefined, resText);
+  }
+
+  async sendRequest<T>(path: string, data?: any, method?: string, formData?: boolean): Promise<T> {
+    
+    const { isOk, body, requestMethod, requestBody, url, status, error } = 
+      await this.request<T>(path, data, method, formData);
+
+
+    if (isOk) {
+      const kostylAnswer: unknown = true;
+      return body ? body: <T>kostylAnswer;
+    }
+
+    console.error(
+      "Network error for request",
+      requestMethod, url,"\n",
+      requestBody, "\n", 
+      "Error: ", status, error);
+    throw new Error(`Network error: ${status} ${error}`);
   }
 }

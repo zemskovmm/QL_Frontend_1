@@ -1,11 +1,10 @@
 
-import { useForm, Controller, Control, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FunctionalComponent } from "preact";
 import { useMemo } from "preact/hooks";
-import { HOME_ROUTE, SIGN_UP_ROUTE } from "constants/Routes";
+import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
 import { InputControlled } from "components/InputControlled";
-import { Card } from "components/Card";
 import { useRootContext } from "components/RootContextProvider";
 import { SignInStore } from "./_store";
 import { observer } from "mobx-react-lite";
@@ -14,7 +13,6 @@ import { QlClientLoginProps } from "api/QlClient";
 import { Button } from "components/Button";
 import { SchemaOf, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Text } from "components/Text";
 import { CenterCardLayout } from "layouts/CenterCardLayout";
 
 
@@ -34,7 +32,7 @@ export const SignInPage: FunctionalComponent = observer(() => {
     const { loginAction, isLoading } = useMemo(() => new SignInStore(rootState), [rootState]);
 
     useEffect(()=>{
-        isLogined && route(HOME_ROUTE);
+        isLogined && route(PROFILE_ROUTE);
     },[isLogined])
 
     return (
