@@ -2,6 +2,13 @@ import { Text } from "components/Text";
 import { FunctionalComponent } from "preact";
 import { NotificationGroupEnum, NotificationType } from "stores/NotificationStore";
 
+const NotificationColors = {
+    [NotificationGroupEnum.ERROR_NOTIFICATION_GROUP]: "bg-red-200 border-red-500",
+    [NotificationGroupEnum.WARNING_NOTIFICATION_GROUP]: "bg-yellow-200 border-yellow-500",
+    [NotificationGroupEnum.TEXT_NOTIFICATION_GROUP]: "bg-gray-200 border-gray-500",
+    [NotificationGroupEnum.SUCCESS_NOTIFICATION_GROUP]: "bg-green-200 border-green-500",
+}
+
 type PropsType = {
     data: NotificationType;
     onRemove: (id:string)=>void;
@@ -10,11 +17,8 @@ type PropsType = {
 export const NotificationItem: FunctionalComponent<PropsType> = ({data, onRemove}) => {
     
     const classes = [
-        "inline-flex p-2 rounded max-w-md",
-        NotificationGroupEnum.SUCCESS_NOTIFICATION_GROUP,
-        data.group === NotificationGroupEnum.SUCCESS_NOTIFICATION_GROUP ? "bg-green-400":
-        data.group === NotificationGroupEnum.ERROR_NOTIFICATION_GROUP ? "bg-red-400" : 
-            "bg-gray-400",
+        "inline-flex p-2 rounded border max-w-md",
+        NotificationColors[data.group],
     ].join(' ');
 
     return (

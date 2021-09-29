@@ -1,7 +1,8 @@
+import { Text } from "components/Text";
 import { FunctionalComponent } from "preact";
 
 export const HomePage: FunctionalComponent = () => {
-  return <h2>HomePage</h2>
+  return <Text text="Главная" size="title-medium" isBold/>
 };
 
 export default HomePage;

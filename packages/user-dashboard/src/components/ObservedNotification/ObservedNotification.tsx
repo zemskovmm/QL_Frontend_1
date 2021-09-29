@@ -9,7 +9,7 @@ export const ObservedNotification: FunctionalComponent = observer(() => {
     const {notification:{notifications, removeAction,updateTimeAction}} = useRootContext()
 
     useEffect(()=>{
-        let intervalId = setInterval(updateTimeAction,1000);
+        let intervalId = setInterval(updateTimeAction,300);
         return ()=>clearInterval(intervalId);
     },[])
 

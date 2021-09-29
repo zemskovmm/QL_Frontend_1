@@ -24,7 +24,8 @@ export class RootStore{
 
 
     //actions
-    async heartbeatAction(status?:UserStatus){
+
+    async heartbeatAction(status?:UserStatus): Promise<boolean>{
         if(status){
             this.userStatus = status;
         }
@@ -32,9 +33,20 @@ export class RootStore{
             const result = await qlClient.heartbeat()
             if(result){
                 this.userStatus = UserStatus.LOGINED_PROFILE_STATUS;
-                return;
+                return true;
             }
         }catch(e){ }
         this.userStatus = UserStatus.UNLOGINED_PROFILE_STATUS;
+        return false;
+    }
+
+    async logoutAction(){
+        try{
+            const result = await qlClient.logout()
+            this.notification.addSuccessAction("Logout successful");
+            this.userStatus = UserStatus.UNLOGINED_PROFILE_STATUS;
+        }catch(e){
+            this.notification.addErrorAction(e);
+        }
     }
 }

@@ -24,8 +24,13 @@ const TEXT_COLORS = {
 }
 
 const TEXT_SIZES = {
-    'caption': "text-xs",
-    'default': "text-base",
+    'title-large': "text-title-large",
+    'title-medium': "text-title-medium",
+    'title-small': "text-title-small",
+    'large': "text-large",
+    'medium': "text-medium",
+    'small': "text-small",
+    'caption': "text-caption",
 }
     
 type TextTagType = keyof typeof TEXT_TAGS;
@@ -37,6 +42,8 @@ type PropsType = {
     className?:string;
     /** Отображаемый текст */
     text: string;
+    /** Флаг включающий жирное отображение */
+    isBold?: boolean;
     /** Цвет текста */
     color?: TextColorType;
     /** Размер текста */
@@ -46,12 +53,13 @@ type PropsType = {
 };
 
 export const Text:FunctionalComponent<PropsType> = 
-    ({className, text, color='primary', size='default', tag='span'})=>{
+    ({className, text, isBold, color='primary', size='large', tag='span'})=>{
 
     const Tag = TEXT_TAGS[tag];
     const classes = [
         TEXT_COLORS[color],
         TEXT_SIZES[size],
+        isBold ? "font-bold" :"",
         className ? className : "",
     ].join(' ');
 

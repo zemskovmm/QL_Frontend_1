@@ -1,7 +1,8 @@
 import { makeAutoObservable } from "mobx";
 import { NotificationGroupEnum, NotificationType } from "./_types";
 
-const MAX_TIME_NOTIFICATION = 6000
+const MAX_NOTIFICATION = 15;
+const MAX_TIME_NOTIFICATION = 6000;
 
 export class NotificationStore {
     notifications: Array<NotificationType> = [];
@@ -14,7 +15,9 @@ export class NotificationStore {
 
 
     addAction(notification: NotificationType) {
-        this.notifications = [...this.notifications, {...notification,time: Date.now()}];
+        const newNotifications = this.notifications.slice(-(MAX_NOTIFICATION-1));
+        newNotifications.push({...notification,time: Date.now()})
+        this.notifications = newNotifications;
     }
 
     removeAction( notificationsId?: string ) {
@@ -23,22 +26,20 @@ export class NotificationStore {
 
     addErrorAction(error:string) {
         const id = `localID_${this.lastId++}`;
-        this.notifications = [...this.notifications, {
+        this.addAction({
             id, 
             group: NotificationGroupEnum.ERROR_NOTIFICATION_GROUP,
             message: error,
-            time: Date.now()
-        }];
+        });
     }
     
-    addSuccessAction(error:string) {
+    addSuccessAction(success:string) {
         const id = `localID_${this.lastId++}`;
-        this.notifications = [...this.notifications, {
+        this.addAction({
             id, 
             group: NotificationGroupEnum.SUCCESS_NOTIFICATION_GROUP,
-            message: error,
-            time: Date.now()
-        }];
+            message: success,
+        });
     }
 
     updateTimeAction() {

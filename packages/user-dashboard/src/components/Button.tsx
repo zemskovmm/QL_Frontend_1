@@ -1,4 +1,5 @@
 import { FunctionalComponent} from "preact";
+import { Text } from "./Text";
 
 const BUTTON_COLORS = {
     "default": "bg-button text-button-text",
@@ -36,7 +37,7 @@ export const Button:FunctionalComponent<PropsType> =
     ({className, id, text, type, color='default', size='default', disabled=false,onClick})=>{
 
     const classes = [
-        'rounded',
+        'rounded text-medium w-full',
         BUTTON_COLORS[color],
         BUTTON_SIZES[size],
         className ? className : "",

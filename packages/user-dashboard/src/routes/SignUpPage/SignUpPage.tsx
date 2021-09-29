@@ -12,6 +12,8 @@ import { useRootContext } from "components/RootContext";
 import { SignUpStore } from "./_store";
 import { observer } from "mobx-react-lite";
 import SignInPage from "routes/SignInPage";
+import { Text } from "components/Text";
+import { CenterCardLayout } from "layouts/CenterCardLayout";
 
 
 
@@ -31,32 +33,47 @@ const schema: SchemaOf<FormFields> = object({
 
 
 export const SignUpPage: FunctionalComponent = observer(() => {
-  const { handleSubmit, control } = useForm<FormFields>({
-    mode: "onBlur",
-    resolver: yupResolver(schema),
-  });
+    const { handleSubmit, control } = useForm<FormFields>({
+        mode: "onBlur",
+        resolver: yupResolver(schema),
+    });
 
-  const rootState = useRootContext();
-  const { registerAction, isLoading, isRegistred } = useMemo(() => new SignUpStore(rootState), [rootState]);
+    const rootState = useRootContext();
+    const { registerAction, isLoading, isRegistred } = useMemo(() => new SignUpStore(rootState), [rootState]);
 
-  useEffect(()=>{
-    isRegistred && route(SIGN_IN_ROUTE);
-  },[isRegistred])
+    useEffect(()=>{
+        isRegistred && route(SIGN_IN_ROUTE);
+    },[isRegistred])
 
-  return (
-    <div className="h-full flex items-center justify-center">
-      <Card>
-        <form onSubmit={handleSubmit(registerAction) as any}>
-            <h2>Register</h2>
-            <InputControlled name="email" label="Email" control={control} type="email" />
-            <InputControlled name="password" label="Password" control={control} type="password" />
-            <InputControlled name="passwordConfirmation" label="Password confirmation" control={control} type="password" />
-            <Button className="m-2" text="Register" type="submit" disabled={isLoading}/>
-            <Link href={SIGN_IN_ROUTE}>
-              <Button className="m-2" text="Login" color="secondary" />
-            </Link>
-        </form>
-      </Card>
-    </div>
-  );
+    return (
+        <CenterCardLayout 
+            title="Регистрация" 
+            subtitle="Пароль должен состоять из заглавных и строчных букв и цифр. Длина - не менее 10 символов.">
+
+            <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(registerAction) as any}>
+                <InputControlled 
+                    name="email" 
+                    label="Адрес электронной почты" 
+                    placeholder="Ваша электронная почта" 
+                    control={control} 
+                    type="email" />
+                <InputControlled 
+                    name="password" 
+                    label="Пароль" 
+                    placeholder="Придумайте пароль" 
+                    control={control} 
+                    type="password" />
+                <InputControlled 
+                    name="passwordConfirmation" 
+                    label="Пароль" 
+                    placeholder="Подтвердите пароль" 
+                    control={control} 
+                    type="password" />
+                <Button className="my-2" text="Зарегистрироваться" type="submit" disabled={isLoading}/>
+                <Link href={SIGN_IN_ROUTE}>
+                    <Button className="my-2" text="Войти" color="secondary" />
+                </Link>
+            </form>
+        </CenterCardLayout>
+    );
 });
