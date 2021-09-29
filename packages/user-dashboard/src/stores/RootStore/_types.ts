@@ -1,0 +1,5 @@
+export enum UserStatus {
+    INIT_PROFILE_STATUS,
+    LOGINED_PROFILE_STATUS,
+    UNLOGINED_PROFILE_STATUS,
+}
