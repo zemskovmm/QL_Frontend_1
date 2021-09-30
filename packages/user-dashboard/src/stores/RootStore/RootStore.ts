@@ -30,8 +30,8 @@ export class RootStore{
         if(status){
             this.userStatus = status;
         }
-        const result = await qlClient.heartbeat();
-        if(result.isOk){
+        const {isOk} = await qlClient.heartbeat();
+        if(isOk){
             this.userStatus = UserStatus.LOGINED_PROFILE_STATUS;
             return true;
         }
@@ -40,12 +40,12 @@ export class RootStore{
     }
 
     async logoutAction(){
-        const result = await qlClient.logout();
-        if(result.isOk){
+        const {isOk,error} = await qlClient.logout();
+        if(isOk){
             this.notification.addSuccessAction("Logout successful");
             this.userStatus = UserStatus.UNLOGINED_PROFILE_STATUS;
         }else{
-            this.notification.addErrorAction(`${result.status} ${result.error}`);
+            this.notification.addErrorAction(error);
         }
     }
 

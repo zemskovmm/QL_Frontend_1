@@ -16,12 +16,12 @@ export class SignInStore{
     //computed
     async loginAction(data:QlClientLoginProps){
         this.isLoading = true;
-        const result = await qlClient.login(data)
-        if(result.isOk){
+        const {isOk,error} = await qlClient.login(data)
+        if(isOk){
             this.rootStor.heartbeatAction(UserStatus.LOGINED_PROFILE_STATUS);
             this.rootStor.notification.addSuccessAction("Login successful");
         }else{
-            this.rootStor.notification.addErrorAction(`${result.status} ${result.error}`);
+            this.rootStor.notification.addErrorAction(error);
         }
         this.isLoading = false;
     }

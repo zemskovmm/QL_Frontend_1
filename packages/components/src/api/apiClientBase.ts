@@ -43,17 +43,22 @@ export class ApiClientBase {
     const url =
       path === "global" ? `https://ql.dotlic.ru/api/global/ql/${data}` : SsrCompatibleApiBaseUrl + "/api/" + path;
 
-    const res = await fetch(url, init);
-    const resText = await res.text();
+    try{
+      const res = await fetch(url, init);
+      const resText = await res.text();
 
-    if (res.ok) {
-      if (resText.length) {
-        return new QLRequest<T>(true,res.status,url,init.method,init.body,<T>JSON.parse(resText));
-      } else {
-        return new QLRequest<T>(true,res.status,url,init.method,init.body);
+      if (res.ok) {
+        if (resText.length) {
+          return new QLRequest<T>(true,res.status,url,init.method,init.body,<T>JSON.parse(resText));
+        } else {
+          return new QLRequest<T>(true,res.status,url,init.method,init.body);
+        }
       }
+      return new QLRequest<T>(false,res.status,url,init.method,init.body, undefined, `Network error: ${res.status} ${resText}`);
+    }catch(e){
+      return new QLRequest<T>(false,0,url,init.method,init.body, undefined, e);
     }
-    return new QLRequest<T>(false,res.status,url,init.method,init.body, undefined, resText);
+    
   }
 
   async sendRequest<T>(path: string, data?: any, method?: string, formData?: boolean): Promise<T> {
@@ -72,6 +77,9 @@ export class ApiClientBase {
       requestMethod, url,"\n",
       requestBody, "\n", 
       "Error: ", status, error);
-    throw new Error(`Network error: ${status} ${error}`);
+    if(status){
+      throw new Error(error);
+    }
+    throw new Error(error);
   }
 }
