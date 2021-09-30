@@ -57,6 +57,7 @@ const cn: LocaleDefinition = {
   university_cost: "教育费用：",
   university_lang: "教育语言：:",
   university_city: "城市:",
+  university_accreditation: "认证:",
   university_sert: "认证:",
   university_foundation: "成立年份:",
   university_from: "从 ",

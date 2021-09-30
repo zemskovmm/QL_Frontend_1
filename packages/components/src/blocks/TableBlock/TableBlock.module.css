@@ -1,8 +1,13 @@
+.tableMax{
+  overflow-x: auto;
+}
+
 .table {
   border-top: 1px solid #d8d8d8;
   border-left: 1px solid #d8d8d8;
   width: 100%;
   position: relative;
+  min-width: 1200px;
 }
 
 .table div {
@@ -103,62 +108,62 @@
   color: #f00;
 }
 
-@media screen and (max-width: 1250px) {
-  .cell {
-    flex-direction: column;
-  }
+/*@media screen and (max-width: 1250px) {*/
+/*  .cell {*/
+/*    flex-direction: column;*/
+/*  }*/
 
-  .text {
-    text-align: center;
-    max-width: 100% !important;
-    justify-content: center;
-    border-bottom: 1px solid #d8d8d8;
-  }
+/*  .text {*/
+/*    text-align: center;*/
+/*    max-width: 100% !important;*/
+/*    justify-content: center;*/
+/*    border-bottom: 1px solid #d8d8d8;*/
+/*  }*/
 
-  .info > div:first-of-type {
-    border-left: none
-  }
-}
+/*  .info > div:first-of-type {*/
+/*    border-left: none*/
+/*  }*/
+/*}*/
 
-@media screen and (max-width: 950px) {
-  .table span {
-    display: inline;
-    font-weight: 700;
-    margin-right: 4px;
-  }
+/*@media screen and (max-width: 950px) {*/
+/*  .table span {*/
+/*    display: inline;*/
+/*    font-weight: 700;*/
+/*    margin-right: 4px;*/
+/*  }*/
 
-  .info {
-    flex-wrap: wrap;
-  }
+/*  .info {*/
+/*    flex-wrap: wrap;*/
+/*  }*/
 
-  .info > div {
-    width: 50% !important;
-    max-width: 100% !important;
-    margin-left: -1px;
-    border-bottom: 1px solid #d8d8d8;
-    margin-bottom: -1px;
-    padding: 5px;
-  }
+/*  .info > div {*/
+/*    width: 50% !important;*/
+/*    max-width: 100% !important;*/
+/*    margin-left: -1px;*/
+/*    border-bottom: 1px solid #d8d8d8;*/
+/*    margin-bottom: -1px;*/
+/*    padding: 5px;*/
+/*  }*/
 
-  .info > div:nth-child(odd) {
-    border-right: 1px solid #d8d8d8;
-  }
+/*  .info > div:nth-child(odd) {*/
+/*    border-right: 1px solid #d8d8d8;*/
+/*  }*/
 
 
 
-  .table > .cell:first-of-type {
-    display: none;
-  }
-}
+/*  .table > .cell:first-of-type {*/
+/*    display: none;*/
+/*  }*/
+/*}*/
 
-@media screen and (max-width: 500px) {
-  .info > div {
-    width: 100% !important;
-  }
+/*@media screen and (max-width: 500px) {*/
+/*  .info > div {*/
+/*    width: 100% !important;*/
+/*  }*/
 
-  .info > div:nth-child(odd) {
-    border-right: none;
-  }
-}
+/*  .info > div:nth-child(odd) {*/
+/*    border-right: none;*/
+/*  }*/
+/*}*/
 
 

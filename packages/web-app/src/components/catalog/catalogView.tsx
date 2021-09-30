@@ -30,7 +30,7 @@ function CatalogFilter(props: {
       <h3 className={style.catalog__filterTitle}>{props.filter.name}</h3>
       <div
         className={`flex flex-col relative ${props.filter.options.length > 5 ? style.filterList : ""} ${
-          show ? style.hideList : style.showList
+          props.filter.options.length <= 5 ? "" : show ? style.hideList : style.showList
         }`}
       >
         {props.filter.options.map((option) => (
@@ -70,6 +70,15 @@ const CatalogCategories = ({ lang = "en", type = "university" }) => (
     </h3>
     <div>
       <a
+        href={`/${lang}/catalog/course`}
+        className={cn(style.toggle__switch, type === "course" ? style.toggle__switch_active : "")}
+      >
+        <img src={course} alt="" className={`${style.toggle__switchImg}`} />
+        <span className={`${style.toggle__switchName}`}>
+          <LocalizedText id={"catalogEducation_courses"} />
+        </span>
+      </a>
+      <a
         href={`/${lang}/catalog/university`}
         className={cn(style.toggle__switch, type === "university" ? style.toggle__switch_active : "")}
       >
@@ -80,7 +89,7 @@ const CatalogCategories = ({ lang = "en", type = "university" }) => (
       </a>
       <a
         href={`/${lang}/catalog/housing`}
-        className={cn(style.toggle__switch, type !== "university" ? style.toggle__switch_active : "")}
+        className={cn(style.toggle__switch, type === "housing" ? style.toggle__switch_active : "")}
       >
         <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
         <span className={`${style.toggle__switchName}`}>

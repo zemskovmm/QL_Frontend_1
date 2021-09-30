@@ -57,6 +57,7 @@ const fr: LocaleDefinition = {
   university_cost: "Coût de l'éducation:",
   university_lang: "Langue d'enseignement:",
   university_city: "Villes:",
+  university_accreditation: "Accréditation:",
   university_sert: "Attestation:",
   university_foundation: "Année de fondation:",
   university_from: "de ",
