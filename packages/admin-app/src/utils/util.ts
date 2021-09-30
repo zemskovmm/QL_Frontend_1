@@ -75,7 +75,7 @@ export function fireAndAlertOnError(cb: () => Promise<void>) : void
     try {
       await cb();
     } catch (e) {
-      alert(e.toString());
+      // alert(e.toString());
     }
   }
   call();

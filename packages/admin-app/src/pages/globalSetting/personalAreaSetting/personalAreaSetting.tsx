@@ -4,12 +4,16 @@ import { GlobalSettingsPageStore } from "../../../stores/pages/globalSettings/gl
 import { GlobalLink, GlobalSocialLink } from "../common/commonGlobal";
 import { DropDownList } from "@project/components/src/blocks/FaqBlock/faqBlock";
 
+const ProfileForm: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
+  return useObserver(() => <div></div>);
+};
+
 export const PersonalAreaSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
   const [name, setName] = useState("");
   return useObserver(() => (
     <div>
       <DropDownList name={`Profile`} active={name === "Profile"} onClick={() => setName(`Profile`)}>
-        <div />
+        <ProfileForm s={s} />
       </DropDownList>
     </div>
   ));
