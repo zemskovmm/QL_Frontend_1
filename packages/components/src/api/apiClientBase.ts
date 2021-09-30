@@ -56,7 +56,7 @@ export class ApiClientBase {
       }
       return new QLRequest<T>(false,res.status,url,init.method,init.body, undefined, `Network error: ${res.status} ${resText}`);
     }catch(e){
-      return new QLRequest<T>(false,0,url,init.method,init.body, undefined, e);
+      return new QLRequest<T>(false,0,url,init.method,init.body, undefined, String(e));
     }
     
   }
@@ -76,7 +76,7 @@ export class ApiClientBase {
       "Network error for request",
       requestMethod, url,"\n",
       requestBody, "\n", 
-      "Error: ", status, error);
+      "Error: ", error);
     if(status){
       throw new Error(error);
     }
