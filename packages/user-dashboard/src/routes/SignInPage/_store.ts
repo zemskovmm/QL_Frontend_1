@@ -13,7 +13,6 @@ export class SignInStore{
         makeAutoObservable(this, {}, { autoBind: true });
     }
 
-    //computed
     async loginAction(data:QlClientLoginProps){
         this.isLoading = true;
         const {isOk,error} = await qlClient.login(data)

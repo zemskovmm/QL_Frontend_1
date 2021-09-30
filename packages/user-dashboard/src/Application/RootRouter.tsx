@@ -3,10 +3,10 @@ import { observer } from "mobx-react-lite";
 import { FunctionalComponent } from "preact";
 import Router, { route, RouterOnChangeArgs } from "preact-router";
 import HomePage from "routes/HomePage";
-import ProfilePage from "routes/ProfilePage";
 import SignUpPage from "routes/SignUpPage";
 import SignInPage from "routes/SignInPage";
 import NotFoundPage from "routes/NotFoundPage";
+import ProfilePage from "routes/ProfilePage";
 import { 
     HOME_ROUTE, 
     SIGN_UP_ROUTE, 
@@ -15,6 +15,7 @@ import {
     SecureRoutes
 } from "constants/Routes";
 import { useEffect } from "react";
+
 
 
 export const RootRouter: FunctionalComponent = observer(() => {
