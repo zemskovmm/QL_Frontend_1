@@ -11,20 +11,25 @@ import {
     HOME_ROUTE, 
     SIGN_UP_ROUTE, 
     SIGN_IN_ROUTE, 
-    PROFILE_ROUTE 
+    PROFILE_ROUTE,
+    SecureRoutes
 } from "constants/Routes";
+import { useEffect } from "react";
 
 
 export const RootRouter: FunctionalComponent = observer(() => {
-    const {heartbeatAction} = useRootContext();
+    const {heartbeatAction, changeUrl, isUnlogined, url} = useRootContext();
 
-    const handleRoute = async (event:RouterOnChangeArgs) => {
-        switch (event.url) {
-          case PROFILE_ROUTE:
-            if ( await heartbeatAction() ) route( HOME_ROUTE, true);
-            break;
-        }
+    const handleRoute = (event:RouterOnChangeArgs) => {
+        changeUrl(event.url);
+        heartbeatAction();
     };
+
+    useEffect(()=>{
+        if(isUnlogined && SecureRoutes.includes(url)){
+            route( SIGN_IN_ROUTE, true);
+        }
+    },[url,isUnlogined])
 
     return (
         <Router onChange={handleRoute}>

@@ -5,6 +5,7 @@ import { UserStatus } from './_types';
 
 
 export class RootStore{
+    url:string = "";
     userStatus:UserStatus = UserStatus.INIT_PROFILE_STATUS;
     notification:NotificationStore;
 
@@ -18,7 +19,7 @@ export class RootStore{
         return this.userStatus === UserStatus.LOGINED_PROFILE_STATUS;
     }
 
-    get isUnlogined(){
+    get isUnlogined() {
         return this.userStatus === UserStatus.UNLOGINED_PROFILE_STATUS;
     }
 
@@ -29,24 +30,26 @@ export class RootStore{
         if(status){
             this.userStatus = status;
         }
-        try{
-            const result = await qlClient.heartbeat()
-            if(result){
-                this.userStatus = UserStatus.LOGINED_PROFILE_STATUS;
-                return true;
-            }
-        }catch(e){ }
+        const result = await qlClient.heartbeat();
+        if(result.isOk){
+            this.userStatus = UserStatus.LOGINED_PROFILE_STATUS;
+            return true;
+        }
         this.userStatus = UserStatus.UNLOGINED_PROFILE_STATUS;
         return false;
     }
 
     async logoutAction(){
-        try{
-            const result = await qlClient.logout()
+        const result = await qlClient.logout();
+        if(result.isOk){
             this.notification.addSuccessAction("Logout successful");
             this.userStatus = UserStatus.UNLOGINED_PROFILE_STATUS;
-        }catch(e){
-            this.notification.addErrorAction(e);
+        }else{
+            this.notification.addErrorAction(`${result.status} ${result.error}`);
         }
+    }
+
+    async changeUrl(url:string){
+        this.url=url;
     }
 }
