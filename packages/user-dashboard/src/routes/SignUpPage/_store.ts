@@ -19,12 +19,12 @@ export class SignUpStore{
     async registerAction(data:QlClientRegisterProps){
         this.isRegistred = false;
         this.isLoading = true;
-        const result = await qlClient.register(data)
-        if(result.isOk){
+        const {isOk,error} = await qlClient.register(data)
+        if(isOk){
             this.rootStor.notification.addSuccessAction("Register successful");
             this.isRegistred = true;
         }else{
-            this.rootStor.notification.addErrorAction(`${result.status} ${result.error}`);
+            this.rootStor.notification.addErrorAction(error);
         }
         this.isLoading = false;
     }
