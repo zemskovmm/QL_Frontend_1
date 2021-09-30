@@ -10,11 +10,11 @@ import img from "src/assets/images/courses/2.png";
 import TempSchoolLogo from "src/assets/icons/tempSchoolLogo.svg";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
-import { FC } from "react";
+import React, { FC } from "react";
 import pin from "src/assets/icons/pin.svg";
 
 const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
-  <Link href={item.url}>
+  <Link href={item.url ?? "#"}>
     <a className={style.card}>
       <div className={style.card__left}>
         <div className={style.card__leftImg}>
@@ -78,6 +78,14 @@ export const HousingCatalogElement = (item: CatalogHousingDto) => (
         <div className={style.card__rightTitle}>
           {item.name} {item.namedTraits.city && item.namedTraits.city[0]?.name}
         </div>
+        <a
+          className={`flex items-start ${style.multiImg__contentMap}`}
+          href={`https://www.google.com/maps/@${item.location.lat},${item.location.lng},20z`}
+          target={`_blank`}
+        >
+          <img src={pin} alt="" /> <span className={`ml-2 underline`}>{item.location.address}</span>
+        </a>
+        <div dangerouslySetInnerHTML={{ __html: item.htmlDescription }} className={`${style.card__housingDesc} py-5`} />
         <div className={`${style.card__rightPrice} mt-auto`}>
           <span className={style.card__rightSubtitle}>
             <LocalizedText id={"catalogItems_price"} />:
@@ -126,20 +134,43 @@ export const UniversityCatalogElement = (item: CatalogUniversityDto) => (
 );
 
 export const CourseCatalogElement = (item: CatalogCourseDto) => (
-  <ElementCatalog item={item}>
-    <div className={style.card__rightLevel}>
-      <span className={style.card__rightSubtitle}>
-        <LocalizedText id={"catalogItems_school"} />:{" "}
-      </span>
-      <p className={style.card__school}>
-        <span>{item.schoolName}</span>
-      </p>
-    </div>
-    <div className={style.card__rightLevel}>
-      <span className={style.card__rightSubtitle}>
-        <LocalizedText id={"catalogItems_duration"} />:{" "}
-      </span>
-      <LocalizedText id={"catalogItems_week"} />
-    </div>
-  </ElementCatalog>
+  <Link href={item.url ?? "#"}>
+    <a className={style.card}>
+      <div className={style.card__left}>
+        <div className={style.card__leftImg}>
+          <img src={img} alt="" />
+        </div>
+      </div>
+      <div className={style.card__right}>
+        <div className={style.card__rightTitle}>{item.name}</div>
+        <div className={style.card__rightLevel}>
+          <span className={style.card__rightSubtitle}>
+            <LocalizedText id={"catalogItems_school"} />:{" "}
+          </span>
+          <p className={style.card__school}>
+            <span>{item.schoolName}</span>
+          </p>
+        </div>
+        <div className={style.card__rightLevel}>
+          <span className={style.card__rightSubtitle}>
+            <LocalizedText id={"catalogItems_duration"} />:{" "}
+          </span>
+          <LocalizedText id={"catalogItems_week"} />
+        </div>
+        <div className={`${style.card__rightPrice} mt-auto`}>
+          <span className={style.card__rightSubtitle}>
+            <LocalizedText id={"catalogItems_price"} />:
+          </span>
+          <div className={`${style.card__rightPrice__list}`}>
+            <span className={style.card__rightPrice__listItem}>
+              <b>
+                <LocalizedText id={"catalogItems_price_upto"} /> <LocalizedText id={"catalogItems_price_value"} />
+              </b>{" "}
+              / <LocalizedText id={"catalogItems_price_month"} />
+            </span>
+          </div>
+        </div>
+      </div>
+    </a>
+  </Link>
 );

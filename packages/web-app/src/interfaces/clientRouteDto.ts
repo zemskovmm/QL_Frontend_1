@@ -2,6 +2,8 @@ import { ClientPageDto } from "src/interfaces/clientPageDto";
 import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
 import { ClientHousingDto } from "./clientHousingDto";
 import { ClientCourseDto } from "./clientCourseDto";
+import { ClientSchoolDto } from "./clientSchoolDto";
+import { ClientSchoolAndCourseDto } from "./clientSchoolAndCourseDto";
 
 interface RouteDataBase {
   urls: { [key: string]: string };
@@ -12,6 +14,11 @@ interface RoutedAsPage {
   module: {
     page: ClientPageDto;
   };
+}
+
+interface RoutedAsSchool {
+  moduleName: "school";
+  module: ClientSchoolDto;
 }
 
 interface RoutedAsUniversity {
@@ -29,4 +36,10 @@ interface RoutedAsHousing {
   module: ClientHousingDto;
 }
 
-export type ClientRouteDto = RouteDataBase & (RoutedAsPage | RoutedAsUniversity | RoutedAsHousing | RoutedAsCourse);
+interface RoutedAsSchoolAndCourse {
+  moduleName: "schoolAndCourseList";
+  module: ClientSchoolAndCourseDto;
+}
+
+export type ClientRouteDto = RouteDataBase &
+  (RoutedAsPage | RoutedAsUniversity | RoutedAsHousing | RoutedAsCourse | RoutedAsSchool | RoutedAsSchoolAndCourse);
