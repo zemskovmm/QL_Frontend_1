@@ -18,7 +18,7 @@ import { AdminApi } from "src/clients/adminApiClient";
 import { PageBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
 import { AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
-function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
+export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
     for (const typeName in definition.subTypes) {
@@ -45,7 +45,7 @@ function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   };
 }
 
-class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization {
+export class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization {
   getCustomStore(config: RemoteUiEditorConfiguration, type: string, data: any): IRemoteUiData {
     if (type == "Html") return new AdminRemoteUiHtmlEditorStore(data);
     if (type == "Image") return new AdminRemoteUiImageFieldStore(data);
