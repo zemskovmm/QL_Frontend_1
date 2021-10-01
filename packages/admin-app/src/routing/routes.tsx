@@ -17,6 +17,7 @@ import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } f
 import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "../pages/course/page";
 import { TraitTypeEditPage, TraitTypeNewPage } from "../pages/trait/traitTypeNewPage";
 import { AdminGlobalSettingEditor } from "../pages/globalSetting/page";
+import { FormEditorPage } from "../pages/globalSetting/formEditorPage/formEditorPage";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -26,6 +27,7 @@ export enum RouteNames {
   newPage = "newPage",
   pageTraitEditPage = "pageTraitEditPage",
   globalSettingsEditor = "globalSettingsEditor",
+  formEditorPage = "formEditorPage",
 
   fileList = "fileList",
 
@@ -60,6 +62,7 @@ export const RouteViewMap = {
   [RouteNames.pageList]: <PageListPage />,
   [RouteNames.pageTraitEditPage]: <PageTraitEditorPage />,
   [RouteNames.globalSettingsEditor]: <AdminGlobalSettingEditor />,
+  [RouteNames.formEditorPage]: <FormEditorPage />,
 
   [RouteNames.fileList]: <FilesPage />,
 
@@ -99,6 +102,11 @@ export const Routes: Route[] = convertRoutes([
     pattern: "/global-settings/:lang",
     name: RouteNames.globalSettingsEditor,
     onEnter: (root, to) => root.globalSettingsPage.load(to.params["lang"]),
+  },
+  {
+    pattern: "/form-editor/:lang/:type",
+    name: RouteNames.formEditorPage,
+    onEnter: (root, to) => root.formEditorPage.load(to.params["lang"], to.params["type"]),
   },
   {
     pattern: "/pages",

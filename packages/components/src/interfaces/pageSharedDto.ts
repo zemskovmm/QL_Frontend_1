@@ -17,3 +17,12 @@ export interface PageBlockDto {
 export interface PageDataDto {
   rows: PageBlockRowDto[];
 }
+
+export interface FormBlockRowDto {
+  blocks: PageBlockDto[];
+  maxWidth: string;
+  background: string;
+  hide: boolean;
+  vertical: string;
+  hideHistory?: boolean;
+}

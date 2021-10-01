@@ -1,3 +1,4 @@
+import { AdminFormPageDto } from "./AdminFormPageDto";
 
 export interface SocialLinkDto {
   icon: string;
@@ -41,8 +42,13 @@ export interface FooterDto {
   footerContactLinkList: ContactLinkDto[];
 }
 
+export interface PersonalCabinetDto {
+  [key: string]: AdminFormPageDto;
+}
+
 export interface GlobalSettingsDto {
   requestForm: RequestFormDto;
   header: HeaderDto;
   footer: FooterDto;
+  personalCabinet: PersonalCabinetDto;
 }
