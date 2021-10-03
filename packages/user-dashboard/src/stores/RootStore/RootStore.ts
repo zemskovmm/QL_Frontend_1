@@ -1,55 +1,29 @@
-import { qlClient, QlClientLoginProps, QlClientRegisterProps } from 'api/QlClient';
-import { makeAutoObservable } from 'mobx';
-import { NotificationStore } from 'stores/NotificationStore';
-import { UserStatus } from './_types';
+import { createMap } from 'nanostores'
+import { useStore } from "nanostores/preact";
 
 
-export class RootStore{
-    url:string = "";
-    userStatus:UserStatus = UserStatus.INIT_PROFILE_STATUS;
-    notification:NotificationStore;
 
-    constructor(notification:NotificationStore) {
-        this.notification = notification;
-        makeAutoObservable(this, {}, { autoBind: true });
+interface RootStore {
+    url:string;
+}
+
+const createRootStore = ()=>{
+    const store = createMap<RootStore>(() => {
+        store.set({
+            url:"",
+        })
+    })
+
+    const changeUrl = (url:string) => {
+        store.setKey("url", url);
     }
 
-    //computed
-    get isLogined(){
-        return this.userStatus === UserStatus.LOGINED_PROFILE_STATUS;
-    }
+    return { store, changeUrl }
+}
 
-    get isUnlogined() {
-        return this.userStatus === UserStatus.UNLOGINED_PROFILE_STATUS;
-    }
+export const rootStore = createRootStore();
 
-
-    //actions
-
-    async heartbeatAction(status?:UserStatus): Promise<boolean>{
-        if(status){
-            this.userStatus = status;
-        }
-        const {isOk} = await qlClient.heartbeat();
-        if(isOk){
-            this.userStatus = UserStatus.LOGINED_PROFILE_STATUS;
-            return true;
-        }
-        this.userStatus = UserStatus.UNLOGINED_PROFILE_STATUS;
-        return false;
-    }
-
-    async logoutAction(){
-        const {isOk,error} = await qlClient.logout();
-        if(isOk){
-            this.notification.addSuccessAction("Logout successful");
-            this.userStatus = UserStatus.UNLOGINED_PROFILE_STATUS;
-        }else{
-            this.notification.addErrorAction(error);
-        }
-    }
-
-    async changeUrl(url:string){
-        this.url=url;
-    }
+export const useRootStore = () => {
+    const state = useStore(rootStore.store)
+    return { ...rootStore, ...state }
 }

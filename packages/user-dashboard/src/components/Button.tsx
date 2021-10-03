@@ -37,7 +37,7 @@ export const Button:FunctionalComponent<PropsType> =
     ({className, id, text, type, color='default', size='default', disabled=false,onClick})=>{
 
     const classes = [
-        'rounded text-medium w-full',
+        'rounded text-medium w-full whitespace-nowrap',
         BUTTON_COLORS[color],
         BUTTON_SIZES[size],
         className ? className : "",
