@@ -1,39 +1,34 @@
-
 import { useForm } from "react-hook-form";
 import { FunctionalComponent } from "preact";
-import { useMemo } from "preact/hooks";
 import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
 import { InputControlled } from "components/InputControlled";
-import { useRootContext } from "components/RootContextProvider";
-import { SignInStore } from "./_store";
-import { observer } from "mobx-react-lite";
+import { useSignInStore } from "./_store";
 import { useEffect } from "react";
-import { QlClientLoginProps } from "api/QlClient";
 import { Button } from "components/Button";
 import { SchemaOf, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CenterCardLayout } from "layouts/CenterCardLayout";
+import { UserStatuseLoginProps } from "stores/UserStatuseStore";
 
 
-const schema: SchemaOf<QlClientLoginProps> = object({
+const schema: SchemaOf<UserStatuseLoginProps> = object({
   email: string().required("Required to fill"),
   password: string().required("Required to fill")
 })
 
 
-export const SignInPage: FunctionalComponent = observer(() => {
-    const { handleSubmit, control } = useForm<QlClientLoginProps>({
+export const SignInPage: FunctionalComponent = () => {
+    const { handleSubmit, control } = useForm<UserStatuseLoginProps>({
         mode: "onBlur",
         resolver: yupResolver(schema),
     });
-    const rootState = useRootContext();
-    const {isLogined} = rootState
-    const { loginAction, isLoading } = useMemo(() => new SignInStore(rootState), [rootState]);
+    
+    const {isLoading, isSuccess, loginAction} = useSignInStore();
 
     useEffect(()=>{
-        isLogined && route(PROFILE_ROUTE);
-    },[isLogined])
+        isSuccess && route(PROFILE_ROUTE);
+    },[isSuccess])
 
     return (
         <CenterCardLayout 
@@ -59,4 +54,4 @@ export const SignInPage: FunctionalComponent = observer(() => {
             </form>
         </CenterCardLayout>
     );
-});
+};

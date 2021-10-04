@@ -1,48 +1,32 @@
-import { qlClient, QlClientLoginProps, QlClientUserProps } from "api/QlClient";
-import { RootStore, UserStatus } from "stores/RootStore";
-import { makeAutoObservable } from "mobx";
+import { useMemo } from "preact/hooks";
+import { createMap } from 'nanostores'
+import { useStore } from "nanostores/preact";
+import { userStatuseStore, UserStatuseUserProps } from "stores/UserStatuseStore";
 
+interface ProfileStore {
+    isLoading:boolean;
+}
 
-const EMPTY_USER:QlClientUserProps = {
-    firstName:"",
-    lastName:"",
-    phone:"",
-    personalInfo:{}
+const createProfileStore = ()=>{
+    const store = createMap<ProfileStore>(() => {
+        store.set({
+            isLoading: false,
+        })
+    })
+
+    const putUserAction = async (data:UserStatuseUserProps) => {
+        store.setKey('isLoading',true);
+        await userStatuseStore.putUserAction(data);
+        store.setKey('isLoading',false);
+    }
+
+    return { store, putUserAction }
 }
 
 
-export class ProfileStore{
-    rootStor:RootStore;
-    isLoading = false;
-    defaultUser:QlClientUserProps = EMPTY_USER;
+export const useProfileStore = () => {
+    const pageStore = useMemo(() => createProfileStore(), []);
+    const state = useStore(pageStore.store)
 
-    constructor(rootStor:RootStore) {
-        this.rootStor = rootStor;
-
-        makeAutoObservable(this, {}, { autoBind: true });
-    }
-
-    async putUserAction(data:QlClientUserProps){
-        this.isLoading = true;
-        const {isOk,error} = await qlClient.putUser(data)
-        if(isOk){
-            this.rootStor.heartbeatAction();
-            this.rootStor.notification.addSuccessAction("Profile successful update");
-        }else{
-            this.rootStor.notification.addErrorAction(error);
-        }
-        this.isLoading = false;
-    }
-
-    async getUserAction():Promise<QlClientUserProps>{
-        
-        this.isLoading = true;
-        const {isOk,error,body} = await qlClient.getUser()
-        if(!isOk){
-            this.rootStor.notification.addErrorAction(error);
-        }
-        this.isLoading = false;
-        this.defaultUser = body? body: EMPTY_USER;
-        return this.defaultUser;
-    }
+    return { ...pageStore, ...state }
 }

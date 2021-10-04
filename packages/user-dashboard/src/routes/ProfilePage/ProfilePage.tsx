@@ -1,33 +1,23 @@
-import { FunctionalComponent, h } from 'preact';
-import { Link } from 'preact-router/match';
-import { HOME_ROUTE } from 'constants/Routes';
+import { FunctionalComponent } from 'preact';
 import { Button } from 'components/Button';
 import { CenterCardLayout } from 'layouts/CenterCardLayout';
 import { InputControlled } from 'components/InputControlled';
-import { QlClientUserProps } from 'api/QlClient';
 import { useForm } from 'react-hook-form';
-import { useRootContext } from 'components/RootContextProvider';
-import { useEffect, useMemo } from 'preact/hooks';
-import { ProfileStore } from './_store';
-import { observer } from 'mobx-react-lite';
+import { useEffect} from 'preact/hooks';
+import { useProfileStore } from './_store';
+import { useUserStatuseStore, UserStatuseUserProps } from 'stores/UserStatuseStore';
 
-const ProfilePage: FunctionalComponent = observer(() => {
-    
-    const rootState = useRootContext();
-    const {isLogined} = rootState
-    const { putUserAction, isLoading, getUserAction, defaultUser } = useMemo(() => new ProfileStore(rootState), [rootState]);
 
-    const { handleSubmit, control, setValue} = useForm<QlClientUserProps>();
+const ProfilePage: FunctionalComponent = () => {
+    const { putUserAction, isLoading } = useProfileStore();
+    const { user } = useUserStatuseStore();
+    const { handleSubmit, control, setValue} = useForm<UserStatuseUserProps>();
 
     useEffect(()=>{
-        getUserAction()
-    },[])
-
-    useEffect(()=>{
-        setValue( "firstName", defaultUser.firstName);
-        setValue( "lastName", defaultUser.lastName);
-        setValue( "phone", defaultUser.phone);
-    },[defaultUser])
+        setValue( "firstName", user.firstName);
+        setValue( "lastName", user.lastName);
+        setValue( "phone", user.phone);
+    },[user])
 
     return (
     <CenterCardLayout title="Мой профиль">
@@ -51,11 +41,11 @@ const ProfilePage: FunctionalComponent = observer(() => {
                     control={control} 
                     type="tel"/>
                
-                <Button className="my-2" text="Обновить" type="submit" />
+                <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} />
             </form>
         </div>
     </CenterCardLayout>
     );
-});
+};
 
 export default ProfilePage;

@@ -1,31 +1,34 @@
-import { qlClient, QlClientRegisterProps } from "api/QlClient";
-import { RootStore} from "stores/RootStore";
-import { makeAutoObservable } from "mobx";
 
+import { useMemo } from "preact/hooks";
+import { createMap } from 'nanostores'
+import { useStore } from "nanostores/preact";
+import { userStatuseStore, UserStatuseRegisterProps } from "stores/UserStatuseStore";
 
-export class SignUpStore{
-    rootStor:RootStore;
-    isLoading = false;
-    isRegistred = false;
+interface SignUpStore {
+    isLoading :boolean;
+    isSuccess :boolean;
+}
 
-    constructor(rootStor:RootStore) {
-        this.rootStor = rootStor;
+const createSignUpStore = ()=>{
+    const store = createMap<SignUpStore>(() => {
+        store.set({
+            isLoading: false,
+            isSuccess: false,
+        })
+    })
 
-        makeAutoObservable(this, {}, { autoBind: true });
+    const registerAction = async (data:UserStatuseRegisterProps) => {
+        store.setKey("isLoading",true);
+        store.setKey("isSuccess",await userStatuseStore.registerAction(data));
+        store.setKey("isLoading",false);
     }
 
-    //computed
+    return { store, registerAction }
+}
 
-    async registerAction(data:QlClientRegisterProps){
-        this.isRegistred = false;
-        this.isLoading = true;
-        const {isOk,error} = await qlClient.register(data)
-        if(isOk){
-            this.rootStor.notification.addSuccessAction("Register successful");
-            this.isRegistred = true;
-        }else{
-            this.rootStor.notification.addErrorAction(error);
-        }
-        this.isLoading = false;
-    }
+
+export const useSignUpStore = () => {
+    const pageStore = useMemo(() => createSignUpStore(), []);
+    const state = useStore(pageStore.store)
+    return { ...pageStore, ...state }
 }

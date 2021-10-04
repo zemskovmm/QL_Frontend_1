@@ -14,16 +14,16 @@ type PropsType = {
     onRemove: (id:string)=>void;
 };
 
-export const NotificationItem: FunctionalComponent<PropsType> = ({data, onRemove}) => {
+export const NotificationItem: FunctionalComponent<PropsType> = ({ data:{id,message,group}, onRemove}) => {
     
     const classes = [
         "inline-flex p-2 rounded border max-w-md",
-        NotificationColors[data.group],
+        NotificationColors[group],
     ].join(' ');
 
     return (
-        <button className={classes} key={data.id+""} onClick={()=>onRemove(data.id+"")} >
-            <Text text={data.message+""}/>
+        <button className={classes} key={id} onClick={()=>onRemove(id)} >
+            <Text text={message}/>
         </button>
     );
 };

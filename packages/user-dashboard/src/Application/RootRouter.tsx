@@ -1,5 +1,3 @@
-import { useRootContext } from "components/RootContextProvider";
-import { observer } from "mobx-react-lite";
 import { FunctionalComponent } from "preact";
 import Router, { route, RouterOnChangeArgs } from "preact-router";
 import HomePage from "routes/HomePage";
@@ -15,11 +13,12 @@ import {
     SecureRoutes
 } from "constants/Routes";
 import { useEffect } from "react";
+import { useUserStatuseStore } from "stores/UserStatuseStore";
+import { useRootStore } from "stores/RootStore";
 
-
-
-export const RootRouter: FunctionalComponent = observer(() => {
-    const {heartbeatAction, changeUrl, isUnlogined, url} = useRootContext();
+export const RootRouter: FunctionalComponent = () => {
+    const { url, changeUrl } = useRootStore();
+    const {heartbeatAction, isUnlogined } = useUserStatuseStore();
 
     const handleRoute = (event:RouterOnChangeArgs) => {
         changeUrl(event.url);
@@ -41,4 +40,4 @@ export const RootRouter: FunctionalComponent = observer(() => {
             <NotFoundPage default />
         </Router>
     )
-});
+};
