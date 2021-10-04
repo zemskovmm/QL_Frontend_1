@@ -215,7 +215,7 @@ const PageEditorRow = (props: { store: FormEditorRowStore }) => {
   ));
 };
 
-class RemoteUiCustomization implements IRemoteUiEditorCustomization {
+export class RemoteUiCustomization implements IRemoteUiEditorCustomization {
   getEditorFor(store: IRemoteUiData): any {
     if (store instanceof AdminRemoteUiHtmlEditorStore) return <AdminRemoteUiHtmlEditor store={store} />;
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
