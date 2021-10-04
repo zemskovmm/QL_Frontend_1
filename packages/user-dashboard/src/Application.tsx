@@ -1,4 +1,6 @@
 import { FunctionalComponent } from "preact";
+import { AppLayout } from "layouts/AppLayout";
+import { Notification } from "components/Notification";
 import Router, { route, RouterOnChangeArgs } from "preact-router";
 import HomePage from "routes/HomePage";
 import SignUpPage from "routes/SignUpPage";
@@ -14,10 +16,12 @@ import {
 } from "constants/Routes";
 import { useEffect } from "react";
 import { useUserStatuseStore } from "stores/UserStatuseStore";
-import { useRootStore } from "stores/RootStore";
+import { useRouterStore } from "stores/RouterStore";
 
-export const RootRouter: FunctionalComponent = () => {
-    const { url, changeUrl } = useRootStore();
+
+export const Application: FunctionalComponent = () => {
+
+    const { url, changeUrl } = useRouterStore();
     const {heartbeatAction, isUnlogined } = useUserStatuseStore();
 
     const handleRoute = (event:RouterOnChangeArgs) => {
@@ -32,12 +36,17 @@ export const RootRouter: FunctionalComponent = () => {
     },[url,isUnlogined])
 
     return (
-        <Router onChange={handleRoute}>
-            <HomePage path={HOME_ROUTE} />
-            <ProfilePage path={PROFILE_ROUTE} />
-            <SignUpPage path={SIGN_UP_ROUTE} />
-            <SignInPage path={SIGN_IN_ROUTE} />
-            <NotFoundPage default />
-        </Router>
-    )
+        <div id="preact_root" className="h-full">
+            <AppLayout>
+            <Router onChange={handleRoute}>
+                <HomePage path={HOME_ROUTE} />
+                <ProfilePage path={PROFILE_ROUTE} />
+                <SignUpPage path={SIGN_UP_ROUTE} />
+                <SignInPage path={SIGN_IN_ROUTE} />
+                <NotFoundPage default />
+            </Router>
+            </AppLayout>
+            <Notification/>
+        </div>
+    );
 };
