@@ -3,12 +3,12 @@ import { useStore } from "nanostores/preact";
 
 
 
-interface RootStore {
+interface RouterStore {
     url:string;
 }
 
-const createRootStore = ()=>{
-    const store = createMap<RootStore>(() => {
+const createRouterStore = ()=>{
+    const store = createMap<RouterStore>(() => {
         store.set({
             url:"",
         })
@@ -21,9 +21,9 @@ const createRootStore = ()=>{
     return { store, changeUrl }
 }
 
-export const rootStore = createRootStore();
+export const routerStore = createRouterStore();
 
-export const useRootStore = () => {
-    const state = useStore(rootStore.store)
-    return { ...rootStore, ...state }
+export const useRouterStore = () => {
+    const state = useStore(routerStore.store)
+    return { ...routerStore, ...state }
 }
