@@ -54,7 +54,7 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
           </tr>
         </thead>
         <tbody>
-          {data.map((el, index) => (
+          {data?.map((el, index) => (
             <tr key={index + " tableHousing"}>
               <td
                 className={style.tablePlans__title + " my-1"}

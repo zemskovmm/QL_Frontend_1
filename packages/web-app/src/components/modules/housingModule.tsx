@@ -29,11 +29,11 @@ export const HousingModule = (props: ClientHousingDto) => {
           img={props.galleryList}
           text={props.htmlDescription}
           title={props.title}
-          city={props.traits.namedTraits["city"][0].name}
+          city={props.traits.namedTraits["city"][0]?.name ?? ""}
         />
       </div>
       <div className={`mb-6 flex flex-wrap px-4 lg:px-16`}>
-        {props.traits.namedTraits["housing-accommodation"].map((el, index) => (
+        {props.traits.namedTraits["housing-accommodation"]?.map((el, index) => (
           <div className={`flex items-center mr-40 w-40 mb-10`} key={el.name + index}>
             <div className={`p-2 w-10 h-10 rounded-full mr-8 lg:mr-10`} style={{ backgroundColor: "#EFF3FA" }}>
               <img src={el.iconId ? `${ApiBaseUrl}/api/media/scaled/${el.iconId}` : notIcon} alt="" />
