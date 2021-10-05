@@ -78,7 +78,7 @@ export const CatalogCourseInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) =>
                 <LocalizedText id={"university_city"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["city"].map((el) => (
+                {data.traits.namedTraits["city"]?.map((el) => (
                   <span>{el.name}</span>
                 ))}
               </div>
@@ -88,7 +88,7 @@ export const CatalogCourseInnerAbout: FC<CatalogInnerAboutProps> = ({ data }) =>
                 <LocalizedText id={"trait_age"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["Age"].map((el) => (
+                {data.traits.namedTraits["Age"]?.map((el) => (
                   <span>{el.name}</span>
                 ))}
               </div>

@@ -4,6 +4,7 @@
 
  */
 import { ClientCommonTraitLanguageDto } from "src/interfaces/clientCommonTraitLanguageDto";
+import { ClientSchoolDto } from "./clientSchoolDto";
 
 export interface ClientTraitDto {
   iconId: null | number;
@@ -23,4 +24,11 @@ export interface ClientCourseDto {
   schoolId: number;
   title: string;
   traits: { namedTraits: ClientCourseTraitDto };
+}
+
+export interface ClientSchoolAndCourseDto {
+  school: ClientSchoolDto;
+  course: ClientCourseDto;
+  title: string;
+  urls: string;
 }
