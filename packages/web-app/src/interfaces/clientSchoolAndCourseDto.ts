@@ -12,7 +12,7 @@ export interface ClientSchoolTraitsDto {
   namedTraits: { [key: string]: ClientCommonTraitLanguageDto[] };
 }
 
-export interface ClientSchoolAndCourseDto {
+export interface ClientSchoolAndCourseListDto {
   school: ClientSchoolDto;
   courses: CatalogCourseDto[];
   urls: string;

@@ -164,7 +164,8 @@ export const CourseCatalogElement = (item: CatalogCourseDto) => (
           <div className={`${style.card__rightPrice__list}`}>
             <span className={style.card__rightPrice__listItem}>
               <b>
-                <LocalizedText id={"catalogItems_price_upto"} /> <LocalizedText id={"catalogItems_price_value"} />
+                <LocalizedText id={"catalogItems_price_upto"} /> {item.price}{" "}
+                <LocalizedText id={"catalogItems_price_value"} />
               </b>{" "}
               / <LocalizedText id={"catalogItems_price_month"} />
             </span>

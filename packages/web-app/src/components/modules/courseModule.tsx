@@ -1,21 +1,15 @@
-import { ClientCourseDto } from "src/interfaces/clientCourseDto";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { LocalizedText, useLocalizedText } from "../common/LocalizedText";
 import { TitleAndCallBackBlock } from "@project/components/src/blocks/TitleAndCallBackBlock/titleAndCallBackBlock";
-import { CatalogInnerAbout } from "../catalogInner/about/catalogInnerAbout";
-import { GallerySliderBlock } from "@project/components/src/blocks/GallerySliderBlock/gallerySliderBlock";
 import { CatalogCourseInnerAbout } from "../catalogInner/course/catalogCourseInnerAbout";
 import { useIntl } from "react-intl";
 import cn from "classnames";
 import styles from "src/components/catalogInner/course/TabsControlBlock.module.css";
-import { RowsPresenter } from "@project/components/src/blocks";
-import React, { useState } from "react";
-import { siteApi } from "../../clients/siteApiClient";
+import React from "react";
 import Link from "next/link";
+import { ClientSchoolAndCourseDto } from "../../interfaces/clientCourseDto";
 
-const tabs = ["course"]; /* "all course", "housing", "school" */
-
-export const CourseModule = (props: ClientCourseDto) => {
+export const CourseModule = (props: ClientSchoolAndCourseDto) => {
   const lang = useIntl().locale;
   const intl = useIntl();
 
@@ -27,12 +21,12 @@ export const CourseModule = (props: ClientCourseDto) => {
           items={[
             { name: <LocalizedText id={"breadcrumbs_Main"} />, link: `/${lang}` },
             { name: <LocalizedText id={"breadcrumbs_Catalog"} />, link: `/${lang}/catalog/course` },
-            { name: props.title, link: `#` },
+            { name: <LocalizedText id={"courses_tab_about_course"} />, link: `#` },
           ]}
         />
         <TitleAndCallBackBlock
-          logo={props.imageId}
-          title={props.title}
+          logo={props.school.logoId}
+          title={props.school.title}
           titleColor={"black"}
           titleShadow={false}
           background={null}
@@ -40,7 +34,7 @@ export const CourseModule = (props: ClientCourseDto) => {
           textButton={<LocalizedText id={"university_button"} />}
           showButton={false}
           textAbove={`
-            ${useLocalizedText({ id: "courses_title1" }, intl)} ${props.title}${useLocalizedText(
+            ${useLocalizedText({ id: "courses_title1" }, intl)} ${props.school.title}${useLocalizedText(
             { id: "courses_title2" },
             intl
           )}`}
@@ -50,12 +44,12 @@ export const CourseModule = (props: ClientCourseDto) => {
       <div className="flex flex-col w-full">
         <div className={cn(styles.tabs, "flex px-2.5 pb-2.5")}>
           <div className="flex flex-wrap justify-left max-w-screen-xl w-full mx-auto px-5">
-            <Link href={{ pathname: `/en/school/1233211321` }}>
+            <Link href={{ pathname: `/${lang}/school/${props.urls.split("/")[2]}` ?? "#" }}>
               <div>
                 <LocalizedText id={"courses_tab_about_school"} />
               </div>
             </Link>
-            <Link href={`/en/1233211321/courses` ?? "#"}>
+            <Link href={`/${lang}/${props.urls.split("/")[2]}/courses` ?? "#"}>
               <div>
                 <LocalizedText id={"courses_tab_all_course"} />
               </div>
@@ -82,7 +76,7 @@ export const CourseModule = (props: ClientCourseDto) => {
           </div>
         </div>
         <div className={cn("py-9 px-10")}>
-          <CatalogCourseInnerAbout data={props} />
+          <CatalogCourseInnerAbout data={props.course} />
         </div>
       </div>
     </>
