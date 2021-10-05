@@ -304,3 +304,7 @@ export class FormEditorStore extends RequestTracking {
     // );
   }
 }
+
+export class SchemeEditorStore {
+  constructor() {}
+}
