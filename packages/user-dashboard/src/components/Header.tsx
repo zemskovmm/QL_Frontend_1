@@ -13,7 +13,6 @@ export const Header: FunctionalComponent= () => {
     const { isLogined, isUnlogined, logoutAction, user } = useUserStatuseStore();
 
     const profileName = user.lastName.length|user.firstName.length ? [ user.lastName, user.firstName ].join(' ') : "Профиль";
-    console.log( "Header", user )
 
     return (
         <Continer className="shadow flex justify-between items-center">

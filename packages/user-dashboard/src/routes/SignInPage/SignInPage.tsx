@@ -36,12 +36,14 @@ export const SignInPage: FunctionalComponent = () => {
             subtitle="Войдите или создайте аккаунт">
             <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(loginAction) as any}>
                 <InputControlled 
+                    className="my-1"
                     name="email" 
                     label="Адрес электронной почты" 
                     placeholder="Ваша электронная почта" 
                     control={control} 
                     type="email" />
                 <InputControlled 
+                    className="my-1"
                     name="password" 
                     label="Пароль" 
                     placeholder="Ваш пароль" 
@@ -49,7 +51,7 @@ export const SignInPage: FunctionalComponent = () => {
                     type="password" />
                 <Button className="my-2" text="Войти" type="submit" disabled={isLoading}/>
                 <Link href={SIGN_UP_ROUTE}>
-                    <Button className="my-2" text="Зарегистрироваться" color="secondary" />
+                    <Button className="my-2" text="Зарегистрироваться" color="secondary"  isFullWidth/>
                 </Link>
             </form>
         </CenterCardLayout>

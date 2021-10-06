@@ -43,18 +43,21 @@ export const SignUpPage: FunctionalComponent = () => {
 
             <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(registerAction) as any}>
                 <InputControlled 
+                    className="my-1"
                     name="email" 
                     label="Адрес электронной почты" 
                     placeholder="Ваша электронная почта" 
                     control={control} 
                     type="email" />
                 <InputControlled 
+                    className="my-1"
                     name="password" 
                     label="Пароль" 
                     placeholder="Придумайте пароль" 
                     control={control} 
                     type="password" />
                 <InputControlled 
+                    className="my-1"
                     name="passwordConfirmation" 
                     label="Пароль" 
                     placeholder="Подтвердите пароль" 
@@ -62,7 +65,7 @@ export const SignUpPage: FunctionalComponent = () => {
                     type="password" />
                 <Button className="my-2" text="Зарегистрироваться" type="submit" disabled={isLoading}/>
                 <Link href={SIGN_IN_ROUTE}>
-                    <Button className="my-2" text="Войти" color="secondary" />
+                    <Button className="my-2" text="Войти" color="secondary" isFullWidth/>
                 </Link>
             </form>
         </CenterCardLayout>

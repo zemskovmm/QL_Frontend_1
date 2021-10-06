@@ -16,7 +16,7 @@ const createProfileStore = ()=>{
 
     const putUserAction = async (data:UserStatuseUserProps) => {
         store.setKey('isLoading',true);
-        await userStatuseStore.putUserAction(data);
+        await userStatuseStore.putUserAction({...data, personalInfo:{}});
         store.setKey('isLoading',false);
     }
 

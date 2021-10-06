@@ -1,8 +1,7 @@
 
 import { FunctionalComponent} from "preact";
 import { Controller} from "react-hook-form";
-import { Text } from "components/Text";
-import { Input, InputTypeType } from "components/Input";
+import { Input, InputTagType, InputTypeType } from "components/Input";
 
 type PropsType={
     className?:string;
@@ -11,10 +10,11 @@ type PropsType={
     placeholder?:string;
     control: any;
     type?: InputTypeType;
-    
+    tag?: InputTagType;
+    rows?: number;
 }
 
-export const InputControlled:FunctionalComponent<PropsType> = ({className, name, label, placeholder, control, type})=>{
+export const InputControlled:FunctionalComponent<PropsType> = ({className, name, label, placeholder, control, type, tag,rows})=>{
     return <Controller
         name={name}
         control={control}
@@ -27,7 +27,9 @@ export const InputControlled:FunctionalComponent<PropsType> = ({className, name,
                 label={label} 
                 type={type} 
                 helperText={error ? error.message:""} 
-                isError={invalid}/>
+                isError={invalid}
+                tag={tag}
+                rows={rows}/>
         )}
     />
 }

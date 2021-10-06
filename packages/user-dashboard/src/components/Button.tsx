@@ -26,18 +26,22 @@ type PropsType = {
     color?: ButtonColorType;
     /** Размер кнопки */
     size?: ButtonSizeType;
+    /** Индикатор который вытсавляет кнопке ширину 100% */
+    isFullWidth?: boolean;
     /** Если кнопка не активна */
     disabled?: boolean;
     /** Событие нажатия */
     onClick?:(id?:string)=>void;
     
+    
 };
 
 export const Button:FunctionalComponent<PropsType> = 
-    ({className, id, text, type, color='default', size='default', disabled=false,onClick})=>{
+    ({className, id, text, type, color='default', size='default', disabled=false, isFullWidth=false,onClick})=>{
 
     const classes = [
-        'rounded text-medium w-full whitespace-nowrap',
+        'rounded text-medium whitespace-nowrap',
+        isFullWidth ? 'w-full' : '',
         BUTTON_COLORS[color],
         BUTTON_SIZES[size],
         className ? className : "",
