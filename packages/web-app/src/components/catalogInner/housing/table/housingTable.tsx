@@ -19,7 +19,7 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
       {dialog && (
         <OverlayDialog cancel={() => setDialog(false)}>
           <div className={`flex flex-wrap`}>
-            {dialogData.map((el, index) => (
+            {dialogData?.map((el, index) => (
               <div className={`flex items-center mr-10 w-30 mb-10`} key={el.name + index}>
                 <div className={`p-2 w-10 h-10 rounded-full mr-10`} style={{ backgroundColor: "#EFF3FA" }}>
                   <img src={el.iconId ? `${ApiBaseUrl}/api/media/scaled/${el.iconId}` : notIcon} alt="" />
@@ -80,7 +80,7 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
                 style={{ borderLeft: "1px solid #EFF3FA", borderRight: "1px solid #EFF3FA" }}
                 data-name={useLocalizedText({ id: "housing_tableTitle_equipment" }, intl)}
                 onClick={() => {
-                  setDialogData(el.traits.namedTraits["housing-equipment"]);
+                  setDialogData(el.traits.namedTraits["housing-equipment"] ?? []);
                   setDialog(true);
                 }}
               >
