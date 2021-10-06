@@ -12,24 +12,13 @@ export class FormEditorPageStore extends RequestTracking {
   }
   async load(lang: string, type: string) {
     const req = await AdminApi.getGlobalSettings(lang);
-    // const model = req?.personalCabinet[type] ?? [];
-    // if (this.editor != null && this.editor.id == id) return;
-    // if (model)
-    //   this.editor = new FormEditorStore(
-    //     () => {
-    //       alert("Saved");
-    //     },
-    //     null,
-    //     null
-    //   );
-    // else
-    this.editor = new FormEditorStore(
-      (savedId) => {
-        this.rootStore.routerStore.goTo(RouteNames.editPage, { id: savedId.toString() });
-        alert("Created");
-      },
-      null,
-      null
-    );
+    debugger;
+    const cabinet = req.personalCabinet ?? null;
+    const model = cabinet ? cabinet[type] : null;
+    if (model) {
+      this.editor = new FormEditorStore(() => console.log(), null, model);
+    } else {
+      this.editor = new FormEditorStore(() => console.log(), null, null);
+    }
   }
 }

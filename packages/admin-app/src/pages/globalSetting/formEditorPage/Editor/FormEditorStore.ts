@@ -15,8 +15,9 @@ import { AdminFormPageDto, AdminFormPageLanguageDto } from "src/interfaces/Admin
 import { RequestTracking } from "src/utils/Loadable";
 import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
-import { FormBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
+import {FormBlockRowDto, PageDataDto} from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
+import { EditFormDto, GlobalSettingsDto, PersonalCabinetDto } from "../../../../interfaces/GlobalSettingsDto";
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -243,56 +244,60 @@ export class FormLanguageEditorStore extends FormRowsEditorStore {
   }
 }
 
-export class FormEditorStore extends RequestTracking {
-  @observable langs: { [lang: string]: FormLanguageEditorStore } = {};
-  @observable id: number | null = null;
-
-  constructor(private onSave: (id: number) => void, id: number | null, data: AdminFormPageDto | null) {
-    super();
-    if (id) {
-      if (!data) throw new Error("id is set but data is missing");
-      this.id = id;
-      for (const l in data.languages) {
-        this.langs[l] = new FormLanguageEditorStore(data.languages[l]);
-      }
-    } else {
-      this.addLang("en");
-    }
-  }
-
-  @action addLang(lang: string, copyFrom?: string) {
-    const initialData = {
-      pageData: {
-        rows: [
+const initialData = {
+  pageData: {
+    rows: [
+      {
+        maxWidth: "",
+        background: "",
+        hide: false,
+        vertical: "start",
+        blocks: [
           {
-            maxWidth: "",
-            background: "",
+            size: 12,
             hide: false,
-            vertical: "start",
-            blocks: [
-              {
-                size: 12,
-                hide: false,
-                type: AvailableBlocks[0].id,
-                data: JSON.parse(JSON.stringify(AvailableBlocks[0].initialData)),
-              },
-            ],
+            type: AvailableBlocks[0].id,
+            data: JSON.parse(JSON.stringify(AvailableBlocks[0].initialData)),
           },
         ],
       },
-    };
-    this.langs[lang] = new FormLanguageEditorStore(
-      copyFrom != null && this.langs[copyFrom] != null ? this.langs[copyFrom].serialize() : initialData
-    );
+    ],
+  },
+};
+
+export class FormEditorStore extends RequestTracking {
+  @observable langs: FormLanguageEditorStore;
+  @observable id: number | null = null;
+  @observable schemaEditor: SchemeEditorStore | null = null;
+  @observable form: PageDataDto;
+
+  constructor(private onSave: () => void, id: number | null, data: EditFormDto | null) {
+    super();
+    if(data) {
+      this.form = data.form
+      this.langs = new FormLanguageEditorStore(this.form)
+    } else {
+      this.langs = new FormLanguageEditorStore(initialData)
+    }
+    // if (data) {
+    //   if (!data) throw new Error("id is set but data is missing");
+    //   this.id = id;
+    //   for (const l in data.languages) {
+    //     this.langs[l] = new FormLanguageEditorStore(data.languages[l]);
+    //   }
+    // } else {
+    //   this.addLang("en");
+    // }
+    this.schemaEditor = new SchemeEditorStore(this);
   }
 
   serialize(): AdminFormPageDto {
     return {
-      languages: dictMap(this.langs, (k, v) => v.serialize()),
+      : dictMap(this.langs, (k, v) => v.serialize()),
     };
   }
 
-  async save() {
+  // async save() {
     // if (this.isLoading) return;
     // const dto = this.serialize();
     // fireAndAlertOnError(() =>
@@ -302,9 +307,56 @@ export class FormEditorStore extends RequestTracking {
     //     this.onSave(this.id);
     //   })
     // );
-  }
+  // }
 }
 
-export class SchemeEditorStore {
-  constructor() {}
+class SchemeEditorStore {
+  static definition = {
+    fields: [
+      {
+        id: "items",
+        type: "List",
+        name: "Schema",
+        listType: "schema",
+      },
+    ],
+    subTypes: {
+      schema: {
+        fields: [
+          {
+            id: "id",
+            type: "String",
+            name: "id",
+          },
+          {
+            id: "displayName",
+            type: "String",
+            name: "displayName",
+          },
+          {
+            id: "type",
+            type: "String",
+            name: "type",
+          },
+        ],
+      },
+    },
+  };
+
+  static val = {
+    items: [],
+  };
+
+  // @observable data: RemoteUiEditorStore;
+
+  constructor(props: FormEditorStore) {}
+
+  @computed get currentSchemeEditor(): RemoteUiEditorStore | null {
+    const remote = new RemoteUiEditorStore(
+      createDefinition(SchemeEditorStore.definition),
+      SchemeEditorStore.val,
+      new RemoteUiCustomization()
+    );
+    return remote;
+  }
 }

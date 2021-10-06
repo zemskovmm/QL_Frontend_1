@@ -1,4 +1,5 @@
 import { AdminFormPageDto } from "./AdminFormPageDto";
+import { PageDataDto } from "@project/components/src/interfaces/pageSharedDto";
 
 export interface SocialLinkDto {
   icon: string;
@@ -43,7 +44,18 @@ export interface FooterDto {
 }
 
 export interface PersonalCabinetDto {
-  [key: string]: AdminFormPageDto;
+  [key: string]: EditFormDto;
+}
+
+export interface EditFormDto {
+  form: AdminFormPageLanguageDto;
+  schema: FormSchemaDto[];
+}
+
+export interface FormSchemaDto {
+  id: string;
+  displayName: string;
+  type: string;
 }
 
 export interface GlobalSettingsDto {

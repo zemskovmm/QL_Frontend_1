@@ -11,7 +11,7 @@ export const FormEditorPage = () => {
         <FormEditor store={formEditorPage.editor!} />
       </div>
       <div className={`w-2/12`}>
-        <SchemeEditor s={formEditorPage} />
+        <SchemeEditor s={formEditorPage.editor!} />
       </div>
     </div>
   ));
