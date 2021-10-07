@@ -7,11 +7,12 @@ import {
 import Link from "next/link";
 import style from "src/components/catalog/style/catalogView.module.css";
 import img from "src/assets/images/courses/2.png";
-import TempSchoolLogo from "src/assets/icons/tempSchoolLogo.svg";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import pin from "src/assets/icons/pin.svg";
+import { useObserver } from "mobx-react";
+import { ComponentHostContext } from "@project/components/src/blocks";
 
 const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
   <Link href={item.url ?? "#"}>
@@ -105,40 +106,43 @@ export const HousingCatalogElement = (item: CatalogHousingDto) => (
   </Link>
 );
 
-export const UniversityCatalogElement = (item: CatalogUniversityDto) => (
-  <ElementCatalog item={item}>
-    <div className={style.card__rightLevel}>
-      <span className={style.card__rightSubtitle}>
-        <LocalizedText id={"catalogItems_degree"} />:{" "}
-      </span>
-      {item.degrees?.map((el, ind) => (
-        <span key={ind} className={style.card__rightLevel_degree}>
-          {el}
+export const UniversityCatalogElement = (item: CatalogUniversityDto) => {
+  const lang = useContext(ComponentHostContext)?.lang;
+  return useObserver(() => (
+    <ElementCatalog item={item}>
+      <div className={style.card__rightLevel}>
+        <span className={style.card__rightSubtitle}>
+          <LocalizedText id={"catalogItems_degree"} />:{" "}
         </span>
-      ))}
-    </div>
-    <div className={style.card__rightLanguage}>
-      <span className={style.card__rightSubtitle}>
-        <LocalizedText id={"catalogItems_language"} />:
-      </span>
-      <div className={style.card__rightLanguage_list}>
-        <b>
-          <img src="`../../images/catalogFlags/${lang}.svg`" alt="" />
-          <span>
-            <LocalizedText id={"catalogItems_language_all"} />
+        {item.degrees?.map((el, ind) => (
+          <span key={ind} className={style.card__rightLevel_degree}>
+            {el}
           </span>
-        </b>
+        ))}
       </div>
-    </div>
-  </ElementCatalog>
-);
+      <div className={style.card__rightLanguage}>
+        <span className={style.card__rightSubtitle}>
+          <LocalizedText id={"catalogItems_language"} />:
+        </span>
+        <div className={style.card__rightLanguage_list}>
+          <b>
+            <img src={`../../images/catalogFlags/${lang}.svg`} alt="" />
+            <span>
+              <LocalizedText id={"catalogItems_language_all"} />
+            </span>
+          </b>
+        </div>
+      </div>
+    </ElementCatalog>
+  ));
+};
 
 export const CourseCatalogElement = (item: CatalogCourseDto) => (
   <Link href={item.url ?? "#"}>
     <a className={style.card}>
       <div className={style.card__left}>
         <div className={style.card__leftImg}>
-          <img src={img} alt="" />
+          {item.logoId ? <img src={`${ApiBaseUrl}/api/media/${item.logoId}`} alt="" /> : <img src={img} alt="" />}
         </div>
       </div>
       <div className={style.card__right}>
