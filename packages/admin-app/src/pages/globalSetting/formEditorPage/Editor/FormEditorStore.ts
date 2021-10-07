@@ -15,9 +15,14 @@ import { AdminFormPageDto, AdminFormPageLanguageDto } from "src/interfaces/Admin
 import { RequestTracking } from "src/utils/Loadable";
 import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
-import {FormBlockRowDto, PageDataDto} from "@project/components/src/interfaces/pageSharedDto";
+import { FormBlockRowDto, PageDataDto } from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { EditFormDto, GlobalSettingsDto, PersonalCabinetDto } from "../../../../interfaces/GlobalSettingsDto";
+import {
+  EditFormDto,
+  FormSchemaDto,
+  GlobalSettingsDto,
+  PersonalCabinetDto,
+} from "../../../../interfaces/GlobalSettingsDto";
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -269,15 +274,15 @@ export class FormEditorStore extends RequestTracking {
   @observable langs: FormLanguageEditorStore;
   @observable id: number | null = null;
   @observable schemaEditor: SchemeEditorStore | null = null;
-  @observable form: PageDataDto;
+  @observable data: EditFormDto | null = null;
 
   constructor(private onSave: () => void, id: number | null, data: EditFormDto | null) {
     super();
-    if(data) {
-      this.form = data.form
-      this.langs = new FormLanguageEditorStore(this.form)
+    this.data = data;
+    if (data) {
+      this.langs = new FormLanguageEditorStore(data.form);
     } else {
-      this.langs = new FormLanguageEditorStore(initialData)
+      this.langs = new FormLanguageEditorStore(initialData);
     }
     // if (data) {
     //   if (!data) throw new Error("id is set but data is missing");
@@ -288,75 +293,68 @@ export class FormEditorStore extends RequestTracking {
     // } else {
     //   this.addLang("en");
     // }
-    this.schemaEditor = new SchemeEditorStore(this);
+    this.schemaEditor = new SchemeEditorStore(data?.schema ?? null);
   }
 
-  serialize(): AdminFormPageDto {
-    return {
-      : dictMap(this.langs, (k, v) => v.serialize()),
-    };
-  }
+  // serialize(): AdminFormPageDto {
+  //   return {
+  //     : dictMap(this.langs, (k, v) => v.serialize()),
+  //   };
+  // }
 
   // async save() {
-    // if (this.isLoading) return;
-    // const dto = this.serialize();
-    // fireAndAlertOnError(() =>
-    //   this.track(async () => {
-    //     if (this.id === null) this.id = (await AdminApi.createPage(dto)).id;
-    //     else await AdminApi.updatePage(this.id, dto);
-    //     this.onSave(this.id);
-    //   })
-    // );
+  // if (this.isLoading) return;
+  // const dto = this.serialize();
+  // fireAndAlertOnError(() =>
+  //   this.track(async () => {
+  //     if (this.id === null) this.id = (await AdminApi.createPage(dto)).id;
+  //     else await AdminApi.updatePage(this.id, dto);
+  //     this.onSave(this.id);
+  //   })
+  // );
   // }
 }
 
-class SchemeEditorStore {
-  static definition = {
-    fields: [
-      {
-        id: "items",
-        type: "List",
-        name: "Schema",
-        listType: "schema",
-      },
-    ],
-    subTypes: {
-      schema: {
-        fields: [
-          {
-            id: "id",
-            type: "String",
-            name: "id",
-          },
-          {
-            id: "displayName",
-            type: "String",
-            name: "displayName",
-          },
-          {
-            id: "type",
-            type: "String",
-            name: "type",
-          },
-        ],
-      },
+const definitionSchema = {
+  fields: [
+    {
+      id: "items",
+      type: "List",
+      name: "Schema",
+      listType: "schema",
     },
-  };
+  ],
+  subTypes: {
+    schema: {
+      fields: [
+        {
+          id: "id",
+          type: "String",
+          name: "id",
+        },
+        {
+          id: "displayName",
+          type: "String",
+          name: "displayName",
+        },
+        {
+          id: "type",
+          type: "String",
+          name: "type",
+        },
+      ],
+    },
+  },
+};
 
-  static val = {
-    items: [],
-  };
+class SchemeEditorStore {
+  @observable data: FormSchemaDto[] | null;
 
-  // @observable data: RemoteUiEditorStore;
-
-  constructor(props: FormEditorStore) {}
+  constructor(props: FormSchemaDto[] | null) {
+    this.data = props;
+  }
 
   @computed get currentSchemeEditor(): RemoteUiEditorStore | null {
-    const remote = new RemoteUiEditorStore(
-      createDefinition(SchemeEditorStore.definition),
-      SchemeEditorStore.val,
-      new RemoteUiCustomization()
-    );
-    return remote;
+    return new RemoteUiEditorStore(createDefinition(definitionSchema), this.data, new RemoteUiCustomization());
   }
 }

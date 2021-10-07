@@ -1,4 +1,4 @@
-import { AdminFormPageDto } from "./AdminFormPageDto";
+import { AdminFormPageLanguageDto } from "./AdminFormPageDto";
 import { PageDataDto } from "@project/components/src/interfaces/pageSharedDto";
 
 export interface SocialLinkDto {
@@ -49,13 +49,14 @@ export interface PersonalCabinetDto {
 
 export interface EditFormDto {
   form: AdminFormPageLanguageDto;
-  schema: FormSchemaDto[];
+  schema: FormSchemaFieldDto[];
 }
 
-export interface FormSchemaDto {
+export interface FormSchemaFieldDto {
   id: string;
   displayName: string;
   type: string;
+  hide: boolean;
 }
 
 export interface GlobalSettingsDto {
