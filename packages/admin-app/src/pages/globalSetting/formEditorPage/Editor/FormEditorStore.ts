@@ -11,18 +11,14 @@ import { AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemot
 import { AdminRemoteUiImageFieldStore } from "src/components/remoteui/AdminRemoteUiImageEditor";
 import { action, computed, observable, runInAction } from "mobx";
 import { AvailableBlocks, findBlockInfo } from "@project/components/src/blocks";
-import { AdminFormPageDto, AdminFormPageLanguageDto } from "src/interfaces/AdminFormPageDto";
+import { AdminFormPageLanguageDto } from "src/interfaces/AdminFormPageDto";
 import { RequestTracking } from "src/utils/Loadable";
 import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
 import { FormBlockRowDto, PageDataDto } from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import {
-  EditFormDto,
-  FormSchemaDto,
-  GlobalSettingsDto,
-  PersonalCabinetDto,
-} from "../../../../interfaces/GlobalSettingsDto";
+import { EditFormDto, FormSchemaFieldDto, GlobalSettingsDto } from "../../../../interfaces/GlobalSettingsDto";
+import { AdminPageDto } from "../../../../interfaces/AdminPageDto";
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -186,8 +182,7 @@ export class FormEditorRowStore {
 
   moveTo(newIndex: number) {
     const ind = this.editor.rows.indexOf(this);
-    const swapWith = this.editor.rows[newIndex];
-    this.editor.rows[ind] = swapWith;
+    this.editor.rows[ind] = this.editor.rows[newIndex];
     this.editor.rows[newIndex] = this;
   }
 
@@ -272,13 +267,16 @@ const initialData = {
 
 export class FormEditorStore extends RequestTracking {
   @observable langs: FormLanguageEditorStore;
-  @observable id: number | null = null;
   @observable schemaEditor: SchemeEditorStore | null = null;
-  @observable data: EditFormDto | null = null;
 
-  constructor(private onSave: () => void, id: number | null, data: EditFormDto | null) {
+  constructor(
+    private onSave: () => void,
+    private type: string,
+    private data: EditFormDto | null,
+    private lang: string,
+    private req: GlobalSettingsDto
+  ) {
     super();
-    this.data = data;
     if (data) {
       this.langs = new FormLanguageEditorStore(data.form);
     } else {
@@ -296,23 +294,33 @@ export class FormEditorStore extends RequestTracking {
     this.schemaEditor = new SchemeEditorStore(data?.schema ?? null);
   }
 
-  // serialize(): AdminFormPageDto {
-  //   return {
-  //     : dictMap(this.langs, (k, v) => v.serialize()),
-  //   };
-  // }
-
-  // async save() {
-  // if (this.isLoading) return;
-  // const dto = this.serialize();
-  // fireAndAlertOnError(() =>
-  //   this.track(async () => {
-  //     if (this.id === null) this.id = (await AdminApi.createPage(dto)).id;
-  //     else await AdminApi.updatePage(this.id, dto);
-  //     this.onSave(this.id);
-  //   })
-  // );
-  // }
+  async save() {
+    if (this.isLoading) return;
+    const dto = this.langs.serialize();
+    const schema = this.schemaEditor?.serialize();
+    const personalCabinet = this.req.personalCabinet ?? {};
+    if (personalCabinet[this.type] === undefined) {
+      personalCabinet[this.type] = {
+        schema: schema[0],
+        form: dto,
+      };
+    }
+    debugger;
+    fireAndAlertOnError(() =>
+      this.track(async () => {
+        if (schema === undefined) {
+          return alert("make schema plz");
+        }
+        const body: GlobalSettingsDto = {
+          requestForm: this.req.requestForm,
+          header: this.req.header,
+          footer: this.req.footer,
+          personalCabinet: personalCabinet,
+        };
+        await AdminApi.putGlobalSettings(this.lang, body);
+      })
+    );
+  }
 }
 
 const definitionSchema = {
@@ -348,13 +356,38 @@ const definitionSchema = {
 };
 
 class SchemeEditorStore {
-  @observable data: FormSchemaDto[] | null;
+  @observable blockData: any;
+  @observable editSchemaShow: boolean = false;
 
-  constructor(props: FormSchemaDto[] | null) {
-    this.data = props;
-  }
+  constructor(private props: FormSchemaFieldDto[] | null) {}
 
   @computed get currentSchemeEditor(): RemoteUiEditorStore | null {
-    return new RemoteUiEditorStore(createDefinition(definitionSchema), this.data, new RemoteUiCustomization());
+    return new RemoteUiEditorStore(
+      createDefinition(definitionSchema),
+      this.blockData ?? this.props,
+      new RemoteUiCustomization()
+    );
+  }
+
+  @action dismiss() {
+    this.editSchemaShow = false;
+  }
+
+  @action open() {
+    this.editSchemaShow = true;
+  }
+
+  public async save() {
+    if (this.currentSchemeEditor == null) return;
+    const data = await this.currentSchemeEditor.getDataAsync();
+    runInAction(() => {
+      this.blockData = data;
+      this.dismiss();
+    });
+  }
+
+  serialize(): any {
+    // JSON.parse(JSON.stringify(this.blockDatas[this.blockType] || info.initialData)),
+    return JSON.parse(JSON.stringify(this.blockData));
   }
 }

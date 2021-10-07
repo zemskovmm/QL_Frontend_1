@@ -334,71 +334,15 @@ export const PageRowsEditor = (props: { store: FormRowsEditorStore }) => {
   ));
 };
 
-export const PageLanguageEditor = (props: { store: FormLanguageEditorStore }) => {
-  return useObserver(() => (
-    <div className={`flex flex-col`}>
-      <PageRowsEditor store={props.store} />
-    </div>
-  ));
-};
-
-const CreatePage = (props: {
-  availableLangs: { lang: string; name: string }[];
-  createPage: (copyFrom?: string) => void;
-}) => {
-  const noneLang = "<none>";
-  const [selectedLang, setSelectedLang] = useState(noneLang);
-  return (
-    <div className="content-center m-4">
-      {props.availableLangs.length == 0 ? null : (
-        <>
-          Copy from
-          <select value={selectedLang} onChange={(e) => setSelectedLang(e.target.value)}>
-            <option value={noneLang}>Create new</option>
-            {props.availableLangs.map((l) => (
-              <option value={l.lang}>{l.name}</option>
-            ))}
-          </select>
-          <br />
-        </>
-      )}
-
-      <AdminButton
-        color="primary"
-        onClick={(e) => props.createPage(selectedLang == noneLang ? undefined : selectedLang)}
-      >
-        Create Page Version
-      </AdminButton>
-    </div>
-  );
-};
-
-export const FormEditor = (props: { store: FormEditorStore | any }) => {
+export const FormEditor = (props: { store: FormEditorStore }) => {
   const s = props.store;
   return useObserver(() => {
-    const availableLangs = dmap(AllLanguages, (id, lang) => ({
-      lang: id,
-      name: lang.title,
-      isAvailable: props.store.langs[id] != null,
-    })).filter((l) => l.isAvailable);
     return (
-      <div>
+      <div className={`flex flex-col`}>
         <AdminButton color="save" onClick={() => s.save()}>
           Save
-        </AdminButton>{" "}
-        <br />
-        <AdminTabControl
-          tabs={dmap(AllLanguages, (lang, data) => ({
-            id: lang,
-            title: data.title,
-            renderer:
-              props.store.langs[lang] == null
-                ? () => (
-                    <CreatePage availableLangs={availableLangs} createPage={(copyFrom) => s.addLang(lang, copyFrom)} />
-                  )
-                : () => <PageLanguageEditor store={props.store.langs[lang]} />,
-          }))}
-        />
+        </AdminButton>
+        <PageRowsEditor store={props.store.langs} />
       </div>
     );
   });
