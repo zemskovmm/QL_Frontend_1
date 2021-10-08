@@ -1,8 +1,6 @@
-
-import { FunctionalComponent} from "preact";
-import { Controller} from "react-hook-form";
-import { Text } from "components/Text";
-import { Input, InputTypeType } from "components/Input";
+import React,{ FunctionComponent} from "react";
+import { Controller } from "react-hook-form";
+import { Input, InputTypeType } from "@project/components/src/ui-kit/Input";
 
 type PropsType={
     className?:string;
@@ -11,10 +9,9 @@ type PropsType={
     placeholder?:string;
     control: any;
     type?: InputTypeType;
-    
 }
 
-export const InputControlled:FunctionalComponent<PropsType> = ({className, name, label, placeholder, control, type})=>{
+export const InputControlled:FunctionComponent<PropsType> = ({className, name, label, placeholder, control, type})=>{
     return <Controller
         name={name}
         control={control}

@@ -17,6 +17,22 @@ const events={
     onResponseList: new Array<SubscriberType>()
 };
 
+export const jsonToUrlParam = (path:string, data:any):string => {
+    const param = Object.keys(data)
+        .filter(key=>{
+            const value = data[key];
+            const t = typeof value
+            return (t==="string" && value.length) 
+                || t==="number" 
+                || t==="bigint" 
+                || t==="boolean" 
+        })
+        .map(key=>`${key}=${data[key]}`)
+        .join("&")
+
+    return encodeURI(`${path}?${param}`)
+}
+
 export const onResponse = (subscribe:SubscriberType): UnSubscriberType => {
     events.onResponseList.push(subscribe)
     return ()=>{

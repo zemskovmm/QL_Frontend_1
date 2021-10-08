@@ -1,7 +1,7 @@
 import { FunctionalComponent, h } from 'preact';
 import { Link } from 'preact-router/match';
 import { HOME_ROUTE } from 'constants/Routes';
-import { Button } from 'components/Button';
+import { Button } from "@project/components/src/ui-kit/Button";
 import { CenterCardLayout } from 'layouts/CenterCardLayout';
 
 const NotFoundPage: FunctionalComponent = () => {

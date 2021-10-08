@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import { FunctionalComponent } from "preact";
 import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
-import { InputControlled } from "components/InputControlled";
+import { InputControlled } from '@project/components/src/form/InputControlled';
 import { useSignInStore } from "./_store";
 import { useEffect } from "react";
-import { Button } from "components/Button";
+import { Button } from "@project/components/src/ui-kit/Button";
 import { SchemaOf, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CenterCardLayout } from "layouts/CenterCardLayout";
@@ -36,12 +36,14 @@ export const SignInPage: FunctionalComponent = () => {
             subtitle="Войдите или создайте аккаунт">
             <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(loginAction) as any}>
                 <InputControlled 
+                    className="my-1"
                     name="email" 
                     label="Адрес электронной почты" 
                     placeholder="Ваша электронная почта" 
                     control={control} 
                     type="email" />
                 <InputControlled 
+                    className="my-1"
                     name="password" 
                     label="Пароль" 
                     placeholder="Ваш пароль" 
@@ -49,7 +51,7 @@ export const SignInPage: FunctionalComponent = () => {
                     type="password" />
                 <Button className="my-2" text="Войти" type="submit" disabled={isLoading}/>
                 <Link href={SIGN_UP_ROUTE}>
-                    <Button className="my-2" text="Зарегистрироваться" color="secondary" />
+                    <Button className="my-2" text="Зарегистрироваться" color="secondary"  isFullWidth/>
                 </Link>
             </form>
         </CenterCardLayout>

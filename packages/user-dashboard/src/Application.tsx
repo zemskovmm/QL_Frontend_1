@@ -7,16 +7,19 @@ import SignUpPage from "routes/SignUpPage";
 import SignInPage from "routes/SignInPage";
 import NotFoundPage from "routes/NotFoundPage";
 import ProfilePage from "routes/ProfilePage";
+import PersonalPage from "routes/PersonalPage";
 import { 
     HOME_ROUTE, 
     SIGN_UP_ROUTE, 
     SIGN_IN_ROUTE, 
     PROFILE_ROUTE,
-    SecureRoutes
+    SecureRoutes,
+    PERSONAL_ROUTE
 } from "constants/Routes";
 import { useEffect } from "react";
 import { useUserStatuseStore } from "stores/UserStatuseStore";
 import { useRouterStore } from "stores/RouterStore";
+
 
 
 export const Application: FunctionalComponent = () => {
@@ -43,6 +46,7 @@ export const Application: FunctionalComponent = () => {
                 <ProfilePage path={PROFILE_ROUTE} />
                 <SignUpPage path={SIGN_UP_ROUTE} />
                 <SignInPage path={SIGN_IN_ROUTE} />
+                <PersonalPage path={PERSONAL_ROUTE} />
                 <NotFoundPage default />
             </Router>
             </AppLayout>
