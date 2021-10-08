@@ -1,21 +1,14 @@
 import { useForm } from "react-hook-form";
 import { FunctionalComponent } from "preact";
-import { useEffect, useMemo } from "preact/hooks";
+import { useEffect } from "preact/hooks";
 import { SchemaOf, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { InputControlled } from "components/InputControlled";
+import { InputControlled } from "@project/components/src/form/InputControlled";
 import { SIGN_IN_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
-import { Card } from "components/Card";
-import { Button } from "components/Button";
-import { useRootContext } from "components/RootContextProvider";
-import { SignUpStore } from "./_store";
-import { observer } from "mobx-react-lite";
-import SignInPage from "routes/SignInPage";
-import { Text } from "components/Text";
+import { Button } from "@project/components/src/ui-kit/Button";
+import { useSignUpStore } from "./_store";
 import { CenterCardLayout } from "layouts/CenterCardLayout";
-
-
 
 export type FormFields = {
   email: string;
@@ -32,18 +25,16 @@ const schema: SchemaOf<FormFields> = object({
 })
 
 
-export const SignUpPage: FunctionalComponent = observer(() => {
+export const SignUpPage: FunctionalComponent = () => {
     const { handleSubmit, control } = useForm<FormFields>({
         mode: "onBlur",
         resolver: yupResolver(schema),
     });
-
-    const rootState = useRootContext();
-    const { registerAction, isLoading, isRegistred } = useMemo(() => new SignUpStore(rootState), [rootState]);
+    const { registerAction, isLoading, isSuccess } = useSignUpStore();
 
     useEffect(()=>{
-        isRegistred && route(SIGN_IN_ROUTE);
-    },[isRegistred])
+        isSuccess && route(SIGN_IN_ROUTE);
+    },[isSuccess])
 
     return (
         <CenterCardLayout 
@@ -52,18 +43,21 @@ export const SignUpPage: FunctionalComponent = observer(() => {
 
             <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(registerAction) as any}>
                 <InputControlled 
+                    className="my-1"
                     name="email" 
                     label="Адрес электронной почты" 
                     placeholder="Ваша электронная почта" 
                     control={control} 
                     type="email" />
                 <InputControlled 
+                    className="my-1"
                     name="password" 
                     label="Пароль" 
                     placeholder="Придумайте пароль" 
                     control={control} 
                     type="password" />
                 <InputControlled 
+                    className="my-1"
                     name="passwordConfirmation" 
                     label="Пароль" 
                     placeholder="Подтвердите пароль" 
@@ -71,9 +65,9 @@ export const SignUpPage: FunctionalComponent = observer(() => {
                     type="password" />
                 <Button className="my-2" text="Зарегистрироваться" type="submit" disabled={isLoading}/>
                 <Link href={SIGN_IN_ROUTE}>
-                    <Button className="my-2" text="Войти" color="secondary" />
+                    <Button className="my-2" text="Войти" color="secondary" isFullWidth/>
                 </Link>
             </form>
         </CenterCardLayout>
     );
-});
+};

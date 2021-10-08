@@ -1,28 +1,32 @@
-import { qlClient, QlClientLoginProps } from "api/QlClient";
-import { RootStore, UserStatus } from "stores/RootStore";
-import { makeAutoObservable } from "mobx";
+import { useMemo } from "preact/hooks";
+import { createMap } from 'nanostores'
+import { useStore } from "nanostores/preact";
+import { userStatuseStore, UserStatuseLoginProps } from "stores/UserStatuseStore";
 
+interface SignInStore {
+    isLoading: boolean;
+    isSuccess: boolean;
+}
 
-export class SignInStore{
-    rootStor:RootStore;
-    isLoading = false;
+const createSignInStore = ()=>{
+    const store = createMap<SignInStore>(() => {
+        store.set({
+            isLoading: false,
+            isSuccess: false,
+        })
+    })
 
-    constructor(rootStor:RootStore) {
-        this.rootStor = rootStor;
-
-        makeAutoObservable(this, {}, { autoBind: true });
+    const loginAction = async (data:UserStatuseLoginProps) => {
+        store.setKey('isLoading',true);
+        store.setKey('isSuccess',await userStatuseStore.loginAction(data) );
+        store.setKey('isLoading',false);
     }
 
-    //computed
-    async loginAction(data:QlClientLoginProps){
-        this.isLoading = true;
-        const {isOk,error} = await qlClient.login(data)
-        if(isOk){
-            this.rootStor.heartbeatAction(UserStatus.LOGINED_PROFILE_STATUS);
-            this.rootStor.notification.addSuccessAction("Login successful");
-        }else{
-            this.rootStor.notification.addErrorAction(error);
-        }
-        this.isLoading = false;
-    }
+    return { store, loginAction }
+}
+
+export const useSignInStore = () => {
+    const pageStore = useMemo(() => createSignInStore(), []);
+    const state = useStore(pageStore.store)
+    return { ...pageStore, ...state }
 }

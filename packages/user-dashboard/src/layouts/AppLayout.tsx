@@ -10,7 +10,7 @@ type PropsType = {
 
 export const AppLayout: FunctionalComponent<PropsType> = ({ children }) => {
     return (<div className="flex flex-col h-full">
-        <Header title="Quartier-Latin dashboard" />
+        <Header/>
         <Continer className="flex-grow "> 
             { children }
         </Continer>

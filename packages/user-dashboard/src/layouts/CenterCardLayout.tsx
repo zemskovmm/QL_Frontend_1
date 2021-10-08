@@ -1,5 +1,5 @@
-import { Card } from "components/Card";
-import { Text } from "components/Text";
+import { Card } from "@project/components/src/ui-kit/Card";
+import { Text } from "@project/components/src/ui-kit/Text";
 import { FunctionalComponent } from "preact";
 
 type PropsType = {

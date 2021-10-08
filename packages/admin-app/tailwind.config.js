@@ -1,3 +1,5 @@
+const { TailwindTheme } = require("../components/src/styles/TailwindTheme");
+
 module.exports = {
   purge: [
     "./public/index.html",
@@ -5,16 +7,6 @@ module.exports = {
     "src/components/**/*.{js,ts,jsx,tsx}",
     "../components/src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
-  theme: {
-    extend: {
-      spacing: {
-        128: '32rem',
-      },
-    },
-  },
-  variants: {
-    extend: {},
-  },
+  ...TailwindTheme,
   plugins: [],
 }

@@ -12,8 +12,6 @@
   "dependencies": {
     "@hookform/resolvers": "^2.8.1",
     "@project/components": "*",
-    "mobx": "^6.3.3",
-    "mobx-react-lite": "^3.2.1",
     "nanostores": "0.4.8",
     "preact": "^10.3.1",
     "preact-render-to-string": "^5.1.4",
