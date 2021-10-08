@@ -301,7 +301,7 @@ export class FormEditorStore extends RequestTracking {
     const personalCabinet = this.req.personalCabinet ?? {};
     if (personalCabinet[this.type] === undefined) {
       personalCabinet[this.type] = {
-        schema: schema[0],
+        schema,
         form: dto,
       };
     }
@@ -326,7 +326,7 @@ export class FormEditorStore extends RequestTracking {
 const definitionSchema = {
   fields: [
     {
-      id: "items",
+      id: "schema",
       type: "List",
       name: "Schema",
       listType: "schema",
@@ -362,6 +362,7 @@ class SchemeEditorStore {
   constructor(private props: FormSchemaFieldDto[] | null) {}
 
   @computed get currentSchemeEditor(): RemoteUiEditorStore | null {
+    debugger;
     return new RemoteUiEditorStore(
       createDefinition(definitionSchema),
       this.blockData ?? this.props,
