@@ -1,4 +1,4 @@
-import { Text } from "components/Text";
+import { Text } from "@project/components/src/ui-kit/Text";
 import { FunctionalComponent } from "preact";
 
 export const HomePage: FunctionalComponent = () => {

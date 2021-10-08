@@ -1,4 +1,4 @@
-import { Button } from "components/Button";
+import { Button } from "@project/components/src/ui-kit/Button";
 import { InputControlled } from "components/InputControlled";
 import { FunctionalComponent } from "preact";
 import { useForm } from "react-hook-form";

@@ -1,5 +1,5 @@
 import { FunctionalComponent } from 'preact';
-import { Button } from 'components/Button';
+import { Button } from "@project/components/src/ui-kit/Button";
 import { CenterCardLayout } from 'layouts/CenterCardLayout';
 import { InputControlled } from 'components/InputControlled';
 import { useForm } from 'react-hook-form';

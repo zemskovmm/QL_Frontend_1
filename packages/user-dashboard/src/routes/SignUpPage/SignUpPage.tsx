@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { InputControlled } from "components/InputControlled";
 import { SIGN_IN_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
-import { Button } from "components/Button";
+import { Button } from "@project/components/src/ui-kit/Button";
 import { useSignUpStore } from "./_store";
 import { CenterCardLayout } from "layouts/CenterCardLayout";
 

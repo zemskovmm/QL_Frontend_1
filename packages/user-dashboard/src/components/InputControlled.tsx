@@ -1,7 +1,7 @@
 
 import { FunctionalComponent} from "preact";
 import { Controller} from "react-hook-form";
-import { Input, InputTagType, InputTypeType } from "components/Input";
+import { Input, InputTagType, InputTypeType } from "@project/components/src/ui-kit/Input";
 
 type PropsType={
     className?:string;

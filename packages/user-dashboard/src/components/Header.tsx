@@ -4,7 +4,7 @@ import QuarterLatinIcon from "assets/quarter-latin.png";
 import { Continer } from "components/Continer";
 import { Link } from "preact-router";
 import { HOME_ROUTE, PROFILE_ROUTE, SIGN_IN_ROUTE } from "constants/Routes";
-import { Button } from "./Button";
+import { Button } from "@project/components/src/ui-kit/Button";
 import { useUserStatuseStore } from "stores/UserStatuseStore";
 
 

@@ -1,4 +1,4 @@
-import { Text } from "components/Text";
+import { Text } from "@project/components/src/ui-kit/Text";
 import { FunctionalComponent } from "preact";
 
 type PropsType = {
@@ -19,7 +19,7 @@ export const Message: FunctionalComponent<PropsType> = ({className,title,text,me
     ].join(' ');
 
     return <div className={classes}>
-        <Text text={title} size="caption" color="caption"/>
+        <Text text={title} size="caption" color="help"/>
         <Text text={text} />
     </div>
 };

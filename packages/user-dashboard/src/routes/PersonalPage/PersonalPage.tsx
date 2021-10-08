@@ -1,7 +1,5 @@
-import { Button } from "components/Button";
-import { Text } from "components/Text";
+import { Text } from "@project/components/src/ui-kit/Text";
 import { FunctionalComponent } from "preact";
-import { useEffect } from "preact/hooks";
 import { Chat } from "./_components";
 import { useChatStore } from "./_components/Chat/ChatStore";
 import { usePersonalStore } from "./PersonalPageState";
@@ -24,9 +22,6 @@ const PersonalPage: FunctionalComponent = () => {
             </ul> 
             <Chat applicationId={applicationId} className="flex-grow" store={chatStore}/>
         </div>
-        
-        
-        
     </div>
 };
 

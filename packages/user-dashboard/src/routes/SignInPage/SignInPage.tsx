@@ -5,7 +5,7 @@ import { Link, route } from "preact-router";
 import { InputControlled } from "components/InputControlled";
 import { useSignInStore } from "./_store";
 import { useEffect } from "react";
-import { Button } from "components/Button";
+import { Button } from "@project/components/src/ui-kit/Button";
 import { SchemaOf, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CenterCardLayout } from "layouts/CenterCardLayout";
