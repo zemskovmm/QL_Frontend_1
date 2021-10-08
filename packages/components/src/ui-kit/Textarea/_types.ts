@@ -1,11 +1,10 @@
-export type InputTypeType = "text"|"email"|"tel"|"password";
 
-export interface InputPropsType  {
+export interface TextareaPropsType  {
     className?:string;
     label?: string;
     value?:string;
     placeholder?:string;
     isError?: boolean;
     helperText?: string;
-    type?: InputTypeType;
+    rows?: number;
 }

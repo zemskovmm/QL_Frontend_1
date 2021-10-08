@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { FunctionalComponent } from "preact";
 import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
-import { InputControlled } from "components/InputControlled";
+import { InputControlled } from '@project/components/src/form/InputControlled';
 import { useSignInStore } from "./_store";
 import { useEffect } from "react";
 import { Button } from "@project/components/src/ui-kit/Button";

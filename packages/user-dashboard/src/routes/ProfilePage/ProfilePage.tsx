@@ -1,7 +1,7 @@
 import { FunctionalComponent } from 'preact';
 import { Button } from "@project/components/src/ui-kit/Button";
 import { CenterCardLayout } from 'layouts/CenterCardLayout';
-import { InputControlled } from 'components/InputControlled';
+import { InputControlled } from '@project/components/src/form/InputControlled';
 import { useForm } from 'react-hook-form';
 import { useEffect} from 'preact/hooks';
 import { useProfileStore } from './_store';

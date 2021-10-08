@@ -1,7 +1,6 @@
-
-import { FunctionalComponent} from "preact";
-import { Controller} from "react-hook-form";
-import { Input, InputTagType, InputTypeType } from "@project/components/src/ui-kit/Input";
+import React,{ FunctionComponent} from "react";
+import { Controller } from "react-hook-form";
+import { Input, InputTypeType } from "@project/components/src/ui-kit/Input";
 
 type PropsType={
     className?:string;
@@ -10,11 +9,9 @@ type PropsType={
     placeholder?:string;
     control: any;
     type?: InputTypeType;
-    tag?: InputTagType;
-    rows?: number;
 }
 
-export const InputControlled:FunctionalComponent<PropsType> = ({className, name, label, placeholder, control, type, tag,rows})=>{
+export const InputControlled:FunctionComponent<PropsType> = ({className, name, label, placeholder, control, type})=>{
     return <Controller
         name={name}
         control={control}
@@ -27,9 +24,7 @@ export const InputControlled:FunctionalComponent<PropsType> = ({className, name,
                 label={label} 
                 type={type} 
                 helperText={error ? error.message:""} 
-                isError={invalid}
-                tag={tag}
-                rows={rows}/>
+                isError={invalid}/>
         )}
     />
 }

@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react";
 import { Text } from "@project/components/src/ui-kit/Text";
-import { InputPropsType } from "./_types";
+import { TextareaPropsType } from "./_types";
 
 
 
-export const Input:FunctionComponent<InputPropsType> = 
-({className,label,value,placeholder,isError=false, helperText="", type, ...fields })=>{
+export const Textarea:FunctionComponent<TextareaPropsType> = 
+({className,label,value,placeholder,isError=false, helperText="",rows, ...fields })=>{
     
     const inputClass = [
         'p-1 px-4 rounded-sm border-2 focus:border-2 text-small' ,
@@ -18,7 +18,7 @@ export const Input:FunctionComponent<InputPropsType> =
 
     return <div className={`flex flex-col ${className}`}>
         {label && <Text className="mb-2" text={label} color={textColor} size="caption"/>}
-        <input className={inputClass} type={type} value={value} placeholder={placeholder} {...fields}/>
+        <textarea className={inputClass} value={value} placeholder={placeholder} rows={rows} {...fields}/>
         {helperText && <Text className="mt-2" text={helperText} color={textColor} size="caption"/>}
     </div>
 }

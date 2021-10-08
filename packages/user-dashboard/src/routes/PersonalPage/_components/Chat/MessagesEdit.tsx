@@ -1,5 +1,5 @@
 import { Button } from "@project/components/src/ui-kit/Button";
-import { InputControlled } from "components/InputControlled";
+import { TextareaControlled } from "@project/components/src/form/TextareaControlled";
 import { FunctionalComponent } from "preact";
 import { useForm } from "react-hook-form";
 import { ChatMessagesType, ChatStoreType } from "./ChatStore";
@@ -25,14 +25,13 @@ export const MessagesEdit: FunctionalComponent<PropsType> = ({className, applica
 
     return (
         <form className="flex" onSubmit={handleSubmit(handleSendMessage) as any}>
-            <InputControlled 
+            <TextareaControlled 
                 rows={5}
-                tag="textarea"
-                className="flex-grow"
+                className="flex-grow mr-2"
                 name="text" 
                 placeholder="Ваше сообщение" 
                 control={control} />
-            <Button className="flex-grow-0"  text="Отправить" color="secondary" type="submit"/>
+            <Button className="self-end"  text="Отправить" color="secondary" type="submit"/>
         </form>
     )
 };

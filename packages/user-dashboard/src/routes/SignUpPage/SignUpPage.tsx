@@ -3,7 +3,7 @@ import { FunctionalComponent } from "preact";
 import { useEffect } from "preact/hooks";
 import { SchemaOf, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { InputControlled } from "components/InputControlled";
+import { InputControlled } from "@project/components/src/form/InputControlled";
 import { SIGN_IN_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
 import { Button } from "@project/components/src/ui-kit/Button";
