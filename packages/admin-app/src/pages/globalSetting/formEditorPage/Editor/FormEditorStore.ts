@@ -9,16 +9,23 @@ import {
 } from "@kekekeks/remoteui/src";
 import { AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemoteUiHtmlEditor";
 import { AdminRemoteUiImageFieldStore } from "src/components/remoteui/AdminRemoteUiImageEditor";
-import { action, computed, observable, runInAction } from "mobx";
-import { AvailableBlocks, findBlockInfo } from "@project/components/src/blocks";
+import { action, computed, observable, runInAction, toJS } from "mobx";
+import { findBlockInfo } from "@project/components/src/blocks";
 import { AdminFormPageLanguageDto } from "src/interfaces/AdminFormPageDto";
 import { RequestTracking } from "src/utils/Loadable";
 import { dictMap, fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
 import { FormBlockRowDto, PageDataDto } from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { EditFormDto, FormSchemaFieldDto, GlobalSettingsDto } from "../../../../interfaces/GlobalSettingsDto";
+import {
+  EditFormDto,
+  FormSchemaFieldDto,
+  GlobalSettingsDto,
+  SchemaDto,
+} from "../../../../interfaces/GlobalSettingsDto";
 import { AdminPageDto } from "../../../../interfaces/AdminPageDto";
+import { FormBuilderBlockList } from "@project/components/src/blocks/FormBuilderBlock/FormBuilderBlockList";
+import { AdminRemoteUiDropdownSchemaEditorStore } from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -51,6 +58,7 @@ export class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization 
     if (type == "Html") return new AdminRemoteUiHtmlEditorStore(data);
     if (type == "Image") return new AdminRemoteUiImageFieldStore(data);
     if (type == "Rows") return new AdminRemoteUiRowsStore(data);
+    if (type == "DropdownSchema") return new AdminRemoteUiDropdownSchemaEditorStore(data, []);
     return null!;
   }
 }
@@ -71,7 +79,7 @@ export class FormEditorCellDialogStore {
 
   @computed get currentEditor(): RemoteUiEditorStore | null {
     if (this.blocks[this.blockType] != null) return this.blocks[this.blockType];
-    const info = findBlockInfo(this.blockType);
+    const info = findBlockInfo(this.blockType, true);
     if (info != null)
       return (this.blocks[this.blockType] = new RemoteUiEditorStore(
         createDefinition(info.definition),
@@ -115,7 +123,7 @@ export class FormEditorCellStore {
   ) {
     this.size = size;
     this.hide = hide;
-    const info = findBlockInfo(blockType);
+    const info = findBlockInfo(blockType, true);
     if (info != null) {
       this.blockData = blockData;
       this.blockType = blockType;
@@ -138,8 +146,8 @@ function editNewCell(editor: FormRowsEditorStore, row: FormEditorRowStore, cb: (
     row,
     12,
     false,
-    AvailableBlocks[0].id,
-    JSON.parse(JSON.stringify(AvailableBlocks[0].initialData))
+    FormBuilderBlockList[0].id,
+    JSON.parse(JSON.stringify(FormBuilderBlockList[0].initialData))
   );
   editor.cellEditor = new FormEditorCellDialogStore(cell, () => {
     cb(cell);
@@ -256,8 +264,8 @@ const initialData = {
           {
             size: 12,
             hide: false,
-            type: AvailableBlocks[0].id,
-            data: JSON.parse(JSON.stringify(AvailableBlocks[0].initialData)),
+            type: FormBuilderBlockList[0].id,
+            data: JSON.parse(JSON.stringify(FormBuilderBlockList[0].initialData)),
           },
         ],
       },
@@ -299,13 +307,10 @@ export class FormEditorStore extends RequestTracking {
     const dto = this.langs.serialize();
     const schema = this.schemaEditor?.serialize();
     const personalCabinet = this.req.personalCabinet ?? {};
-    if (personalCabinet[this.type] === undefined) {
-      personalCabinet[this.type] = {
-        schema,
-        form: dto,
-      };
-    }
-    debugger;
+    personalCabinet[this.type] = {
+      schema: toJS(schema),
+      form: dto,
+    };
     fireAndAlertOnError(() =>
       this.track(async () => {
         if (schema === undefined) {
@@ -350,6 +355,11 @@ const definitionSchema = {
           type: "String",
           name: "type",
         },
+        {
+          id: "hide",
+          type: "CheckBox",
+          name: "hide",
+        },
       ],
     },
   },
@@ -359,15 +369,12 @@ class SchemeEditorStore {
   @observable blockData: any;
   @observable editSchemaShow: boolean = false;
 
-  constructor(private props: FormSchemaFieldDto[] | null) {}
+  constructor(private props: SchemaDto | null) {
+    this.blockData = props;
+  }
 
   @computed get currentSchemeEditor(): RemoteUiEditorStore | null {
-    debugger;
-    return new RemoteUiEditorStore(
-      createDefinition(definitionSchema),
-      this.blockData ?? this.props,
-      new RemoteUiCustomization()
-    );
+    return new RemoteUiEditorStore(createDefinition(definitionSchema), this.blockData, new RemoteUiCustomization());
   }
 
   @action dismiss() {
@@ -388,7 +395,6 @@ class SchemeEditorStore {
   }
 
   serialize(): any {
-    // JSON.parse(JSON.stringify(this.blockDatas[this.blockType] || info.initialData)),
-    return JSON.parse(JSON.stringify(this.blockData));
+    return this.blockData;
   }
 }

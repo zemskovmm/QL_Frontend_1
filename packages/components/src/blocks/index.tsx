@@ -41,6 +41,7 @@ import { CommentsBlockInfo } from "./CommentsBlock/commentsBlock";
 import { SkipHistoryBlockInfo } from "./SkipHistoryBlock/skip-history";
 import { MultiImgBlockInfo } from "./MultiImgBlock/MultiImgBlock";
 import { RequestFormDto } from "admin-app/src/interfaces/GlobalSettingsDto";
+import { FormBuilderBlockList } from "./FormBuilderBlock/FormBuilderBlockList";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -91,8 +92,12 @@ export interface IComponentHost {
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);
 
-export function findBlockInfo(blockType: string): BlockTypeInfo | null {
-  for (var info of AvailableBlocks) if (info.id == blockType) return info;
+export function findBlockInfo(blockType: string, formBuilder?: boolean): BlockTypeInfo | null {
+  if (formBuilder) {
+    for (var info of FormBuilderBlockList) if (info.id == blockType) return info;
+  } else {
+    for (var info of AvailableBlocks) if (info.id == blockType) return info;
+  }
   return null;
 }
 

@@ -5,11 +5,24 @@ import { RemoteUiEditor } from "@kekekeks/remoteui/src";
 import "@kekekeks/remoteui/src/styles/RemoteUiEditor.css";
 import { AdminOverlayDialog } from "../../../../components/common/AdminOverlayDialog";
 import { AdminButton } from "../../../../components/common/AdminButton";
+import { FormSchemaFieldDto } from "../../../../interfaces/GlobalSettingsDto";
 
 export const SchemeEditor: FC<{ s: FormEditorStore }> = ({ s }) => {
   return useObserver(() => (
     <div>
       <button onClick={() => s.schemaEditor?.open()}>Edit Scheme</button>
+      {s.schemaEditor?.blockData && (
+        <div>
+          {s.schemaEditor.blockData.schema.map((el: FormSchemaFieldDto) => (
+            <div className={`flex flex-col `}>
+              <span>ID: {el.id}</span>
+              <span>DN: {el.displayName}</span>
+              <span>TY: {el.type}</span>
+              <span>HI: {el.hide.toString()}</span>
+            </div>
+          ))}
+        </div>
+      )}
       {s.schemaEditor?.editSchemaShow && (
         <AdminOverlayDialog cancel={() => s.schemaEditor?.dismiss()}>
           <div>

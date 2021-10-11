@@ -49,6 +49,10 @@ export interface PersonalCabinetDto {
 
 export interface EditFormDto {
   form: AdminFormPageLanguageDto;
+  schema: SchemaDto;
+}
+
+export interface SchemaDto {
   schema: FormSchemaFieldDto[];
 }
 

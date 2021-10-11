@@ -12,7 +12,7 @@ import {
   AdminRemoteUiImageFieldEditor,
   AdminRemoteUiImageFieldStore,
 } from "src/components/remoteui/AdminRemoteUiImageEditor";
-import { AvailableBlocks, BlockPresenter } from "@project/components/src/blocks";
+import { BlockPresenter } from "@project/components/src/blocks";
 import { AdminButton } from "src/components/common/AdminButton";
 import { IRemoteUiData, IRemoteUiEditorCustomization, RemoteUiEditor } from "@kekekeks/remoteui/src";
 import { AdminSlider } from "src/components/common/AdminSlider";
@@ -33,6 +33,11 @@ import {
 } from "src/components/remoteui/AdminRemoteUiDropdownEditor";
 import { RouterLink } from "mobx-state-router";
 import { RouteNames } from "src/routing/routes";
+import { FormBuilderBlockList } from "@project/components/src/blocks/FormBuilderBlock/FormBuilderBlockList";
+import {
+  AdminRemoteUiDropdownSchemaEditorStore,
+  AdminRemoteUiDropdownSchemaEditor,
+} from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
 
 const PageEditorCell = (props: { store: FormEditorCellStore }) => {
   const s = props.store;
@@ -221,6 +226,8 @@ export class RemoteUiCustomization implements IRemoteUiEditorCustomization {
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
     if (store instanceof AdminRemoteUiRowsStore) return <AdminRemoteUiRowsEditor store={store} />;
     if (store instanceof AdminRemoteUiDropdownEditorStore) return <AdminRemoteUiDropdownEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownSchemaEditorStore)
+      return <AdminRemoteUiDropdownSchemaEditor store={store} />;
     return null;
   }
 }
@@ -230,7 +237,7 @@ const PageEditorCellDialog = (props: { store: FormEditorCellDialogStore }) => {
   const [currentType, setCurrentType] = useState(0);
 
   useEffect(() => {
-    setCurrentType(AvailableBlocks.findIndex((el) => el.id === props.store.blockType));
+    setCurrentType(FormBuilderBlockList.findIndex((el) => el.id === props.store.blockType));
   }, [props.store.blockType]);
 
   return useObserver(() => (
@@ -263,7 +270,7 @@ const PageEditorCellDialog = (props: { store: FormEditorCellDialogStore }) => {
           </label>
         </div>
       </div>
-      Type: {AvailableBlocks[currentType].name}
+      Type: {FormBuilderBlockList[currentType].name}
       <br />
       <AdminButton color={"primary"} onClick={() => setShowTypes(true)}>
         Change Type
@@ -271,12 +278,12 @@ const PageEditorCellDialog = (props: { store: FormEditorCellDialogStore }) => {
       {showTypes && (
         <AdminOverlayDialog cancel={() => setShowTypes(false)}>
           <div className={styles.types}>
-            {AvailableBlocks.map((b, ind) => (
+            {FormBuilderBlockList.map((b, ind) => (
               <div
                 key={ind}
-                className={`${AvailableBlocks[ind].id === props.store.blockType ? styles.active : ""}`}
+                className={`${FormBuilderBlockList[ind].id === props.store.blockType ? styles.active : ""}`}
                 onClick={() => {
-                  props.store.blockType = AvailableBlocks[ind].id;
+                  props.store.blockType = FormBuilderBlockList[ind].id;
                   setShowTypes(false);
                 }}
               >
