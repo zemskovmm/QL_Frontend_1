@@ -8,9 +8,14 @@ import { useProfileStore } from './_store';
 import { useUserStatuseStore, UserStatuseUserProps } from 'stores/UserStatuseStore';
 import { Link } from 'preact-router';
 import { PERSONAL_ROUTE } from 'constants/Routes';
+import { useInternationalStore} from 'stores/International';
 
+type PropsType = {
+    lang?:string;
+}
 
-const ProfilePage: FunctionalComponent = () => {
+const ProfilePage: FunctionalComponent<PropsType> = ({lang}) => {
+    const {translate:{My_profile}} = useInternationalStore();
     const { putUserAction, isLoading } = useProfileStore();
     const store = useUserStatuseStore();
     const {user:{firstName,lastName,phone}} = store;
@@ -23,7 +28,7 @@ const ProfilePage: FunctionalComponent = () => {
     },[store])
 
     return (
-    <CenterCardLayout title="Мой профиль">
+    <CenterCardLayout title={My_profile}>
         <div className="flex flex-col max-w-card-small" >
             
             <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(putUserAction) as any}>
@@ -48,7 +53,7 @@ const ProfilePage: FunctionalComponent = () => {
                     type="tel"/>
                
                 <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} />
-                <Link href={PERSONAL_ROUTE}>
+                <Link href={PERSONAL_ROUTE.getRoute()}>
                     <Button text="Мои заявки" color="secondary" isFullWidth />
                 </Link>
             </form>

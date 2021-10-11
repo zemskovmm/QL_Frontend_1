@@ -27,7 +27,7 @@ export const SignInPage: FunctionalComponent = () => {
     const {isLoading, isSuccess, loginAction} = useSignInStore();
 
     useEffect(()=>{
-        isSuccess && route(PROFILE_ROUTE);
+        isSuccess && route(PROFILE_ROUTE.getRoute());
     },[isSuccess])
 
     return (
@@ -50,7 +50,7 @@ export const SignInPage: FunctionalComponent = () => {
                     control={control} 
                     type="password" />
                 <Button className="my-2" text="Войти" type="submit" disabled={isLoading}/>
-                <Link href={SIGN_UP_ROUTE}>
+                <Link href={SIGN_UP_ROUTE.getRoute()}>
                     <Button className="my-2" text="Зарегистрироваться" color="secondary"  isFullWidth/>
                 </Link>
             </form>

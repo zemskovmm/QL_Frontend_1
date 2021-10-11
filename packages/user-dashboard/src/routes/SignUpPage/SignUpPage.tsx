@@ -33,7 +33,7 @@ export const SignUpPage: FunctionalComponent = () => {
     const { registerAction, isLoading, isSuccess } = useSignUpStore();
 
     useEffect(()=>{
-        isSuccess && route(SIGN_IN_ROUTE);
+        isSuccess && route(SIGN_IN_ROUTE.getRoute());
     },[isSuccess])
 
     return (
@@ -64,7 +64,7 @@ export const SignUpPage: FunctionalComponent = () => {
                     control={control} 
                     type="password" />
                 <Button className="my-2" text="Зарегистрироваться" type="submit" disabled={isLoading}/>
-                <Link href={SIGN_IN_ROUTE}>
+                <Link href={SIGN_IN_ROUTE.getRoute()}>
                     <Button className="my-2" text="Войти" color="secondary" isFullWidth/>
                 </Link>
             </form>
