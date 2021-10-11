@@ -16,19 +16,19 @@ export const Header: FunctionalComponent= () => {
 
     return (
         <Continer className="shadow flex justify-between items-center">
-            <Link href={HOME_ROUTE}>
+            <Link href={HOME_ROUTE.getRoute()}>
                 <img className="object-none" src={QuarterLatinIcon} />
             </Link>
             
             <div className="inline-flex gap-2">
                 { isLogined && <>
-                    <Link href={PROFILE_ROUTE}>
+                    <Link href={PROFILE_ROUTE.getRoute()}>
                         <Button text={profileName} color="secondary" />
                     </Link>
                     <Button text="Выход" color="secondary" onClick={logoutAction}/> 
                 </>}
                 { isUnlogined && 
-                    <Link href={SIGN_IN_ROUTE}>
+                    <Link href={SIGN_IN_ROUTE.getRoute()}>
                         <Button text="Войти" color="secondary" />
                     </Link>
                 }
