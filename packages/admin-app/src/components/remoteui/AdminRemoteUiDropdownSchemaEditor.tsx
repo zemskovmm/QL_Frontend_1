@@ -2,6 +2,9 @@ import { IRemoteUiData } from "@kekekeks/remoteui/src";
 import { action, observable } from "mobx";
 import Select from "@project/components/src/ui/Select/Select";
 import { useObserver } from "mobx-react";
+import { RootStore } from "../../stores/RootStore";
+import { useRootStore } from "../../utils/rootStoreUtils";
+import { FormSchemaFieldDto } from "../../interfaces/GlobalSettingsDto";
 
 export class AdminRemoteUiDropdownSchemaEditorStore implements IRemoteUiData {
   @observable isValid = true;
@@ -9,7 +12,6 @@ export class AdminRemoteUiDropdownSchemaEditorStore implements IRemoteUiData {
   @observable items: AdminRemoteUiDropdownSchemaEditorPropsItem[];
 
   constructor(initialValue: string, items: AdminRemoteUiDropdownSchemaEditorPropsItem[]) {
-    debugger;
     this.value = initialValue;
     this.items = items;
   }
@@ -30,14 +32,22 @@ type AdminRemoteUiDropdownSchemaEditorProps = {
   label?: string;
 };
 
-export const AdminRemoteUiDropdownSchemaEditor = ({ store, label }: AdminRemoteUiDropdownSchemaEditorProps) =>
-  useObserver(() => (
+export const AdminRemoteUiDropdownSchemaEditor = ({ store, label }: AdminRemoteUiDropdownSchemaEditorProps) => {
+  const { formEditorPage } = useRootStore();
+  const itemsInStore = formEditorPage.editor?.schemaEditor?.blockData;
+  const items = itemsInStore.schema.reduce(
+    (accum: AdminRemoteUiDropdownSchemaEditorPropsItem[], el: FormSchemaFieldDto) => {
+      if (el.type === "text") {
+        return [...accum, { id: el.id, name: el.displayName }];
+      } else {
+        return;
+      }
+    },
+    []
+  );
+  return useObserver(() => (
     <>
-      <Select
-        label={label}
-        value={store.value}
-        options={store.items}
-        selectChange={(item, id) => store.setValue(item)}
-      />
+      <Select label={label} value={store.value} options={items} selectChange={(item, id) => store.setValue(item)} />
     </>
   ));
+};

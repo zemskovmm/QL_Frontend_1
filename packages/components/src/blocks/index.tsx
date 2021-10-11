@@ -102,7 +102,7 @@ export function findBlockInfo(blockType: string, formBuilder?: boolean): BlockTy
 }
 
 export const BlockPresenter = (props: { blockType: string; blockData: any }) => {
-  const info = findBlockInfo(props.blockType);
+  const info = findBlockInfo(props.blockType) ?? findBlockInfo(props.blockType, true);
   if (info == null) return <div>Unknown block type: {props.blockType}</div>;
   const Renderer = info.renderer;
   return <Renderer {...props.blockData} />;

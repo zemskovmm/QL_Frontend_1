@@ -13,7 +13,7 @@ export const BasicInputBlock = (props: BasicInputBlockElement) => {
     <div className="py-12">
       <label className={`flex`}>
         <span className={`mr-10`}>{props.label}</span>
-        <input type="text" placeholder={props.placeholder} />
+        <input id={props.id} type="text" placeholder={props.placeholder} />
       </label>
     </div>
   );
