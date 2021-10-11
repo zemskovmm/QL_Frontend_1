@@ -8,7 +8,7 @@ const NotFoundPage: FunctionalComponent = () => {
     return (
     <CenterCardLayout title="404. Страница не найдена :(" isError>
         <div className="flex flex-col max-w-card-small" >
-            <Link href={HOME_ROUTE}>
+            <Link href={HOME_ROUTE.getRoute()}>
                 <Button className="my-2" text="На главную" color="secondary" />
             </Link>
         </div>
