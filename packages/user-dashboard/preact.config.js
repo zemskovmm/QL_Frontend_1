@@ -27,6 +27,7 @@ module.exports = (config, env, helpers) => {
     config.resolve.alias["components"] = path.resolve(__dirname, 'src/components')
     config.resolve.alias["constants"] = path.resolve(__dirname, 'src/constants')
     config.resolve.alias["layouts"] = path.resolve(__dirname, 'src/layouts')
+    config.resolve.alias["locales"] = path.resolve(__dirname, 'src/locales')
     config.resolve.alias["routes"] = path.resolve(__dirname, 'src/routes')
     config.resolve.alias["stores"] = path.resolve(__dirname, 'src/stores')
     config.resolve.alias["style"] = path.resolve(__dirname, 'src/style')

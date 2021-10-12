@@ -1,7 +1,7 @@
 import { FunctionalComponent } from "preact";
 import { AppLayout } from "layouts/AppLayout";
 import { Notification } from "components/Notification";
-import Router, { route, RouterOnChangeArgs } from "preact-router";
+import Router, { route } from "preact-router";
 import HomePage from "routes/HomePage";
 import SignUpPage from "routes/SignUpPage";
 import SignInPage from "routes/SignInPage";
@@ -9,47 +9,36 @@ import NotFoundPage from "routes/NotFoundPage";
 import ProfilePage from "routes/ProfilePage";
 import PersonalPage from "routes/PersonalPage";
 import { 
-    HOME_ROUTE, 
-    SIGN_UP_ROUTE, 
-    SIGN_IN_ROUTE, 
-    PROFILE_ROUTE,
-    PERSONAL_ROUTE,
-    isSecureUrl
-} from "constants/Routes";
-import { useEffect } from "react";
+    useRouterStore,
+    HOME_TEMPLATE, 
+    SIGN_UP_TEMPLATE, 
+    SIGN_IN_TEMPLATE, 
+    PROFILE_TEMPLATE,
+    PERSONAL_TEMPLATE,
+} from "stores/RouterStore";
+import { useEffect } from "preact/hooks";
 import { useUserStatuseStore } from "stores/UserStatuseStore";
-import { useRouterStore } from "stores/RouterStore";
-import { useInternationalStore } from "stores/International";
-
-
+import { isSecureUrl } from "stores/RouterStore/_utils";
 
 export const Application: FunctionalComponent = () => {
-
-    const { url, changeUrl } = useRouterStore();
-    const {heartbeatAction, isUnlogined } = useUserStatuseStore();
-    const {changeUrl:changeUrlInternational} = useInternationalStore()
-
-    const handleRoute = (event:RouterOnChangeArgs) => {
-        changeUrlInternational(event.url);
-        changeUrl(event.url);
-        heartbeatAction();
-    };
+    const { url, changeUrl, HOME_PATH } = useRouterStore();
+    const { isUnlogined } = useUserStatuseStore();
 
     useEffect(()=>{
         if( isUnlogined && isSecureUrl(url) ){
-            route( HOME_ROUTE.getRoute(), true);
+            route( HOME_PATH, true);
         }
-    },[url,isUnlogined])
+    },[url,isUnlogined,HOME_PATH])
 
     return (
         <div id="preact_root" className="h-full">
             <AppLayout>
-            <Router onChange={handleRoute}>
-                <HomePage path={HOME_ROUTE.route} />
-                <ProfilePage path={PROFILE_ROUTE.route} />
-                <SignUpPage path={SIGN_UP_ROUTE.route} />
-                <SignInPage path={SIGN_IN_ROUTE.route} />
-                <PersonalPage path={PERSONAL_ROUTE.route} />
+            <Router onChange={changeUrl}>
+                <HomePage path={HOME_TEMPLATE.path} />
+                <ProfilePage path={PROFILE_TEMPLATE.path} />
+                <SignUpPage path={SIGN_UP_TEMPLATE.path} />
+                <SignInPage path={SIGN_IN_TEMPLATE.path} />
+                <PersonalPage path={PERSONAL_TEMPLATE.path} />
                 <NotFoundPage default />
             </Router>
             </AppLayout>

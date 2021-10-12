@@ -4,11 +4,11 @@ import { useEffect } from "preact/hooks";
 import { SchemaOf, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputControlled } from "@project/components/src/form/InputControlled";
-import { SIGN_IN_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { useSignUpStore } from "./_store";
 import { CenterCardLayout } from "layouts/CenterCardLayout";
+import { useRouterStore } from "stores/RouterStore";
 
 export type FormFields = {
   email: string;
@@ -31,9 +31,10 @@ export const SignUpPage: FunctionalComponent = () => {
         resolver: yupResolver(schema),
     });
     const { registerAction, isLoading, isSuccess } = useSignUpStore();
+    const { SIGN_IN_PATH } = useRouterStore();
 
     useEffect(()=>{
-        isSuccess && route(SIGN_IN_ROUTE.getRoute());
+        isSuccess && route(SIGN_IN_PATH);
     },[isSuccess])
 
     return (
@@ -64,7 +65,7 @@ export const SignUpPage: FunctionalComponent = () => {
                     control={control} 
                     type="password" />
                 <Button className="my-2" text="Зарегистрироваться" type="submit" disabled={isLoading}/>
-                <Link href={SIGN_IN_ROUTE.getRoute()}>
+                <Link href={ SIGN_IN_PATH }>
                     <Button className="my-2" text="Войти" color="secondary" isFullWidth/>
                 </Link>
             </form>
