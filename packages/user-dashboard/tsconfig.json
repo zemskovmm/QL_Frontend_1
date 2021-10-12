@@ -50,6 +50,9 @@
             "layouts/*": [
                 "src/layouts/*"
             ],
+            "locales/*": [
+                "src/locales/*"
+            ],
             "routes/*": [
                 "src/routes/*"
             ],

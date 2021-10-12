@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { FunctionalComponent } from "preact";
-import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "constants/Routes";
 import { Link, route } from "preact-router";
 import { InputControlled } from '@project/components/src/form/InputControlled';
 import { useSignInStore } from "./_store";
@@ -10,6 +9,7 @@ import { SchemaOf, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CenterCardLayout } from "layouts/CenterCardLayout";
 import { UserStatuseLoginProps } from "stores/UserStatuseStore";
+import { useRouterStore } from "stores/RouterStore";
 
 
 const schema: SchemaOf<UserStatuseLoginProps> = object({
@@ -17,17 +17,16 @@ const schema: SchemaOf<UserStatuseLoginProps> = object({
   password: string().required("Required to fill")
 })
 
-
 export const SignInPage: FunctionalComponent = () => {
     const { handleSubmit, control } = useForm<UserStatuseLoginProps>({
         mode: "onBlur",
         resolver: yupResolver(schema),
     });
-    
     const {isLoading, isSuccess, loginAction} = useSignInStore();
+    const {PERSONAL_PATH,SIGN_UP_PATH} = useRouterStore();
 
     useEffect(()=>{
-        isSuccess && route(PROFILE_ROUTE.getRoute());
+        isSuccess && route(PERSONAL_PATH);
     },[isSuccess])
 
     return (
@@ -50,7 +49,7 @@ export const SignInPage: FunctionalComponent = () => {
                     control={control} 
                     type="password" />
                 <Button className="my-2" text="Войти" type="submit" disabled={isLoading}/>
-                <Link href={SIGN_UP_ROUTE.getRoute()}>
+                <Link href={SIGN_UP_PATH}>
                     <Button className="my-2" text="Зарегистрироваться" color="secondary"  isFullWidth/>
                 </Link>
             </form>

@@ -7,19 +7,20 @@ import { useEffect} from 'preact/hooks';
 import { useProfileStore } from './_store';
 import { useUserStatuseStore, UserStatuseUserProps } from 'stores/UserStatuseStore';
 import { Link } from 'preact-router';
-import { PERSONAL_ROUTE } from 'constants/Routes';
-import { useInternationalStore} from 'stores/International';
+import { useLocalesStore} from 'stores/LocalesStore';
+import { useRouterStore } from 'stores/RouterStore';
 
 type PropsType = {
     lang?:string;
 }
 
 const ProfilePage: FunctionalComponent<PropsType> = ({lang}) => {
-    const {translate:{My_profile}} = useInternationalStore();
+    const {translate:{My_profile}} = useLocalesStore();
     const { putUserAction, isLoading } = useProfileStore();
     const store = useUserStatuseStore();
     const {user:{firstName,lastName,phone}} = store;
     const { handleSubmit, control, setValue} = useForm<UserStatuseUserProps>();
+    const {PERSONAL_PATH} = useRouterStore();
 
     useEffect(()=>{
         setValue( "firstName", firstName);
@@ -53,7 +54,7 @@ const ProfilePage: FunctionalComponent<PropsType> = ({lang}) => {
                     type="tel"/>
                
                 <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} />
-                <Link href={PERSONAL_ROUTE.getRoute()}>
+                <Link href={PERSONAL_PATH}>
                     <Button text="Мои заявки" color="secondary" isFullWidth />
                 </Link>
             </form>
