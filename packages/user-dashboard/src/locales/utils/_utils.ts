@@ -4,7 +4,6 @@ import { DEFAULT_LANG, LANGS_VARIANT } from "./_constants"
 export const urlToLang = (url:string):string|undefined => {
     const LANGS_URL_REGEX = /^\/(\w+)/
     const result = LANGS_URL_REGEX.exec(url);
-    console.log("urlToLang",result)
     if(result){
         const lang = result[1];
         if(LANGS_VARIANT.includes(lang)){
