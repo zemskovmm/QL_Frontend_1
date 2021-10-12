@@ -4,6 +4,7 @@ import { useStore } from "nanostores/preact";
 import { route, RouterOnChangeArgs } from 'preact-router';
 import { localesStore } from 'stores/LocalesStore';
 import { userStatuseStore } from 'stores/UserStatuseStore';
+import { HOME_TEMPLATE } from '.';
 import { PagePaths } from './_types';
 import { getLangPagePaths } from './_utils';
 
@@ -22,6 +23,10 @@ const createRouterStore = ()=>{
 
     const changeUrl = ( event:RouterOnChangeArgs ) => {
         const url = event.url;
+        if(url===""||url==="/"){
+            route(HOME_TEMPLATE.getRoute({lang:DEFAULT_LANG}), true);
+            return;
+        }
         const lang = urlToLang(url)
         store.set({
             ...getLangPagePaths(lang||DEFAULT_LANG),
