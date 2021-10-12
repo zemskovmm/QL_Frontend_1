@@ -1,5 +1,4 @@
 
-
 export type Translate={
     My_profile: string;
 }
