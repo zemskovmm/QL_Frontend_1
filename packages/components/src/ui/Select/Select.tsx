@@ -7,8 +7,8 @@ import styles from "./Select.module.css";
 interface SelectProps {
   label?: string;
   value: string;
-  options: { name: string; id: number | string }[];
-  selectChange: (value: string, id: number | string) => void;
+  options: { name: string; id: number | string; required?: boolean }[];
+  selectChange: (value: string, id: number | string, required?: boolean) => void;
 }
 
 const Select = ({ label, value, options, selectChange }: SelectProps) => {
@@ -26,7 +26,7 @@ const Select = ({ label, value, options, selectChange }: SelectProps) => {
               {options.map((el, ind) => (
                 <li
                   key={ind}
-                  onClick={() => selectChange(el.name, el.id)}
+                  onClick={() => selectChange(el.name, el.id, el?.required)}
                   className={el.name === value ? "font-bold" : ""}
                 >
                   {el.name}
