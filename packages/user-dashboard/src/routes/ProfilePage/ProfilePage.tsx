@@ -1,6 +1,5 @@
 import { FunctionalComponent } from 'preact';
 import { Button } from "@project/components/src/ui-kit/Button";
-import { CenterCardLayout } from 'layouts/CenterCardLayout';
 import { InputControlled } from '@project/components/src/form/InputControlled';
 import { useForm } from 'react-hook-form';
 import { useEffect} from 'preact/hooks';
@@ -9,13 +8,14 @@ import { useUserStatuseStore, UserStatuseUserProps } from 'stores/UserStatuseSto
 import { Link } from 'preact-router';
 import { useLocalesStore} from 'stores/LocalesStore';
 import { useRouterStore } from 'stores/RouterStore';
+import { LeftNavigationLayout } from 'layouts/LeftNavigationLayout';
 
 type PropsType = {
     lang?:string;
 }
 
 const ProfilePage: FunctionalComponent<PropsType> = ({lang}) => {
-    const {translate:{My_profile}} = useLocalesStore();
+    const {translate:{profile}} = useLocalesStore();
     const { putUserAction, isLoading } = useProfileStore();
     const store = useUserStatuseStore();
     const {user:{firstName,lastName,phone}} = store;
@@ -29,7 +29,7 @@ const ProfilePage: FunctionalComponent<PropsType> = ({lang}) => {
     },[store])
 
     return (
-    <CenterCardLayout title={My_profile}>
+    <LeftNavigationLayout title={profile}>
         <div className="flex flex-col max-w-card-small" >
             
             <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(putUserAction) as any}>
@@ -59,7 +59,7 @@ const ProfilePage: FunctionalComponent<PropsType> = ({lang}) => {
                 </Link>
             </form>
         </div>
-    </CenterCardLayout>
+    </LeftNavigationLayout>
     );
 };
 
