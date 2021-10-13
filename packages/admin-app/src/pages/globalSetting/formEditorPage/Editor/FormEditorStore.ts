@@ -19,11 +19,7 @@ import { FormBlockRowDto } from "@project/components/src/interfaces/pageSharedDt
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
 import { EditFormDto, GlobalSettingsDto, SchemaDto } from "../../../../interfaces/GlobalSettingsDto";
 import { FormBuilderBlockList } from "@project/components/src/FormBuilderBlocks/FormBuilderBlockList";
-import {
-  AdminRemoteUiDropdownFileListSchemaEditorStore,
-  AdminRemoteUiDropdownFileSchemaEditorStore,
-  AdminRemoteUiDropdownTextSchemaEditorStore,
-} from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
+import { AdminRemoteUiDropdownSchemaEditorStore } from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -56,9 +52,8 @@ export class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization 
     if (type == "Html") return new AdminRemoteUiHtmlEditorStore(data);
     if (type == "Image") return new AdminRemoteUiImageFieldStore(data);
     if (type == "Rows") return new AdminRemoteUiRowsStore(data);
-    if (type == "DropdownSchemaText") return new AdminRemoteUiDropdownTextSchemaEditorStore(data, []);
-    if (type == "DropdownSchemaFile") return new AdminRemoteUiDropdownFileSchemaEditorStore(data, []);
-    if (type == "DropdownSchemaFileList") return new AdminRemoteUiDropdownFileListSchemaEditorStore(data, []);
+    if (type == "DropdownSchemaText" || type == "DropdownSchemaFile" || type == "DropdownSchemaFileList")
+      return new AdminRemoteUiDropdownSchemaEditorStore(data, type);
     return null!;
   }
 }

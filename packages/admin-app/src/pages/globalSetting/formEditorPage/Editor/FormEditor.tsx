@@ -28,12 +28,8 @@ import {
 } from "src/components/remoteui/AdminRemoteUiDropdownEditor";
 import { FormBuilderBlockList } from "@project/components/src/FormBuilderBlocks/FormBuilderBlockList";
 import {
-  AdminRemoteUiDropdownTextSchemaEditorStore,
-  AdminRemoteUiDropdownTextSchemaEditor,
-  AdminRemoteUiDropdownFileSchemaEditorStore,
-  AdminRemoteUiDropdownFileSchemaEditor,
-  AdminRemoteUiDropdownFileListSchemaEditorStore,
-  AdminRemoteUiDropdownFileListSchemaEditor,
+  AdminRemoteUiDropdownSchemaEditorStore,
+  AdminRemoteUiDropdownSchemaEditor,
 } from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
 
 const PageEditorCell = (props: { store: FormEditorCellStore }) => {
@@ -223,12 +219,8 @@ export class RemoteUiCustomization implements IRemoteUiEditorCustomization {
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
     if (store instanceof AdminRemoteUiRowsStore) return <AdminRemoteUiRowsEditor store={store} />;
     if (store instanceof AdminRemoteUiDropdownEditorStore) return <AdminRemoteUiDropdownEditor store={store} />;
-    if (store instanceof AdminRemoteUiDropdownTextSchemaEditorStore)
-      return <AdminRemoteUiDropdownTextSchemaEditor store={store} />;
-    if (store instanceof AdminRemoteUiDropdownFileSchemaEditorStore)
-      return <AdminRemoteUiDropdownFileSchemaEditor store={store} />;
-    if (store instanceof AdminRemoteUiDropdownFileListSchemaEditorStore)
-      return <AdminRemoteUiDropdownFileListSchemaEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownSchemaEditorStore)
+      return <AdminRemoteUiDropdownSchemaEditor store={store} />;
     return null;
   }
 }

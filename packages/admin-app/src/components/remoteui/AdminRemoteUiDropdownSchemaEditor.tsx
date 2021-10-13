@@ -6,149 +6,58 @@ import { RootStore } from "../../stores/RootStore";
 import { useRootStore } from "../../utils/rootStoreUtils";
 import { FormSchemaFieldDto } from "../../interfaces/GlobalSettingsDto";
 
-export class AdminRemoteUiDropdownTextSchemaEditorStore implements IRemoteUiData {
+export class AdminRemoteUiDropdownSchemaEditorStore implements IRemoteUiData {
   @observable isValid = true;
-  @observable value: string;
+  @observable value?: string;
   @observable items: AdminRemoteUiDropdownSchemaEditorPropsItem[];
+  @observable id: number | string;
+  @observable type: string;
 
-  constructor(initialValue: string, items: AdminRemoteUiDropdownSchemaEditorPropsItem[]) {
-    this.value = initialValue;
-    this.items = items;
+  constructor(initialValue: string | number, type: string) {
+    this.type = type;
+    this.id = initialValue;
+    const { formEditorPage } = useRootStore();
+    const itemsInStore = formEditorPage.editor?.schemaEditor?.blockData;
+    this.items = itemsInStore.schema.reduce(
+      (accum: AdminRemoteUiDropdownSchemaEditorPropsItem[], el: FormSchemaFieldDto) => {
+        if (el.type === type && !el.hide) {
+          return [...accum, { id: el.id, name: el.displayName }];
+        } else {
+          return [...accum];
+        }
+      },
+      []
+    );
   }
 
-  @action setValue(value: string) {
+  @action setValue(value: string, id: string | number) {
     this.value = value;
+    this.id = id;
   }
 
-  getData(): string {
-    return this.value;
+  getData(): string | number {
+    return this.id;
   }
 }
 
 type AdminRemoteUiDropdownSchemaEditorPropsItem = { id: string; name: string };
 
-type AdminRemoteUiDropdownTextSchemaEditorProps = {
-  store: AdminRemoteUiDropdownTextSchemaEditorStore;
+type AdminRemoteUiDropdownSchemaEditorProps = {
+  store: AdminRemoteUiDropdownSchemaEditorStore;
   label?: string;
 };
 
-export const AdminRemoteUiDropdownTextSchemaEditor = ({ store, label }: AdminRemoteUiDropdownTextSchemaEditorProps) => {
-  const { formEditorPage } = useRootStore();
-  const itemsInStore = formEditorPage.editor?.schemaEditor?.blockData;
-  const items = itemsInStore.schema.reduce(
-    (accum: AdminRemoteUiDropdownSchemaEditorPropsItem[], el: FormSchemaFieldDto) => {
-      if (el.type === "text" && !el.hide) {
-        return [...accum, { id: el.id, name: el.displayName }];
-      } else {
-        return [...accum];
-      }
-    },
-    []
-  );
-
+export const AdminRemoteUiDropdownSchemaEditor = ({ store, label }: AdminRemoteUiDropdownSchemaEditorProps) => {
+  // console.log(store.items.indexOf((e: AdminRemoteUiDropdownSchemaEditorPropsItem) => e.name === store.value));
   return useObserver(() => (
     <>
+      {store.type}
       <Select
         label={label}
-        value={
-          items.filter((e: AdminRemoteUiDropdownSchemaEditorPropsItem) => e.id === store.value).length > 0
-            ? store.value
-            : ""
-        }
-        options={items}
-        selectChange={(item, id) => store.setValue(item)}
+        value={store?.value ?? ""}
+        options={store.items}
+        selectChange={(item, id) => store.setValue(item, id)}
       />
-    </>
-  ));
-};
-
-export class AdminRemoteUiDropdownFileSchemaEditorStore implements IRemoteUiData {
-  @observable isValid = true;
-  @observable value: string;
-  @observable items: AdminRemoteUiDropdownSchemaEditorPropsItem[];
-
-  constructor(initialValue: string, items: AdminRemoteUiDropdownSchemaEditorPropsItem[]) {
-    this.value = initialValue;
-    this.items = items;
-  }
-
-  @action setValue(value: string) {
-    this.value = value;
-  }
-
-  getData(): string {
-    return this.value;
-  }
-}
-
-type AdminRemoteUiDropdownFileSchemaEditorProps = {
-  store: AdminRemoteUiDropdownFileSchemaEditorStore;
-  label?: string;
-};
-
-export const AdminRemoteUiDropdownFileSchemaEditor = ({ store, label }: AdminRemoteUiDropdownFileSchemaEditorProps) => {
-  const { formEditorPage } = useRootStore();
-  const itemsInStore = formEditorPage.editor?.schemaEditor?.blockData;
-  const items = itemsInStore.schema.reduce(
-    (accum: AdminRemoteUiDropdownSchemaEditorPropsItem[], el: FormSchemaFieldDto) => {
-      if (el.type === "file" && !el.hide) {
-        return [...accum, { id: el.id, name: el.displayName }];
-      } else {
-        return [...accum];
-      }
-    },
-    []
-  );
-  return useObserver(() => (
-    <>
-      <Select label={label} value={store.value} options={items} selectChange={(item, id) => store.setValue(item)} />
-    </>
-  ));
-};
-
-export class AdminRemoteUiDropdownFileListSchemaEditorStore implements IRemoteUiData {
-  @observable isValid = true;
-  @observable value: string;
-  @observable items: AdminRemoteUiDropdownSchemaEditorPropsItem[];
-
-  constructor(initialValue: string, items: AdminRemoteUiDropdownSchemaEditorPropsItem[]) {
-    this.value = initialValue;
-    this.items = items;
-  }
-
-  @action setValue(value: string) {
-    this.value = value;
-  }
-
-  getData(): string {
-    return this.value;
-  }
-}
-
-type AdminRemoteUiDropdownFileListSchemaEditorProps = {
-  store: AdminRemoteUiDropdownFileListSchemaEditorStore;
-  label?: string;
-};
-
-export const AdminRemoteUiDropdownFileListSchemaEditor = ({
-  store,
-  label,
-}: AdminRemoteUiDropdownFileListSchemaEditorProps) => {
-  const { formEditorPage } = useRootStore();
-  const itemsInStore = formEditorPage.editor?.schemaEditor?.blockData;
-  const items = itemsInStore.schema.reduce(
-    (accum: AdminRemoteUiDropdownSchemaEditorPropsItem[], el: FormSchemaFieldDto) => {
-      if (el.type === "fileList" && !el.hide) {
-        return [...accum, { id: el.id, name: el.displayName }];
-      } else {
-        return [...accum];
-      }
-    },
-    []
-  );
-  return useObserver(() => (
-    <>
-      <Select label={label} value={store.value} options={items} selectChange={(item, id) => store.setValue(item)} />
     </>
   ));
 };
