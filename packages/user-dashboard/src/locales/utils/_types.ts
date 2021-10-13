@@ -1,6 +1,9 @@
 
 export type Translate={
-    My_profile: string;
+    profile: string;
+    myApplications: string;
+    application: string;
+    settings: string;
 }
 
 export type LangsTranslate = {

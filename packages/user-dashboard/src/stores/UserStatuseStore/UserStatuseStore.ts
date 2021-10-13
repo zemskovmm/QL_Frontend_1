@@ -38,7 +38,7 @@ const createUserStatuseStore = ()=>{
         store.set({
             userStatus: UserStatus.INIT_PROFILE_STATUS,
             isLogined: false,
-            isUnlogined: true,
+            isUnlogined: false,
             user: EMPTY_USER,
         })
         heartbeatAction();
