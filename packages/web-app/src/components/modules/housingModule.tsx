@@ -30,6 +30,7 @@ export const HousingModule = (props: ClientHousingDto) => {
           text={props.htmlDescription}
           title={props.title}
           city={props.traits.namedTraits["city"][0]?.name ?? ""}
+          price={props.price}
         />
       </div>
       <div className={`mb-6 flex flex-wrap px-4 lg:px-16`}>
