@@ -1,6 +1,5 @@
-
-
 import { Continer } from "components/Continer";
+import { Footer } from "components/Footer";
 import { Header } from "components/Header";
 import { ComponentChildren, FunctionalComponent } from "preact";
 
@@ -14,6 +13,8 @@ export const AppLayout: FunctionalComponent<PropsType> = ({ children }) => {
         <Continer className="flex-grow "> 
             { children }
         </Continer>
+        <Footer/>
+        
     </div>);
 };
 

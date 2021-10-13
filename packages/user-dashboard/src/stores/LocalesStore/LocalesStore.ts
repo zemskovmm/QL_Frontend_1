@@ -19,7 +19,6 @@ const createLocalesStore = ()=>{
     })
 
     const changeLang = (lang:string) => {
-        console.log("changeLang",lang)
         store.set({
             lang,
             translate: getTranslate(lang),
