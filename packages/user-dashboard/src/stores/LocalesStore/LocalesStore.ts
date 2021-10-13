@@ -6,8 +6,8 @@ import { DEFAULT_LANG, getTranslate, Translate} from "locales/utils";
 
 
 interface LocalesStore {
-    lang:string;
-    translate:Translate;
+    lang: string;
+    translate: Translate;
 }
 
 const createLocalesStore = ()=>{
@@ -19,8 +19,11 @@ const createLocalesStore = ()=>{
     })
 
     const changeLang = (lang:string) => {
-        store.setKey("lang",lang);
-        store.setKey("translate",getTranslate(lang));
+        console.log("changeLang",lang)
+        store.set({
+            lang,
+            translate: getTranslate(lang),
+        });
     }
 
     return { store, changeLang }

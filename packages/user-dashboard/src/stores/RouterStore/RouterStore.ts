@@ -1,10 +1,6 @@
-import { changeLangInUrl, DEFAULT_LANG, urlToLang } from 'locales/utils';
+import { DEFAULT_LANG, urlToLang } from 'locales/utils';
 import { createMap } from 'nanostores'
 import { useStore } from "nanostores/preact";
-import { route, RouterOnChangeArgs } from 'preact-router';
-import { localesStore } from 'stores/LocalesStore';
-import { userStatuseStore } from 'stores/UserStatuseStore';
-import { HOME_TEMPLATE } from '.';
 import { PagePaths } from './_types';
 import { getLangPagePaths } from './_utils';
 
@@ -21,23 +17,14 @@ const createRouterStore = ()=>{
         })
     })
 
-    const changeUrl = ( event:RouterOnChangeArgs ) => {
-        const url = event.url;
-        if(url===""||url==="/"){
-            route(HOME_TEMPLATE.getRoute({lang:DEFAULT_LANG}), true);
-            return;
-        }
+    const changeUrl = ( url:string ) => {
         const lang = urlToLang(url)
         store.set({
             ...getLangPagePaths(lang||DEFAULT_LANG),
             url,
         });
-        if(!lang){
-            route(changeLangInUrl(url,DEFAULT_LANG), true);
-        }
-        localesStore.changeLang(lang||DEFAULT_LANG);
-        userStatuseStore.heartbeatAction();
     }
+
 
     return { store, changeUrl }
 }

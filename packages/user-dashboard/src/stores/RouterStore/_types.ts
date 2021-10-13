@@ -36,4 +36,5 @@ export type PagePaths = {
 
     PERSONAL_PATH: string;
     PROFILE_PATH: string;
+    SETTINGS_TEMPLATE: string;
 }
