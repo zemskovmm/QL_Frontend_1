@@ -60,7 +60,7 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
                 className={style.tablePlans__title + " my-1"}
                 data-name={useLocalizedText({ id: "housing_tableTitle_type" }, intl)}
               >
-                Type of allocation
+                {el.name}
               </td>
               <td
                 className={style.tablePlans__area + " lg:text-center my-1"}

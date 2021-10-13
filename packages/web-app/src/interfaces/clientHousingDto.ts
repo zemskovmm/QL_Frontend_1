@@ -23,6 +23,7 @@ export interface ClientHousingTraitsDto {
 }
 
 export interface ClientHousingAccommodationTypesDto {
+  name: string;
   price: number;
   residents: string;
   square: string;

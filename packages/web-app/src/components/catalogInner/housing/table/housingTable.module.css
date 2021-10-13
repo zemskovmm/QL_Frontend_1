@@ -131,7 +131,7 @@
 }
 
 @media screen and (min-width: 992px) {
-  .tablePlans__area:before, .tablePlans__people:before, .tablePlans__price:before, .tablePlans__learnMore:before{
+  .tablePlans__area:before, .tablePlans__people:before, .tablePlans__price:before, .tablePlans__learnMore:before, .tablePlans__title:before{
     display: none
   }
 }
