@@ -41,7 +41,7 @@ import { CommentsBlockInfo } from "./CommentsBlock/commentsBlock";
 import { SkipHistoryBlockInfo } from "./SkipHistoryBlock/skip-history";
 import { MultiImgBlockInfo } from "./MultiImgBlock/MultiImgBlock";
 import { RequestFormDto } from "admin-app/src/interfaces/GlobalSettingsDto";
-import { FormBuilderBlockList } from "./FormBuilderBlock/FormBuilderBlockList";
+import { FormBuilderBlockList } from "../FormBuilderBlocks/FormBuilderBlockList";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,

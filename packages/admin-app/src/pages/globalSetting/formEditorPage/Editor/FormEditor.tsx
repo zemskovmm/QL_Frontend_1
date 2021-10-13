@@ -3,7 +3,6 @@ import {
   FormEditorCellStore,
   FormEditorRowStore,
   FormEditorStore,
-  FormLanguageEditorStore,
   FormRowsEditorStore,
 } from "./FormEditorStore";
 import { useObserver } from "mobx-react";
@@ -17,11 +16,7 @@ import { AdminButton } from "src/components/common/AdminButton";
 import { IRemoteUiData, IRemoteUiEditorCustomization, RemoteUiEditor } from "@kekekeks/remoteui/src";
 import { AdminSlider } from "src/components/common/AdminSlider";
 import { AdminOverlayDialog } from "src/components/common/AdminOverlayDialog";
-import { bind, dmap } from "src/utils/util";
-import { AdminTabControl } from "src/components/common/AdminTabControl";
 import "@kekekeks/remoteui/src/styles/RemoteUiEditor.css";
-import { AdminTextBox } from "src/components/common/AdminTextBox";
-import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
 import { useEffect, useState } from "react";
@@ -31,12 +26,14 @@ import {
   AdminRemoteUiDropdownEditor,
   AdminRemoteUiDropdownEditorStore,
 } from "src/components/remoteui/AdminRemoteUiDropdownEditor";
-import { RouterLink } from "mobx-state-router";
-import { RouteNames } from "src/routing/routes";
-import { FormBuilderBlockList } from "@project/components/src/blocks/FormBuilderBlock/FormBuilderBlockList";
+import { FormBuilderBlockList } from "@project/components/src/FormBuilderBlocks/FormBuilderBlockList";
 import {
-  AdminRemoteUiDropdownSchemaEditorStore,
-  AdminRemoteUiDropdownSchemaEditor,
+  AdminRemoteUiDropdownTextSchemaEditorStore,
+  AdminRemoteUiDropdownTextSchemaEditor,
+  AdminRemoteUiDropdownFileSchemaEditorStore,
+  AdminRemoteUiDropdownFileSchemaEditor,
+  AdminRemoteUiDropdownFileListSchemaEditorStore,
+  AdminRemoteUiDropdownFileListSchemaEditor,
 } from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
 
 const PageEditorCell = (props: { store: FormEditorCellStore }) => {
@@ -226,8 +223,12 @@ export class RemoteUiCustomization implements IRemoteUiEditorCustomization {
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
     if (store instanceof AdminRemoteUiRowsStore) return <AdminRemoteUiRowsEditor store={store} />;
     if (store instanceof AdminRemoteUiDropdownEditorStore) return <AdminRemoteUiDropdownEditor store={store} />;
-    if (store instanceof AdminRemoteUiDropdownSchemaEditorStore)
-      return <AdminRemoteUiDropdownSchemaEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownTextSchemaEditorStore)
+      return <AdminRemoteUiDropdownTextSchemaEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownFileSchemaEditorStore)
+      return <AdminRemoteUiDropdownFileSchemaEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownFileListSchemaEditorStore)
+      return <AdminRemoteUiDropdownFileListSchemaEditor store={store} />;
     return null;
   }
 }

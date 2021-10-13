@@ -13,19 +13,17 @@ import { action, computed, observable, runInAction, toJS } from "mobx";
 import { findBlockInfo } from "@project/components/src/blocks";
 import { AdminFormPageLanguageDto } from "src/interfaces/AdminFormPageDto";
 import { RequestTracking } from "src/utils/Loadable";
-import { dictMap, fireAndAlertOnError } from "src/utils/util";
+import { fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
-import { FormBlockRowDto, PageDataDto } from "@project/components/src/interfaces/pageSharedDto";
+import { FormBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
+import { EditFormDto, GlobalSettingsDto, SchemaDto } from "../../../../interfaces/GlobalSettingsDto";
+import { FormBuilderBlockList } from "@project/components/src/FormBuilderBlocks/FormBuilderBlockList";
 import {
-  EditFormDto,
-  FormSchemaFieldDto,
-  GlobalSettingsDto,
-  SchemaDto,
-} from "../../../../interfaces/GlobalSettingsDto";
-import { AdminPageDto } from "../../../../interfaces/AdminPageDto";
-import { FormBuilderBlockList } from "@project/components/src/blocks/FormBuilderBlock/FormBuilderBlockList";
-import { AdminRemoteUiDropdownSchemaEditorStore } from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
+  AdminRemoteUiDropdownFileListSchemaEditorStore,
+  AdminRemoteUiDropdownFileSchemaEditorStore,
+  AdminRemoteUiDropdownTextSchemaEditorStore,
+} from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -58,7 +56,9 @@ export class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization 
     if (type == "Html") return new AdminRemoteUiHtmlEditorStore(data);
     if (type == "Image") return new AdminRemoteUiImageFieldStore(data);
     if (type == "Rows") return new AdminRemoteUiRowsStore(data);
-    if (type == "DropdownSchema") return new AdminRemoteUiDropdownSchemaEditorStore(data, []);
+    if (type == "DropdownSchemaText") return new AdminRemoteUiDropdownTextSchemaEditorStore(data, []);
+    if (type == "DropdownSchemaFile") return new AdminRemoteUiDropdownFileSchemaEditorStore(data, []);
+    if (type == "DropdownSchemaFileList") return new AdminRemoteUiDropdownFileListSchemaEditorStore(data, []);
     return null!;
   }
 }
@@ -290,15 +290,6 @@ export class FormEditorStore extends RequestTracking {
     } else {
       this.langs = new FormLanguageEditorStore(initialData);
     }
-    // if (data) {
-    //   if (!data) throw new Error("id is set but data is missing");
-    //   this.id = id;
-    //   for (const l in data.languages) {
-    //     this.langs[l] = new FormLanguageEditorStore(data.languages[l]);
-    //   }
-    // } else {
-    //   this.addLang("en");
-    // }
     this.schemaEditor = new SchemeEditorStore(data?.schema ?? null);
   }
 
@@ -352,8 +343,24 @@ const definitionSchema = {
         },
         {
           id: "type",
-          type: "String",
+          type: "Select",
           name: "type",
+          possibleValues: [
+            {
+              id: "text",
+              name: "Text",
+            },
+            {
+              id: "file",
+              name: "File",
+            },
+            { id: "fileList", name: "File list" },
+          ],
+        },
+        {
+          id: "require",
+          type: "CheckBox",
+          name: "require",
         },
         {
           id: "hide",

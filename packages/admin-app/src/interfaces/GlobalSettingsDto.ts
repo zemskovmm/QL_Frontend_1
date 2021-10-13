@@ -59,8 +59,15 @@ export interface SchemaDto {
 export interface FormSchemaFieldDto {
   id: string;
   displayName: string;
-  type: string;
+  type: FormSchemaTypeEnum;
+  require: boolean;
   hide: boolean;
+}
+
+export enum FormSchemaTypeEnum {
+  text = "text",
+  file = "file",
+  fileList = "fileList",
 }
 
 export interface GlobalSettingsDto {

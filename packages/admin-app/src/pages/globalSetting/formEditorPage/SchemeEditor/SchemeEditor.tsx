@@ -18,6 +18,7 @@ export const SchemeEditor: FC<{ s: FormEditorStore }> = ({ s }) => {
               <span>ID: {el.id}</span>
               <span>DN: {el.displayName}</span>
               <span>TY: {el.type}</span>
+              <span>RQ: {el.require.toString()}</span>
               <span>HI: {el.hide.toString()}</span>
             </div>
           ))}
