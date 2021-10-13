@@ -3,7 +3,7 @@ import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
 
 export interface BasicInputBlockElement {
-  id: string;
+  schema: { id: string | number; required: boolean };
   label: string;
   placeholder: string;
 }
@@ -13,7 +13,12 @@ export const BasicInputBlock = (props: BasicInputBlockElement) => {
     <div className="py-12">
       <label className={`flex`}>
         <span className={`mr-10`}>{props.label}</span>
-        <input id={props.id} type="text" placeholder={props.placeholder} />
+        <input
+          id={String(props.schema.id)}
+          required={props.schema.required}
+          type="text"
+          placeholder={props.placeholder}
+        />
       </label>
     </div>
   );
@@ -25,17 +30,20 @@ export const BasicInputBlockInfo: TypedBlockTypeInfo<BasicInputBlockElement> = {
   preview: preview,
   renderer: BasicInputBlock,
   initialData: {
-    id: "",
+    schema: {
+      id: "",
+      required: false,
+    },
     label: "",
     placeholder: "",
   },
   definition: {
     fields: [
       {
-        id: "id",
+        id: "schema",
         type: "Custom",
         customType: "DropdownSchemaText",
-        name: "id",
+        name: "schema",
       },
       {
         id: "label",

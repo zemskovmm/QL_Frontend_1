@@ -353,9 +353,9 @@ const definitionSchema = {
           ],
         },
         {
-          id: "require",
+          id: "required",
           type: "CheckBox",
-          name: "require",
+          name: "required",
         },
         {
           id: "hide",
@@ -389,7 +389,7 @@ class SchemeEditorStore {
 
   public async save() {
     if (this.currentSchemeEditor == null) return;
-    const data = await this.currentSchemeEditor.getDataAsync();
+    const data: any = await this.currentSchemeEditor.getDataAsync();
     runInAction(() => {
       this.blockData = data;
       this.dismiss();

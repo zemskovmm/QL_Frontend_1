@@ -60,7 +60,7 @@ export interface FormSchemaFieldDto {
   id: string;
   displayName: string;
   type: FormSchemaTypeEnum;
-  require: boolean;
+  required: boolean;
   hide: boolean;
 }
 
