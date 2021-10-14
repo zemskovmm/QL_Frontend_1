@@ -18,9 +18,8 @@ const createGlobalSettingsStore = ()=>{
         const { isOk, body } = await globalSettingsApi.getGlobalSettings(lang)
         if(isOk){
             store.setKey("gs",body);
-            console.log("getGlobalSettings",lang,body);
         }
-    },"");
+    },"",(prev,curr)=>prev===curr);
 
     const getGlobalSettings = async (lang: string):Promise<void> =>  {
         globalSettingsActualState.update(lang);

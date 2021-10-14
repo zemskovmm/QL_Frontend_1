@@ -1,21 +1,26 @@
 import { effect } from "nanostores";
+import { bool } from "yup";
 
 
 export class ActualState<T>{
-
     private needLoad = false;
     private isLoading = false;
     private props:T;
     private callback: (props:T)=>Promise<void>
+    private compare: (prev:T,curr:T)=>boolean
 
-    constructor( callback: (props:T)=>Promise<void>, defaultProps:T ){
+    constructor( callback: (props:T)=>Promise<void>, defaultProps:T, compare:(prev:T,curr:T)=>boolean = ()=>false){
         this.props =  defaultProps;
         this.callback = callback;
+        this.compare = compare;
     }
     
     async update(props:T):Promise<void>{
-        this.props = props;
+        if(this.compare(this.props,props)){
+            return;
+        }
         this.needLoad=true;
+        this.props = props;
         if(this.isLoading){
             return;
         }
