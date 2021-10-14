@@ -1,31 +1,28 @@
-import { createMap } from 'nanostores'
+import { createMap, effect } from 'nanostores'
 import { useStore } from "nanostores/preact";
 import { GlobalSettingsDto } from 'admin-app/src/interfaces/GlobalSettingsDto'
 import { globalSettingsApi } from "api/GlobalSettingsApi";
+import { ActualState } from 'stores/ActualState';
 
 
 interface GlobalSettingsStore {
-    isLoading: boolean;
     gs?:GlobalSettingsDto,
 }
 
 const createGlobalSettingsStore = ()=>{
     const store = createMap<GlobalSettingsStore>(() => {
-        store.set({
-            isLoading: false,
-        })
+        store.set({})
     })
 
-    const getGlobalSettings = async (lang: string):Promise<boolean> =>  {
-        store.setKey("isLoading",true);
-        const { isOk, body } = await globalSettingsApi.getGlobalSettings(lang);
-        store.setKey("isLoading",false);
+    const globalSettingsActualState = new ActualState<string>(async (lang: string)=>{
+        const { isOk, body } = await globalSettingsApi.getGlobalSettings(lang)
         if(isOk){
             store.setKey("gs",body);
-            console.log("getGlobalSettings",body);
-            return true;
         }
-        return false;
+    },"",(prev,curr)=>prev===curr);
+
+    const getGlobalSettings = async (lang: string):Promise<void> =>  {
+        globalSettingsActualState.update(lang);
     }
 
     return { 
