@@ -49,14 +49,25 @@ export interface PersonalCabinetDto {
 
 export interface EditFormDto {
   form: AdminFormPageLanguageDto;
+  schema: SchemaDto;
+}
+
+export interface SchemaDto {
   schema: FormSchemaFieldDto[];
 }
 
 export interface FormSchemaFieldDto {
   id: string;
   displayName: string;
-  type: string;
+  type: FormSchemaTypeEnum;
+  required: boolean;
   hide: boolean;
+}
+
+export enum FormSchemaTypeEnum {
+  text = "text",
+  file = "file",
+  fileList = "fileList",
 }
 
 export interface GlobalSettingsDto {
