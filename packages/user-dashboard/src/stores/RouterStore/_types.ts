@@ -14,7 +14,7 @@ export class RouteTemplate {
         this.page = page;
         this.pageId = pageId;
         
-        let regex = `/\\w+${page}` + (pageId ? `(/${pageId})$` : '$');
+        let regex = `/\\w+${page}` + (pageId ? `/\\w+$` : '$');
         this.regex = new RegExp(regex);
     }
 
@@ -34,7 +34,6 @@ export type PagePaths = {
     SIGN_UP_PATH: string;
     SIGN_IN_PATH: string;
 
-    PERSONAL_PATH: string;
     PROFILE_PATH: string;
     SETTINGS_TEMPLATE: string;
 }

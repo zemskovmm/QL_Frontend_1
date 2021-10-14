@@ -7,14 +7,12 @@ import SignUpPage from "routes/SignUpPage";
 import SignInPage from "routes/SignInPage";
 import NotFoundPage from "routes/NotFoundPage";
 import ProfilePage from "routes/ProfilePage";
-import PersonalPage from "routes/PersonalPage";
 import { 
     useRouterStore,
     HOME_TEMPLATE, 
     SIGN_UP_TEMPLATE, 
     SIGN_IN_TEMPLATE, 
     PROFILE_TEMPLATE,
-    PERSONAL_TEMPLATE,
     MY_APPLICATIONS_TEMPLATE,
     SETTINGS_TEMPLATE,
 } from "stores/RouterStore";
@@ -35,7 +33,6 @@ export const Application: FunctionalComponent = () => {
 
     useEffect(()=>{
         if( url !== undefined && isUnlogined && isSecureUrl(url) ){
-            console.log("isUnlogined",url)
             route( HOME_PATH, true);
         }
     },[url,isUnlogined,HOME_PATH])
@@ -43,13 +40,11 @@ export const Application: FunctionalComponent = () => {
     useEffect(()=>{
         if(url !== undefined){
             if(url===""||url==="/"){
-                console.log(`url===""||url==="/"`,url)
                 route(HOME_TEMPLATE.getRoute({lang:DEFAULT_LANG}), true);
                 return;
             }
             const lang = urlToLang(url)
             if(!lang){
-                console.log(`!lang`)
                 route(changeLangInUrl(url,DEFAULT_LANG), true);
                 return;
             }
@@ -72,7 +67,6 @@ export const Application: FunctionalComponent = () => {
                 <ProfilePage path={PROFILE_TEMPLATE.path} />
                 <SignUpPage path={SIGN_UP_TEMPLATE.path} />
                 <SignInPage path={SIGN_IN_TEMPLATE.path} />
-                <PersonalPage path={PERSONAL_TEMPLATE.path} />
                 <MyApplicationsPage path={MY_APPLICATIONS_TEMPLATE.path} />
                 <SettingsPage path={SETTINGS_TEMPLATE.path} />
                 <NotFoundPage default />

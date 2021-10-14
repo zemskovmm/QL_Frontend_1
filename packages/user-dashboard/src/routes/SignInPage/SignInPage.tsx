@@ -23,10 +23,10 @@ export const SignInPage: FunctionalComponent = () => {
         resolver: yupResolver(schema),
     });
     const {isLoading, isSuccess, loginAction} = useSignInStore();
-    const {PERSONAL_PATH,SIGN_UP_PATH} = useRouterStore();
+    const {PROFILE_PATH,SIGN_UP_PATH} = useRouterStore();
 
     useEffect(()=>{
-        isSuccess && route(PERSONAL_PATH);
+        isSuccess && route(PROFILE_PATH);
     },[isSuccess])
 
     return (

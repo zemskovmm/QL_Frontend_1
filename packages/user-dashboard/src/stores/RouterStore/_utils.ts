@@ -1,7 +1,6 @@
 import { SETTINGS_TEMPLATE } from ".";
 import { 
     HOME_TEMPLATE, 
-    PERSONAL_TEMPLATE, 
     PROFILE_TEMPLATE, 
     SIGN_IN_TEMPLATE, 
     SIGN_UP_TEMPLATE 
@@ -45,7 +44,6 @@ export const getLangPagePaths = (lang:string):PagePaths => {
         SIGN_UP_PATH: SIGN_UP_TEMPLATE.getRoute({lang}),
         SIGN_IN_PATH: SIGN_IN_TEMPLATE.getRoute({lang}),
 
-        PERSONAL_PATH: PERSONAL_TEMPLATE.getRoute({lang}),
         PROFILE_PATH: PROFILE_TEMPLATE.getRoute({lang}),
         SETTINGS_TEMPLATE: SETTINGS_TEMPLATE.getRoute({lang}),
     }
