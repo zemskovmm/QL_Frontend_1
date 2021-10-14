@@ -1,4 +1,4 @@
- import MyApplicationsPage from './MyApplicationsPage'
+import MyApplicationsPage from './MyApplicationsPage'
 
 
- export default MyApplicationsPage
+export default MyApplicationsPage

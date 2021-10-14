@@ -10,17 +10,15 @@ import { useLocalesStore} from 'stores/LocalesStore';
 import { useRouterStore } from 'stores/RouterStore';
 import { LeftNavigationLayout } from 'layouts/LeftNavigationLayout';
 
-type PropsType = {
-    lang?:string;
-}
 
-const ProfilePage: FunctionalComponent<PropsType> = ({lang}) => {
+
+const ProfilePage: FunctionalComponent = () => {
     const {translate:{profile}} = useLocalesStore();
     const { putUserAction, isLoading } = useProfileStore();
     const store = useUserStatuseStore();
     const {user:{firstName,lastName,phone}} = store;
     const { handleSubmit, control, setValue} = useForm<UserStatuseUserProps>();
-    const {PERSONAL_PATH} = useRouterStore();
+    const {PROFILE_PATH} = useRouterStore();
 
     useEffect(()=>{
         setValue( "firstName", firstName);
@@ -54,9 +52,6 @@ const ProfilePage: FunctionalComponent<PropsType> = ({lang}) => {
                     type="tel"/>
                
                 <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} />
-                <Link href={PERSONAL_PATH}>
-                    <Button text="Мои заявки" color="secondary" isFullWidth />
-                </Link>
             </form>
         </div>
     </LeftNavigationLayout>

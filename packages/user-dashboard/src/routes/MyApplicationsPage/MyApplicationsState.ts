@@ -6,15 +6,15 @@ import { notificationStore } from "stores/NotificationStore";
 
 const TOTAL_APPLICATIONS = 100;
 
-interface PersonalStore {
+interface MyApplicationsState {
     isLoading: boolean;
     applications: Array<ApplicationsPage>
     applicationId: number;
 }
 
-const createPersonalStore = ()=>{
+const createMyApplicationsState = ()=>{
 
-    const store = createMap<PersonalStore>(() => {
+    const store = createMap<MyApplicationsState>(() => {
         store.set({
             isLoading: false,
             applications: [],
@@ -55,12 +55,12 @@ const createPersonalStore = ()=>{
 }
 
 
-export const usePersonalStore = () => {
-    const pageStore = useMemo(() => createPersonalStore(), []);
-    const state = useStore(pageStore.store)
+export const useMyApplicationsState = () => {
+    const myApplicationsState = useMemo(() => createMyApplicationsState(), []);
+    const state = useStore(myApplicationsState.store)
 
     useEffect(()=>{
-        pageStore.getApplications({
+        myApplicationsState.getApplications({
             page:0, 
             pageSize:TOTAL_APPLICATIONS,
             type: "",
@@ -68,5 +68,5 @@ export const usePersonalStore = () => {
         })
     },[])
 
-    return { ...pageStore, ...state }
+    return { ...myApplicationsState, ...state }
 }
