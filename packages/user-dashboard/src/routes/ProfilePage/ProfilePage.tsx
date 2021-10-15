@@ -13,7 +13,7 @@ import { LeftNavigationLayout } from 'layouts/LeftNavigationLayout';
 
 
 const ProfilePage: FunctionalComponent = () => {
-    const {translate:{profile}} = useLocalesStore();
+    const {translate:{PROFILE}} = useLocalesStore();
     const { putUserAction, isLoading } = useProfileStore();
     const store = useUserStatuseStore();
     const {user:{firstName,lastName,phone}} = store;
@@ -27,7 +27,7 @@ const ProfilePage: FunctionalComponent = () => {
     },[store])
 
     return (
-    <LeftNavigationLayout title={profile}>
+    <LeftNavigationLayout title={PROFILE}>
         <div className="flex flex-col max-w-card-small" >
             
             <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(putUserAction) as any}>

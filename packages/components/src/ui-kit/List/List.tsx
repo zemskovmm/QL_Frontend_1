@@ -12,13 +12,13 @@ export const List:FunctionComponent<ListPropsType> = ({className,items,onClick})
     
 
     return <div className={`flex flex-col ${className}`}>
-        {items.map(({id,text,list})=>(
+        {items.map(({id,text,depth})=>(
             <ListItem 
+                depth={depth}
                 key={id} 
                 id={id} 
                 text={text} 
-                onClick={onClick} 
-                component={list ? <List items={list} onClick={onClick}/> : <></>}
+                onClick={onClick}
             />
         ))}
     </div>

@@ -6,22 +6,23 @@ export type ListItemPropsType = {
     id: string;
     text: string;
     onClick: (id:string)=>void;
-    component?: ReactNode;
+    depth: number;
 }
 
-export const ListItem:FunctionComponent<ListItemPropsType> = ({id,text,onClick,component=(<></>)})=>{
+export const ListItem:FunctionComponent<ListItemPropsType> = ({depth,id,text,onClick})=>{
 
     const handleClick = () => {
         onClick(id);
     }
 
+    const ofset:Array<ReactNode> = []
+    for(let d=0; d<depth; d++){
+        ofset.push(<div className="pl-2"/>)
+    }
+
     return (
-        <div className="flex flex-col">
-            <button className="border" onClick={handleClick}>
-                <Text text={text}/>
-            </button>
-            {component}
+        <div className="flex border px-2" onClick={handleClick}>
+            {ofset}<Text text={text}/>
         </div>
-        
     )
 }

@@ -1,1 +1,2 @@
-export * from './Chat'
+export * from './ApplicationTab'
+export * from './ChatTab'

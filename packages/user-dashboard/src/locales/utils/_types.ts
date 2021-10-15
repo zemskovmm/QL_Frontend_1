@@ -1,9 +1,10 @@
 
 export type Translate={
-    profile: string;
-    myApplications: string;
-    application: string;
-    settings: string;
+    PROFILE: string;
+    MY_APPLICATIONS: string;
+    APPLICATION: string;
+    CHAT: string;
+    SETTINGS: string;
 }
 
 export type LangsTranslate = {

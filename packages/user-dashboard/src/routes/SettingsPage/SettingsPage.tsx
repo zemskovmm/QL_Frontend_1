@@ -6,12 +6,12 @@ import { Text } from '@project/components/src/ui-kit/Text';
 
 const SettingsPage: FunctionalComponent = () => {
     const {translate:{
-        settings,
+        SETTINGS,
     }} = useLocalesStore();
 
     return (
-        <LeftNavigationLayout title={settings}>
-            <Text text={settings} color="help"/>
+        <LeftNavigationLayout title={SETTINGS}>
+            <Text text={SETTINGS} color="help"/>
         </LeftNavigationLayout>
     );
 };

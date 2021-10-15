@@ -1,4 +1,3 @@
-import { Text } from "@project/components/src/ui-kit/Text";
 import { List, ListItemType } from "@project/components/src/ui-kit/List";
 import { FunctionalComponent } from "preact";
 import { memo } from "preact/compat";
@@ -20,10 +19,9 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
     } = useRouterStore();
 
     const {lang,translate:{
-        profile,
-        myApplications,
-        application,
-        settings,
+        PROFILE,
+        MY_APPLICATIONS,
+        SETTINGS,
     }} = useLocalesStore();
 
     const {applications, getApplications} = useApplicationsState();
@@ -38,13 +36,14 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
     },[])
 
     const myApplicationsList:Array<ListItemType> = applications.map(({id,type,status})=>(
-        {id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:id.toString()}), text:`${id}${type} ${status}` }
+        {depth:1, id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:id.toString()}), text:`${id}${type} ${status}` }
     ));
 
     const items:Array<ListItemType> = [
-        {id:PROFILE_PATH, text:profile },
-        {id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:"0"}), text:myApplications, list: myApplicationsList },
-        {id:SETTINGS_TEMPLATE, text:settings },
+        {depth:0, id:PROFILE_PATH, text:PROFILE },
+        {depth:0, id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:"0"}), text:MY_APPLICATIONS},
+        ...myApplicationsList,
+        {depth:0, id:SETTINGS_TEMPLATE, text:SETTINGS },
     ]
 
     const handleClick = (id:string) => {
