@@ -4,17 +4,16 @@ import { useStore } from "nanostores/preact";
 import { ApplicationsPage, ApplicationsPropsReq, personalApi } from "api/PersonalApi";
 import { notificationStore } from "stores/NotificationStore";
 
-const TOTAL_APPLICATIONS = 100;
+export const TOTAL_APPLICATIONS = 100;
 
-interface MyApplicationsState {
+interface ApplicationsState {
     isLoading: boolean;
     applications: Array<ApplicationsPage>
     applicationId: number;
 }
 
-const createMyApplicationsState = ()=>{
-
-    const store = createMap<MyApplicationsState>(() => {
+const createApplicationsState = ()=>{
+    const store = createMap<ApplicationsState>(() => {
         store.set({
             isLoading: false,
             applications: [],
@@ -47,26 +46,13 @@ const createMyApplicationsState = ()=>{
         store.setKey('isLoading',false);
     }
 
-    const selectApplication = (id:number) => {
-        store.setKey('applicationId',id);
-    }
-
-    return { store, getApplications, selectApplication }
+    return { store, getApplications }
 }
 
+const applicationsState = createApplicationsState();
 
-export const useMyApplicationsState = () => {
-    const myApplicationsState = useMemo(() => createMyApplicationsState(), []);
-    const state = useStore(myApplicationsState.store)
+export const useApplicationsState = () => {
+    const state = useStore(applicationsState.store)
 
-    useEffect(()=>{
-        myApplicationsState.getApplications({
-            page:0, 
-            pageSize:TOTAL_APPLICATIONS,
-            type: "",
-            status: "",
-        })
-    },[])
-
-    return { ...myApplicationsState, ...state }
+    return { ...applicationsState, ...state }
 }

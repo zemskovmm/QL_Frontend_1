@@ -10,7 +10,7 @@ type PropsType = {
     store: ChatStoreType;
 };
 
-export const Chat: FunctionalComponent<PropsType> = ({className,applicationId, store}) => {
+export const Chat: FunctionalComponent<PropsType> = ({className, applicationId, store}) => {
 
     useEffect(()=>{
         store.getMessages(applicationId);
