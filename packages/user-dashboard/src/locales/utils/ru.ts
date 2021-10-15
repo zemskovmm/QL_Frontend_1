@@ -2,9 +2,10 @@ import { Translate } from "./_types";
 
 
 export const ru: Translate = {
-    profile: "Профиль",
-    myApplications: "Мои заявки",
-    application: "Заявка",
-    settings: "Настройки",
+    PROFILE: "Профиль",
+    MY_APPLICATIONS: "Мои заявки",
+    APPLICATION: "Заявка",
+    CHAT: "Чат",
+    SETTINGS: "Настройки",
 };
 
