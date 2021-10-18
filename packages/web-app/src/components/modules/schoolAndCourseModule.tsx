@@ -74,7 +74,7 @@ export const SchoolAndCourseModule = (props: ClientSchoolAndCourseListDto) => {
             </Link>
           </div>
         </div>
-        <div className={`max-w-screen-xl w-full mx-auto my-10 px-10`}>
+        <div className={`max-w-screen-xl w-full mx-auto my-10 px-14`}>
           <div className={`mb-8`}>Вы сможете забронировать вариант проживания в процессе покупки курса</div>
           <div className={`w-6/12`}>
             {props.courses.map((el) => (
