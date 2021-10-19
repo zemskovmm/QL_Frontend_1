@@ -3,22 +3,32 @@ import "src/styles/global.css";
 import "src/styles/legacy.css";
 import { MainLayout } from "src/components/layouts/mainLayout";
 import { useRouter } from "next/router";
-import footerData from "src/hardcoded/footerData";
-import headerData from "src/hardcoded/headerData";
 import { getLanguageUrlsFromRouterState } from "src/locales/locales";
 import React from "react";
 import { AppComponentHost } from "src/components/AppComponentHost";
 import App from "next/app";
+import { siteApi } from "../clients/siteApiClient";
+import { GlobalSettingsDto } from "admin-app/src/interfaces/GlobalSettingsDto";
+import { NextPageContext } from "next";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({
+  Component,
+  pageProps,
+  appProps,
+  globalSettings,
+}: AppProps & { globalSettings: GlobalSettingsDto; appProps: any } & { query: NextPageContext }) {
   const router = useRouter();
-  let { urls, title, module } = pageProps;
+  let { urls, title, module } = appProps;
   if (urls == null) urls = getLanguageUrlsFromRouterState(router);
 
   return (
     <>
-      <AppComponentHost headTitle={title} headMeta={module?.page?.Metadata?.meta ?? null}>
-        <MainLayout header={headerData} footer={footerData} urls={urls}>
+      <AppComponentHost
+        requestSetting={globalSettings.requestForm}
+        headTitle={title}
+        headMeta={module?.page?.Metadata?.meta ?? null}
+      >
+        <MainLayout globalSettings={globalSettings} urls={urls}>
           <Component {...pageProps} />
         </MainLayout>
       </AppComponentHost>
@@ -31,7 +41,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 // server-side locales to work
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
-  return appProps;
+  const routeLang = appContext.ctx.query["lang"];
+  const globalSettings = await siteApi.sendRequest(`global`, routeLang ? routeLang : "en");
+  return { appProps, globalSettings };
 };
 
 export default MyApp;

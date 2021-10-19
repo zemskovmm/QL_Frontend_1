@@ -37,9 +37,8 @@ const HistoryItem: FC<HistoryItemType> = ({ title, link, date, children }) => {
   );
 };
 
-const HistoryClientsPage = () => {
+const HistoryClientsPage: FC = () => {
   const lang = useIntl().locale;
-
   const historyList = siteApi.useBlogPages(lang, { pageType: "UserReview", pageNumber: 0, pageSize: 100 });
 
   return (

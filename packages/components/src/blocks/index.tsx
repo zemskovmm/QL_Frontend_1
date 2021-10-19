@@ -39,6 +39,8 @@ import { SocialBlockInfo } from "./SocialBlock/SocialBlock";
 import { GallerySliderBlockInfo } from "./GallerySliderBlock/gallerySliderBlock";
 import { CommentsBlockInfo } from "./CommentsBlock/commentsBlock";
 import { SkipHistoryBlockInfo } from "./SkipHistoryBlock/skip-history";
+import { MultiImgBlockInfo } from "./MultiImgBlock/MultiImgBlock";
+import { RequestFormDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 
 export const AvailableBlocks: BlockTypeInfo[] = [
   CirclesBlockInfo,
@@ -76,6 +78,7 @@ export const AvailableBlocks: BlockTypeInfo[] = [
   FirstArticleBlockInfo,
   CommentsBlockInfo,
   SkipHistoryBlockInfo,
+  MultiImgBlockInfo,
 ];
 
 export interface IComponentHost {
@@ -83,6 +86,7 @@ export interface IComponentHost {
   filters: any;
   lang: string;
   linkComponent: (props: { href: string; children: any }) => React.ReactElement;
+  requestSetting: RequestFormDto;
 }
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);
@@ -115,7 +119,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;
-        if (props.hideHistory && i >= findSkip) return;
+        if (props.hideHistory && i >= findSkip && findSkip !== -1) return;
         if (cell.type === "breadcrumbsBlock") return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
         return (
           <div

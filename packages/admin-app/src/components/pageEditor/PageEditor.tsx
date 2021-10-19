@@ -432,7 +432,7 @@ export const PageEditor = (props: { store: PageEditorStore | any }) => {
     })).filter((l) => l.isAvailable);
     return (
       <div>
-        <AdminButton color="primary" onClick={() => s.save()}>
+        <AdminButton color="save" onClick={() => s.save()}>
           Save
         </AdminButton>{" "}
         {s.id && (

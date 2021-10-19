@@ -24,12 +24,14 @@ import {
   CreateCoursePageStore,
 } from "./pages/course/coursePageStore";
 import { CreateTraitTypePageStore, EditTraitTypePageStore } from "./pages/trait/createTraitTypePageStore";
+import { GlobalSettingsPageStore } from "./pages/globalSettings/globalSettingsPageStore";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
   @observable pageEditorPage = new PageEditorPageStore(this);
   @observable pageListPage = new PageListPageStore();
   @observable pageTraitEditPage = new PageTraitEditPageStore(this);
+  @observable globalSettingsPage = new GlobalSettingsPageStore(this);
 
   @observable traitListPage = new TraitListPageStore(this);
   @observable traitPage = new TraitPageStore(this);

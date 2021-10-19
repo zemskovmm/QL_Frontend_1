@@ -13,6 +13,7 @@ export interface CatalogProps<T> {
   elementRenderer: (element: T) => JSX.Element;
   apiElementName: string;
   title: string;
+  searchTitle: string;
 }
 
 interface CatalogQuery {
@@ -89,6 +90,7 @@ export function Catalog<T>(props: CatalogProps<T>) {
       setFilter={setFilter}
       elementRenderer={props.elementRenderer}
       title={props.title}
+      searchTitle={props.searchTitle}
       type={props.apiElementName}
     />
   );
