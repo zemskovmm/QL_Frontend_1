@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
+// import { useContext } from "preact/hooks";
+import { ComponentHostDashboardContext } from "user-dashboard/src/layouts/HostLayout";
 
 export interface BasicInputBlockElement {
   schema: { id: string | number; required: boolean };
@@ -9,6 +11,8 @@ export interface BasicInputBlockElement {
 }
 
 export const BasicInputBlock = (props: BasicInputBlockElement) => {
+  const cl = useContext(ComponentHostDashboardContext);
+  console.log(cl?.personalInfo);
   return (
     <div className="py-12">
       <label className={`flex`}>
@@ -18,6 +22,8 @@ export const BasicInputBlock = (props: BasicInputBlockElement) => {
           required={props.schema.required}
           type="text"
           placeholder={props.placeholder}
+          value={cl?.personalInfo[props.schema.id]}
+          onChange={(e) => (cl!.personalInfo[props.schema.id] = e.target.value)}
         />
       </label>
     </div>

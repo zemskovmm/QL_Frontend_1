@@ -13,16 +13,15 @@ import {
   SIGN_UP_TEMPLATE,
   SIGN_IN_TEMPLATE,
   PROFILE_TEMPLATE,
-  MY_APPLICATIONS_TEMPLATE,
   SETTINGS_TEMPLATE,
 } from "stores/RouterStore";
 import { useEffect, useState } from "preact/hooks";
 import { useUserStatuseStore } from "stores/UserStatuseStore";
 import { isSecureUrl } from "stores/RouterStore/_utils";
-import MyApplicationsPage from "routes/MyApplicationsPage";
 import SettingsPage from "routes/SettingsPage";
 import { useLocalesStore } from "stores/LocalesStore";
 import { changeLangInUrl, DEFAULT_LANG, urlToLang } from "locales/utils";
+import { HostLayout } from "layouts/HostLayout";
 
 export const Application: FunctionalComponent = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
@@ -59,19 +58,21 @@ export const Application: FunctionalComponent = () => {
   };
 
   return (
-    <div id="preact_root" className="h-full">
-      <AppLayout>
-        <Router onChange={handleChangeUrl}>
-          <HomePage path={HOME_TEMPLATE.path} />
-          <ProfilePage path={PROFILE_TEMPLATE.path} />
-          <SignUpPage path={SIGN_UP_TEMPLATE.path} />
-          <SignInPage path={SIGN_IN_TEMPLATE.path} />
-          {/*<MyApplicationsPage path={MY_APPLICATIONS_TEMPLATE.path} />*/}
-          <SettingsPage path={SETTINGS_TEMPLATE.path} />
-          <NotFoundPage default />
-        </Router>
-      </AppLayout>
-      <Notification />
-    </div>
+    <HostLayout>
+      <div id="preact_root" className="h-full">
+        <AppLayout>
+          <Router onChange={handleChangeUrl}>
+            <HomePage path={HOME_TEMPLATE.path} />
+            <ProfilePage path={PROFILE_TEMPLATE.path} />
+            <SignUpPage path={SIGN_UP_TEMPLATE.path} />
+            <SignInPage path={SIGN_IN_TEMPLATE.path} />
+            {/*<MyApplicationsPage path={MY_APPLICATIONS_TEMPLATE.path} />*/}
+            <SettingsPage path={SETTINGS_TEMPLATE.path} />
+            <NotFoundPage default />
+          </Router>
+        </AppLayout>
+        <Notification />
+      </div>
+    </HostLayout>
   );
 };

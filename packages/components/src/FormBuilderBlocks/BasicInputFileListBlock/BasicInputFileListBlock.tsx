@@ -1,20 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
+import { useContext, useState } from "preact/hooks";
+import { ComponentHostDashboardContext } from "user-dashboard/src/layouts/HostLayout";
 
 export interface BasicInputFileListBlockElement {
   id: string;
   label: string;
-  placeholder: string;
+  buttonName: string;
 }
 
 export const BasicInputFileListBlock = (props: BasicInputFileListBlockElement) => {
+  const cl = useContext(ComponentHostDashboardContext);
+  const [file, observeFile] = useState<File[]>([]);
+
   return (
     <div className="py-12">
+      <div>{props.label}</div>
       <label className={`flex`}>
-        <span className={`mr-10`}>{props.label}</span>
-        <input id={props.id} type="file" />
+        <span className={`mr-10`}>{props.buttonName}</span>
+        <input
+          id={props.id}
+          type="file"
+          onChange={(e) => {
+            const files = file;
+            if (e.target.files![0].name) {
+              files.push(e.target.files![0]);
+            }
+            observeFile(files);
+            // const req = new FormData();
+            // for (let i = 0; files.length < i; i++) {
+            //   req.append(`file ${i}`, files[i]);
+            // }
+            cl!.personalInfo[props.id] = files;
+          }}
+        />
       </label>
+      <div className={`flex`}>
+        <div>
+          {file.length}
+          {file.map((el) => (
+            <div>
+              {el.name} <button>remove</button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
@@ -27,7 +58,7 @@ export const BasicInputFileListBlockInfo: TypedBlockTypeInfo<BasicInputFileListB
   initialData: {
     id: "",
     label: "",
-    placeholder: "",
+    buttonName: "",
   },
   definition: {
     fields: [
@@ -43,9 +74,9 @@ export const BasicInputFileListBlockInfo: TypedBlockTypeInfo<BasicInputFileListB
         name: "label",
       },
       {
-        id: "placeholder",
+        id: "buttonName",
         type: "String",
-        name: "placeholder",
+        name: "buttonName",
       },
     ],
   },
