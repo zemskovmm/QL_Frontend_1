@@ -5,23 +5,22 @@ import { DEFAULT_LANG, getTranslate, Translate} from "locales/utils";
 
 
 
-interface LocalesStore {
+type LocalesStore = Translate &{
     lang: string;
-    translate: Translate;
-}
+} 
 
 const createLocalesStore = ()=>{
     const store = createMap<LocalesStore>(() => {
         store.set({
+            ...getTranslate(DEFAULT_LANG),
             lang: DEFAULT_LANG,
-            translate: getTranslate(DEFAULT_LANG),
         })
     })
 
     const changeLang = (lang:string) => {
         store.set({
+            ...getTranslate(lang),
             lang,
-            translate: getTranslate(lang),
         });
     }
 

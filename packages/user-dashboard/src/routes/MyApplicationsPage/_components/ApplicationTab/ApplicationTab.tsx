@@ -8,7 +8,7 @@ type PropsType = {
 };
 
 export const ApplicationTab: FunctionalComponent<PropsType> = ({className, applicationId}) => {
-    const {translate:{APPLICATION}} = useLocalesStore()
+    const {APPLICATION_LANG} = useLocalesStore()
 
     const classes = [
         "flex flex-col border gap-2 p-2",
@@ -16,6 +16,6 @@ export const ApplicationTab: FunctionalComponent<PropsType> = ({className, appli
     ].join(' ');
 
     return <div className={classes} >
-        <Text text={APPLICATION} size="title-medium"/>
+        <Text text={APPLICATION_LANG} size="title-medium"/>
     </div>
 };

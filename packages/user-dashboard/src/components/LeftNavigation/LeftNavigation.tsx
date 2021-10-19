@@ -15,14 +15,14 @@ type PropsType = {
 export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className}) => {
     const {
         PROFILE_PATH,
-        SETTINGS_TEMPLATE,
+        SETTINGS_PATH,
     } = useRouterStore();
 
-    const {lang,translate:{
-        PROFILE,
-        MY_APPLICATIONS,
-        SETTINGS,
-    }} = useLocalesStore();
+    const {lang,
+        PROFILE_LANG,
+        MY_APPLICATIONS_LANG,
+        SETTINGS_LANG,
+    } = useLocalesStore();
 
     const {applications, getApplications} = useApplicationsState();
 
@@ -40,10 +40,10 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
     ));
 
     const items:Array<ListItemType> = [
-        {depth:0, id:PROFILE_PATH, text:PROFILE },
-        {depth:0, id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:"0"}), text:MY_APPLICATIONS},
+        {depth:0, id:PROFILE_PATH, text:PROFILE_LANG },
+        {depth:0, id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:"0"}), text:MY_APPLICATIONS_LANG},
         ...myApplicationsList,
-        {depth:0, id:SETTINGS_TEMPLATE, text:SETTINGS },
+        {depth:0, id:SETTINGS_PATH, text:SETTINGS_LANG },
     ]
 
     const handleClick = (id:string) => {

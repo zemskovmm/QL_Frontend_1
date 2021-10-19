@@ -1,4 +1,4 @@
-import { SETTINGS_TEMPLATE } from ".";
+import { NEW_APPLICATION_TEMPLATE, SETTINGS_TEMPLATE } from ".";
 import { 
     HOME_TEMPLATE, 
     PROFILE_TEMPLATE, 
@@ -45,6 +45,7 @@ export const getLangPagePaths = (lang:string):PagePaths => {
         SIGN_IN_PATH: SIGN_IN_TEMPLATE.getRoute({lang}),
 
         PROFILE_PATH: PROFILE_TEMPLATE.getRoute({lang}),
-        SETTINGS_TEMPLATE: SETTINGS_TEMPLATE.getRoute({lang}),
+        SETTINGS_PATH: SETTINGS_TEMPLATE.getRoute({lang}),
+        NEW_APPLICATION_PATH: NEW_APPLICATION_TEMPLATE.getRoute({lang}),
     }
 }
