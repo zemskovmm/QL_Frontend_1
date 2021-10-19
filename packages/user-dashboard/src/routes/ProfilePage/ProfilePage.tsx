@@ -27,9 +27,9 @@ const ProfilePage: FunctionalComponent = () => {
 
     return (
     <LeftNavigationLayout title={PROFILE_LANG}>
-        <div className="flex flex-col max-w-card-small" >
+        <div className="flex flex-col max-w-72" >
             
-            <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(putUserAction) as any}>
+            <form className="flex flex-col max-w-72" onSubmit={handleSubmit(putUserAction) as any}>
                 <InputControlled 
                     className="my-1"
                     name="firstName" 

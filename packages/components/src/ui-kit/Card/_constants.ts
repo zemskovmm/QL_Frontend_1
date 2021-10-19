@@ -1,6 +1,6 @@
 export const CARD_SIZES = {
     'content': "",
-    'large': "w-full max-w-card-large",
-    'medium': "w-full max-w-card-medium",
-    'small': "w-full max-w-card-small",
+    '208': "w-full max-w-208", //832px
+    '112': "w-full max-w-112", //448px
+    '72': "w-full max-w-72", //288px
 }

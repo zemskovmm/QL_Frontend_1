@@ -33,7 +33,7 @@ export const SignInPage: FunctionalComponent = () => {
         <CenterCardLayout 
             title="Вход в личный кабинет"
             subtitle="Войдите или создайте аккаунт">
-            <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(loginAction) as any}>
+            <form className="flex flex-col max-w-72" onSubmit={handleSubmit(loginAction) as any}>
                 <InputControlled 
                     className="my-1"
                     name="email" 
