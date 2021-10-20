@@ -1,4 +1,6 @@
 import { jsonToUrlParam, request } from "./QLBaseApi";
+import { ApplicationsPagesDto,ApplicationDto } from "@project/components/src/interfaces/ApplicationDto";
+
 
 export type ApplicationsPropsReq = {
     page: number;
@@ -7,19 +9,9 @@ export type ApplicationsPropsReq = {
     status: string;
 };
 
-export type ApplicationsPage = {
-    id: number,
-    type: string,
-    entityId: number,
-    status: string,
-    commonApplicationInfo: any,
-    entityTypeSpecificApplicationInfo: any,
-};
 
-export type ApplicationsRes = {
-    totalPages: number;
-    totalItems: number;
-    items: Array<ApplicationsPage>;
+export type IdReq = {
+    id:number;
 };
 
 export type MessagesType = {
@@ -36,10 +28,15 @@ export type SendMessageType = {
 }
 
 export class PersonalApi {
+    addApplications = async ( data:ApplicationDto) => 
+        request<IdReq>("personal/applications", data, "POST");
+
     getApplications = async ( data:ApplicationsPropsReq ) => 
-        request<ApplicationsRes>(jsonToUrlParam("personal/applications",data), null, "GET");
+        request<ApplicationsPagesDto>(jsonToUrlParam("personal/applications",data), null, "GET");
+
     getMessages = async ( id:number ) => 
-        request<Array<MessagesType>>(`personal/applications/${id}/chat/messages`, null, "GET");
+        request<Array<MessagesType>>(`personal/applications/${id}/chat/messages?count=100`, null, "GET");
+
     sendMessages = async ( id:number, data: SendMessageType) => 
         request(`personal/applications/${id}/chat/messages`, data, "POST");
 }

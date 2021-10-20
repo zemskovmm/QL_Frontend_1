@@ -8,7 +8,18 @@ const TailwindTheme = {
                 'desktop': '1280px',// => @media (min-width: 1280px) { ... }
             },
             maxWidth: {
+                28:	'7rem', //112px	
+                32:	'8rem', //128px	
+                36:	'9rem', //144px	
+                40:	'10rem', //160px	
+                44:	'11rem', //176px	
+                48:	'12rem', //192px	
+                52:	'13rem', //208px	
+                56:	'14rem', //224px	
+                60:	'15rem', //240px	
+                64: '16rem', //256px
                 72: '18rem', //288px
+                80: '20rem', //320px
                 96: '24rem', //384px
                 112: '28rem', //448px
                 128: '32rem', //512px
