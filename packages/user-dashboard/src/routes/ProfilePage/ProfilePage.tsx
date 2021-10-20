@@ -11,6 +11,8 @@ import { LeftNavigationLayout } from "layouts/LeftNavigationLayout";
 import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
 import { RowsPresenter } from "@project/components/src/blocks";
 import { ComponentHostDashboardContext } from "layouts/HostLayout";
+import { Preload } from "@project/components/src/ui-kit/Preload";
+import PRELOAD_ICON from "assets/images/preload.gif";
 
 const ProfilePage: FunctionalComponent = () => {
   const cl = useContext(ComponentHostDashboardContext);
@@ -21,7 +23,7 @@ const ProfilePage: FunctionalComponent = () => {
     user: { firstName, lastName, phone },
   } = store;
   const { handleSubmit, control, setValue } = useForm<UserStatuseUserProps>();
-  const { gs, getGlobalSettings } = useGlobalSettingsStore();
+  const { isLoading:isLoadingGS, gs, getGlobalSettings } = useGlobalSettingsStore();
   const { lang } = useLocalesStore();
 
   useEffect(() => {
@@ -37,28 +39,30 @@ const ProfilePage: FunctionalComponent = () => {
 
   return (
     <LeftNavigationLayout title={PROFILE_LANG}>
-      <div className="flex flex-col ">
-        <form className="flex flex-col max-w-72" onSubmit={handleSubmit(putUserAction) as any}>
-          <InputControlled className="my-1" name="firstName" label="Имя" placeholder="Ваше имя" control={control} />
-          <InputControlled
-            className="my-1"
-            name="lastName"
-            label="Фамилия"
-            placeholder="Ваше фамилия"
-            control={control}
-          />
-          <InputControlled
-            className="my-1"
-            name="phone"
-            label="Номер телефона"
-            placeholder="Ваш номер"
-            control={control}
-            type="tel"
-          />
-          <RowsPresenter rows={gs?.personalCabinet["profile"].form.pageData.rows ?? []} />
-          <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} />
-        </form>
-      </div>
+      <Preload isLoading={isLoading||isLoadingGS} color="white">
+        <div className="flex flex-col p-4">
+          <form className="flex flex-col max-w-72" onSubmit={handleSubmit(putUserAction) as any}>
+            <InputControlled className="my-1" name="firstName" label="Имя" placeholder="Ваше имя" control={control} />
+            <InputControlled
+              className="my-1"
+              name="lastName"
+              label="Фамилия"
+              placeholder="Ваше фамилия"
+              control={control}
+            />
+            <InputControlled
+              className="my-1"
+              name="phone"
+              label="Номер телефона"
+              placeholder="Ваш номер"
+              control={control}
+              type="tel"
+            />
+            {gs && <RowsPresenter rows={gs?.personalCabinet["profile"].form.pageData.rows ?? []}/>}
+            <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} />
+          </form>
+        </div>
+      </Preload>
     </LeftNavigationLayout>
   );
 };

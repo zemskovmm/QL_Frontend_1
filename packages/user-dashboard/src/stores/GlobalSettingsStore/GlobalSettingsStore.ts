@@ -6,19 +6,24 @@ import { ActualState } from 'stores/ActualState';
 
 
 interface GlobalSettingsStore {
+    isLoading:boolean,
     gs?:GlobalSettingsDto,
 }
 
 const createGlobalSettingsStore = ()=>{
     const store = createMap<GlobalSettingsStore>(() => {
-        store.set({})
+        store.set({
+            isLoading:false,
+        })
     })
 
     const globalSettingsActualState = new ActualState<string>(async (lang: string)=>{
+        store.setKey("isLoading",true);
         const { isOk, body } = await globalSettingsApi.getGlobalSettings(lang)
         if(isOk){
             store.setKey("gs",body);
         }
+        store.setKey("isLoading",false);
     },"",(prev,curr)=>prev===curr);
 
     const getGlobalSettings = async (lang: string):Promise<void> =>  {
