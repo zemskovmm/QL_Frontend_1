@@ -1,7 +1,7 @@
 import { FunctionalComponent } from "preact";
 import { AppLayout } from "layouts/AppLayout";
 import { Notification } from "components/Notification";
-import Router, { route, RouterOnChangeArgs } from "preact-router";
+import Router, { Route, route, RouterOnChangeArgs } from "preact-router";
 import HomePage from "routes/HomePage";
 import SignUpPage from "routes/SignUpPage";
 import SignInPage from "routes/SignInPage";

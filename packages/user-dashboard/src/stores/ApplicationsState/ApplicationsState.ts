@@ -1,14 +1,14 @@
-import { useMemo,useEffect } from "preact/hooks";
 import { createMap, updateKey } from 'nanostores'
 import { useStore } from "nanostores/preact";
-import { ApplicationsPage, ApplicationsPropsReq, personalApi } from "api/PersonalApi";
+import { ApplicationsPropsReq, personalApi } from "api/PersonalApi";
 import { notificationStore } from "stores/NotificationStore";
+import { ApplicationDto, ApplicationType, APPLICATION_DTO_DEFAULT } from "@project/components/src/interfaces/ApplicationDto";
 
 export const TOTAL_APPLICATIONS = 100;
 
 interface ApplicationsState {
     isLoading: boolean;
-    applications: Array<ApplicationsPage>
+    applications: Array<ApplicationDto>
     applicationId: number;
 }
 
@@ -20,6 +20,26 @@ const createApplicationsState = ()=>{
             applicationId: 0,
         })
     })
+
+    const addApplication = async (applicationType:ApplicationType):Promise<number> => {
+        store.setKey('isLoading',true);
+        let outApplicationId = 0;
+
+        const result = await personalApi.addApplications({
+            ...APPLICATION_DTO_DEFAULT,
+            type:applicationType
+        });
+
+        const {isOk,body,error} = result
+        if(isOk){
+            outApplicationId= body?.id || 0;
+        }else{
+            notificationStore.addErrorAction(error);
+        }
+
+        store.setKey('isLoading',false);
+        return outApplicationId;
+    }
 
     const getApplications = async (data:ApplicationsPropsReq) => {
         store.setKey('isLoading',true);
@@ -46,7 +66,7 @@ const createApplicationsState = ()=>{
         store.setKey('isLoading',false);
     }
 
-    return { store, getApplications }
+    return { store, getApplications, addApplication }
 }
 
 const applicationsState = createApplicationsState();

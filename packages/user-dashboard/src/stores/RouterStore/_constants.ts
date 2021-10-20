@@ -8,6 +8,7 @@ export const SIGN_IN_TEMPLATE = publicRoute("/sign-in");
 export const PROFILE_TEMPLATE = secureRoute("/profile");
 export const MY_APPLICATIONS_TEMPLATE = secureRoute("/my-applications","/:applicationId?");
 export const SETTINGS_TEMPLATE = secureRoute("/settings");
+export const NEW_APPLICATION_TEMPLATE = secureRoute("/new-application");
 
 
 

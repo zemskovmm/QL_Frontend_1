@@ -42,7 +42,7 @@ export const SignUpPage: FunctionalComponent = () => {
             title="Регистрация" 
             subtitle="Пароль должен состоять из заглавных и строчных букв и цифр. Длина - не менее 10 символов.">
 
-            <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(registerAction) as any}>
+            <form className="flex flex-col max-w-72" onSubmit={handleSubmit(registerAction) as any}>
                 <InputControlled 
                     className="my-1"
                     name="email" 

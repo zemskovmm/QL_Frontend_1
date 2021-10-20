@@ -8,13 +8,33 @@ const TailwindTheme = {
                 'desktop': '1280px',// => @media (min-width: 1280px) { ... }
             },
             maxWidth: {
-                'laptop': "1024px",
-                'card-large': "856px",
-                'card-medium': "432px",
-                'card-small': "280px",
+                28:	'7rem', //112px	
+                32:	'8rem', //128px	
+                36:	'9rem', //144px	
+                40:	'10rem', //160px	
+                44:	'11rem', //176px	
+                48:	'12rem', //192px	
+                52:	'13rem', //208px	
+                56:	'14rem', //224px	
+                60:	'15rem', //240px	
+                64: '16rem', //256px
+                72: '18rem', //288px
+                80: '20rem', //320px
+                96: '24rem', //384px
+                112: '28rem', //448px
+                128: '32rem', //512px
+                160: '40rem', //640px
+                208: '52rem', //832px
+                256: '64rem', //1024px
+                320: '80rem', //1280px
             },
             spacing: {
-                128: '32rem',
+                112: '28rem', //448px
+                128: '32rem', //512px
+                160: '40rem', //640px
+                208: '52rem', //832px
+                256: '64rem', //1024px
+                320: '80rem', //1280px
             },
             colors: {
                 'help': '#A8B5CC',
