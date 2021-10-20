@@ -16,8 +16,8 @@ export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({title
     const { NEW_APPLICATION_PATH } = useRouterStore();
 
     return (
-        <div className="h-full flex flex-col py-2">
-            <div className="flex justify-between" >
+        <div className="h-full flex flex-col">
+            <div className="flex justify-between py-4" >
                 <Text text={title} size="title-large"/>
                 <Link href={NEW_APPLICATION_PATH}>
                     <Button text={NEW_APPLICATION_LANG} />
