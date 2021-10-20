@@ -1,6 +1,8 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
+import { useContext } from "preact/hooks";
+import { ComponentHostDashboardContext } from "user-dashboard/src/layouts/HostLayout";
 
 export interface BasicInputFileBlockElement {
   id: string;
@@ -9,11 +11,20 @@ export interface BasicInputFileBlockElement {
 }
 
 export const BasicInputFileBlock = (props: BasicInputFileBlockElement) => {
+  const cl = useContext(ComponentHostDashboardContext);
   return (
     <div className="py-12">
       <label className={`flex`}>
         <span className={`mr-10`}>{props.label}</span>
-        <input id={props.id} type="file" />
+        <input
+          id={props.id}
+          type="file"
+          value={cl?.personalInfo[props.id]}
+          onChange={(e) => {
+            cl!.personalInfo[props.id] = new FormData().append("file", e.target.files![0]);
+            console.log(cl?.personalInfo[props.id]);
+          }}
+        />
       </label>
     </div>
   );
