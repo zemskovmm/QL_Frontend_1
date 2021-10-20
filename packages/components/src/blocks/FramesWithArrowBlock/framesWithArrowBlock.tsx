@@ -13,7 +13,7 @@ export const FramesWithArrowBlock = (props: FramesWithArrowBlockElement) => {
   return (
     <div className="px-10 mx-auto max-w-screen-xl w-full">
       <HtmlPresenter text={props.text} />
-      <div className="flex justify-start items-start flex-wrap">
+      <div className="flex justify-start flex-wrap">
         {props.elements.map((el, ind) => (
           <div className={styles.frame} key={ind}>
             {el.text}

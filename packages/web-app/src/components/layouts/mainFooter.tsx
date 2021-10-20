@@ -73,16 +73,16 @@ export const MainFooter: FC<{ s: FooterDto }> = ({ s }) => {
           </div>
         ))}
         <div className={cn("w-full lg:w-1/3", styles.footer_column, styles.footer_address)}>
-
           <div className="py-4">
-            {s.footerContactLinkList && s.footerContactLinkList.map(({link,text,icon}, i) =>
-              <div className="relative p-1 pl-6" key={i + "MainFooterContactLinkList"}>
-                <a className="absolute top-1 left-0 w-5 h-5" href={link}>
-                  <Social className={styles.footer_icon}  icon={icon.toLowerCase()} />
-                </a>
-                <a href={link}>{text}</a>
-              </div>
-            )}
+            {s.footerContactLinkList &&
+              s.footerContactLinkList.map(({ link, text, icon }, i) => (
+                <div className="relative p-1 pl-6" key={i + "MainFooterContactLinkList"}>
+                  <a className="absolute top-1 left-0 w-5 h-5" href={link}>
+                    <Social className={styles.footer_icon} icon={icon.toLowerCase()} />
+                  </a>
+                  <a href={link}>{text}</a>
+                </div>
+              ))}
           </div>
 
           {s.footerContactLinkList && (
@@ -103,7 +103,7 @@ export const MainFooter: FC<{ s: FooterDto }> = ({ s }) => {
             )}
           </div>
           {lang === "cn" && (
-            <img src="/WeChat.jpg" alt="" className={`w-full pl-6 mb-10`} style={{ maxWidth: "240px" }} />
+            <img src="/WeChat.jpg" alt="" className={`w-full mx-auto lg:pl-6 mb-10`} style={{ maxWidth: "240px" }} />
           )}
         </div>
       </div>

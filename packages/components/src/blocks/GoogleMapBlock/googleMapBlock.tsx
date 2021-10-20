@@ -38,7 +38,8 @@ export const GoogleMapBlock = (props: GoogleMapBlockElement) => {
     <div className={cn(styles.mapblock, "pt-12")}>
       <div className="flex flex-wrap justify-center align-stretch">
         {props.elements.map((el, ind) => (
-          <div
+          <a
+            href={`#map`}
             key={ind}
             className={cn(
               styles.block,
@@ -51,10 +52,10 @@ export const GoogleMapBlock = (props: GoogleMapBlockElement) => {
             <h3 className="font-bold">{el.title}</h3>
             <br />
             <div dangerouslySetInnerHTML={{ __html: el.text }} />
-          </div>
+          </a>
         ))}
       </div>
-      <div className="flex w-full">
+      <div id={`map`} className="flex w-full">
         {scriptLoaded && <Map mapTypeControl={true} mapAddresses={addresses} mapActiveAddress={activeAddress} />}
       </div>
     </div>

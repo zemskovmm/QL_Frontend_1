@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "mobx-state-router";
+import { Route, RouterState } from "mobx-state-router";
 import { convertRoutes } from "./route";
 import { IndexPage } from "src/pages/indexPage";
 import { PageEditorPage } from "src/pages/page/pageEditorPage";
@@ -17,6 +17,8 @@ import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } f
 import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "../pages/course/page";
 import { TraitTypeEditPage, TraitTypeNewPage } from "../pages/trait/traitTypeNewPage";
 import { AdminGlobalSettingEditor } from "../pages/globalSetting/page";
+import { AdminApi } from "../clients/adminApiClient";
+import { RootStore } from "../stores/RootStore";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -86,6 +88,14 @@ export const RouteViewMap = {
   [RouteNames.courseTraitEditor]: <CourseTraitEditorPage />,
 };
 
+// export interface RouteTransitionHook {
+//   (root: RootStore, next: () => Promise<void>, to: RouterState, from: RouterState): Promise<void> | void;
+// }
+//
+// export const UserAuthorizedOnlyHook: RouteTransitionHook = (root) => {
+//   if (!AdminApi.getCheck()) throw new RouterState(RouteNames.index);
+// };
+
 export const Routes: Route[] = convertRoutes([
   {
     pattern: "/not-found",
@@ -103,6 +113,7 @@ export const Routes: Route[] = convertRoutes([
   {
     pattern: "/pages",
     name: RouteNames.pageList,
+    // hooks: [UserAuthorizedOnlyHook],
   },
   {
     pattern: "/pages/new",

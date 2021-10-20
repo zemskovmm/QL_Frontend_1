@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
-import { RouterLink } from "mobx-state-router";
+import { RouterLink, RouterState } from "mobx-state-router";
 import { RouteNames } from "src/routing/routes";
+import { AdminApi } from "../../clients/adminApiClient";
 
 const Navbar = () => (
   <nav className="flex items-center justify-between w-full bg-blue-600 p-4">
@@ -35,7 +36,15 @@ const Navbar = () => (
       </div>
     </div>
     <div className="flex items-center flex-shrink-0 text-white mr-4">
-      <span className="font-semibold text-xl tracking-tight">Quartier Latin Admin</span>
+      <button
+        className="font-semibold text-xl tracking-tight"
+        onClick={() => {
+          AdminApi.getLogout();
+          new RouterState(RouteNames.index);
+        }}
+      >
+        Logout
+      </button>
     </div>
   </nav>
 );

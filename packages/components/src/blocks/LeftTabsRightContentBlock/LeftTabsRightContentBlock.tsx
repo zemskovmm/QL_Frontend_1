@@ -6,6 +6,7 @@ import { PageBlockRowDto } from "../../interfaces/pageSharedDto";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import { RowsPresenter } from "../index";
 import preview from "./preview.png";
+import arrow from "./arrow-down.svg";
 
 interface TabControlBlockTab {
   title: string;
@@ -49,10 +50,16 @@ const LeftTabsRightContentBlock = ({ tabs, revers }: TabControlBlockProps) => {
             <button
               type={"button"}
               key={ind}
-              className={cn(ind === activeTab ? styles.tab__elementActive : "", styles.tab__element, styles.mobiletab)}
+              className={cn(
+                ind === activeTab ? styles.tab__elementActive : "",
+                styles.tab__element,
+                styles.mobiletab,
+                `flex justify-between`
+              )}
               onClick={() => setActiveTab(ind)}
             >
               {tab.title}
+              <img src={arrow} alt={"arrow"} className={``} />
             </button>
             <div>{effectiveActiveTab !== ind ? null : <RowsPresenter rows={tabs[effectiveActiveTab].rows} />}</div>
           </div>
