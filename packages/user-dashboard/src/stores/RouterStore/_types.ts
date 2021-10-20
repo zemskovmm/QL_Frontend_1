@@ -35,5 +35,6 @@ export type PagePaths = {
     SIGN_IN_PATH: string;
 
     PROFILE_PATH: string;
-    SETTINGS_TEMPLATE: string;
+    SETTINGS_PATH: string;
+    NEW_APPLICATION_PATH: string;
 }

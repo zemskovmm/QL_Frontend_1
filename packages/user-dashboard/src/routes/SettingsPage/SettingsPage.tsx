@@ -5,13 +5,11 @@ import { Text } from '@project/components/src/ui-kit/Text';
 
 
 const SettingsPage: FunctionalComponent = () => {
-    const {translate:{
-        SETTINGS,
-    }} = useLocalesStore();
+    const { SETTINGS_LANG } = useLocalesStore();
 
     return (
-        <LeftNavigationLayout title={SETTINGS}>
-            <Text text={SETTINGS} color="help"/>
+        <LeftNavigationLayout title={SETTINGS_LANG}>
+            <Text text={SETTINGS_LANG} color="help"/>
         </LeftNavigationLayout>
     );
 };

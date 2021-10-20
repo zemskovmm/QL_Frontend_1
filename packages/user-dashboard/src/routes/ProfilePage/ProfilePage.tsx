@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { useEffect} from 'preact/hooks';
 import { useProfileStore } from './_store';
 import { useUserStatuseStore, UserStatuseUserProps } from 'stores/UserStatuseStore';
-import { Link } from 'preact-router';
 import { useLocalesStore} from 'stores/LocalesStore';
 import { useRouterStore } from 'stores/RouterStore';
 import { LeftNavigationLayout } from 'layouts/LeftNavigationLayout';
@@ -13,7 +12,7 @@ import { LeftNavigationLayout } from 'layouts/LeftNavigationLayout';
 
 
 const ProfilePage: FunctionalComponent = () => {
-    const {translate:{PROFILE}} = useLocalesStore();
+    const { PROFILE_LANG } = useLocalesStore();
     const { putUserAction, isLoading } = useProfileStore();
     const store = useUserStatuseStore();
     const {user:{firstName,lastName,phone}} = store;
@@ -27,10 +26,10 @@ const ProfilePage: FunctionalComponent = () => {
     },[store])
 
     return (
-    <LeftNavigationLayout title={PROFILE}>
-        <div className="flex flex-col max-w-card-small" >
+    <LeftNavigationLayout title={PROFILE_LANG}>
+        <div className="flex flex-col max-w-72" >
             
-            <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(putUserAction) as any}>
+            <form className="flex flex-col max-w-72" onSubmit={handleSubmit(putUserAction) as any}>
                 <InputControlled 
                     className="my-1"
                     name="firstName" 

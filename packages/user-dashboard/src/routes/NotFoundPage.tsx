@@ -8,7 +8,7 @@ const NotFoundPage: FunctionalComponent = () => {
     const {HOME_PATH} = useRouterStore();
     return (
     <CenterCardLayout title="404. Страница не найдена :(" isError>
-        <div className="flex flex-col max-w-card-small" >
+        <div className="flex flex-col max-w-72" >
             <Link href={HOME_PATH}>
                 <Button className="my-2" text="На главную" color="secondary" />
             </Link>

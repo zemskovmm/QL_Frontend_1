@@ -1,5 +1,4 @@
 import { effect } from "nanostores";
-import { bool } from "yup";
 
 
 export class ActualState<T>{
