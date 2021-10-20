@@ -3,7 +3,7 @@ import { memo } from "preact/compat";
 import { useEffect } from "preact/hooks";
 import { useLocalesStore } from "stores/LocalesStore";
 import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
-import { Continer } from "components/Continer";
+import { Container } from "components/Container";
 
 type PropsType = {
     className?: string;
@@ -18,8 +18,8 @@ export const Footer: FunctionalComponent<PropsType> = memo(({className}) => {
     },[lang,getGlobalSettings]);
 
     return (
-        <Continer className={`bg-blue-400 py-4 ${className}`}> 
+        <Container className={`bg-blue-400 py-4 ${className}`}> 
             {JSON.stringify(gs,null,"  ")}
-        </Continer>
+        </Container>
     );
 });

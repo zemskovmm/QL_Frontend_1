@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useContext, useEffect } from "preact/hooks";
 import { useProfileStore } from "./_store";
 import { useUserStatuseStore, UserStatuseUserProps } from "stores/UserStatuseStore";
-import { Link } from "preact-router";
 import { useLocalesStore } from "stores/LocalesStore";
 import { useRouterStore } from "stores/RouterStore";
 import { LeftNavigationLayout } from "layouts/LeftNavigationLayout";
@@ -15,16 +14,13 @@ import { ComponentHostDashboardContext } from "layouts/HostLayout";
 
 const ProfilePage: FunctionalComponent = () => {
   const cl = useContext(ComponentHostDashboardContext);
-  const {
-    translate: { PROFILE },
-  } = useLocalesStore();
+  const {PROFILE_LANG } = useLocalesStore();
   const { putUserAction, isLoading } = useProfileStore();
   const store = useUserStatuseStore();
   const {
     user: { firstName, lastName, phone },
   } = store;
   const { handleSubmit, control, setValue } = useForm<UserStatuseUserProps>();
-  const { PROFILE_PATH } = useRouterStore();
   const { gs, getGlobalSettings } = useGlobalSettingsStore();
   const { lang } = useLocalesStore();
 
@@ -40,9 +36,9 @@ const ProfilePage: FunctionalComponent = () => {
   }, [store]);
 
   return (
-    <LeftNavigationLayout title={PROFILE}>
-      <div className="flex flex-col max-w-card-small">
-        <form className="flex flex-col max-w-card-small" onSubmit={handleSubmit(putUserAction) as any}>
+    <LeftNavigationLayout title={PROFILE_LANG}>
+      <div className="flex flex-col ">
+        <form className="flex flex-col max-w-72" onSubmit={handleSubmit(putUserAction) as any}>
           <InputControlled className="my-1" name="firstName" label="Имя" placeholder="Ваше имя" control={control} />
           <InputControlled
             className="my-1"
