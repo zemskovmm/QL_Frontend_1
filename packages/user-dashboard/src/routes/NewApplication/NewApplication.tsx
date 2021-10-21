@@ -10,9 +10,12 @@ import { MY_APPLICATIONS_TEMPLATE } from "stores/RouterStore";
 export const NewApplication: FunctionalComponent = () => {
     const {
         lang,
-        WHAT_SERVICES_LANG,
+        FIND_RENTAL_HOME,
+        GET_EDUCATION_LANG,
         GET_EDUCATION_COURSES_VISA_LANG, 
-        GO_TO_LANG,
+        GET_VISA_FRANCE,
+        TAKE_LANGUAGE_COURSES_LANG,
+        WHAT_SERVICES_LANG,
     } = useLocalesStore();
 
     const { addApplication } = useApplicationsState();
@@ -35,19 +38,19 @@ export const NewApplication: FunctionalComponent = () => {
             <div className="self-stretch flex flex-wrap justify-center">
                 <ApplicationCard 
                     id={ApplicationType.University} 
-                    title={"Получите профессиональное образование"}
+                    title={GET_EDUCATION_LANG}
                     onClick={handleClick}/>
                 <ApplicationCard 
                     id={ApplicationType.Course} 
-                    title={"Пройдите языковые курсы"}
+                    title={TAKE_LANGUAGE_COURSES_LANG}
                     onClick={handleClick}/>
                 <ApplicationCard 
                     id={ApplicationType.Housing} 
-                    title={"Найдите жилье для аренды"}
+                    title={FIND_RENTAL_HOME}
                     onClick={handleClick}/>
                 <ApplicationCard 
                     id={ApplicationType.Visa} 
-                    title={"Получили визу во Францию"}
+                    title={GET_VISA_FRANCE}
                     onClick={handleClick}/>
             </div>
         </div>
