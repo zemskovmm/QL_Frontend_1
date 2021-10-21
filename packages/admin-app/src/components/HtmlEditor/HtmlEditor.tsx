@@ -20,27 +20,30 @@ export const HtmlEditor: FunctionComponent<PropsType> = observer(({ className, d
       >
         {type ? "Edit on HTML" : "Edit on Editor"}
       </button>
-      <div className={`${HtmlPresenterStyle.text} ${className} ${type ? "" : "hidden"}`}>
-        <CKEditor
-          editor={DecoupledEditor}
-          data={data}
-          onChange={(event, editor) => {
-            onChange(editor.getData());
-          }}
-          onReady={(editor) => {
-            // Insert the toolbar before the editable area.
-            editor.ui
-              .getEditableElement()
-              .parentElement.insertBefore(editor.ui.view.toolbar.element, editor.ui.getEditableElement());
-          }}
+      {type ? (
+        <div className={`${HtmlPresenterStyle.text} ${className} ${type ? "" : "hidden"}`}>
+          <CKEditor
+            editor={DecoupledEditor}
+            data={data}
+            onChange={(event, editor) => {
+              onChange(editor.getData());
+            }}
+            onReady={(editor) => {
+              // Insert the toolbar before the editable area.
+              editor.ui
+                .getEditableElement()
+                .parentElement.insertBefore(editor.ui.view.toolbar.element, editor.ui.getEditableElement());
+            }}
+          />
+        </div>
+      ) : (
+        <textarea
+          value={data}
+          className={`flex border-2 border-indigo-600 outline-none ${!type ? "" : "hidden"}`}
+          style={{ minHeight: "200px" }}
+          onChange={(e) => onChange(e.target.value)}
         />
-      </div>
-      <textarea
-        value={data}
-        className={`flex border-2 border-indigo-600 outline-none ${!type ? "" : "hidden"}`}
-        style={{ minHeight: "200px" }}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      )}
     </div>
   );
 });
