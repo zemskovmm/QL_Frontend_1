@@ -1,53 +1,51 @@
 import React, { ReactNode } from "react";
-import { RouterLink, RouterState } from "mobx-state-router";
+import { RouterLink, RouterState, routerStateToUrl, RouterStore } from "mobx-state-router";
 import { RouteNames } from "src/routing/routes";
 import { AdminApi } from "../../clients/adminApiClient";
+import { useRootStore } from "../../utils/rootStoreUtils";
 
-const Navbar = () => (
-  <nav className="flex items-center justify-between w-full bg-blue-600 p-4">
-    <div className="flex items-center flex-shrink-0 text-white mr-4">
-      <span className="font-semibold text-xl tracking-tight">Quartier Latin Admin</span>
-    </div>
-    <div className=" block lg:flex lg:items-center mx-auto">
-      <div className="text-sm flex lg:flex-grow font-bold text-white flex-nowrap	">
-        <RouterLink routeName={RouteNames.pageList}>
-          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Pages</a>
-        </RouterLink>
-        <RouterLink routeName={RouteNames.fileList}>
-          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Files</a>
-        </RouterLink>
-        <RouterLink routeName={RouteNames.traitList}>
-          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Traits</a>
-        </RouterLink>
-        <RouterLink routeName={RouteNames.universityList}>
-          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Universities</a>
-        </RouterLink>
-        <RouterLink routeName={RouteNames.schoolList}>
-          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Schools</a>
-        </RouterLink>
-        <RouterLink routeName={RouteNames.courseList}>
-          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Coures</a>
-        </RouterLink>
-        <RouterLink routeName={RouteNames.globalSettingsEditor} params={{ lang: "en" }}>
-          <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10 whitespace-nowrap	">
-            Global settings
-          </a>
-        </RouterLink>
+const Navbar = () => {
+  const { loginStore: s } = useRootStore();
+  return (
+    <nav className="flex items-center justify-between w-full bg-blue-600 p-4">
+      <div className="flex items-center flex-shrink-0 text-white mr-4">
+        <span className="font-semibold text-xl tracking-tight">Quartier Latin Admin</span>
       </div>
-    </div>
-    <div className="flex items-center flex-shrink-0 text-white mr-4">
-      <button
-        className="font-semibold text-xl tracking-tight"
-        onClick={() => {
-          AdminApi.getLogout();
-          new RouterState(RouteNames.index);
-        }}
-      >
-        Logout
-      </button>
-    </div>
-  </nav>
-);
+      <div className=" block lg:flex lg:items-center mx-auto">
+        <div className="text-sm flex lg:flex-grow font-bold text-white flex-nowrap	">
+          <RouterLink routeName={RouteNames.pageList}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Pages</a>
+          </RouterLink>
+          <RouterLink routeName={RouteNames.fileList}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Files</a>
+          </RouterLink>
+          <RouterLink routeName={RouteNames.traitList}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Traits</a>
+          </RouterLink>
+          <RouterLink routeName={RouteNames.universityList}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Universities</a>
+          </RouterLink>
+          <RouterLink routeName={RouteNames.schoolList}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Schools</a>
+          </RouterLink>
+          <RouterLink routeName={RouteNames.courseList}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Coures</a>
+          </RouterLink>
+          <RouterLink routeName={RouteNames.globalSettingsEditor} params={{ lang: "en" }}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10 whitespace-nowrap	">
+              Global settings
+            </a>
+          </RouterLink>
+        </div>
+      </div>
+      <div className="flex items-center flex-shrink-0 text-white mr-4">
+        <button className="font-semibold text-xl tracking-tight" onClick={() => s.logOut()}>
+          Logout
+        </button>
+      </div>
+    </nav>
+  );
+};
 
 type Props = {
   children?: ReactNode;

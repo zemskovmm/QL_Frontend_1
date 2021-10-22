@@ -1,16 +1,11 @@
-import React, { useState } from "react";
-import { PageEditorStore } from "src/components/pageEditor/PageEditorStore";
-import { PageEditor } from "src/components/pageEditor/PageEditor";
-import { RouterLink } from "mobx-state-router";
-import { RouteNames } from "src/routing/routes";
-import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
+import React from "react";
 import { useRootStore } from "../utils/rootStoreUtils";
 import { useObserver } from "mobx-react";
 
 export const IndexPage = () => {
   const { loginStore: s } = useRootStore();
   return useObserver(() => (
-    <div className={`w-6/12 mx-auto my-12`}>
+    <div className={`w-6/12 m-auto `}>
       <div className={`flex flex-col`}>
         <input
           type="text"
@@ -28,7 +23,7 @@ export const IndexPage = () => {
           <input type="checkbox" checked={!s.rememberMe} onChange={(e) => (s.rememberMe = !e.target.checked)} />
           <span>don't remember me</span>
         </label>
-        <button onClick={() => s.save()}>login</button>
+        <button onClick={async () => await s.logIn()}>login</button>
       </div>
     </div>
   ));
