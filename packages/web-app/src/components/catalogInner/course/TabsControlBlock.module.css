@@ -56,6 +56,9 @@
     border-radius: 3px;
   }
 
+  .tabs > div > div.active:after {
+    width: 0%;
+  }
 
   .content {
     display: none;

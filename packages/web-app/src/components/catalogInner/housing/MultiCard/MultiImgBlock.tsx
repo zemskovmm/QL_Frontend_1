@@ -11,9 +11,10 @@ interface MultiImgBlockProps {
   title: string;
   city: string;
   location: LocationDto;
+  price: number | string;
 }
 
-export const MultiImgBlock: FC<MultiImgBlockProps> = ({ img, text, title, city, location }) => {
+export const MultiImgBlock: FC<MultiImgBlockProps> = ({ img, text, title, city, location, price }) => {
   const [current, setCurrent] = useState(img[0]);
 
   return (
@@ -61,7 +62,7 @@ export const MultiImgBlock: FC<MultiImgBlockProps> = ({ img, text, title, city, 
           </span>
           <span className={style.multiImg__contentPrice}>
             <b>
-              <LocalizedText id={"catalogItems_price_upto"} /> 40 <LocalizedText id={"catalogItems_price_value"} />
+              <LocalizedText id={"catalogItems_price_upto"} /> {price} <LocalizedText id={"catalogItems_price_value"} />
             </b>{" "}
             / <LocalizedText id={"catalogItems_price_month"} />
           </span>

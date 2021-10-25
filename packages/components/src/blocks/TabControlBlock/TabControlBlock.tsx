@@ -40,7 +40,7 @@ const TabControl = ({ tabs }: TabControlBlockProps) => {
         <div className="flex flex-col  mx-auto">
           {tabs.map((tab, ind) => (
             <div key={ind} onClick={() => setActiveTab(ind)}>
-              <div className={cn(ind === activeTab ? styles.active : "")}>{tab.title}</div>
+              <div className={cn(ind === activeTab ? styles.active : "", styles.mobileTitle)}>{tab.title}</div>
 
               <div>{activeTab === ind ? <RowsPresenter rows={tabs[effectiveActiveTab].rows} /> : null}</div>
             </div>

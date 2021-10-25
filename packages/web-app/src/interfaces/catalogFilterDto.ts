@@ -40,8 +40,7 @@ export interface CatalogCourseDto {
   url: string;
   name: string;
   logoId: number;
-  priceFrom: number;
-  priceTo: number;
+  price: number;
   term: string;
   schoolName: string;
 }

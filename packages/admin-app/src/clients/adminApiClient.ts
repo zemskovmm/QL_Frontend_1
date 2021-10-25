@@ -26,7 +26,10 @@ export class AdminApiClient extends ApiClientBase {
   getGlobalSettings = (lang: string) => this.sendRequest<GlobalSettingsDto>(`global/ql/${lang}`);
   putGlobalSettings = (lang: string, data: any) =>
     this.sendRequest<GlobalSettingsDto>(`admin/global/ql/${lang}`, data, "PUT");
-
+  postLogin = (data: { username: string; password: string; rememberMe: boolean }) =>
+    this.sendRequest("admin/auth/login", data, "POST");
+  getCheck = () => this.sendRequest("admin/auth/check");
+  getLogout = () => this.sendRequest("admin/auth/logout");
   /* Trait */
 
   getTraitTypeList = () => this.sendRequest<AdminTraitTypeDto[]>("admin/trait-types");

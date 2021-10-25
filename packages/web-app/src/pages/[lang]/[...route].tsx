@@ -18,7 +18,7 @@ const GetModule = (props: ClientRouteDto) => {
   if (props.moduleName == "university") return <UniversityModule {...props.module} />;
   if (props.moduleName == "school") return <SchoolModule {...props.module} urls={urls[lang]} />;
   if (props.moduleName == "housing") return <HousingModule {...props.module} />;
-  if (props.moduleName == "course") return <CourseModule {...props.module} />;
+  if (props.moduleName == "schoolAndCourse") return <CourseModule {...props.module} urls={urls[lang]} />;
   if (props.moduleName == "schoolAndCourseList") return <SchoolAndCourseModule {...props.module} urls={urls[lang]} />;
   return <div>Error: unknown module {name}</div>;
 };

@@ -6,7 +6,7 @@ import cn from "classnames";
 import styles from "../catalogInner/course/TabsControlBlock.module.css";
 import React from "react";
 import Link from "next/link";
-import { ClientSchoolAndCourseDto } from "../../interfaces/clientSchoolAndCourseDto";
+import { ClientSchoolAndCourseListDto } from "../../interfaces/clientSchoolAndCourseDto";
 import style from "../catalog/style/catalogView.module.css";
 import { Catalog } from "../catalog/catalog";
 import { CatalogUniversityDto } from "../../interfaces/catalogFilterDto";
@@ -14,7 +14,7 @@ import { UniversityCatalogElement } from "../catalog/catalogElement";
 import { CatalogView } from "../catalog/catalogView";
 import { CourseCatalogElement } from "src/components/catalog/catalogElement";
 
-export const SchoolAndCourseModule = (props: ClientSchoolAndCourseDto) => {
+export const SchoolAndCourseModule = (props: ClientSchoolAndCourseListDto) => {
   const lang = useIntl().locale;
   const intl = useIntl();
   return (
@@ -74,7 +74,7 @@ export const SchoolAndCourseModule = (props: ClientSchoolAndCourseDto) => {
             </Link>
           </div>
         </div>
-        <div className={`max-w-screen-xl w-full mx-auto my-10 px-10`}>
+        <div className={`max-w-screen-xl w-full mx-auto my-10 px-14`}>
           <div className={`mb-8`}>Вы сможете забронировать вариант проживания в процессе покупки курса</div>
           <div className={`w-6/12`}>
             {props.courses.map((el) => (

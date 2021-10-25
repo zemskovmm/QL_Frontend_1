@@ -1,0 +1,27 @@
+﻿.loginBoard{
+  border: 1px solid black;
+  padding: 50px;
+  background: white;
+  border-radius: 6px;
+}
+
+
+.loginBoard__input{
+  width: 100%;
+  padding: 0 15px;
+  font-size: 14px;
+  line-height: 36px;
+  background: #FFFFFF;
+  border: 2px solid #EFF3FA;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.loginBoard__input::placeholder{
+  color: #646F83;
+}
+
+.loginBoard__input:focus{
+  outline: none;
+  border: 2px solid #567DD0;
+}

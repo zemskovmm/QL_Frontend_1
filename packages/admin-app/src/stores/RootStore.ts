@@ -26,6 +26,7 @@ import {
 import { CreateTraitTypePageStore, EditTraitTypePageStore } from "./pages/trait/createTraitTypePageStore";
 import { GlobalSettingsPageStore } from "./pages/globalSettings/globalSettingsPageStore";
 import { FormEditorPageStore } from "../pages/globalSetting/formEditorPage/FormEditorPageStore";
+import { LoginStore } from "./pages/login/login";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -34,6 +35,7 @@ export class RootStore {
   @observable pageTraitEditPage = new PageTraitEditPageStore(this);
   @observable globalSettingsPage = new GlobalSettingsPageStore(this);
   @observable formEditorPage = new FormEditorPageStore(this);
+  @observable loginStore = new LoginStore(this);
 
   @observable traitListPage = new TraitListPageStore(this);
   @observable traitPage = new TraitPageStore(this);
