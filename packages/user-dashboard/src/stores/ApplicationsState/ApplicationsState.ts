@@ -4,7 +4,7 @@ import { ApplicationsPropsReq, personalApi } from "api/PersonalApi";
 import { notificationStore } from "stores/NotificationStore";
 import { ApplicationDto, ApplicationType, APPLICATION_DTO_DEFAULT } from "@project/components/src/interfaces/ApplicationDto";
 
-export const TOTAL_APPLICATIONS = 5;
+export const TOTAL_APPLICATIONS = 20;
 
 interface ApplicationsState {
     isLoading: boolean;
