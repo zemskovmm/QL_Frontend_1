@@ -6,7 +6,13 @@ export const IndexPage = () => {
   const { loginStore: s } = useRootStore();
   return useObserver(() => (
     <div className={`w-6/12 m-auto `}>
-      <div className={`flex flex-col`}>
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          await s.logIn();
+        }}
+        className={`flex flex-col`}
+      >
         <input
           type="text"
           placeholder={`username`}
@@ -14,17 +20,17 @@ export const IndexPage = () => {
           onChange={(e) => (s.username = e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           placeholder={`password`}
           value={s.password}
           onChange={(e) => (s.password = e.target.value)}
         />
         <label>
           <input type="checkbox" checked={!s.rememberMe} onChange={(e) => (s.rememberMe = !e.target.checked)} />
-          <span>don't remember me</span>
+          <span className={`ml-3`}>don't remember me</span>
         </label>
-        <button onClick={async () => await s.logIn()}>login</button>
-      </div>
+        <button>login</button>
+      </form>
     </div>
   ));
 };

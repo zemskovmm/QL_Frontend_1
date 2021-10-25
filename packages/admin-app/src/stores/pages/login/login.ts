@@ -13,7 +13,13 @@ export class LoginStore extends RequestTracking {
     super();
   }
 
-  async logIn() {
+  @action reset() {
+    this.username = "";
+    this.password = "";
+    this.rememberMe = true;
+  }
+
+  @action async logIn() {
     const data = {
       username: this.username,
       password: this.password,
@@ -21,18 +27,28 @@ export class LoginStore extends RequestTracking {
     };
     try {
       await AdminApi.postLogin(data);
+      this.reset();
       await this.rootStore.routerStore.goTo(RouteNames.pageList);
     } catch (e) {
       alert(e);
     }
   }
 
-  async logOut() {
+  @action async logOut() {
     try {
       const req = await AdminApi.getLogout();
       await this.rootStore.routerStore.goTo(RouteNames.index);
     } catch (e) {
-      alert(e);
+      await this.rootStore.routerStore.goTo(RouteNames.index);
+    }
+  }
+
+  @action async check() {
+    try {
+      const req = await AdminApi.getCheck();
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }
