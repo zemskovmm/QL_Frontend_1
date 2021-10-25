@@ -18,9 +18,10 @@ import { UniversityCreatePage } from "../pages/university/universityCreatePage";
 import { UniversityTraitEditorPage } from "../pages/university/universityTraitEditPage";
 import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } from "../pages/school/page";
 import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "../pages/course/page";
+import { NotFoundPage } from "../pages/NotFounds/NotFoundPage";
 
 export enum RouteNames {
-  notFound = "admin-not-found",
+  notFound = "not-found",
   index = "index",
   pageList = "admin-pageList",
   editPage = "admin-editPage",
@@ -54,11 +55,11 @@ export enum RouteNames {
 }
 
 export const AnonRouteViewMap = {
+  [RouteNames.notFound]: <NotFoundPage />,
   [RouteNames.index]: <IndexPage />,
 };
 
 export const AdminRouteViewMap = {
-  [RouteNames.notFound]: <div>404 - not found</div>,
   [RouteNames.newPage]: <PageEditorPage />,
   [RouteNames.editPage]: <PageEditorPage />,
   [RouteNames.pageList]: <PageListPage />,
@@ -92,6 +93,11 @@ export const AdminRouteViewMap = {
 
 export const AnonRoutes: Route[] = convertRoutes([
   {
+    pattern: "/not-found",
+    name: RouteNames.notFound,
+    hooks: [UserAuthorizedOnlyHook],
+  },
+  {
     pattern: "/",
     name: RouteNames.index,
     hooks: [UserAuthorizedHook],
@@ -100,11 +106,6 @@ export const AnonRoutes: Route[] = convertRoutes([
 ]);
 
 export const AdminRoutes: Route[] = convertRoutes([
-  {
-    pattern: "/not-found",
-    name: RouteNames.notFound,
-    hooks: [UserAuthorizedOnlyHook],
-  },
   {
     pattern: "/global-settings/:lang",
     name: RouteNames.globalSettingsEditor,
