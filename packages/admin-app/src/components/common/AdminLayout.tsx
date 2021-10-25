@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react";
-import { RouterLink, RouterState, routerStateToUrl, RouterStore } from "mobx-state-router";
-import { RouteNames } from "src/routing/routes";
-import { AdminApi } from "../../clients/adminApiClient";
+import { RouterLink } from "mobx-state-router";
 import { useRootStore } from "../../utils/rootStoreUtils";
+import { RouteNames } from "../../routing/routes";
 
 const Navbar = () => {
   const { loginStore: s } = useRootStore();
@@ -49,10 +48,9 @@ const Navbar = () => {
 
 type Props = {
   children?: ReactNode;
-  title?: string;
 };
 
-const AdminLayout = ({ children, title = "This is the default title" }: Props) => (
+const AdminLayout = ({ children }: Props) => (
   <div>
     <header>
       <Navbar />

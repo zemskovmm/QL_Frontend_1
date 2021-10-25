@@ -1,61 +1,64 @@
 import React from "react";
-import { Route, RouterState } from "mobx-state-router";
+import { Route } from "mobx-state-router";
 import { convertRoutes } from "./route";
-import { IndexPage } from "src/pages/indexPage";
-import { PageEditorPage } from "src/pages/page/pageEditorPage";
-import { PageListPage } from "src/pages/page/pageListPage";
+import { IndexPage } from "src/pages/LoginPage/indexPage";
+import { UserAuthorizedHook, UserAuthorizedOnlyHook } from "./routehooks";
+import { PageEditorPage } from "../pages/page/pageEditorPage";
+import { PageListPage } from "../pages/page/pageListPage";
 import { PageTraitEditorPage } from "../pages/page/pageTraitEditPage";
-import { FilesPage } from "src/pages/files/filesPage";
+import { AdminGlobalSettingEditor } from "../pages/globalSetting/page";
+import { FilesPage } from "../pages/files/filesPage";
 import { TraitListPage } from "../pages/trait/traitListPage";
 import { TraitPage } from "../pages/trait/traitPage";
 import { NewTraitPage, TraitItemPage } from "../pages/trait/traitItemPage";
+import { TraitTypeEditPage, TraitTypeNewPage } from "../pages/trait/traitTypeNewPage";
 import { UniversityListPage } from "../pages/university/universityListPage";
 import { UniversityPage } from "../pages/university/universityPage";
 import { UniversityCreatePage } from "../pages/university/universityCreatePage";
 import { UniversityTraitEditorPage } from "../pages/university/universityTraitEditPage";
 import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } from "../pages/school/page";
 import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "../pages/course/page";
-import { TraitTypeEditPage, TraitTypeNewPage } from "../pages/trait/traitTypeNewPage";
-import { AdminGlobalSettingEditor } from "../pages/globalSetting/page";
-import { RootStore } from "../stores/RootStore";
 
 export enum RouteNames {
-  notFound = "not-found",
+  notFound = "admin-not-found",
   index = "index",
-  pageList = "pageList",
-  editPage = "editPage",
-  newPage = "newPage",
-  pageTraitEditPage = "pageTraitEditPage",
-  globalSettingsEditor = "globalSettingsEditor",
+  pageList = "admin-pageList",
+  editPage = "admin-editPage",
+  newPage = "admin-newPage",
+  pageTraitEditPage = "admin-pageTraitEditPage",
+  globalSettingsEditor = "admin-globalSettingsEditor",
 
-  fileList = "fileList",
+  fileList = "admin-fileList",
 
-  traitList = "traitList",
-  traitTypeCreate = "traitTypeCreate",
-  traitTypeEdit = "traitTypeEdit",
-  traitPage = "traitPage",
-  traitCreate = "traitCreate",
-  traitItemPage = "traitItemPage",
+  traitList = "admin-traitList",
+  traitTypeCreate = "admin-traitTypeCreate",
+  traitTypeEdit = "admin-traitTypeEdit",
+  traitPage = "admin-traitPage",
+  traitCreate = "admin-traitCreate",
+  traitItemPage = "admin-traitItemPage",
 
-  universityList = "universityList",
-  universityPage = "universityPage",
-  universityCreatePage = "universityCreatePage",
-  universityTraitEditPage = "universityTraitEditPage",
+  universityList = "admin-universityList",
+  universityPage = "admin-universityPage",
+  universityCreatePage = "admin-universityCreatePage",
+  universityTraitEditPage = "admin-universityTraitEditPage",
 
-  schoolList = "schoolList",
-  schoolPage = "schoolPage",
-  schoolCreate = "schoolCreate",
-  schoolTraitEditor = "schoolTraitEditor",
+  schoolList = "admin-schoolList",
+  schoolPage = "admin-schoolPage",
+  schoolCreate = "admin-schoolCreate",
+  schoolTraitEditor = "admin-schoolTraitEditor",
 
-  courseList = "courseList",
-  coursePage = "coursePage",
-  courseCreate = "courseCreate",
-  courseTraitEditor = "courseTraitEditor",
+  courseList = "admin-courseList",
+  coursePage = "admin-coursePage",
+  courseCreate = "admin-courseCreate",
+  courseTraitEditor = "admin-courseTraitEditor",
 }
 
-export const RouteViewMap = {
-  [RouteNames.notFound]: <div>404 - not found</div>,
+export const AnonRouteViewMap = {
   [RouteNames.index]: <IndexPage />,
+};
+
+export const AdminRouteViewMap = {
+  [RouteNames.notFound]: <div>404 - not found</div>,
   [RouteNames.newPage]: <PageEditorPage />,
   [RouteNames.editPage]: <PageEditorPage />,
   [RouteNames.pageList]: <PageListPage />,
@@ -87,29 +90,20 @@ export const RouteViewMap = {
   [RouteNames.courseTraitEditor]: <CourseTraitEditorPage />,
 };
 
-export interface RouteTransitionHook {
-  (root: RootStore, next: () => Promise<void>, to: RouterState, from: RouterState): Promise<void> | void;
-}
-
-export const UserAuthorizedOnlyHook: RouteTransitionHook = async (root) => {
-  if (!(await root.loginStore.check())) throw new RouterState(RouteNames.index);
-};
-
-export const UserAuthorizedHook: RouteTransitionHook = async (root) => {
-  if (await root.loginStore.check()) throw new RouterState(RouteNames.pageList);
-};
-
-export const Routes: Route[] = convertRoutes([
-  {
-    pattern: "/not-found",
-    name: RouteNames.notFound,
-    hooks: [UserAuthorizedOnlyHook],
-  },
+export const AnonRoutes: Route[] = convertRoutes([
   {
     pattern: "/",
     name: RouteNames.index,
     hooks: [UserAuthorizedHook],
     onEnter: (root) => root.loginStore.reset(),
+  },
+]);
+
+export const AdminRoutes: Route[] = convertRoutes([
+  {
+    pattern: "/not-found",
+    name: RouteNames.notFound,
+    hooks: [UserAuthorizedOnlyHook],
   },
   {
     pattern: "/global-settings/:lang",
@@ -266,3 +260,5 @@ export const Routes: Route[] = convertRoutes([
     onEnter: async (root, to) => await root.courseTraitEditor.loadStore(Number(to.params.id)),
   },
 ]);
+
+export const Routes: Route[] = AnonRoutes.concat(AdminRoutes);
