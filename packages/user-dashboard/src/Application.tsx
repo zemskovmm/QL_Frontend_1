@@ -23,9 +23,9 @@ import { isSecureUrl } from "stores/RouterStore/_utils";
 import SettingsPage from "routes/SettingsPage";
 import { useLocalesStore } from "stores/LocalesStore";
 import { changeLangInUrl, DEFAULT_LANG, urlToLang } from "locales/utils";
-import { HostLayout } from "layouts/HostLayout";
 import NewApplication from "routes/NewApplication";
 import MyApplicationsPage from "routes/MyApplicationsPage";
+import { HostLayout } from "@project/components/src/FormBuilderBlocks/HostLayout";
 
 export const Application: FunctionalComponent = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
@@ -70,7 +70,7 @@ export const Application: FunctionalComponent = () => {
             <ProfilePage path={PROFILE_TEMPLATE.path} />
             <SignUpPage path={SIGN_UP_TEMPLATE.path} />
             <SignInPage path={SIGN_IN_TEMPLATE.path} />
-            <Route component={MyApplicationsPage}  path={MY_APPLICATIONS_TEMPLATE.path} />
+            <Route component={MyApplicationsPage} path={MY_APPLICATIONS_TEMPLATE.path} />
             <NewApplication path={NEW_APPLICATION_TEMPLATE.path} />
             <SettingsPage path={SETTINGS_TEMPLATE.path} />
             <NotFoundPage default />

@@ -10,20 +10,20 @@ import { useRouterStore } from "stores/RouterStore";
 import { LeftNavigationLayout } from "layouts/LeftNavigationLayout";
 import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
 import { RowsPresenter } from "@project/components/src/blocks";
-import { ComponentHostDashboardContext } from "layouts/HostLayout";
 import { Preload } from "@project/components/src/ui-kit/Preload";
 import PRELOAD_ICON from "assets/images/preload.gif";
+import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
 
 const ProfilePage: FunctionalComponent = () => {
   const cl = useContext(ComponentHostDashboardContext);
-  const {PROFILE_LANG } = useLocalesStore();
+  const { PROFILE_LANG } = useLocalesStore();
   const { putUserAction, isLoading } = useProfileStore();
   const store = useUserStatuseStore();
   const {
     user: { firstName, lastName, phone },
   } = store;
   const { handleSubmit, control, setValue } = useForm<UserStatuseUserProps>();
-  const { isLoading:isLoadingGS, gs, getGlobalSettings } = useGlobalSettingsStore();
+  const { isLoading: isLoadingGS, gs, getGlobalSettings } = useGlobalSettingsStore();
   const { lang } = useLocalesStore();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const ProfilePage: FunctionalComponent = () => {
 
   return (
     <LeftNavigationLayout title={PROFILE_LANG}>
-      <Preload isLoading={isLoading||isLoadingGS} color="white">
+      <Preload isLoading={isLoading || isLoadingGS} color="white">
         <div className="flex flex-col p-4">
           <form className="flex flex-col max-w-72" onSubmit={handleSubmit(putUserAction) as any}>
             <InputControlled className="my-1" name="firstName" label="Имя" placeholder="Ваше имя" control={control} />
@@ -58,7 +58,7 @@ const ProfilePage: FunctionalComponent = () => {
               control={control}
               type="tel"
             />
-            {gs && <RowsPresenter rows={gs?.personalCabinet["profile"].form.pageData.rows ?? []}/>}
+            {gs && <RowsPresenter rows={gs?.personalCabinet["profile"].form.pageData.rows ?? []} />}
             <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} />
           </form>
         </div>

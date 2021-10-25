@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
 import { useContext, useState } from "preact/hooks";
-import { ComponentHostDashboardContext } from "user-dashboard/src/layouts/HostLayout";
+import { ComponentHostDashboardContext } from "../HostLayout";
 
 export interface BasicInputFileListBlockElement {
   id: string;

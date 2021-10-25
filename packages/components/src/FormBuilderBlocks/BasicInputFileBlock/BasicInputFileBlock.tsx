@@ -2,7 +2,7 @@ import React from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
 import { useContext } from "preact/hooks";
-import { ComponentHostDashboardContext } from "user-dashboard/src/layouts/HostLayout";
+import { ComponentHostDashboardContext } from "../HostLayout";
 
 export interface BasicInputFileBlockElement {
   id: string;
@@ -21,7 +21,7 @@ export const BasicInputFileBlock = (props: BasicInputFileBlockElement) => {
           type="file"
           value={cl?.personalInfo[props.id]}
           onChange={(e) => {
-            cl!.personalInfo[props.id] = new FormData().append("file", e.target.files![0]);
+            cl!.personalInfo[props.id] = e.target.files![0];
             console.log(cl?.personalInfo[props.id]);
           }}
         />
