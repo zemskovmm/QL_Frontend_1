@@ -1,5 +1,4 @@
-import React, { FunctionComponent } from "react";
-import { ReactNode } from "react";
+import React, { FunctionComponent,CSSProperties,ReactNode } from "react";
 import { Text } from "../Text";
 
 export type ListItemPropsType = {
@@ -7,9 +6,10 @@ export type ListItemPropsType = {
     text: string;
     onClick: (id:string)=>void;
     depth: number;
+    style?:CSSProperties;
 }
 
-export const ListItem:FunctionComponent<ListItemPropsType> = ({depth,id,text,onClick})=>{
+export const ListItem:FunctionComponent<ListItemPropsType> = ({depth,id,text,onClick,style})=>{
 
     const handleClick = () => {
         onClick(id);
@@ -21,7 +21,7 @@ export const ListItem:FunctionComponent<ListItemPropsType> = ({depth,id,text,onC
     }
 
     return (
-        <div className="flex border px-2" onClick={handleClick}>
+        <div className="flex border px-2" onClick={handleClick} style={style} >
             {ofset}<Text text={text}/>
         </div>
     )
