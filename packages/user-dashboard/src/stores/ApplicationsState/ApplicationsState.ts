@@ -1,23 +1,22 @@
-import { createMap, updateKey } from 'nanostores'
+import { createMap } from 'nanostores'
 import { useStore } from "nanostores/preact";
 import { ApplicationsPropsReq, personalApi } from "api/PersonalApi";
 import { notificationStore } from "stores/NotificationStore";
 import { ApplicationDto, ApplicationType, APPLICATION_DTO_DEFAULT } from "@project/components/src/interfaces/ApplicationDto";
 
-export const TOTAL_APPLICATIONS = 100;
+export const TOTAL_APPLICATIONS = 20;
 
 interface ApplicationsState {
     isLoading: boolean;
-    applications: Array<ApplicationDto>
-    applicationId: number;
+    applications: Array<ApplicationDto|undefined>
 }
 
 const createApplicationsState = ()=>{
+    let loadedPages:Array<boolean> = [];
     const store = createMap<ApplicationsState>(() => {
         store.set({
             isLoading: false,
             applications: [],
-            applicationId: 0,
         })
     })
 
@@ -33,6 +32,7 @@ const createApplicationsState = ()=>{
         const {isOk,body,error} = result
         if(isOk){
             outApplicationId= body?.id || 0;
+            getApplications();
         }else{
             notificationStore.addErrorAction(error);
         }
@@ -41,23 +41,41 @@ const createApplicationsState = ()=>{
         return outApplicationId;
     }
 
-    const getApplications = async (data:ApplicationsPropsReq) => {
+    const getApplications = ()=>{
+        loadedPages=[];
+        onItemRender(0);
+    }
+    
+    const onItemRender = async (index: number) => {
+        console.log("index",index)
+        const pageIndex = Math.floor(index/TOTAL_APPLICATIONS);
+        if(loadedPages[pageIndex]){
+            return;
+        }
+        loadedPages[pageIndex]=true;
+        const data:ApplicationsPropsReq = {
+            page:pageIndex,
+            pageSize:TOTAL_APPLICATIONS,
+            type:"",
+            status:"",
+        }
         store.setKey('isLoading',true);
         const result = await personalApi.getApplications(data);
         const {isOk,body,error} = result
         if(isOk){
-            const applications = body?.items || [];
-            updateKey(store, "applicationId",(applicationId)=>{
-                if(applications.length === 0){
-                    return 0;
+            console.log("body",body)
+            let applications:Array<ApplicationDto|undefined> = store.value?.applications || [];
+            if(body){
+                if(applications.length !== body.totalItems){
+                    applications = new Array(body.totalItems);
                 }
-                for(let {id} of applications){
-                    if(applicationId === id){
-                        return applicationId
-                    }
-                }
-                return applications[0].id;
-            });
+                body.items.forEach((item,index)=>{
+                    applications[TOTAL_APPLICATIONS*pageIndex + index] = item;
+                })
+            }else{
+                applications=[];
+                loadedPages=[];
+            }
             store.setKey( "applications", applications )
         }else{
             notificationStore.addErrorAction(error);
@@ -66,7 +84,7 @@ const createApplicationsState = ()=>{
         store.setKey('isLoading',false);
     }
 
-    return { store, getApplications, addApplication }
+    return { store, onItemRender, getApplications, addApplication }
 }
 
 const applicationsState = createApplicationsState();
