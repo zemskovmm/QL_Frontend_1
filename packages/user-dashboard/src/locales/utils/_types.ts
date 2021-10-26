@@ -1,6 +1,7 @@
 
 export type Translate={
     APPLICATION_LANG: string;
+    APPLICATION_TYTLES_LANG: {[key:string]:string};
     CHAT_LANG: string;
     FIND_RENTAL_HOME: string;
     GET_EDUCATION_LANG: string;
@@ -13,6 +14,7 @@ export type Translate={
     SETTINGS_LANG: string;
     TAKE_LANGUAGE_COURSES_LANG: string;
     WHAT_SERVICES_LANG: string;
+    
 }
 
 export type LangsTranslate = {

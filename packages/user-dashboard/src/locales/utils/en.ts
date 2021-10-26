@@ -1,7 +1,14 @@
+import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
 import { Translate } from "./_types";
 
 export const en: Translate = {
     APPLICATION_LANG: "Application",
+    APPLICATION_TYTLES_LANG: {
+        [ApplicationType.Course]: "Application for passing the COURSE from :date",
+        [ApplicationType.Housing]: "Application for HOUSING from :date",
+        [ApplicationType.University]: "Application for EDUCATION from :date",
+        [ApplicationType.Visa]: "VISA application from :date",
+    },
     CHAT_LANG: "Chat",
     FIND_RENTAL_HOME: "Find a rental home",
     GET_EDUCATION_LANG: "Get professional education",

@@ -27,6 +27,7 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
 
     const {
         lang,
+        APPLICATION_TYTLES_LANG,
         PROFILE_LANG,
         MY_APPLICATIONS_LANG,
         SETTINGS_LANG,
@@ -53,9 +54,13 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
         const row = applications[index];
         if(row){
             const {id,type,status} = row;
+            const date:Date = new Date() //TODO После добавления даты, получать с сервера
+            console.log("APPLICATION_TYTLES_LANG",type,APPLICATION_TYTLES_LANG)
             return {
                 id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:id.toString()}), 
-                text:`${id}${type} ${status}` 
+                text:(APPLICATION_TYTLES_LANG[type]||type.toString()).replace(":date",
+                    date.toLocaleDateString()
+                )
             }
         }
     }
