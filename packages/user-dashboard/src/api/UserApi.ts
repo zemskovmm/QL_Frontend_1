@@ -14,6 +14,7 @@ export type QlClientUserProps = {
   firstName: string|null;
   lastName: string|null;
   phone: string|null;
+  email?: string|null;
   personalInfo: any|null;
 };
 

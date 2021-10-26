@@ -47,7 +47,6 @@ const createApplicationsState = ()=>{
     }
     
     const onItemRender = async (index: number) => {
-        console.log("index",index)
         const pageIndex = Math.floor(index/TOTAL_APPLICATIONS);
         if(loadedPages[pageIndex]){
             return;
@@ -63,7 +62,6 @@ const createApplicationsState = ()=>{
         const result = await personalApi.getApplications(data);
         const {isOk,body,error} = result
         if(isOk){
-            console.log("body",body)
             let applications:Array<ApplicationDto|undefined> = store.value?.applications || [];
             if(body){
                 if(applications.length !== body.totalItems){

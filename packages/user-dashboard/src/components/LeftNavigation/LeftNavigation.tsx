@@ -1,25 +1,29 @@
-import { InfinityList, List, ListItemType } from "@project/components/src/ui-kit/List";
+import { InfinityList, ListItem, ListItemType } from "@project/components/src/ui-kit/List";
 import { FunctionalComponent } from "preact";
 import { memo } from "preact/compat";
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { route } from "preact-router";
 import { useLocalesStore } from "stores/LocalesStore";
 import { MY_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
-
-import { TOTAL_APPLICATIONS, useApplicationsState } from "stores/ApplicationsState";
-import { ApplicationDto } from "@project/components/src/interfaces/ApplicationDto";
-import { Button } from "@project/components/src/ui-kit/Button";
-import { Link } from "preact-router/match";
+import { useApplicationsState } from "stores/ApplicationsState";
+import { Link } from "preact-router";
+import { useUserStatuseStore } from "stores/UserStatuseStore";
+import { Text } from "@project/components/src/ui-kit/Text";
+import { IconLabel } from "@project/components/src/ui-kit/IconLabel";
+import USER_ICON from "@project/components/src/assets/icons/user.svg";
 
 type PropsType = {
     className?: string;
 }
 
 export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className}) => {
+    const {url} = useRouterStore()
+    const [isApplicationsOpen,setApplicationsOpen] = useState(false);
     const {
         PROFILE_PATH,
         SETTINGS_PATH,
     } = useRouterStore();
+    const { user:{email,firstName,lastName} } = useUserStatuseStore();
 
     const {
         lang,
@@ -38,40 +42,48 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
         getApplications();
     },[])
 
-    const myApplicationsList:Array<ListItemType> = applications.map((applications,index)=>{
-        if(applications){
-            const {id,type,status} = applications;
+    useEffect(()=>{
+        if(MY_APPLICATIONS_TEMPLATE.isUrl(url)){
+            setApplicationsOpen(true);
+        }
+    },[url])
+
+    const handleItemRender = (index:number):ListItemType|undefined=>{
+        onItemRender(index);
+        const row = applications[index];
+        if(row){
+            const {id,type,status} = row;
             return {
                 id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:id.toString()}), 
                 text:`${id}${type} ${status}` 
             }
         }
-        return {
-            id:`Loading-${index}`, 
-            text:'Loading...' 
-        }
-    });
-
-    // const items:Array<ListItemType> = [
-    //     {depth:0, id:PROFILE_PATH, text:PROFILE_LANG },
-    //     {depth:0, id:MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:"0"}), text:MY_APPLICATIONS_LANG},
-    //     ...myApplicationsList,
-    //     {depth:0, id:SETTINGS_PATH, text:SETTINGS_LANG },
-    // ]
+    }
 
     const handleClick = (id:string) => {
         route(id);
     }
 
-    return (<div className="flex flex-col">
-        <Link href={PROFILE_PATH}><button>PROFILE_LANG</button></Link>
-        <button>MY_APPLICATIONS_LANG</button>
-        <InfinityList 
-            className="flex-grow" 
-            items={myApplicationsList} 
-            onClick={handleClick}
-            onItemRender={onItemRender}
-        />
-        <Link href={SETTINGS_PATH}><button>SETTINGS_LANG</button></Link>
+    return (<div className={`relative h-full ${className}`}>
+        <div className="absolute p-4 h-full w-full top-0 left-0 flex flex-col">
+            <IconLabel 
+                className="mt-5 mb-8"
+                iconSrc={USER_ICON}
+                text={`${lastName} ${firstName}`}
+                subText={email}
+            />
+            <Link href={PROFILE_PATH}><ListItem id={PROFILE_PATH} text={PROFILE_LANG}/></Link>
+            <ListItem id="MY_APPLICATIONS_LANG" text={MY_APPLICATIONS_LANG} onClick={()=>{setApplicationsOpen(!isApplicationsOpen)}}/>
+
+            {isApplicationsOpen && <InfinityList 
+                depth={1}
+                className="flex-shrink" 
+                count={applications.length} 
+                onClick={handleClick}
+                onItemRender={handleItemRender}
+            />}
+
+            <Link href={SETTINGS_PATH}><ListItem id={SETTINGS_PATH} text={SETTINGS_LANG}/></Link>
+        </div>
     </div>);
 });
