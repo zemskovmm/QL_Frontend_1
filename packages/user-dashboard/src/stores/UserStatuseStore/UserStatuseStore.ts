@@ -12,6 +12,7 @@ export type UserStatuseUserProps = {
   firstName: string;
   lastName: string;
   phone: string;
+  email: string;
   personalInfo: any;
 };
 
@@ -19,6 +20,7 @@ const EMPTY_USER: UserStatuseUserProps = {
   firstName: "",
   lastName: "",
   phone: "",
+  email: "",
   personalInfo: {},
 };
 
@@ -76,6 +78,7 @@ const createUserStatuseStore = () => {
         lastName: user.lastName || "",
         firstName: user.firstName || "",
         phone: user.phone || "",
+        email:user.email || "",
         personalInfo: user.personalInfo || {},
       });
       return true;

@@ -1,28 +1,27 @@
-import React, { FunctionComponent,useState } from "react";
+import React, { FunctionComponent, CSSProperties } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeList} from "react-window";
 import { ListItemType } from ".";
-import { ListItem } from "./ListItem";
+import { ListItem,LIST_ITEM_H } from "./ListItem";
 
 export type InfinityListPropsType = {
     className?: string;
-    items: Array<ListItemType>;
-    depth?: number;
+    style?:CSSProperties;
+    count: number;
+    maxSize?: number;
     onClick: (id:string) => void;
-    onItemRender: (index:number) => void;
+    onItemRender: (index:number) => ListItemType|undefined;
+    depth?: number;
 }
 
-export const InfinityList:FunctionComponent<InfinityListPropsType> = ({className,items,onClick,onItemRender,depth=0})=>{
-    
+export const InfinityList:FunctionComponent<InfinityListPropsType> = ({className,count,maxSize=20,onClick,onItemRender,depth=0})=>{
     const Row = ({ index, style }:any) => {
-        onItemRender(index);
-        const {id,text} = items[index] || {
-            id:`InfinityList-${index}`,
-            text: "Loading...",
-            depth: 0,
+        const item = onItemRender(index);
+        const hanldeClick = item ? onClick : ()=>{}
+        const {id,text} = item || {
+            id:`InfinityListLoading-${index}`, 
+            text:'Loading...'
         }
-        const hanldeClick = items[index] ? onClick:()=>{}
-
         return <ListItem 
             style={style}
             depth={depth}
@@ -33,18 +32,25 @@ export const InfinityList:FunctionComponent<InfinityListPropsType> = ({className
         />
     };
 
-    return <div className={className}>
-        <AutoSizer>
-            {({ height, width }) => (
-                <FixedSizeList
-                    height={height}
-                    itemCount={items.length}
-                    itemSize={35}
-                    width={width}
-                >
-                    {Row}
-                </FixedSizeList>
-            )}
-        </AutoSizer>
-    </div> 
+    return (
+        <div 
+            className = {className}
+            style={{
+                height:LIST_ITEM_H*(count>maxSize?maxSize:count)
+            }}
+        >
+            <AutoSizer>
+                {({ height, width }) => (
+                    <FixedSizeList
+                        height={height}
+                        itemCount={count}
+                        itemSize={LIST_ITEM_H}
+                        width={width}
+                    >
+                        {Row}
+                    </FixedSizeList>
+                )}
+            </AutoSizer>
+        </div>
+    )
 }

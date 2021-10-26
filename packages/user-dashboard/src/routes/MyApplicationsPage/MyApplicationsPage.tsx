@@ -1,4 +1,3 @@
-import { Text } from "@project/components/src/ui-kit/Text";
 import { FunctionalComponent } from "preact";
 import { ChatTab, ApplicationTab } from "./_components";
 import { useChatStore } from "./_components/ChatTab/ChatStore";
@@ -36,7 +35,6 @@ const MyApplicationsPage: FunctionalComponent<PropsType> = ({applicationId}) => 
                     {tabId===CHAT_TAB && <ChatTab className="h-full" applicationId={applicationIdInt}  store={chatStore}/>}
                 </div>
             </div>
-            
         </LeftNavigationLayout>
     );
 };
