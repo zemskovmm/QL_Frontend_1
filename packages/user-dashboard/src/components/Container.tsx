@@ -6,7 +6,7 @@ interface PropsType  {
 
 export const Container: FunctionalComponent<PropsType> = ({ className="", children }) => {
     return (
-        <div className={`py-2 px-4 tablet:px-10 laptop:px-20 desktop:px-40 ${className}`}>
+        <div className={`m-auto py-2 max-w-320 w-full ${className}`}>
             {children}
         </div>
     );

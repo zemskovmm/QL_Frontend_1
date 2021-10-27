@@ -15,31 +15,34 @@ export const Header: FunctionalComponent = () => {
     user.lastName.length | user.firstName.length ? [user.lastName, user.firstName].join(" ") : "Профиль";
 
   return (
-    <Container className="shadow flex justify-between items-center">
-      <Link href={HOME_PATH}>
-        <img className="object-none" src={QuarterLatinIcon} />
-      </Link>
+    <div className="px-2 shadow">
+      <Container className="flex justify-between items-center">
+        <Link href={HOME_PATH}>
+          <img className="object-none" src={QuarterLatinIcon} />
+        </Link>
 
-      <div className="inline-flex gap-2">
-        {isLogined && (
-          <>
-            <Link href={PROFILE_PATH}>
-              <Button text={profileName} color="secondary" />
+        <div className="inline-flex gap-2">
+          {isLogined && (
+            <>
+              <Link href={PROFILE_PATH}>
+                <Button text={profileName} color="secondary" />
+              </Link>
+              <Button text="Выход" color="secondary" onClick={logoutAction} />
+            </>
+          )}
+          {isUnlogined && (
+            <Link href={SIGN_IN_PATH}>
+              <Button text="Войти" color="secondary" />
             </Link>
-            <Button text="Выход" color="secondary" onClick={logoutAction} />
-          </>
-        )}
-        {isUnlogined && (
-          <Link href={SIGN_IN_PATH}>
-            <Button text="Войти" color="secondary" />
-          </Link>
-        )}
-        {LANGS_VARIANT.map((lang) => (
-          <Link key={lang} href={changeLangInUrl(url, lang)}>
-            <button>{lang}</button>
-          </Link>
-        ))}
-      </div>
-    </Container>
+          )}
+          {LANGS_VARIANT.map((lang) => (
+            <Link key={lang} href={changeLangInUrl(url, lang)}>
+              <button>{lang}</button>
+            </Link>
+          ))}
+        </div>
+      </Container>
+    </div>
+    
   );
 };
