@@ -43,6 +43,8 @@ export interface CatalogCourseDto {
   price: number;
   term: string;
   schoolName: string;
+  schoolImageId: number | null;
+  courseImageId: number | null;
 }
 
 export interface CatalogHousingDto {

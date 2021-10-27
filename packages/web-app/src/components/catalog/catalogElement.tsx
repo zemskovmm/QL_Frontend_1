@@ -142,7 +142,13 @@ export const CourseCatalogElement = (item: CatalogCourseDto) => (
     <a className={style.card}>
       <div className={style.card__left}>
         <div className={style.card__leftImg}>
-          {item.logoId ? <img src={`${ApiBaseUrl}/api/media/${item.logoId}`} alt="" /> : <img src={img} alt="" />}
+          {item.courseImageId ? (
+            <img src={`${ApiBaseUrl}/api/media/${item.courseImageId}`} alt="" />
+          ) : item.schoolImageId ? (
+            <img src={`${ApiBaseUrl}/api/media/${item.schoolImageId}`} alt="" />
+          ) : (
+            <img src={img} alt="" />
+          )}
         </div>
       </div>
       <div className={style.card__right}>
