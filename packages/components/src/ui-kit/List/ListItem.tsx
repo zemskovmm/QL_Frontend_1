@@ -23,7 +23,7 @@ export const ListItem:FunctionComponent<ListItemPropsType> = ({depth=0,id,text,o
     }
 
     return (
-        <div className="flex border items-center h-10 px-4 py-1" onClick={handleClick} style={style} >
+        <div className="flex border-b items-center h-10 px-4 py-1" onClick={handleClick} style={style} >
             {ofset}<Text text={text} size="small"/>
         </div>
     )
