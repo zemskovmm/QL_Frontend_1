@@ -1,7 +1,10 @@
 const removeLastSlash = (url: string) => url.replace(/\/+$/, "");
 
 export const ApiBaseUrl = removeLastSlash(
-  process.env["REACT_APP_API_BASE_URL"] || process.env["NEXT_PUBLIC_API_BASE_URL"] || ""
+  process.env["REACT_APP_API_BASE_URL"] || 
+  process.env["NEXT_PUBLIC_API_BASE_URL"] ||
+  process.env["DASHBOARD_PUBLIC_API_BASE_URL"] ||
+  ""
 );
 
 export const SsrCompatibleApiBaseUrl = removeLastSlash(process.env["API_BASE_URL"] || ApiBaseUrl);
