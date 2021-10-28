@@ -5,5 +5,5 @@ export const BUTTON_COLORS = {
 }
 
 export const BUTTON_SIZES = {
-    'default': "py-2 px-4",
+    'default': "p-2 h-10",
 }

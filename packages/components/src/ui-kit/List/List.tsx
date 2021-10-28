@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import { ListBorder } from "./ListBorder";
 import { ListItem } from "./ListItem";
 import { ListItemType } from "./_types";
 
@@ -8,12 +7,11 @@ export type ListPropsType = {
     items: Array<ListItemType>;
     onClick: (id:string) => void;
     depth?: number;
-    withoutBorder?: boolean;
 }
 
-export const List:FunctionComponent<ListPropsType> = ({className,items,onClick,depth=0,withoutBorder=false})=>{
+export const List:FunctionComponent<ListPropsType> = ({className,items,onClick,depth=0})=>{
     
-    return <ListBorder withoutBorder={withoutBorder} className={`flex flex-col ${className}`}>
+    return <div className={`flex flex-col ${className}`}>
         {items.map(({id,text})=>(
             <ListItem 
                 depth={depth}
@@ -23,5 +21,5 @@ export const List:FunctionComponent<ListPropsType> = ({className,items,onClick,d
                 onClick={onClick}
             />
         ))}
-    </ListBorder>
+    </div>
 }
