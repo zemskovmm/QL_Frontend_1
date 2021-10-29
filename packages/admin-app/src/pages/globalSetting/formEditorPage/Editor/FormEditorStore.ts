@@ -412,6 +412,10 @@ class SchemeEditorStore {
   public async save() {
     if (this.currentSchemeEditor == null) return;
     const data: any = await this.currentSchemeEditor.getDataAsync();
+    if (this.arrayIndex === undefined && (!data.id || !data.displayName)) {
+      alert(`${data.id ? "" : "Fill in the field id"} ${data.displayName ? "" : "Fill in the field displayName"}`);
+      return;
+    }
     runInAction(() => {
       if (this.arrayIndex !== undefined) {
         this.blockData[this.arrayIndex].required = data.required;
