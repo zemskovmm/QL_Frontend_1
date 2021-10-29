@@ -6,11 +6,11 @@ import { AdminLanguageDictionaryEditorCustomization } from "../school/page";
 import { RouterLink } from "mobx-state-router";
 import { RouteNames } from "../../routing/routes";
 import { AdminTable } from "../../components/common/AdminTable";
-import { AdminSchoolDto, AdminSchoolLanguageDto } from "../../stores/pages/school/schoolPageStore";
+import { AdminSchoolDto } from "../../stores/pages/school/schoolPageStore";
 import { dmap } from "../../utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { FC } from "react";
-import { AdminCourseDto, AdminCourseLanguageDto } from "../../stores/pages/course/coursePageStore";
+import { AdminCourseLanguageDto } from "../../stores/pages/course/coursePageStore";
 import { TraitEditor } from "../../components/traitEditor";
 
 const customize = new AdminLanguageDictionaryEditorCustomization();
@@ -20,9 +20,11 @@ export const CourseCreatePage = () => {
 
   return useObserver(() => (
     <div>
-      <AdminButton color={"primary"} onClick={() => courseCreate.save()}>
-        Save
-      </AdminButton>
+      <div className={`m-2`}>
+        <AdminButton color={"primary"} onClick={() => courseCreate.save()}>
+          Save
+        </AdminButton>
+      </div>
       {courseCreate.remoteUiStore ? (
         <RemoteUiEditor store={courseCreate.remoteUiStore} customization={customize} />
       ) : (
@@ -37,12 +39,18 @@ export const CourseEditPage = () => {
 
   return useObserver(() => (
     <div>
-      <AdminButton color={"primary"} onClick={() => courseEdit.save()}>
-        Save
-      </AdminButton>
-      <RouterLink routeName={RouteNames.courseTraitEditor} params={{ id: `${courseEdit.id}` }}>
-        <AdminButton color={"primary"}> Traits editor </AdminButton>
-      </RouterLink>
+      <div className={`flex m-2 items-center`}>
+        <AdminButton color={"primary"} className={`mr-4`} onClick={() => courseEdit.save()}>
+          Save
+        </AdminButton>
+        <RouterLink routeName={RouteNames.courseTraitEditor} params={{ id: `${courseEdit.id}` }}>
+          <AdminButton color={"primary"} className={`mr-4`}>
+            {" "}
+            Traits editor{" "}
+          </AdminButton>
+        </RouterLink>
+        <div>Course id: {courseEdit.id}</div>
+      </div>
       {courseEdit.remoteUiStore ? (
         <RemoteUiEditor store={courseEdit.remoteUiStore} customization={customize} />
       ) : (

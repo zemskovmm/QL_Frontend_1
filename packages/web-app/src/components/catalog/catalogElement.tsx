@@ -146,6 +146,8 @@ export const CourseCatalogElement = (item: CatalogCourseDto) => (
             <img src={`${ApiBaseUrl}/api/media/${item.courseImageId}`} alt="" />
           ) : item.schoolImageId ? (
             <img src={`${ApiBaseUrl}/api/media/${item.schoolImageId}`} alt="" />
+          ) : item.imageId ? (
+            <img src={`${ApiBaseUrl}/api/media/${item.imageId}`} alt="" />
           ) : (
             <img src={img} alt="" />
           )}
@@ -165,7 +167,13 @@ export const CourseCatalogElement = (item: CatalogCourseDto) => (
           <span className={style.card__rightSubtitle}>
             <LocalizedText id={"catalogItems_duration"} />:{" "}
           </span>
-          <LocalizedText id={"catalogItems_week"} />
+          <div className={`flex flex-col`}>
+            {item.traits
+              ? item.traits.namedTraits["duration"]?.map((el, i) => (
+                  <span key={`duration ${i} ${el.name}`}>{el.name}</span>
+                ))
+              : item.namedTraits["duration"]?.map((el, i) => <span key={`duration ${i} ${el.name}`}>{el.name}</span>)}
+          </div>
         </div>
         <div className={`${style.card__rightPrice} mt-auto`}>
           <span className={style.card__rightSubtitle}>
@@ -174,7 +182,7 @@ export const CourseCatalogElement = (item: CatalogCourseDto) => (
           <div className={`${style.card__rightPrice__list}`}>
             <span className={style.card__rightPrice__listItem}>
               <b>
-                <LocalizedText id={"catalogItems_price_upto"} /> {item.price}{" "}
+                <LocalizedText id={"catalogItems_price_from"} /> {item.price}{" "}
                 <LocalizedText id={"catalogItems_price_value"} />
               </b>{" "}
               / <LocalizedText id={"catalogItems_price_month"} />

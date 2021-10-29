@@ -54,6 +54,11 @@ export const CourseModule = (props: ClientSchoolAndCourseDto) => {
                 <LocalizedText id={"courses_tab_all_course"} />
               </div>
             </Link>
+            <Link href={`/${lang}/catalog/housing`}>
+              <div>
+                <LocalizedText id={"catalogHousing_title"} />
+              </div>
+            </Link>
             <Link href={`#`}>
               <div className={styles.active}>
                 <LocalizedText id={"courses_tab_about_course"} />
@@ -63,13 +68,23 @@ export const CourseModule = (props: ClientSchoolAndCourseDto) => {
         </div>
         <div className={cn(styles.tabs, styles.mobiletabs, "p-2.5")}>
           <div className="flex flex-col  mx-auto">
-            <Link href={`#`}>
-              <div className={styles.active}>
+            <Link href={{ pathname: `/${lang}/school/${props.urls.split("/")[2]}` ?? "#" }}>
+              <div>
                 <LocalizedText id={"courses_tab_about_school"} />
               </div>
             </Link>
-            <Link href={`#`}>
+            <Link href={`/${lang}/${props.urls.split("/")[2]}/courses` ?? "#"}>
               <div>
+                <LocalizedText id={"courses_tab_all_course"} />
+              </div>
+            </Link>
+            <Link href={`/${lang}/catalog/housing`}>
+              <div>
+                <LocalizedText id={"catalogHousing_title"} />
+              </div>
+            </Link>
+            <Link href={`#`}>
+              <div className={styles.active}>
                 <LocalizedText id={"courses_tab_about_course"} />
               </div>
             </Link>

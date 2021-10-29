@@ -69,12 +69,15 @@ export const SchoolPage = () => {
 
   return useObserver(() => (
     <div>
-      <AdminButton color={"primary"} onClick={() => schoolPage.save()}>
-        Save
-      </AdminButton>
-      <RouterLink routeName={RouteNames.schoolTraitEditor} params={{ id: `${schoolPage.id}` }}>
-        <AdminButton color={"primary"}> Traits editor </AdminButton>
-      </RouterLink>
+      <div className={`flex m-2 items-center`}>
+        <AdminButton color={"primary"} className={`mr-4`} onClick={() => schoolPage.save()}>
+          Save
+        </AdminButton>
+        <RouterLink routeName={RouteNames.schoolTraitEditor} className={`mr-4`} params={{ id: `${schoolPage.id}` }}>
+          <AdminButton color={"primary"}> Traits editor </AdminButton>
+        </RouterLink>
+        <div>School Id: {schoolPage.id}</div>
+      </div>
       {schoolPage.remoteUiStore ? (
         <RemoteUiEditor store={schoolPage.remoteUiStore} customization={customize} />
       ) : (

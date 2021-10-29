@@ -109,6 +109,7 @@ export class SchoolPageStore extends Loadable {
 
   async load(): Promise<void> {
     const { value, definition } = await this.track(() => AdminApi.getSchool(this.id));
+    console.log(definition);
     this.remoteUiStore = new RemoteUiEditorStore(definition, value, new LanguageDictionaryCustomize(value.languages));
   }
 }

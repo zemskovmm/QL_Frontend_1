@@ -23,7 +23,7 @@ export const BreadcrumbsBlock = (props: BreadcrumbsBlockElement) => {
       )}
     >
       {props.items.map((el, index) => (
-        <ComponentLink href={el.link ? el.link : "#"}>
+        <ComponentLink href={el.link ? el.link : "#"} key={`breadcrumbsBlock ${index} ${el.name}`}>
           <a className={"flex"} key={`${index}`}>
             {el.name}
             {props.items.length - 1 > index && <img src={props.whiteColor ? icon_white : icon} alt="" />}

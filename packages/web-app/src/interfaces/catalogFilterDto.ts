@@ -45,6 +45,11 @@ export interface CatalogCourseDto {
   schoolName: string;
   schoolImageId: number | null;
   courseImageId: number | null;
+  imageId: number | null;
+  traits: {
+    namedTraits: { [key: string]: ClientCommonTraitLanguageDto[] };
+  };
+  namedTraits: { [key: string]: ClientCommonTraitLanguageDto[] };
 }
 
 export interface CatalogHousingDto {
