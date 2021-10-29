@@ -25,8 +25,8 @@ export class AdminRemoteUiDropdownSchemaEditorStore implements IRemoteUiData {
     this.type = type;
     this.id = initialValue.id;
     const { formEditorPage } = useRootStore();
-    const itemsInStore = formEditorPage.editor?.schemaEditor?.blockData;
-    this.items = itemsInStore.schema.reduce(
+    const itemsInStore = formEditorPage.editor?.schemaEditor?.blockData ?? [];
+    this.items = itemsInStore.reduce(
       (accum: AdminRemoteUiDropdownSchemaEditorPropsItem[], el: FormSchemaFieldDto) => {
         if (el.type === typeFields[type].toString() && !el.hide) {
           return [...accum, { name: el.displayName, id: el.id, required: el.required }];

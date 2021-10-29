@@ -9,7 +9,7 @@ export const PersonalCabinetSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s 
     <div className={`px-1`}>
       <div className={`flex justify-between mb-4`}>
         <span className={`text-lg`}>Profile Form</span>
-        <RouterLink routeName={RouteNames.formEditorPage} params={{ lang: s.lang, type: "profile" }}>
+        <RouterLink routeName={RouteNames.formEditorPageProfile} params={{ lang: s.lang }}>
           <a
             className={`text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
           >
@@ -19,7 +19,7 @@ export const PersonalCabinetSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s 
       </div>
       <div className={`flex justify-between mb-4`}>
         <span className={`text-lg`}>University Form</span>
-        <RouterLink routeName={RouteNames.formEditorPage} params={{ lang: s.lang, type: "university" }}>
+        <RouterLink routeName={RouteNames.formEditorPageUniversity} params={{ lang: s.lang }}>
           <a
             className={`text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
           >
@@ -29,7 +29,7 @@ export const PersonalCabinetSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s 
       </div>
       <div className={`flex justify-between mb-4`}>
         <span className={`text-lg`}>Course Form</span>
-        <RouterLink routeName={RouteNames.formEditorPage} params={{ lang: s.lang, type: "course" }}>
+        <RouterLink routeName={RouteNames.formEditorPageCourse} params={{ lang: s.lang }}>
           <a
             className={`text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
           >
@@ -39,7 +39,7 @@ export const PersonalCabinetSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s 
       </div>
       <div className={`flex justify-between mb-4`}>
         <span className={`text-lg`}>Housing Form</span>
-        <RouterLink routeName={RouteNames.formEditorPage} params={{ lang: s.lang, type: "housing" }}>
+        <RouterLink routeName={RouteNames.formEditorPageHousing} params={{ lang: s.lang }}>
           <a
             className={`text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
           >
@@ -49,7 +49,7 @@ export const PersonalCabinetSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s 
       </div>
       <div className={`flex justify-between`}>
         <span className={`text-lg`}>Visa Form</span>
-        <RouterLink routeName={RouteNames.formEditorPage} params={{ lang: s.lang, type: "visa" }}>
+        <RouterLink routeName={RouteNames.formEditorPageVisa} params={{ lang: s.lang }}>
           <a
             className={`text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
           >

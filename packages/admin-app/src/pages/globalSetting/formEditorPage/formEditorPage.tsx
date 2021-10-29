@@ -6,7 +6,7 @@ import { SchemeEditor } from "./SchemeEditor/SchemeEditor";
 export const FormEditorPage = () => {
   const { formEditorPage } = useRootStore();
   return useObserver(() => (
-    <div className={"m-2 flex"}>
+    <div className={"flex"}>
       <div className={`w-10/12`}>
         <FormEditor store={formEditorPage.editor!} />
       </div>

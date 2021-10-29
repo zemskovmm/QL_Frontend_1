@@ -29,7 +29,11 @@ export enum RouteNames {
   newPage = "admin-newPage",
   pageTraitEditPage = "admin-pageTraitEditPage",
   globalSettingsEditor = "admin-globalSettingsEditor",
-  formEditorPage = "admin-formEditorPage",
+  formEditorPageVisa = "admin-formEditorPage-visa",
+  formEditorPageCourse = "admin-formEditorPage-course",
+  formEditorPageHousing = "admin-formEditorPage-housing",
+  formEditorPageProfile = "admin-formEditorPage-profile",
+  formEditorPageUniversity = "admin-formEditorPage-university",
 
   fileList = "admin-fileList",
 
@@ -67,7 +71,11 @@ export const AdminRouteViewMap = {
   [RouteNames.pageList]: <PageListPage />,
   [RouteNames.pageTraitEditPage]: <PageTraitEditorPage />,
   [RouteNames.globalSettingsEditor]: <AdminGlobalSettingEditor />,
-  [RouteNames.formEditorPage]: <FormEditorPage />,
+  [RouteNames.formEditorPageProfile]: <FormEditorPage />,
+  [RouteNames.formEditorPageVisa]: <FormEditorPage />,
+  [RouteNames.formEditorPageCourse]: <FormEditorPage />,
+  [RouteNames.formEditorPageUniversity]: <FormEditorPage />,
+  [RouteNames.formEditorPageHousing]: <FormEditorPage />,
 
   [RouteNames.fileList]: <FilesPage />,
 
@@ -116,9 +124,34 @@ export const AdminRoutes: Route[] = convertRoutes([
     onEnter: (root, to) => root.globalSettingsPage.load(to.params["lang"]),
   },
   {
-    pattern: "/form-editor/:lang/:type",
-    name: RouteNames.formEditorPage,
-    onEnter: (root, to) => root.formEditorPage.load(to.params["lang"], to.params["type"]),
+    pattern: "/form-editor/:lang/visa",
+    name: RouteNames.formEditorPageVisa,
+    hooks: [UserAuthorizedOnlyHook],
+    onEnter: (root, to) => root.formEditorPage.load(to.params["lang"], "visa"),
+  },
+  {
+    pattern: "/form-editor/:lang/course",
+    name: RouteNames.formEditorPageCourse,
+    hooks: [UserAuthorizedOnlyHook],
+    onEnter: (root, to) => root.formEditorPage.load(to.params["lang"], "course"),
+  },
+  {
+    pattern: "/form-editor/:lang/university",
+    name: RouteNames.formEditorPageUniversity,
+    hooks: [UserAuthorizedOnlyHook],
+    onEnter: (root, to) => root.formEditorPage.load(to.params["lang"], "university"),
+  },
+  {
+    pattern: "/form-editor/:lang/profile",
+    name: RouteNames.formEditorPageProfile,
+    hooks: [UserAuthorizedOnlyHook],
+    onEnter: (root, to) => root.formEditorPage.load(to.params["lang"], "profile"),
+  },
+  {
+    pattern: "/form-editor/:lang/housing",
+    name: RouteNames.formEditorPageHousing,
+    hooks: [UserAuthorizedOnlyHook],
+    onEnter: (root, to) => root.formEditorPage.load(to.params["lang"], "housing"),
   },
   {
     pattern: "/pages",

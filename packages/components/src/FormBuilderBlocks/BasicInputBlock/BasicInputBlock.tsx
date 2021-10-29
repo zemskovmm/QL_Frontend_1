@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
 import { ComponentHostDashboardContext } from "../HostLayout";
-// import { useContext } from "preact/hooks";
-// import { ComponentHostDashboardContext } from ;
 
 export interface BasicInputBlockElement {
   schema: { id: string | number; required: boolean };

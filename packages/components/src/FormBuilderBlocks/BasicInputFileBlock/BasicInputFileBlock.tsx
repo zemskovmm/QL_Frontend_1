@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
-import { useContext } from "preact/hooks";
 import { ComponentHostDashboardContext } from "../HostLayout";
 
 export interface BasicInputFileBlockElement {
-  id: string;
   label: string;
   placeholder: string;
+  schema: { id: string | number; required: boolean };
 }
 
 export const BasicInputFileBlock = (props: BasicInputFileBlockElement) => {
@@ -17,12 +16,12 @@ export const BasicInputFileBlock = (props: BasicInputFileBlockElement) => {
       <label className={`flex`}>
         <span className={`mr-10`}>{props.label}</span>
         <input
-          id={props.id}
+          id={String(props.schema?.id)}
           type="file"
-          value={cl?.personalInfo[props.id]}
+          value={cl?.personalInfo[props.schema.id]}
           onChange={(e) => {
-            cl!.personalInfo[props.id] = e.target.files![0];
-            console.log(cl?.personalInfo[props.id]);
+            cl!.personalInfo[props.schema.id] = e.target.files![0];
+            console.log(cl?.personalInfo[props.schema.id]);
           }}
         />
       </label>
@@ -36,7 +35,10 @@ export const BasicInputFileBlockInfo: TypedBlockTypeInfo<BasicInputFileBlockElem
   preview: preview,
   renderer: BasicInputFileBlock,
   initialData: {
-    id: "",
+    schema: {
+      id: "",
+      required: false,
+    },
     label: "",
     placeholder: "",
   },

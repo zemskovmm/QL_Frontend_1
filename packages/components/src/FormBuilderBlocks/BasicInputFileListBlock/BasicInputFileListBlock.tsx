@@ -1,38 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
 import preview from "./preview.png";
-import { useContext, useState } from "preact/hooks";
 import { ComponentHostDashboardContext } from "../HostLayout";
 
 export interface BasicInputFileListBlockElement {
-  id: string;
+  schema: { id: string | number; required: boolean };
   label: string;
   buttonName: string;
 }
 
 export const BasicInputFileListBlock = (props: BasicInputFileListBlockElement) => {
   const cl = useContext(ComponentHostDashboardContext);
-  const [file, observeFile] = useState<File[]>([]);
-
+  const file: File[] = [];
   return (
     <div className="py-12">
       <div>{props.label}</div>
       <label className={`flex`}>
         <span className={`mr-10`}>{props.buttonName}</span>
         <input
-          id={props.id}
+          id={String(props.schema?.id)}
           type="file"
           onChange={(e) => {
             const files = file;
             if (e.target.files![0].name) {
               files.push(e.target.files![0]);
             }
-            observeFile(files);
-            // const req = new FormData();
-            // for (let i = 0; files.length < i; i++) {
-            //   req.append(`file ${i}`, files[i]);
-            // }
-            cl!.personalInfo[props.id] = files;
+            cl!.personalInfo[props.schema.id] = files;
           }}
         />
       </label>
@@ -56,7 +49,10 @@ export const BasicInputFileListBlockInfo: TypedBlockTypeInfo<BasicInputFileListB
   preview: preview,
   renderer: BasicInputFileListBlock,
   initialData: {
-    id: "",
+    schema: {
+      id: "",
+      required: false,
+    },
     label: "",
     buttonName: "",
   },
