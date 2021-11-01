@@ -2,7 +2,6 @@ import React, { FunctionComponent, CSSProperties } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeList} from "react-window";
 import { ListItemType } from ".";
-import { ListBorder } from "./ListBorder";
 import { ListItem,LIST_ITEM_H } from "./ListItem";
 
 export type InfinityListPropsType = {
@@ -13,10 +12,9 @@ export type InfinityListPropsType = {
     onClick: (id:string) => void;
     onItemRender: (index:number) => ListItemType|undefined;
     depth?: number;
-    withoutBorder?: boolean;
 }
 
-export const InfinityList:FunctionComponent<InfinityListPropsType> = ({className,count,maxSize=20,onClick,onItemRender,depth=0,withoutBorder=false})=>{
+export const InfinityList:FunctionComponent<InfinityListPropsType> = ({className,count,maxSize=20,onClick,onItemRender,depth=0})=>{
     const Row = ({ index, style }:any) => {
         const item = onItemRender(index);
         const hanldeClick = item ? onClick : ()=>{}
@@ -35,8 +33,7 @@ export const InfinityList:FunctionComponent<InfinityListPropsType> = ({className
     };
 
     return (
-        <ListBorder 
-            withoutBorder={withoutBorder}
+        <div 
             className = {className}
             style={{
                 height:LIST_ITEM_H*(count>maxSize?maxSize:count)
@@ -54,6 +51,6 @@ export const InfinityList:FunctionComponent<InfinityListPropsType> = ({className
                     </FixedSizeList>
                 )}
             </AutoSizer>
-        </ListBorder>
+        </div>
     )
 }

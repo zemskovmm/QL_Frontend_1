@@ -7,10 +7,11 @@ import { ButtonPropsType } from "./_types";
 
 
 export const Button:FunctionComponent<ButtonPropsType> = 
-    ({className, id, text, type, color='default', size='default', disabled=false, isFullWidth=false,onClick})=>{
+    ({className, id, text, type, color='default', size='default', disabled=false, isFullWidth=false,onClick, children})=>{
 
     const classes = [
         'rounded text-medium whitespace-nowrap',
+        'flex items-center justify-center',
         isFullWidth ? 'w-full' : '',
         BUTTON_COLORS[color],
         BUTTON_SIZES[size],
@@ -23,7 +24,7 @@ export const Button:FunctionComponent<ButtonPropsType> =
 
     return (
         <button className={classes} id={id} type={type} disabled={disabled} onClick={handleOnClick}>
-            {text}
+            {text} {children}
         </button>
     )
 }

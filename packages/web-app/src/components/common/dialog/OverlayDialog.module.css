@@ -20,7 +20,9 @@
   position: relative;
   width: 100%;
   max-width: 650px;
-  padding: 39px 52px 46px 48px;
+  padding-top: 39px;
+  padding-right: 52px;
+  padding-left: 48px;
   box-sizing: border-box;
 }
 

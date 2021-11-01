@@ -17,9 +17,9 @@ const CatalogCallBack = () => {
         </div>
       </div>
       <ContactUsFormButton footer={true}>
-        <button className={style.catalogCallBack__btn}>
+        <div className={style.catalogCallBack__btn}>
           <LocalizedText id={"university_button"} />
-        </button>
+        </div>
       </ContactUsFormButton>
     </div>
   );
