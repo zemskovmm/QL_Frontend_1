@@ -20,6 +20,8 @@ import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRow
 import { EditFormDto, FormSchemaFieldDto, GlobalSettingsDto } from "../../../../interfaces/GlobalSettingsDto";
 import { FormBuilderBlockList } from "@project/components/src/FormBuilderBlocks/FormBuilderBlockList";
 import { AdminRemoteUiDropdownSchemaEditorStore } from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
+import { findIndex } from "lodash";
+
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -308,7 +310,12 @@ export class FormEditorStore extends RequestTracking {
           footer: this.req.footer,
           personalCabinet: personalCabinet,
         };
-        await AdminApi.putGlobalSettings(this.lang, body);
+        try {
+          await AdminApi.putGlobalSettings(this.lang, body);
+          alert("Settings saved");
+        } catch (e) {
+          alert(e);
+        }
       })
     );
   }
@@ -414,6 +421,10 @@ class SchemeEditorStore {
     const data: any = await this.currentSchemeEditor.getDataAsync();
     if (this.arrayIndex === undefined && (!data.id || !data.displayName)) {
       alert(`${data.id ? "" : "Fill in the field id"} ${data.displayName ? "" : "Fill in the field displayName"}`);
+      return;
+    }
+    if (findIndex(this.blockData, ["id", data.id]) >= 0) {
+      alert(`this id is already taken`);
       return;
     }
     runInAction(() => {

@@ -22,8 +22,8 @@ export const SchemeEditor: FC<{ s: FormEditorStore }> = ({ s }) => {
                 <span className={`w-4/12`}>RQ: {String(el.required)}</span>
                 <span className={`w-4/12`}>HI: {String(el.hide)}</span>
               </div>
-              <AdminButton color={"primary"} onClick={() => s.schemaEditor?.open(el, index)}>
-                Edit Scheme {index}
+              <AdminButton color={"primary"} className={`text-center`} onClick={() => s.schemaEditor?.open(el, index)}>
+                Edit Scheme
               </AdminButton>
             </div>
           ))}
