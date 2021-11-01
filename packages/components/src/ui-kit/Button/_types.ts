@@ -9,7 +9,7 @@ export type ButtonPropsType = {
     /** id кнопки */
     id?:string;
     /** Отображаемый текст */
-    text: string;
+    text?: string;
     /** Тип кнопки */
     type?: "submit";
     /** Цвет кнопки */

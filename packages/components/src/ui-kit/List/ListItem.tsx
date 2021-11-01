@@ -4,6 +4,7 @@ import { Text } from "../Text";
 export const LIST_ITEM_H = 40;
 
 export type ListItemPropsType = {
+    className?: string;
     id: string;
     text: string;
     onClick?: (id:string)=>void;
@@ -11,7 +12,7 @@ export type ListItemPropsType = {
     style?:CSSProperties;
 }
 
-export const ListItem:FunctionComponent<ListItemPropsType> = ({depth=0,id,text,onClick=()=>{},style})=>{
+export const ListItem:FunctionComponent<ListItemPropsType> = ({className,depth=0,id,text,onClick=()=>{},style})=>{
 
     const handleClick = () => {
         onClick(id);
@@ -23,8 +24,10 @@ export const ListItem:FunctionComponent<ListItemPropsType> = ({depth=0,id,text,o
     }
 
     return (
-        <div className="flex border-b items-center h-10 px-4 py-1" onClick={handleClick} style={style} >
-            {ofset}<Text text={text} size="small"/>
+        <div className={`relative border-l border-t border-r h-10 ${className}`} onClick={handleClick} style={style} >
+            <div className="relative -bottom-px border-b flex items-center h-full px-4 py-1"  >
+                {ofset}<Text text={text} size="small"/>
+            </div>
         </div>
     )
 }

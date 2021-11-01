@@ -1,4 +1,4 @@
-import { InfinityList, ListItem, ListItemType,ListBorder } from "@project/components/src/ui-kit/List";
+import { InfinityList, ListItem, ListItemType } from "@project/components/src/ui-kit/List";
 import { FunctionalComponent } from "preact";
 import { memo } from "preact/compat";
 import { useEffect, useState } from "preact/hooks";
@@ -11,6 +11,7 @@ import { useUserStatuseStore } from "stores/UserStatuseStore";
 import { Text } from "@project/components/src/ui-kit/Text";
 import { IconLabel } from "@project/components/src/ui-kit/IconLabel";
 import USER_ICON from "@project/components/src/assets/icons/user.svg";
+import { Button } from "@project/components/src/ui-kit/Button";
 
 type PropsType = {
     className?: string;
@@ -23,7 +24,7 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
         PROFILE_PATH,
         SETTINGS_PATH,
     } = useRouterStore();
-    const { user:{email,firstName,lastName} } = useUserStatuseStore();
+    const { user:{email,firstName,lastName} ,logoutAction} = useUserStatuseStore();
 
     const {
         lang,
@@ -76,13 +77,12 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
             subText={email}
         />
         <div className="relative flex-grow">
-            <ListBorder className="absolute h-full w-full top-0 left-0 flex flex-col">
+            <div className="absolute w-full h-full top-0 left-0 flex flex-col">
                 
                 <Link href={PROFILE_PATH}><ListItem id={PROFILE_PATH} text={PROFILE_LANG}/></Link>
-                <Link><ListItem id="MY_APPLICATIONS_LANG" text={MY_APPLICATIONS_LANG} onClick={()=>{setApplicationsOpen(!isApplicationsOpen)}}/></Link>
+                <ListItem className="flex-shrink-0"  id="MY_APPLICATIONS_LANG" text={MY_APPLICATIONS_LANG} onClick={()=>{setApplicationsOpen(!isApplicationsOpen)}}/>
 
                 {isApplicationsOpen && <InfinityList 
-                    withoutBorder
                     depth={1}
                     className="flex-shrink" 
                     count={applications.length} 
@@ -91,7 +91,12 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
                 />}
 
                 <Link href={SETTINGS_PATH}><ListItem id={SETTINGS_PATH} text={SETTINGS_LANG}/></Link>
-            </ListBorder>
+                
+            </div>
         </div>
+        
+        <Button className="my-4" text="Выход" color="secondary" onClick={logoutAction} />
+        
+        
     </div>);
 });
