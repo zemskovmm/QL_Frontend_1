@@ -79,8 +79,15 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
         <div className="relative flex-grow">
             <div className="absolute w-full h-full top-0 left-0 flex flex-col">
                 
-                <Link href={PROFILE_PATH}><ListItem id={PROFILE_PATH} text={PROFILE_LANG}/></Link>
-                <ListItem className="flex-shrink-0"  id="MY_APPLICATIONS_LANG" text={MY_APPLICATIONS_LANG} onClick={()=>{setApplicationsOpen(!isApplicationsOpen)}}/>
+                <Link onClick={e=>e.preventDefault()} href={PROFILE_PATH}><ListItem id={PROFILE_PATH} text={PROFILE_LANG}/></Link>
+                <ListItem 
+                    className="flex-shrink-0"  
+                    id="MY_APPLICATIONS_LANG" 
+                    text={MY_APPLICATIONS_LANG} 
+                    onClick={(id,event)=>{
+                        setApplicationsOpen(!isApplicationsOpen)
+                        event.stopPropagation();
+                    }}/>
 
                 {isApplicationsOpen && <InfinityList 
                     depth={1}
@@ -90,7 +97,7 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
                     onItemRender={handleItemRender}
                 />}
 
-                <Link href={SETTINGS_PATH}><ListItem id={SETTINGS_PATH} text={SETTINGS_LANG}/></Link>
+                <Link onClick={e=>e.preventDefault()} href={SETTINGS_PATH}><ListItem id={SETTINGS_PATH} text={SETTINGS_LANG}/></Link>
                 
             </div>
         </div>

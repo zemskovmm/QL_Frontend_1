@@ -23,8 +23,8 @@ export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({title
                     <Button text={NEW_APPLICATION_LANG} />
                 </Link>
             </div>
-            <div className="flex-grow flex w-full border">
-                <LeftNavigation className="border-r w-128"/>
+            <div className="flex flex-grow w-full border">
+                <LeftNavigation className="hidden tablet:flex border-r w-128"/>
                 <div className="flex-grow">{children}</div>
             </div>
         </div>
