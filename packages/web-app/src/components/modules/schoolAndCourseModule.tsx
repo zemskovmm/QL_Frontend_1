@@ -7,11 +7,6 @@ import styles from "../catalogInner/course/TabsControlBlock.module.css";
 import React from "react";
 import Link from "next/link";
 import { ClientSchoolAndCourseListDto } from "../../interfaces/clientSchoolAndCourseDto";
-import style from "../catalog/style/catalogView.module.css";
-import { Catalog } from "../catalog/catalog";
-import { CatalogUniversityDto } from "../../interfaces/catalogFilterDto";
-import { UniversityCatalogElement } from "../catalog/catalogElement";
-import { CatalogView } from "../catalog/catalogView";
 import { CourseCatalogElement } from "src/components/catalog/catalogElement";
 
 export const SchoolAndCourseModule = (props: ClientSchoolAndCourseListDto) => {
@@ -58,12 +53,17 @@ export const SchoolAndCourseModule = (props: ClientSchoolAndCourseListDto) => {
                 <LocalizedText id={"courses_tab_all_course"} />
               </div>
             </Link>
+            <Link href={`/${lang}/catalog/housing`}>
+              <div>
+                <LocalizedText id={"catalogHousing_title"} />
+              </div>
+            </Link>
           </div>
         </div>
         <div className={cn(styles.tabs, styles.mobiletabs, "p-2.5")}>
           <div className="flex flex-col  mx-auto">
             <Link href={`/${lang}/school/${props.urls.split("/")[2]}`}>
-              <div className={styles.active}>
+              <div>
                 <LocalizedText id={"courses_tab_about_school"} />
               </div>
             </Link>
@@ -72,13 +72,18 @@ export const SchoolAndCourseModule = (props: ClientSchoolAndCourseListDto) => {
                 <LocalizedText id={"courses_tab_all_course"} />
               </div>
             </Link>
+            <Link href={`/${lang}/catalog/housing`}>
+              <div>
+                <LocalizedText id={"catalogHousing_title"} />
+              </div>
+            </Link>
           </div>
         </div>
         <div className={`max-w-screen-xl w-full mx-auto my-10 px-14`}>
           <div className={`mb-8`}>Вы сможете забронировать вариант проживания в процессе покупки курса</div>
           <div className={`w-6/12`}>
-            {props.courses.map((el) => (
-              <CourseCatalogElement {...el} schoolName={props.school.title} />
+            {props.courses?.map((el, i) => (
+              <CourseCatalogElement {...el} schoolName={props.school.title} key={`CourseElement ${el.name} ${i}`} />
             ))}
           </div>
         </div>

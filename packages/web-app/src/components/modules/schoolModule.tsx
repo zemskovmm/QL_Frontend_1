@@ -56,6 +56,11 @@ export const SchoolModule = (props: ClientSchoolDto) => {
                 <LocalizedText id={"courses_tab_all_course"} />
               </div>
             </Link>
+            <Link href={`/${lang}/catalog/housing`}>
+              <div>
+                <LocalizedText id={"catalogHousing_title"} />
+              </div>
+            </Link>
           </div>
         </div>
         <div className={cn(styles.tabs, styles.mobiletabs, "p-2.5")}>
@@ -66,8 +71,13 @@ export const SchoolModule = (props: ClientSchoolDto) => {
               </div>
             </Link>
             <Link href={`/${lang}/${props.urls.split("/")[3]}/courses` ?? "#"}>
-              <div className={styles.active}>
+              <div>
                 <LocalizedText id={"courses_tab_all_course"} />
+              </div>
+            </Link>
+            <Link href={`/${lang}/catalog/housing`}>
+              <div>
+                <LocalizedText id={"catalogHousing_title"} />
               </div>
             </Link>
           </div>

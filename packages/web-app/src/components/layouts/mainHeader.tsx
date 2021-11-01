@@ -1,4 +1,3 @@
-import { HeaderDataDto } from "src/interfaces/headerDataDto";
 import { useIntl } from "react-intl";
 import Link from "next/link";
 import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
@@ -41,7 +40,7 @@ export const MainHeader: FC<MainHeaderProps & { s: HeaderDto }> = ({ urls, s }) 
             </Link>
             <ul className="hidden lg:flex list-none ">
               {s.headerTopLink.map((el, index) => (
-                <li key={index + el.link} className="mx-4 uppercase flex items-center">
+                <li key={`headerTopLink ${index} ${el.link}`} className="mx-4 uppercase flex items-center">
                   <a className="text-xs font-bold hover:text-hover" href={el.link}>
                     {el.name}
                   </a>
@@ -85,7 +84,7 @@ export const MainHeader: FC<MainHeaderProps & { s: HeaderDto }> = ({ urls, s }) 
       </div>
       <div className="hidden lg:flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-1 px-10">
         {s.headerBottomLink.map((el, i) => (
-          <Link key={i + "headLink"} href={el.link}>
+          <Link key={`${i} headLink`} href={el.link}>
             <a className={cn(styles.header_offer, "py-5 whitespace-nowrap text-center")}>{el.name}</a>
           </Link>
         ))}
