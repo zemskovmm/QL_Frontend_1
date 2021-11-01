@@ -2,6 +2,7 @@ import React,{ FunctionComponent,useState,MouseEvent } from "react";
 import { Icon } from "@project/components/src/ui-kit/Icon";
 import { Text } from "@project/components/src/ui-kit/Text";
 import { Button } from "@project/components/src/ui-kit/Button";
+import { Dropmenu } from "@project/components/src/ui-kit/Dropmenu";
 import EN_FLAG from "@project/components/src/assets/img/flags/en.svg"
 import RU_FLAG from "@project/components/src/assets/img/flags/ru.svg"
 import FR_FLAG from "@project/components/src/assets/img/flags/fr.svg"
@@ -24,7 +25,6 @@ type PropsType = {
 }
 
 export const LangChooser:FunctionComponent<PropsType> = ({ lang, onChoose }) => {
-    const [isOpen, setIsOpen] = useState(false);
 
     const currLang = (lang in LANGS) ? lang : "en"
     const handleChoose = (event:MouseEvent<HTMLElement>)=>{
@@ -32,17 +32,20 @@ export const LangChooser:FunctionComponent<PropsType> = ({ lang, onChoose }) => 
     }
   
     return (
-        <Button onClick={() => setIsOpen(!isOpen)} className="relative" color="secondary">
-            <Icon src={LANGS[currLang].flag} alt={lang} size="6"/>
-            <div className="mx-2 w-px h-1/2 bg-gray-400"/>
-            <Text className="px-2" text={LANGS[currLang].char} size="caption"/>
-            {isOpen && <ul className="absolute top-8 z-10 border drop-shadow bg-white rounded">
-                {Object.keys(LANGS).map((id) => (
-                    <li className="px-4 py-1 hover:bg-blue-100" id={id} key={`LangChooser-${id}`} onClick={handleChoose}>
-                        <Text text={id} size="large" />
-                    </li>
-                ))}
-            </ul>}
-        </Button>
+        
+        <Dropmenu content={
+            <Button className="relative" color="secondary">
+                <Icon src={LANGS[currLang].flag} alt={lang} size="6"/>
+                <div className="mx-2 w-px h-1/2 bg-gray-400"/>
+                <Text className="px-2" text={LANGS[currLang].char} size="caption"/>
+                
+            </Button>
+        }>
+            {Object.keys(LANGS).map((id) => (
+                <div className="px-4 py-1 hover:bg-blue-100" id={id} key={`LangChooser-${id}`} onClick={handleChoose}>
+                    <Text text={id} size="large" />
+                </div>
+            ))}
+        </Dropmenu>
     );
 };

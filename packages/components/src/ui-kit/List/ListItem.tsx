@@ -1,4 +1,4 @@
-import React, { FunctionComponent,CSSProperties,ReactNode } from "react";
+import React, { FunctionComponent,CSSProperties,ReactNode,MouseEvent } from "react";
 import { Text } from "../Text";
 
 export const LIST_ITEM_H = 40;
@@ -7,15 +7,15 @@ export type ListItemPropsType = {
     className?: string;
     id: string;
     text: string;
-    onClick?: (id:string)=>void;
+    onClick?: (id:string, event: MouseEvent)=>void;
     depth?: number;
     style?:CSSProperties;
 }
 
 export const ListItem:FunctionComponent<ListItemPropsType> = ({className,depth=0,id,text,onClick=()=>{},style})=>{
 
-    const handleClick = () => {
-        onClick(id);
+    const handleClick = (event: MouseEvent) => {
+        onClick(id,event);
     }
 
     const ofset:Array<ReactNode> = []
