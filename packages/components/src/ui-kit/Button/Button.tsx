@@ -2,10 +2,6 @@ import React, { FunctionComponent} from "react";
 import { BUTTON_COLORS, BUTTON_SIZES } from "./_constats";
 import { ButtonPropsType } from "./_types";
 
-
-    
-
-
 export const Button:FunctionComponent<ButtonPropsType> = 
     ({className, id, text, type, color='default', size='default', disabled=false, isFullWidth=false,onClick, children})=>{
 
