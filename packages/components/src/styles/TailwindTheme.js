@@ -11,6 +11,7 @@ const TailwindTheme = {
                 'desktop': '1280px',// => @media (min-width: 1280px) { ... }
             },
             maxWidth: {
+                9:	'2.25rem',	//36px
                 28:	'7rem', //112px	
                 32:	'8rem', //128px	
                 36:	'9rem', //144px	

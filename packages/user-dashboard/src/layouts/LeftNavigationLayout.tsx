@@ -24,8 +24,8 @@ export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({title
                 </Link>
             </div>
             <div className="flex flex-grow w-full ">
-                <LeftNavigation className="hidden tablet:flex border-r w-128 border rounded-primary"/>
-                <div className="flex-grow border rounded-primary">{children}</div>
+                <LeftNavigation className="hidden flex-grow flex-shrink-0 tablet:flex border-r w-64 border rounded-primary"/>
+                <div className="flex-grow w-80 border rounded-primary">{children}</div>
             </div>
         </div>
     );
