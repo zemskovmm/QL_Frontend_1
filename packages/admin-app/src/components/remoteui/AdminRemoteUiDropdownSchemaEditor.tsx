@@ -15,42 +15,48 @@ type typeFieldsStrings = keyof typeof typeFields;
 
 export class AdminRemoteUiDropdownSchemaEditorStore implements IRemoteUiData {
   @observable items: AdminRemoteUiDropdownSchemaEditorPropsItem[];
-  @observable type: string;
   @observable isValid = true;
   @observable value?: string;
   @observable required?: boolean;
   @observable id: number | string;
+  @observable type?: string;
 
-  constructor(initialValue: { id: string | number; required: boolean }, type: typeFieldsStrings) {
-    this.type = type;
+  constructor(initialValue: { id: string | number; required: boolean; type: typeFieldsStrings }) {
     this.id = initialValue.id;
     const { formEditorPage } = useRootStore();
-    const itemsInStore = formEditorPage.editor?.schemaEditor?.blockData ?? [];
+    const itemsInStore: FormSchemaFieldDto[] = formEditorPage.editor?.schemaEditor?.blockData ?? [];
     this.items = itemsInStore.reduce(
-      (accum: AdminRemoteUiDropdownSchemaEditorPropsItem[], el: FormSchemaFieldDto) => {
-        if (el.type === typeFields[type].toString() && !el.hide) {
-          return [...accum, { name: el.displayName, id: el.id, required: el.required }];
+      (accum: any[], el: FormSchemaFieldDto) => {
+        if (!el.hide) {
+          return [...accum, { name: el.displayName, id: el.id, required: el.required, type: el.type }];
         } else {
           return [...accum];
         }
       },
-      [{ name: "Empty", id: "", required: false }]
+      [{ name: "Empty", id: "", required: false, type: "" }]
     );
     this.value = this.items.find((el) => el.id === this.id)?.name;
+    this.type = this.items.find((el) => el.id === this.id)?.type;
   }
 
-  @action setValue(item: string, id: number | string, required?: boolean) {
+  @action setValue(item: string, id: number | string, required?: boolean, type?: string) {
     this.value = item;
     this.id = id;
     this.required = required;
+    this.type = type;
   }
 
-  getData(): { id: string | number; required: boolean } {
-    return { id: this.id, required: this.required ?? false };
+  getData(): { id: string | number; required: boolean; type: string } {
+    return { id: this.id, required: this.required ?? false, type: this.type ?? "" };
   }
 }
 
-type AdminRemoteUiDropdownSchemaEditorPropsItem = { name: string; id: string; required: boolean };
+type AdminRemoteUiDropdownSchemaEditorPropsItem = {
+  name: string;
+  id: string;
+  required: boolean;
+  type: typeFieldsStrings;
+};
 
 type AdminRemoteUiDropdownSchemaEditorProps = {
   store: AdminRemoteUiDropdownSchemaEditorStore;
@@ -61,12 +67,11 @@ export const AdminRemoteUiDropdownSchemaEditor = ({ store, label }: AdminRemoteU
   console.log(store.items);
   return useObserver(() => (
     <>
-      {store.type}
       <Select
         label={label}
         value={store.value ?? "Empty"}
         options={store.items}
-        selectChange={(item, id, required) => store.setValue(item, id, required)}
+        selectChange={(item, id, required, type) => store.setValue(item, id, required, type)}
       />
     </>
   ));

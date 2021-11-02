@@ -9,7 +9,7 @@ import {
 } from "@kekekeks/remoteui/src";
 import { AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemoteUiHtmlEditor";
 import { AdminRemoteUiImageFieldStore } from "src/components/remoteui/AdminRemoteUiImageEditor";
-import { action, computed, observable, runInAction, toJS } from "mobx";
+import { action, computed, observable, runInAction } from "mobx";
 import { findBlockInfo } from "@project/components/src/blocks";
 import { AdminFormPageLanguageDto } from "src/interfaces/AdminFormPageDto";
 import { RequestTracking } from "src/utils/Loadable";
@@ -54,8 +54,7 @@ export class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization 
     if (type == "Html") return new AdminRemoteUiHtmlEditorStore(data);
     if (type == "Image") return new AdminRemoteUiImageFieldStore(data);
     if (type == "Rows") return new AdminRemoteUiRowsStore(data);
-    if (type == "DropdownSchemaText" || type == "DropdownSchemaFile" || type == "DropdownSchemaFileList")
-      return new AdminRemoteUiDropdownSchemaEditorStore(data, type);
+    if (type == "DropdownSchema") return new AdminRemoteUiDropdownSchemaEditorStore(data);
     return null!;
   }
 }
