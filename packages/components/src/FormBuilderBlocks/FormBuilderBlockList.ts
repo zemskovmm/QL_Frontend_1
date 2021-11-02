@@ -1,12 +1,5 @@
 ﻿import { BlockTypeInfo } from "../blocks/blocks-info";
 import { CirclesBlockInfo } from "../blocks/CirclesBlock/circles";
-import { BasicInputBlockInfo } from "./BasicInputBlock/BasicInputBlock";
-import { BasicInputFileBlockInfo } from "./BasicInputFileBlock/BasicInputFileBlock";
-import { BasicInputFileListBlockInfo } from "./BasicInputFileListBlock/BasicInputFileListBlock";
+import { TypeInputBlockInfo } from "./TypeInputBlock/TypeInputBlock";
 
-export const FormBuilderBlockList: BlockTypeInfo[] = [
-  CirclesBlockInfo,
-  BasicInputBlockInfo,
-  BasicInputFileBlockInfo,
-  BasicInputFileListBlockInfo,
-];
+export const FormBuilderBlockList: BlockTypeInfo[] = [CirclesBlockInfo, TypeInputBlockInfo];

@@ -9,7 +9,7 @@ import {
 } from "@kekekeks/remoteui/src";
 import { AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemoteUiHtmlEditor";
 import { AdminRemoteUiImageFieldStore } from "src/components/remoteui/AdminRemoteUiImageEditor";
-import { action, computed, observable, runInAction, toJS } from "mobx";
+import { action, computed, observable, runInAction } from "mobx";
 import { findBlockInfo } from "@project/components/src/blocks";
 import { AdminFormPageLanguageDto } from "src/interfaces/AdminFormPageDto";
 import { RequestTracking } from "src/utils/Loadable";
@@ -17,9 +17,11 @@ import { fireAndAlertOnError } from "src/utils/util";
 import { AdminApi } from "src/clients/adminApiClient";
 import { FormBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { EditFormDto, GlobalSettingsDto, SchemaDto } from "../../../../interfaces/GlobalSettingsDto";
+import { EditFormDto, FormSchemaFieldDto, GlobalSettingsDto } from "../../../../interfaces/GlobalSettingsDto";
 import { FormBuilderBlockList } from "@project/components/src/FormBuilderBlocks/FormBuilderBlockList";
 import { AdminRemoteUiDropdownSchemaEditorStore } from "../../../../components/remoteui/AdminRemoteUiDropdownSchemaEditor";
+import { findIndex } from "lodash";
+
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -52,8 +54,7 @@ export class RemoteUiCustomization implements IRemoteUiEditorStoreCustomization 
     if (type == "Html") return new AdminRemoteUiHtmlEditorStore(data);
     if (type == "Image") return new AdminRemoteUiImageFieldStore(data);
     if (type == "Rows") return new AdminRemoteUiRowsStore(data);
-    if (type == "DropdownSchemaText" || type == "DropdownSchemaFile" || type == "DropdownSchemaFileList")
-      return new AdminRemoteUiDropdownSchemaEditorStore(data, type);
+    if (type == "DropdownSchema") return new AdminRemoteUiDropdownSchemaEditorStore(data);
     return null!;
   }
 }
@@ -291,10 +292,10 @@ export class FormEditorStore extends RequestTracking {
   async save() {
     if (this.isLoading) return;
     const dto = this.langs.serialize();
-    const schema = this.schemaEditor?.serialize();
+    const schema: FormSchemaFieldDto[] = this.schemaEditor?.serialize() ?? [];
     const personalCabinet = this.req.personalCabinet ?? {};
     personalCabinet[this.type] = {
-      schema: toJS(schema),
+      schema: schema,
       form: dto,
     };
     fireAndAlertOnError(() =>
@@ -308,7 +309,12 @@ export class FormEditorStore extends RequestTracking {
           footer: this.req.footer,
           personalCabinet: personalCabinet,
         };
-        await AdminApi.putGlobalSettings(this.lang, body);
+        try {
+          await AdminApi.putGlobalSettings(this.lang, body);
+          alert("Settings saved");
+        } catch (e) {
+          alert(e);
+        }
       })
     );
   }
@@ -317,86 +323,121 @@ export class FormEditorStore extends RequestTracking {
 const definitionSchema = {
   fields: [
     {
-      id: "schema",
-      type: "List",
-      name: "Schema",
-      listType: "schema",
+      id: "id",
+      type: "String",
+      name: "id",
     },
-  ],
-  subTypes: {
-    schema: {
-      fields: [
+    {
+      id: "displayName",
+      type: "String",
+      name: "displayName",
+    },
+    {
+      id: "type",
+      type: "Select",
+      name: "type",
+      possibleValues: [
         {
-          id: "id",
-          type: "String",
-          name: "id",
+          id: "text",
+          name: "Text",
         },
         {
-          id: "displayName",
-          type: "String",
-          name: "displayName",
+          id: "file",
+          name: "File",
         },
-        {
-          id: "type",
-          type: "Select",
-          name: "type",
-          possibleValues: [
-            {
-              id: "text",
-              name: "Text",
-            },
-            {
-              id: "file",
-              name: "File",
-            },
-            { id: "fileList", name: "File list" },
-          ],
-        },
-        {
-          id: "required",
-          type: "CheckBox",
-          name: "required",
-        },
-        {
-          id: "hide",
-          type: "CheckBox",
-          name: "hide",
-        },
+        { id: "fileList", name: "File list" },
       ],
     },
-  },
+    {
+      id: "required",
+      type: "CheckBox",
+      name: "required",
+    },
+    {
+      id: "hide",
+      type: "CheckBox",
+      name: "hide",
+    },
+  ],
+};
+
+const definitionSchemaEdit = {
+  fields: [
+    {
+      id: "required",
+      type: "CheckBox",
+      name: "required",
+    },
+    {
+      id: "hide",
+      type: "CheckBox",
+      name: "hide",
+    },
+  ],
 };
 
 class SchemeEditorStore {
-  @observable blockData: any;
+  @observable blockData: FormSchemaFieldDto[];
   @observable editSchemaShow: boolean = false;
+  @observable blockEdit: FormSchemaFieldDto | null = null;
+  @observable arrayIndex?: number;
 
-  constructor(private props: SchemaDto | null) {
-    this.blockData = props;
+  constructor(private props: FormSchemaFieldDto[] | null) {
+    this.blockData = props ?? [];
   }
 
   @computed get currentSchemeEditor(): RemoteUiEditorStore | null {
-    return new RemoteUiEditorStore(createDefinition(definitionSchema), this.blockData, new RemoteUiCustomization());
+    if (this.blockEdit) {
+      return new RemoteUiEditorStore(
+        createDefinition(definitionSchemaEdit),
+        this.blockEdit,
+        new RemoteUiCustomization()
+      );
+    } else {
+      return new RemoteUiEditorStore(createDefinition(definitionSchema), this.blockEdit, new RemoteUiCustomization());
+    }
   }
 
-  @action dismiss() {
+  dismiss() {
     this.editSchemaShow = false;
+    this.blockEdit = null;
+    this.arrayIndex = undefined;
   }
 
-  @action open() {
+  @action open(el: any, index: number) {
+    this.editSchemaShow = true;
+    this.blockEdit = el;
+    this.arrayIndex = index;
+  }
+
+  @action addNew() {
+    this.blockEdit = null;
     this.editSchemaShow = true;
   }
 
   public async save() {
     if (this.currentSchemeEditor == null) return;
     const data: any = await this.currentSchemeEditor.getDataAsync();
+    if (this.arrayIndex === undefined && (!data.id || !data.displayName)) {
+      alert(`${data.id ? "" : "Fill in the field id"} ${data.displayName ? "" : "Fill in the field displayName"}`);
+      return;
+    }
+    if (findIndex(this.blockData, ["id", data.id]) >= 0) {
+      alert(`this id is already taken`);
+      return;
+    }
     runInAction(() => {
-      this.blockData = data;
+      if (this.arrayIndex !== undefined) {
+        this.blockData[this.arrayIndex].required = data.required;
+        this.blockData[this.arrayIndex].hide = data.hide;
+      } else {
+        this.blockData.push(data);
+      }
       this.dismiss();
     });
   }
 
-  serialize(): any {
+  serialize(): FormSchemaFieldDto[] {
     return this.blockData;
   }
 }
