@@ -1,6 +1,9 @@
 const TailwindTheme = {
     darkMode: false, // or 'media' or 'class'
     theme: {
+        boxShadow: {
+            DEFAULT: '0 5px 10px rgba(0, 78, 255, 0.05), 0 10px 30px rgba(0, 78, 255, 0.03);',
+        },
         extend: {
             screens: {
                 'tablet': '640px',// => @media (min-width: 640px) { ... }
@@ -37,10 +40,15 @@ const TailwindTheme = {
                 320: '80rem', //1280px
             },
             colors: {
+                primary: 'var(--color-primary)',
+                secondary: 'var(--color-secondary)',
+                third: 'var(--color-third)',
+                bgprimary: 'var(--color-bg-primary)',
+                bgsecondary: 'var(--color-bg-secondary)',
+                bdprimary: 'var(--color-bd-primary)',
+                hover: 'var(--color-hover)',
                 'help': '#A8B5CC',
-                'primary': '#373737',
                 'error': '#e3342f',
-        
                 'button': '#ff6768',
                 'button-text': '#fff',
                 'button-secondary': '#ECEFF5',
@@ -54,7 +62,10 @@ const TailwindTheme = {
                 'medium': ['1rem', '1.5rem'],
                 'small': ['0.875rem', '1.25rem'],
                 'caption': ['0.75rem', '1rem'],
-            }
+            },
+            borderRadius: {
+                primary: '0.1875rem'
+            },
         },
     },
     variants: {

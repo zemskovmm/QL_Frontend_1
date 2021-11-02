@@ -18,14 +18,14 @@ export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({title
     return (
         <div className="h-full flex flex-col">
             <div className="flex justify-between py-4" >
-                <Text text={title} size="title-large"/>
+                <Text text={title} size="title-large" isBold/>
                 <Link href={NEW_APPLICATION_PATH}>
                     <Button text={NEW_APPLICATION_LANG} />
                 </Link>
             </div>
-            <div className="flex flex-grow w-full border">
-                <LeftNavigation className="hidden tablet:flex border-r w-128"/>
-                <div className="flex-grow">{children}</div>
+            <div className="flex flex-grow w-full ">
+                <LeftNavigation className="hidden tablet:flex border-r w-128 border rounded-primary"/>
+                <div className="flex-grow border rounded-primary">{children}</div>
             </div>
         </div>
     );
