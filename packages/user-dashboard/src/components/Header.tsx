@@ -27,7 +27,7 @@ export const Header: FunctionalComponent = () => {
         <Container className="flex justify-between items-center h-full">
             <Link href={HOME_PATH}><Logo/></Link>
 
-            <div className="relative inline-flex gap-2 items-center">
+            <div className="relative inline-flex gap-5 items-center">
                 <LangChooser 
                     lang={lang} 
                     urls={langUrls}

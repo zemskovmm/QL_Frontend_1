@@ -6,7 +6,7 @@ export const Button:FunctionComponent<ButtonPropsType> =
     ({className, id, text, type, color='default', size='default', disabled=false, isFullWidth=false,onClick, children})=>{
 
     const classes = [
-        'rounded text-medium whitespace-nowrap',
+        'rounded-primary text-medium whitespace-nowrap',
         'flex items-center justify-center',
         isFullWidth ? 'w-full' : '',
         BUTTON_COLORS[color],

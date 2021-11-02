@@ -67,40 +67,42 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
         route(id);
     }
 
-    return (<div className={`p-4 h-full flex flex-col ${className}`}>
-        <IconLabel 
-            className="mt-5 mb-8"
-            iconSrc={USER_ICON}
-            text={`${lastName} ${firstName}`}
-            subText={email}
-        />
-        <div className="relative flex-grow">
-            <div className="absolute w-full h-full top-0 left-0 flex flex-col">
-                
-                <ListItem id={PROFILE_PATH} text={PROFILE_LANG} onClick={handleClick}/>
-                <ListItem 
-                    className="flex-shrink-0"  
-                    id="MY_APPLICATIONS_LANG" 
-                    text={MY_APPLICATIONS_LANG} 
-                    onClick={(id,event)=>{
-                        setApplicationsOpen(!isApplicationsOpen)
-                        event.stopPropagation();
-                    }}/>
+    return (
+        <div className={` p-4 h-full flex flex-col ${className}`}>
+            <IconLabel 
+                className="mt-5 mb-8"
+                iconSrc={USER_ICON}
+                text={`${lastName} ${firstName}`}
+                subText={email}
+            />
+            <div className="relative flex-grow">
+                <div className="absolute w-full h-full top-0 left-0 flex flex-col">
+                    
+                    <ListItem id={PROFILE_PATH} text={PROFILE_LANG} onClick={handleClick}/>
+                    <ListItem 
+                        className="flex-shrink-0"  
+                        id="MY_APPLICATIONS_LANG" 
+                        text={MY_APPLICATIONS_LANG} 
+                        onClick={(id,event)=>{
+                            setApplicationsOpen(!isApplicationsOpen)
+                            event.stopPropagation();
+                        }}/>
 
-                {isApplicationsOpen && <InfinityList 
-                    depth={1}
-                    className="flex-shrink" 
-                    count={applications.length} 
-                    onClick={handleClick}
-                    onItemRender={handleItemRender}
-                />}
+                    {isApplicationsOpen && <InfinityList 
+                        depth={1}
+                        className="flex-shrink" 
+                        count={applications.length} 
+                        onClick={handleClick}
+                        onItemRender={handleItemRender}
+                    />}
 
-                <ListItem id={SETTINGS_PATH} text={SETTINGS_LANG} onClick={handleClick}/>
+                    <ListItem id={SETTINGS_PATH} text={SETTINGS_LANG} onClick={handleClick}/>
+                </div>
             </div>
+            
+            <Button className="self-end my-4 w-32" text="Выход" onClick={logoutAction} />
+            
+            
         </div>
-        
-        <Button className="my-4" text="Выход" color="secondary" onClick={logoutAction} />
-        
-        
-    </div>);
+    );
 });
