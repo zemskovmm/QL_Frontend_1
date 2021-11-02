@@ -1,6 +1,6 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../../blocks/blocks-info";
-import preview from "./preview.png";
+import preview from "./preview.jpg";
 import { BasicInputFileListBlock } from "./BasicInputFileListBlock/BasicInputFileListBlock";
 import { BasicInputFileBlock } from "./BasicInputFileBlock/BasicInputFileBlock";
 import { BasicInputBlock } from "./BasicInputBlock/BasicInputBlock";
