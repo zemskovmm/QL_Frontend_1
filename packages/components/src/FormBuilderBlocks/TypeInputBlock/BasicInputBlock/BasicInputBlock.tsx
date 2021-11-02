@@ -9,19 +9,22 @@ export interface BasicInputBlockElement {
 
 export const BasicInputBlock = (props: BasicInputBlockElement) => {
   const cl = useContext(ComponentHostDashboardContext);
-  console.log(cl?.personalInfo);
   return (
     <div className="py-12">
       <label className={`flex`}>
         <span className={`mr-10`}>{props.label}</span>
-        <input
-          id={String(props.schema.id)}
-          required={props.schema.required}
-          type="text"
-          placeholder={props.placeholder}
-          value={cl?.personalInfo[props.schema.id]}
-          onChange={(e) => (cl!.personalInfo[props.schema.id] = e.target.value)}
-        />
+        {cl ? (
+          <input
+            id={String(props.schema.id)}
+            required={props.schema.required}
+            type="text"
+            placeholder={props.placeholder}
+            value={cl?.personalInfo[props.schema.id]}
+            onChange={(e) => (cl!.personalInfo[props.schema.id] = e.target.value)}
+          />
+        ) : (
+          "input text"
+        )}
       </label>
     </div>
   );

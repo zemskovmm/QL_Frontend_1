@@ -28,7 +28,7 @@ export const BasicInputFileListBlock = (props: BasicInputFileListBlockElement) =
             }}
           />
         ) : (
-          ""
+          "input file list"
         )}
       </label>
       <div className={`flex`}>

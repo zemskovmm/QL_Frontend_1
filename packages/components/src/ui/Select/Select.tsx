@@ -29,7 +29,7 @@ const Select = ({ label, value, options, selectChange }: SelectProps) => {
                   onClick={() => selectChange(el.name, el.id, el?.required, el?.type)}
                   className={el.name === value ? "font-bold" : ""}
                 >
-                  {el.name}
+                  {el.name} {el?.type}
                 </li>
               ))}
             </ul>

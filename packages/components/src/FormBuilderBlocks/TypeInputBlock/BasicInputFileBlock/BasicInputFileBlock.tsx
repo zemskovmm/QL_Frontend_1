@@ -23,7 +23,7 @@ export const BasicInputFileBlock = (props: BasicInputFileBlockElement) => {
             }}
           />
         ) : (
-          ""
+          "input file"
         )}
       </label>
     </div>
