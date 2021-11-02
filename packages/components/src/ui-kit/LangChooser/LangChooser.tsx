@@ -1,51 +1,54 @@
-import React,{ FunctionComponent,useState,MouseEvent } from "react";
-import { Icon } from "@project/components/src/ui-kit/Icon";
-import { Text } from "@project/components/src/ui-kit/Text";
-import { Button } from "@project/components/src/ui-kit/Button";
-import { Dropmenu } from "@project/components/src/ui-kit/Dropmenu";
-import EN_FLAG from "@project/components/src/assets/img/flags/en.svg"
-import RU_FLAG from "@project/components/src/assets/img/flags/ru.svg"
-import FR_FLAG from "@project/components/src/assets/img/flags/fr.svg"
-import ESP_FLAG from "@project/components/src/assets/img/flags/esp.svg"
-import CN_FLAG from "@project/components/src/assets/img/flags/cn.svg"
+import React,{ FunctionComponent,useState,ReactNode } from "react";
+import { FlagIcon } from "@project/components/src/ui-kit/FlagIcon";
 
 
-const LANGS:{[key:string]:{char:string,flag:string}} = {
-    en: {char:"$", flag:EN_FLAG },
-    fr: {char:"€", flag: FR_FLAG},
-    ru: {char:"₽", flag:RU_FLAG },
-    cn: {char:"¥", flag:CN_FLAG },
-    esp: {char:"P", flag:ESP_FLAG },
+import cn from "classnames";
+import styles from "./langChooser.module.css";
+
+
+const LANGS:{[key:string]:string} = {
+    en: "$",
+    fr: "€",
+    ru: "₽", 
+    cn: "¥", 
+    esp: "P",
 };
 
 
-type PropsType = {
-    lang: string;
-    onChoose: (lang:string)=>void
+type LinkPropsType = {
+    url:string;
+    lang:string;
 }
 
-export const LangChooser:FunctionComponent<PropsType> = ({ lang, onChoose }) => {
+export type LangChooserPropsType = {
+    lang: string;
+    urls: { [key: string]: string;};
+    linkComponent: (props:LinkPropsType)=>ReactNode;
+}
 
+export const LangChooser:FunctionComponent<LangChooserPropsType> = ({ 
+    lang,
+    urls, 
+    linkComponent,
+}) => {
+    const [isOpen, setIsOpen] = useState(false);
     const currLang = (lang in LANGS) ? lang : "en"
-    const handleChoose = (event:MouseEvent<HTMLElement>)=>{
-        onChoose(event.currentTarget.id);
-    }
-  
     return (
-        
-        <Dropmenu content={
-            <Button className="relative" color="secondary">
-                <Icon src={LANGS[currLang].flag} alt={lang} size="6"/>
-                <div className="mx-2 w-px h-1/2 bg-gray-400"/>
-                <Text className="px-2" text={LANGS[currLang].char} size="caption"/>
-                
-            </Button>
-        }>
-            {Object.keys(LANGS).map((id) => (
-                <div className="px-4 py-1 hover:bg-blue-100" id={id} key={`LangChooser-${id}`} onClick={handleChoose}>
-                    <Text text={id} size="large" />
-                </div>
-            ))}
-        </Dropmenu>
+        <div onClick={() => setIsOpen(!isOpen)} className={cn(styles.lang, "bg-button-secondary", "rounded-primary")}>
+            <FlagIcon lang={currLang} />
+            <span>{LANGS[currLang]}</span>
+            {Object.keys(urls).length > 0 && (
+            <>
+                <div className={isOpen ? styles.back : ""} />
+                <ul className={isOpen ? styles.open : ""}>
+                {Object.keys(urls).map((el, index) => (
+                    <li key={el + index + "LangChooser"} className={el === lang ? "font-bold" : ""}>
+                        {linkComponent({lang:el,url:urls[el]})}
+                    </li>
+                ))}
+                </ul>
+            </>
+            )}
+        </div>
     );
 };

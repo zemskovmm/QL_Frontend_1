@@ -2,13 +2,11 @@ import { InfinityList, ListItem, ListItemType } from "@project/components/src/ui
 import { FunctionalComponent } from "preact";
 import { memo } from "preact/compat";
 import { useEffect, useState } from "preact/hooks";
-import { route } from "preact-router";
+import { route,Link } from "preact-router";
 import { useLocalesStore } from "stores/LocalesStore";
 import { MY_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
 import { useApplicationsState } from "stores/ApplicationsState";
-import { Link } from "preact-router";
 import { useUserStatuseStore } from "stores/UserStatuseStore";
-import { Text } from "@project/components/src/ui-kit/Text";
 import { IconLabel } from "@project/components/src/ui-kit/IconLabel";
 import USER_ICON from "@project/components/src/assets/icons/user.svg";
 import { Button } from "@project/components/src/ui-kit/Button";
@@ -79,7 +77,7 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
         <div className="relative flex-grow">
             <div className="absolute w-full h-full top-0 left-0 flex flex-col">
                 
-                <Link onClick={e=>e.preventDefault()} href={PROFILE_PATH}><ListItem id={PROFILE_PATH} text={PROFILE_LANG}/></Link>
+                <ListItem id={PROFILE_PATH} text={PROFILE_LANG} onClick={handleClick}/>
                 <ListItem 
                     className="flex-shrink-0"  
                     id="MY_APPLICATIONS_LANG" 
@@ -97,8 +95,7 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
                     onItemRender={handleItemRender}
                 />}
 
-                <Link onClick={e=>e.preventDefault()} href={SETTINGS_PATH}><ListItem id={SETTINGS_PATH} text={SETTINGS_LANG}/></Link>
-                
+                <ListItem id={SETTINGS_PATH} text={SETTINGS_LANG} onClick={handleClick}/>
             </div>
         </div>
         

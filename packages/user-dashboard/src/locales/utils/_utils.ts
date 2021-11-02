@@ -16,6 +16,16 @@ export const changeLangInUrl = (url:string,lang:string):string => {
     return url.replace(/^\/\w+/, `/${lang}`)
 }
 
+export const getLangIUrls = (url:string):{[key:string]:string} => {
+    return {
+        en: changeLangInUrl(url,"en"),
+        fr: changeLangInUrl(url,"fr"),
+        ru: changeLangInUrl(url,"ru"),
+        cn: changeLangInUrl(url,"cn"),
+        esp: changeLangInUrl(url,"esp"),
+    };
+}
+
 export const getTranslate = (lang:string):Translate => {
     if(lang in LANGS_TRANSLATE){
         return LANGS_TRANSLATE[lang]
