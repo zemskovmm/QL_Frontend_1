@@ -19,6 +19,7 @@ export const ru: Translate = {
     GO_TO_LANG: "Перейти",
     MY_APPLICATIONS_LANG: "Мои заявки",
     NEW_APPLICATION_LANG: "Новая заявка",
+    NOTHING_HERE_YET: "Здесь пока ничего нет",
     PROFILE_LANG: "Профиль",
     SETTINGS_LANG: "Настройки",
     TAKE_LANGUAGE_COURSES_LANG: "Пройдите языковые курсы",

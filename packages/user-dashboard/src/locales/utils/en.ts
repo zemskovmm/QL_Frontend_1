@@ -17,6 +17,7 @@ export const en: Translate = {
     GO_TO_LANG: "Go to",
     MY_APPLICATIONS_LANG: "My applications",
     NEW_APPLICATION_LANG: "New application",
+    NOTHING_HERE_YET: "There is nothing here yet",
     PROFILE_LANG: "Profile",
     SETTINGS_LANG: "Settings",
     TAKE_LANGUAGE_COURSES_LANG: "Take language courses",
