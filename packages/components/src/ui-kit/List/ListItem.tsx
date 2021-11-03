@@ -27,11 +27,16 @@ export const ListItem:FunctionComponent<ListItemPropsType> = ({className,depth=0
         ofset.push(<div className="pl-4"/>)
     }
 
+    const iconClassName = [
+        "transition duration-200 ease-in-out",
+        isOpenArrow?"transform rotate-90":"",
+    ].join(' ')
+
     return (
         <div className={`cursor-pointer relative border-l border-t border-r h-10 flex-shrink-0 ${className}`} onClick={handleClick} style={style} >
             <div className="relative -bottom-px border-b flex items-center justify-between h-full px-4 py-1"  >
                 <div className="flex max-h-9 overflow-hidden">{ofset}<Text text={text} size="small"/></div>
-                {withArrow && <Icon className={isOpenArrow?"transform rotate-90":""} src={ RIGHT_ARROW_ICON } size="8"/>}
+                {withArrow && <Icon className={iconClassName} src={ RIGHT_ARROW_ICON } size="8"/>}
             </div>
         </div>
     )
