@@ -6,7 +6,7 @@ const TailwindTheme = {
         },
         extend: {
             screens: {
-                'tablet': '640px',// => @media (min-width: 640px) { ... }
+                'tablet': '767px',// => @media (min-width: 767px) { ... }
                 'laptop': '1024px',// => @media (min-width: 1024px) { ... }
                 'desktop': '1280px',// => @media (min-width: 1280px) { ... }
             },
@@ -30,6 +30,7 @@ const TailwindTheme = {
                 160: '40rem', //640px
                 208: '52rem', //832px
                 256: '64rem', //1024px
+                300: '75rem', //1200px
                 320: '80rem', //1280px
             },
             spacing: {
@@ -38,6 +39,7 @@ const TailwindTheme = {
                 160: '40rem', //640px
                 208: '52rem', //832px
                 256: '64rem', //1024px
+                300: '75rem', //1200px
                 320: '80rem', //1280px
             },
             colors: {

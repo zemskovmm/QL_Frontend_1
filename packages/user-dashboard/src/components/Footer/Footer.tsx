@@ -18,7 +18,7 @@ export const Footer: FunctionalComponent<PropsType> = memo(({className}) => {
     },[lang,getGlobalSettings]);
 
     return (
-        <Container className={`bg-blue-400 py-4 ${className}`}> 
+        <Container className={`px-3.5 bg-blue-400 py-4 ${className}`}> 
             {JSON.stringify(gs,null,"  ")}
         </Container>
     );

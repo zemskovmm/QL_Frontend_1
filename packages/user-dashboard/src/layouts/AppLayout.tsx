@@ -11,7 +11,7 @@ export const AppLayout: FunctionalComponent<PropsType> = ({ children }) => {
   return (
       <div className="flex flex-col h-full">
         <Header />
-        <div className="px-2 flex-grow">
+        <div className="px-3.5 flex-grow">
           <Container className="h-full">{children}</Container>
         </div>
         {/*<Footer/>*/}
