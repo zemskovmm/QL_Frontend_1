@@ -1,7 +1,6 @@
 import React, { FunctionComponent,CSSProperties,ReactNode,MouseEvent } from "react";
 import { Icon } from "@project/components/src/ui-kit/Icon";
 import { Text } from "../Text";
-import DOWN_ARROW_ICON from "@project/components/src/assets/icons/down-arrow.svg"
 import RIGHT_ARROW_ICON from "@project/components/src/assets/icons/right-arrow.svg"
 
 export const LIST_ITEM_H = 40;
@@ -29,10 +28,10 @@ export const ListItem:FunctionComponent<ListItemPropsType> = ({className,depth=0
     }
 
     return (
-        <div className={`relative border-l border-t border-r h-10 flex-shrink-0 ${className}`} onClick={handleClick} style={style} >
+        <div className={`cursor-pointer relative border-l border-t border-r h-10 flex-shrink-0 ${className}`} onClick={handleClick} style={style} >
             <div className="relative -bottom-px border-b flex items-center justify-between h-full px-4 py-1"  >
                 <div className="flex max-h-9 overflow-hidden">{ofset}<Text text={text} size="small"/></div>
-                {withArrow && <Icon src={ isOpenArrow ? DOWN_ARROW_ICON: RIGHT_ARROW_ICON } size="8"/>}
+                {withArrow && <Icon className={isOpenArrow?"transform rotate-90":""} src={ RIGHT_ARROW_ICON } size="8"/>}
             </div>
         </div>
     )
