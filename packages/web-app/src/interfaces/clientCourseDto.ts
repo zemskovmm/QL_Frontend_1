@@ -3,7 +3,6 @@
         public List<UniversityDegreeDto> UniversityDegrees { get; set; }*
 
  */
-import { ClientCommonTraitLanguageDto } from "src/interfaces/clientCommonTraitLanguageDto";
 import { ClientSchoolDto } from "./clientSchoolDto";
 
 export interface ClientTraitDto {

@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import style from "./breadcrumbs.module.css";
 import { LocaleKeys } from "src/locales/locales";
-import { useLocalizedText } from "src/components/common/LocalizedText";
 import { IntlShape, useIntl } from "react-intl";
 import { hasOwnProperty } from "src/utilities/utils";
 

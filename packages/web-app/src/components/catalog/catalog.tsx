@@ -1,12 +1,7 @@
 import { NextRouter, useRouter } from "next/router";
-import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilterDto";
-import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
-import stringify from "fast-json-stable-stringify";
 import { CatalogFilterRequestDto, siteApi } from "src/clients/siteApiClient";
 import { ParsedUrlQuery } from "querystring";
-import { LoadingIf } from "src/components/utilities/Loading";
-import { Paginator } from "src/components/utilities/Paginator";
 import { CatalogView } from "src/components/catalog/catalogView";
 
 export interface CatalogProps<T> {

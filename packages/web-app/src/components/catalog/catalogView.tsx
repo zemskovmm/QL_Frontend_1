@@ -159,14 +159,6 @@ function CatalogItems<T>(props: {
   );
 }
 
-const linkHousing: { [key: string]: string } = {
-  en: "https://housing.quartier-latin.com/en/housing",
-  ru: "https://housing.quartier-latin.com/housing",
-  cn: "https://housing.quartier-latin.com/cn/housing",
-  fr: "https://housing.quartier-latin.com/fr/housing",
-  esp: "",
-};
-
 export function CatalogView<T>(props: {
   elementRenderer: (element: T) => JSX.Element;
   filters: CatalogFilterDto[] | undefined;

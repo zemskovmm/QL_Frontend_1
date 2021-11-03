@@ -1,5 +1,4 @@
 import { useIntl } from "react-intl";
-import { FooterDataDto } from "src/interfaces/footerDataDto";
 import styles from "./main.module.css";
 import cn from "classnames";
 import Logo from "src/assets/images/logoFooter.svg";

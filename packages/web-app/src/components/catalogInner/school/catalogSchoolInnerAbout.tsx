@@ -77,7 +77,7 @@ export const CatalogSchoolInnerAbout: FC<CatalogInnerSchoolAboutProps> = ({ data
               </span>
               <div className={style.info__columnItem__list}>
                 {data.traits.namedTraits["sites"]?.map((el, i) => (
-                  <a href={el.name} key={`sites ${i} ${el.name}`}>
+                  <a href={`https://${el.name}`} key={`sites ${i} ${el.name}`} target={`_blank`}>
                     {el.name}
                   </a>
                 ))}
