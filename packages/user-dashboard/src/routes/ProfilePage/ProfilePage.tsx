@@ -6,12 +6,10 @@ import { useContext, useEffect } from "preact/hooks";
 import { useProfileStore } from "./_store";
 import { useUserStatuseStore, UserStatuseUserProps } from "stores/UserStatuseStore";
 import { useLocalesStore } from "stores/LocalesStore";
-import { useRouterStore } from "stores/RouterStore";
 import { LeftNavigationLayout } from "layouts/LeftNavigationLayout";
 import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
 import { RowsPresenter } from "@project/components/src/blocks";
 import { Preload } from "@project/components/src/ui-kit/Preload";
-import PRELOAD_ICON from "assets/images/preload.gif";
 import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
 
 const ProfilePage: FunctionalComponent = () => {
@@ -20,11 +18,12 @@ const ProfilePage: FunctionalComponent = () => {
   const { putUserAction, isLoading } = useProfileStore();
   const store = useUserStatuseStore();
   const {
-    user: { firstName, lastName, phone },
+    user: { firstName, lastName, phone, personalInfo },
   } = store;
   const { handleSubmit, control, setValue } = useForm<UserStatuseUserProps>();
   const { isLoading: isLoadingGS, gs, getGlobalSettings } = useGlobalSettingsStore();
   const { lang } = useLocalesStore();
+  cl!.personalInfo = personalInfo;
 
   useEffect(() => {
     getGlobalSettings(lang);
