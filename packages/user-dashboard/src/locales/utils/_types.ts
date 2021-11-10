@@ -10,9 +10,11 @@ export type Translate={
     GO_TO_LANG: string;
     MY_APPLICATIONS_LANG: string;
     NEW_APPLICATION_LANG: string;
+    NOTHING_HERE_YET: string;
     PROFILE_LANG: string;
     SETTINGS_LANG: string;
     TAKE_LANGUAGE_COURSES_LANG: string;
+    
     WHAT_SERVICES_LANG: string;
     
 }

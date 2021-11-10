@@ -10,6 +10,7 @@ import { useUserStatuseStore } from "stores/UserStatuseStore";
 import { IconLabel } from "@project/components/src/ui-kit/IconLabel";
 import USER_ICON from "@project/components/src/assets/icons/user.svg";
 import { Button } from "@project/components/src/ui-kit/Button";
+import { Text } from "@project/components/src/ui-kit/Text";
 
 type PropsType = {
     className?: string;
@@ -29,6 +30,7 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
         APPLICATION_TYTLES_LANG,
         PROFILE_LANG,
         MY_APPLICATIONS_LANG,
+        NOTHING_HERE_YET,
         SETTINGS_LANG,
     } = useLocalesStore();
 
@@ -86,7 +88,9 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
                         onClick={(id,event)=>{
                             setApplicationsOpen(!isApplicationsOpen)
                             event.stopPropagation();
-                        }}/>
+                        }}
+                        isOpenArrow={isApplicationsOpen}
+                        withArrow/>
 
                     {isApplicationsOpen && <InfinityList 
                         depth={1}
@@ -95,6 +99,9 @@ export const LeftNavigation: FunctionalComponent<PropsType> = memo(({className})
                         onClick={handleClick}
                         onItemRender={handleItemRender}
                     />}
+                    {isApplicationsOpen && applications.length==0 && 
+                        <ListItem depth={1} id="NOTHING_HERE_YET" text={NOTHING_HERE_YET}/>
+                    }
 
                     <ListItem id={SETTINGS_PATH} text={SETTINGS_LANG} onClick={handleClick}/>
                 </div>
