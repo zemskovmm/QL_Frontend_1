@@ -14,7 +14,6 @@ export interface TypeInputBlockElement {
 export const TypeInputBlock = (props: TypeInputBlockElement) => {
   return (
     <>
-      {props.schema.type}
       {props.schema.type === "fileList" ? (
         <BasicInputFileListBlock
           label={props.label}

@@ -10,11 +10,16 @@ export interface BasicInputFileBlockElement {
 export const BasicInputFileBlock: any = (props: BasicInputFileBlockElement) => {
   const cl = useContext(ComponentHostDashboardContext);
   const [fileState, setFileState] = useState(false);
+
+  if (cl) {
+    setFileState(Boolean(cl?.personalInfo[props.schema.id]));
+  }
+
   return (
     <div className="py-12">
       {!cl ? (
         "input file"
-      ) : cl.personalInfo[props.schema.id] ? (
+      ) : fileState ? (
         <div>
           {cl.personalInfo[props.schema.id]}{" "}
           <button
