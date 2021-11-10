@@ -8,25 +8,25 @@ import { Link } from "preact-router";
 import { useRouterStore } from "stores/RouterStore";
 
 type PropsType = {
-    title:string;
-}
+  title: string;
+};
 
-export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({title, children}) => {
-    const { NEW_APPLICATION_LANG } = useLocalesStore();
-    const { NEW_APPLICATION_PATH } = useRouterStore();
+export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({ title, children }) => {
+  const { NEW_APPLICATION_LANG } = useLocalesStore();
+  const { NEW_APPLICATION_PATH } = useRouterStore();
 
-    return (
-        <div className="h-full flex flex-col">
-            <div className="flex justify-between py-4" >
-                <Text text={title} size="title-large" isBold/>
-                <Link href={NEW_APPLICATION_PATH}>
-                    <Button text={NEW_APPLICATION_LANG} />
-                </Link>
-            </div>
-            <div className="flex flex-grow w-full ">
-                <LeftNavigation className="hidden tablet:flex border-r w-128 border rounded-primary"/>
-                <div className="flex-grow border rounded-primary">{children}</div>
-            </div>
-        </div>
-    );
+  return (
+    <div className=" flex flex-col my-auto">
+      <div className="flex justify-between pb-4">
+        <Text text={title} size="title-large" isBold />
+        <Link href={NEW_APPLICATION_PATH}>
+          <Button text={NEW_APPLICATION_LANG} />
+        </Link>
+      </div>
+      <div className="flex flex-grow w-full h-screen MainContainer">
+        <LeftNavigation className="hidden tablet:flex border-r w-128 border rounded-primary flex flex-col leftNavigation" />
+        <div className="flex-grow border rounded-primary lg:overflow-y-scroll">{children}</div>
+      </div>
+    </div>
+  );
 });
