@@ -25,7 +25,7 @@ export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({ titl
       </div>
       <div className="flex flex-grow w-full h-screen MainContainer">
         <LeftNavigation className="hidden tablet:flex border-r w-128 border rounded-primary flex flex-col leftNavigation" />
-        <div className="flex-grow border rounded-primary lg:overflow-y-scroll">{children}</div>
+        <div className="flex-grow border rounded-primary customScroll">{children}</div>
       </div>
     </div>
   );

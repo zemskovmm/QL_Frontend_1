@@ -43,7 +43,6 @@ export const BasicInputFileBlock: any = (props: BasicInputFileBlockElement) => {
           <input
             id={String(props.schema?.id)}
             type="file"
-            value={cl?.personalInfo[props.schema.id]}
             onChange={async (e) => {
               if (e.target.files) {
                 const data = new FormData();

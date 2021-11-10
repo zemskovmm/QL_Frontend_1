@@ -47,8 +47,20 @@ img {
   height: 100%;
 }
 
+.customScroll{
+  overflow-y: scroll;
+}
 
-@media (min-width: 600px) {
+.customScroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.customScroll::-webkit-scrollbar-thumb {
+  background: #E6E6E6;
+  border-radius: 100px;
+}
+
+@media (min-width: 640px) {
   .MainContainer{
     max-height: 455px;
   }
