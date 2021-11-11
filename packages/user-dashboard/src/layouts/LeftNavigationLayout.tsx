@@ -15,7 +15,7 @@ export const LeftNavigationLayout: FunctionalComponent<{ title: string }> = memo
       <div className="flex justify-between pb-4">
         <h1 className={`text-4xl font-bold`}>{title}</h1>
         <Link href={NEW_APPLICATION_PATH}>
-          <Button text={NEW_APPLICATION_LANG} />
+          <Button text={NEW_APPLICATION_LANG} color={"red"} />
         </Link>
       </div>
       <div className="flex flex-grow w-full h-screen MainContainer">

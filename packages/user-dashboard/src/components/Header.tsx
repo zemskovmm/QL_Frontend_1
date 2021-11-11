@@ -51,7 +51,7 @@ export const Header: FunctionalComponent = () => {
             </>
           ) : (
             <Link href={SIGN_IN_PATH}>
-              <Button text="Войти" color="secondary" />
+              <Button text="Войти" color="red" />
             </Link>
           )}
         </div>

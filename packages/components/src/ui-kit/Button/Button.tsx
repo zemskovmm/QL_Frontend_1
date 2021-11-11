@@ -15,14 +15,14 @@ export const Button: FunctionComponent<ButtonPropsType> = ({
   onClick,
   children,
 }) => {
-  const classes = [
-    "rounded-primary text-medium whitespace-nowrap",
-    "flex items-center justify-center",
-    isFullWidth ? "w-full" : "",
-    BUTTON_COLORS[color],
-    BUTTON_SIZES[size],
-    className ? className : "",
-  ].join(" ");
+  let classes = `text-white font-bold py-2 px-4 rounded inline-block transition ${className} `;
+  if (color == "default") classes += "bg-gray-500 hover:bg-gray-100 hover:text-black";
+  if (color == "primary") classes += "bg-blue-500 hover:bg-blue-100 hover:text-black";
+  if (color == "success") classes += "bg-green-400 hover:bg-green-100 hover:text-black";
+  if (color == "danger") classes += "bg-red-600 hover:bg-red-900";
+  if (color == "red") classes += "bg-red-500 hover:bg-red-400";
+  if (color == "gray") classes += "bg-gray-400 hover:bg-gray-100 hover:text-black";
+  if (color == "save") classes += "bg-blue-500 hover:bg-blue-100 hover:text-black fixed right-10 bottom-10 z-50";
 
   const handleOnClick = () => {
     onClick && onClick(id);

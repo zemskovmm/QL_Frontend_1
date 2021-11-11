@@ -55,7 +55,7 @@ export const ApplicationTab: FunctionalComponent<PropsType> = ({ className, appl
             <RowsPresenter
               rows={gs?.personalCabinet[application.type.toString().toLowerCase()].form.pageData.rows ?? []}
             />
-            <Button className="ml-auto my-2" text="Обновить" type="submit" disabled={isLoadingStore} />
+            <Button className="ml-auto my-2" text="Обновить" type="submit" disabled={isLoadingStore} color={`red`} />
           </form>
         ) : (
           "Form is not allowed"

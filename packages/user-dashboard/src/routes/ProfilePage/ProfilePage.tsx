@@ -58,7 +58,7 @@ const ProfilePage: FunctionalComponent = () => {
               type="tel"
             />
             {gs && <RowsPresenter rows={gs?.personalCabinet["profile"].form.pageData.rows ?? []} />}
-            <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} />
+            <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} color={`red`} />
           </form>
         </div>
       </Preload>

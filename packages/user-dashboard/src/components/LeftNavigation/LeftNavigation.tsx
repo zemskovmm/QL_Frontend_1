@@ -78,7 +78,7 @@ export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(
         {isApplicationsOpen && applications.length == 0 && <ListItem depth={1} text={NOTHING_HERE_YET} />}
         <ListItem text={SETTINGS_LANG} onClick={() => route(SETTINGS_PATH)} />
       </div>
-      <Button className="self-end mt-4 mb-2.5 w-32" text="Выход" onClick={logoutAction} />
+      <Button className="self-end mt-auto mb-2.5 w-32" text="Выход" onClick={logoutAction} color={"red"} />
     </div>
   );
 });
