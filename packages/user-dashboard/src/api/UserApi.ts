@@ -11,11 +11,11 @@ export type QlClientRegisterProps = {
 };
 
 export type QlClientUserProps = {
-  firstName: string|null;
-  lastName: string|null;
-  phone: string|null;
-  email?: string|null;
-  personalInfo: any|null;
+  firstName: string | null;
+  lastName: string | null;
+  phone: string | null;
+  email?: string | null;
+  personalInfo: any | null;
 };
 
 export class UserApi {
@@ -24,7 +24,7 @@ export class UserApi {
   heartbeat = async () => request("portal/heartbeat", null, "POST");
   logout = async () => request("portal/logout", null, "GET");
   getUser = async () => request<QlClientUserProps>("portal/user", null, "GET");
-  putUser = async (props: QlClientUserProps) => request("portal/user", props, "PUT");
+  putUser = async (props: QlClientUserProps) => request("portal/user", props, "PUT", false);
 }
 
 export const userApi = new UserApi();
