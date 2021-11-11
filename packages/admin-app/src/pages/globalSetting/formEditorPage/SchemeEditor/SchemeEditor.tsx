@@ -13,7 +13,7 @@ export const SchemeEditor: FC<{ s: FormEditorStore }> = ({ s }) => {
     <div>
       {s.schemaEditor?.blockData && (
         <div className={`mb-4`}>
-          {s.schemaEditor.blockData.map((el: FormSchemaFieldDto, index: number) => (
+          {s.schemaEditor.blockData?.map((el: FormSchemaFieldDto, index: number) => (
             <div className={`flex flex-col border px-2`}>
               <span>ID: {el.id}</span>
               <span>DN: {el.displayName}</span>
