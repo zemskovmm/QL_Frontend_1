@@ -24,23 +24,15 @@ const createApplicationsState = () => {
     });
   });
 
-    const addApplication = async (applicationType:ApplicationType,entityId:string):Promise<number> => {
-        store.setKey('isLoading',true);
-        let outApplicationId = 0;
+  const addApplication = async (applicationType:ApplicationType,entityId:string):Promise<number> => {
+    store.setKey('isLoading',true);
+    let outApplicationId = 0;
 
-        const result = await personalApi.addApplications({
-            ...APPLICATION_DTO_DEFAULT,
-            type:applicationType,
-            //TODO Добавить entityId когда будет понятно откуда брать
-        });
-
-        const {isOk,body,error} = result
-        if(isOk){
-            outApplicationId= body?.id || 0;
-            getApplications();
-        }else{
-            notificationStore.addErrorAction(error);
-        }
+    const result = await personalApi.addApplications({
+        ...APPLICATION_DTO_DEFAULT,
+        type:applicationType,
+        //TODO Добавить entityId когда будет понятно откуда брать
+    });
 
     const { isOk, body, error } = result;
     if (isOk) {
