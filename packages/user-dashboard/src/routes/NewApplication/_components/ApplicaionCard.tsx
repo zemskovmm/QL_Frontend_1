@@ -3,7 +3,7 @@ import { Card } from "@project/components/src/ui-kit/Card";
 import { Text } from "@project/components/src/ui-kit/Text";
 import { FunctionalComponent } from "preact";
 import { useLocalesStore } from "stores/LocalesStore";
-import EmpryImgIcon from 'assets/images/empry_img_icon.svg';
+import EmpryImgIcon from "assets/images/empry_img_icon.svg";
 import { Icon } from "@project/components/src/ui-kit/Icon";
 
 type PropsType = {
