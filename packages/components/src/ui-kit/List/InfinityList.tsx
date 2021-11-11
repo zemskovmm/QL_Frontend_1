@@ -29,7 +29,7 @@ export const InfinityList: FunctionComponent<InfinityListPropsType> = ({
       id: `InfinityListLoading-${index}`,
       text: "Loading...",
     };
-    return <ListItem style={style} depth={depth} key={id} id={id} text={text} onClick={hanldeClick} />;
+    return <ListItem style={style} depth={depth} key={id} text={text} onClick={() => hanldeClick(id)} />;
   };
 
   return (

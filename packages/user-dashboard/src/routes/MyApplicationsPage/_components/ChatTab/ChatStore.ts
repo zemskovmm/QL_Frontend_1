@@ -38,9 +38,7 @@ const createChatStore = (): CreateChatStore => {
 
   const getMessages = async (applicationId: number): Promise<void> => {
     store.setKey("messages", []);
-    if (applicationId === 0) {
-      return;
-    }
+    if (applicationId === 0) return;
     store.setKey("isLoading", true);
     const result = await personalApi.getMessages(applicationId);
     const { isOk, body, error } = result;
@@ -60,9 +58,7 @@ const createChatStore = (): CreateChatStore => {
   };
 
   const sendMessage = async (applicationId: number, message: ChatSendMessageType): Promise<void> => {
-    if (applicationId === 0) {
-      return;
-    }
+    if (applicationId === 0) return;
     const result = await personalApi.sendMessages(applicationId, { ...message, type: 0 });
     const { isOk, error } = result;
     if (isOk) {
