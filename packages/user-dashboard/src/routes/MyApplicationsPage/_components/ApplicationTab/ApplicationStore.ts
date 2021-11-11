@@ -28,7 +28,7 @@ interface ApplicationStore {
 
 interface CreateApplicationStore {
   store: MapStore<ApplicationStore>;
-  getApplication: (applicationId: number) => Promise<void>;
+  getApplication(applicationId: number): Promise<void>;
   postApplicationAction: (data: ApplicationPostProps) => Promise<boolean>;
 }
 

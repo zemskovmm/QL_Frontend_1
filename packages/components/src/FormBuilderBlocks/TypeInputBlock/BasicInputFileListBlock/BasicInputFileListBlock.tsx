@@ -13,7 +13,7 @@ export const BasicInputFileListBlock = (props: BasicInputFileListBlockElement) =
   const [fileState, setFileState] = useState(true);
 
   return (
-    <div className="py-3 flex flex-col">
+    <div className="pt-3 flex flex-col">
       <label className={`flex cursor-pointer justify-between w-full`}>
         <span className={`mr-10`}>{props.label}</span>
         <div style={{ padding: "4px", border: "1px solid #E7E7E7", background: "#F6FAFF" }} className={`flex `}>

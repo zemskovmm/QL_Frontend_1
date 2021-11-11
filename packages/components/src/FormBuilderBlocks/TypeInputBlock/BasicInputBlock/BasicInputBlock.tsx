@@ -10,13 +10,16 @@ export interface BasicInputBlockElement {
 export const BasicInputBlock = (props: BasicInputBlockElement) => {
   const cl = useContext(ComponentHostDashboardContext);
   return (
-    <div className="py-12">
-      <label className={`flex`}>
-        <span className={`mr-10`}>{props.label}</span>
+    <div className="pt-3">
+      <label className={`flex flex-col`}>
+        <span className={`text-help text-caption mb-2`}>{props.label}</span>
         {cl ? (
           <input
             id={String(props.schema.id)}
             required={props.schema.required}
+            className={
+              "p-1 px-4 rounded-sm border-2 focus:border-2 text-small text-gray-600 focus:text-gray-600 border-gray-200 focus:border-gray-400"
+            }
             type="text"
             placeholder={props.placeholder}
             value={cl?.personalInfo[props.schema.id]}
