@@ -5,8 +5,14 @@ function updateProcessEnv(config, helpers) {
     const { plugin } = helpers.getPluginsByName(config, 'DefinePlugin')[0];
 
     Object.assign(
-        plugin.definitions,
-        ['REACT_APP_API_BASE_URL', 'NEXT_PUBLIC_API_BASE_URL', 'API_BASE_URL'].reduce(
+        plugin.definitions,[
+            'NEXT_PUBLIC_BASE_URL',
+            'DASHBOARD_PUBLIC_BASE_URL',
+            'REACT_APP_API_BASE_URL', 
+            'NEXT_PUBLIC_API_BASE_URL', 
+            'DASHBOARD_PUBLIC_API_BASE_URL',
+            'API_BASE_URL'
+        ].reduce(
             (env, key) => (key in process.env ? {
                 ...env,
                 [`process.env.${key}`]: JSON.stringify(process.env[key]),

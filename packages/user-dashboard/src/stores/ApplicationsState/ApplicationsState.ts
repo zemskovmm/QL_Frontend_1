@@ -20,13 +20,14 @@ const createApplicationsState = ()=>{
         })
     })
 
-    const addApplication = async (applicationType:ApplicationType):Promise<number> => {
+    const addApplication = async (applicationType:ApplicationType,entityId:string):Promise<number> => {
         store.setKey('isLoading',true);
         let outApplicationId = 0;
 
         const result = await personalApi.addApplications({
             ...APPLICATION_DTO_DEFAULT,
-            type:applicationType
+            type:applicationType,
+            //TODO Добавить entityId когда будет понятно откуда брать
         });
 
         const {isOk,body,error} = result

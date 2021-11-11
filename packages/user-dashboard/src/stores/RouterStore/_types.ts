@@ -14,7 +14,7 @@ export class RouteTemplate {
         this.page = page;
         this.pageId = pageId;
         
-        let regex = `/\\w+${page}` + (pageId ? `/\\w+$` : '$');
+        let regex = `/\\w+${page}${pageId.split('/').map(()=>`/\\w+`).join()}$`;
         this.regex = new RegExp(regex);
     }
 

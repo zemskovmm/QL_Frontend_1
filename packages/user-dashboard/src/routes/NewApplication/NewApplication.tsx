@@ -2,10 +2,8 @@ import { Text } from "@project/components/src/ui-kit/Text";
 import { FunctionalComponent } from "preact";
 import { useLocalesStore } from "stores/LocalesStore";
 import { ApplicationCard } from "./_components";
-import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
-import { useApplicationsState } from "stores/ApplicationsState";
-import { route } from "preact-router";
-import { MY_APPLICATIONS_TEMPLATE } from "stores/RouterStore";
+import { NEXT_PUBLIC_BASE_URL } from "@project/components/src/baseUrl";
+
 
 export const NewApplication: FunctionalComponent = () => {
     const {
@@ -18,17 +16,6 @@ export const NewApplication: FunctionalComponent = () => {
         WHAT_SERVICES_LANG,
     } = useLocalesStore();
 
-    const { addApplication } = useApplicationsState();
-
-    const handleClick = async (applicationType:string|undefined) => {
-        if(Object.values(ApplicationType).includes(applicationType as ApplicationType)){
-            const id = await addApplication(applicationType as ApplicationType);
-            if(id){
-                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:id.toString()}))
-            }
-            
-        }
-    }
     
     return (
         <div className="flex flex-col items-center p-4">
@@ -37,21 +24,17 @@ export const NewApplication: FunctionalComponent = () => {
 
             <div className="self-stretch flex flex-wrap justify-center">
                 <ApplicationCard 
-                    id={ApplicationType.University} 
-                    title={GET_EDUCATION_LANG}
-                    onClick={handleClick}/>
+                    href={`${NEXT_PUBLIC_BASE_URL}/${lang}/catalog/university`} 
+                    title={GET_EDUCATION_LANG}/>
                 <ApplicationCard 
-                    id={ApplicationType.Course} 
-                    title={TAKE_LANGUAGE_COURSES_LANG}
-                    onClick={handleClick}/>
+                    href={`${NEXT_PUBLIC_BASE_URL}/${lang}/catalog/course`} 
+                    title={TAKE_LANGUAGE_COURSES_LANG}/>
                 <ApplicationCard 
-                    id={ApplicationType.Housing} 
-                    title={FIND_RENTAL_HOME}
-                    onClick={handleClick}/>
+                    href={`${NEXT_PUBLIC_BASE_URL}/${lang}/catalog/housing`} 
+                    title={FIND_RENTAL_HOME}/>
                 <ApplicationCard 
-                    id={ApplicationType.Visa} 
-                    title={GET_VISA_FRANCE}
-                    onClick={handleClick}/>
+                    href={`${NEXT_PUBLIC_BASE_URL}/${lang}/visa`} 
+                    title={GET_VISA_FRANCE}/>
             </div>
         </div>
     );
