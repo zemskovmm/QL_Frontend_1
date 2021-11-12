@@ -4,6 +4,7 @@ import { useStore } from "nanostores/preact";
 import { UserStatus } from "./_types";
 import { notificationStore } from "stores/NotificationStore";
 import { onResponse } from "api/QLBaseApi";
+import { route } from "preact-router";
 
 export type UserStatuseLoginProps = QlClientLoginProps;
 export type UserStatuseRegisterProps = QlClientRegisterProps;
@@ -78,7 +79,7 @@ const createUserStatuseStore = () => {
         lastName: user.lastName || "",
         firstName: user.firstName || "",
         phone: user.phone || "",
-        email:user.email || "",
+        email: user.email || "",
         personalInfo: user.personalInfo || {},
       });
       return true;
