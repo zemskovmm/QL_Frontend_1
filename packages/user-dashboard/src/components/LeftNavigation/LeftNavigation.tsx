@@ -48,7 +48,7 @@ export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(
       const { id, type } = row;
       const date: Date = new Date(); //TODO После добавления даты, получать с сервера
       return {
-        id: MY_APPLICATIONS_TEMPLATE.getRoute({ lang, pageId: id.toString() }),
+        id: MY_APPLICATIONS_TEMPLATE.getRoute({ lang, params:[id.toString()]}),
         text: (APPLICATION_TYTLES_LANG[type] || type.toString()).replace(":date", date.toLocaleDateString()),
       };
     }

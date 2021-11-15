@@ -26,9 +26,9 @@ export const CreateApplication: FunctionalComponent<PropsType> = ({applicationTy
         if(Object.values(ApplicationType).includes(applicationType as ApplicationType)){
             const id = await addApplication(applicationType as ApplicationType, entityId);
             if(id){
-                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:id.toString()}))
+                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,params:[id.toString()]}))
             }else{
-                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,pageId:"0"}))
+                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,params:['0']}))
             }
         }
     }

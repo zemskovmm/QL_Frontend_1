@@ -29,7 +29,7 @@
   }
 }
 
-.applyModal__title{
+.ContactUsForm__title{
   font-style: normal;
   font-weight: bold;
   font-size: 30px;
@@ -39,13 +39,13 @@
 }
 
 @media (max-width: 767px) {
-  .applyModal__title{
+  .ContactUsForm__title{
     font-size: 24px;
     margin-bottom: 2px;
   }
 }
 
-.applyModal__formColTitle{
+.ContactUsForm__formColTitle{
   margin-bottom: 18px;
   font-style: normal;
   font-weight: 600;
@@ -54,14 +54,14 @@
   color: #373737;
 }
 
-.applyModal__labelTitle{
+.ContactUsForm__labelTitle{
   color: #A8B5CC;
   font-size: 12px;
   line-height: 20px;
   margin-bottom: 4px;
 }
 
-.applyModal__input{
+.ContactUsForm__input{
   width: 100%;
   padding: 0 15px;
   font-size: 14px;
@@ -72,16 +72,16 @@
   border-radius: 3px;
 }
 
-.applyModal__input::placeholder, .applyModal__textarea::placeholder{
+.ContactUsForm__input::placeholder, .ContactUsForm__textarea::placeholder{
   color: #646F83;
 }
 
-.applyModal__input:focus, .applyModal__textarea:focus{
+.ContactUsForm__input:focus, .ContactUsForm__textarea:focus{
   outline: none;
   border: 2px solid #567DD0;
 }
 
-.applyModal__textarea{
+.ContactUsForm__textarea{
   font-size: 14px;
   line-height: 36px;
   width: 100%;
@@ -94,7 +94,7 @@
   box-sizing: border-box;
 }
 
-.applyModal__description{
+.ContactUsForm__description{
   font-size: 12px;
   line-height: 18px;
   color: #A8B5CC;
@@ -102,18 +102,18 @@
 }
 
 @media (max-width: 767px) {
-  .applyModal__description{
+  .ContactUsForm__description{
     margin-right: 0;
     margin-bottom: 13px;
   }
 }
 
-.applyModal__description a{
+.ContactUsForm__description a{
   text-decoration-line: underline;
   color: #0C389A;
 }
 
-.applyModal__buttonApply{
+.ContactUsForm__buttonApply{
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -134,7 +134,7 @@
 }
 
 @media (max-width: 767px) {
-  .applyModal__buttonApply{
+  .ContactUsForm__buttonApply{
     width: 100%;
   }
 

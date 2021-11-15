@@ -5,7 +5,7 @@ import cn from "classnames";
 import Logo from "src/assets/images/logoFooter.svg";
 import Arrow from "src/assets/images/icons/arrow.svg";
 import { default as Social } from "src/assets/icons/socialFooter";
-import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
+import { ContactUsFormButton } from "src/components/common/ContactUsForm";
 import React, { FC, useState } from "react";
 import { FooterDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 import { LocalizedText } from "../common/LocalizedText";

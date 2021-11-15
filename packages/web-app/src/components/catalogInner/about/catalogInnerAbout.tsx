@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import style from "./catalogInnerAbout.module.css";
 import { ClientUniversityDto } from "src/interfaces/clientUniversityDto";
-import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
+import { NewApplicationButton } from "src/components/common/ContactUsForm";
 import { HtmlPresenter } from "@project/components/src/ui/HtmlPresenter/htmlPresenter";
 import { LocalizedText } from "src/components/common/LocalizedText";
+import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
 
 const CatalogCallBack = () => {
   return (
@@ -16,11 +17,11 @@ const CatalogCallBack = () => {
           <LocalizedText id={"university_answer"} />
         </div>
       </div>
-      <ContactUsFormButton footer={true}>
+      <NewApplicationButton applicationType={ApplicationType.University} entityId={0} footer={true}>
         <div className={style.catalogCallBack__btn}>
           <LocalizedText id={"university_button"} />
         </div>
-      </ContactUsFormButton>
+      </NewApplicationButton>
     </div>
   );
 };
