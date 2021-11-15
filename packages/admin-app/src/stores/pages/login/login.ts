@@ -36,16 +36,16 @@ export class LoginStore extends RequestTracking {
 
   @action async logOut() {
     try {
-      const req = await AdminApi.getLogout();
+      await AdminApi.getLogout();
       await this.rootStore.routerStore.goTo(RouteNames.index);
     } catch (e) {
-      await this.rootStore.routerStore.goTo(RouteNames.index);
+      alert(e);
     }
   }
 
   @action async check() {
     try {
-      const req = await AdminApi.getCheck();
+      await AdminApi.getCheck();
       return true;
     } catch (e) {
       return false;
