@@ -4,9 +4,7 @@ import React, { FC, Suspense, useState } from "react";
 import { AdminInputBox } from "../../components/common/AdminInputBox";
 import { GlobalSettingsPageStore } from "../../stores/pages/globalSettings/globalSettingsPageStore";
 import { AdminButton } from "../../components/common/AdminButton";
-import { AlertComponent } from "../../components/common/AlertComponent";
 import { DropDownList } from "@project/components/src/blocks/FaqBlock/faqBlock";
-import styles from "../../components/remoteui/AdminRemoteUiHtmlEditor.module.css";
 import { LinkDto, SocialLinkDto } from "../../interfaces/GlobalSettingsDto";
 import { RouterLink } from "mobx-state-router";
 import { RouteNames } from "../../routing/routes";
@@ -17,7 +15,7 @@ const GlobalSocialLink: FC<{ value: SocialLinkDto[]; name: string }> = ({ value,
     <div className={`flex justify-between pb-4 mb-4 border-b-2	`}>
       <span className="text-gray-700 text-xl pr-4 flex flex-col">
         {name}
-        <span>We have: telegram, vk, facebook, instagram, linkedIn, G+, twitter, youtube</span>
+        <span>We have: telegram, vk, facebook, instagram, linkedIn, G+, twitter, youtube, whatsapp</span>
       </span>
       <div className={`flex flex-col w-3/4`}>
         {value &&
