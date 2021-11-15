@@ -24,14 +24,14 @@ const createApplicationsState = () => {
     });
   });
 
-  const addApplication = async (applicationType:ApplicationType,entityId:string):Promise<number> => {
+  const addApplication = async (applicationType:ApplicationType,entityId:number):Promise<number> => {
     store.setKey('isLoading',true);
     let outApplicationId = 0;
 
     const result = await personalApi.addApplications({
         ...APPLICATION_DTO_DEFAULT,
         type:applicationType,
-        //TODO Добавить entityId когда будет понятно откуда брать
+        entityId,
     });
 
     const { isOk, body, error } = result;

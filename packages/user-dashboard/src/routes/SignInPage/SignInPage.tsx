@@ -9,24 +9,38 @@ import { SchemaOf, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CenterCardLayout } from "layouts/CenterCardLayout";
 import { UserStatuseLoginProps } from "stores/UserStatuseStore";
-import { useRouterStore } from "stores/RouterStore";
+import { CREATE_APPLICATIONS_TEMPLATE, SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
+import { useLocalesStore } from "stores/LocalesStore";
 
 const schema: SchemaOf<UserStatuseLoginProps> = object({
   email: string().required("Required to fill"),
   password: string().required("Required to fill"),
 });
 
-export const SignInPage: FunctionalComponent = () => {
+type PropsType = {
+  applicationType?:string;
+  entityId?:string;
+}
+
+export const SignInPage: FunctionalComponent<PropsType> = ({applicationType,entityId}) => {
   const { handleSubmit, control } = useForm<UserStatuseLoginProps>({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
   const { isLoading, isSuccess, loginAction } = useSignInStore();
+  const { lang } = useLocalesStore()
   const { PROFILE_PATH, SIGN_UP_PATH } = useRouterStore();
 
+  const signUpPath = applicationType
+  ? SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[applicationType,entityId||"0"]}) 
+  :SIGN_UP_PATH
+
   useEffect(() => {
-    isSuccess && route(PROFILE_PATH);
-  }, [isSuccess]);
+    const successPath = applicationType
+      ? CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[applicationType,entityId||"0"]}) 
+      :PROFILE_PATH
+    isSuccess && route(successPath);
+  }, [isSuccess,applicationType,entityId]);
 
   return (
     <CenterCardLayout title="Вход в личный кабинет" subtitle="Войдите или создайте аккаунт">
@@ -48,7 +62,7 @@ export const SignInPage: FunctionalComponent = () => {
           type="password"
         />
         <Button className="my-2" text="Войти" type="submit" disabled={isLoading} color={`red`} />
-        <Link href={SIGN_UP_PATH}>
+        <Link href={signUpPath}>
           <Button className="my-2" text="Зарегистрироваться" color="gray" isFullWidth />
         </Link>
       </form>
