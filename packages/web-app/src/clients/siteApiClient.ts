@@ -2,9 +2,17 @@ import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { ClientRouteDto } from "src/interfaces/clientRouteDto";
 import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilterDto";
 import { useData } from "@project/components/src/utils/dataEffect";
-import { ContactUsFormType } from "src/components/common/contactUsForm/contactUsForm";
 import { PageListDto } from "src/interfaces/pagesDto";
 import { TraitDto } from "src/interfaces/traitsDto";
+
+export type ContactUsFormType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  comment: string;
+  url: string;
+};
 
 export interface CatalogFilterRequestDto {
   identifier: string;

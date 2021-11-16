@@ -6,13 +6,13 @@ import { OverlayDialog } from "../../../common/dialog/OverlayDialog";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 import notIcon from "../../../../assets/icons/done_outline.svg";
 import { ClientCommonTraitLanguageDto } from "../../../../interfaces/clientCommonTraitLanguageDto";
-import { ComponentHostContext } from "@project/components/src/blocks";
 import { useIntl } from "react-intl";
+import { NewApplicationButton } from "src/components/common/ContactUsForm";
+import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
 
 export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = ({ data }) => {
   const [dialog, setDialog] = useState(false);
   const [dialogData, setDialogData] = useState<ClientCommonTraitLanguageDto[]>([]);
-  const cl = useContext(ComponentHostContext);
   const intl = useIntl();
   return (
     <>
@@ -104,9 +104,9 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
                 <LocalizedText id={"catalogItems_price_value"} /> / <LocalizedText id={"catalogItems_price_month"} />
               </td>
               <td className={style.tablePlans__order}>
-                <button onClick={() => cl?.showContactUsForm()} className={style.button}>
-                  <LocalizedText id={"housing_tableTitle_order"} />
-                </button>
+                <NewApplicationButton applicationType={ApplicationType.Housing} entityId={0} className={style.button} footer>
+                  <LocalizedText id={"housing_tableTitle_order"}/>
+                </NewApplicationButton>
               </td>
             </tr>
           ))}

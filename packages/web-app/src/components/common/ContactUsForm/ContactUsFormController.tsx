@@ -1,53 +1,9 @@
-import { OverlayDialog } from "src/components/common/dialog/OverlayDialog";
-import { useLocalizedText } from "src/components/common/LocalizedText";
 import React, { FC, useState } from "react";
-import { useIntl } from "react-intl";
 import cn from "classnames";
 
-import styles from "./contactUsForm.module.css";
-import { UsForm } from "./_components/UsForm";
-import { DashboardOrUsForm } from "./_components/DashboardOrUsForm";
-
-
-export const SuccessMessage = (props: { onDismiss: () => void }) => {
-  const intl = useIntl();
-  return (
-    <OverlayDialog cancel={props.onDismiss}>
-      <div
-        className={"text-center"}
-        dangerouslySetInnerHTML={{ __html: useLocalizedText({ id: "contactUs_thanks" }, intl) }}
-      />
-    </OverlayDialog>
-  );
-};
-
-export type ContactUsFormType = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  comment: string;
-  url: string;
-};
-
-type ContactUsFormPropsType = {
-  onDismiss: () => void;
-  onSuccess: () => void;
-  
-}
-
-
-
-export const ContactUsForm:FC<ContactUsFormPropsType> = ({ onDismiss, onSuccess}) => {
-  const [isForm, setIsForm] = useState(false);
-
-  return <>
-    {isForm ? 
-      <UsForm onDismiss={onDismiss} onSuccess={onSuccess}/> :
-      <DashboardOrUsForm onDismiss={onDismiss} onUsForm={()=>{setIsForm(true)}} />
-    }
-  </>
-};
+import styles from "./ContactUsFormController.module.css";
+import { ContactUsForm } from "./ContactUsForm";
+import { SuccessMessage } from "./SuccessMessage";
 
 export const ContactUsFormController = (props: { onDismiss: () => void }) => {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -55,7 +11,13 @@ export const ContactUsFormController = (props: { onDismiss: () => void }) => {
   return <ContactUsForm onDismiss={props.onDismiss} onSuccess={() => setIsSuccess(true)} />;
 };
 
-export const ContactUsFormButton = (props: { children: React.ReactNode; footer?: boolean; className?: string }) => {
+
+type ContactUsFormButtonPropsType = {
+  className?: string
+  footer?: boolean;
+}
+
+export const ContactUsFormButton:FC<ContactUsFormButtonPropsType> = ({className,footer, children   }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -63,26 +25,24 @@ export const ContactUsFormButton = (props: { children: React.ReactNode; footer?:
       <button
         type={"button"}
         className={
-          props.footer
-            ? props.className
-              ? props.className
-              : ""
+          footer
+            ? className ? className : ""
             : cn(
-                styles.button,
+                styles.ContactUsFormButton,
                 "bg-bgprimary",
                 "rounded-primary",
                 "font-medium",
                 "flex",
                 "items-center",
                 "text-secondary",
-                props.className ? props.className : ""
+                className,
               )
         }
         onClick={() => {
           setIsOpen(true);
         }}
       >
-        <span className={`${props.footer ? "" : "hidden md:block"}`}>{props.children}</span>
+        <span className={`${footer ? "" : "hidden md:block"}`}>{children}</span>
       </button>
       {isOpen ? <ContactUsFormController onDismiss={() => setIsOpen(false)} /> : null}
     </>

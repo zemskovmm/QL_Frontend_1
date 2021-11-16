@@ -1,6 +1,6 @@
 type RouteTemplateGetProps = {
     lang:string;
-    pageId?:string;
+    params?:Array<string>;
 }
 
 export class RouteTemplate {
@@ -24,8 +24,8 @@ export class RouteTemplate {
         return this.regex.test(url);
     }
 
-    getRoute({lang, pageId="" }:RouteTemplateGetProps){
-        return `/${lang}${this.page}${pageId?"/"+pageId:""}`
+    getRoute({lang, params=[] }:RouteTemplateGetProps){
+        return `/${lang}${this.page}${params?"/"+params.join('/'):""}`
     }
 }
 

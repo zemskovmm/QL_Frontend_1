@@ -8,7 +8,8 @@ import { Link, route } from "preact-router";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { useSignUpStore } from "./_store";
 import { CenterCardLayout } from "layouts/CenterCardLayout";
-import { useRouterStore } from "stores/RouterStore";
+import { SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
+import { useLocalesStore } from "stores/LocalesStore";
 
 export type FormFields = {
   email: string;
@@ -26,16 +27,26 @@ const schema: SchemaOf<FormFields> = object({
     .required("Required to fill"),
 });
 
-export const SignUpPage: FunctionalComponent = () => {
+type PropsType = {
+  applicationType?:string;
+  entityId?:string;
+}
+
+export const SignUpPage: FunctionalComponent<PropsType> = ({applicationType,entityId}) => {
   const { handleSubmit, control } = useForm<FormFields>({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
   const { registerAction, isLoading, isSuccess } = useSignUpStore();
+  const { lang } = useLocalesStore()
   const { SIGN_IN_PATH } = useRouterStore();
 
+  const signInPath = applicationType
+  ? SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[applicationType,entityId||"0"]}) 
+  :SIGN_IN_PATH
+
   useEffect(() => {
-    isSuccess && route(SIGN_IN_PATH);
+    isSuccess && route(signInPath);
   }, [isSuccess]);
 
   return (
@@ -69,7 +80,7 @@ export const SignUpPage: FunctionalComponent = () => {
           type="password"
         />
         <Button className="my-2" text="Зарегистрироваться" type="submit" disabled={isLoading} color={`red`} />
-        <Link href={SIGN_IN_PATH}>
+        <Link href={signInPath}>
           <Button className="my-2" text="Войти" color="secondary" isFullWidth />
         </Link>
       </form>

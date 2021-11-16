@@ -3,7 +3,7 @@ import { ComponentHostContext, IComponentHost } from "@project/components/src/bl
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
 import { getLocaleMessages } from "../locales/locales";
-import { ContactUsFormController } from "./common/contactUsForm/contactUsForm";
+import { ContactUsFormController } from "./common/ContactUsForm";
 import { siteApi } from "../clients/siteApiClient";
 import Head from "next/head";
 import Link from "next/link";
