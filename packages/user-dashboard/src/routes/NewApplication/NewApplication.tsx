@@ -3,6 +3,8 @@ import { FunctionalComponent } from "preact";
 import { useLocalesStore } from "stores/LocalesStore";
 import { ApplicationCard } from "./_components";
 import { NEXT_PUBLIC_BASE_URL } from "@project/components/src/baseUrl";
+import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
+import { CREATE_APPLICATIONS_TEMPLATE } from "stores/RouterStore";
 
 
 export const NewApplication: FunctionalComponent = () => {
@@ -33,7 +35,7 @@ export const NewApplication: FunctionalComponent = () => {
                     href={`${NEXT_PUBLIC_BASE_URL}/${lang}/catalog/housing`} 
                     title={FIND_RENTAL_HOME}/>
                 <ApplicationCard 
-                    href={`${NEXT_PUBLIC_BASE_URL}/${lang}/visa`} 
+                    href={CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[ApplicationType.Visa,"0"]})} 
                     title={GET_VISA_FRANCE}/>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import Link from "next/link";
-import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
+import { ContactUsFormButton } from "src/components/common/ContactUsForm";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import Logo from "src/assets/images/logo.png";
 import LogoMob from "src/assets/images/logoMob.svg";

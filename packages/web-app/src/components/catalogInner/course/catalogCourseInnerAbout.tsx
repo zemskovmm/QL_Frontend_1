@@ -1,11 +1,12 @@
 import React, { FC } from "react";
 import style from "./catalogCourseInnerAbout.module.css";
-import { ContactUsFormButton } from "src/components/common/contactUsForm/contactUsForm";
+import { NewApplicationButton } from "src/components/common/ContactUsForm";
 import { HtmlPresenter } from "@project/components/src/ui/HtmlPresenter/htmlPresenter";
 import { LocalizedText } from "src/components/common/LocalizedText";
 import { ClientCourseDto } from "../../../interfaces/clientCourseDto";
 import { ApiBaseUrl } from "@project/components/src/api/apiClientBase";
 import notIcon from "../../../assets/icons/done_outline.svg";
+import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
 
 const CatalogCallBack = () => {
   return (
@@ -18,11 +19,11 @@ const CatalogCallBack = () => {
           <LocalizedText id={"university_answer"} />
         </div>
       </div>
-      <ContactUsFormButton footer={true}>
+      <NewApplicationButton applicationType={ApplicationType.Course} entityId={0} footer={true}>
         <div className={style.catalogCallBack__btn}>
           <LocalizedText id={"university_button"} />
         </div>
-      </ContactUsFormButton>
+      </NewApplicationButton>
     </div>
   );
 };
