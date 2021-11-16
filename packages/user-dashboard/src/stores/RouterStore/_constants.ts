@@ -9,6 +9,7 @@ export const SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE = publicRoute("/sign-
 export const CREATE_APPLICATIONS_TEMPLATE = publicRoute("/create-applications","/:applicationType/:entityId");
 
 export const PROFILE_TEMPLATE = secureRoute("/profile");
+export const PROFILE_REDIRECT_CREATE_APPLICATIONS_TEMPLATE = secureRoute("/profile","/:applicationType/:entityId");
 export const MY_APPLICATIONS_TEMPLATE = secureRoute("/my-applications","/:applicationId?");
 export const SETTINGS_TEMPLATE = secureRoute("/settings");
 export const NEW_APPLICATION_TEMPLATE = secureRoute("/new-application");

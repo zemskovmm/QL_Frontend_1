@@ -28,8 +28,11 @@ interface UserStatuseStore {
   userStatus: UserStatus;
   isLogined: boolean;
   isUnlogined: boolean;
+  isRegistrationComplite: boolean;
   user: UserStatuseUserProps;
 }
+
+
 
 const createUserStatuseStore = () => {
   const store = createMap<UserStatuseStore>(() => {
@@ -37,6 +40,7 @@ const createUserStatuseStore = () => {
       userStatus: UserStatus.INIT_PROFILE_STATUS,
       isLogined: false,
       isUnlogined: false,
+      isRegistrationComplite:false,
       user: EMPTY_USER,
     });
     heartbeatAction();
@@ -48,12 +52,26 @@ const createUserStatuseStore = () => {
     });
   });
 
+  const setUser = (user:any)=>{
+    store.setKey("user", {
+      lastName: user.lastName || "",
+      firstName: user.firstName || "",
+      phone: user.phone || "",
+      email:user.email || "",
+      personalInfo: user.personalInfo || {},
+    });
+    store.setKey("isRegistrationComplite",
+      !!user.lastName && 
+      !!user.firstName && 
+      !!user.phone);
+  }
+
   const setUserStatus = (userStatus: UserStatus) => {
     store.setKey("userStatus", userStatus);
     store.setKey("isLogined", userStatus === UserStatus.LOGINED_PROFILE_STATUS);
     store.setKey("isUnlogined", userStatus === UserStatus.UNLOGINED_PROFILE_STATUS);
     if (userStatus != UserStatus.UNLOGINED_PROFILE_STATUS) {
-      store.setKey("user", EMPTY_USER);
+      setUser(EMPTY_USER)
     }
   };
 
@@ -61,7 +79,7 @@ const createUserStatuseStore = () => {
     const { isOk, error } = await userApi.putUser(data);
     if (isOk) {
       notificationStore.addSuccessAction("Profile successful update");
-      store.setKey("user", data);
+      setUser(data)
       return true;
     } else {
       notificationStore.addErrorAction(error);
@@ -74,13 +92,7 @@ const createUserStatuseStore = () => {
     if (isOk) {
       setUserStatus(UserStatus.LOGINED_PROFILE_STATUS);
       const user = body || EMPTY_USER;
-      store.setKey("user", {
-        lastName: user.lastName || "",
-        firstName: user.firstName || "",
-        phone: user.phone || "",
-        email:user.email || "",
-        personalInfo: user.personalInfo || {},
-      });
+      setUser(user)
       return true;
     }
     return getValue(store).isLogined;

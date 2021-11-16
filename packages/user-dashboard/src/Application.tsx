@@ -19,6 +19,7 @@ import {
   CREATE_APPLICATIONS_TEMPLATE,
   SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
   SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
+  PROFILE_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
 } from "stores/RouterStore";
 import { useEffect, useState } from "preact/hooks";
 import { useUserStatuseStore } from "stores/UserStatuseStore";
@@ -73,6 +74,7 @@ export const Application: FunctionalComponent = () => {
           <Router onChange={handleChangeUrl}>
             <HomePage path={HOME_TEMPLATE.path} />
             <ProfilePage path={PROFILE_TEMPLATE.path} />
+            <Route component={ProfilePage} path={PROFILE_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.path} />
             <SignUpPage path={SIGN_UP_TEMPLATE.path} />
             <Route component={SignUpPage} path={SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.path} />
             <SignInPage path={SIGN_IN_TEMPLATE.path} />
