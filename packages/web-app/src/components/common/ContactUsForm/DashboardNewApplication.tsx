@@ -23,12 +23,17 @@ export const DashboardNewApplication:FC<PropsType> = ({ onDismiss,onUsForm,appli
   const dashboardUrl = `${DASHBOARD_PUBLIC_BASE_URL}/${lang}/create-applications/${applicationType}/${entityId}}`;
 
   return (
-    <OverlayDialog cancel={onDismiss}>
-      <div className={"text-center flex flex-col"}>
-        <Text text="Как вы хотите подать заявку" size="title-medium"/>
+    <OverlayDialog className={"text-center flex flex-col items-center justify-around h-112 w-160"} cancel={onDismiss}>
+        <Text className="mb-4" text="Как вы хотите подать заявку" size="title-large" isBold/>
         <a href={dashboardUrl}>Личный кабинет</a>
-        <Button onClick={onUsForm} text="Форма обратной связи"/>
-      </div>
+
+        <div className={"flex w-full justify-center items-center"}>
+          <div className={"h-px w-48 bg-help m-2"} />
+          <Text text="или" size="medium"/>
+          <div className={"h-px w-48 bg-help m-2"} />
+        </div>
+        
+        <Button onClick={onUsForm} text="Форма обратной связи" color="red"/>
     </OverlayDialog>
   );
 };
