@@ -1,18 +1,19 @@
 import { createMap } from "nanostores";
 import { useStore } from "nanostores/preact";
-import { GlobalSettingsDto } from "admin-app/src/interfaces/GlobalSettingsDto";
+import { EditFormDto, PersonalCabinetDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 import { globalSettingsApi } from "api/GlobalSettingsApi";
 import { ActualState } from "stores/ActualState";
 
 interface GlobalSettingsStore {
   isLoading: boolean;
-  gs?: GlobalSettingsDto;
+  personalCabinet: PersonalCabinetDto;
 }
 
 const createGlobalSettingsStore = () => {
   const store = createMap<GlobalSettingsStore>(() => {
     store.set({
       isLoading: false,
+      personalCabinet:{}
     });
   });
 
@@ -20,8 +21,12 @@ const createGlobalSettingsStore = () => {
     async (lang: string) => {
       store.setKey("isLoading", true);
       const { isOk, body } = await globalSettingsApi.getGlobalSettings(lang);
+      console.log(body);
+      let personalCabinet: EditFormDto|undefined = undefined;
       if (isOk) {
-        store.setKey("gs", body);
+        store.setKey("personalCabinet", body?.personalCabinet || {})
+      }else{
+        store.setKey("personalCabinet", {})
       }
       store.setKey("isLoading", false);
     },

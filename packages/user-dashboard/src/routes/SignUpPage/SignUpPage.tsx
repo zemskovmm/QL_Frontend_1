@@ -10,6 +10,7 @@ import { useSignUpStore } from "./_store";
 import { CenterCardLayout } from "layouts/CenterCardLayout";
 import { SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
 import { useLocalesStore } from "stores/LocalesStore";
+import { useUserStatuseStore } from "stores/UserStatuseStore";
 
 export type FormFields = {
   email: string;
@@ -37,7 +38,8 @@ export const SignUpPage: FunctionalComponent<PropsType> = ({applicationType,enti
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-  const { registerAction, isLoading, isSuccess } = useSignUpStore();
+  const { registerAction, isLoading,isSuccess } = useSignUpStore();
+  const { isLogined } = useUserStatuseStore()
   const { lang } = useLocalesStore()
   const { SIGN_IN_PATH } = useRouterStore();
 
@@ -46,8 +48,8 @@ export const SignUpPage: FunctionalComponent<PropsType> = ({applicationType,enti
   :SIGN_IN_PATH
 
   useEffect(() => {
-    isSuccess && route(signInPath);
-  }, [isSuccess]);
+    (isLogined || isSuccess) && route(signInPath);
+  }, [isLogined,isSuccess]);
 
   return (
     <CenterCardLayout
@@ -81,7 +83,7 @@ export const SignUpPage: FunctionalComponent<PropsType> = ({applicationType,enti
         />
         <Button className="my-2" text="Зарегистрироваться" type="submit" disabled={isLoading} color={`red`} />
         <Link href={signInPath}>
-          <Button className="my-2" text="Войти" color="secondary" isFullWidth />
+          <Button className="my-2 w-full" text="Войти" color="gray" />
         </Link>
       </form>
     </CenterCardLayout>
