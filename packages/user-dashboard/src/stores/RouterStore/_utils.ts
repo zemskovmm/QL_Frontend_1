@@ -11,13 +11,13 @@ const AllRoutes:{[key:string]:RouteTemplate} = {}
 
 export const secureRoute=(page:string, pageId:string="")=>{
     const template = new RouteTemplate(true, page, pageId)
-    AllRoutes[page] = template;
+    AllRoutes[template.path.replace(/:\w+/g,':w')] = template;
     return template;
 }
 
 export const publicRoute=(page:string, pageId:string="")=>{
     const template = new RouteTemplate(false, page, pageId)
-    AllRoutes[page] = template;
+    AllRoutes[template.path.replace(/:\w+/g,':w')] = template;
     return template;
 }
 
@@ -25,6 +25,7 @@ export const getRouteTemplate = (url:string): RouteTemplate|undefined =>{
     const keys = Object.keys(AllRoutes);
     for(const next of keys){
         if(AllRoutes[next].isUrl(url)){
+            console.log(next)
             return AllRoutes[next];
         }
     }
