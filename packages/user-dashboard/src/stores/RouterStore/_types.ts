@@ -15,7 +15,6 @@ export class RouteTemplate {
         this.pageId = pageId;
         
         const regex = '^'+this.path.replace(/:\w+/g,'\\w+')+'/?$'
-        console.log(regex)
         this.regex = new RegExp(regex);
     }
 
