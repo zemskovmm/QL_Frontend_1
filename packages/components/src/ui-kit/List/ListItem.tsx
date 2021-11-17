@@ -13,6 +13,7 @@ export type ListItemPropsType = {
   style?: CSSProperties;
   isOpenArrow?: boolean;
   withArrow?: boolean;
+  stopPropagation?: boolean;
 };
 
 export const ListItem: FunctionComponent<ListItemPropsType> = ({
@@ -23,6 +24,7 @@ export const ListItem: FunctionComponent<ListItemPropsType> = ({
   style,
   isOpenArrow = "false",
   withArrow,
+  stopPropagation,
 }) => {
   const ofset: Array<ReactNode> = [];
   for (let d = 0; d < depth; d++) {
@@ -34,7 +36,10 @@ export const ListItem: FunctionComponent<ListItemPropsType> = ({
   return (
     <div
       className={`cursor-pointer relative border-l border-t border-r h-10 flex-shrink-0 ${className}`}
-      onClick={() => onClick()}
+      onClick={(e) => {
+        stopPropagation && e.stopPropagation();
+        onClick()
+      }}
       style={style}
     >
       <div className="relative -bottom-px border-b flex items-center justify-between h-full px-4 py-1">
