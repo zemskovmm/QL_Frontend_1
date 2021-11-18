@@ -2,14 +2,12 @@ import { FunctionalComponent } from "preact";
 import { AppLayout } from "layouts/AppLayout";
 import { Notification } from "components/Notification";
 import Router, { Route, route, RouterOnChangeArgs } from "preact-router";
-import HomePage from "routes/HomePage";
 import SignUpPage from "routes/SignUpPage";
 import SignInPage from "routes/SignInPage";
 import NotFoundPage from "routes/NotFoundPage";
 import ProfilePage from "routes/ProfilePage";
 import {
   useRouterStore,
-  HOME_TEMPLATE,
   SIGN_UP_TEMPLATE,
   SIGN_IN_TEMPLATE,
   PROFILE_TEMPLATE,
@@ -35,41 +33,44 @@ import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
 
 export const Application: FunctionalComponent = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
-  const { changeUrl, HOME_PATH } = useRouterStore();
+  const { changeUrl } = useRouterStore();
   const { lang, changeLang } = useLocalesStore();
-  const { isUnlogined } = useUserStatuseStore();
+  const { isUnlogined, isLogined } = useUserStatuseStore();
   const { heartbeatAction } = useUserStatuseStore();
   const { getGlobalSettings } = useGlobalSettingsStore();
 
   useEffect(() => {
-    getGlobalSettings(lang);
-  }, [lang, getGlobalSettings]);
+    heartbeatAction();
+  }, []);
 
   useEffect(() => {
-    if (url !== undefined && isUnlogined && isSecureUrl(url)) {
-      route(HOME_PATH, true);
-    }
-  }, [url, isUnlogined, HOME_PATH]);
-
-  useEffect(() => {
-    if (url !== undefined) {
-      if (url === "" || url === "/") {
-        route(HOME_TEMPLATE.getRoute({ lang: DEFAULT_LANG }), true);
+    if (url !== undefined && (isUnlogined || isLogined)) {
+      const lang = urlToLang(url);
+      if(!url || /^\/(\w+\/?)?$/.test(url)){
+        if(isLogined){
+          route(PROFILE_TEMPLATE.getRoute({lang:lang||DEFAULT_LANG}), true);
+        }else{
+          route(SIGN_IN_TEMPLATE.getRoute({lang:lang||DEFAULT_LANG}), true);
+        }
         return;
       }
-      const lang = urlToLang(url);
       if (!lang) {
         route(changeLangInUrl(url, DEFAULT_LANG), true);
         return;
       }
+      if(isUnlogined && isSecureUrl(url)){
+        route(SIGN_IN_TEMPLATE.getRoute({lang:lang||DEFAULT_LANG}), true);
+      }
+      changeLang(lang);
       changeUrl(url);
-      changeLang(lang || DEFAULT_LANG);
+      getGlobalSettings(lang);
       heartbeatAction();
     }
-  }, [url]);
+  }, [url, isUnlogined, isLogined]);
+
 
   const handleChangeUrl = (event: RouterOnChangeArgs) => {
-    setUrl(event.url);
+    setUrl(event.url)
   };
 
   return (
@@ -77,7 +78,6 @@ export const Application: FunctionalComponent = () => {
       <div id="preact_root" className="h-full">
         <AppLayout>
           <Router onChange={handleChangeUrl}>
-            <HomePage path={HOME_TEMPLATE.path} />
             <ProfilePage path={PROFILE_TEMPLATE.path} />
             <Route component={ProfilePage} path={PROFILE_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.path} />
             <SignUpPage path={SIGN_UP_TEMPLATE.path} />
