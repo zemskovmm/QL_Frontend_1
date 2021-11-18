@@ -78,6 +78,5 @@ const TailwindTheme = {
 }
 
 module.exports = {
-    TailwindTheme,
-}
-
+  TailwindTheme,
+};

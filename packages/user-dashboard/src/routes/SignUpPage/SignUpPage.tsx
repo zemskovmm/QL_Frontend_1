@@ -29,61 +29,73 @@ const schema: SchemaOf<FormFields> = object({
 });
 
 type PropsType = {
-  applicationType?:string;
-  entityId?:string;
-}
+  applicationType?: string;
+  entityId?: string;
+};
 
-export const SignUpPage: FunctionalComponent<PropsType> = ({applicationType,entityId}) => {
+export const SignUpPage: FunctionalComponent<PropsType> = ({ applicationType, entityId }) => {
   const { handleSubmit, control } = useForm<FormFields>({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-  const { registerAction, isLoading,isSuccess } = useSignUpStore();
-  const { isLogined } = useUserStatuseStore()
-  const { lang } = useLocalesStore()
+  const { registerAction, isLoading, isSuccess } = useSignUpStore();
+  const { isLogined } = useUserStatuseStore();
+  const {
+    lang,
+    SIGN_IN_REG,
+    SIGN_IN_ENTRY,
+    SIGN_UP_EMAIL_LABEL,
+    SIGN_UP_EMAIL_PLACEHOLDER,
+    SIGN_UP_PASSWORD_CONF_LABEL,
+    SIGN_UP_PASSWORD_CONF_PLACEHOLDER,
+    SIGN_UP_PASSWORD_LABEL,
+    SIGN_UP_PASSWORD_PLACEHOLDER,
+    SIGN_UP_SUBTITLE,
+    SIGN_UP_TITLE,
+  } = useLocalesStore();
   const { SIGN_IN_PATH } = useRouterStore();
 
   const signInPath = applicationType
-  ? SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[applicationType,entityId||"0"]}) 
-  :SIGN_IN_PATH
+    ? SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
+    : SIGN_IN_PATH;
 
   useEffect(() => {
     (isLogined || isSuccess) && route(signInPath);
-  }, [isLogined,isSuccess]);
+  }, [isLogined, isSuccess]);
 
   return (
-    <CenterCardLayout
-      title="Регистрация"
-      subtitle="Пароль должен состоять из заглавных и строчных букв и цифр. Длина - не менее 10 символов."
-    >
-      <form className="flex flex-col max-w-72" onSubmit={handleSubmit(registerAction) as any}>
+    <CenterCardLayout title={SIGN_UP_TITLE} subtitle={SIGN_UP_SUBTITLE}>
+      <form className="flex flex-col md:px-28 w-full" onSubmit={handleSubmit(registerAction) as any}>
         <InputControlled
-          className="my-1"
+          className="mb-4"
           name="email"
-          label="Адрес электронной почты"
-          placeholder="Ваша электронная почта"
+          label={SIGN_UP_EMAIL_LABEL}
+          placeholder={SIGN_UP_EMAIL_PLACEHOLDER}
           control={control}
           type="email"
+          sign={true}
         />
         <InputControlled
-          className="my-1"
+          className="mb-4"
           name="password"
-          label="Пароль"
-          placeholder="Придумайте пароль"
+          label={SIGN_UP_PASSWORD_LABEL}
+          placeholder={SIGN_UP_PASSWORD_PLACEHOLDER}
           control={control}
           type="password"
+          sign={true}
         />
         <InputControlled
-          className="my-1"
+          className="mb-8"
           name="passwordConfirmation"
-          label="Пароль"
-          placeholder="Подтвердите пароль"
+          label={SIGN_UP_PASSWORD_CONF_LABEL}
+          placeholder={SIGN_UP_PASSWORD_CONF_PLACEHOLDER}
           control={control}
           type="password"
+          sign={true}
         />
-        <Button className="my-2" text="Зарегистрироваться" type="submit" disabled={isLoading} color={`red`} />
+        <Button className="mb-4" text={SIGN_IN_REG} type="submit" disabled={isLoading} color={`red`} />
         <Link href={signInPath}>
-          <Button className="my-2 w-full" text="Войти" color="gray" />
+          <Button className="my-2 w-full" text={SIGN_IN_ENTRY} color="gray" />
         </Link>
       </form>
     </CenterCardLayout>

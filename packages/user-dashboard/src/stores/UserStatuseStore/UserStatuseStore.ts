@@ -4,6 +4,8 @@ import { useStore } from "nanostores/preact";
 import { UserStatus } from "./_types";
 import { notificationStore } from "stores/NotificationStore";
 import { onResponse } from "api/QLBaseApi";
+import { route } from "preact-router";
+import { useRouterStore } from "stores/RouterStore";
 
 export type UserStatuseLoginProps = QlClientLoginProps;
 export type UserStatuseRegisterProps = QlClientRegisterProps;
@@ -32,15 +34,13 @@ interface UserStatuseStore {
   user: UserStatuseUserProps;
 }
 
-
-
 const createUserStatuseStore = () => {
   const store = createMap<UserStatuseStore>(() => {
     store.set({
       userStatus: UserStatus.INIT_PROFILE_STATUS,
       isLogined: false,
       isUnlogined: false,
-      isRegistrationComplite:false,
+      isRegistrationComplite: false,
       user: EMPTY_USER,
     });
     heartbeatAction();
@@ -52,26 +52,23 @@ const createUserStatuseStore = () => {
     });
   });
 
-  const setUser = (user:any)=>{
+  const setUser = (user: any) => {
     store.setKey("user", {
       lastName: user.lastName || "",
       firstName: user.firstName || "",
       phone: user.phone || "",
-      email:user.email || "",
+      email: user.email || "",
       personalInfo: user.personalInfo || {},
     });
-    store.setKey("isRegistrationComplite",
-      !!user.lastName && 
-      !!user.firstName && 
-      !!user.phone);
-  }
+    store.setKey("isRegistrationComplite", !!user.lastName && !!user.firstName && !!user.phone);
+  };
 
   const setUserStatus = (userStatus: UserStatus) => {
     store.setKey("userStatus", userStatus);
     store.setKey("isLogined", userStatus === UserStatus.LOGINED_PROFILE_STATUS);
     store.setKey("isUnlogined", userStatus === UserStatus.UNLOGINED_PROFILE_STATUS);
     if (userStatus != UserStatus.UNLOGINED_PROFILE_STATUS) {
-      setUser(EMPTY_USER)
+      setUser(EMPTY_USER);
     }
   };
 
@@ -79,7 +76,7 @@ const createUserStatuseStore = () => {
     const { isOk, error } = await userApi.putUser(data);
     if (isOk) {
       notificationStore.addSuccessAction("Profile successful update");
-      setUser(data)
+      setUser(data);
       return true;
     } else {
       notificationStore.addErrorAction(error);
@@ -92,7 +89,7 @@ const createUserStatuseStore = () => {
     if (isOk) {
       setUserStatus(UserStatus.LOGINED_PROFILE_STATUS);
       const user = body || EMPTY_USER;
-      setUser(user)
+      setUser(user);
       return true;
     }
     return getValue(store).isLogined;

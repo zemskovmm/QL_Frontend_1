@@ -33,7 +33,6 @@ import CreateApplication from "routes/CreateApplication";
 import { HostLayout } from "@project/components/src/FormBuilderBlocks/HostLayout";
 import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
 
-
 export const Application: FunctionalComponent = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
   const { changeUrl, HOME_PATH } = useRouterStore();

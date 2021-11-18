@@ -19,15 +19,11 @@ type PropsType = {
 };
 
 export const ApplicationTab: FunctionalComponent<PropsType> = ({ className, applicationId }) => {
-  const { APPLICATION_LANG } = useLocalesStore();
   const cl = useContext(ComponentHostDashboardContext);
   const store = useApplicationStore();
   const { application, postApplicationAction, isLoading: isLoadingStore } = store;
   const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
-  const { lang } = useLocalesStore();
   const { handleSubmit, control, setValue } = useForm<ApplicationPostProps>();
-
-
 
   useEffect(() => {
     store.getApplication(applicationId);
@@ -50,9 +46,7 @@ export const ApplicationTab: FunctionalComponent<PropsType> = ({ className, appl
         {/*<Text text={APPLICATION_LANG} size="title-medium" />*/}
         {personalCabinet[application.type.toString().toLowerCase()] ? (
           <form className="flex flex-col mx-0" onSubmit={handleSubmit(postApplicationAction) as any}>
-            <RowsPresenter
-              rows={personalCabinet[application.type.toString().toLowerCase()].form.pageData.rows ?? []}
-            />
+            <RowsPresenter rows={personalCabinet[application.type.toString().toLowerCase()].form.pageData.rows ?? []} />
             <Button className="ml-auto my-2" text="Обновить" type="submit" disabled={isLoadingStore} color="red" />
           </form>
         ) : (
