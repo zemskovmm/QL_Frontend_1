@@ -34,7 +34,15 @@ export const SignInPage: FunctionalComponent<PropsType> = ({ applicationType, en
   });
   const { isLoading, loginAction } = useSignInStore();
   const { isLogined } = useUserStatuseStore();
-  const { lang, SIGN_IN_REG, SIGN_IN_ENTRY, SIGN_IN_SUBTITLE, SIGN_IN_TITLE } = useLocalesStore();
+  const {
+    lang,
+    SIGN_IN_REG,
+    SIGN_IN_ENTRY,
+    SIGN_IN_SUBTITLE,
+    SIGN_IN_TITLE,
+    SIGN_UP_EMAIL_LABEL,
+    SIGN_UP_EMAIL_PLACEHOLDER,
+  } = useLocalesStore();
   const { PROFILE_PATH, SIGN_UP_PATH } = useRouterStore();
 
   const signUpPath = applicationType
@@ -54,8 +62,8 @@ export const SignInPage: FunctionalComponent<PropsType> = ({ applicationType, en
         <InputControlled
           className="mb-4"
           name="email"
-          label="Адрес электронной почты"
-          placeholder="Ваша электронная почта"
+          label={SIGN_UP_EMAIL_LABEL}
+          placeholder={SIGN_UP_EMAIL_PLACEHOLDER}
           control={control}
           type="email"
           sign={true}

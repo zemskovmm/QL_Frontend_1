@@ -6,6 +6,15 @@ export const en: Translate = {
   SIGN_IN_SUBTITLE: "Login or create an account",
   SIGN_IN_ENTRY: "Proceed",
   SIGN_IN_REG: "Register now",
+  SIGN_UP_TITLE: "Registration",
+  SIGN_UP_SUBTITLE:
+    "The password must be composed of upper and lower case letters and numbers. Length - at least 10 characters.",
+  SIGN_UP_EMAIL_LABEL: "E-mail",
+  SIGN_UP_EMAIL_PLACEHOLDER: "E-mail",
+  SIGN_UP_PASSWORD_LABEL: "Password",
+  SIGN_UP_PASSWORD_PLACEHOLDER: "Password",
+  SIGN_UP_PASSWORD_CONF_LABEL: "Repeat password",
+  SIGN_UP_PASSWORD_CONF_PLACEHOLDER: "Repeat password",
   APPLICATION_LANG: "Application",
   APPLICATION_TYTLES_LANG: {
     [ApplicationType.Course]: "Application for passing the COURSE from :date",

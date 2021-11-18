@@ -3,6 +3,14 @@ export type Translate = {
   SIGN_IN_SUBTITLE: string;
   SIGN_IN_ENTRY: string;
   SIGN_IN_REG: string;
+  SIGN_UP_TITLE: string;
+  SIGN_UP_SUBTITLE: string;
+  SIGN_UP_EMAIL_LABEL: string;
+  SIGN_UP_EMAIL_PLACEHOLDER: string;
+  SIGN_UP_PASSWORD_LABEL: string;
+  SIGN_UP_PASSWORD_PLACEHOLDER: string;
+  SIGN_UP_PASSWORD_CONF_LABEL: string;
+  SIGN_UP_PASSWORD_CONF_PLACEHOLDER: string;
   APPLICATION_LANG: string;
   APPLICATION_TYTLES_LANG: { [key: string]: string };
   CHAT_LANG: string;
