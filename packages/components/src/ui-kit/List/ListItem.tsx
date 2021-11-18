@@ -38,11 +38,11 @@ export const ListItem: FunctionComponent<ListItemPropsType> = ({
       className={`cursor-pointer relative border-l border-t border-r h-10 flex-shrink-0 ${className}`}
       onClick={(e) => {
         stopPropagation && e.stopPropagation();
-        onClick()
+        onClick();
       }}
       style={style}
     >
-      <div className="relative -bottom-px border-b flex items-center justify-between h-full px-4 py-1">
+      <div className="relative -bottom-px border-b flex items-center justify-between h-full px-4 box-content md:box-border py-3 md:py-1">
         <div className="flex max-h-9 overflow-hidden">
           {ofset}
           <Text text={text} size="small" />
