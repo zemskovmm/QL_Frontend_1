@@ -22,7 +22,7 @@ export const CreateApplication: FunctionalComponent<PropsType> = ({applicationTy
     const { addApplication } = useApplicationsState();
     const { lang } = useLocalesStore()
     const { SIGN_IN_PATH,PROFILE_PATH } = useRouterStore();
-    const { isUnlogined,isRegistrationComplite } = useUserStatuseStore();
+    const { isUnlogined,isLogined,isRegistrationComplite } = useUserStatuseStore();
 
     const signInPath = applicationType
         ? SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[applicationType,entityId||"0"]}) 
@@ -34,21 +34,21 @@ export const CreateApplication: FunctionalComponent<PropsType> = ({applicationTy
 
     useEffect(()=>{
         if( isUnlogined ){
-            route(signInPath);
+            route(signInPath,true);
         }else if( isRegistrationComplite ){
-            handleClick();
-        }else {
-            route(profilePath);
+            handleAddApplication();
+        }else if(isLogined) {
+            route(profilePath,true);
         }
-    },[isUnlogined,applicationType,entityId])
+    },[isUnlogined,isLogined,applicationType,entityId])
 
-    const handleClick = async () => {
+    const handleAddApplication = async () => {
         if(Object.values(ApplicationType).includes(applicationType as ApplicationType)){
             const id = await addApplication(applicationType as ApplicationType, Number(entityId));
             if(id){
-                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,params:[id.toString()]}))
+                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,params:[id.toString()]}),true)
             }else{
-                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,params:['0']}))
+                route(MY_APPLICATIONS_TEMPLATE.getRoute({lang,params:['0']}),true)
             }
         }
     }

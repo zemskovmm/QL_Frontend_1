@@ -5,12 +5,12 @@ import { CenterCardLayout } from 'layouts/CenterCardLayout';
 import { useRouterStore } from 'stores/RouterStore';
 
 const NotFoundPage: FunctionalComponent = () => {
-    const {HOME_PATH} = useRouterStore();
+    const {PROFILE_PATH} = useRouterStore();
     return (
-    <CenterCardLayout title="404. Страница не найдена :(" isError>
+    <CenterCardLayout title="404. Страница не найдена :(">
         <div className="flex flex-col max-w-72" >
-            <Link href={HOME_PATH}>
-                <Button className="my-2" text="На главную" color="secondary" />
+            <Link href={PROFILE_PATH}>
+                <Button className="my-2" text="В профиль" color="red" />
             </Link>
         </div>
     </CenterCardLayout>

@@ -13,7 +13,7 @@ import { MenuBurger } from "components/MenuBurger";
 
 export const Header: FunctionalComponent = () => {
   const { isLogined, user } = useUserStatuseStore();
-  const { langUrls, HOME_PATH, PROFILE_PATH, SIGN_IN_PATH } = useRouterStore();
+  const { langUrls, PROFILE_PATH, SIGN_IN_PATH } = useRouterStore();
   const { lang } = useLocalesStore();
 
   const profileName =
@@ -22,9 +22,7 @@ export const Header: FunctionalComponent = () => {
   return (
     <div className="px-2 shadow h-20 lg:absolute lg:left-0 lg:right-0 lg:top-0 lg:z-50">
       <Container className="flex justify-between items-center h-full">
-        <Link href={HOME_PATH}>
-          <Logo />
-        </Link>
+      <Logo />
 
         <div className="relative inline-flex gap-5 items-center">
           <LangChooser
@@ -42,18 +40,12 @@ export const Header: FunctionalComponent = () => {
             )}
           />
 
-          {isLogined ? (
-            <>
+          {isLogined && <>
               <Link href={PROFILE_PATH}>
                 <Icon src={USER_ICON} alt={profileName} size="8" />
               </Link>
               <MenuBurger className="inline tablet:hidden" />
-            </>
-          ) : (
-            <Link href={SIGN_IN_PATH}>
-              <Button text="Войти" color="red" />
-            </Link>
-          )}
+          </>}
         </div>
       </Container>
     </div>

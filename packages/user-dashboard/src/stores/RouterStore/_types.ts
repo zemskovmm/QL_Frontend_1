@@ -30,7 +30,6 @@ export class RouteTemplate {
 }
 
 export type PagePaths = {
-    HOME_PATH: string;
     SIGN_UP_PATH: string;
     SIGN_IN_PATH: string;
 
