@@ -31,13 +31,19 @@ import NewApplication from "routes/NewApplication";
 import MyApplicationsPage from "routes/MyApplicationsPage";
 import CreateApplication from "routes/CreateApplication";
 import { HostLayout } from "@project/components/src/FormBuilderBlocks/HostLayout";
+import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
 
 export const Application: FunctionalComponent = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
   const { changeUrl, HOME_PATH } = useRouterStore();
-  const { changeLang } = useLocalesStore();
+  const { lang, changeLang } = useLocalesStore();
   const { isUnlogined } = useUserStatuseStore();
   const { heartbeatAction } = useUserStatuseStore();
+  const { getGlobalSettings } = useGlobalSettingsStore();
+
+  useEffect(() => {
+    getGlobalSettings(lang);
+  }, [lang, getGlobalSettings]);
 
   useEffect(() => {
     if (url !== undefined && isUnlogined && isSecureUrl(url)) {

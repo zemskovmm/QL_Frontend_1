@@ -3,6 +3,7 @@ import { TextareaControlled } from "@project/components/src/form/TextareaControl
 import { FunctionalComponent } from "preact";
 import { useForm } from "react-hook-form";
 import { ChatMessagesType, ChatStoreType } from "./ChatStore";
+import cn from "classnames"
 
 type PropsType = {
   className?: string;
@@ -19,7 +20,7 @@ export const MessagesEdit: FunctionalComponent<PropsType> = ({ className, applic
   };
 
   return (
-    <form className="flex" onSubmit={handleSubmit(handleSendMessage) as any}>
+    <form className={cn("flex",className)} onSubmit={handleSubmit(handleSendMessage) as any}>
       <TextareaControlled
         rows={5}
         className="flex-grow mr-2"
@@ -27,7 +28,7 @@ export const MessagesEdit: FunctionalComponent<PropsType> = ({ className, applic
         placeholder="Ваше сообщение"
         control={control}
       />
-      <Button className="self-end" text="Отправить" color="secondary" type="submit" />
+      <Button className="self-end" text="Отправить" color="gray" type="submit" />
     </form>
   );
 };

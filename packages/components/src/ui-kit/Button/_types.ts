@@ -1,6 +1,6 @@
-import { BUTTON_COLORS, BUTTON_SIZES } from "./_constats";
+import { BUTTON_COLORS} from "./_constats";
 
-export type ButtonSizeType = keyof typeof BUTTON_SIZES;
+export type ButtonCollorType = keyof typeof BUTTON_COLORS;
 
 export type ButtonPropsType = {
   className?: string;
@@ -12,11 +12,7 @@ export type ButtonPropsType = {
   /** Тип кнопки */
   type?: "submit";
   /** Цвет кнопки */
-  color?: string;
-  /** Размер кнопки */
-  size?: ButtonSizeType;
-  /** Индикатор который вытсавляет кнопке ширину 100% */
-  isFullWidth?: boolean;
+  color?: ButtonCollorType;
   /** Если кнопка не активна */
   disabled?: boolean;
   /** Событие нажатия */

@@ -25,7 +25,7 @@ export class RouteTemplate {
     }
 
     getRoute({lang, params=[] }:RouteTemplateGetProps){
-        return `/${lang}${this.page}${params?"/"+params.join('/'):""}`
+        return `/${lang}${this.page}${params.length?"/"+params.join('/'):""}`
     }
 }
 

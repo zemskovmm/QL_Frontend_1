@@ -8,12 +8,8 @@ import { Button } from "@project/components/src/ui-kit/Button";
 import { SchemaOf, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CenterCardLayout } from "layouts/CenterCardLayout";
-import { UserStatuseLoginProps } from "stores/UserStatuseStore";
-import {
-  CREATE_APPLICATIONS_TEMPLATE,
-  SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
-  useRouterStore,
-} from "stores/RouterStore";
+import { UserStatuseLoginProps, useUserStatuseStore } from "stores/UserStatuseStore";
+import { CREATE_APPLICATIONS_TEMPLATE, SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
 import { useLocalesStore } from "stores/LocalesStore";
 
 const schema: SchemaOf<UserStatuseLoginProps> = object({
@@ -22,29 +18,30 @@ const schema: SchemaOf<UserStatuseLoginProps> = object({
 });
 
 type PropsType = {
-  applicationType?: string;
-  entityId?: string;
-};
+  applicationType?:string;
+  entityId?:string;
+}
 
-export const SignInPage: FunctionalComponent<PropsType> = ({ applicationType, entityId }) => {
+export const SignInPage: FunctionalComponent<PropsType> = ({applicationType,entityId}) => {
   const { handleSubmit, control } = useForm<UserStatuseLoginProps>({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-  const { isLoading, isSuccess, loginAction } = useSignInStore();
-  const { lang } = useLocalesStore();
+  const { isLoading, loginAction } = useSignInStore();
+  const { isLogined } = useUserStatuseStore();
+  const { lang } = useLocalesStore()
   const { PROFILE_PATH, SIGN_UP_PATH } = useRouterStore();
 
   const signUpPath = applicationType
-    ? SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
-    : SIGN_UP_PATH;
+  ? SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[applicationType,entityId||"0"]}) 
+  :SIGN_UP_PATH
 
   useEffect(() => {
     const successPath = applicationType
-      ? CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
-      : PROFILE_PATH;
-    isSuccess && route(successPath);
-  }, [isSuccess, applicationType, entityId]);
+      ? CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[applicationType,entityId||"0"]}) 
+      :PROFILE_PATH
+    isLogined && route(successPath);
+  }, [isLogined,applicationType,entityId]);
 
   return (
     <CenterCardLayout title="Вход в личный кабинет" subtitle="Войдите или создайте аккаунт">

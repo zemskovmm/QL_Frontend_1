@@ -15,11 +15,11 @@ import { CREATE_APPLICATIONS_TEMPLATE } from "stores/RouterStore";
 import { route } from "preact-router";
 
 type PropsType = {
-  applicationType?: string;
-  entityId?: string;
-};
+  applicationType?:string;
+  entityId?:string;
+}
 
-const ProfilePage: FunctionalComponent<PropsType> = ({ applicationType, entityId }) => {
+const ProfilePage: FunctionalComponent<PropsType> = ({applicationType,entityId}) => {
   const cl = useContext(ComponentHostDashboardContext);
   const { PROFILE_LANG } = useLocalesStore();
   const { putUserAction, isLoading } = useProfileStore();
@@ -29,35 +29,29 @@ const ProfilePage: FunctionalComponent<PropsType> = ({ applicationType, entityId
     user: { firstName, lastName, phone, personalInfo },
   } = store;
   const { handleSubmit, control, setValue } = useForm<UserStatuseUserProps>();
-  const { isLoading: isLoadingGS, gs, getGlobalSettings } = useGlobalSettingsStore();
+  const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
   const { lang } = useLocalesStore();
   cl!.personalInfo = personalInfo;
 
-  useEffect(() => {
-    getGlobalSettings(lang);
-  }, [lang, getGlobalSettings]);
 
   useEffect(() => {
     setValue("firstName", firstName);
     setValue("lastName", lastName);
     setValue("phone", phone);
     setValue("personalInfo", cl?.personalInfo);
+    
   }, [store]);
 
-  useEffect(() => {
-    console.log("user", firstName, lastName, phone, isRegistrationComplite);
-    if (applicationType && isRegistrationComplite) {
-      const createApplicationPath = CREATE_APPLICATIONS_TEMPLATE.getRoute({
-        lang,
-        params: [applicationType, entityId || "0"],
-      });
+  useEffect(()=>{
+    if(applicationType && isRegistrationComplite){
+      const createApplicationPath = CREATE_APPLICATIONS_TEMPLATE.getRoute({lang,params:[applicationType,entityId||"0"]})
       route(createApplicationPath);
     }
-  }, [isRegistrationComplite, applicationType, entityId]);
+  },[isRegistrationComplite,applicationType,entityId])
 
   return (
     <LeftNavigationLayout title={PROFILE_LANG}>
-      <Preload isLoading={isLoading} color="white">
+      <Preload isLoading={isLoading||isLoadingGS} color="white">
         <div className="flex flex-col p-4">
           <form className="flex flex-col max-w-72" onSubmit={handleSubmit(putUserAction) as any}>
             <InputControlled className="my-1" name="firstName" label="Имя" placeholder="Ваше имя" control={control} />
@@ -76,7 +70,7 @@ const ProfilePage: FunctionalComponent<PropsType> = ({ applicationType, entityId
               control={control}
               type="tel"
             />
-            {gs && <RowsPresenter rows={gs?.personalCabinet["profile"].form.pageData.rows ?? []} />}
+            {personalCabinet["profile"] && <RowsPresenter rows={personalCabinet["profile"].form.pageData.rows ?? []} />}
             <Button className="my-2" text="Обновить" type="submit" disabled={isLoading} color={`red`} />
           </form>
         </div>
