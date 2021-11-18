@@ -3,6 +3,7 @@ const TailwindTheme = {
     theme: {
         boxShadow: {
             DEFAULT: '0 5px 10px rgba(0, 78, 255, 0.05), 0 10px 30px rgba(0, 78, 255, 0.03);',
+            'left-navigation': '8px 0px 10px rgba(172, 192, 236, 0.3);'
         },
         extend: {
             screens: {

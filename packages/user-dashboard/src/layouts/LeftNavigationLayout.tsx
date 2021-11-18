@@ -19,7 +19,7 @@ export const LeftNavigationLayout: FunctionalComponent<{ title: string }> = memo
         </Link>
       </div>
       <div className="flex flex-grow w-full h-screen MainContainer">
-        <LeftNavigation className="hidden tablet:flex border-r w-128 border rounded-primary flex flex-col leftNavigation" />
+        <LeftNavigation className="hidden tablet:flex border-r w-128 border rounded-primary shadow-left-navigation" />
         <div className="flex-grow border rounded-primary customScroll">{children}</div>
       </div>
     </div>

@@ -64,7 +64,4 @@ img {
   .MainContainer{
     max-height: 455px;
   }
-  .leftNavigation{
-    box-shadow: 8px 0px 10px rgba(172, 192, 236, 0.3);
-  }
 }

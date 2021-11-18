@@ -55,30 +55,32 @@ export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(
   };
 
   return (
-    <div className={` p-4 h-full flex flex-col ${className}`}>
+    <div className={`p-4 h-full flex flex-col ${className}`}>
       <IconLabel className="mt-5 mb-8" iconSrc={USER_ICON} text={`${lastName} ${firstName}`} subText={email} />
-      <div className="flex flex-col">
-        <ListItem text={PROFILE_LANG} onClick={() => route(PROFILE_PATH)} />
-        <ListItem
-          className="flex-shrink-0"
-          text={MY_APPLICATIONS_LANG}
-          onClick={() => setApplicationsOpen(!isApplicationsOpen)}
-          isOpenArrow={isApplicationsOpen}
-          withArrow
-        />
-        {isApplicationsOpen && (
-          <InfinityList
-            depth={1}
-            className="max-h-32"
-            count={applications.length}
-            onClick={(id) => route(id)}
-            onItemRender={handleItemRender}
-          />
-        )}
-        {isApplicationsOpen && applications.length == 0 && <ListItem depth={1} text={NOTHING_HERE_YET} />}
-        <ListItem text={SETTINGS_LANG} onClick={() => route(SETTINGS_PATH)} />
+      <div className="relative flex-grow">
+          <div className="absolute w-full h-full top-0 left-0 flex flex-col">
+            <ListItem text={PROFILE_LANG} onClick={() => route(PROFILE_PATH)} />
+            <ListItem
+              text={MY_APPLICATIONS_LANG}
+              onClick={() => setApplicationsOpen(!isApplicationsOpen)}
+              stopPropagation
+              isOpenArrow={isApplicationsOpen}
+              withArrow
+            />
+            {isApplicationsOpen && (
+              <InfinityList
+                depth={1}
+                className="flex-shrink"
+                count={applications.length}
+                onClick={(id) => route(id)}
+                onItemRender={handleItemRender}
+              />
+            )}
+            {isApplicationsOpen && applications.length == 0 && <ListItem depth={1} text={NOTHING_HERE_YET} />}
+            <ListItem  text={SETTINGS_LANG} onClick={() => route(SETTINGS_PATH)} />
+          </div>
       </div>
-      <Button className="self-end mt-auto mb-2.5 w-32" text="Выход" onClick={() => logoutAction} color={"red"} />
+      <Button className="self-end mt-auto mb-2.5 w-32" text="Выход" onClick={logoutAction} color="red" />
     </div>
   );
 });

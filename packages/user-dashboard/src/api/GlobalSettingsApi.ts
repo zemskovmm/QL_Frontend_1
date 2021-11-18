@@ -1,4 +1,4 @@
-import { jsonToUrlParam, request } from "./QLBaseApi";
+import { request } from "./QLBaseApi";
 import { GlobalSettingsDto } from 'admin-app/src/interfaces/GlobalSettingsDto'
 
 export class GlobalSettingsApi {
