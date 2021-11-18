@@ -47,7 +47,7 @@
   height: auto;
   overflow-y: hidden;
   box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-  border: 1px solid transparent;
+  /*border: 1px solid transparent;*/
   transition: max-height, padding 0.5s, 0.2s ease-in-out;
   z-index: 9999;
 }

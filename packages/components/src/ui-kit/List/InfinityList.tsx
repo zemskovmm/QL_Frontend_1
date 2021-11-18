@@ -17,7 +17,7 @@ export type InfinityListPropsType = {
 export const InfinityList: FunctionComponent<InfinityListPropsType> = ({
   className,
   count,
-  maxSize = 20,
+  maxSize = 3,
   onClick,
   onItemRender,
   depth = 0,
