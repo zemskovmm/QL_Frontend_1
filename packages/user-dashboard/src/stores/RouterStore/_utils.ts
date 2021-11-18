@@ -1,6 +1,5 @@
 import { NEW_APPLICATION_TEMPLATE, SETTINGS_TEMPLATE } from ".";
 import { 
-    HOME_TEMPLATE, 
     PROFILE_TEMPLATE, 
     SIGN_IN_TEMPLATE, 
     SIGN_UP_TEMPLATE 
@@ -41,7 +40,6 @@ export const isSecureUrl = (url:string): boolean =>{
 
 export const getLangPagePaths = (lang:string):PagePaths => {
     return {
-        HOME_PATH: HOME_TEMPLATE.getRoute({lang}),
         SIGN_UP_PATH: SIGN_UP_TEMPLATE.getRoute({lang}),
         SIGN_IN_PATH: SIGN_IN_TEMPLATE.getRoute({lang}),
 
