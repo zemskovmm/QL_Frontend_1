@@ -1,23 +1,21 @@
-import { Card } from "@project/components/src/ui-kit/Card";
-import { Text } from "@project/components/src/ui-kit/Text";
 import { FunctionalComponent } from "preact";
 
 type PropsType = {
-    title:string;
-    subtitle?: string;
-    isError?:boolean;
-}
+  title: string;
+  subtitle?: string;
+};
 
-export const CenterCardLayout: FunctionalComponent<PropsType> = ({title, subtitle,isError, children}) => {
-    return (
-        <div className="h-full flex items-center justify-center">
-            <Card className="flex flex-col items-center justify-center py-4 gap-4" size="208">
-                <div className="flex flex-col mb-10 max-w-112">
-                    <Text text={title} size="title-medium" color={isError?"error":undefined} isBold/>
-                    <Text text={subtitle || ""} size="small" color={isError?"error":undefined} isBold/>
-                </div>
-                {children}
-            </Card>
-        </div>
-    );
+export const CenterCardLayout: FunctionalComponent<PropsType> = ({ title, subtitle, children }) => {
+  return (
+    <div
+      className="flex h-full mx-auto flex-col items-center justify-center py-13 max-w-128 px-2.5 box-content w-full"
+      style={{ border: "2px solid #EFF3FA", borderRadius: "10px" }}
+    >
+      <div className="flex flex-col mb-10">
+        <h1 className={`text-4xl font-bold text-center mb-4`}>{title}</h1>
+        <h2 className={`text-base font-semibold text-center`}>{subtitle}</h2>
+      </div>
+      {children}
+    </div>
+  );
 };

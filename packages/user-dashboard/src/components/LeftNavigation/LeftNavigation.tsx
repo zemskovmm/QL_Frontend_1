@@ -48,7 +48,7 @@ export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(
       const { id, type } = row;
       const date: Date = new Date(); //TODO После добавления даты, получать с сервера
       return {
-        id: MY_APPLICATIONS_TEMPLATE.getRoute({ lang, params:[id.toString()]}),
+        id: MY_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [id.toString()] }),
         text: (APPLICATION_TYTLES_LANG[type] || type.toString()).replace(":date", date.toLocaleDateString()),
       };
     }
@@ -78,7 +78,12 @@ export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(
         {isApplicationsOpen && applications.length == 0 && <ListItem depth={1} text={NOTHING_HERE_YET} />}
         <ListItem text={SETTINGS_LANG} onClick={() => route(SETTINGS_PATH)} />
       </div>
-      <Button className="self-end mt-auto mb-2.5 w-32" text="Выход" onClick={() => logoutAction} color={"red"} />
+      <Button
+        className="self-end mt-auto mb-2.5 w-32"
+        text="Выход"
+        onClick={async () => await logoutAction()}
+        color={"red"}
+      />
     </div>
   );
 });
