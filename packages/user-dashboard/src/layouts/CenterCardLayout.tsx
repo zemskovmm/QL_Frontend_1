@@ -8,7 +8,7 @@ type PropsType = {
 export const CenterCardLayout: FunctionalComponent<PropsType> = ({ title, subtitle, children }) => {
   return (
     <div
-      className="flex h-full mx-auto flex-col items-center justify-center py-13 max-w-128 px-2.5 box-content w-full"
+      className="flex h-full mx-auto flex-col items-center justify-center py-14 max-w-128 px-2.5 box-content w-full"
       style={{ border: "2px solid #EFF3FA", borderRadius: "10px" }}
     >
       <div className="flex flex-col mb-10">
