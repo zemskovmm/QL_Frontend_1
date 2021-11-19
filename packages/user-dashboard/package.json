@@ -12,8 +12,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.1",
+    "@nanostores/preact": "^0.1.2",
     "@project/components": "*",
-    "nanostores": "0.4.8",
+    "nanostores": "^0.5.6",
     "preact": "^10.3.1",
     "preact-render-to-string": "^5.1.4",
     "preact-router": "^3.2.1",

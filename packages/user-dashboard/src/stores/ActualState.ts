@@ -1,5 +1,3 @@
-import { effect } from "nanostores";
-
 
 export class ActualState<T>{
     private needLoad = false;
@@ -24,12 +22,10 @@ export class ActualState<T>{
             return;
         }
         this.isLoading = true;
-        await effect(async()=>{
-            while(this.needLoad){
-                this.needLoad=false;
-                await this.callback(this.props);
-            }
-        })
+        while(this.needLoad){
+            this.needLoad=false;
+            await this.callback(this.props);
+        }
         this.isLoading = false;
     }
 }
