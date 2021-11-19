@@ -3,66 +3,64 @@ import { NotificationGroupEnum, NotificationType } from "./_types";
 const MAX_NOTIFICATION = 15;
 const MAX_TIME_NOTIFICATION = 6000;
 
-import { createStore, getValue, update } from 'nanostores'
-import { useStore } from "nanostores/preact";
+import { action, atom, onMount } from 'nanostores'
+import { useStore } from "@nanostores/preact";
 
 
-const createNotificationStore = ()=>{
-    let lastId = 1;
+const notificationStore = atom<Array<NotificationType>>([])
 
-    const store = createStore<Array<NotificationType>>(() => {
-        store.set([])
+onMount(notificationStore, ()=>{
+    let intervalId = setInterval(updateTimeAction,300);
+    return ()=>clearInterval(intervalId);
+})
 
-        let intervalId = setInterval(updateTimeAction,300);
-        return ()=>clearInterval(intervalId);
-    })
+const addAction = action(notificationStore,'addAction',(store, notification: NotificationType) => {
+    const newNotifications = store.get().slice(-(MAX_NOTIFICATION-1));
+    newNotifications.push({...notification,time: Date.now()})
+    store.set(newNotifications)
+}) 
 
-    const addAction = (notification: NotificationType) => {
-        update(store,(prev)=>{
-            const newNotifications = prev.slice(-(MAX_NOTIFICATION-1));
-            newNotifications.push({...notification,time: Date.now()})
-            return newNotifications;
-        })
-    }
+const removeAction = action(notificationStore,'removeAction', (store, notificationsId?: string ) => {
+    store.set(store.get().filter(({ id }) => id !== notificationsId) )
+}) 
 
-    const removeAction = ( notificationsId?: string ) => {
-        update( store, prev => prev.filter(({ id }) => id !== notificationsId) );
-    }
+let lastId = 1;
+export const addErrorAction = action(notificationStore,'addErrorAction',(store, error:string) => {
+    const id = `localID_${lastId++}`;
+    addAction({
+        id, 
+        group: NotificationGroupEnum.ERROR_NOTIFICATION_GROUP,
+        message: error,
+    });
+}) 
 
-    const addErrorAction = (error:string) => {
-        const id = `localID_${lastId++}`;
-        addAction({
-            id, 
-            group: NotificationGroupEnum.ERROR_NOTIFICATION_GROUP,
-            message: error,
-        });
-    }
-    
-    const addSuccessAction = (success:string) => {
-        const id = `localID_${lastId++}`;
-        addAction({
-            id, 
-            group: NotificationGroupEnum.SUCCESS_NOTIFICATION_GROUP,
-            message: success,
-        });
-    }
+export const addSuccessAction = action(notificationStore,'addSuccessAction',(store,success:string) => {
+    const id = `localID_${lastId++}`;
+    addAction({
+        id, 
+        group: NotificationGroupEnum.SUCCESS_NOTIFICATION_GROUP,
+        message: success,
+    });
+})
 
-    const updateTimeAction = () => {
-        const notifications = getValue(store);
-        if(notifications.length>0){
-            const now = Date.now() - MAX_TIME_NOTIFICATION;
-            if(now > (notifications[0].time || 0)){
-                store.set(notifications.filter(({ time }) => now < (time || 0)));
-            }
+const updateTimeAction = action(notificationStore,'updateTimeAction',(store) => {
+    const notifications = store.get();
+    if(notifications.length>0){
+        const now = Date.now() - MAX_TIME_NOTIFICATION;
+        if(now > (notifications[0].time || 0)){
+            store.set(notifications.filter(({ time }) => now < (time || 0)));
         }
     }
+})
 
-    return { store, addAction, removeAction, addErrorAction, addSuccessAction }
-}
 
-export const notificationStore = createNotificationStore();
 
 export const useNotificationStore = () => {
-    const notifications = useStore(notificationStore.store)
-    return { ...notificationStore, notifications }
+    const notifications = useStore(notificationStore)
+    return { 
+        notifications,
+        removeAction,
+        addSuccessAction, 
+        addErrorAction,
+    }
 }

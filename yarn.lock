@@ -1982,6 +1982,11 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
+"@nanostores/preact@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@nanostores/preact/-/preact-0.1.2.tgz#cbf2f46a9d9a87b97724be59af24d69bc7b11f10"
+  integrity sha512-99ngXNZvrma2rGUspzVFxSiXurip8d35Y3FtqcmRqto2MIhMjjwoBHPIaWRFyNTHoiHenyaFioef2BlXA+KVEg==
+
 "@next/env@10.2.3":
   version "10.2.3"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-10.2.3.tgz#ede3bbe68cec9939c37168ea2077f9adbc68334e"
@@ -10305,10 +10310,10 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-nanostores@0.4.8:
-  version "0.4.8"
-  resolved "https://registry.yarnpkg.com/nanostores/-/nanostores-0.4.8.tgz#991f936a2537007912a198fdb2e0e52694cf6b42"
-  integrity sha512-98Lg1qKD+zBp9fccQIv5q2umLEZUiH+o+dBick4X7G93jWYTzfdJaMi3UDPkE4UiAX/KlQbZ0qi1z8YoUIBNBA==
+nanostores@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/nanostores/-/nanostores-0.5.6.tgz#d744c511ccbe417a6cdcdde6892196ef7df59cc0"
+  integrity sha512-GGqPf5sjDF5QM9jVhLpO+LMeTO0IqsCrQxvfUcBXezG/563ZcflCKFFYCokn5lSOv1he5awNHII9qQVqcQQceA==
 
 native-url@0.3.4:
   version "0.3.4"

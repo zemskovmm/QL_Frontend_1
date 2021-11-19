@@ -6,12 +6,10 @@ import { Button } from "@project/components/src/ui-kit/Button";
 import { useContext, useEffect } from "preact/hooks";
 import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
 import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
-import {
-  ApplicationPostProps,
-  useApplicationStore,
-} from "routes/MyApplicationsPage/_components/ApplicationTab/ApplicationStore";
+import { useApplicationStore } from "routes/MyApplicationsPage/_components/ApplicationTab/ApplicationStore";
 import { useForm } from "react-hook-form";
 import { Preload } from "@project/components/src/ui-kit/Preload";
+import { ApplicationPostProps } from "@project/components/src/interfaces/ApplicationDto";
 
 type PropsType = {
   className?: string;

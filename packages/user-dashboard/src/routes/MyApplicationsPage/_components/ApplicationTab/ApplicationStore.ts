@@ -1,9 +1,8 @@
-import { useMemo } from "preact/hooks";
-import { createMap, MapStore } from "nanostores";
-import { useStore } from "nanostores/preact";
+import { action, map } from "nanostores";
+import { useStore } from "@nanostores/preact";
 import { personalApi } from "api/PersonalApi";
-import { userApi } from "api/UserApi";
-import { notificationStore } from "stores/NotificationStore";
+import { addErrorAction, addSuccessAction } from "stores/NotificationStore";
+import { ApplicationPostProps } from "@project/components/src/interfaces/ApplicationDto";
 
 type ApplicationItem = {
   id: number;
@@ -14,74 +13,55 @@ type ApplicationItem = {
   entityTypeSpecificApplicationInfo: { [key: string]: any };
 };
 
-export type ApplicationPostProps = {
-  type: number | string;
-  entityId: number;
-  commonApplicationInfo: { [key: string]: any };
-  entityTypeSpecificApplicationInfo: { [key: string]: any };
-};
-
 interface ApplicationStore {
   isLoading: boolean;
   application: ApplicationItem;
 }
 
-interface CreateApplicationStore {
-  store: MapStore<ApplicationStore>;
-  getApplication(applicationId: number): Promise<void>;
-  postApplicationAction: (data: ApplicationPostProps) => Promise<boolean>;
+const applicationStore = map<ApplicationStore>({
+  isLoading: false,
+  application: {
+    id: 0,
+    type: 0,
+    entityId: 0,
+    status: 0,
+    commonApplicationInfo: {},
+    entityTypeSpecificApplicationInfo: {},
+  },
+});
+
+const getApplication = action(applicationStore,"getApplication", async (store, applicationId: number): Promise<void> => {
+  if (!applicationId) return;
+  store.setKey("isLoading", true);
+  const result = await personalApi.getApplicationItem(applicationId);
+  const { isOk, body, error } = result;
+  if (isOk) {
+    store.setKey("application", body as ApplicationItem);
+  } else {
+    addErrorAction(error);
+  }
+  store.setKey("isLoading", false);
+}) ;
+
+const postApplicationAction = action(applicationStore,"postApplicationAction", async (store, data: ApplicationPostProps): Promise<boolean> => {
+  if (!store.get().application.id) return false;
+  const { isOk, error } = await personalApi.postApplicationItem(store.get().application.id, data);
+  if (isOk) {
+    addSuccessAction("Profile successful update");
+    return true;
+  } else {
+    addErrorAction(error);
+  }
+  return false;
+});
+
+type UseApplicationStore=ApplicationStore&{
+  getApplication: (applicationId: number)=> Promise<void>
+  postApplicationAction: (data: ApplicationPostProps)=> Promise<boolean>
 }
 
-export type ChatStoreType = CreateApplicationStore & ApplicationStore;
+export const useApplicationStore = (): UseApplicationStore => {
+  const state = useStore(applicationStore);
 
-const applicationItemDefault = {
-  id: 0,
-  type: 0,
-  entityId: 0,
-  status: 0,
-  commonApplicationInfo: {},
-  entityTypeSpecificApplicationInfo: {},
-};
-
-const createApplicationStore = (): CreateApplicationStore => {
-  const store = createMap<ApplicationStore>(() => {
-    store.set({
-      isLoading: false,
-      application: applicationItemDefault,
-    });
-  });
-
-  const getApplication = async (applicationId: number): Promise<void> => {
-    if (!applicationId) return;
-    store.setKey("isLoading", true);
-    const result = await personalApi.getApplicationItem(applicationId);
-    const { isOk, body, error } = result;
-    if (isOk) {
-      store.setKey("application", body as ApplicationItem);
-    } else {
-      notificationStore.addErrorAction(error);
-    }
-    store.setKey("isLoading", false);
-  };
-
-  const postApplicationAction = async (data: ApplicationPostProps): Promise<boolean> => {
-    if (!store.value?.application.id) return false;
-    const { isOk, error } = await personalApi.postApplicationItem(store.value?.application.id, data);
-    if (isOk) {
-      notificationStore.addSuccessAction("Profile successful update");
-      return true;
-    } else {
-      notificationStore.addErrorAction(error);
-    }
-    return false;
-  };
-
-  return { store, getApplication, postApplicationAction };
-};
-
-export const useApplicationStore = (): ChatStoreType => {
-  const pageStore = useMemo(() => createApplicationStore(), []);
-  const state = useStore(pageStore.store);
-
-  return { ...pageStore, ...state };
+  return { ...state, getApplication, postApplicationAction };
 };

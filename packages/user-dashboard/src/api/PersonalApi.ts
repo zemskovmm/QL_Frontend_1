@@ -1,6 +1,12 @@
 import { jsonToUrlParam, request } from "./QLBaseApi";
-import { ApplicationsPagesDto, ApplicationDto } from "@project/components/src/interfaces/ApplicationDto";
-import { ApplicationPostProps } from "routes/MyApplicationsPage/_components/ApplicationTab/ApplicationStore";
+import { 
+  ApplicationsPagesDto, 
+  ApplicationDto, 
+  ApplicationsMessageDto, 
+  ApplicationsSendMessageProps,
+  ApplicationPostProps
+} from "@project/components/src/interfaces/ApplicationDto";
+
 
 export type ApplicationsPropsReq = {
   page: number;
@@ -13,18 +19,15 @@ export type IdReq = {
   id: number;
 };
 
-export type MessagesType = {
-  author: string;
-  blobId: number | null;
-  date: string;
-  type: string;
-  text: string;
+export type GetMessagesPropsReq = {
+  beforeMessageId?:number;
+  afterMessageId?:number;
+  count?:number
 };
 
-export type SendMessageType = {
-  type: number;
-  text: string;
-};
+
+
+
 
 export class PersonalApi {
   addApplications = async (data: ApplicationDto) => request<IdReq>("personal/applications", data, "POST");
@@ -32,10 +35,10 @@ export class PersonalApi {
   getApplications = async (data: ApplicationsPropsReq) =>
     request<ApplicationsPagesDto>(jsonToUrlParam("personal/applications", data), null, "GET");
 
-  getMessages = async (id: number) =>
-    request<Array<MessagesType>>(`personal/applications/${id}/chat/messages?count=100`, null, "GET");
+  getMessages = async (id: number,data:GetMessagesPropsReq) =>
+    request<Array<ApplicationsMessageDto>>(jsonToUrlParam(`personal/applications/${id}/chat/messages`,data), null, "GET");
 
-  sendMessages = async (id: number, data: SendMessageType) =>
+  sendMessages = async (id: number, data: ApplicationsSendMessageProps) =>
     request(`personal/applications/${id}/chat/messages`, data, "POST");
 
   getApplicationItem = async (id: number) => request(`personal/applications/${id}`, null, "GET");
