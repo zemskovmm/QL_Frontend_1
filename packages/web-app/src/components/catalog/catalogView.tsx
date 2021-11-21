@@ -160,10 +160,10 @@ function CatalogItems<T>(props: {
 }
 
 const linkHousing: { [key: string]: string } = {
-  en: "https://housing.quartier-latin.com/en/housing",
-  ru: "https://housing.quartier-latin.com/housing",
-  cn: "https://housing.quartier-latin.com/cn/housing",
-  fr: "https://housing.quartier-latin.com/fr/housing",
+  en: "/en/housing",
+  ru: "/housing",
+  cn: "/cn/housing",
+  fr: "/fr/housing",
   esp: "",
 };
 
