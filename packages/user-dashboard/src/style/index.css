@@ -47,21 +47,23 @@ img {
   height: 100%;
 }
 
-.customScroll{
-  overflow-y: scroll;
-}
-
-.customScroll::-webkit-scrollbar {
-  width: 8px;
-}
-
-.customScroll::-webkit-scrollbar-thumb {
-  background: #E6E6E6;
-  border-radius: 100px;
-}
-
 @media (min-width: 640px) {
   .MainContainer{
     max-height: 455px;
   }
+}
+
+@media (min-width: 768px) {
+  .customScroll{
+    overflow-y: scroll;
+  }
+
+  .customScroll::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .customScroll::-webkit-scrollbar-thumb {
+    background: #E6E6E6;
+    border-radius: 100px;
+  } 
 }

@@ -5,6 +5,7 @@ export interface PageBlockRowDto {
   hide: boolean;
   vertical: string;
   hideHistory?: boolean;
+  marginAuto?: boolean;
 }
 
 export interface PageBlockDto {

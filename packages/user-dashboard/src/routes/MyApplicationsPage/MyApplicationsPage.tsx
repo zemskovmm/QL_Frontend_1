@@ -11,7 +11,7 @@ const MyApplicationsPage: FunctionalComponent<{ applicationId: string }> = ({ ap
 
   return (
     <LeftNavigationLayout title={`${APPLICATION_LANG} ${applicationId}`}>
-      <div className="flex flex-col h-full py-7 pr-4 pl-10">
+      <div className="flex flex-col h-full pt-6 pr-2.5 pl-3 pb-2 md:py-7 md:pr-4 md:pl-10">
         <div className="flex my-2 mr-auto" style={{ border: "1px solid #D7D7D7" }}>
           <button
             className={`px-8 py-1 hover:bg-blue-50 transition ${!tabId ? "bg-blue-50" : ""}`}
