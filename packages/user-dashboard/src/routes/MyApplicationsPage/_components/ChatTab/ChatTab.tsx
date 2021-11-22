@@ -15,7 +15,7 @@ export const ChatTab: FunctionalComponent<PropsType> = ({ className, application
     store.getMessages(applicationId);
   }, [applicationId]);
 
-  const classes = ["flex flex-col md:border gap-2 md:p-2", className ? className : ""].join(" ");
+  const classes = ["flex flex-col md:border gap-2 md:p-2 md:pt-0", className ? className : ""].join(" ");
 
   return (
     <div className={classes}>

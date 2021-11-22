@@ -20,7 +20,7 @@ export const MessagesEdit: FunctionalComponent<PropsType> = ({ className, applic
   };
 
   return (
-    <form className={cn("flex", className)} onSubmit={handleSubmit(handleSendMessage) as any}>
+    <form className={cn(`flex`, className)} onSubmit={handleSubmit(handleSendMessage) as any}>
       <TextareaControlled
         rows={5}
         className="flex-grow mr-2 min-h-10"
