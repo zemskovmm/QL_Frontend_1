@@ -23,6 +23,13 @@ export type Translate = {
   NEW_APPLICATION_LANG: string;
   NOTHING_HERE_YET: string;
   PROFILE_LANG: string;
+  PROFILE_SAVE: string;
+  PROFILE_NAME: string;
+  PROFILE_NAME_PLACEHOLDER: string;
+  PROFILE_LASTNAME: string;
+  PROFILE_LASTNAME_PLACEHOLDER: string;
+  PROFILE_PHONE: string;
+  PROFILE_PHONE_PLACEHOLDER: string;
   SETTINGS_LANG: string;
   TAKE_LANGUAGE_COURSES_LANG: string;
 

@@ -22,6 +22,7 @@ export type ButtonPropsType = {
   color?: ButtonCollorType;
   disabled?: boolean;
   onClick?: (id?: string) => void;
+  plus?: boolean;
 };
 
 export const Button: FunctionComponent<ButtonPropsType> = ({
@@ -34,6 +35,7 @@ export const Button: FunctionComponent<ButtonPropsType> = ({
   disabled = false,
   onClick,
   children,
+  plus,
 }) => {
   const handleOnClick = () => {
     onClick && onClick(id);
@@ -41,13 +43,31 @@ export const Button: FunctionComponent<ButtonPropsType> = ({
 
   return (
     <button
-      className={cn(" py-2 px-4 rounded inline-block transition", BUTTON_COLORS[color], className)}
+      className={cn(" py-2 px-4 rounded inline-block transition flex justify-center ", BUTTON_COLORS[color], className)}
       style={style}
       id={id}
       type={type}
       disabled={disabled}
       onClick={handleOnClick}
     >
+      {plus && (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="13"
+          height="13"
+          viewBox="0 0 13 13"
+          fill="none"
+          className={`mr-3`}
+          style={{ marginTop: "5px" }}
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M5.71667 0C5.55098 0 5.41667 0.134315 5.41667 0.3V5.41667H0.3C0.134315 5.41667 0 5.55098 0 5.71667V7.28333C0 7.44902 0.134315 7.58333 0.3 7.58333H5.41667V12.7C5.41667 12.8657 5.55098 13 5.71667 13H7.28333C7.44902 13 7.58333 12.8657 7.58333 12.7V7.58333H12.7C12.8657 7.58333 13 7.44902 13 7.28333V5.71667C13 5.55098 12.8657 5.41667 12.7 5.41667H7.58333V0.3C7.58333 0.134315 7.44902 0 7.28333 0H5.71667Z"
+            fill="white"
+          />
+        </svg>
+      )}
       {text} {children}
     </button>
   );

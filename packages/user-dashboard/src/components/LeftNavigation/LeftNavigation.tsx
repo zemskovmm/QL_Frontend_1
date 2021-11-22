@@ -2,7 +2,7 @@ import { InfinityList, ListItem, ListItemType } from "@project/components/src/ui
 import { FunctionalComponent } from "preact";
 import { memo } from "preact/compat";
 import { useEffect, useState } from "preact/hooks";
-import { route } from "preact-router";
+import { Link, route } from "preact-router";
 import { useLocalesStore } from "stores/LocalesStore";
 import { MY_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
 import { useApplicationsState } from "stores/ApplicationsState";
@@ -12,14 +12,13 @@ import USER_ICON from "@project/components/src/assets/icons/user.svg";
 import { Button } from "@project/components/src/ui-kit/Button";
 
 export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(({ className }) => {
-  const { url } = useRouterStore();
+  const { url, NEW_APPLICATION_PATH } = useRouterStore();
   const [isApplicationsOpen, setApplicationsOpen] = useState(false);
   const { PROFILE_PATH, SETTINGS_PATH } = useRouterStore();
   const {
     user: { email, firstName, lastName },
     logoutAction,
   } = useUserStatuseStore();
-
   const {
     lang,
     APPLICATION_TYTLES_LANG,
@@ -27,6 +26,7 @@ export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(
     MY_APPLICATIONS_LANG,
     NOTHING_HERE_YET,
     SETTINGS_LANG,
+    NEW_APPLICATION_LANG,
   } = useLocalesStore();
 
   const { applications, onItemRender, getApplications } = useApplicationsState();
@@ -77,8 +77,13 @@ export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(
         )}
         {isApplicationsOpen && applications.length == 0 && <ListItem depth={1} text={NOTHING_HERE_YET} />}
         <ListItem text={SETTINGS_LANG} onClick={() => route(SETTINGS_PATH)} />
+        <div className={`mt-4 ml-auto md:hidden`}>
+          <Link href={NEW_APPLICATION_PATH}>
+            <Button plus={true} text={NEW_APPLICATION_LANG} color={"red"} />
+          </Link>
+        </div>
       </div>
-      <Button className="self-end mt-auto mb-2.5 w-32" text="Выход" onClick={logoutAction} color="red" />
+      <Button className="self-end mt-auto mb-2.5 w-32 " text="Выход" onClick={logoutAction} color="red" />
     </div>
   );
 });

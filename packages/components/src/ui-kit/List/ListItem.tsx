@@ -35,17 +35,17 @@ export const ListItem: FunctionComponent<ListItemPropsType> = ({
 
   return (
     <div
-      className={`cursor-pointer relative border-l border-t border-r h-10 flex-shrink-0 ${className}`}
+      className={`cursor-pointer relative border-l border-t border-r h-10 box-border flex-shrink-0 ${className}`}
       onClick={(e) => {
         stopPropagation && e.stopPropagation();
         onClick();
       }}
       style={style}
     >
-      <div className="relative -bottom-px border-b flex items-center justify-between h-full px-4 box-content md:box-border py-3 md:py-1">
+      <div className="relative -bottom-px border-b flex items-center justify-between h-full px-4 py-3 md:py-1">
         <div className="flex max-h-9 overflow-hidden">
           {ofset}
-          <Text text={text} size="small" />
+          <Text text={text} size="small" className={`whitespace-nowrap`} />
         </div>
         {withArrow && <Icon className={iconClassName} src={RIGHT_ARROW_ICON} size="8" />}
       </div>
