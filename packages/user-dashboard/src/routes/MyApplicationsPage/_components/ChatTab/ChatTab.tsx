@@ -1,26 +1,31 @@
 import { FunctionalComponent } from "preact";
 import { useEffect } from "preact/hooks";
-import { ChatStoreType } from "./ChatStore";
-import { Messages } from "./Messages";
-import { MessagesEdit } from "./MessagesEdit";
+import { useChatStore } from "./ChatStore";
+import { Chat } from '@project/components/src/ui-kit/Chat'
 
 type PropsType = {
-  className?: string;
-  applicationId: number;
-  store: ChatStoreType;
+    className?:string;
+    applicationId: number;
 };
 
-export const ChatTab: FunctionalComponent<PropsType> = ({ className, applicationId, store }) => {
-  useEffect(() => {
-    store.getMessages(applicationId);
-  }, [applicationId]);
+export const ChatTab: FunctionalComponent<PropsType> = ({className, applicationId}) => {
+    const {getMessages, messages}= useChatStore()
 
-  const classes = ["flex flex-col md:border gap-2 md:p-2 md:pt-0", className ? className : ""].join(" ");
+    useEffect(()=>{
+        getMessages(applicationId);
+    },[applicationId])
 
-  return (
-    <div className={classes}>
-      <Messages className="flex-grow border md:border-0" store={store} />
-      <MessagesEdit applicationId={applicationId} store={store} />
-    </div>
-  );
+    const handleBeforeMessages=(beforeMessageId:number)=>{
+        getMessages(applicationId,{beforeMessageId});
+    }
+
+    const handleAfterMessages=(afterMessageId:number)=>{
+        getMessages(applicationId,{afterMessageId});
+    }
+
+    return <Chat 
+        classname={className} 
+        provider={messages}
+        onBeforeMessages={handleBeforeMessages}
+        onAfterMessages={handleAfterMessages}/>
 };

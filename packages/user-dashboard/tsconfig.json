@@ -81,6 +81,6 @@
     },
     "include": [
         "src/**/*",
-        "tests/**/*"
-, "../components/src/ui-kit/Button.tsx", "../components/src/ui-kit/Card.tsx"    ]
+        "tests/**/*", 
+        "../components/src/**/*"]
 }

@@ -1,6 +1,5 @@
 import { FunctionalComponent } from "preact";
 import { ChatTab, ApplicationTab } from "./_components";
-import { useChatStore } from "./_components/ChatTab/ChatStore";
 import { useLocalesStore } from "stores/LocalesStore";
 import { LeftNavigationLayout } from "layouts/LeftNavigationLayout";
 import { useState } from "preact/hooks";
@@ -9,7 +8,6 @@ const MyApplicationsPage: FunctionalComponent<{ applicationId: string }> = ({ ap
   const [tabId, setTabId] = useState(false);
   const { APPLICATION_LANG, CHAT_LANG } = useLocalesStore();
   const applicationIdInt = Number.parseInt(applicationId);
-  const chatStore = useChatStore();
 
   return (
     <LeftNavigationLayout title={`${APPLICATION_LANG} ${applicationId}`}>
@@ -33,7 +31,7 @@ const MyApplicationsPage: FunctionalComponent<{ applicationId: string }> = ({ ap
           {tabId ? (
             <ApplicationTab className="h-full" applicationId={applicationIdInt} />
           ) : (
-            <ChatTab className="h-full" applicationId={applicationIdInt} store={chatStore} />
+            <ChatTab className="h-full" applicationId={applicationIdInt} />
           )}
         </div>
       </div>

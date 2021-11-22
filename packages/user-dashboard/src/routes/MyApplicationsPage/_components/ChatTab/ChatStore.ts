@@ -1,16 +1,10 @@
-import { useMemo } from "preact/hooks";
-import { createMap, MapStore } from "nanostores";
-import { useStore } from "nanostores/preact";
-import { personalApi } from "api/PersonalApi";
-import { notificationStore } from "stores/NotificationStore";
+import { map, action} from "nanostores";
+import { useStore } from "@nanostores/preact";
+import { GetMessagesPropsReq, personalApi } from "api/PersonalApi";
+import { addErrorAction } from "stores/NotificationStore";
+import { MessageListProvider,MessageType } from "@project/components/src/ui-kit/Chat";
 
-export type ChatMessagesType = {
-  author: string;
-  blobId: number | null;
-  date: Date;
-  type: string;
-  text: string;
-};
+
 
 export type ChatSendMessageType = {
   text: string;
@@ -18,62 +12,58 @@ export type ChatSendMessageType = {
 
 interface ChatStore {
   isLoading: boolean;
-  messages: Array<ChatMessagesType>;
-}
-interface CreateChatStore {
-  store: MapStore<ChatStore>;
-  getMessages: (applicationId: number) => Promise<void>;
-  sendMessage: (applicationId: number, message: ChatSendMessageType) => Promise<void>;
+  applicationId: number;
+  messages: MessageListProvider;
 }
 
-export type ChatStoreType = CreateChatStore & ChatStore;
+const MAX_COUNT = 3
 
-const createChatStore = (): CreateChatStore => {
-  const store = createMap<ChatStore>(() => {
-    store.set({
-      isLoading: false,
-      messages: [],
-    });
-  });
+const chatStor = map<ChatStore>({
+  isLoading: false,
+  applicationId: 0,
+  messages: new MessageListProvider(),
+});
 
-  const getMessages = async (applicationId: number): Promise<void> => {
-    store.setKey("messages", []);
-    if (applicationId === 0) return;
-    store.setKey("isLoading", true);
-    const result = await personalApi.getMessages(applicationId);
-    const { isOk, body, error } = result;
-    if (isOk) {
-      const messages: Array<ChatMessagesType> = (body || []).map(({ author, blobId, date, type, text }) => ({
-        author,
-        blobId,
-        date: new Date(date),
-        type,
-        text,
-      }));
-      store.setKey("messages", messages);
-    } else {
-      notificationStore.addErrorAction(error);
-    }
-    store.setKey("isLoading", false);
-  };
+const getMessages = action( chatStor,"getMessages", async (store, applicationId: number,data:GetMessagesPropsReq={}): Promise<void> => {
+  store.setKey("applicationId", applicationId);
+  if(store.get().applicationId!==applicationId){
+    store.setKey("messages", new MessageListProvider());
+  }
+  if (applicationId === 0) return;
+  store.setKey("isLoading", true);
+  const result = await personalApi.getMessages(applicationId,{...data,count:MAX_COUNT});
+  const { isOk, body, error } = result;
+  if (isOk) {
+    const messages: Array<MessageType> = (body || []).map(({id, author, blobId, date, type, text }) => ({
+      id,
+      me: author === "User",
+      title: new Date(date).toLocaleString(),
+      text: text,
+    }));
+    store.setKey('messages',store.get().messages.push(messages))
+  } 
+  store.setKey("isLoading", false);
+});
 
-  const sendMessage = async (applicationId: number, message: ChatSendMessageType): Promise<void> => {
-    if (applicationId === 0) return;
-    const result = await personalApi.sendMessages(applicationId, { ...message, type: 0 });
-    const { isOk, error } = result;
-    if (isOk) {
-      await getMessages(applicationId);
-    } else {
-      notificationStore.addErrorAction(error);
-    }
-  };
 
-  return { store, getMessages, sendMessage };
-};
+const sendMessage = action( chatStor,"getMessages", async (store, applicationId: number, message: ChatSendMessageType): Promise<void> => {
+  console.log(getMessages)
+  if (applicationId === 0) return;
+  const result = await personalApi.sendMessages(applicationId, { ...message, type: 0 });
+  const { isOk, error } = result;
+  if (isOk) {
+    getMessages(applicationId);
+  } else {
+    addErrorAction(error);
+  }
+});
 
-export const useChatStore = (): ChatStoreType => {
-  const pageStore = useMemo(() => createChatStore(), []);
-  const state = useStore(pageStore.store);
 
-  return { ...pageStore, ...state };
+chatStor.listen((state,keys)=>{
+  console.log(keys,state)
+})
+
+export const useChatStore = () => {
+  const state = useStore(chatStor);
+  return { ...state, getMessages, sendMessage };
 };
