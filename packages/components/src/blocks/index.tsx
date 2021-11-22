@@ -120,7 +120,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
         background: props.background,
         alignItems: props.vertical,
       }}
-      className="relative mx-auto flex-wrap flex"
+      className={`relative ${props.marginAuto ? "" : "mx-auto"} flex-wrap flex`}
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;
@@ -147,7 +147,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
   );
 };
 
-export const RowsPresenter = (props: { rows: PageBlockRowDto[]; hideHistory?: boolean }) => {
+export const RowsPresenter = (props: { rows: PageBlockRowDto[]; hideHistory?: boolean; marginAuto?: boolean }) => {
   return (
     <>
       {props.rows.map(
@@ -155,6 +155,7 @@ export const RowsPresenter = (props: { rows: PageBlockRowDto[]; hideHistory?: bo
           !row.hide && (
             <React.Fragment key={ind}>
               <RowPresenter
+                marginAuto={props.marginAuto}
                 blocks={row.blocks}
                 maxWidth={row.maxWidth}
                 background={row.background}

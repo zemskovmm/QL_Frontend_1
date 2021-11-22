@@ -5,24 +5,22 @@ import { Messages } from "./Messages";
 import { MessagesEdit } from "./MessagesEdit";
 
 type PropsType = {
-    className?:string;
-    applicationId: number;
-    store: ChatStoreType;
+  className?: string;
+  applicationId: number;
+  store: ChatStoreType;
 };
 
-export const ChatTab: FunctionalComponent<PropsType> = ({className, applicationId, store}) => {
+export const ChatTab: FunctionalComponent<PropsType> = ({ className, applicationId, store }) => {
+  useEffect(() => {
+    store.getMessages(applicationId);
+  }, [applicationId]);
 
-    useEffect(()=>{
-        store.getMessages(applicationId);
-    },[applicationId])
+  const classes = ["flex flex-col md:border gap-2 md:p-2", className ? className : ""].join(" ");
 
-    const classes = [
-        "flex flex-col border gap-2 p-2",
-        className ? className : "",
-    ].join(' ');
-
-    return <div className={classes} >
-        <Messages className="flex-grow" store={store}/>
-        <MessagesEdit applicationId={applicationId} store={store}/>
+  return (
+    <div className={classes}>
+      <Messages className="flex-grow border md:border-0" store={store} />
+      <MessagesEdit applicationId={applicationId} store={store} />
     </div>
+  );
 };

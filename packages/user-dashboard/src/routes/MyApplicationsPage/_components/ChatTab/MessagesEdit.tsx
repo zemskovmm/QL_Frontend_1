@@ -3,7 +3,7 @@ import { TextareaControlled } from "@project/components/src/form/TextareaControl
 import { FunctionalComponent } from "preact";
 import { useForm } from "react-hook-form";
 import { ChatMessagesType, ChatStoreType } from "./ChatStore";
-import cn from "classnames"
+import cn from "classnames";
 
 type PropsType = {
   className?: string;
@@ -20,15 +20,27 @@ export const MessagesEdit: FunctionalComponent<PropsType> = ({ className, applic
   };
 
   return (
-    <form className={cn("flex",className)} onSubmit={handleSubmit(handleSendMessage) as any}>
+    <form className={cn("flex", className)} onSubmit={handleSubmit(handleSendMessage) as any}>
       <TextareaControlled
         rows={5}
-        className="flex-grow mr-2"
+        className="flex-grow mr-2 min-h-10"
         name="text"
         placeholder="Ваше сообщение"
         control={control}
       />
-      <Button className="self-end" text="Отправить" color="gray" type="submit" />
+      <Button className="self-end" color="red" type="submit">
+        <svg
+          className={`md:hidden`}
+          xmlns="http://www.w3.org/2000/svg"
+          width="11"
+          height="18"
+          viewBox="0 0 11 18"
+          fill="none"
+        >
+          <path d="M1.53564 2L8.60671 9.07107L1.53564 16.1421" stroke="white" stroke-width="3" />
+        </svg>
+        <span className={`hidden md:block`}>Send</span>
+      </Button>
     </form>
   );
 };
