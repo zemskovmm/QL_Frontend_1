@@ -20,6 +20,7 @@ import { TraitTypeEditPage, TraitTypeNewPage } from "../pages/trait/traitTypeNew
 import { AdminGlobalSettingEditor } from "../pages/globalSetting/page";
 import { FormEditorPage } from "../pages/globalSetting/formEditorPage/formEditorPage";
 import { NotFoundPage } from "../pages/NotFounds/NotFoundPage";
+import { ManagerCreatePage } from "../pages/Manager/ManagerCreate/ManagerCreatePage";
 
 export enum RouteNames {
   notFound = "not-found",
@@ -58,6 +59,8 @@ export enum RouteNames {
   coursePage = "admin-coursePage",
   courseCreate = "admin-courseCreate",
   courseTraitEditor = "admin-courseTraitEditor",
+
+  mangerCreate = "admin-mangerCreate",
 }
 
 export const AnonRouteViewMap = {
@@ -100,6 +103,8 @@ export const AdminRouteViewMap = {
   [RouteNames.coursePage]: <CourseEditPage />,
   [RouteNames.courseList]: <CourseListPage />,
   [RouteNames.courseTraitEditor]: <CourseTraitEditorPage />,
+
+  [RouteNames.mangerCreate]: <ManagerCreatePage />,
 };
 
 export const AnonRoutes: Route[] = convertRoutes([
@@ -300,6 +305,12 @@ export const AdminRoutes: Route[] = convertRoutes([
     name: RouteNames.courseTraitEditor,
     hooks: [UserAuthorizedOnlyHook],
     onEnter: async (root, to) => await root.courseTraitEditor.loadStore(Number(to.params.id)),
+  },
+  {
+    pattern: "/manager/create",
+    name: RouteNames.mangerCreate,
+    hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.mangerCreatePage.reset(),
   },
 ]);
 

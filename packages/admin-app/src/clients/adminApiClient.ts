@@ -7,6 +7,7 @@ import { AdminSchoolDto } from "../stores/pages/school/schoolPageStore";
 import { RemoteUiDefinition } from "@kekekeks/remoteui/src";
 import { AdminCourseDto } from "../stores/pages/course/coursePageStore";
 import { GlobalSettingsDto } from "src/interfaces/GlobalSettingsDto";
+import { ManagerCreateDto } from "../stores/pages/manager/managerCreateStore";
 
 export class AdminApiClient extends ApiClientBase {
   getTotalPages = (length: number) => (length % 10 ? Math.floor(length / 10) + 1 : Math.floor(length / 10));
@@ -18,7 +19,6 @@ export class AdminApiClient extends ApiClientBase {
           search: search,
         })
     );
-
   getPageById = (page: number) => this.sendRequest<AdminPageDto>("admin/pages/" + page);
   updatePage = (page: number, data: AdminPageDto) =>
     this.sendRequest<IdResponseDto>("admin/pages/" + page, data, "PUT");
@@ -30,8 +30,8 @@ export class AdminApiClient extends ApiClientBase {
     this.sendRequest("admin/auth/login", data, "POST");
   getCheck = () => this.sendRequest("admin/auth/check");
   getLogout = () => this.sendRequest("admin/auth/logout");
+  
   /* Trait */
-
   getTraitTypeList = () => this.sendRequest<AdminTraitTypeDto[]>("admin/trait-types");
   getTraitsListOfType = (id: number) => this.sendRequest<AdminTraitTypeDto[]>(`admin/traits/of-type/${id}`);
   getActiveTraitsByCourseId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-course/${id}`);
@@ -105,6 +105,9 @@ export class AdminApiClient extends ApiClientBase {
   updateCourse = (id: number, data: AdminCourseDto<unknown>) => this.sendRequest(`admin/courses/${id}`, data, "PUT");
   createCourse = (data: AdminCourseDto<unknown>) => this.sendRequest(`admin/courses/`, data, "POST");
   definitionCourses = () => this.sendRequest<RemoteUiDefinition>("admin/courses/definition");
+
+  /* Manager */
+  postManagerCreate = (data: ManagerCreateDto) => this.sendRequest(`admin/auth/manager/register`, data, "POST");
 }
 
 export const AdminApi = new AdminApiClient();

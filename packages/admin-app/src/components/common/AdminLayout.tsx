@@ -35,6 +35,11 @@ const Navbar = () => {
               Global settings
             </a>
           </RouterLink>
+          <RouterLink routeName={RouteNames.mangerCreate}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10 whitespace-nowrap	">
+              Create Manager
+            </a>
+          </RouterLink>
         </div>
       </div>
       <div className="flex items-center flex-shrink-0 text-white mr-4">
