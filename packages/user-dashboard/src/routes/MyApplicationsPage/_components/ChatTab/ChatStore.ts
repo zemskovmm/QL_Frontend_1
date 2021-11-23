@@ -2,7 +2,7 @@ import { map, action} from "nanostores";
 import { useStore } from "@nanostores/preact";
 import { GetMessagesPropsReq, personalApi } from "api/PersonalApi";
 import { addErrorAction } from "stores/NotificationStore";
-import { MessageListProvider,MessageType } from "@project/components/src/ui-kit/Chat";
+import { MAX_ROW_IN_PAGE, MessageListProvider,MessageType } from "@project/components/src/ui-kit/Chat";
 
 
 
@@ -15,8 +15,6 @@ interface ChatStore {
   applicationId: number;
   messages: MessageListProvider;
 }
-
-const MAX_COUNT = 3
 
 const chatStor = map<ChatStore>({
   isLoading: false,
@@ -31,7 +29,7 @@ const getMessages = action( chatStor,"getMessages", async (store, applicationId:
   }
   if (applicationId === 0) return;
   store.setKey("isLoading", true);
-  const result = await personalApi.getMessages(applicationId,{...data,count:MAX_COUNT});
+  const result = await personalApi.getMessages(applicationId,{...data,count:MAX_ROW_IN_PAGE});
   const { isOk, body, error } = result;
   if (isOk) {
     const messages: Array<MessageType> = (body || []).map(({id, author, blobId, date, type, text }) => ({
@@ -47,7 +45,6 @@ const getMessages = action( chatStor,"getMessages", async (store, applicationId:
 
 
 const sendMessage = action( chatStor,"getMessages", async (store, applicationId: number, message: ChatSendMessageType): Promise<void> => {
-  console.log(getMessages)
   if (applicationId === 0) return;
   const result = await personalApi.sendMessages(applicationId, { ...message, type: 0 });
   const { isOk, error } = result;
@@ -58,10 +55,6 @@ const sendMessage = action( chatStor,"getMessages", async (store, applicationId:
   }
 });
 
-
-chatStor.listen((state,keys)=>{
-  console.log(keys,state)
-})
 
 export const useChatStore = () => {
   const state = useStore(chatStor);

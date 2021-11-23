@@ -16,10 +16,12 @@ export const ChatTab: FunctionalComponent<PropsType> = ({className, applicationI
     },[applicationId])
 
     const handleBeforeMessages=(beforeMessageId:number)=>{
+        console.log("before",beforeMessageId)
         getMessages(applicationId,{beforeMessageId});
     }
 
     const handleAfterMessages=(afterMessageId:number)=>{
+        console.log("after",afterMessageId)
         getMessages(applicationId,{afterMessageId});
     }
 
