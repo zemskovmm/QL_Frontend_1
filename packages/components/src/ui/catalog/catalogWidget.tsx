@@ -71,6 +71,7 @@ const searchTranslate: { [key: string]: string } = {
   esp: "Buscar",
 };
 
+
 export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
   const router = useRouter();
   const appliedFilters: CatalogWidgetFilter[] = [];
