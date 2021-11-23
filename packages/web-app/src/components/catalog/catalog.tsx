@@ -45,10 +45,10 @@ function parseCatalogQuery(query: ParsedUrlQuery) {
   return data;
 }
 
-function changeQueryArg(router: NextRouter, key: string, value: string) {
+async function changeQueryArg(router: NextRouter, key: string, value: string) {
   const newQuery = { ...router.query };
   newQuery[key] = value;
-  router.push(
+  await router.push(
     {
       query: newQuery,
     },
@@ -68,11 +68,11 @@ export function Catalog<T>(props: CatalogProps<T>) {
   const data = siteApi.useCatalogItems<T>(locale, props.apiElementName, 20, parsed.page, parsed.filters);
 
   const setPage = (page: number) => changeQueryArg(router, "page", page.toString());
-  const setFilter = (identifier: string, id: number, selected: boolean) => {
+  const setFilter = async (identifier: string, id: number, selected: boolean) => {
     const selectedItems = parsed.filters.find((f) => f.identifier == identifier)?.values || [];
     const newItems = selectedItems.filter((x) => x != id);
     if (selected) newItems.push(id);
-    changeQueryArg(router!, "filter-" + identifier, newItems.join(","));
+    await changeQueryArg(router!, "filter-" + identifier, newItems.join(","));
   };
 
   return (
