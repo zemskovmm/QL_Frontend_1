@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "https://ql-dev-admin.dotlic.ru",
   "dependencies": {
+    "@keroosha/class-validator": "*",
     "@ckeditor/ckeditor5-build-decoupled-document": "^29.2.0",
     "@ckeditor/ckeditor5-react": "^3.0.2",
     "fast-json-stable-stringify": "^2.1.0",
