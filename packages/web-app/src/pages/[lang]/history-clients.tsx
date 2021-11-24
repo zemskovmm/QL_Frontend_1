@@ -4,7 +4,7 @@ import { LocalizedText } from "src/components/common/LocalizedText";
 import { siteApi } from "../../clients/siteApiClient";
 import { RowsPresenter } from "@project/components/src/blocks";
 import React, { FC } from "react";
-import { PageListDto, PageListItemDto } from "../../interfaces/pagesDto";
+import { PageListItemDto } from "../../interfaces/pagesDto";
 
 type HistoryItemType = {
   title: string;

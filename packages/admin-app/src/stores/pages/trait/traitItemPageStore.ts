@@ -1,5 +1,4 @@
 ﻿import { action, observable } from "mobx";
-import { AdminTraitItemDto } from "src/interfaces/TraitPageDto";
 import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { RootStore } from "src/stores/RootStore";

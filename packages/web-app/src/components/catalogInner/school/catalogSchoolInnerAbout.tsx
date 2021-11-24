@@ -19,9 +19,9 @@ const CatalogCallBack = () => {
         </div>
       </div>
       <ContactUsFormButton footer={true}>
-        <button className={style.catalogCallBack__btn}>
+        <div className={style.catalogCallBack__btn}>
           <LocalizedText id={"university_button"} />
-        </button>
+        </div>
       </ContactUsFormButton>
     </div>
   );
@@ -46,8 +46,8 @@ export const CatalogSchoolInnerAbout: FC<CatalogInnerSchoolAboutProps> = ({ data
                 <LocalizedText id={"trait_directions_study"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["directions-study"]?.map((el) => (
-                  <span>{el.name}</span>
+                {data.traits.namedTraits["directions-study"]?.map((el, i) => (
+                  <span key={`directions-study ${i} ${el.name}`}>{el.name}</span>
                 ))}
               </div>
             </div>
@@ -56,8 +56,8 @@ export const CatalogSchoolInnerAbout: FC<CatalogInnerSchoolAboutProps> = ({ data
                 <LocalizedText id={"university_lang"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["instruction-language"]?.map((el) => (
-                  <span>{el.name}</span>
+                {data.traits.namedTraits["instruction-language"]?.map((el, i) => (
+                  <span key={`instruction-language ${i} ${el.name}`}>{el.name}</span>
                 ))}
               </div>
             </div>
@@ -66,8 +66,8 @@ export const CatalogSchoolInnerAbout: FC<CatalogInnerSchoolAboutProps> = ({ data
                 <LocalizedText id={"trait_age"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["Age"]?.map((el) => (
-                  <span>{el.name}</span>
+                {data.traits.namedTraits["Age"]?.map((el, i) => (
+                  <span key={`Age ${i} ${el.name}`}>{el.name}</span>
                 ))}
               </div>
             </div>
@@ -76,8 +76,10 @@ export const CatalogSchoolInnerAbout: FC<CatalogInnerSchoolAboutProps> = ({ data
                 <LocalizedText id={"trait_sites"} />
               </span>
               <div className={style.info__columnItem__list}>
-                {data.traits.namedTraits["sites"]?.map((el) => (
-                  <a href={el.name}>{el.name}</a>
+                {data.traits.namedTraits["sites"]?.map((el, i) => (
+                  <a href={`https://${el.name}`} key={`sites ${i} ${el.name}`} target={`_blank`}>
+                    {el.name}
+                  </a>
                 ))}
               </div>
             </div>
@@ -90,7 +92,7 @@ export const CatalogSchoolInnerAbout: FC<CatalogInnerSchoolAboutProps> = ({ data
           </div>
           <div className={`mb-6 flex flex-wrap px-4 lg:px-16`}>
             {data.traits.namedTraits["benefits"]?.map((el, index) => (
-              <div className={`flex flex-col items-center mx-10 w-40 mb-10`} key={el.name + index}>
+              <div className={`flex flex-col items-center mx-10 w-40 mb-10`} key={`benefits ${index} ${el.name}`}>
                 <div className={`p-2 w-10 h-10 rounded-full mr-8 lg:mr-10`} style={{ backgroundColor: "#EFF3FA" }}>
                   <img src={el.iconId ? `${ApiBaseUrl}/api/media/scaled/${el.iconId}` : notIcon} alt="" />
                 </div>

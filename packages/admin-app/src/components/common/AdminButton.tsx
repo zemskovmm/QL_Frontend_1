@@ -10,8 +10,8 @@ interface AdminButtonProps
 }
 
 export const AdminButton = (props: AdminButtonProps) => {
-  const { color, href, onClick, ...rest } = props;
-  var classes = "text-white font-bold py-2 px-4 rounded inline-block ";
+  const { color, href, onClick, className, ...rest } = props;
+  let classes = `text-white font-bold py-2 px-4 rounded inline-block ${props.className} `;
   if (color == "default") classes += "bg-gray-500 hover:bg-gray-100 hover:text-black";
   if (color == "primary") classes += "bg-blue-500 hover:bg-blue-100 hover:text-black";
   if (color == "success") classes += "bg-green-400 hover:bg-green-100 hover:text-black";

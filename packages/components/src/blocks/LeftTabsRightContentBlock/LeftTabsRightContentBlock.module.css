@@ -20,6 +20,11 @@
   color: #646F83;
 }
 
+.tab__elementActive img{
+  transform-origin: center;
+  transform: rotate(180deg);
+}
+
 .tab__elementList{
   max-width: 370px;
 }

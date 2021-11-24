@@ -159,14 +159,6 @@ function CatalogItems<T>(props: {
   );
 }
 
-const linkHousing: { [key: string]: string } = {
-  en: "/en/housing",
-  ru: "/housing",
-  cn: "/cn/housing",
-  fr: "/fr/housing",
-  esp: "",
-};
-
 export function CatalogView<T>(props: {
   elementRenderer: (element: T) => JSX.Element;
   filters: CatalogFilterDto[] | undefined;

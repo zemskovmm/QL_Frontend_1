@@ -19,6 +19,7 @@ export class ApiClientBase {
     };
     const url =
       path === "global" ? `https://ql.dotlic.ru/api/global/ql/${data}` : SsrCompatibleApiBaseUrl + "/api/" + path;
+
     const res = await fetch(encodeURI(url), init);
 
     if (res.ok) {

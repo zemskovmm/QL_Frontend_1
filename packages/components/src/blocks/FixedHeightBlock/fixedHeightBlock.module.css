@@ -55,6 +55,7 @@
 .text.open:after {
   opacity: 0;
   transition: 1s opacity;
+  display: none;
 }
 
 .arrow.open {

@@ -2,7 +2,13 @@ import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { action, observable } from "mobx";
 import { RootStore } from "src/stores/RootStore";
-import { GlobalSettingsDto, LinkDto, SocialLinkDto, LinkListDto, ContactLinkDto } from "src/interfaces/GlobalSettingsDto";
+import {
+  GlobalSettingsDto,
+  LinkDto,
+  SocialLinkDto,
+  LinkListDto,
+  ContactLinkDto,
+} from "src/interfaces/GlobalSettingsDto";
 
 export class GlobalSettingsPageStore extends RequestTracking {
   @observable headerTopLink: LinkDto[] = [];

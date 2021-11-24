@@ -1,0 +1,10 @@
+﻿.loginBoard{
+  border: 1px solid black;
+  padding: 50px;
+  background: white;
+  border-radius: 6px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}

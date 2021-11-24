@@ -4,9 +4,7 @@ import React, { FC, Suspense, useState } from "react";
 import { AdminInputBox } from "../../components/common/AdminInputBox";
 import { GlobalSettingsPageStore } from "../../stores/pages/globalSettings/globalSettingsPageStore";
 import { AdminButton } from "../../components/common/AdminButton";
-import { AlertComponent } from "../../components/common/AlertComponent";
 import { DropDownList } from "@project/components/src/blocks/FaqBlock/faqBlock";
-import styles from "../../components/remoteui/AdminRemoteUiHtmlEditor.module.css";
 import { LinkDto, SocialLinkDto } from "../../interfaces/GlobalSettingsDto";
 import { RouterLink } from "mobx-state-router";
 import { RouteNames } from "../../routing/routes";
@@ -17,7 +15,7 @@ const GlobalSocialLink: FC<{ value: SocialLinkDto[]; name: string }> = ({ value,
     <div className={`flex justify-between pb-4 mb-4 border-b-2	`}>
       <span className="text-gray-700 text-xl pr-4 flex flex-col">
         {name}
-        <span>We have: telegram, vk, facebook, instagram, linkedIn, G+, twitter, youtube</span>
+        <span>We have: telegram, vk, facebook, instagram, linkedIn, G+, twitter, youtube, whatsapp</span>
       </span>
       <div className={`flex flex-col w-3/4`}>
         {value &&
@@ -94,9 +92,11 @@ const RequestFormSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
       <Suspense fallback={<div>Loading...</div>}>
         <div className={`flex flex-col`}>
           <span className="text-gray-700 text-xl pr-4 text-center mb-3">Post script</span>
-          <HtmlEditor 
+          <HtmlEditor
             data={s.requestFormPostText}
-            onChange={ (value) => {s.requestFormPostText = value} }
+            onChange={(value) => {
+              s.requestFormPostText = value;
+            }}
           />
         </div>
       </Suspense>
@@ -143,12 +143,13 @@ const FooterSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
           </button>
         </div>
       </div>
-      <div className="text-gray-700 text-xl py-4">We have: call, email, facebook, instagram, telegram, linkedin, location, skype, g+, twitter, vk, whatsapp, youtube
+      <div className="text-gray-700 text-xl py-4">
+        We have: call, email, facebook, instagram, telegram, linkedin, location, skype, g+, twitter, vk, whatsapp,
+        youtube
       </div>
       <div className={`flex justify-between pb-4 mb-4 border-b-2	`}>
-        <span className="text-gray-700 text-xl pr-4 flex-col">Contact list
-        </span>
-        
+        <span className="text-gray-700 text-xl pr-4 flex-col">Contact list</span>
+
         <div className={`flex flex-col w-3/4`}>
           {s.footerContactLinkList &&
             s.footerContactLinkList.map((el, index) => (
@@ -217,7 +218,7 @@ export const AdminGlobalSettingEditor = () => {
           </a>
         </RouterLink>
 
-        <RouterLink routeName={RouteNames.globalSettingsEditor} params={{ lang: "ch" }}>
+        <RouterLink routeName={RouteNames.globalSettingsEditor} params={{ lang: "cn" }}>
           <a
             className={`text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
           >

@@ -17,7 +17,7 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
   return (
     <>
       {dialog && (
-        <OverlayDialog cancel={() => setDialog(false)}>
+        <OverlayDialog cancel={() => setDialog(false)} paddingBottom={`lg:pb-0`}>
           <div className={`flex flex-wrap`}>
             {dialogData?.map((el, index) => (
               <div className={`flex items-center mr-10 w-30 mb-10`} key={el.name + index}>
@@ -75,17 +75,27 @@ export const HousingTable: FC<{ data: ClientHousingAccommodationTypesDto[] }> = 
               >
                 {el.residents} <LocalizedText id={"housing_tableTitle_residents"} />
               </td>
-              <td
-                className={style.tablePlans__learnMore + " lg:text-center my-1 cursor-pointer"}
-                style={{ borderLeft: "1px solid #EFF3FA", borderRight: "1px solid #EFF3FA" }}
-                data-name={useLocalizedText({ id: "housing_tableTitle_equipment" }, intl)}
-                onClick={() => {
-                  setDialogData(el.traits.namedTraits["housing-equipment"] ?? []);
-                  setDialog(true);
-                }}
-              >
-                <LocalizedText id={"housing_tableTitle_more"} />
-              </td>
+              {el.traits.namedTraits["housing-equipment"]?.length > 0 ? (
+                <td
+                  className={style.tablePlans__learnMore + " lg:text-center my-1 cursor-pointer"}
+                  style={{ borderLeft: "1px solid #EFF3FA", borderRight: "1px solid #EFF3FA" }}
+                  data-name={useLocalizedText({ id: "housing_tableTitle_equipment" }, intl)}
+                  onClick={() => {
+                    setDialogData(el.traits.namedTraits["housing-equipment"] ?? []);
+                    setDialog(true);
+                  }}
+                >
+                  <LocalizedText id={"housing_tableTitle_more"} />
+                </td>
+              ) : (
+                <td
+                  className={style.tablePlans__area + " lg:text-center my-1"}
+                  style={{ borderLeft: "1px solid #EFF3FA", borderRight: "1px solid #EFF3FA" }}
+                  data-name={useLocalizedText({ id: "housing_tableTitle_equipment" }, intl)}
+                >
+                  —
+                </td>
+              )}
               <td
                 className={style.tablePlans__area + " lg:text-center my-1"}
                 data-name={useLocalizedText({ id: "housing_tableTitle_price" }, intl)}

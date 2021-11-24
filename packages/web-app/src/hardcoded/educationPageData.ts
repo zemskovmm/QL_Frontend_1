@@ -1,5 +1,3 @@
-import { EducationPageDataDto } from "src/interfaces/educationPageDataDto";
-
 type educationPageDataType = {
   [key: string]: {
     breadcrumbs: { title: string; url: string }[];

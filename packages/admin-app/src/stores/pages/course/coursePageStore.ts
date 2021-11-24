@@ -62,8 +62,14 @@ export class CourseEditPageStore extends Loadable {
 
   @action async save() {
     const data = await this.remoteUiStore?.getDataAsync();
-    if (data) await AdminApi.updateCourse(this.id, data as AdminCourseDto<unknown>);
-    alert("Entity updated");
+    if (data) {
+      try {
+        await AdminApi.updateCourse(this.id, data as AdminCourseDto<unknown>);
+        alert("Entity updated");
+      } catch (e) {
+        alert(`This id is school undefined`);
+      }
+    }
   }
 
   async load(): Promise<void> {
@@ -84,8 +90,14 @@ export class CreateCoursePageStore extends Loadable {
 
   async save() {
     const data = await this.remoteUiStore?.getDataAsync();
-    if (data) await AdminApi.createCourse(data as AdminCourseDto<unknown>);
-    alert("Entity created");
+    if (data) {
+      try {
+        await AdminApi.createCourse(data as AdminCourseDto<unknown>);
+        alert("Entity created");
+      } catch (e) {
+        alert(`This id is school undefined`);
+      }
+    }
   }
 
   @action async load(): Promise<void> {

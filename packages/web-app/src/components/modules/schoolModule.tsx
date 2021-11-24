@@ -1,16 +1,13 @@
-import { CatalogInnerAbout } from "src/components/catalogInner/about/catalogInnerAbout";
 import { TitleAndCallBackBlock } from "@project/components/src/blocks/TitleAndCallBackBlock/titleAndCallBackBlock";
 import { LocalizedText, useLocalizedText } from "../common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { useIntl } from "react-intl";
-import { GallerySliderBlock } from "@project/components/src/blocks/GallerySliderBlock/gallerySliderBlock";
 import { ClientSchoolDto } from "../../interfaces/clientSchoolDto";
 import cn from "classnames";
 import styles from "../catalogInner/course/TabsControlBlock.module.css";
 import { CatalogSchoolInnerAbout } from "../catalogInner/school/catalogSchoolInnerAbout";
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export const SchoolModule = (props: ClientSchoolDto) => {
   const lang = useIntl().locale;
@@ -56,6 +53,11 @@ export const SchoolModule = (props: ClientSchoolDto) => {
                 <LocalizedText id={"courses_tab_all_course"} />
               </div>
             </Link>
+            <Link href={`/${lang}/catalog/housing`}>
+              <div>
+                <LocalizedText id={"catalogHousing_title"} />
+              </div>
+            </Link>
           </div>
         </div>
         <div className={cn(styles.tabs, styles.mobiletabs, "p-2.5")}>
@@ -66,8 +68,13 @@ export const SchoolModule = (props: ClientSchoolDto) => {
               </div>
             </Link>
             <Link href={`/${lang}/${props.urls.split("/")[3]}/courses` ?? "#"}>
-              <div className={styles.active}>
+              <div>
                 <LocalizedText id={"courses_tab_all_course"} />
+              </div>
+            </Link>
+            <Link href={`/${lang}/catalog/housing`}>
+              <div>
+                <LocalizedText id={"catalogHousing_title"} />
               </div>
             </Link>
           </div>

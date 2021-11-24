@@ -54,7 +54,14 @@ export class EditTraitTypePageStore extends Loadable {
     const value = (await this.remoteUi?.getDataAsync()) as any;
     if (!value) return;
     const unmapNames = Object.keys(value.names).reduce((acc, x) => ({ ...acc, [x]: value.names[x].name }), {});
-    await this.track(() => AdminApi.updateTraitType(Number(this.traitTypeId), { ...value, names: unmapNames }));
+    const unWhiteSpaceIdentifier = value.identifier.replace(/\s/g, "");
+    await this.track(() =>
+      AdminApi.updateTraitType(Number(this.traitTypeId), {
+        ...value,
+        identifier: unWhiteSpaceIdentifier,
+        names: unmapNames,
+      })
+    );
     await this.root.routerStore.goTo(RouteNames.traitPage, { id: this.traitTypeId });
   }
 }
