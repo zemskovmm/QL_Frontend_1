@@ -9,7 +9,7 @@ type PropsType = {
 };
 
 export const ChatTab: FunctionalComponent<PropsType> = ({className, applicationId}) => {
-    const {getMessages, messages}= useChatStore()
+    const {getMessages,sendMessage, messages}= useChatStore()
 
     useEffect(()=>{
         getMessages(applicationId);
@@ -24,10 +24,16 @@ export const ChatTab: FunctionalComponent<PropsType> = ({className, applicationI
         console.log("after",afterMessageId)
         getMessages(applicationId,{afterMessageId});
     }
+    const handleSendMessage=(text:string)=>{
+        console.log("send",text)
+        sendMessage(applicationId,{text})
+    }
 
     return <Chat 
-        classname={className} 
+        className={className} 
         provider={messages}
         onBeforeMessages={handleBeforeMessages}
-        onAfterMessages={handleAfterMessages}/>
+        onAfterMessages={handleAfterMessages}
+        onSendMessage={handleSendMessage}
+        />
 };

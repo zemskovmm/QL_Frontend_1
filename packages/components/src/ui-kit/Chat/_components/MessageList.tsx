@@ -4,18 +4,19 @@ import { VariableSizeList,ListOnItemsRenderedProps } from 'react-window';
 import AutoSizer from "react-virtualized-auto-sizer";
 import cn from 'classnames'
 import { useEffect } from "preact/hooks";
-import { MessageListProvider } from "./MessageListProvider";
-import { MAX_ROW_IN_PAGE } from "./MessageListPage";
+import { MessageListProvider,MessageListProviderPosition } from "./MessageListProvider";
 
+type Pages ={
+    upPrevPage:Array<MessageType>
+    upPage:Array<MessageType>
+    downPage:Array<MessageType>
+    downPrevPage:Array<MessageType>
+}
 
-
-class LastCalc{
-    lastBeforHeight:number =  0
-    lastCurrentHeight:number =  0
-    lastAfterHeight:number =  0
-    beforId:number =  0
-    currentId:number =  0
-    afterId:number =  0
+type LastScrollCalc = {
+    top:number,
+    upHeight:number,
+    downHeight:number,
 }
 
 type PropsType = {
@@ -25,45 +26,52 @@ type PropsType = {
     onAfterMessages:(id:number)=>void;
 };
 
-const MESSAGE_LIST_HEIGHT = MIN_MESSAGE_HEIGHT * MAX_ROW_IN_PAGE
+const getMaxRows=():number=>{
+    let rows = Math.floor(window.screen.height/MIN_MESSAGE_HEIGHT)+3;
+    if(rows<10){
+        rows=0;
+    }
+    return rows;
+}
+
+const TIMER_UPDATE_MS = 3000
 
 export const MessageList: FC<PropsType> = ({className,provider,onBeforeMessages,onAfterMessages}) => {
-    //const onAfterMessages=(id:number)=>{}
-    const beforRef = useRef<HTMLDivElement>(null)
-    const currentRef = useRef<HTMLDivElement>(null)
-    const afterRef = useRef<HTMLDivElement>(null)
     const listRef = useRef<HTMLDivElement>(null)
-    const lastCalc = useRef<LastCalc>(new LastCalc())
-    const [currentId, setCurrentId] = useState(0)
+    const upPrevRef = useRef<HTMLDivElement>(null)
+    const upRef = useRef<HTMLDivElement>(null)
+    const downRef = useRef<HTMLDivElement>(null)
+    const downPrevRef = useRef<HTMLDivElement>(null)
+    const [position, setPosition] = useState<MessageListProviderPosition>({index:0,id:0})
 
     const [lastBeforeMessages, setLastBeforeMessages] = useState(0)
     const [lastAfterMessages, setLastAfterMessages] = useState(0)
     const [onScroll, setOnScroll] = useState(0)
+    const [maxCountRow, setMaxCountRow] = useState(getMaxRows())
+    const lastScrollCalc = useRef<LastScrollCalc>({top:0,upHeight:0,downHeight:0})
 
-    
-    const [ beforRows, currentRows, afterRows] = useMemo< Array<Array<MessageType>> >(()=>{
+    useEffect(()=>{
+        let timerId = setInterval(() =>{
+            onAfterMessages(provider.getLastId())
+        },TIMER_UPDATE_MS);
+        return ()=>clearInterval(timerId)
+    },[provider,onAfterMessages])
 
-        console.log("provider",currentId,provider.pages.map(i=>i.rows[0].id))
-        let beforRows:Array<MessageType> = []
-        let currentRows:Array<MessageType> = []
-        let afterRows:Array<MessageType> = []
+    const {upPrevPage,upPage,downPage,downPrevPage} = useMemo< Pages >(()=>{
 
-        let pages = provider.getPages(currentId)
-        if(!pages[1]){
-            pages = provider.getLastPages()
-            if(pages[1] && pages[1].getCurrentId()!==currentId){
-                setCurrentId(pages[1].getCurrentId())
-            }
+        const newPosition = provider.getCurrectPosition(position,maxCountRow)
+        if(position.id !== newPosition.id || position.index !== newPosition.index){
+            setPosition(newPosition)
+            return {upPrevPage:[],upPage:[],downPage:[],downPrevPage:[]}
         }
 
-        const [beforPage,currentPage,afterPage] = pages
+        let upPrevPage:Array<MessageType> = provider.getPageUp(position.index-maxCountRow,maxCountRow)
+        let upPage:Array<MessageType> = provider.getPageUp(position.index,maxCountRow)
+        let downPage:Array<MessageType> = provider.getPageDown(position.index,maxCountRow)
+        let downPrevPage:Array<MessageType> = provider.getPageDown(position.index+maxCountRow,maxCountRow)
 
-        beforRows = beforPage?beforPage.getShowRow():[]
-        currentRows= currentPage?currentPage.getShowRow():[]
-        afterRows = afterPage?afterPage.getShowRow():[]
-
-        return [beforRows,currentRows,afterRows]
-    },[provider,currentId])
+        return {upPrevPage,upPage,downPage,downPrevPage}
+    },[provider,position,maxCountRow])
 
     useEffect(()=>{
         if(provider.isEmpty()){
@@ -73,124 +81,118 @@ export const MessageList: FC<PropsType> = ({className,provider,onBeforeMessages,
             }
             return
         }
-        const beforId = provider.checkBeforMessages(currentId)
+        const beforId = provider.checkBeforMessagesId(position,maxCountRow)
         if(beforId && beforId !=lastBeforeMessages){
             setLastBeforeMessages(beforId);
             onBeforeMessages(beforId);
             return
         }
-        const afterId = provider.checkAfterMessages(currentId)
+        const afterId = provider.checkAfterMessagesId(position,maxCountRow)
         if(afterId && afterId !=lastAfterMessages){
             setLastAfterMessages(afterId);
             onAfterMessages(afterId);
             return
         }
-    },[provider,currentId,onBeforeMessages,onAfterMessages,lastAfterMessages,lastBeforeMessages])
+    },[provider,maxCountRow,position,onBeforeMessages,onAfterMessages,lastAfterMessages,lastBeforeMessages])
 
     useLayoutEffect(()=>{
-        const calc = lastCalc.current
         const target:any = listRef.current
         let scrollTop:number = target?.scrollTop || 0;
         let top:number = scrollTop;
+        const calc = lastScrollCalc.current
 
         const listHeight = listRef.current?.clientHeight||0
-        const beforHeight = beforRef.current?.clientHeight||0
-        const currentHeight = currentRef.current?.clientHeight||0
-        const afterHeight = afterRef.current?.clientHeight||0
+        const upPrevHeight = upPrevRef.current?.clientHeight||0
+        const upHeight = upRef.current?.clientHeight||0
+        const downHeight = downRef.current?.clientHeight||0
+        const downPrevHeight = downPrevRef.current?.clientHeight||0
+        const allHeight = upHeight+downHeight+MIN_MESSAGE_HEIGHT*2
 
-        top += beforHeight -calc.lastBeforHeight
-        top += currentHeight -calc.lastCurrentHeight
-        //top += afterHeight -calc.lastAfterHeight
-   
-        calc.lastBeforHeight = beforHeight
-        calc.lastCurrentHeight = currentHeight
-        calc.lastAfterHeight = afterHeight
+        if(maxCountRow<getMaxRows()){
+            setMaxCountRow(getMaxRows());
+        }
 
-        const beforId = beforRows[0]?.id||0
-        const currentId = currentRows[0]?.id||0
-        const afterId = afterRows[0]?.id||0
 
-        const allHeight = beforHeight+currentHeight+afterHeight
+        top += upHeight -calc.upHeight
+        top += downHeight -calc.downHeight
 
-        console.log({top,allHeight,listHeight,m:allHeight-listHeight-10})
+        if(top!=scrollTop){
+            calc.top = top
+        }
 
-        if(MESSAGE_LIST_HEIGHT<allHeight){
-            if( top<10 ){
-                if(beforId && currentId!=beforId){
-                    calc.lastAfterHeight=calc.lastCurrentHeight
-                    calc.lastCurrentHeight=calc.lastBeforHeight
-                    calc.lastBeforHeight=0
-                    setCurrentId(beforId)
+        calc.upHeight = upHeight
+        calc.downHeight = downHeight
+
+        if(listHeight<allHeight){
+            if(top<calc.top && top<MIN_MESSAGE_HEIGHT && upPrevPage.length>0 && upPage.length>0){
+                const index = position.index - upPage.length
+                const id = provider.getMessage(index)?.id||0
+                if(id){
+                    top+= upPrevHeight
+                    calc.top=top
+                    calc.downHeight = upHeight
+                    calc.upHeight = upPrevHeight
+                    setPosition({index,id})
                 }
             }
-            if( top>allHeight-listHeight-10){
-                if(afterId && currentId!=afterId){
-                    top+= -calc.lastBeforHeight
-                    calc.lastBeforHeight=calc.lastCurrentHeight
-                    calc.lastCurrentHeight=calc.lastAfterHeight
-                    calc.lastAfterHeight=0
-                    setCurrentId(afterId)
+            if(top>calc.top && top>allHeight-listHeight-MIN_MESSAGE_HEIGHT && downPrevPage.length>0 && downPage.length>0){
+                const index = position.index + downPage.length
+                const id = provider.getMessage(index)?.id||0
+                if(id){
+                    top-= upHeight
+                    calc.top=top
+                    calc.upHeight = downHeight
+                    calc.downHeight = downPrevHeight
+                    setPosition({index,id})
                 }
+            }
+            if(top!=scrollTop && top<MIN_MESSAGE_HEIGHT){
+                top=MIN_MESSAGE_HEIGHT;
+            }
+            if(top!=scrollTop && top>allHeight-MIN_MESSAGE_HEIGHT){
+                top=allHeight-MIN_MESSAGE_HEIGHT;
             }
         }
-    
         if(top!=scrollTop){
             target?.scrollTo({top,behavior:'instant'});
         }
+        calc.top = top
         
-    },[beforRows, currentRows, afterRows, onScroll])
+    },[onScroll,maxCountRow,provider,position,upPrevPage,upPage,downPage,downPrevPage])
 
     const handleScroll = (event:UIEvent<HTMLDivElement>)=>{
         setOnScroll(event.currentTarget.scrollTop)
     }
 
     return (
-        <AutoSizer>
-            {({ height, width }) => (
-                <div ref={listRef} 
-                    className="overflow-auto" 
-                    style={{height,width,maxHeight:MESSAGE_LIST_HEIGHT}} 
-                    onScroll={handleScroll}
-                >
-                    <div ref={beforRef} style={{width}}>
-                        {beforRows.map((m)=>(
-                            <Message {...m} key={"k"+m.id}/>
-                        ))}
-                    </div>
-                    <div ref={currentRef} style={{width}}>
-                        {currentRows.map((m)=>(
-                            <Message {...m} key={"k"+m.id}/>
-                        ))}
-                    </div>
-                    <div ref={afterRef} style={{width}}>
-                        {afterRows.map((m)=>(
-                            <Message {...m} key={"k"+m.id}/>
-                        ))}
-                    </div>
+        <div ref={listRef} 
+            className={cn("overflow-auto border border-bdsecondary rounded-sm customScroll",className)}
+            onScroll={handleScroll}
+        >
+            <div className="relative overflow-hidden w-full" style={{height:MIN_MESSAGE_HEIGHT}}>
+                <div className="absolute left-0  bottom-0 w-full flex flex-col"  ref={upPrevRef} >
+                    {upPrevPage.map((m)=>(
+                        <Message {...m} key={"k"+m.id}/>
+                    ))}
                 </div>
-            )}
-            
-
-            {/* {({ height, width }) => (
-                <VariableSizeList
-                    onItemsRendered={handleItemsRendered}
-                    height={height}
-                    width={width}
-                    itemCount={provider.count}
-                    itemSize={getItemSize}
-                >
-                    {Row}
-                </VariableSizeList>
-            )} */}
-        </AutoSizer>
+            </div>
+            <div className="relative flex flex-col w-full"  ref={upRef} >
+                {upPage.map((m)=>(
+                    <Message {...m} key={"k"+m.id}/>
+                ))}
+            </div>
+            <div className="relative flex flex-col w-full"  ref={downRef} >
+                {downPage.map((m)=>(
+                    <Message {...m} key={"k"+m.id}/>
+                ))}
+            </div>
+            <div className="relative overflow-hidden w-full" style={{height:MIN_MESSAGE_HEIGHT}}>
+                <div className="absolute left-0 top-0 w-full flex flex-col"  ref={downPrevRef} >
+                    {downPrevPage.map((m)=>(
+                        <Message {...m} key={"k"+m.id}/>
+                    ))}
+                </div>
+            </div>
+        </div>
     )
-    
-    
-    
-
-    // return <div className={cn("flex flex-col gap-2",className)} >
-    //     {messages.map(({author,text,date})=>{
-    //         return <Message key={date.toString()} title={date.toLocaleString()} text={text} me={author === "User"}/>
-    //     })}
-    // </div>
 };

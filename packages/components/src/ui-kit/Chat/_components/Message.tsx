@@ -14,20 +14,30 @@ type MessagePropsType = MessageType & {
     className?:string;
 };
 
-export const MIN_MESSAGE_HEIGHT=50;
+export const MIN_MESSAGE_HEIGHT=38;
 
 export const Message: FC<MessagePropsType> = ({key,id,className,title,text,me}) => {
     return (
         <div 
             style={{minHeight:MIN_MESSAGE_HEIGHT}}
-            key={key}
             className={cn(
-                "flex flex-col rounded border px-2",
-                me ? "bg-green-100 self-end" : "bg-white self-start",
+                "py-1.5",
+                me ? "self-end pl-8 pr-2 " : "self-start pl-2 pr-8",
                 className
-            )}>
-            <Text text={`(${id}) ${title}`} size="caption" color="help"/>
-            <Text text={text} />
+            )}
+        >
+            <div 
+                key={key}
+                className={cn(
+                    "flex flex-col p-2 h-full",
+                    "border border-bdsecondary rounded",
+                    me ? "bg-blue-50" : "bg-white",
+                )}>
+                {/* <Text text={`(${id}) ${title}`} size="caption" color="help" /> */}
+                <Text text={text} size="small" tag="pre"/>
+            </div>
         </div>
+        
+        
     )
 };

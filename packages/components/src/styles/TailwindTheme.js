@@ -50,6 +50,7 @@ const TailwindTheme = {
                 bgprimary: 'var(--color-bg-primary)',
                 bgsecondary: 'var(--color-bg-secondary)',
                 bdprimary: 'var(--color-bd-primary)',
+                bdsecondary: '#D7D7D7',
                 hover: 'var(--color-hover)',
                 'help': '#A8B5CC',
                 'error': '#e3342f',
@@ -57,6 +58,7 @@ const TailwindTheme = {
                 'button-text': '#fff',
                 'button-secondary': '#ECEFF5',
                 'button-secondary-text': '#222A37',
+                
             },
             fontSize: {
                 'title-large': ['2.25rem', '2.5rem'],

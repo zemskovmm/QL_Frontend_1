@@ -1,23 +1,28 @@
 import React,{ FC } from "react"
 import cn from 'classnames'
-import { MessageList,MessageListProvider } from "./_components/MessageList"
+import { MessageList} from "./_components/MessageList"
+import { MessagesEdit } from "./_components/MessagesEdit"
+import { MessageListProvider } from "./_components/MessageListProvider"
 
 export type ChatPropsType={
-    classname?:string;
+    className?:string;
     provider:MessageListProvider;
     onBeforeMessages:(id:number)=>void;
     onAfterMessages:(id:number)=>void;
+    onSendMessage: (text:string)=>void
 }
 
-export const Chat:FC<ChatPropsType> = ({classname,provider,onBeforeMessages,onAfterMessages})=>{
-
+export const Chat:FC<ChatPropsType> = ({className,provider,onBeforeMessages,onAfterMessages,onSendMessage})=>{
 
 
     return (
-        <MessageList provider={provider} onBeforeMessages={onBeforeMessages} onAfterMessages={onAfterMessages}/>
+        <div className={cn("relative h-full", className)}>
+            <div className={cn("absolute top-0 left-0 h-full w-full flex flex-col gap-2")} >
+                <MessageList className="flex-grow flex-shrink" provider={provider} onBeforeMessages={onBeforeMessages} onAfterMessages={onAfterMessages}/>
+                <MessagesEdit onSendMessage={onSendMessage}/>
+            </div>
+        </div>
+        
     )
-    // <div className={cn("flex flex-col border gap-2 p-2", className)} >
-    //     <Messages className="flex-grow" store={store}/>
-    //     <MessagesEdit applicationId={applicationId} store={store}/>
-    // </div>
+    
 }

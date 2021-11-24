@@ -1,99 +1,134 @@
 import { MessageType } from "./Message";
-import { MessageListPage,MAX_ROW_IN_PAGE } from "./MessageListPage";
-
+    
+export type MessageListProviderPosition ={
+    index:number
+    id:number
+}
 
 export class MessageListProvider{
-    pages: Array<MessageListPage> = []
+    rows:{[key:number]:MessageType} = {}
+    min:number = 0
+    max:number = 0
 
     constructor(provider?: MessageListProvider){
         if(provider){
-            this.pages = provider.pages
+            this.min = provider.min
+            this.max = provider.max
+            this.rows = provider.rows
         }
+    }
+
+    getCount():number{
+        return this.max-this.min
+    }
+    isEmpty():boolean{
+        return this.max-this.min === 0
+    }
+    getFirst():MessageType {
+        return this.rows[this.min]
+    }
+    getLast():MessageType {
+        return this.rows[this.max-1]
     }
 
     push(messages:Array<MessageType>):MessageListProvider{
-        console.log("push",messages)
-        if(!messages.length){
-            this.pages = []
+        if(messages.length === 0){
+            return new MessageListProvider()
+        }
+        if(this.getCount() === 0){
+            messages.forEach((m)=>{
+                this.rows[this.max++] = m
+            })
             return new MessageListProvider(this)
         }
-        if(!this.pages.length){
-            this.pages=[new MessageListPage(messages)]
-            return new MessageListProvider(this)
-        }
-
-        if(this.pages[0].isBefor(messages)){
-            if(messages.length>1){
-                this.pages.unshift(new MessageListPage(messages))
-                return new MessageListProvider(this)
+        if(this.getFirst().id === messages[messages.length-1].id){
+            if(messages.length===1){
+                return this
             }
+            this.min++
+            messages.reverse().forEach((m)=>{
+                this.rows[--this.min] = m
+            })
             return new MessageListProvider(this)
         }
-        if(this.pages[this.pages.length-1].isAfter(messages)){
-            this.pages.push(new MessageListPage(messages))
+        if(this.getLast().id === messages[0].id){
+            if(messages.length===1){
+                return this
+            }
+            this.max--
+            messages.forEach((m)=>{
+                this.rows[this.max++] = m
+            })
             return new MessageListProvider(this)
         }
-        if(this.pages[this.pages.length-1].isCurrent(messages)){
-            this.pages[this.pages.length-1]=new MessageListPage(messages)
-            return new MessageListProvider(this)
-        }
-
-        this.pages=[new MessageListPage(messages)]
+        this.max=0
+        this.min=0
+        this.rows={}
+        messages.forEach((m)=>{
+            this.rows[this.max++] = m
+        })
         return new MessageListProvider(this)
     }
 
-    getPages(currentId:number):Array<MessageListPage|undefined>{
-        for(let i=0; i<this.pages.length; i++){
-            if(this.pages[i].rows[0]?.id===currentId){
-                return [this.pages[i-1],this.pages[i],this.pages[i+1]]
+    getPageUp(index:number,maxRows:number):Array<MessageType>{
+        const upPage:Array<MessageType> = []
+        let min = index-maxRows
+        if(min<this.min){
+            min=this.min
+        }
+        for(let i=index-1; i>=min; i--){
+            upPage.push(this.rows[i])
+        }
+        return upPage.reverse()
+    }
+
+    getPageDown(index:number,maxRows:number):Array<MessageType>{
+        const downPage:Array<MessageType> = []
+        for(let i=index; i<index+maxRows && i<this.max;i++){
+            downPage.push(this.rows[i])
+        }
+        return downPage
+    }
+
+    getMessage(index:number):MessageType|undefined{
+        return this.rows[index]
+    }
+
+    getCurrectPosition({index,id}:MessageListProviderPosition,maxRows:number): MessageListProviderPosition{
+        if(this.isEmpty()){
+            return {index:0,id:0}
+        }
+        if(index<this.min || index>=this.max || this.rows[index].id !== id){
+            let newIndex = this.max - maxRows
+            if(newIndex<this.min){
+                newIndex = this.min
             }
+            return {index:newIndex,id:this.rows[newIndex].id||0}
         }
-        return []
-    }
-    getLastPages():Array<MessageListPage|undefined>{
-        let i =this.pages.length-1
-        return [this.pages[i-1],this.pages[i]]
+        return {index,id}
     }
 
-    checkAfterMessages(pageId:number):number{
-        if(!this.pages.length){
+    getLastId(): number {
+        return this.rows[this.max-1]?.id||0
+    }
+
+    checkBeforMessagesId({index,id}:MessageListProviderPosition,maxRows:number):number{
+        if(this.rows[index]?.id !== id){
             return 0
         }
-        const page = this.pages[this.pages.length-1]
-        const page2 = this.pages[this.pages.length-2]
-
-        let isId = false
-        
-        if(page && page.getCurrentId() === pageId){
-            isId = true
+        if(index-maxRows*2-2<this.min){
+            return this.rows[this.min]?.id||0
         }
-        if(page2 && page2.getCurrentId() === pageId){
-            isId = true
-        }
-
-        if(!isId){
+        return 0;
+    }
+    checkAfterMessagesId({index,id}:MessageListProviderPosition,maxRows:number):number{
+        if(this.rows[index]?.id !== id){
             return 0
         }
-
-        if(page.rows.length < MAX_ROW_IN_PAGE){
-            return page.getCurrentId()
-        }else{
-            return page.getAfterId()
+        if(index+maxRows*2+2>this.max){
+            return this.rows[this.max-1]?.id||0
         }
-    }
-
-    checkBeforMessages(pageId:number):number{
-        if(!this.pages.length){
-            return 0
-        }
-        const page = this.pages[0]
-        if(page && page.getCurrentId() === pageId){
-            return page.getCurrentId()
-        }
-        return 0
-    }
-    isEmpty():boolean{
-        return this.pages.length === 0;
+        return 0;
     }
 
 }

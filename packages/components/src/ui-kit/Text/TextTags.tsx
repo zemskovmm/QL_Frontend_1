@@ -14,4 +14,5 @@ export const TEXT_TAGS:{ [key:string]:FunctionComponent<TextTagPropsType> } = {
     "h6": ({className, value}) => <h6 className={className}>{value}</h6>,
     "span": ({className, value}) => <span className={className}>{value}</span>,
     "a": ({className, value}) => <a className={className}>{value}</a>,
+    "pre": ({className, value}) => <pre className={className}>{value}</pre>,
 }

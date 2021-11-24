@@ -6,7 +6,11 @@ import { useLocalesStore } from "stores/LocalesStore";
 import { Link } from "preact-router";
 import { useRouterStore } from "stores/RouterStore";
 
-export const LeftNavigationLayout: FunctionalComponent<{ title: string }> = memo(({ title, children }) => {
+type PropsType={
+  title: string;
+}
+
+export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({ title, children }) => {
   const { NEW_APPLICATION_LANG } = useLocalesStore();
   const { NEW_APPLICATION_PATH } = useRouterStore();
 
