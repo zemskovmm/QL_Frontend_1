@@ -19,6 +19,7 @@ type PropsType = {
 export const ApplicationTab: FunctionalComponent<PropsType> = ({ className, applicationId }) => {
   const cl = useContext(ComponentHostDashboardContext);
   const store = useApplicationStore();
+  const { PROFILE_SAVE } = useLocalesStore();
   const { application, postApplicationAction, isLoading: isLoadingStore } = store;
   const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
   const { handleSubmit, control, setValue } = useForm<ApplicationPostProps>();
@@ -36,16 +37,27 @@ export const ApplicationTab: FunctionalComponent<PropsType> = ({ className, appl
     setValue("entityTypeSpecificApplicationInfo", {});
   }, [store]);
 
-  const classes = ["flex flex-col border gap-2 p-2", className ? className : ""].join(" ");
+  const classes = ["flex flex-col gap-2", className ? className : ""].join(" ");
 
   return (
     <div className={classes}>
-      <Preload isLoading={isLoadingStore || isLoadingGS} color="white">
+      <Preload isLoading={isLoadingStore || isLoadingGS} color="white" className={`flex flex-col h-full`}>
         {/*<Text text={APPLICATION_LANG} size="title-medium" />*/}
         {personalCabinet[application.type.toString().toLowerCase()] ? (
-          <form className="flex flex-col mx-0" onSubmit={handleSubmit(postApplicationAction) as any}>
-            <RowsPresenter rows={personalCabinet[application.type.toString().toLowerCase()].form.pageData.rows ?? []} />
-            <Button className="ml-auto my-2" text="Обновить" type="submit" disabled={isLoadingStore} color="red" />
+          <form className="flex flex-col mx-0 h-full" onSubmit={handleSubmit(postApplicationAction) as any}>
+            <div className={`mb-3`}>
+              <RowsPresenter
+                marginAuto={true}
+                rows={personalCabinet[application.type.toString().toLowerCase()].form.pageData.rows ?? []}
+              />
+            </div>
+            <Button
+              className="ml-auto mt-auto"
+              text={PROFILE_SAVE}
+              type="submit"
+              disabled={isLoadingStore}
+              color="red"
+            />
           </form>
         ) : (
           "Form is not allowed"

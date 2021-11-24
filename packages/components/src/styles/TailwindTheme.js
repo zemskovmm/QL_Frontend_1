@@ -5,6 +5,7 @@ const TailwindTheme = {
             DEFAULT: '0 5px 10px rgba(0, 78, 255, 0.05), 0 10px 30px rgba(0, 78, 255, 0.03);',
             'left-navigation': '8px 0px 10px rgba(172, 192, 236, 0.3);'
         },
+
         extend: {
             screens: {
                 'tablet': '767px',// => @media (min-width: 767px) { ... }
@@ -77,7 +78,7 @@ const TailwindTheme = {
     variants: {
         extend: {},
     },
-}
+};
 
 module.exports = {
   TailwindTheme,

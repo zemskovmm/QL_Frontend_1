@@ -1,6 +1,5 @@
 import { FilesListDto, FolderDto, CreateFolderDto } from "src/interfaces/FilesDto";
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
-import { request } from "user-dashboard/src/api/QLBaseApi";
 
 export class FilesApiClient extends ApiClientBase {
   getFolder = () => this.sendRequest<FilesListDto>("media/directories");
