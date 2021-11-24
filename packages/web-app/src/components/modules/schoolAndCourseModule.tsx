@@ -83,7 +83,7 @@ export const SchoolAndCourseModule = (props: ClientSchoolAndCourseListDto) => {
           <div className={`mb-8`}>Вы сможете забронировать вариант проживания в процессе покупки курса</div>
           <div className={`w-6/12`}>
             {props.courses?.map((el, i) => (
-              <CourseCatalogElement {...el} schoolName={props.school.title} key={`CourseElement ${el.name} ${i}`} />
+              <CourseCatalogElement item={el} key={`CourseElement ${el.name} ${i}`} />
             ))}
           </div>
         </div>
