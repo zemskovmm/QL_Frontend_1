@@ -14,6 +14,7 @@ import { LocalizedText } from "../common/LocalizedText";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import cn from "classnames";
+import { CourseCatalogElement, HousingCatalogElement, UniversityCatalogElement } from "./catalogElement";
 
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
@@ -121,7 +122,7 @@ function CatalogFilters(props: {
 
 function CatalogItems<T>(props: {
   data: CatalogResponseDto<T>;
-  elementRenderer: (item: T) => JSX.Element;
+  elementRendererName: string;
   page: number;
   setPage: (page: number) => void;
   widthInner: boolean;
@@ -149,18 +150,32 @@ function CatalogItems<T>(props: {
           {/*</button>*/}
         </div>
       )}
-      {props.data.items.map((item, idx) => (
-        <div key={idx} className={`mx-auto lg:mx-0`}>
-          {props.elementRenderer(item)}
-        </div>
-      ))}
+      {props.elementRendererName === "university"
+        ? props.data.items.map((item: any, idx) => (
+            <div key={idx} className={`mx-auto lg:mx-0`}>
+              <UniversityCatalogElement item={item} />
+            </div>
+          ))
+        : props.elementRendererName === "housing"
+        ? props.data.items.map((item: any, idx) => (
+            <div key={idx} className={`mx-auto lg:mx-0`}>
+              <HousingCatalogElement item={item} />
+            </div>
+          ))
+        : props.elementRendererName === "course"
+        ? props.data.items.map((item: any, idx) => (
+            <div key={idx} className={`mx-auto lg:mx-0`}>
+              <CourseCatalogElement item={item} />
+            </div>
+          ))
+        : ""}
       <Paginator page={props.page} totalPages={props.data.totalPages} setPage={props.setPage} />
     </div>
   );
 }
 
 export function CatalogView<T>(props: {
-  elementRenderer: (element: T) => JSX.Element;
+  elementRendererName: string;
   filters: CatalogFilterDto[] | undefined;
   parsedFilters: CatalogFilterRequestDto[];
   data: CatalogResponseDto<T> | undefined;
@@ -215,7 +230,7 @@ export function CatalogView<T>(props: {
         <LoadingIf isLoading={props.data == null}>
           {props.data == null ? null : (
             <CatalogItems<T>
-              elementRenderer={props.elementRenderer}
+              elementRendererName={props.elementRendererName}
               data={props.data}
               page={props.page}
               setPage={props.setPage}

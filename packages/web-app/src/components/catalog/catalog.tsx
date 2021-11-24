@@ -5,7 +5,7 @@ import { ParsedUrlQuery } from "querystring";
 import { CatalogView } from "src/components/catalog/catalogView";
 
 export interface CatalogProps<T> {
-  elementRenderer: (element: T) => JSX.Element;
+  elementRendererName: string;
   apiElementName: string;
   title: string;
   searchTitle: string;
@@ -83,7 +83,7 @@ export function Catalog<T>(props: CatalogProps<T>) {
       data={data}
       setPage={setPage}
       setFilter={setFilter}
-      elementRenderer={props.elementRenderer}
+      elementRendererName={props.elementRendererName}
       title={props.title}
       searchTitle={props.searchTitle}
       type={props.apiElementName}

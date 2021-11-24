@@ -4,7 +4,6 @@ import style from "src/components/catalog/style/catalogView.module.css";
 import { LocalizedText, useLocalizedText } from "src/components/common/LocalizedText";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 import { useIntl } from "react-intl";
-import { UniversityCatalogElement } from "src/components/catalog/catalogElement";
 
 const UniversityCatalogPage = () => {
   const lang = useIntl().locale;
@@ -29,7 +28,7 @@ const UniversityCatalogPage = () => {
         <Catalog<CatalogUniversityDto>
           searchTitle={useLocalizedText({ id: "catalogEducation_search_result" }, intl)}
           title={useLocalizedText({ id: "catalogEducation_title" }, intl)}
-          elementRenderer={UniversityCatalogElement}
+          elementRendererName={"university"}
           apiElementName="university"
         />
       </div>
