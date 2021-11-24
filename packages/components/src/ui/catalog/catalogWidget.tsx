@@ -42,7 +42,7 @@ function navigateToCatalog(
   for (const key in filters) {
     const value = filters[key];
     if (value != null) {
-      const newKey = entityType == "housing" ? key : "filter-" + key;
+      const newKey = "filter-" + key;
       query[newKey] = value;
     }
   }
@@ -70,6 +70,7 @@ const searchTranslate: { [key: string]: string } = {
   en: "Search",
   esp: "Buscar",
 };
+
 
 export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
   const router = useRouter();
