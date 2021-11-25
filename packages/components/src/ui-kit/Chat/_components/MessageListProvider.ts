@@ -24,11 +24,20 @@ export class MessageListProvider{
     isEmpty():boolean{
         return this.max-this.min === 0
     }
+    isNotEmpty():boolean{
+        return this.max-this.min > 0
+    }
     getFirst():MessageType {
         return this.rows[this.min]
     }
     getLast():MessageType {
         return this.rows[this.max-1]
+    }
+    getLastIndex():number {
+        if(this.isEmpty()){
+            return 0;
+        }
+        return this.max-1
     }
 
     push(messages:Array<MessageType>):MessageListProvider{
@@ -41,26 +50,38 @@ export class MessageListProvider{
             })
             return new MessageListProvider(this)
         }
-        if(this.getFirst().id === messages[messages.length-1].id){
-            if(messages.length===1){
-                return this
-            }
-            this.min++
-            messages.reverse().forEach((m)=>{
-                this.rows[--this.min] = m
-            })
-            return new MessageListProvider(this)
+        if(messages.length === 1 && (this.getFirst().id==messages[0].id || this.getLast().id==messages[0].id )){
+            return this
         }
-        if(this.getLast().id === messages[0].id){
-            if(messages.length===1){
-                return this
-            }
-            this.max--
-            messages.forEach((m)=>{
+
+        let after = false
+        const afterId = this.getLast().id
+        messages.forEach((m)=>{
+            if(after){
                 this.rows[this.max++] = m
-            })
+            }else if(afterId==m.id){
+                after=true
+            }
+        })
+
+        if(after){
             return new MessageListProvider(this)
         }
+
+        let befor = false
+        const beforId = this.getFirst().id
+        messages.reverse().forEach((m)=>{
+            if(befor){
+                this.rows[--this.min] = m
+            }else if(beforId==m.id){
+                befor=true
+            }
+        })
+
+        if(befor){
+            return new MessageListProvider(this)
+        }
+
         this.max=0
         this.min=0
         this.rows={}
@@ -108,27 +129,11 @@ export class MessageListProvider{
         return {index,id}
     }
 
+    getFirstId(): number {
+        return this.rows[this.min]?.id||0
+    }
     getLastId(): number {
         return this.rows[this.max-1]?.id||0
-    }
-
-    checkBeforMessagesId({index,id}:MessageListProviderPosition,maxRows:number):number{
-        if(this.rows[index]?.id !== id){
-            return 0
-        }
-        if(index-maxRows*2-2<this.min){
-            return this.rows[this.min]?.id||0
-        }
-        return 0;
-    }
-    checkAfterMessagesId({index,id}:MessageListProviderPosition,maxRows:number):number{
-        if(this.rows[index]?.id !== id){
-            return 0
-        }
-        if(index+maxRows*2+2>this.max){
-            return this.rows[this.max-1]?.id||0
-        }
-        return 0;
     }
 
 }
