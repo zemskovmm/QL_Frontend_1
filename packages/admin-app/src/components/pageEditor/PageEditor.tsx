@@ -25,12 +25,12 @@ import { AdminTextBox } from "src/components/common/AdminTextBox";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./PageEditor.module.css";
 import { AdminRemoteUiDropdownEditor, AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
 import { RouterLink } from "mobx-state-router";
-import { RouteNames } from "../../routing/routes";
+import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 
 const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   const s = props.store;
@@ -414,7 +414,7 @@ const CreatePage = (props: {
 
       <AdminButton
         color="primary"
-        onClick={(e) => props.createPage(selectedLang == noneLang ? undefined : selectedLang)}
+        onClick={() => props.createPage(selectedLang == noneLang ? undefined : selectedLang)}
       >
         Create Page Version
       </AdminButton>
@@ -436,7 +436,7 @@ export const PageEditor = (props: { store: PageEditorStore | any }) => {
           Save
         </AdminButton>{" "}
         {s.id && (
-          <RouterLink routeName={RouteNames.pageTraitEditPage} params={{ id: s.id }}>
+          <RouterLink routeName={AdminRouteNames.pageTraitEditPage} params={{ id: s.id }}>
             <AdminButton color={"primary"}> Traits editor </AdminButton>
           </RouterLink>
         )}

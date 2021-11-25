@@ -2,11 +2,7 @@
 import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { RootStore } from "src/stores/RootStore";
-import {
-  AdminUniversityItemDto,
-  AdminUniversityItemPostDto,
-  AdminUniversityPageLanguageDto,
-} from "../../../interfaces/UniversityPageDto";
+import { AdminUniversityItemPostDto, AdminUniversityPageLanguageDto } from "src/interfaces/UniversityPageDto";
 
 export class UniversityPageStore extends RequestTracking {
   @observable items: { [lang: string]: AdminUniversityPageLanguageDto } = {};
@@ -37,6 +33,10 @@ export class UniversityPageStore extends RequestTracking {
       bannerId: this.bannerId,
       languages: this.items,
     };
-    const res = await this.track(() => AdminApi.putUniversity(this.id, data));
+    try {
+      await this.track(() => AdminApi.putUniversity(this.id, data));
+    } catch (e) {
+      alert(e);
+    }
   }
 }

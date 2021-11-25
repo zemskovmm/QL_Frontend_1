@@ -1,8 +1,9 @@
 import { RequestTracking } from "src/utils/Loadable";
 import { action, observable } from "mobx";
 import { RootStore } from "src/stores/RootStore";
-import { AdminApi } from "../../../clients/adminApiClient";
-import { RouteNames } from "../../../routing/routes";
+import { AdminApi } from "src/clients/adminApiClient";
+import { RouteNames } from "src/routing/routes";
+import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 
 export class LoginStore extends RequestTracking {
   @observable username: string = "";
@@ -28,7 +29,7 @@ export class LoginStore extends RequestTracking {
     try {
       await AdminApi.postLogin(data);
       this.reset();
-      await this.rootStore.routerStore.goTo(RouteNames.pageList);
+      await this.rootStore.routerStore.goTo(AdminRouteNames.pageList);
     } catch (e) {
       alert(e);
     }
@@ -36,7 +37,7 @@ export class LoginStore extends RequestTracking {
 
   @action async logOut() {
     try {
-      const req = await AdminApi.getLogout();
+      await AdminApi.getLogout();
       await this.rootStore.routerStore.goTo(RouteNames.index);
     } catch (e) {
       await this.rootStore.routerStore.goTo(RouteNames.index);
@@ -45,7 +46,7 @@ export class LoginStore extends RequestTracking {
 
   @action async check() {
     try {
-      const req = await AdminApi.getCheck();
+      await AdminApi.getCheck();
       return true;
     } catch (e) {
       return false;

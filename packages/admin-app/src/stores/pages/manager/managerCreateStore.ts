@@ -1,9 +1,9 @@
 import { RequestTracking } from "src/utils/Loadable";
 import { action, observable } from "mobx";
-import { RootStore } from "../../RootStore";
-import { AdminApi } from "../../../clients/adminApiClient";
+import { RootStore } from "src/stores/RootStore";
+import { AdminApi } from "src/clients/adminApiClient";
 import { IsEmail, IsNotEmpty, MinLength, validate } from "@keroosha/class-validator";
-import { reduceValidationErrorsToErrors } from "../../../utils/util";
+import { reduceValidationErrorsToErrors } from "src/utils/util";
 
 type ManagerCreateStoreErrors = {
   email?: string[];

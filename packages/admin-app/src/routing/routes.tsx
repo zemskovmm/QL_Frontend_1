@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "mobx-state-router";
 import { convertRoutes } from "./route";
 import { IndexPage } from "src/pages/LoginPage/indexPage";
-import { UserAuthorizedHook, UserAuthorizedOnlyHook } from "./routehooks";
+import { UserAuthorizedHook } from "./routehooks";
 import { NotFoundPage } from "src/pages/NotFounds/NotFoundPage";
 import { AdminRoutes } from "src/pages/Admin/AdminRoutes";
 
@@ -20,7 +20,6 @@ export const AnonRoutes: Route[] = convertRoutes([
   {
     pattern: "/not-found",
     name: RouteNames.notFound,
-    hooks: [UserAuthorizedOnlyHook],
   },
   {
     pattern: "/",

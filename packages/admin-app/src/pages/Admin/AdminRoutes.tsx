@@ -1,7 +1,7 @@
 import React from "react";
-import { Route } from "mobx-state-router";
+import { Route, RouterState } from "mobx-state-router";
 import { convertRoutes } from "src/routing/route";
-import { UserAuthorizedOnlyHook } from "../../routing/routehooks";
+import { RouteTransitionHook } from "src/routing/routehooks";
 import { PageEditorPage } from "./pageEditor/pageEditorPage";
 import { PageListPage } from "./pageEditor/pageListPage";
 import { PageTraitEditorPage } from "./pageEditor/pageTraitEditPage";
@@ -19,6 +19,11 @@ import { UniversityTraitEditorPage } from "./university/universityTraitEditPage"
 import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } from "./school/page";
 import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "./course/page";
 import { ManagerCreatePage } from "../Manager/ManagerCreate/ManagerCreatePage";
+import { RouteNames } from "../../routing/routes";
+
+export const UserAuthorizedOnlyHook: RouteTransitionHook = async (root) => {
+  if (!(await root.loginStore.check())) throw new RouterState(RouteNames.index);
+};
 
 export enum AdminRouteNames {
   pageList = "admin-pageList",

@@ -25,7 +25,7 @@ import {
 } from "./pages/course/coursePageStore";
 import { CreateTraitTypePageStore, EditTraitTypePageStore } from "./pages/trait/createTraitTypePageStore";
 import { GlobalSettingsPageStore } from "./pages/globalSettings/globalSettingsPageStore";
-import { FormEditorPageStore } from "../pages/globalSetting/formEditorPage/FormEditorPageStore";
+import { FormEditorPageStore } from "src/pages/Admin/globalSetting/formEditorPage/FormEditorPageStore";
 import { LoginStore } from "./pages/login/login";
 import { ManagerCreateStore } from "./pages/manager/managerCreateStore";
 

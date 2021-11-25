@@ -1,6 +1,6 @@
 import { useRootStore } from "src/utils/rootStoreUtils";
 import { useObserver } from "mobx-react";
-import { RouteNames } from "src/routing/routes";
+import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 import React, { ChangeEvent, useState } from "react";
 import { RouterLink } from "mobx-state-router";
 
@@ -40,7 +40,7 @@ export const UniversityPage = () => {
               className={
                 "d-flex mb-4 mr-auto text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
               }
-              routeName={RouteNames.universityList}
+              routeName={AdminRouteNames.universityList}
             >
               back in list
             </RouterLink>
@@ -48,7 +48,7 @@ export const UniversityPage = () => {
               className={
                 "d-flex mb-4 mr-4 text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black"
               }
-              routeName={RouteNames.universityTraitEditPage}
+              routeName={AdminRouteNames.universityTraitEditPage}
               params={{ id: s.id }}
             >
               Trait Edit
