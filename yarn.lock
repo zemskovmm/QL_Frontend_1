@@ -1982,6 +1982,15 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
+"@keroosha/class-validator@*":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@keroosha/class-validator/-/class-validator-0.0.3.tgz#80300ae050b78bf355cd4108c73b813df457f882"
+  integrity sha512-ivCLLEpsBRR+iiTSEdaaoujQntHelnwhVBymfB8TmePFJ7zOlIrFpbkoPs0FYsrgw0Oy6tpnUNFV9TTS4iXw9w==
+  dependencies:
+    "@types/validator" "^13.1.0"
+    libphonenumber-js "^1.7.57"
+    validator "^13.1.1"
+
 "@nanostores/preact@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@nanostores/preact/-/preact-0.1.2.tgz#cbf2f46a9d9a87b97724be59af24d69bc7b11f10"
@@ -2673,6 +2682,11 @@
   integrity sha512-O3MmRAk6ZuAKa9CHgg0Pr0+lUOqoMLpc9AS4R8ano2auvsg7IE8syF3Xh/NPr26TWklxYcqoEEFdzLLs1fV9PQ==
   dependencies:
     source-map "^0.6.1"
+
+"@types/validator@^13.1.0":
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.7.0.tgz#fa25263656d234473025c2d48249a900053c355a"
+  integrity sha512-+jBxVvXVuggZOrm04NR8z+5+bgoW4VZyLzUO+hmPPW1mVFL/HaitLAkizfv4yg9TbG8lkfHWVMQ11yDqrVVCzA==
 
 "@types/webpack-sources@*":
   version "3.2.0"
@@ -9559,6 +9573,11 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+libphonenumber-js@^1.7.57:
+  version "1.9.43"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.43.tgz#2371e4383e6780990381d5b900b8c22666221cbb"
+  integrity sha512-tNB87ZutAiAkl3DE/Bo0Mxqn/XZbNxhPg4v9bYBwQQW4dlhBGqXl1vtmPxeDWbrijzwOA9vRjOOFm5V9SK/W3w==
+
 lilconfig@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.3.tgz#68f3005e921dafbd2a2afb48379986aa6d2579fd"
@@ -15626,6 +15645,11 @@ validate-npm-package-name@^3.0.0:
   integrity sha1-X6kS2B630MdK/BQN5zF/DKffQ34=
   dependencies:
     builtins "^1.0.3"
+
+validator@^13.1.1:
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
+  integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
 
 value-equal@^0.4.0:
   version "0.4.0"

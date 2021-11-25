@@ -1,7 +1,7 @@
-﻿import { TraitEditorStore, TraitLoaderWithCache } from "../../../components/traitEditor";
+﻿import { TraitEditorStore, TraitLoaderWithCache } from "src/components/traitEditor";
 import { action, observable } from "mobx";
-import { RootStore } from "../../RootStore";
-import { AdminApi } from "../../../clients/adminApiClient";
+import { RootStore } from "src/stores/RootStore";
+import { AdminApi } from "src/clients/adminApiClient";
 
 export class UniversityTraitLoader extends TraitLoaderWithCache {
   @observable universityId = 0;

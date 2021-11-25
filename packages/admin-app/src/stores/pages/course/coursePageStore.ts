@@ -1,11 +1,11 @@
-import { Loadable } from "../../../utils/Loadable";
-import { action, observable, runInAction } from "mobx";
-import { RootStore } from "../../RootStore";
-import { AdminApi } from "../../../clients/adminApiClient";
+import { Loadable } from "src/utils/Loadable";
+import { action, observable } from "mobx";
+import { RootStore } from "src/stores/RootStore";
+import { AdminApi } from "src/clients/adminApiClient";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
-import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
-import { Dictionary } from "../../../utils/types";
-import { TraitEditorStore, TraitLoader, TraitLoaderWithCache } from "../../../components/traitEditor";
+import { LanguageDictionaryCustomize } from "src/components/remoteui/AdminLanguageDictionaryEditor";
+import { Dictionary } from "src/utils/types";
+import { TraitEditorStore, TraitLoaderWithCache } from "src/components/traitEditor";
 
 const emptyModel = ({ languages: { en: {} } } as unknown) as AdminCourseDto<unknown>;
 

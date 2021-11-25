@@ -2,12 +2,8 @@
 import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { RootStore } from "src/stores/RootStore";
-import {
-  AdminUniversityItemDto,
-  AdminUniversityItemPostDto,
-  AdminUniversityPageLanguageDto,
-} from "../../../interfaces/UniversityPageDto";
-import { RouteNames } from "../../../routing/routes";
+import { AdminUniversityItemPostDto, AdminUniversityPageLanguageDto } from "src/interfaces/UniversityPageDto";
+import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 
 export class UniversityCreatePageStore extends RequestTracking {
   @observable items: { [lang: string]: AdminUniversityPageLanguageDto };
@@ -35,8 +31,8 @@ export class UniversityCreatePageStore extends RequestTracking {
       languages: this.items,
     };
     try {
-      const res = await this.track(() => AdminApi.postUniversity(data));
-      await routerStore.goTo(RouteNames.universityList);
+      await this.track(() => AdminApi.postUniversity(data));
+      await routerStore.goTo(AdminRouteNames.universityList);
     } catch (e) {
       alert(e);
     }

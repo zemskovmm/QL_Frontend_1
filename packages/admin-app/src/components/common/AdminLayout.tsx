@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { RouterLink } from "mobx-state-router";
-import { useRootStore } from "../../utils/rootStoreUtils";
-import { RouteNames } from "../../routing/routes";
+import { useRootStore } from "src/utils/rootStoreUtils";
+import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 
 const Navbar = () => {
   const { loginStore: s } = useRootStore();
@@ -12,30 +12,30 @@ const Navbar = () => {
       </div>
       <div className=" block lg:flex lg:items-center mx-auto">
         <div className="text-sm flex lg:flex-grow font-bold text-white flex-nowrap	">
-          <RouterLink routeName={RouteNames.pageList}>
+          <RouterLink routeName={AdminRouteNames.pageList}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Pages</a>
           </RouterLink>
-          <RouterLink routeName={RouteNames.fileList}>
+          <RouterLink routeName={AdminRouteNames.fileList}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Files</a>
           </RouterLink>
-          <RouterLink routeName={RouteNames.traitList}>
+          <RouterLink routeName={AdminRouteNames.traitList}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Traits</a>
           </RouterLink>
-          <RouterLink routeName={RouteNames.universityList}>
+          <RouterLink routeName={AdminRouteNames.universityList}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Universities</a>
           </RouterLink>
-          <RouterLink routeName={RouteNames.schoolList}>
+          <RouterLink routeName={AdminRouteNames.schoolList}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Schools</a>
           </RouterLink>
-          <RouterLink routeName={RouteNames.courseList}>
+          <RouterLink routeName={AdminRouteNames.courseList}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Coures</a>
           </RouterLink>
-          <RouterLink routeName={RouteNames.globalSettingsEditor} params={{ lang: "en" }}>
+          <RouterLink routeName={AdminRouteNames.globalSettingsEditor} params={{ lang: "en" }}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10 whitespace-nowrap	">
               Global settings
             </a>
           </RouterLink>
-          <RouterLink routeName={RouteNames.mangerCreate}>
+          <RouterLink routeName={AdminRouteNames.mangerCreate}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10 whitespace-nowrap	">
               Create Manager
             </a>

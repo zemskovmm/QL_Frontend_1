@@ -3,9 +3,9 @@ import { RequestTracking } from "src/utils/Loadable";
 import { AdminApi } from "src/clients/adminApiClient";
 import { RootStore } from "src/stores/RootStore";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
-import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
-import { Loadable } from "../../table/LoadableStore";
-import { RouteNames } from "../../../routing/routes";
+import { LanguageDictionaryCustomize } from "src/components/remoteui/AdminLanguageDictionaryEditor";
+import { Loadable } from "src/stores/table/LoadableStore";
+import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 
 export class NewTraitItemPageStore extends Loadable {
   @observable remoteUi?: RemoteUiEditorStore;
@@ -34,7 +34,7 @@ export class NewTraitItemPageStore extends Loadable {
     if (!value) return;
     const unmapNames = Object.keys(value.names).reduce((acc, x) => ({ ...acc, [x]: value.names[x].name }), {});
     await this.track(() => AdminApi.createTrait(this.traitTypeId, { ...value, names: unmapNames }));
-    await this.root.routerStore.goTo(RouteNames.traitPage, { id: `${this.traitTypeId}` });
+    await this.root.routerStore.goTo(AdminRouteNames.traitPage, { id: `${this.traitTypeId}` });
   }
 }
 

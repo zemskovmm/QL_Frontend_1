@@ -1,10 +1,10 @@
-import { Loadable } from "../../../utils/Loadable";
+import { Loadable } from "src/utils/Loadable";
 import { action, observable } from "mobx";
-import { RootStore } from "../../RootStore";
+import { RootStore } from "src/stores/RootStore";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
-import { AdminApi } from "../../../clients/adminApiClient";
-import { LanguageDictionaryCustomize } from "../../../components/remoteui/AdminLanguageDictionaryEditor";
-import { RouteNames } from "../../../routing/routes";
+import { AdminApi } from "src/clients/adminApiClient";
+import { LanguageDictionaryCustomize } from "src/components/remoteui/AdminLanguageDictionaryEditor";
+import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 
 export class CreateTraitTypePageStore extends Loadable {
   @observable root: RootStore;
@@ -25,7 +25,7 @@ export class CreateTraitTypePageStore extends Loadable {
     if (!value) return;
     const unmapNames = Object.keys(value.names).reduce((acc, x) => ({ ...acc, [x]: value.names[x].name }), {});
     await this.track(() => AdminApi.createTraitType({ ...value, names: unmapNames }));
-    await this.root.routerStore.goTo(RouteNames.traitList);
+    await this.root.routerStore.goTo(AdminRouteNames.traitList);
   }
 }
 
@@ -62,6 +62,6 @@ export class EditTraitTypePageStore extends Loadable {
         names: unmapNames,
       })
     );
-    await this.root.routerStore.goTo(RouteNames.traitPage, { id: this.traitTypeId });
+    await this.root.routerStore.goTo(AdminRouteNames.traitPage, { id: this.traitTypeId });
   }
 }

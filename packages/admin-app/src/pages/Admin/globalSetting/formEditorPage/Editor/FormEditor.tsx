@@ -1,38 +1,38 @@
 import {
-  PageEditorCellDialogStore,
-  PageEditorCellStore,
-  PageEditorRowStore,
-  PageEditorStore,
-  PageLanguageEditorStore,
-  PageRowsEditorStore,
-} from "./PageEditorStore";
+  FormEditorCellDialogStore,
+  FormEditorCellStore,
+  FormEditorRowStore,
+  FormEditorStore,
+  FormRowsEditorStore,
+} from "./FormEditorStore";
 import { useObserver } from "mobx-react";
 import { AdminRemoteUiHtmlEditor, AdminRemoteUiHtmlEditorStore } from "src/components/remoteui/AdminRemoteUiHtmlEditor";
 import {
   AdminRemoteUiImageFieldEditor,
   AdminRemoteUiImageFieldStore,
-  ImagePickerWithLabel,
 } from "src/components/remoteui/AdminRemoteUiImageEditor";
-import { AvailableBlocks, BlockPresenter } from "@project/components/src/blocks";
+import { BlockPresenter } from "@project/components/src/blocks";
 import { AdminButton } from "src/components/common/AdminButton";
 import { IRemoteUiData, IRemoteUiEditorCustomization, RemoteUiEditor } from "@kekekeks/remoteui/src";
 import { AdminSlider } from "src/components/common/AdminSlider";
 import { AdminOverlayDialog } from "src/components/common/AdminOverlayDialog";
-import { bind, dmap } from "src/utils/util";
-import { AdminTabControl } from "src/components/common/AdminTabControl";
 import "@kekekeks/remoteui/src/styles/RemoteUiEditor.css";
-import { AdminTextBox } from "src/components/common/AdminTextBox";
-import { AllLanguages } from "@project/components/src/utils/langs";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
 import { useEffect, useState } from "react";
 
-import styles from "./PageEditor.module.css";
-import { AdminRemoteUiDropdownEditor, AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
-import { RouterLink } from "mobx-state-router";
-import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
+import styles from "./FormEditor.module.css";
+import {
+  AdminRemoteUiDropdownEditor,
+  AdminRemoteUiDropdownEditorStore,
+} from "src/components/remoteui/AdminRemoteUiDropdownEditor";
+import { FormBuilderBlockList } from "@project/components/src/FormBuilderBlocks/FormBuilderBlockList";
+import {
+  AdminRemoteUiDropdownSchemaEditorStore,
+  AdminRemoteUiDropdownSchemaEditor,
+} from "src/components/remoteui/AdminRemoteUiDropdownSchemaEditor";
 
-const PageEditorCell = (props: { store: PageEditorCellStore }) => {
+const PageEditorCell = (props: { store: FormEditorCellStore }) => {
   const s = props.store;
   return useObserver(() => (
     <div>
@@ -56,7 +56,7 @@ const PageEditorCell = (props: { store: PageEditorCellStore }) => {
   ));
 };
 
-const PageEditorRow = (props: { store: PageEditorRowStore }) => {
+const PageEditorRow = (props: { store: FormEditorRowStore }) => {
   const s = props.store;
   return useObserver(() => (
     <div className="bg-gray-100 pt-2 pb-2">
@@ -213,22 +213,24 @@ const PageEditorRow = (props: { store: PageEditorRowStore }) => {
   ));
 };
 
-class RemoteUiCustomization implements IRemoteUiEditorCustomization {
+export class RemoteUiCustomization implements IRemoteUiEditorCustomization {
   getEditorFor(store: IRemoteUiData): any {
     if (store instanceof AdminRemoteUiHtmlEditorStore) return <AdminRemoteUiHtmlEditor store={store} />;
     if (store instanceof AdminRemoteUiImageFieldStore) return <AdminRemoteUiImageFieldEditor store={store} />;
     if (store instanceof AdminRemoteUiRowsStore) return <AdminRemoteUiRowsEditor store={store} />;
     if (store instanceof AdminRemoteUiDropdownEditorStore) return <AdminRemoteUiDropdownEditor store={store} />;
+    if (store instanceof AdminRemoteUiDropdownSchemaEditorStore)
+      return <AdminRemoteUiDropdownSchemaEditor store={store} />;
     return null;
   }
 }
 
-const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
+const PageEditorCellDialog = (props: { store: FormEditorCellDialogStore }) => {
   const [showTypes, setShowTypes] = useState(false);
   const [currentType, setCurrentType] = useState(0);
 
   useEffect(() => {
-    setCurrentType(AvailableBlocks.findIndex((el) => el.id === props.store.blockType));
+    setCurrentType(FormBuilderBlockList.findIndex((el) => el.id === props.store.blockType));
   }, [props.store.blockType]);
 
   return useObserver(() => (
@@ -261,7 +263,7 @@ const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
           </label>
         </div>
       </div>
-      Type: {AvailableBlocks[currentType].name}
+      Type: {FormBuilderBlockList[currentType].name}
       <br />
       <AdminButton color={"primary"} onClick={() => setShowTypes(true)}>
         Change Type
@@ -269,12 +271,12 @@ const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
       {showTypes && (
         <AdminOverlayDialog cancel={() => setShowTypes(false)}>
           <div className={styles.types}>
-            {AvailableBlocks.map((b, ind) => (
+            {FormBuilderBlockList.map((b, ind) => (
               <div
                 key={ind}
-                className={`${AvailableBlocks[ind].id === props.store.blockType ? styles.active : ""}`}
+                className={`${FormBuilderBlockList[ind].id === props.store.blockType ? styles.active : ""}`}
                 onClick={() => {
-                  props.store.blockType = AvailableBlocks[ind].id;
+                  props.store.blockType = FormBuilderBlockList[ind].id;
                   setShowTypes(false);
                 }}
               >
@@ -309,7 +311,7 @@ const PageEditorCellDialog = (props: { store: PageEditorCellDialogStore }) => {
   ));
 };
 
-export const PageRowsEditor = (props: { store: PageRowsEditorStore }) => {
+export const PageRowsEditor = (props: { store: FormRowsEditorStore }) => {
   const s = props.store;
 
   return useObserver(() => (
@@ -332,128 +334,15 @@ export const PageRowsEditor = (props: { store: PageRowsEditorStore }) => {
   ));
 };
 
-export const PageLanguageEditor = (props: { store: PageLanguageEditorStore }) => {
-  return useObserver(() => (
-    <div className={`flex flex-col`}>
-      <div className={`my-4`}>
-        {props.store.metadata?.meta.map((el, index) => (
-          <div key={index + "metadata"} className={`flex items-end`}>
-            <label className={`mr-2`}>
-              <span>Name</span>
-              <input
-                type="text"
-                className={`form-control`}
-                value={el.name}
-                onChange={(e) => (el.name = e.target.value)}
-              />
-            </label>
-            <label className={`mr-2`}>
-              <span>Property</span>
-              <input
-                type="text"
-                className={`form-control`}
-                value={el.property}
-                onChange={(e) => (el.property = e.target.value)}
-              />
-            </label>
-            <label className={`mr-2`}>
-              <span>Content</span>
-              <input
-                type="text"
-                className={`form-control`}
-                value={el.content}
-                onChange={(e) => (el.content = e.target.value)}
-              />
-            </label>
-            <button
-              onClick={() => props.store.removeMeta(index)}
-              className={`text-white  font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-        <button
-          onClick={() => props.store.addMeta()}
-          className={`text-white mt-4 font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
-        >
-          Add meta
-        </button>
-      </div>
-      <AdminTextBox id={"title"} label="Title" {...bind(props.store, "title")} />
-      <AdminTextBox id={"url"} label="Url" {...bind(props.store, "url")} />
-      <ImagePickerWithLabel store={props.store.previewImage} title={"Preview image:"} />
-      <ImagePickerWithLabel store={props.store.smallPreviewImage} title={"Small Preview image:"} />
-      <ImagePickerWithLabel store={props.store.widePreviewImage} title={"Wide Preview image:"} />
-      <br />
-      <PageRowsEditor store={props.store} />
-    </div>
-  ));
-};
-
-const CreatePage = (props: {
-  availableLangs: { lang: string; name: string }[];
-  createPage: (copyFrom?: string) => void;
-}) => {
-  const noneLang = "<none>";
-  const [selectedLang, setSelectedLang] = useState(noneLang);
-  return (
-    <div className="content-center m-4">
-      {props.availableLangs.length == 0 ? null : (
-        <>
-          Copy from
-          <select value={selectedLang} onChange={(e) => setSelectedLang(e.target.value)}>
-            <option value={noneLang}>Create new</option>
-            {props.availableLangs.map((l) => (
-              <option value={l.lang}>{l.name}</option>
-            ))}
-          </select>
-          <br />
-        </>
-      )}
-
-      <AdminButton
-        color="primary"
-        onClick={() => props.createPage(selectedLang == noneLang ? undefined : selectedLang)}
-      >
-        Create Page Version
-      </AdminButton>
-    </div>
-  );
-};
-
-export const PageEditor = (props: { store: PageEditorStore | any }) => {
+export const FormEditor = (props: { store: FormEditorStore }) => {
   const s = props.store;
   return useObserver(() => {
-    const availableLangs = dmap(AllLanguages, (id, lang) => ({
-      lang: id,
-      name: lang.title,
-      isAvailable: props.store.langs[id] != null,
-    })).filter((l) => l.isAvailable);
     return (
-      <div>
+      <div className={`flex flex-col`}>
         <AdminButton color="save" onClick={() => s.save()}>
           Save
-        </AdminButton>{" "}
-        {s.id && (
-          <RouterLink routeName={AdminRouteNames.pageTraitEditPage} params={{ id: s.id }}>
-            <AdminButton color={"primary"}> Traits editor </AdminButton>
-          </RouterLink>
-        )}
-        <br />
-        <AdminRemoteUiDropdownEditor store={props.store.pageType} label={"Page type: "} />
-        <AdminTabControl
-          tabs={dmap(AllLanguages, (lang, data) => ({
-            id: lang,
-            title: data.title,
-            renderer:
-              props.store.langs[lang] == null
-                ? () => (
-                    <CreatePage availableLangs={availableLangs} createPage={(copyFrom) => s.addLang(lang, copyFrom)} />
-                  )
-                : () => <PageLanguageEditor store={props.store.langs[lang]} />,
-          }))}
-        />
+        </AdminButton>
+        <PageRowsEditor store={props.store.langs} />
       </div>
     );
   });
