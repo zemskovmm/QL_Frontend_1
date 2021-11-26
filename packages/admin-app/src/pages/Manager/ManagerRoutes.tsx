@@ -4,8 +4,8 @@ import { convertRoutes } from "src/routing/route";
 
 export enum RouteNames {}
 
-export const AdminRouteViewMap = {
+export const ManagerRouteViewMap = {
   // [RouteNames.newPage]: <PageEditorPage />,
 };
 
-export const AdminRoutes: Route[] = convertRoutes([]);
+export const ManagerRoutes: Route[] = convertRoutes([]);

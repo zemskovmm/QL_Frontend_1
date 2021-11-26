@@ -40,7 +40,7 @@ export class LoginStore extends RequestTracking {
       await AdminApi.getLogout();
       await this.rootStore.routerStore.goTo(RouteNames.index);
     } catch (e) {
-      await this.rootStore.routerStore.goTo(RouteNames.index);
+      alert(e);
     }
   }
 

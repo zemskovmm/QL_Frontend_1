@@ -18,7 +18,7 @@ import { UniversityCreatePage } from "./university/universityCreatePage";
 import { UniversityTraitEditorPage } from "./university/universityTraitEditPage";
 import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } from "./school/page";
 import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "./course/page";
-import { ManagerCreatePage } from "../Manager/ManagerCreate/ManagerCreatePage";
+import { ManagerCreatePage } from "./ManagerCreate/ManagerCreatePage";
 import { RouteNames } from "../../routing/routes";
 
 export const UserAuthorizedOnlyHook: RouteTransitionHook = async (root) => {
