@@ -1,10 +1,5 @@
 import { MessageType } from "./Message";
     
-export type MessageListProviderPosition ={
-    index:number
-    id:number
-}
-
 export class MessageListProvider{
     rows:{[key:number]:MessageType} = {}
     min:number = 0
@@ -70,7 +65,8 @@ export class MessageListProvider{
 
         let befor = false
         const beforId = this.getFirst().id
-        messages.reverse().forEach((m)=>{
+        const revers = [...messages].reverse()
+        revers.forEach((m)=>{
             if(befor){
                 this.rows[--this.min] = m
             }else if(beforId==m.id){
@@ -91,42 +87,16 @@ export class MessageListProvider{
         return new MessageListProvider(this)
     }
 
-    getPageUp(index:number,maxRows:number):Array<MessageType>{
-        const upPage:Array<MessageType> = []
-        let min = index-maxRows
-        if(min<this.min){
-            min=this.min
+    getPage(indexMin:number,indexMax:number):Array<MessageType>{
+        const page:Array<MessageType> = []
+        for(let i=indexMin; i<indexMax && i<this.max;i++){
+            page.push(this.rows[i])
         }
-        for(let i=index-1; i>=min; i--){
-            upPage.push(this.rows[i])
-        }
-        return upPage.reverse()
-    }
-
-    getPageDown(index:number,maxRows:number):Array<MessageType>{
-        const downPage:Array<MessageType> = []
-        for(let i=index; i<index+maxRows && i<this.max;i++){
-            downPage.push(this.rows[i])
-        }
-        return downPage
+        return page
     }
 
     getMessage(index:number):MessageType|undefined{
         return this.rows[index]
-    }
-
-    getCurrectPosition({index,id}:MessageListProviderPosition,maxRows:number): MessageListProviderPosition{
-        if(this.isEmpty()){
-            return {index:0,id:0}
-        }
-        if(index<this.min || index>=this.max || this.rows[index].id !== id){
-            let newIndex = this.max - maxRows
-            if(newIndex<this.min){
-                newIndex = this.min
-            }
-            return {index:newIndex,id:this.rows[newIndex].id||0}
-        }
-        return {index,id}
     }
 
     getFirstId(): number {

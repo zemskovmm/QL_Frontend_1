@@ -19,7 +19,7 @@ export const MIN_MESSAGE_HEIGHT=38;
 export const Message: FC<MessagePropsType> = ({key,id,className,title,text,me}) => {
     return (
         <div
-            id={`Message_${id}`}
+            id={`message_${id}`}
             style={{minHeight:MIN_MESSAGE_HEIGHT}}
             className={cn(
                 "py-1.5",
