@@ -1,13 +1,21 @@
-import React, { FunctionComponent } from "react";
+import React, { FC,KeyboardEvent } from "react";
 import { Text } from "@project/components/src/ui-kit/Text";
 import { TextareaPropsType } from "./_types";
 import cn from "classnames"
 
 
-export const Textarea:FunctionComponent<TextareaPropsType> = 
-({className,label,value,placeholder,isError=false, helperText="",rows, ...fields })=>{
+export const Textarea:FC<TextareaPropsType> = 
+({className,label,value,placeholder,isError=false, helperText="",rows,onPressEnter, ...fields })=>{
 
     const textColor = isError ? 'error': 'help'
+
+
+    const handleKeyPress = (event:KeyboardEvent<HTMLTextAreaElement>)=>{
+        if(event.key=='Enter'){
+            event.preventDefault();
+            onPressEnter && onPressEnter()
+        }
+    }
 
     return <div className={`flex flex-col ${className}`}>
         {label && <Text className="mb-2" text={label} color={textColor} size="caption"/>}
@@ -19,6 +27,7 @@ export const Textarea:FunctionComponent<TextareaPropsType> =
                     'text-gray-600 focus:text-gray-600 border-gray-200 focus:border-gray-400',
             )} 
             value={value} 
+            onKeyPress={handleKeyPress}
             placeholder={placeholder} 
             rows={rows} 
             {...fields}

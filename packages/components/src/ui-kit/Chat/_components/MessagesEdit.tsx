@@ -18,6 +18,7 @@ type MessagesType={
 export const MessagesEdit: FC<PropsType> = ({ className,onSendMessage }) => {
   const { handleSubmit, control, setValue } = useForm<MessagesType>();
   const fileRef = useRef<HTMLInputElement>(null)
+  const submitButtonRef = useRef<HTMLButtonElement>(null)
 
   const handleSendMessage = ({text}: MessagesType) => {
     if(text){
@@ -37,16 +38,17 @@ export const MessagesEdit: FC<PropsType> = ({ className,onSendMessage }) => {
 
   return (
     <form className={cn("flex",className)} onSubmit={handleSubmit(handleSendMessage) as any}>
-      <input ref={fileRef} type="file" onChange={handleImageChange} style={{display:"none"}} />
-      <IconButton src={CLIP_ICON} size="4" onClick={()=>fileRef.current?.click()} />
+      {/* <input ref={fileRef} type="file" onChange={handleImageChange} style={{display:"none"}} />
+      <IconButton src={CLIP_ICON} size="4" onClick={()=>fileRef.current?.click()} /> */}
       <TextareaControlled
         rows={2}
         className="flex-grow mr-2"
         name="text"
         placeholder="Ваше сообщение"
         control={control}
+        onPressEnter={()=>submitButtonRef.current?.click()}
       />
-      <Button className="self-end" text="Отправить" color="red" type="submit" />
+      <Button ref={submitButtonRef} className="self-end" text="Отправить" color="red" type="submit" />
     </form>
   );
 };
