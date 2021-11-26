@@ -6,15 +6,15 @@ import "src/styles/legacy.css";
 import { LoadingIf } from "src/components/common/Loading";
 import { useRootStore } from "../../utils/rootStoreUtils";
 import { useObserver } from "mobx-react-lite";
-import { AdminRouteViewMap } from "src/pages/Admin/AdminRoutes";
 import ManagerLayout from "../common/ManagerLayout";
+import { ManagerRouteViewMap } from "../../pages/Manager/ManagerRoutes";
 
 export const ManagerShell = () => {
   const { routerStore } = useRootStore();
   return useObserver(() => (
     <ManagerLayout>
       <LoadingIf isLoading={routerStore.isTransitioning}>
-        <RouterView routerStore={routerStore} viewMap={} />
+        <RouterView routerStore={routerStore} viewMap={ManagerRouteViewMap} />
       </LoadingIf>
     </ManagerLayout>
   ));
