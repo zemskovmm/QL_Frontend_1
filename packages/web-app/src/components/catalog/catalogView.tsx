@@ -1,4 +1,4 @@
-import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilterDto";
+import {CatalogFilterDto, CatalogResponseDto, ClientCatalogFilterOptionDto} from "src/interfaces/catalogFilterDto";
 import { CatalogFilterRequestDto } from "src/clients/siteApiClient";
 import { Paginator } from "src/components/utilities/Paginator";
 import { LoadingIf } from "src/components/utilities/Loading";
@@ -11,10 +11,100 @@ import filter from "src/assets/icons/filter.svg";
 import sort from "src/assets/icons/sort.svg";
 import close from "src/assets/icons/cross-remove.svg";
 import { LocalizedText } from "../common/LocalizedText";
-import { useEffect, useState } from "react";
+import {FC, useEffect, useState} from "react";
 import { useIntl } from "react-intl";
 import cn from "classnames";
 import { CourseCatalogElement, HousingCatalogElement, UniversityCatalogElement } from "./catalogElement";
+import {useObserver} from "mobx-react";
+
+const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number, selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
+  const [openRegion, setOpenRegion] = useState(false)
+  return useObserver( () =>
+    <div className={`flex`}>
+      <label className={`${style.checkbox__label}`}>
+        <span
+          className={`${style.checkbox__input} ${
+            seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
+          }`}
+        >
+          <span className={`${style.checkbox__inner}`} />
+          <input
+            type="checkbox"
+            checked={seletedItems.indexOf(option.id) != -1}
+            aria-hidden="false"
+            className={style.checkbox__original}
+            value={option.name}
+            onChange={(e) => toggleFilter(option.id, e.target.checked)}
+          />
+        </span>
+      </label>
+      <div className={`flex flex-col w-full`}>
+        <div className={`${style.checkbox__name} w-full flex items-center cursor-pointer`} onClick={() => setOpenRegion(!openRegion)}>{option.name} <svg className={`${openRegion ? '-rotate-90' : 'rotate-90'} transform ml-2 transition duration-300`} xmlns="http://www.w3.org/2000/svg" width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M2.08268 0L0.916016 1.16667L4.74935 5L0.916016 8.83333L2.08268 10L7.08268 5L2.08268 0Z" fill="#567DD0"/></svg></div>
+        <div className={`flex flex-wrap justify-between w-full pl-2.5 pr-6 ${openRegion ? style.hideListRegions : style.showListRegions }`}>
+          <label className={`${style.checkbox__label} w-full ${openRegion ? 'mb-4' : ''}`} >
+            <span
+              className={`${style.checkbox__input} ${
+                seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
+              }`}
+            >
+              <span className={`${style.checkbox__inner}`} />
+              <input
+                type="checkbox"
+                checked={seletedItems.indexOf(option.id) != -1}
+                aria-hidden="false"
+                className={style.checkbox__original}
+                value={option.name}
+                onChange={(e) => toggleFilter(option.id, e.target.checked)}
+              />
+            </span>
+            <span className={`${style.checkbox__name}`}>{option.name}</span>
+          </label>
+          <label className={`${style.checkbox__label} w-full`} >
+            <span
+              className={`${style.checkbox__input} ${
+                seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
+              }`}
+            >
+              <span className={`${style.checkbox__inner}`} />
+              <input
+                type="checkbox"
+                checked={seletedItems.indexOf(option.id) != -1}
+                aria-hidden="false"
+                className={style.checkbox__original}
+                value={option.name}
+                onChange={(e) => toggleFilter(option.id, e.target.checked)}
+              />
+            </span>
+            <span className={`${style.checkbox__name}`}>{option.name}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    )
+}
+
+const CityFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number, selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
+  return (
+    <label className={`${style.checkbox__label} w-full mb-4`}>
+            <span
+              className={`${style.checkbox__input} ${
+                seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
+              }`}
+            >
+              <span className={`${style.checkbox__inner}`} />
+              <input
+                type="checkbox"
+                checked={seletedItems.indexOf(option.id) != -1}
+                aria-hidden="false"
+                className={style.checkbox__original}
+                value={option.name}
+                onChange={(e) => toggleFilter(option.id, e.target.checked)}
+              />
+            </span>
+      <span className={`${style.checkbox__name}`}>{option.name}</span>
+    </label>
+  )
+}
 
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
@@ -35,24 +125,7 @@ function CatalogFilter(props: {
         }`}
       >
         {props.filter.options.map((option) => (
-          <label className={`${style.checkbox__label}`} key={option.id}>
-            <span
-              className={`${style.checkbox__input} ${
-                props.seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
-              }`}
-            >
-              <span className={`${style.checkbox__inner}`} />
-              <input
-                type="checkbox"
-                checked={props.seletedItems.indexOf(option.id) != -1}
-                aria-hidden="false"
-                className={style.checkbox__original}
-                value={option.name}
-                onChange={(e) => props.toggleFilter(option.id, e.target.checked)}
-              />
-            </span>
-            <span className={`${style.checkbox__name}`}>{option.name}</span>
-          </label>
+          <RegionFilter option={option} toggleFilter={props.toggleFilter} seletedItems={props.seletedItems} key={`option ${option.name} ${option.id}`} />
         ))}
       </div>
       {props.filter.options.length > 5 && (
