@@ -1,29 +1,47 @@
 import React, { FC } from "react"
 import { Text } from "@project/components/src/ui-kit/Text";
+import { IconButton } from "@project/components/src/ui-kit/IconButton";
+import CLIP_ICON from "@project/components/src/assets/icons/clip.svg";
 import cn from 'classnames'
 
 export type MessageType = {
     id:number;
     me: boolean;
-    title: string;
-    text: string;
+    fileId?: number;
+    text?: string;
 };
 
 type MessagePropsType = MessageType & {
+    key?:string;
     className?:string;
 };
 
-export const Message: FC<MessagePropsType> = ({className,title,text,me}) => {
+export const MIN_MESSAGE_HEIGHT=38;
 
+export const Message: FC<MessagePropsType> = ({key,id,className,text,me,fileId}) => {
     return (
-        <div 
+        <div
+            id={`message_${id}`}
+            style={{minHeight:MIN_MESSAGE_HEIGHT}}
             className={cn(
-                "flex flex-col rounded border px-2",
-                me ? "bg-green-100 self-end" : "bg-white self-start",
+                "py-1.5",
+                me ? "self-end pl-8 pr-2 " : "self-start pl-2 pr-8",
                 className
-            )}>
-            <Text text={title} size="caption" color="help"/>
-            <Text text={text} />
+            )}
+        >
+            <div 
+                key={key}
+                className={cn(
+                    "flex flex-col p-2 h-full",
+                    "border border-bdsecondary rounded",
+                    me ? "bg-blue-50" : "bg-white",
+                )}>
+                {fileId ? <IconButton src={CLIP_ICON} size="16" />:null}
+                {text ? <Text text={text} size="small" tag="pre"/>:null}
+                
+            </div>
         </div>
+        
+        
     )
 };

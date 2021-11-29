@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC,forwardRef } from "react";
 import cn from "classnames";
 
 export type ButtonCollorType = keyof typeof BUTTON_COLORS;
@@ -25,7 +25,7 @@ export type ButtonPropsType = {
   plus?: boolean;
 };
 
-export const Button: FunctionComponent<ButtonPropsType> = ({
+export const Button = forwardRef<HTMLButtonElement,ButtonPropsType>(({
   className,
   style,
   id,
@@ -36,13 +36,14 @@ export const Button: FunctionComponent<ButtonPropsType> = ({
   onClick,
   children,
   plus,
-}) => {
+},ref) => {
   const handleOnClick = () => {
     onClick && onClick(id);
   };
 
   return (
     <button
+      ref={ref}
       className={cn(" py-2 px-4 rounded inline-block transition flex justify-center ", BUTTON_COLORS[color], className)}
       style={style}
       id={id}
@@ -71,4 +72,4 @@ export const Button: FunctionComponent<ButtonPropsType> = ({
       {text} {children}
     </button>
   );
-};
+});

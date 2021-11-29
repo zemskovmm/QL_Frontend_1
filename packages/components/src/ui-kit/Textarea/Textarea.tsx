@@ -1,24 +1,45 @@
-import React, { FunctionComponent } from "react";
+import React, { FC,KeyboardEvent } from "react";
 import { Text } from "@project/components/src/ui-kit/Text";
+import { IconButton } from "@project/components/src/ui-kit/IconButton";
 import { TextareaPropsType } from "./_types";
+import cn from "classnames"
 
 
-
-export const Textarea:FunctionComponent<TextareaPropsType> = 
-({className,label,value,placeholder,isError=false, helperText="",rows, ...fields })=>{
-    
-    const inputClass = [
-        'p-1 px-4 rounded-sm border-2 focus:border-2 text-small' ,
-        isError ? 
-            'text-red-600 focus:text-red-600 border-red-200 focus:border-red-400' : 
-            'text-gray-600 focus:text-gray-600 border-gray-200 focus:border-gray-400',
-    ].join(' ')
+export const Textarea:FC<TextareaPropsType> = 
+({className,label,value,placeholder,isError=false, helperText="",rows, onPressEnter,iconSrc,onIconClick, ...fields })=>{
 
     const textColor = isError ? 'error': 'help'
 
-    return <div className={`flex flex-col ${className}`}>
+
+    const handleKeyPress = (event:KeyboardEvent<HTMLTextAreaElement>)=>{
+        if(event.key=='Enter'){
+            event.preventDefault();
+            onPressEnter && onPressEnter()
+        }
+    }
+
+    return <div className={`flex flex-col  ${className}`}>
         {label && <Text className="mb-2" text={label} color={textColor} size="caption"/>}
-        <textarea className={inputClass} value={value} placeholder={placeholder} rows={rows} {...fields}/>
+        <div className="relative h-full" >
+            {iconSrc && <IconButton className="absolute top-1 left-1" src={iconSrc} size="7" onClick={onIconClick} />}
+            <textarea 
+                className={cn(
+                    "w-full h-full",
+                    'p-1 border border-bdsecondary rounded-sm focus:border text-small' ,
+                    iconSrc ? 'pl-8': null,
+                    isError ? 
+                        'text-red-600 focus:text-red-600 border-red-200 focus:border-red-400': 
+                        'text-gray-600 focus:text-gray-600 border-gray-200 focus:border-gray-400',
+                )} 
+                style={{resize:'none'}}
+                value={value} 
+                onKeyPress={handleKeyPress}
+                placeholder={placeholder} 
+                rows={rows} 
+                {...fields}
+            />
+        </div>
+        
         {helperText && <Text className="mt-2" text={helperText} color={textColor} size="caption"/>}
     </div>
 }
