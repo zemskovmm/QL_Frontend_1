@@ -10,9 +10,11 @@ type PropsType={
     control: any;
     rows?: number;
     onPressEnter?:()=>void
+    iconSrc?:string;
+    onIconClick?:()=>void
 }
 
-export const TextareaControlled:FunctionComponent<PropsType> = ({className, name, label, placeholder, control, rows,onPressEnter})=>{
+export const TextareaControlled:FunctionComponent<PropsType> = ({className, name, label, placeholder, control, rows,iconSrc,onIconClick,onPressEnter})=>{
     return <Controller
         name={name}
         control={control}
@@ -26,6 +28,8 @@ export const TextareaControlled:FunctionComponent<PropsType> = ({className, name
                 rows={rows} 
                 helperText={error ? error.message:""} 
                 isError={invalid}
+                iconSrc={iconSrc}
+                onIconClick={onIconClick}
                 onPressEnter={onPressEnter}/>
         )}
     />

@@ -1,12 +1,14 @@
 import React, { FC } from "react"
 import { Text } from "@project/components/src/ui-kit/Text";
+import { IconButton } from "@project/components/src/ui-kit/IconButton";
+import CLIP_ICON from "@project/components/src/assets/icons/clip.svg";
 import cn from 'classnames'
 
 export type MessageType = {
     id:number;
     me: boolean;
-    title: string;
-    text: string;
+    fileId?: number;
+    text?: string;
 };
 
 type MessagePropsType = MessageType & {
@@ -16,7 +18,7 @@ type MessagePropsType = MessageType & {
 
 export const MIN_MESSAGE_HEIGHT=38;
 
-export const Message: FC<MessagePropsType> = ({key,id,className,title,text,me}) => {
+export const Message: FC<MessagePropsType> = ({key,id,className,text,me,fileId}) => {
     return (
         <div
             id={`message_${id}`}
@@ -34,8 +36,9 @@ export const Message: FC<MessagePropsType> = ({key,id,className,title,text,me}) 
                     "border border-bdsecondary rounded",
                     me ? "bg-blue-50" : "bg-white",
                 )}>
-                {/* <Text text={`(${id}) ${title}`} size="caption" color="help" /> */}
-                <Text text={text} size="small" tag="pre"/>
+                {fileId ? <IconButton src={CLIP_ICON} size="16" />:null}
+                {text ? <Text text={text} size="small" tag="pre"/>:null}
+                
             </div>
         </div>
         

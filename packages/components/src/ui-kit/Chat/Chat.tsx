@@ -10,16 +10,17 @@ export type ChatPropsType={
     onBeforeMessages:(id:number)=>void;
     onAfterMessages:(id:number)=>void;
     onSendMessage: (text:string)=>void
+    onFileChose: (file:File)=>void;
+    fileId?: number;
+    fileName?: string;
 }
 
-export const Chat:FC<ChatPropsType> = ({className,provider,onBeforeMessages,onAfterMessages,onSendMessage})=>{
-
-
+export const Chat:FC<ChatPropsType> = ({className,provider,onBeforeMessages,onAfterMessages,onSendMessage,onFileChose})=>{
     return (
         <div className={cn("relative h-full", className)}>
             <div className={cn("absolute top-0 left-0 h-full w-full flex flex-col gap-2")} >
                 <MessageList className="flex-grow flex-shrink" provider={provider} onBeforeMessages={onBeforeMessages} onAfterMessages={onAfterMessages}/>
-                <MessagesEdit onSendMessage={onSendMessage}/>
+                <MessagesEdit onSendMessage={onSendMessage} onFileChose={onFileChose}/>
             </div>
         </div>
         

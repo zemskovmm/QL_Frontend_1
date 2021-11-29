@@ -7,15 +7,18 @@ import cn from "classnames"
 import CLIP_ICON from "@project/components/src/assets/icons/clip.svg";
 import { ChangeEventHandler } from "react-dom/node_modules/@types/react";
 
-type PropsType = {
-  className?: string;
-  onSendMessage: (text:string)=>void
-};
+
 type MessagesType={
   text:string
 }
 
-export const MessagesEdit: FC<PropsType> = ({ className,onSendMessage }) => {
+type PropsType = {
+  className?: string;
+  onSendMessage: (text:string)=>void;
+  onFileChose: (file:File)=>void;
+};
+
+export const MessagesEdit: FC<PropsType> = ({ className,onSendMessage,onFileChose}) => {
   const { handleSubmit, control, setValue } = useForm<MessagesType>();
   const fileRef = useRef<HTMLInputElement>(null)
   const submitButtonRef = useRef<HTMLButtonElement>(null)
@@ -27,24 +30,24 @@ export const MessagesEdit: FC<PropsType> = ({ className,onSendMessage }) => {
     setValue("text", "");
   };
 
-  const handleImageChange=(e:FormEvent<HTMLInputElement>) =>{
+  const handleImageChange= async (e:FormEvent<HTMLInputElement>) =>{
     e.preventDefault();
-    
-    let file = e.currentTarget.files;
-    console.log({
-      file,
-    })
+    let file = e.currentTarget.files?.item(0);
+    if(file){
+      onFileChose(file)
+    }
   }
 
   return (
     <form className={cn("flex",className)} onSubmit={handleSubmit(handleSendMessage) as any}>
-      {/* <input ref={fileRef} type="file" onChange={handleImageChange} style={{display:"none"}} />
-      <IconButton src={CLIP_ICON} size="4" onClick={()=>fileRef.current?.click()} /> */}
+      <input ref={fileRef} type="file" onChange={handleImageChange} style={{display:"none"}} />
       <TextareaControlled
-        rows={2}
-        className="flex-grow mr-2"
+        rows={1}
+        className="flex-grow mr-2 h-full"
         name="text"
         placeholder="Ваше сообщение"
+        iconSrc={CLIP_ICON}
+        onIconClick={()=>fileRef.current?.click()}
         control={control}
         onPressEnter={()=>submitButtonRef.current?.click()}
       />

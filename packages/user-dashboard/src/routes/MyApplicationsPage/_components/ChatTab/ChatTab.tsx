@@ -9,10 +9,10 @@ type PropsType = {
 };
 
 export const ChatTab: FunctionalComponent<PropsType> = ({className, applicationId}) => {
-    const {getMessages,sendMessage, messages}= useChatStore()
+    const {getMessages,sendMessage, messages,setApplicationId,uploadFile}= useChatStore()
 
     useEffect(()=>{
-        getMessages(applicationId);
+        setApplicationId(applicationId);
     },[applicationId])
 
     const handleBeforeMessages=(beforeMessageId:number)=>{
@@ -25,6 +25,9 @@ export const ChatTab: FunctionalComponent<PropsType> = ({className, applicationI
     const handleSendMessage=(text:string)=>{
         sendMessage(applicationId,{text})
     }
+    const handleChoseFile=(file:File)=>{
+        uploadFile(applicationId,file)
+    }
 
     return <Chat 
         className={className} 
@@ -32,5 +35,6 @@ export const ChatTab: FunctionalComponent<PropsType> = ({className, applicationI
         onBeforeMessages={handleBeforeMessages}
         onAfterMessages={handleAfterMessages}
         onSendMessage={handleSendMessage}
-        />
+        onFileChose={handleChoseFile}
+    />
 };

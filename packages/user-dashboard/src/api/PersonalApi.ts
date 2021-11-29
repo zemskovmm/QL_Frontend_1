@@ -30,7 +30,8 @@ export type GetMessagesPropsReq = {
 
 
 export class PersonalApi {
-  addApplications = async (data: ApplicationDto) => request<IdReq>("personal/applications", data, "POST");
+  addApplications = async (data: ApplicationDto) => 
+    request<IdReq>("personal/applications", data, "POST");
 
   getApplications = async (data: ApplicationsPropsReq) =>
     request<ApplicationsPagesDto>(jsonToUrlParam("personal/applications", data), null, "GET");
@@ -41,7 +42,11 @@ export class PersonalApi {
   sendMessages = async (id: number, data: ApplicationsSendMessageProps) =>
     request(`personal/applications/${id}/chat/messages`, data, "POST");
 
-  getApplicationItem = async (id: number) => request(`personal/applications/${id}`, null, "GET");
+  uploadFile = async (id: number, data: FormData) =>
+    request<IdReq>(`personal/applications/${id}/chat/messages/upload`, data, "POST",true);
+
+  getApplicationItem = async (id: number) => 
+    request(`personal/applications/${id}`, null, "GET");
 
   postApplicationItem = async (id: number, data: ApplicationPostProps) =>
     request(`personal/applications/${id}`, data, "POST");

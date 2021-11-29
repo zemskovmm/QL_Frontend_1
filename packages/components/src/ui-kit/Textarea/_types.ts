@@ -7,5 +7,7 @@ export interface TextareaPropsType  {
     isError?: boolean;
     helperText?: string;
     rows?: number;
+    iconSrc?:string;
+    onIconClick?:()=>void
     onPressEnter?:()=>void
 }

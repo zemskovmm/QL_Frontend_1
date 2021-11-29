@@ -22,11 +22,15 @@ const chatStor = map<ChatStore>({
   messages: new MessageListProvider(),
 });
 
-const getMessages = action( chatStor,"getMessages", async (store, applicationId: number,data:GetMessagesPropsReq={}): Promise<void> => {
-  store.setKey("applicationId", applicationId);
+const setApplicationId = action(chatStor,"setApplicationId",(store, applicationId: number)=>{
   if(store.get().applicationId!==applicationId){
     store.setKey("messages", new MessageListProvider());
   }
+  store.setKey("applicationId", applicationId);
+})
+
+const getMessages = action( chatStor,"getMessages", async (store, applicationId: number,data:GetMessagesPropsReq={}): Promise<void> => {
+  setApplicationId(applicationId);
   if (applicationId === 0) return;
   store.setKey("isLoading", true);
   const result = await personalApi.getMessages(applicationId,{...data,count:MAX_MESSAGES});
@@ -35,20 +39,43 @@ const getMessages = action( chatStor,"getMessages", async (store, applicationId:
     const messages: Array<MessageType> = (body || []).map(({id, author, blobId, date, type, text }) => ({
       id,
       me: author === "User",
-      title: new Date(date).toLocaleString(),
+      fileId: blobId||undefined,
       text: text,
     }));
-    store.setKey('messages',store.get().messages.push(messages))
+    if(store.get().applicationId===applicationId){
+      store.setKey('messages',store.get().messages.push(messages))
+    }
   } 
   store.setKey("isLoading", false);
 });
 
+const uploadFile = action( chatStor,"getMessages", async (store, applicationId: number, file:File): Promise<void> => {
+  setApplicationId(applicationId);
+  if (applicationId === 0) return;
+  const data = new FormData();
+  let fileToBlob = new Blob([new Uint8Array(await file.arrayBuffer())], {type: file.type });
+  data.append("UploadedFile", fileToBlob, file.name);
+  
+  const result = await personalApi.uploadFile(applicationId,data);
+  const { isOk, body, error } = result;
+  if (isOk) {
+    if(store.get().applicationId===applicationId){
+      getMessages(applicationId);
+    }
+  } else {
+    addErrorAction(error);
+  }
+});
+
 const sendMessage = action( chatStor,"getMessages", async (store, applicationId: number, message: ChatSendMessageType): Promise<void> => {
+  setApplicationId(applicationId);
   if (applicationId === 0) return;
   const result = await personalApi.sendMessages(applicationId, { ...message, type: 0 });
   const { isOk, error } = result;
   if (isOk) {
-    getMessages(applicationId);
+    if(store.get().applicationId===applicationId){
+      getMessages(applicationId);
+    }
   } else {
     addErrorAction(error);
   }
@@ -56,5 +83,5 @@ const sendMessage = action( chatStor,"getMessages", async (store, applicationId:
 
 export const useChatStore = () => {
   const state = useStore(chatStor);
-  return { ...state, getMessages, sendMessage };
+  return { ...state, getMessages, sendMessage,uploadFile,setApplicationId };
 };

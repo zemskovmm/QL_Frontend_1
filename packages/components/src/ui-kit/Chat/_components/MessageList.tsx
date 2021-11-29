@@ -83,9 +83,6 @@ export const MessageList: FC<PropsType> = ({className,provider,onBeforeMessages,
     },[provider,show])
 
     useLayoutEffect(()=>{
-        if(!show.id){
-            return
-        }
         const target:any = listRef.current
         const scrollTop:number = target?.scrollTop || 0;
   
