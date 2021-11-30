@@ -6,8 +6,8 @@ import { RouteNames } from "src/routing/routes";
 import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 
 export class LoginStore extends RequestTracking {
-  @observable username: string = "";
-  @observable password: string = "";
+  @observable username: string = "manager@example.com";
+  @observable password: string = "1234567890";
   @observable rememberMe: boolean = true;
 
   constructor(public rootStore: RootStore) {
@@ -40,7 +40,7 @@ export class LoginStore extends RequestTracking {
       await AdminApi.getLogout();
       await this.rootStore.routerStore.goTo(RouteNames.index);
     } catch (e) {
-      await this.rootStore.routerStore.goTo(RouteNames.index);
+      alert(e);
     }
   }
 

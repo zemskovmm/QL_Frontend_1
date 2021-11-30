@@ -1,7 +1,7 @@
 import React from "react";
-import { useRootStore } from "../../../utils/rootStoreUtils";
+import { useRootStore } from "src/utils/rootStoreUtils";
 import { useObserver } from "mobx-react";
-import { AdminInputBox } from "../../../components/common/AdminInputBox";
+import { AdminInputBox } from "src/components/common/AdminInputBox";
 
 export const ManagerCreatePage = () => {
   const { mangerCreatePage: s } = useRootStore();

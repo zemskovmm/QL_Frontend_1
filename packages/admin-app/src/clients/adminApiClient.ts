@@ -30,7 +30,7 @@ export class AdminApiClient extends ApiClientBase {
     this.sendRequest("admin/auth/login", data, "POST");
   getCheck = () => this.sendRequest("admin/auth/check");
   getLogout = () => this.sendRequest("admin/auth/logout");
-  
+
   /* Trait */
   getTraitTypeList = () => this.sendRequest<AdminTraitTypeDto[]>("admin/trait-types");
   getTraitsListOfType = (id: number) => this.sendRequest<AdminTraitTypeDto[]>(`admin/traits/of-type/${id}`);
@@ -108,6 +108,9 @@ export class AdminApiClient extends ApiClientBase {
 
   /* Manager */
   postManagerCreate = (data: ManagerCreateDto) => this.sendRequest(`admin/auth/manager/register`, data, "POST");
+
+  /* Manager cabinet */
+  getManagerApplication = (data: any) => this.sendRequest(`admin/personal/applications` + encodeQueryString(data));
 }
 
 export const AdminApi = new AdminApiClient();
