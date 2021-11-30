@@ -17,8 +17,18 @@ import cn from "classnames";
 import { CourseCatalogElement, HousingCatalogElement, UniversityCatalogElement } from "./catalogElement";
 import {useObserver} from "mobx-react";
 
-const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number, selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
+const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number| number[], selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
   const [openRegion, setOpenRegion] = useState(false)
+  function checkItems(items: number[]) {
+    if (seletedItems.find((x) => items.includes(x))) {
+      return true
+    } else {
+      return false
+    }
+  }
+  useEffect(() => {
+    if (option.items && checkItems(option.items?.map((x) => x.id))) setOpenRegion(true);
+  }, []);
   return useObserver( () =>
     <div className={`flex mb-4`}>
       <label className={`${style.checkbox__label}`}>
@@ -34,7 +44,7 @@ const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number
             aria-hidden="false"
             className={style.checkbox__original}
             value={option.name}
-            onChange={(e) => toggleFilter(option.id, e.target.checked)}
+            onChange={(e) => toggleFilter(option.items ? [option.id, ...option.items.map(el => el.id)] : option.id, e.target.checked)}
           />
         </span>
       </label>
@@ -67,7 +77,7 @@ const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number
     )
 }
 
-const CityFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number, selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
+const CityFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number | number[], selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
   return (
     <label className={`${style.checkbox__label} w-full mb-4 flex`}>
             <span
@@ -75,7 +85,7 @@ const CityFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[]
                 seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
               }`}
             >
-              <span className={`${style.checkbox__inner}`} />
+              <span className={`${style.checkbox__inner}`} style={{marginTop: '2px'}} />
               <input
                 type="checkbox"
                 checked={seletedItems.indexOf(option.id) != -1}
@@ -93,7 +103,7 @@ const CityFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[]
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
   seletedItems: number[];
-  toggleFilter: (id: number, selected: boolean) => void;
+  toggleFilter: (id: number | number[], selected: boolean) => void;
 }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -163,7 +173,7 @@ const CatalogCategories = ({ lang = "en", type = "university" }) => (
 function CatalogFilters(props: {
   filters: CatalogFilterDto[];
   parsedFilters: CatalogFilterRequestDto[];
-  setFilter: (identifier: string, item: number, value: boolean) => void;
+  setFilter: (identifier: string, item: number| number[], value: boolean) => void;
 }) {
   return (
     <div>
@@ -240,7 +250,7 @@ export function CatalogView<T>(props: {
   data: CatalogResponseDto<T> | undefined;
   page: number;
   setPage: (p: number) => void;
-  setFilter: (identifier: string, item: number, value: boolean) => void;
+  setFilter: (identifier: string, item: number| number[], value: boolean) => void;
   title: string;
   type: string;
   searchTitle: string;
