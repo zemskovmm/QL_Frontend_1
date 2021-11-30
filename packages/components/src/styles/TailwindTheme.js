@@ -59,7 +59,7 @@ const TailwindTheme = {
                 'button-text': '#fff',
                 'button-secondary': '#ECEFF5',
                 'button-secondary-text': '#222A37',
-                
+                white: "white",
             },
             fontSize: {
                 'title-large': ['2.25rem', '2.5rem'],
