@@ -20,7 +20,7 @@ import {useObserver} from "mobx-react";
 const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number, selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
   const [openRegion, setOpenRegion] = useState(false)
   return useObserver( () =>
-    <div className={`flex`}>
+    <div className={`flex mb-4`}>
       <label className={`${style.checkbox__label}`}>
         <span
           className={`${style.checkbox__input} ${
@@ -40,43 +40,27 @@ const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number
       </label>
       <div className={`flex flex-col w-full`}>
         <div className={`${style.checkbox__name} w-full flex items-center cursor-pointer`} onClick={() => setOpenRegion(!openRegion)}>{option.name} <svg className={`${openRegion ? '-rotate-90' : 'rotate-90'} transform ml-2 transition duration-300`} xmlns="http://www.w3.org/2000/svg" width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M2.08268 0L0.916016 1.16667L4.74935 5L0.916016 8.83333L2.08268 10L7.08268 5L2.08268 0Z" fill="#567DD0"/></svg></div>
-        <div className={`flex flex-wrap justify-between w-full pl-2.5 pr-6 ${openRegion ? style.hideListRegions : style.showListRegions }`}>
-          <label className={`${style.checkbox__label} w-full ${openRegion ? 'mb-4' : ''}`} >
+        <div className={`flex flex-wrap justify-between w-full pl-2.5 pr-4 ${openRegion ? style.hideListRegions : style.showListRegions }`}>
+          {
+            option.items?.map((el, i) => <label className={`${style.checkbox__label} w-full flex mb-4`} key={`regions ${i} ${el.id} ${el.name}`}>
             <span
               className={`${style.checkbox__input} ${
-                seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
+                seletedItems.indexOf(el.id) != -1 ? style.isChecked : ""
               }`}
             >
               <span className={`${style.checkbox__inner}`} />
               <input
                 type="checkbox"
-                checked={seletedItems.indexOf(option.id) != -1}
+                checked={seletedItems.indexOf(el.id) != -1}
                 aria-hidden="false"
                 className={style.checkbox__original}
-                value={option.name}
-                onChange={(e) => toggleFilter(option.id, e.target.checked)}
+                value={el.name}
+                onChange={(e) => toggleFilter(el.id, e.target.checked)}
               />
             </span>
-            <span className={`${style.checkbox__name}`}>{option.name}</span>
-          </label>
-          <label className={`${style.checkbox__label} w-full`} >
-            <span
-              className={`${style.checkbox__input} ${
-                seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
-              }`}
-            >
-              <span className={`${style.checkbox__inner}`} />
-              <input
-                type="checkbox"
-                checked={seletedItems.indexOf(option.id) != -1}
-                aria-hidden="false"
-                className={style.checkbox__original}
-                value={option.name}
-                onChange={(e) => toggleFilter(option.id, e.target.checked)}
-              />
-            </span>
-            <span className={`${style.checkbox__name}`}>{option.name}</span>
-          </label>
+              <div className={`${style.checkbox__name}`}>{el.name}</div>
+            </label>)
+          }
         </div>
       </div>
     </div>
@@ -85,7 +69,7 @@ const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number
 
 const CityFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number, selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
   return (
-    <label className={`${style.checkbox__label} w-full mb-4`}>
+    <label className={`${style.checkbox__label} w-full mb-4 flex`}>
             <span
               className={`${style.checkbox__input} ${
                 seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
@@ -125,7 +109,9 @@ function CatalogFilter(props: {
         }`}
       >
         {props.filter.options.map((option) => (
+          (option.items !== null && option.items.length > 0) ?
           <RegionFilter option={option} toggleFilter={props.toggleFilter} seletedItems={props.seletedItems} key={`option ${option.name} ${option.id}`} />
+            : <CityFilter option={option} toggleFilter={props.toggleFilter} seletedItems={props.seletedItems} key={`option ${option.name} ${option.id}`} />
         ))}
       </div>
       {props.filter.options.length > 5 && (
