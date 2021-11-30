@@ -25,17 +25,25 @@ export type ButtonPropsType = {
   plus?: boolean;
 };
 
-export const Button: FC<ButtonPropsType> = (
-  { className, style, id, text, type, color = "default", disabled = false, onClick, children, plus },
-  ref
-) => {
+export const Button: FC<ButtonPropsType> = ({
+  className,
+  style,
+  id,
+  text,
+  type,
+  color = "default",
+  disabled = false,
+  onClick,
+  children,
+  plus,
+}) => {
   const handleOnClick = () => {
     onClick && onClick(id);
   };
 
   return (
     <button
-      ref={ref}
+      // ref={ref}
       className={cn(" py-2 px-4 rounded inline-block transition flex justify-center ", BUTTON_COLORS[color], className)}
       style={style}
       id={id}

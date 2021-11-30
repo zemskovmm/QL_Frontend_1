@@ -1,3 +1,4 @@
+import * as React from "react";
 import { FC } from "react";
 import { AppLayout } from "./layouts/AppLayout";
 import { Notification } from "./components/Notification";
@@ -33,7 +34,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export const Application: FC = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
-  const { changeUrl } = useRouterStore();
   const { lang, changeLang } = useLocalesStore();
   const { isUnlogined, isLogined } = useUserStatuseStore();
   const { heartbeatAction } = useUserStatuseStore();
@@ -76,25 +76,21 @@ export const Application: FC = () => {
     <HostLayout>
       <div id="preact_root" className="h-full">
         <AppLayout>
-          <BrowserRouter>
-            <Routes>
-              {/*<ProfilePage path={PROFILE_TEMPLATE.path} />*/}
-              <Route element={<ProfilePage />} path={PROFILE_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.path} />
-              {/*<SignUpPage path={SIGN_UP_TEMPLATE.path} />*/}
-              <Route element={<SignUpPage />} path={SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.path} />
-              {/*<SignInPage path={SIGN_IN_TEMPLATE.path} />*/}
-              <Route element={<SignInPage />} path={SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.path} />
-              {/*<Route element={<MyApplicationsPage />} path={MY_APPLICATIONS_TEMPLATE.path} />*/}
-              {/*<Route element={<CreateApplication />} path={CREATE_APPLICATIONS_TEMPLATE.path} />*/}
-              {/*<Route element={}></Route>*/}
-              {/*<NewApplication path={NEW_APPLICATION_TEMPLATE.path} />*/}
-              {/*<SettingsPage path={SETTINGS_TEMPLATE.path} />*/}
-              {/*<NotFoundPage default />*/}
-            </Routes>
-          </BrowserRouter>
+          <Routes>
+            <Route element={<ProfilePage />} path={"profile"} />
+            <Route element={<SignUpPage />} path={"sign-up"} />
+            <Route element={<SignInPage />} path={"sign-in"} />
+            {/*<Route element={<MyApplicationsPage />} path={MY_APPsLICATIONS_TEMPLATE.path} />*/}
+            {/*<Route element={<CreateApplication />} path={CREATE_APPLICATIONS_TEMPLATE.path} />*/}
+            {/*<NewApplication path={NEW_APPLICATION_TEMPLATE.path} />*/}
+            {/*<SettingsPage path={SETTINGS_TEMPLATE.path} />*/}
+            {/*<NotFoundPage default />*/}
+          </Routes>
         </AppLayout>
         <Notification />
       </div>
     </HostLayout>
   );
 };
+
+export default Application;

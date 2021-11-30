@@ -53,11 +53,6 @@ export const SignUpPage: FC<PropsType> = ({ applicationType, entityId }) => {
     SIGN_UP_SUBTITLE,
     SIGN_UP_TITLE,
   } = useLocalesStore();
-  const { SIGN_IN_PATH } = useRouterStore();
-
-  const signInPath = applicationType
-    ? SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
-    : SIGN_IN_PATH;
 
   // useEffect(() => {
   //   (isLogined || isSuccess) && route(signInPath);
@@ -94,7 +89,7 @@ export const SignUpPage: FC<PropsType> = ({ applicationType, entityId }) => {
           sign={true}
         />
         <Button className="mb-4" text={SIGN_IN_REG} type="submit" disabled={isLoading} color={`red`} />
-        <Link to={signInPath}>
+        <Link to={"/sign-in"}>
           <Button className="my-2 w-full" text={SIGN_IN_ENTRY} color="gray" />
         </Link>
       </form>

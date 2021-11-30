@@ -21,12 +21,7 @@ const schema: SchemaOf<UserStatuseLoginProps> = object({
   password: string().required("Required to fill"),
 });
 
-type PropsType = {
-  applicationType?: string;
-  entityId?: string;
-};
-
-export const SignInPage: FC<PropsType> = ({ applicationType, entityId }) => {
+export const SignInPage: FC = () => {
   const { handleSubmit, control } = useForm<UserStatuseLoginProps>({
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -42,11 +37,11 @@ export const SignInPage: FC<PropsType> = ({ applicationType, entityId }) => {
     SIGN_UP_EMAIL_LABEL,
     SIGN_UP_EMAIL_PLACEHOLDER,
   } = useLocalesStore();
-  const { PROFILE_PATH, SIGN_UP_PATH } = useRouterStore();
+  // const { PROFILE_PATH, SIGN_UP_PATH } = useRouterStore();
 
-  const signUpPath = applicationType
-    ? SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
-    : SIGN_UP_PATH;
+  // const signUpPath = applicationType
+  //   ? SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
+  //   : SIGN_UP_PATH;
 
   // useEffect(() => {
   //   const successPath = applicationType
@@ -77,7 +72,7 @@ export const SignInPage: FC<PropsType> = ({ applicationType, entityId }) => {
           sign={true}
         />
         <Button className="mb-4" text={SIGN_IN_ENTRY} type="submit" disabled={isLoading} color={`red`} />
-        <Link to={signUpPath} className={`w-full flex`}>
+        <Link to={"/sign-up"} className={`w-full flex`}>
           <Button color="gray" className={`w-full flex justify-center items-center`}>
             <span className={`relative`}>
               <img src={reg} alt="" className={"absolute -left-7 top-0.5 bottom-0"} />

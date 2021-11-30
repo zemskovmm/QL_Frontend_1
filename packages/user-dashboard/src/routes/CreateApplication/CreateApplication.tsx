@@ -1,5 +1,5 @@
 import { Text } from "@project/components/src/ui-kit/Text";
-import { FC } from "react";
+import React, { FC } from "react";
 import { useLocalesStore } from "src/stores/LocalesStore";
 import { useApplicationsState } from "src/stores/ApplicationsState";
 import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
