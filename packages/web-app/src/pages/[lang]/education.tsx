@@ -1,7 +1,6 @@
 import { useIntl } from "react-intl";
 
 import educationPageData from "src/hardcoded/educationPageData";
-import { EducationPageDataDto } from "src/interfaces/educationPageDataDto";
 
 import { ClientReviewBlock } from "src/components/education/ClientReviewBlock/clientReviewBlock";
 import { ReasonsListBlock } from "src/components/education/ReasonsListBlock/reasonsListBlock";
@@ -12,7 +11,7 @@ import { LeftImgRightContentBlock } from "src/components/education/LeftImgRightC
 import { TitleAndTabsBlock } from "@project/components/src/blocks/TitleAndTabsBlock/titleAndTabsBlock";
 import { BreadcrumbsBlock } from "@project/components/src/blocks/BreadcrumbsBlock/breadcrumbsBlock";
 
-const EducationLangingPage = (props: EducationPageDataDto) => {
+const EducationLangingPage = () => {
   const lang = useIntl().locale;
 
   return (

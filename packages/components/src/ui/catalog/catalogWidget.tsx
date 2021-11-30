@@ -24,11 +24,11 @@ export interface CatalogWidgetProps {
 }
 
 const housingLangs: { [key: string]: string } = {
-  ru: "https://housing.quartier-latin.com/housing",
-  en: "https://housing.quartier-latin.com/en/housing",
-  cn: "https://housing.quartier-latin.com/cn/housing",
-  fr: "https://housing.quartier-latin.com/fr/housing",
-  esp: "https://housing.quartier-latin.com/en/housing",
+  ru: "/catalog/housing",
+  en: "/en/catalog/housing",
+  cn: "/cn/catalog/housing",
+  fr: "/fr/catalog/housing",
+  esp: "/en/catalog/housing",
 };
 
 function navigateToCatalog(
@@ -42,7 +42,7 @@ function navigateToCatalog(
   for (const key in filters) {
     const value = filters[key];
     if (value != null) {
-      const newKey = entityType == "housing" ? key : "filter-" + key;
+      const newKey = "filter-" + key;
       query[newKey] = value;
     }
   }
@@ -70,6 +70,7 @@ const searchTranslate: { [key: string]: string } = {
   en: "Search",
   esp: "Buscar",
 };
+
 
 export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
   const router = useRouter();
@@ -125,13 +126,22 @@ export const ServerCatalogWidget: FC<ServerCatalogWidgetProps> = (props) => {
   const cl = useContext(ComponentHostContext);
   useEffect(() => {
     if (props.entityType === "housing") {
+		/*
       if (state.filtersLoadedForLang != cl?.lang) {
         setState({
           filters: housingCatalogFilters[cl?.lang ?? "en"].filters,
           filtersLoadedForLang: cl?.lang,
         });
-      }
-    } else {
+      } */
+	   if (state.filtersLoadedForLang != cl?.lang) {
+        cl?.filters.getCatalogFilters(cl?.lang, props.entityType).then((filter: any) =>
+          setState({
+            filters: filter,
+            filtersLoadedForLang: cl?.lang,
+          })
+        );
+	  
+    } }else {
       if (state.filtersLoadedForLang != cl?.lang) {
         cl?.filters.getCatalogFilters(cl?.lang, props.entityType).then((filter: any) =>
           setState({

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
 import styles from "./buttonFormBlock.module.css";
-import { is } from "@babel/types/lib/index-legacy";
+
 import cn from "classnames";
 import { ComponentHostContext } from "../index";
 import { ApiBaseUrl } from "../../api/apiClientBase";

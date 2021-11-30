@@ -6,13 +6,9 @@ import { ServerCatalogWidget } from "../../ui/catalog/catalogWidget";
 import preview from "./preview.png";
 import education from "./education.svg";
 import hotel from "./hotel.svg";
-import style from "./titleAndTabsBlock.module.css";
+import course from "./course.svg";
 import { ComponentHostContext } from "../index";
 import { ComponentLink } from "../../component-link";
-enum TabsEnum {
-  university,
-  housing,
-}
 
 export interface TitleAndTabsBlockElement {
   title: string;
@@ -20,15 +16,6 @@ export interface TitleAndTabsBlockElement {
   backgroundShadow?: string;
   tabs: { title: string; filters: { filter: string }[]; type: string }[];
 }
-
-//TODO: Remove copy-paste
-const housingLangs: { [key: string]: string } = {
-  ru: "https://housing.quartier-latin.com/housing",
-  en: "https://housing.quartier-latin.com/en/housing",
-  cn: "https://housing.quartier-latin.com/cn/housing",
-  fr: "https://housing.quartier-latin.com/fr/housing",
-  esp: "https://housing.quartier-latin.com/en/housing",
-};
 
 export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
   const tabsComponent = props.tabs.map((el, index) => (
@@ -42,9 +29,29 @@ export const TitleAndTabsBlock = (props: TitleAndTabsBlockElement) => {
       </div>
       <div className={`flex flex-col lg:hidden`}>
         {props.tabs.map((el) => (
-          <ComponentLink href={el.type === "university" ? `/${lang}/catalog/university` : housingLangs[lang!]}>
-            <a className={style.buttonMobile}>
-              <img src={el.type === "university" ? education : hotel} alt="" />
+          <ComponentLink href={`/${lang}/catalog/${el.type}`}>
+            <a
+              className={` flex items-center bg-white mb-1.5 rounded py-1.5 px-6`}
+              style={{
+                border: "1px solid #EFF3FA",
+              }}
+            >
+              <img
+                src={
+                  el.type === "housing"
+                    ? hotel
+                    : el.type === "university"
+                    ? education
+                    : el.type === "course"
+                    ? course
+                    : ""
+                }
+                alt=""
+                className={`w-6 h-6 box-content py-5 pr-6 mr-5`}
+                style={{
+                  borderRight: "1px solid #C9D5F0",
+                }}
+              />
               {el.title}
             </a>
           </ComponentLink>

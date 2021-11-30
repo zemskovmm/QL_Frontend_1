@@ -133,19 +133,15 @@
 
 .checkbox__label{
   max-width: 140px;
-  width: 100%;
-  flex-basis: 100%;
   color: #606266;
   font-size: 14px;
   cursor: pointer;
-  display: inline-block;
+  /*display: inline-block;*/
   position: relative;
-  white-space: nowrap;
-  margin-bottom: 18px;
+  /*white-space: nowrap;*/
 }
 
 .checkbox__name{
-  display: inline-block;
   padding-left: 10px;
   line-height: 19px;
   font-size: 14px;
@@ -180,6 +176,7 @@
   height: 14px;
   background-color: #fff;
   z-index: 1;
+  cursor: pointer;
   transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
 }
 
@@ -393,6 +390,43 @@
   }
   100%{
     max-height: 0;
+  }
+}
+
+.showListRegions{
+  overflow: hidden;
+  animation: hideRegions 0.3s forwards;
+}
+
+@keyframes hideRegions {
+  0%{
+    margin-top: 16px;
+    height: 100%;
+    max-height: 1000px;
+  }
+  100%{
+    margin-top: 0px;
+    height: 0%;
+    max-height: 0px;
+  }
+}
+
+.hideListRegions{
+  max-height: 0px;
+  overflow: hidden;
+  animation: openRegions 0.3s forwards;
+}
+
+@keyframes openRegions {
+  0%{
+    margin-top: 0px;
+    height: 0%;
+    max-height: none;
+  }
+  100%{
+    margin-top: 16px;
+    height: 100%;
+    max-height: none;
   }
 }
 

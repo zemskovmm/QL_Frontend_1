@@ -63,7 +63,7 @@ const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
   </Link>
 );
 
-export const HousingCatalogElement = (item: CatalogHousingDto) => (
+export const HousingCatalogElement: FC<{ item: CatalogHousingDto }> = ({ item }) => (
   <Link href={item.url}>
     <a className={style.card}>
       <div className={style.card__left}>
@@ -106,7 +106,7 @@ export const HousingCatalogElement = (item: CatalogHousingDto) => (
   </Link>
 );
 
-export const UniversityCatalogElement = (item: CatalogUniversityDto) => {
+export const UniversityCatalogElement: FC<{ item: CatalogUniversityDto }> = ({ item }) => {
   const lang = useContext(ComponentHostContext)?.lang;
   return useObserver(() => (
     <ElementCatalog item={item}>
@@ -137,7 +137,7 @@ export const UniversityCatalogElement = (item: CatalogUniversityDto) => {
   ));
 };
 
-export const CourseCatalogElement = (item: CatalogCourseDto) => (
+export const CourseCatalogElement: FC<{ item: CatalogCourseDto }> = ({ item }) => (
   <Link href={item.url ?? "#"}>
     <a className={style.card}>
       <div className={style.card__left}>

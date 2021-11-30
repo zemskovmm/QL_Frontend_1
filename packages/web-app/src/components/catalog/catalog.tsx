@@ -1,16 +1,11 @@
 import { NextRouter, useRouter } from "next/router";
-import { CatalogFilterDto, CatalogResponseDto } from "src/interfaces/catalogFilterDto";
-import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
-import stringify from "fast-json-stable-stringify";
 import { CatalogFilterRequestDto, siteApi } from "src/clients/siteApiClient";
 import { ParsedUrlQuery } from "querystring";
-import { LoadingIf } from "src/components/utilities/Loading";
-import { Paginator } from "src/components/utilities/Paginator";
 import { CatalogView } from "src/components/catalog/catalogView";
 
 export interface CatalogProps<T> {
-  elementRenderer: (element: T) => JSX.Element;
+  elementRendererName: string;
   apiElementName: string;
   title: string;
   searchTitle: string;
@@ -50,10 +45,10 @@ function parseCatalogQuery(query: ParsedUrlQuery) {
   return data;
 }
 
-function changeQueryArg(router: NextRouter, key: string, value: string) {
+async function changeQueryArg(router: NextRouter, key: string, value: string) {
   const newQuery = { ...router.query };
   newQuery[key] = value;
-  router.push(
+  await router.push(
     {
       query: newQuery,
     },
@@ -73,11 +68,11 @@ export function Catalog<T>(props: CatalogProps<T>) {
   const data = siteApi.useCatalogItems<T>(locale, props.apiElementName, 20, parsed.page, parsed.filters);
 
   const setPage = (page: number) => changeQueryArg(router, "page", page.toString());
-  const setFilter = (identifier: string, id: number, selected: boolean) => {
+  const setFilter = async (identifier: string, id: number | number[], selected: boolean) => {
     const selectedItems = parsed.filters.find((f) => f.identifier == identifier)?.values || [];
-    const newItems = selectedItems.filter((x) => x != id);
-    if (selected) newItems.push(id);
-    changeQueryArg(router!, "filter-" + identifier, newItems.join(","));
+    let newItems = typeof (id) === 'object' ? selectedItems.filter((x) => !id.includes(x) ) : selectedItems.filter((x) => x != id );
+    if (selected) typeof (id) === 'object' ? newItems = newItems.concat(id) : newItems.push(id);
+    await changeQueryArg(router!, "filter-" + identifier, newItems.join(","));
   };
 
   return (
@@ -88,7 +83,7 @@ export function Catalog<T>(props: CatalogProps<T>) {
       data={data}
       setPage={setPage}
       setFilter={setFilter}
-      elementRenderer={props.elementRenderer}
+      elementRendererName={props.elementRendererName}
       title={props.title}
       searchTitle={props.searchTitle}
       type={props.apiElementName}
