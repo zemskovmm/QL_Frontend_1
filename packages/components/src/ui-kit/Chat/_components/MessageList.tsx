@@ -1,7 +1,7 @@
 import React, { FC, useState, useMemo, useRef, UIEvent, useLayoutEffect } from "react";
 import { Message, MessageType, MIN_MESSAGE_HEIGHT } from "./Message";
 import cn from "classnames";
-import { useEffect } from "preact/hooks";
+import { useEffect } from "react";
 import { MessageListProvider } from "./MessageListProvider";
 
 type Show = {
