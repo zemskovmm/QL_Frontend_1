@@ -33,7 +33,6 @@ import { useGlobalSettingsStore } from "./stores/GlobalSettingsStore";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export const Application: FC = () => {
-  const [url, setUrl] = useState<string | undefined>(undefined);
   const { lang, changeLang } = useLocalesStore();
   const { isUnlogined, isLogined } = useUserStatuseStore();
   const { heartbeatAction } = useUserStatuseStore();
@@ -80,11 +79,12 @@ export const Application: FC = () => {
             <Route element={<ProfilePage />} path={"profile"} />
             <Route element={<SignUpPage />} path={"sign-up"} />
             <Route element={<SignInPage />} path={"sign-in"} />
-            {/*<Route element={<MyApplicationsPage />} path={MY_APPsLICATIONS_TEMPLATE.path} />*/}
-            {/*<Route element={<CreateApplication />} path={CREATE_APPLICATIONS_TEMPLATE.path} />*/}
+            <Route element={<MyApplicationsPage />} path={"application/:id"} />
+            <Route element={<CreateApplication />} path={"create-application"} />
+            <Route element={<CreateApplication />} path={"create-application"} />
+            <Route element={<SettingsPage />} path={"settings"} />
             {/*<NewApplication path={NEW_APPLICATION_TEMPLATE.path} />*/}
-            {/*<SettingsPage path={SETTINGS_TEMPLATE.path} />*/}
-            {/*<NotFoundPage default />*/}
+            <Route path={"*"} element={<NotFoundPage />} />
           </Routes>
         </AppLayout>
         <Notification />

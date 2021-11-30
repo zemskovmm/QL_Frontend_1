@@ -1,7 +1,6 @@
 import { InfinityList, ListItem, ListItemType } from "@project/components/src/ui-kit/List";
 import { FC } from "react";
 import { useEffect, useState, memo } from "react";
-import { Link, route } from "preact-router";
 import { useLocalesStore } from "../../stores/LocalesStore";
 import { MY_APPLICATIONS_TEMPLATE, useRouterStore } from "../../stores/RouterStore";
 import { useApplicationsState } from "../../stores/ApplicationsState";
@@ -9,11 +8,11 @@ import { useUserStatuseStore } from "../../stores/UserStatuseStore";
 import { IconLabel } from "@project/components/src/ui-kit/IconLabel";
 import USER_ICON from "@project/components/src/assets/icons/user.svg";
 import { Button } from "@project/components/src/ui-kit/Button";
+import { Link } from "react-router-dom";
 
 export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) => {
   const { url, NEW_APPLICATION_PATH } = useRouterStore();
   const [isApplicationsOpen, setApplicationsOpen] = useState(false);
-  const { PROFILE_PATH, SETTINGS_PATH } = useRouterStore();
   const {
     user: { email, firstName, lastName },
     logoutAction,
@@ -57,7 +56,7 @@ export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) =
     <div className={`p-4 h-full flex flex-col ${className}`}>
       <IconLabel className="mt-5 mb-8" iconSrc={USER_ICON} text={`${lastName} ${firstName}`} subText={email} />
       <div className="w-full flex flex-col">
-        <ListItem text={PROFILE_LANG} onClick={() => route(PROFILE_PATH)} />
+        <ListItem text={PROFILE_LANG} onClick={() => {}} />
         <ListItem
           text={MY_APPLICATIONS_LANG}
           onClick={() => setApplicationsOpen(!isApplicationsOpen)}
@@ -70,14 +69,14 @@ export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) =
             depth={1}
             className="flex-shrink"
             count={applications.length}
-            onClick={(id) => route(id)}
+            onClick={(id) => {}}
             onItemRender={handleItemRender}
           />
         )}
         {isApplicationsOpen && applications.length == 0 && <ListItem depth={1} text={NOTHING_HERE_YET} />}
-        <ListItem text={SETTINGS_LANG} onClick={() => route(SETTINGS_PATH)} />
+        <ListItem text={SETTINGS_LANG} onClick={() => {}} />
         <div className={`mt-4 ml-auto md:hidden`}>
-          <Link href={NEW_APPLICATION_PATH}>
+          <Link to={NEW_APPLICATION_PATH}>
             <Button plus={true} text={NEW_APPLICATION_LANG} color={"red"} />
           </Link>
         </div>

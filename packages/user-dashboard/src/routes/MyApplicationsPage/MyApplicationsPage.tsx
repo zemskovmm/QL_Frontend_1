@@ -2,11 +2,13 @@ import { FC, useState } from "react";
 import { ChatTab, ApplicationTab } from "./_components";
 import { useLocalesStore } from "src/stores/LocalesStore";
 import { LeftNavigationLayout } from "src/layouts/LeftNavigationLayout";
+import { useParams } from "react-router-dom";
 
-const MyApplicationsPage: FC<{ applicationId: string }> = ({ applicationId }) => {
+const MyApplicationsPage: FC = () => {
   const [isAppTab, setAppTab] = useState(false);
   const { APPLICATION_LANG, CHAT_LANG } = useLocalesStore();
-  const applicationIdInt = Number.parseInt(applicationId);
+  const { applicationId } = useParams();
+  const applicationIdInt = Number(applicationId);
 
   return (
     <LeftNavigationLayout title={`${APPLICATION_LANG} ${applicationId}`}>
