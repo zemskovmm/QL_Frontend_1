@@ -1,4 +1,4 @@
-import { FC, h } from "react";
+import { FC } from "react";
 import { Link } from "preact-router/match";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { CenterCardLayout } from "src/layouts/CenterCardLayout";

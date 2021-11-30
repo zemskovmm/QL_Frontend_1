@@ -2,7 +2,7 @@ import { Button } from "@project/components/src/ui-kit/Button";
 import { TextareaControlled } from "@project/components/src/form/TextareaControlled";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { ChatMessages, ChatStore } from "./ChatStore";
+import { ChatStore } from "./ChatStore";
 import cn from "classnames";
 
 type PropsType = {
@@ -11,16 +11,16 @@ type PropsType = {
   store: ChatStore;
 };
 
-export const MessagesEdit: FC<PropsType> = ({ className, applicationId, store: { sendMessage } }) => {
-  const { handleSubmit, control, setValue } = useForm<ChatMessages>();
+export const MessagesEdit: FC<PropsType> = ({ className, applicationId, store: {} }) => {
+  const { handleSubmit, control, setValue } = useForm<{}>();
 
-  const handleSendMessage = (data: ChatMessages) => {
-    sendMessage(applicationId, data);
-    setValue("text", "");
-  };
+  // const handleSendMessage = (data: ChatMessages) => {
+  //   // sendMessage(applicationId, data);
+  //   setValue("text", "");
+  // };
 
   return (
-    <form className={cn(`flex`, className)} onSubmit={handleSubmit(handleSendMessage) as any}>
+    <form className={cn(`flex`, className)}>
       <TextareaControlled
         rows={5}
         className="flex-grow mr-2 min-h-10"
