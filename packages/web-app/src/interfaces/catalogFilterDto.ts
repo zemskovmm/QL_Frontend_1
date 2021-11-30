@@ -1,9 +1,15 @@
 import { ClientCommonTraitLanguageDto } from "./clientCommonTraitLanguageDto";
 import { LocationDto } from "./clientHousingDto";
 
+export interface ClientCatalogFilterOptionItemsDto {
+  id: number;
+  name: string;
+}
+
 export interface ClientCatalogFilterOptionDto {
   id: number;
   name: string;
+  items: null | ClientCatalogFilterOptionItemsDto[]
 }
 
 export interface CatalogFilterDto {

@@ -68,10 +68,10 @@ export function Catalog<T>(props: CatalogProps<T>) {
   const data = siteApi.useCatalogItems<T>(locale, props.apiElementName, 20, parsed.page, parsed.filters);
 
   const setPage = (page: number) => changeQueryArg(router, "page", page.toString());
-  const setFilter = async (identifier: string, id: number, selected: boolean) => {
+  const setFilter = async (identifier: string, id: number | number[], selected: boolean) => {
     const selectedItems = parsed.filters.find((f) => f.identifier == identifier)?.values || [];
-    const newItems = selectedItems.filter((x) => x != id);
-    if (selected) newItems.push(id);
+    let newItems = typeof (id) === 'object' ? selectedItems.filter((x) => !id.includes(x) ) : selectedItems.filter((x) => x != id );
+    if (selected) typeof (id) === 'object' ? newItems = newItems.concat(id) : newItems.push(id);
     await changeQueryArg(router!, "filter-" + identifier, newItems.join(","));
   };
 
