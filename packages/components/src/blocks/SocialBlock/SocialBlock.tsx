@@ -16,7 +16,7 @@ export const SocialBlock: React.FC<SocialTabsProps> = ({ title1, title2, link1, 
   const [activeTab, setActiveTab] = useState({ title: title1, link: link1 });
   const [itsFirefox, setItsFirefox] = useState(false); //window.navigator.userAgent.includes("irefox");
   React.useEffect(() => {
-    setItsFirefox(window.navigator.userAgent.includes("irefox"));
+    setItsFirefox(window.navigator.userAgent.includes("firefox"));
   }, []);
   return !itsFirefox ? (
     <div>
@@ -42,7 +42,6 @@ export const SocialBlock: React.FC<SocialTabsProps> = ({ title1, title2, link1, 
             src={activeTab.link}
             title="YouTube video player"
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
         ) : (
