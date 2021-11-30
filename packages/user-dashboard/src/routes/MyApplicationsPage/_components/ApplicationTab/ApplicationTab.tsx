@@ -1,12 +1,12 @@
 import { Text } from "@project/components/src/ui-kit/Text";
-import { FunctionalComponent } from "preact";
-import { useLocalesStore } from "stores/LocalesStore";
+import { FC } from "react";
+import { useLocalesStore } from "src/stores/LocalesStore";
 import { RowsPresenter } from "@project/components/src/blocks";
 import { Button } from "@project/components/src/ui-kit/Button";
-import { useContext, useEffect } from "preact/hooks";
+import { useContext, useEffect } from "react";
 import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
-import { useGlobalSettingsStore } from "stores/GlobalSettingsStore";
-import { useApplicationStore } from "routes/MyApplicationsPage/_components/ApplicationTab/ApplicationStore";
+import { useGlobalSettingsStore } from "src/stores/GlobalSettingsStore";
+import { useApplicationStore } from "src/routes/MyApplicationsPage/_components/ApplicationTab/ApplicationStore";
 import { useForm } from "react-hook-form";
 import { Preload } from "@project/components/src/ui-kit/Preload";
 import { ApplicationPostProps } from "@project/components/src/interfaces/ApplicationDto";
@@ -16,7 +16,7 @@ type PropsType = {
   applicationId: number;
 };
 
-export const ApplicationTab: FunctionalComponent<PropsType> = ({ className, applicationId }) => {
+export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
   const cl = useContext(ComponentHostDashboardContext);
   const store = useApplicationStore();
   const { PROFILE_SAVE } = useLocalesStore();

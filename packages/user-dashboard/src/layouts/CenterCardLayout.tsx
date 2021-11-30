@@ -1,11 +1,11 @@
-import { FunctionalComponent } from "preact";
+import { FC } from "react";
 
 type PropsType = {
   title: string;
   subtitle?: string;
 };
 
-export const CenterCardLayout: FunctionalComponent<PropsType> = ({ title, subtitle, children }) => {
+export const CenterCardLayout: FC<PropsType> = ({ title, subtitle, children }) => {
   return (
     <div
       className="flex h-full mx-auto flex-col items-center justify-center py-14 max-w-128 px-2.5 md:box-content w-full"

@@ -1,7 +1,7 @@
 import { action, map } from "nanostores";
-import { useStore } from "@nanostores/preact";
-import { ApplicationsPropsReq, personalApi } from "api/PersonalApi";
-import { addErrorAction } from "stores/NotificationStore";
+import { useStore } from "@nanostores/react";
+import { ApplicationsPropsReq, personalApi } from "../../api/PersonalApi";
+import { addErrorAction } from "../NotificationStore";
 import {
   ApplicationDto,
   ApplicationType,
@@ -22,34 +22,38 @@ const applicationsState = map<ApplicationsState>({
   applications: [],
 });
 
-const addApplication = action(applicationsState,"addApplication",async (store,applicationType:ApplicationType,entityId:number):Promise<number> => {
-  store.setKey('isLoading',true);
-  let outApplicationId = 0;
+const addApplication = action(
+  applicationsState,
+  "addApplication",
+  async (store, applicationType: ApplicationType, entityId: number): Promise<number> => {
+    store.setKey("isLoading", true);
+    let outApplicationId = 0;
 
-  const result = await personalApi.addApplications({
+    const result = await personalApi.addApplications({
       ...APPLICATION_DTO_DEFAULT,
-      type:applicationType,
+      type: applicationType,
       entityId,
-  });
+    });
 
-  const { isOk, body, error } = result;
-  if (isOk) {
-    outApplicationId = body?.id || 0;
-    await getApplications();
-  } else {
-    addErrorAction(error);
+    const { isOk, body, error } = result;
+    if (isOk) {
+      outApplicationId = body?.id || 0;
+      await getApplications();
+    } else {
+      addErrorAction(error);
+    }
+
+    store.setKey("isLoading", false);
+    return outApplicationId;
   }
+);
 
-  store.setKey("isLoading", false);
-  return outApplicationId;
-}) 
-
-const getApplications = action(applicationsState,'getApplications',async (store) => {
+const getApplications = action(applicationsState, "getApplications", async (store) => {
   loadedPages = [];
   await onItemRender(0);
-}) 
+});
 
-const onItemRender =  action(applicationsState,'getApplications',async (store, index: number) => {
+const onItemRender = action(applicationsState, "getApplications", async (store, index: number) => {
   const pageIndex = Math.floor(index / TOTAL_APPLICATIONS);
   if (loadedPages[pageIndex]) {
     return;

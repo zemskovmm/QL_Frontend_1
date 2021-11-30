@@ -1,15 +1,15 @@
-import { FunctionalComponent } from "preact";
-import { ChatStoreType } from "./ChatStore";
+import { FC } from "react";
+import { ChatStore } from "./ChatStore";
 import { Message } from "./Message";
 
 import style from "./messageStyle.module.css";
 
 type PropsType = {
   className?: string;
-  store: ChatStoreType;
+  store: ChatStore;
 };
 
-export const Messages: FunctionalComponent<PropsType> = ({ className, store: { messages } }) => {
+export const Messages: FC<PropsType> = ({ className, store: { messages } }) => {
   const classes = ["flex flex-col gap-2 pl-2.5 pr-5 py-2 customScroll ", className ? className : ""].join(" ");
 
   return (

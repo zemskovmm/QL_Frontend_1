@@ -1,12 +1,8 @@
-import { Container } from "components/Container";
-import { Header } from "components/Header";
-import { ComponentChildren, FunctionalComponent } from "preact";
+import { Container } from "src/components/Container";
+import { Header } from "src/components/Header";
+import { FC } from "react";
 
-type PropsType = {
-  children: ComponentChildren;
-};
-
-export const AppLayout: FunctionalComponent<PropsType> = ({ children }) => {
+export const AppLayout: FC = ({ children }) => {
   return (
     <div className="flex flex-col h-full">
       <Header />

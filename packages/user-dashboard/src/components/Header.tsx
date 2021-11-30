@@ -1,16 +1,16 @@
-import { FunctionalComponent } from "preact";
-import { Container } from "components/Container";
+import { FC } from "react";
+import { Container } from "./Container";
 import { Link, route } from "preact-router";
-import { useRouterStore } from "stores/RouterStore";
-import { useUserStatuseStore } from "stores/UserStatuseStore";
+import { useRouterStore } from "../stores/RouterStore";
+import { useUserStatuseStore } from "../stores/UserStatuseStore";
 import USER_ICON from "@project/components/src/assets/icons/user.svg";
 import { Icon } from "@project/components/src/ui-kit/Icon";
 import { Logo } from "@project/components/src/ui-kit/Logo";
 import { LangChooser } from "@project/components/src/ui-kit/LangChooser";
-import { useLocalesStore } from "stores/LocalesStore";
-import { MenuBurger } from "components/MenuBurger";
+import { useLocalesStore } from "../stores/LocalesStore";
+import { MenuBurger } from "./MenuBurger";
 
-export const Header: FunctionalComponent = () => {
+export const Header: FC = () => {
   const { isLogined, user } = useUserStatuseStore();
   const { langUrls, PROFILE_PATH } = useRouterStore();
   const { lang } = useLocalesStore();

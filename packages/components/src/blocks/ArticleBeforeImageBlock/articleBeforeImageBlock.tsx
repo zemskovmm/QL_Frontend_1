@@ -1,6 +1,6 @@
 import React from "react";
 import { TypedBlockTypeInfo } from "../blocks-info";
-import styles from "./articleBeforeImageBlock.module.css";
+import styles from "./article-before-image-block.module.css";
 import { ApiBaseUrl } from "../../api/apiClientBase";
 import preview from "./preview.png";
 import { HtmlPresenter } from "../../ui/HtmlPresenter/htmlPresenter";

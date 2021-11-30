@@ -1,5 +1,5 @@
 import { Text } from "@project/components/src/ui-kit/Text";
-import { FunctionalComponent } from "preact";
+import { FC } from "react";
 
 type PropsType = {
   className?: string;
@@ -8,7 +8,7 @@ type PropsType = {
   text: string;
 };
 
-export const Message: FunctionalComponent<PropsType> = ({ className, title, text, me }) => {
+export const Message: FC<PropsType> = ({ className, title, text, me }) => {
   const classes = [
     "flex flex-col rounded px-2",
     me ? "bg-blue-50  self-end" : "bg-white self-start",

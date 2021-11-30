@@ -1,24 +1,24 @@
 declare module "*.css" {
-    const mapping: Record<string, string>;
-    export default mapping;
+  const mapping: Record<string, string>;
+  export default mapping;
 }
 
-declare module '*.png' {
-    const content: any;
-    export default content;
-}
-
-declare module '*.jpg' {
+declare module "*.png" {
   const content: any;
   export default content;
 }
 
-declare module '*.gif' {
-    const content: any;
-    export default content;
+declare module "*.jpg" {
+  const content: any;
+  export default content;
 }
 
-declare module '*.svg' {
-    const content: any;
-    export default content;
+declare module "*.gif" {
+  const content: any;
+  export default content;
+}
+
+declare module "*.svg" {
+  const content: any;
+  export default content;
 }

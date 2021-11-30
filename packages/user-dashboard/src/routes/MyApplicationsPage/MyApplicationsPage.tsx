@@ -1,10 +1,9 @@
-import { FunctionalComponent } from "preact";
+import { FC, useState } from "react";
 import { ChatTab, ApplicationTab } from "./_components";
-import { useLocalesStore } from "stores/LocalesStore";
-import { LeftNavigationLayout } from "layouts/LeftNavigationLayout";
-import { useState } from "preact/hooks";
+import { useLocalesStore } from "src/stores/LocalesStore";
+import { LeftNavigationLayout } from "src/layouts/LeftNavigationLayout";
 
-const MyApplicationsPage: FunctionalComponent<{ applicationId: string }> = ({ applicationId }) => {
+const MyApplicationsPage: FC<{ applicationId: string }> = ({ applicationId }) => {
   const [isAppTab, setAppTab] = useState(false);
   const { APPLICATION_LANG, CHAT_LANG } = useLocalesStore();
   const applicationIdInt = Number.parseInt(applicationId);

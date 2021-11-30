@@ -1,5 +1,4 @@
-import { FunctionalComponent } from "preact";
-import { useState } from "preact/hooks";
+import { FC, useState } from "react";
 import BURGER_ICON from "@project/components/src/assets/icons/burger.svg";
 import { Icon } from "@project/components/src/ui-kit/Icon";
 import { LeftNavigation } from "./LeftNavigation";
@@ -8,7 +7,7 @@ type PropsType = {
   className?: string;
 };
 
-export const MenuBurger: FunctionalComponent<PropsType> = ({ className = "" }) => {
+export const MenuBurger: FC<PropsType> = ({ className = "" }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {

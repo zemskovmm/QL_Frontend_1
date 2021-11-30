@@ -1,20 +1,20 @@
 import { Button } from "@project/components/src/ui-kit/Button";
 import { TextareaControlled } from "@project/components/src/form/TextareaControlled";
-import { FunctionalComponent } from "preact";
+import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { ChatMessagesType, ChatStoreType } from "./ChatStore";
+import { ChatMessages, ChatStore } from "./ChatStore";
 import cn from "classnames";
 
 type PropsType = {
   className?: string;
   applicationId: number;
-  store: ChatStoreType;
+  store: ChatStore;
 };
 
-export const MessagesEdit: FunctionalComponent<PropsType> = ({ className, applicationId, store: { sendMessage } }) => {
-  const { handleSubmit, control, setValue } = useForm<ChatMessagesType>();
+export const MessagesEdit: FC<PropsType> = ({ className, applicationId, store: { sendMessage } }) => {
+  const { handleSubmit, control, setValue } = useForm<ChatMessages>();
 
-  const handleSendMessage = (data: ChatMessagesType) => {
+  const handleSendMessage = (data: ChatMessages) => {
     sendMessage(applicationId, data);
     setValue("text", "");
   };

@@ -1,16 +1,16 @@
-import { FunctionalComponent } from "preact";
-import { memo } from "preact/compat";
-import { LeftNavigation } from "components/LeftNavigation";
+import { FC } from "react";
+import { memo } from "react";
+import { LeftNavigation } from "src/components/LeftNavigation";
 import { Button } from "@project/components/src/ui-kit/Button";
-import { useLocalesStore } from "stores/LocalesStore";
-import { Link } from "preact-router";
-import { useRouterStore } from "stores/RouterStore";
+import { useLocalesStore } from "src/stores/LocalesStore";
+import { Link } from "react-router-dom";
+import { useRouterStore } from "src/stores/RouterStore";
 
-type PropsType={
+type PropsType = {
   title: string;
-}
+};
 
-export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({ title, children }) => {
+export const LeftNavigationLayout: FC<PropsType> = memo(({ title, children }) => {
   const { NEW_APPLICATION_LANG } = useLocalesStore();
   const { NEW_APPLICATION_PATH } = useRouterStore();
 
@@ -18,7 +18,7 @@ export const LeftNavigationLayout: FunctionalComponent<PropsType> = memo(({ titl
     <div className=" flex flex-col my-auto">
       <div className="hidden md:flex justify-between pb-4">
         <h1 className={`text-4xl font-bold`}>{title}</h1>
-        <Link href={NEW_APPLICATION_PATH}>
+        <Link to={NEW_APPLICATION_PATH}>
           <Button plus={true} text={NEW_APPLICATION_LANG} color={"red"} />
         </Link>
       </div>

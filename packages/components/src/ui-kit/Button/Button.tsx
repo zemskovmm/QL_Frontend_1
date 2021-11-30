@@ -1,4 +1,4 @@
-import React, { FC,forwardRef } from "react";
+import React, { FC, forwardRef } from "react";
 import cn from "classnames";
 
 export type ButtonCollorType = keyof typeof BUTTON_COLORS;
@@ -25,18 +25,10 @@ export type ButtonPropsType = {
   plus?: boolean;
 };
 
-export const Button = forwardRef<HTMLButtonElement,ButtonPropsType>(({
-  className,
-  style,
-  id,
-  text,
-  type,
-  color = "default",
-  disabled = false,
-  onClick,
-  children,
-  plus,
-},ref) => {
+export const Button: FC<ButtonPropsType> = (
+  { className, style, id, text, type, color = "default", disabled = false, onClick, children, plus },
+  ref
+) => {
   const handleOnClick = () => {
     onClick && onClick(id);
   };
@@ -72,4 +64,4 @@ export const Button = forwardRef<HTMLButtonElement,ButtonPropsType>(({
       {text} {children}
     </button>
   );
-});
+};

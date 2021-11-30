@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
-import { FunctionalComponent } from "preact";
-import { useEffect } from "preact/hooks";
+import { FC } from "react";
+import { useEffect } from "react";
 import { SchemaOf, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputControlled } from "@project/components/src/form/InputControlled";
-import { Link, route } from "preact-router";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { useSignUpStore } from "./_store";
-import { CenterCardLayout } from "layouts/CenterCardLayout";
-import { SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
-import { useLocalesStore } from "stores/LocalesStore";
-import { useUserStatuseStore } from "stores/UserStatuseStore";
+import { CenterCardLayout } from "src/layouts/CenterCardLayout";
+import { SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE, useRouterStore } from "src/stores/RouterStore";
+import { useLocalesStore } from "src/stores/LocalesStore";
+import { useUserStatuseStore } from "src/stores/UserStatuseStore";
+import { Link } from "react-router-dom";
 
 export type FormFields = {
   email: string;
@@ -33,7 +33,7 @@ type PropsType = {
   entityId?: string;
 };
 
-export const SignUpPage: FunctionalComponent<PropsType> = ({ applicationType, entityId }) => {
+export const SignUpPage: FC<PropsType> = ({ applicationType, entityId }) => {
   const { handleSubmit, control } = useForm<FormFields>({
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -59,9 +59,9 @@ export const SignUpPage: FunctionalComponent<PropsType> = ({ applicationType, en
     ? SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
     : SIGN_IN_PATH;
 
-  useEffect(() => {
-    (isLogined || isSuccess) && route(signInPath);
-  }, [isLogined, isSuccess]);
+  // useEffect(() => {
+  //   (isLogined || isSuccess) && route(signInPath);
+  // }, [isLogined, isSuccess]);
 
   return (
     <CenterCardLayout title={SIGN_UP_TITLE} subtitle={SIGN_UP_SUBTITLE}>
@@ -94,7 +94,7 @@ export const SignUpPage: FunctionalComponent<PropsType> = ({ applicationType, en
           sign={true}
         />
         <Button className="mb-4" text={SIGN_IN_REG} type="submit" disabled={isLoading} color={`red`} />
-        <Link href={signInPath}>
+        <Link to={signInPath}>
           <Button className="my-2 w-full" text={SIGN_IN_ENTRY} color="gray" />
         </Link>
       </form>

@@ -4,7 +4,7 @@ const MAX_NOTIFICATION = 15;
 const MAX_TIME_NOTIFICATION = 6000;
 
 import { action, atom, onMount } from 'nanostores'
-import { useStore } from "@nanostores/preact";
+import { useStore } from "@nanostores/react";
 
 
 const notificationStore = atom<Array<NotificationType>>([])

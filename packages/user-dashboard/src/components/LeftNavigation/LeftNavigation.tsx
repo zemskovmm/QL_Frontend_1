@@ -1,17 +1,16 @@
 import { InfinityList, ListItem, ListItemType } from "@project/components/src/ui-kit/List";
-import { FunctionalComponent } from "preact";
-import { memo } from "preact/compat";
-import { useEffect, useState } from "preact/hooks";
+import { FC } from "react";
+import { useEffect, useState, memo } from "react";
 import { Link, route } from "preact-router";
-import { useLocalesStore } from "stores/LocalesStore";
-import { MY_APPLICATIONS_TEMPLATE, useRouterStore } from "stores/RouterStore";
-import { useApplicationsState } from "stores/ApplicationsState";
-import { useUserStatuseStore } from "stores/UserStatuseStore";
+import { useLocalesStore } from "../../stores/LocalesStore";
+import { MY_APPLICATIONS_TEMPLATE, useRouterStore } from "../../stores/RouterStore";
+import { useApplicationsState } from "../../stores/ApplicationsState";
+import { useUserStatuseStore } from "../../stores/UserStatuseStore";
 import { IconLabel } from "@project/components/src/ui-kit/IconLabel";
 import USER_ICON from "@project/components/src/assets/icons/user.svg";
 import { Button } from "@project/components/src/ui-kit/Button";
 
-export const LeftNavigation: FunctionalComponent<{ className?: string }> = memo(({ className }) => {
+export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) => {
   const { url, NEW_APPLICATION_PATH } = useRouterStore();
   const [isApplicationsOpen, setApplicationsOpen] = useState(false);
   const { PROFILE_PATH, SETTINGS_PATH } = useRouterStore();
