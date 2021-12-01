@@ -2,14 +2,10 @@ stages:
   - build
   - deploy-develop
 
-.restore:
+.restore-build:
   script:
     - git submodule sync && git submodule update --init --recursive
     - yarn install --frozen-lockfile
-
-.restore-build:
-  extends: .restore
-  script:
     - yarn workspace web-app run build
     - yarn workspace admin-app run build
     - yarn workspace user-dashboard run build
@@ -22,8 +18,6 @@ build:
   extends: .restore-build
   only:
     - merge_requests
-  script:
-    - echo "done"
 
 deploy:
   stage: deploy-develop
@@ -33,7 +27,7 @@ deploy:
     - ql-dev
   only:
     - develop
-  script:
+  after_script:
     # WEB (NEXT.JS Frontend)
     - sudo systemctl stop quartier-latin-web-dev
     - rm -rf /apps/quartier-dev/web && cp -r . /apps/quartier-dev/web/
