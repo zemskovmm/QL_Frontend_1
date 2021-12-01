@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { useLocalesStore } from "src/stores/LocalesStore";
 import { LeftNavigationLayout } from "src/layouts/LeftNavigationLayout";
 import { Text } from "@project/components/src/ui-kit/Text";
+import { useLocalized } from "src/locales";
 
 const SettingsPage: FC = () => {
-  const { SETTINGS_LANG } = useLocalesStore();
+  const { localizedText } = useLocalized();
 
   return (
-    <LeftNavigationLayout title={SETTINGS_LANG}>
-      <Text text={SETTINGS_LANG} color="help" />
+    <LeftNavigationLayout title={localizedText('SETTINGS_LANG')}>
+      <Text text={localizedText('SETTINGS_LANG')} color="help" />
     </LeftNavigationLayout>
   );
 };

@@ -5,13 +5,12 @@ import { useForm } from "react-hook-form";
 import { useContext, useEffect } from "react";
 import { useProfileStore } from "./_store";
 import { useUserStatuseStore, UserStatuseUserProps } from "src/stores/UserStatuseStore";
-import { useLocalesStore } from "src/stores/LocalesStore";
 import { LeftNavigationLayout } from "src/layouts/LeftNavigationLayout";
 import { useGlobalSettingsStore } from "src/stores/GlobalSettingsStore";
 import { RowsPresenter } from "@project/components/src/blocks";
 import { Preload } from "@project/components/src/ui-kit/Preload";
 import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
-import { CREATE_APPLICATIONS_TEMPLATE } from "src/stores/RouterStore";
+import { useLocalized } from "src/locales";
 
 type PropsType = {
   applicationType?: string;
@@ -20,16 +19,7 @@ type PropsType = {
 
 const ProfilePage: FC<PropsType> = ({ applicationType, entityId }) => {
   const cl = useContext(ComponentHostDashboardContext);
-  const {
-    PROFILE_LANG,
-    PROFILE_LASTNAME,
-    PROFILE_LASTNAME_PLACEHOLDER,
-    PROFILE_NAME,
-    PROFILE_NAME_PLACEHOLDER,
-    PROFILE_PHONE,
-    PROFILE_PHONE_PLACEHOLDER,
-    PROFILE_SAVE,
-  } = useLocalesStore();
+  const {lang,localizedText} = useLocalized()
   const { putUserAction, isLoading } = useProfileStore();
   const store = useUserStatuseStore();
   const {
@@ -38,7 +28,6 @@ const ProfilePage: FC<PropsType> = ({ applicationType, entityId }) => {
   } = store;
   const { handleSubmit, control, setValue } = useForm<UserStatuseUserProps>();
   const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
-  const { lang } = useLocalesStore();
   cl!.personalInfo = personalInfo;
 
   useEffect(() => {
@@ -59,7 +48,7 @@ const ProfilePage: FC<PropsType> = ({ applicationType, entityId }) => {
   // }, [isRegistrationComplite, applicationType, entityId]);
 
   return (
-    <LeftNavigationLayout title={PROFILE_LANG}>
+    <LeftNavigationLayout title={localizedText('PROFILE_LANG')}>
       <Preload isLoading={isLoading || isLoadingGS} color="white">
         <div className="flex flex-col pt-6 pb-3 px-4 md:py-8 md:pl-20 md:pr-12">
           <form className="flex flex-col" onSubmit={handleSubmit(putUserAction) as any}>
@@ -67,21 +56,21 @@ const ProfilePage: FC<PropsType> = ({ applicationType, entityId }) => {
               <InputControlled
                 className="mb-3"
                 name="firstName"
-                label={PROFILE_NAME}
-                placeholder={PROFILE_PHONE_PLACEHOLDER}
+                label={localizedText('PROFILE_NAME')}
+                placeholder={localizedText('PROFILE_PHONE_PLACEHOLDER')}
                 control={control}
               />
               <InputControlled
                 className="mb-3"
                 name="lastName"
-                label={PROFILE_LASTNAME}
-                placeholder={PROFILE_LASTNAME_PLACEHOLDER}
+                label={localizedText('PROFILE_LASTNAME')}
+                placeholder={localizedText('PROFILE_LASTNAME_PLACEHOLDER')}
                 control={control}
               />
               <InputControlled
                 name="phone"
-                label={PROFILE_PHONE}
-                placeholder={PROFILE_PHONE_PLACEHOLDER}
+                label={localizedText('PROFILE_PHONE')}
+                placeholder={localizedText('PROFILE_PHONE_PLACEHOLDER')}
                 control={control}
                 type="tel"
               />
@@ -91,7 +80,7 @@ const ProfilePage: FC<PropsType> = ({ applicationType, entityId }) => {
             </div>
             <Button
               className="mt-9 mb-2 ml-auto md:mt-2"
-              text={PROFILE_SAVE}
+              text={localizedText('PROFILE_SAVE')}
               type="submit"
               disabled={isLoading}
               color={`red`}

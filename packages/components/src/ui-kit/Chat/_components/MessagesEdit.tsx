@@ -18,7 +18,6 @@ type PropsType = {
 export const MessagesEdit: FC<PropsType> = ({ className, onSendMessage, onFileChose }) => {
   const { handleSubmit, control, setValue } = useForm<MessagesType>();
   const fileRef = useRef<HTMLInputElement>(null);
-  const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleSendMessage = ({ text }: MessagesType) => {
     if (text) {
@@ -46,10 +45,9 @@ export const MessagesEdit: FC<PropsType> = ({ className, onSendMessage, onFileCh
         iconSrc={CLIP_ICON}
         onIconClick={() => fileRef.current?.click()}
         control={control}
-        onPressEnter={() => submitButtonRef.current?.click()}
+        onPressEnter={() => console.log('//TODO SEND MESSAGE')}
       />
-      // TODO fix this mess!
-      {/*<Button ref={submitButtonRef} className="self-end" text="Отправить" color="red" type="submit" />*/}
+      <Button className="self-end" text="Отправить" color="red" type="submit" />
     </form>
   );
 };

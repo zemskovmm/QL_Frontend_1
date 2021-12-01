@@ -1,6 +1,5 @@
 import { Text } from "@project/components/src/ui-kit/Text";
 import { FC } from "react";
-import { useLocalesStore } from "src/stores/LocalesStore";
 import { RowsPresenter } from "@project/components/src/blocks";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { useContext, useEffect } from "react";
@@ -10,6 +9,7 @@ import { useApplicationStore } from "src/routes/MyApplicationsPage/_components/A
 import { useForm } from "react-hook-form";
 import { Preload } from "@project/components/src/ui-kit/Preload";
 import { ApplicationPostProps } from "@project/components/src/interfaces/ApplicationDto";
+import { useLocalized } from "src/locales";
 
 type PropsType = {
   className?: string;
@@ -19,7 +19,7 @@ type PropsType = {
 export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
   const cl = useContext(ComponentHostDashboardContext);
   const store = useApplicationStore();
-  const { PROFILE_SAVE } = useLocalesStore();
+  const { localizedText } = useLocalized();
   const { application, postApplicationAction, isLoading: isLoadingStore } = store;
   const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
   const { handleSubmit, control, setValue } = useForm<ApplicationPostProps>();
@@ -53,7 +53,7 @@ export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
             </div>
             <Button
               className="ml-auto mt-auto"
-              text={PROFILE_SAVE}
+              text={localizedText('PROFILE_SAVE')}
               type="submit"
               disabled={isLoadingStore}
               color="red"

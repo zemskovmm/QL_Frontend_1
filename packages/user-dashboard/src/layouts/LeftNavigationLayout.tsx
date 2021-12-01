@@ -1,25 +1,22 @@
-import { FC } from "react";
-import { memo } from "react";
+import { FC,memo } from "react";
 import { LeftNavigation } from "src/components/LeftNavigation";
 import { Button } from "@project/components/src/ui-kit/Button";
-import { useLocalesStore } from "src/stores/LocalesStore";
 import { Link } from "react-router-dom";
-import { useRouterStore } from "src/stores/RouterStore";
+import { NEW_APPLICATION_ROUTE } from "src/constants";
+import { useLocalized } from "src/locales";
 
 type PropsType = {
   title: string;
 };
 
 export const LeftNavigationLayout: FC<PropsType> = memo(({ title, children }) => {
-  const { NEW_APPLICATION_LANG } = useLocalesStore();
-  const { NEW_APPLICATION_PATH } = useRouterStore();
-
+  const {localizedText} = useLocalized()
   return (
     <div className=" flex flex-col my-auto">
       <div className="hidden md:flex justify-between pb-4">
         <h1 className={`text-4xl font-bold`}>{title}</h1>
-        <Link to={NEW_APPLICATION_PATH}>
-          <Button plus={true} text={NEW_APPLICATION_LANG} color={"red"} />
+        <Link to={NEW_APPLICATION_ROUTE}>
+          <Button plus={true} text={localizedText('NEW_APPLICATION_LANG') } color={"red"} />
         </Link>
       </div>
       <div className="flex flex-grow w-full md:h-screen MainContainer">

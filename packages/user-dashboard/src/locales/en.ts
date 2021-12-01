@@ -1,7 +1,7 @@
 import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
-import { Translate } from "./_types";
+import { LocalesTranslate } from "./_types";
 
-export const en: Translate = {
+export const en: LocalesTranslate = {
   SIGN_IN_TITLE: "Login to your personal account",
   SIGN_IN_SUBTITLE: "Login or create an account",
   SIGN_IN_ENTRY: "Proceed",
@@ -16,12 +16,10 @@ export const en: Translate = {
   SIGN_UP_PASSWORD_CONF_LABEL: "Repeat password",
   SIGN_UP_PASSWORD_CONF_PLACEHOLDER: "Repeat password",
   APPLICATION_LANG: "Application",
-  APPLICATION_TYTLES_LANG: {
-    [ApplicationType.Course]: "Application for passing the COURSE from :date",
-    [ApplicationType.Housing]: "Application for HOUSING from :date",
-    [ApplicationType.University]: "Application for EDUCATION from :date",
-    [ApplicationType.Visa]: "VISA application from :date",
-  },
+  APPLICATION_TYTLES_COURSE_LANG: "Application for passing the COURSE from :date",
+  APPLICATION_TYTLES_HOUSING_LANG: "Application for HOUSING from :date",
+  APPLICATION_TYTLES_UNIVERSITY_LANG: "Application for EDUCATION from :date",
+  APPLICATION_TYTLES_VISA_LANG: "VISA application from :date",
   CHAT_LANG: "Chat",
   FIND_RENTAL_HOME: "Find a rental home",
   GET_EDUCATION_LANG: "Get professional education",

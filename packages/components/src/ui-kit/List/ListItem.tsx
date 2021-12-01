@@ -7,6 +7,7 @@ export const LIST_ITEM_H = 40;
 
 export type ListItemPropsType = {
   className?: string;
+  key?: string;
   text: string;
   onClick?: () => void;
   depth?: number;
@@ -18,6 +19,7 @@ export type ListItemPropsType = {
 
 export const ListItem: FunctionComponent<ListItemPropsType> = ({
   className,
+  key,
   depth = 0,
   text,
   onClick = () => {},
@@ -28,13 +30,14 @@ export const ListItem: FunctionComponent<ListItemPropsType> = ({
 }) => {
   const ofset: Array<ReactNode> = [];
   for (let d = 0; d < depth; d++) {
-    ofset.push(<div className="pl-4" />);
+    ofset.push(<div key={`item_${key}_ofset${d}`} className="pl-4" />);
   }
 
   const iconClassName = ["transition duration-200 ease-in-out", isOpenArrow ? "transform rotate-90" : ""].join(" ");
 
   return (
     <div
+      key={key}
       className={`cursor-pointer relative border-l border-t border-r h-10 box-border flex-shrink-0 ${className}`}
       onClick={(e) => {
         stopPropagation && e.stopPropagation();

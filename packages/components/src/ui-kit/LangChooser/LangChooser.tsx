@@ -14,21 +14,20 @@ const LANGS:{[key:string]:string} = {
     esp: "P",
 };
 
+const allLangsId = Object.keys(LANGS);
+
 
 type LinkPropsType = {
-    url:string;
     lang:string;
 }
 
 export type LangChooserPropsType = {
     lang: string;
-    urls: { [key: string]: string;};
-    linkComponent: (props:LinkPropsType)=>ReactNode;
+    linkComponent: (lang:string)=>ReactNode;
 }
 
 export const LangChooser:FunctionComponent<LangChooserPropsType> = ({ 
     lang,
-    urls, 
     linkComponent,
 }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -37,13 +36,13 @@ export const LangChooser:FunctionComponent<LangChooserPropsType> = ({
         <div onClick={() => setIsOpen(!isOpen)} className={cn(styles.lang, "bg-button-secondary", "rounded-primary")}>
             <FlagIcon lang={currLang} />
             <span>{LANGS[currLang]}</span>
-            {Object.keys(urls).length > 0 && (
+            {allLangsId.length > 0 && (
             <>
                 <div className={isOpen ? styles.back : ""} />
                 <ul className={isOpen ? styles.open : ""}>
-                {Object.keys(urls).map((el, index) => (
+                {allLangsId.map((el, index) => (
                     <li key={el + index + "LangChooser"} className={el === lang ? "font-bold" : ""}>
-                        {linkComponent({lang:el,url:urls[el]})}
+                        {linkComponent(el)}
                     </li>
                 ))}
                 </ul>

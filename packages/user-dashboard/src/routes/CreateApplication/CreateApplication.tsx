@@ -1,17 +1,11 @@
 import { Text } from "@project/components/src/ui-kit/Text";
 import React, { FC } from "react";
-import { useLocalesStore } from "src/stores/LocalesStore";
 import { useApplicationsState } from "src/stores/ApplicationsState";
 import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
-import {
-  MY_APPLICATIONS_TEMPLATE,
-  PROFILE_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
-  SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
-  useRouterStore,
-} from "src/stores/RouterStore";
 import { useEffect } from "react";
 import { useUserStatuseStore } from "src/stores/UserStatuseStore";
 import { useParams } from "react-router-dom";
+import { useLocalized } from "src/locales";
 
 type PropsType = {
   applicationType: string;
@@ -21,7 +15,7 @@ type PropsType = {
 export const CreateApplication: FC = () => {
   const { applicationType, entityId } = useParams();
   const { addApplication } = useApplicationsState();
-  const { lang } = useLocalesStore();
+  const { localizedText } = useLocalized();
   // const { SIGN_IN_PATH, PROFILE_PATH } = useRouterStore();
   // const { isUnlogined, isLogined, isRegistrationComplite } = useUserStatuseStore();
 

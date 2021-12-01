@@ -1,4 +1,4 @@
-export type Translate = {
+export type LocalesTranslate = {
   SIGN_IN_TITLE: string;
   SIGN_IN_SUBTITLE: string;
   SIGN_IN_ENTRY: string;
@@ -12,7 +12,10 @@ export type Translate = {
   SIGN_UP_PASSWORD_CONF_LABEL: string;
   SIGN_UP_PASSWORD_CONF_PLACEHOLDER: string;
   APPLICATION_LANG: string;
-  APPLICATION_TYTLES_LANG: { [key: string]: string };
+  APPLICATION_TYTLES_COURSE_LANG: string;
+  APPLICATION_TYTLES_HOUSING_LANG: string;
+  APPLICATION_TYTLES_UNIVERSITY_LANG: string;
+  APPLICATION_TYTLES_VISA_LANG: string;
   CHAT_LANG: string;
   FIND_RENTAL_HOME: string;
   GET_EDUCATION_LANG: string;
@@ -36,6 +39,3 @@ export type Translate = {
   WHAT_SERVICES_LANG: string;
 };
 
-export type LangsTranslate = {
-  [key: string]: Translate;
-};

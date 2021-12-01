@@ -11,6 +11,7 @@ import {
 export const TOTAL_APPLICATIONS = 20;
 
 interface ApplicationsState {
+  isOpenPage: boolean;
   isLoading: boolean;
   applications: Array<ApplicationDto | undefined>;
 }
@@ -18,9 +19,16 @@ interface ApplicationsState {
 let loadedPages: Array<boolean> = [];
 
 const applicationsState = map<ApplicationsState>({
+  isOpenPage:false,
   isLoading: false,
   applications: [],
 });
+
+const setIsOpenPage = action(applicationsState,"setIsOpenPage",
+  (store, isOpen: boolean) => {
+    store.setKey("isOpenPage", isOpen);
+  }
+);
 
 const addApplication = action(
   applicationsState,
@@ -90,5 +98,5 @@ const onItemRender = action(applicationsState, "getApplications", async (store, 
 
 export const useApplicationsState = () => {
   const state = useStore(applicationsState);
-  return { ...state, onItemRender, getApplications, addApplication };
+  return { ...state, onItemRender, getApplications, addApplication, setIsOpenPage };
 };

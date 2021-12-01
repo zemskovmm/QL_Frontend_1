@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
 import { AppLayout } from "./layouts/AppLayout";
 import { Notification } from "./components/Notification";
 import SignUpPage from "./routes/SignUpPage";
@@ -7,90 +8,72 @@ import SignInPage from "./routes/SignInPage";
 import NotFoundPage from "./routes/NotFoundPage";
 import ProfilePage from "./routes/ProfilePage";
 import {
-  useRouterStore,
-  SIGN_UP_TEMPLATE,
-  SIGN_IN_TEMPLATE,
-  PROFILE_TEMPLATE,
-  SETTINGS_TEMPLATE,
-  NEW_APPLICATION_TEMPLATE,
-  MY_APPLICATIONS_TEMPLATE,
-  CREATE_APPLICATIONS_TEMPLATE,
-  SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
-  SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
-  PROFILE_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
-} from "./stores/RouterStore";
-import { useEffect, useState } from "react";
+  CREATE_APPLICATIONS_ROUTE,
+  MY_APPLICATIONS_ROUTE,
+  PROFILE_ROUTE, SETTINGS_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE,
+} from "./constants";
+import { useEffect } from "react";
 import { useUserStatuseStore } from "./stores/UserStatuseStore";
-import { isSecureUrl } from "./stores/RouterStore/_utils";
 import SettingsPage from "./routes/SettingsPage";
-import { useLocalesStore } from "./stores/LocalesStore";
-import { changeLangInUrl, DEFAULT_LANG, urlToLang } from "./locales/utils";
 import NewApplication from "./routes/NewApplication";
 import MyApplicationsPage from "./routes/MyApplicationsPage";
 import CreateApplication from "./routes/CreateApplication";
 import { HostLayout } from "@project/components/src/FormBuilderBlocks/HostLayout";
 import { useGlobalSettingsStore } from "./stores/GlobalSettingsStore";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useLocation,useNavigate} from "react-router-dom";
+import { LocalesContextProvider, useLocalized } from "./locales";
+
+
+const InitStores:FC = ({children})=>{
+  const { getGlobalSettings } = useGlobalSettingsStore();
+  const {lang} = useLocalized()
+
+  useEffect(()=>{
+    getGlobalSettings(lang);
+  },[lang])
+
+  return <>{children}</>
+}
 
 export const Application: FC = () => {
-  const { lang, changeLang } = useLocalesStore();
-  const { isUnlogined, isLogined } = useUserStatuseStore();
   const { heartbeatAction } = useUserStatuseStore();
-  const { getGlobalSettings } = useGlobalSettingsStore();
-
+  const location = useLocation();
+  const navigate = useNavigate()
+  
   useEffect(() => {
+    const url = location.pathname
+    if(!url || url==='/'){
+      navigate(PROFILE_ROUTE);
+    }
     heartbeatAction();
-  }, []);
-
-  // useEffect(() => {
-  //   if (url !== undefined && (isUnlogined || isLogined)) {
-  //     const lang = urlToLang(url);
-  //     if (!url || /^\/(\w+\/?)?$/.test(url)) {
-  //       if (isLogined) {
-  //         route(PROFILE_TEMPLATE.getRoute({ lang: lang || DEFAULT_LANG }), true);
-  //       } else {
-  //         route(SIGN_IN_TEMPLATE.getRoute({ lang: lang || DEFAULT_LANG }), true);
-  //       }
-  //       return;
-  //     }
-  //     if (!lang) {
-  //       route(changeLangInUrl(url, DEFAULT_LANG), true);
-  //       return;
-  //     }
-  //     if (isUnlogined && isSecureUrl(url)) {
-  //       route(SIGN_IN_TEMPLATE.getRoute({ lang: lang || DEFAULT_LANG }), true);
-  //     }
-  //     changeLang(lang);
-  //     changeUrl(url);
-  //     getGlobalSettings(lang);
-  //     heartbeatAction();
-  //   }
-  // }, [url, isUnlogined, isLogined]);
-
-  // const handleChangeUrl = (event: RouterOnChangeArgs) => {
-  //   setUrl(event.url);
-  // };
+  }, [location])
 
   return (
-    <HostLayout>
-      <div id="preact_root" className="h-full">
-        <AppLayout>
-          <Routes>
-            <Route element={<ProfilePage />} path={"profile"} />
-            <Route element={<SignUpPage />} path={"sign-up"} />
-            <Route element={<SignInPage />} path={"sign-in"} />
-            <Route element={<MyApplicationsPage />} path={"application/:id"} />
-            <Route element={<CreateApplication />} path={"create-application"} />
-            <Route element={<CreateApplication />} path={"create-application"} />
-            <Route element={<SettingsPage />} path={"settings"} />
-            {/*<NewApplication path={NEW_APPLICATION_TEMPLATE.path} />*/}
-            <Route path={"*"} element={<NotFoundPage />} />
-          </Routes>
-        </AppLayout>
-        <Notification />
-      </div>
-    </HostLayout>
+    <LocalesContextProvider>
+      <HostLayout>
+        <InitStores>
+          <div id="react_root" className="h-full">
+            <AppLayout>
+              <Routes>
+                <Route element={<ProfilePage />} path={PROFILE_ROUTE} />
+                <Route element={<SignUpPage />} path={SIGN_UP_ROUTE} />
+                <Route element={<SignInPage />} path={SIGN_IN_ROUTE} />
+                <Route element={<MyApplicationsPage />} path={MY_APPLICATIONS_ROUTE} />
+                <Route element={<CreateApplication />} path={CREATE_APPLICATIONS_ROUTE} />
+                <Route element={<CreateApplication />} path={CREATE_APPLICATIONS_ROUTE} />
+                <Route element={<SettingsPage />} path={SETTINGS_ROUTE} />
+                {/*<NewApplication path={NEW_APPLICATION_TEMPLATE.path} />*/}
+                <Route path={"*"} element={<NotFoundPage />} />
+              </Routes>
+            </AppLayout>
+            <Notification />
+          </div>
+        </InitStores>
+      </HostLayout>
+    </LocalesContextProvider>
   );
 };
 
 export default Application;
+
+

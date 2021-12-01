@@ -7,14 +7,9 @@ import { SchemaOf, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CenterCardLayout } from "src/layouts/CenterCardLayout";
 import { UserStatuseLoginProps, useUserStatuseStore } from "src/stores/UserStatuseStore";
-import {
-  CREATE_APPLICATIONS_TEMPLATE,
-  SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE,
-  useRouterStore,
-} from "src/stores/RouterStore";
-import { useLocalesStore } from "src/stores/LocalesStore";
 import reg from "./reg.svg";
 import { Link } from "react-router-dom";
+import { useLocalized } from "src/locales";
 
 const schema: SchemaOf<UserStatuseLoginProps> = object({
   email: string().required("Required to fill"),
@@ -28,15 +23,7 @@ export const SignInPage: FC = () => {
   });
   const { isLoading, loginAction } = useSignInStore();
   const { isLogined } = useUserStatuseStore();
-  const {
-    lang,
-    SIGN_IN_REG,
-    SIGN_IN_ENTRY,
-    SIGN_IN_SUBTITLE,
-    SIGN_IN_TITLE,
-    SIGN_UP_EMAIL_LABEL,
-    SIGN_UP_EMAIL_PLACEHOLDER,
-  } = useLocalesStore();
+  const { localizedText } = useLocalized();
   // const { PROFILE_PATH, SIGN_UP_PATH } = useRouterStore();
 
   // const signUpPath = applicationType
@@ -51,13 +38,13 @@ export const SignInPage: FC = () => {
   // }, [isLogined, applicationType, entityId]);
 
   return (
-    <CenterCardLayout title={SIGN_IN_TITLE} subtitle={SIGN_IN_SUBTITLE}>
+    <CenterCardLayout title={localizedText('SIGN_IN_TITLE')} subtitle={localizedText('SIGN_IN_SUBTITLE')}>
       <form className="flex flex-col md:px-28 w-full" onSubmit={handleSubmit(loginAction) as any}>
         <InputControlled
           className="mb-4"
           name="email"
-          label={SIGN_UP_EMAIL_LABEL}
-          placeholder={SIGN_UP_EMAIL_PLACEHOLDER}
+          label={localizedText('SIGN_UP_EMAIL_LABEL')}
+          placeholder={localizedText('SIGN_UP_EMAIL_PLACEHOLDER')}
           control={control}
           type="email"
           sign={true}
@@ -71,12 +58,12 @@ export const SignInPage: FC = () => {
           type="password"
           sign={true}
         />
-        <Button className="mb-4" text={SIGN_IN_ENTRY} type="submit" disabled={isLoading} color={`red`} />
+        <Button className="mb-4" text={localizedText('SIGN_IN_ENTRY')} type="submit" disabled={isLoading} color={`red`} />
         <Link to={"/sign-up"} className={`w-full flex`}>
           <Button color="gray" className={`w-full flex justify-center items-center`}>
             <span className={`relative`}>
               <img src={reg} alt="" className={"absolute -left-7 top-0.5 bottom-0"} />
-              {SIGN_IN_REG}
+              {localizedText('SIGN_IN_REG')}
             </span>
           </Button>
         </Link>

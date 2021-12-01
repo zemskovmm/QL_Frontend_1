@@ -1,7 +1,7 @@
-import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
-import { Translate } from "./_types";
 
-export const ru: Translate = {
+import { LocalesTranslate } from "./_types";
+
+export const ru: LocalesTranslate = {
   SIGN_IN_TITLE: "Вход в личный кабинет",
   SIGN_IN_SUBTITLE: "Войдите или создайте аккаунт",
   SIGN_IN_ENTRY: "Продолжить",
@@ -15,12 +15,10 @@ export const ru: Translate = {
   SIGN_UP_PASSWORD_CONF_LABEL: "Повторить пароль",
   SIGN_UP_PASSWORD_CONF_PLACEHOLDER: "Повторить пароль",
   APPLICATION_LANG: "Заявка",
-  APPLICATION_TYTLES_LANG: {
-    [ApplicationType.Course]: "Заявление на прохождение КУРСА от :date",
-    [ApplicationType.Housing]: "Заявка на ЖИЛЬЕ от :date",
-    [ApplicationType.University]: "Заявка на получение ОБРАЗОВАНИЯ от :date",
-    [ApplicationType.Visa]: "Заявка на получение ВИЗЫ от :date",
-  },
+  APPLICATION_TYTLES_COURSE_LANG: "Заявление на прохождение КУРСА от :date",
+  APPLICATION_TYTLES_HOUSING_LANG: "Заявка на ЖИЛЬЕ от :date",
+  APPLICATION_TYTLES_UNIVERSITY_LANG: "Заявка на получение ОБРАЗОВАНИЯ от :date",
+  APPLICATION_TYTLES_VISA_LANG: "Заявка на получение ВИЗЫ от :date",
   CHAT_LANG: "Чат",
   FIND_RENTAL_HOME: "Найдите жилье для аренды",
   GET_EDUCATION_LANG: "Получите профессиональное образование",

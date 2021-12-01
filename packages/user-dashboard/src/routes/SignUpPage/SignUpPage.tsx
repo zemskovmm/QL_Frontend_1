@@ -1,16 +1,14 @@
 import { useForm } from "react-hook-form";
 import { FC } from "react";
-import { useEffect } from "react";
 import { SchemaOf, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputControlled } from "@project/components/src/form/InputControlled";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { useSignUpStore } from "./_store";
 import { CenterCardLayout } from "src/layouts/CenterCardLayout";
-import { SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE, useRouterStore } from "src/stores/RouterStore";
-import { useLocalesStore } from "src/stores/LocalesStore";
 import { useUserStatuseStore } from "src/stores/UserStatuseStore";
 import { Link } from "react-router-dom";
+import { useLocalized } from "src/locales";
 
 export type FormFields = {
   email: string;
@@ -40,32 +38,20 @@ export const SignUpPage: FC<PropsType> = ({ applicationType, entityId }) => {
   });
   const { registerAction, isLoading, isSuccess } = useSignUpStore();
   const { isLogined } = useUserStatuseStore();
-  const {
-    lang,
-    SIGN_IN_REG,
-    SIGN_IN_ENTRY,
-    SIGN_UP_EMAIL_LABEL,
-    SIGN_UP_EMAIL_PLACEHOLDER,
-    SIGN_UP_PASSWORD_CONF_LABEL,
-    SIGN_UP_PASSWORD_CONF_PLACEHOLDER,
-    SIGN_UP_PASSWORD_LABEL,
-    SIGN_UP_PASSWORD_PLACEHOLDER,
-    SIGN_UP_SUBTITLE,
-    SIGN_UP_TITLE,
-  } = useLocalesStore();
+  const { localizedText } = useLocalized();
 
   // useEffect(() => {
   //   (isLogined || isSuccess) && route(signInPath);
   // }, [isLogined, isSuccess]);
 
   return (
-    <CenterCardLayout title={SIGN_UP_TITLE} subtitle={SIGN_UP_SUBTITLE}>
+    <CenterCardLayout title={localizedText('SIGN_UP_TITLE')} subtitle={localizedText('SIGN_UP_SUBTITLE')}>
       <form className="flex flex-col md:px-28 w-full" onSubmit={handleSubmit(registerAction) as any}>
         <InputControlled
           className="mb-4"
           name="email"
-          label={SIGN_UP_EMAIL_LABEL}
-          placeholder={SIGN_UP_EMAIL_PLACEHOLDER}
+          label={localizedText('SIGN_UP_EMAIL_LABEL')}
+          placeholder={localizedText('SIGN_UP_EMAIL_PLACEHOLDER')}
           control={control}
           type="email"
           sign={true}
@@ -73,8 +59,8 @@ export const SignUpPage: FC<PropsType> = ({ applicationType, entityId }) => {
         <InputControlled
           className="mb-4"
           name="password"
-          label={SIGN_UP_PASSWORD_LABEL}
-          placeholder={SIGN_UP_PASSWORD_PLACEHOLDER}
+          label={localizedText('SIGN_UP_PASSWORD_LABEL')}
+          placeholder={localizedText('SIGN_UP_PASSWORD_PLACEHOLDER')}
           control={control}
           type="password"
           sign={true}
@@ -82,15 +68,15 @@ export const SignUpPage: FC<PropsType> = ({ applicationType, entityId }) => {
         <InputControlled
           className="mb-8"
           name="passwordConfirmation"
-          label={SIGN_UP_PASSWORD_CONF_LABEL}
-          placeholder={SIGN_UP_PASSWORD_CONF_PLACEHOLDER}
+          label={localizedText('SIGN_UP_PASSWORD_CONF_LABEL')}
+          placeholder={localizedText('SIGN_UP_PASSWORD_CONF_PLACEHOLDER')}
           control={control}
           type="password"
           sign={true}
         />
-        <Button className="mb-4" text={SIGN_IN_REG} type="submit" disabled={isLoading} color={`red`} />
+        <Button className="mb-4" text={localizedText('SIGN_IN_REG')} type="submit" disabled={isLoading} color={`red`} />
         <Link to={"/sign-in"}>
-          <Button className="my-2 w-full" text={SIGN_IN_ENTRY} color="gray" />
+          <Button className="my-2 w-full" text={localizedText('SIGN_IN_ENTRY')} color="gray" />
         </Link>
       </form>
     </CenterCardLayout>
