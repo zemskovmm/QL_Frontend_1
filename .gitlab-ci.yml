@@ -1,47 +1,47 @@
 stages:
-  - deploy-web
-  - deploy-admin
-  - deploy-user-dashboard
-    
-deploy-web-dev:
-  stage: deploy-web
+  - build
+  - deploy-develop
+
+.restore:
+  script:
+    - git submodule sync && git submodule update --init --recursive
+    - yarn install --frozen-lockfile
+
+.restore-build:
+  extends: .restore
+  script:
+    - yarn workspace web-app run build
+    - yarn workspace admin-app run build
+    - yarn workspace user-dashboard run build
+
+build:
+  stage: build
+  tags:
+    - shell
+    - ql-dev
+  extends: .restore-build
+  only:
+    - merge_requests
+  script:
+    - echo "done"
+
+deploy:
+  stage: deploy-develop
+  extends: .restore-build
   tags:
     - shell
     - ql-dev
   only:
     - develop
   script:
-    - git submodule sync && git submodule update --init --recursive
-    - yarn install --frozen-lockfile
-    - yarn workspace web-app run build
+    # WEB (NEXT.JS Frontend)
     - sudo systemctl stop quartier-latin-web-dev
     - rm -rf /apps/quartier-dev/web && cp -r . /apps/quartier-dev/web/
     - sudo systemctl start quartier-latin-web-dev
-
-deploy-admin-dev:
-  stage: deploy-admin
-  tags:
-    - shell
-    - ql-dev
-  only:
-    - develop
-  script:
-    - git submodule sync && git submodule update --init --recursive
-    - yarn install --frozen-lockfile
-    - yarn workspace admin-app run build
+    # Admin dashboard
     - sudo rm -rf /var/www/qladmin-dev/ && sudo cp -r packages/admin-app/build/ /var/www/qladmin-dev/
     - sudo chown -R www-data /var/www/qladmin-dev/
-
-deploy-user-dashboard:
-  stage: deploy-user-dashboard
-  tags:
-    - shell
-    - ql-dev
-  only:
-    - develop
-  script:
-    - git submodule sync && git submodule update --init --recursive
-    - yarn install --frozen-lockfile
-    - yarn workspace user-dashboard run build
+    # user-dashboard
     - sudo rm -rf /var/www/ql-user-dashboard-dev/ && sudo cp -r packages/user-dashboard/build/ /var/www/ql-user-dashboard-dev/
     - sudo chown -R www-data /var/www/ql-user-dashboard-dev/
+
