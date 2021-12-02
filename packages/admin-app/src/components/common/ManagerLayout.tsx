@@ -1,8 +1,7 @@
-import React, { createContext, ReactComponentElement, ReactNode } from "react";
+import React, { FC } from "react";
 import { RouterLink, RouterView } from "mobx-state-router";
 import { useRootStore } from "src/utils/rootStoreUtils";
 import { ManagerRouteNames, ManagerRouteViewSettingsMap } from "../../pages/Manager/ManagerRoutes";
-import { ManagerListDto } from "../../interfaces/ManagerRpc";
 import { useObserver } from "mobx-react";
 
 const linkClass =
@@ -46,40 +45,11 @@ const Navbar = () => {
   ));
 };
 
-type Props = {
-  children?: ReactComponentElement<any>;
-};
-
-export const SideSettings = createContext<SideSettingsDto | null>(null);
-
-export type SideSettingsDto = {
-  list: ManagerListDto;
-  text: string;
-};
-
-const dataList: ManagerListDto = {
-  page: 0,
-  pageSize: 20,
-  type: "",
-  status: "",
-  isAnswered: false,
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-};
-
-const AdminLayout = ({ children }: Props) => {
-  const SideSettingsValue = {
-    list: dataList,
-    text: "",
-  };
+const AdminLayout: FC = ({ children }) => {
   return useObserver(() => (
     <div className={`flex h-full`}>
-      <SideSettings.Provider value={SideSettingsValue}>
-        <Navbar />
-        {children?.props()}
-      </SideSettings.Provider>
+      <Navbar />
+      {children}
     </div>
   ));
 };
