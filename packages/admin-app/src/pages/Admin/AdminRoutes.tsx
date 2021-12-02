@@ -20,6 +20,14 @@ import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } f
 import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "./course/page";
 import { ManagerCreatePage } from "./ManagerCreate/ManagerCreatePage";
 import { RouteNames } from "../../routing/routes";
+import {
+  HousingAccommodationEdit,
+  HousingAccommodationTraitEdit,
+  HousingCreatePage,
+  HousingEditPage,
+  HousingTablePage,
+  HousingTraitEditPage,
+} from "./housing/page";
 
 export const UserAuthorizedOnlyHook: RouteTransitionHook = async (root) => {
   if (!(await root.loginStore.check())) throw new RouterState(RouteNames.index);
@@ -62,6 +70,13 @@ export enum AdminRouteNames {
   courseTraitEditor = "admin-courseTraitEditor",
 
   mangerCreate = "admin-mangerCreate",
+
+  housingCreate = "admin-housing-create",
+  housingList = "admin-housing-list",
+  housingEdit = "admin-housing-edit",
+  housingTraitEdit = "admin-housing-trait-edit",
+  housingAccommodationEdit = "admin-accommodation-edit",
+  housingAccommodationTraitEdit = "admin-accommodation-trait-edit",
 }
 
 export const AdminRouteViewMap = {
@@ -101,6 +116,13 @@ export const AdminRouteViewMap = {
   [AdminRouteNames.courseTraitEditor]: <CourseTraitEditorPage />,
 
   [AdminRouteNames.mangerCreate]: <ManagerCreatePage />,
+
+  [AdminRouteNames.housingCreate]: <HousingCreatePage />,
+  [AdminRouteNames.housingEdit]: <HousingEditPage />,
+  [AdminRouteNames.housingList]: <HousingTablePage />,
+  [AdminRouteNames.housingTraitEdit]: <HousingTraitEditPage />,
+  [AdminRouteNames.housingAccommodationEdit]: <HousingAccommodationEdit />,
+  [AdminRouteNames.housingAccommodationTraitEdit]: <HousingAccommodationTraitEdit />,
 };
 
 export const AdminRoutes: Route[] = convertRoutes([
@@ -293,5 +315,35 @@ export const AdminRoutes: Route[] = convertRoutes([
     name: AdminRouteNames.mangerCreate,
     hooks: [UserAuthorizedOnlyHook],
     onEnter: async (root) => await root.mangerCreatePage.reset(),
+  },
+  {
+    pattern: "/housing",
+    name: AdminRouteNames.housingList,
+    hooks: [UserAuthorizedOnlyHook],
+  },
+  {
+    pattern: "/housing/create",
+    name: AdminRouteNames.housingCreate,
+    hooks: [UserAuthorizedOnlyHook],
+  },
+  {
+    pattern: "/housing/:id/edit",
+    name: AdminRouteNames.housingEdit,
+    hooks: [UserAuthorizedOnlyHook],
+  },
+  {
+    pattern: "/housing/:id/traits",
+    name: AdminRouteNames.housingTraitEdit,
+    hooks: [UserAuthorizedOnlyHook],
+  },
+  {
+    pattern: "/housing/:id/accommodation/:accid/edit",
+    name: AdminRouteNames.housingAccommodationEdit,
+    hooks: [UserAuthorizedOnlyHook],
+  },
+  {
+    pattern: "/housing/:id/accommodation/:accid/traits",
+    name: AdminRouteNames.housingAccommodationTraitEdit,
+    hooks: [UserAuthorizedOnlyHook],
   },
 ]);
