@@ -1,4 +1,4 @@
-import {CatalogFilterDto, CatalogResponseDto, ClientCatalogFilterOptionDto} from "src/interfaces/catalogFilterDto";
+import { CatalogFilterDto, CatalogResponseDto, ClientCatalogFilterOptionDto } from "src/interfaces/catalogFilterDto";
 import { CatalogFilterRequestDto } from "src/clients/siteApiClient";
 import { Paginator } from "src/components/utilities/Paginator";
 import { LoadingIf } from "src/components/utilities/Loading";
@@ -11,94 +11,110 @@ import filter from "src/assets/icons/filter.svg";
 import sort from "src/assets/icons/sort.svg";
 import close from "src/assets/icons/cross-remove.svg";
 import { LocalizedText } from "../common/LocalizedText";
-import {FC, useEffect, useState} from "react";
+import { FC, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import cn from "classnames";
 import { CourseCatalogElement, HousingCatalogElement, UniversityCatalogElement } from "./catalogElement";
-import {useObserver} from "mobx-react";
+import { useObserver } from "mobx-react";
 
-const RegionFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number| number[], selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
-  const [openRegion, setOpenRegion] = useState(false)
+const RegionFilter: FC<{
+  option: ClientCatalogFilterOptionDto;
+  seletedItems: number[];
+  toggleFilter: (id: number | number[], selected: boolean) => void;
+}> = ({ option, seletedItems, toggleFilter }) => {
+  const [openRegion, setOpenRegion] = useState(false);
   function checkItems(items: number[]) {
     if (seletedItems.find((x) => items.includes(x))) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   }
   useEffect(() => {
     if (option.items && checkItems(option.items?.map((x) => x.id))) setOpenRegion(true);
   }, []);
-  return useObserver( () =>
-    <div className={`flex mb-4`}>
-      <label className={`${style.checkbox__label}`}>
-        <span
-          className={`${style.checkbox__input} ${
-            seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
-          }`}
-        >
-          <span className={`${style.checkbox__inner}`} />
+  return useObserver(() => (
+    <div className={`flex mb-4 w-5/12`}>
+      <label className={`${style.checkbox__label} cursor-pointer`}>
+        <span className={`${style.checkbox__input} ${seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""}`}>
+          <span className={`${style.checkbox__inner} cursor-pointer`} />
           <input
             type="checkbox"
             checked={seletedItems.indexOf(option.id) != -1}
             aria-hidden="false"
             className={style.checkbox__original}
             value={option.name}
-            onChange={(e) => toggleFilter(option.items ? [option.id, ...option.items.map(el => el.id)] : option.id, e.target.checked)}
+            onChange={(e) =>
+              toggleFilter(option.items ? [option.id, ...option.items.map((el) => el.id)] : option.id, e.target.checked)
+            }
           />
         </span>
       </label>
       <div className={`flex flex-col w-full`}>
-        <div className={`${style.checkbox__name} w-full flex items-center cursor-pointer`} onClick={() => setOpenRegion(!openRegion)}>{option.name} <svg className={`${openRegion ? '-rotate-90' : 'rotate-90'} transform ml-2 transition duration-300`} xmlns="http://www.w3.org/2000/svg" width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M2.08268 0L0.916016 1.16667L4.74935 5L0.916016 8.83333L2.08268 10L7.08268 5L2.08268 0Z" fill="#567DD0"/></svg></div>
-        <div className={`flex flex-wrap justify-between w-full pl-2.5 pr-4 ${openRegion ? style.hideListRegions : style.showListRegions }`}>
-          {
-            option.items?.map((el, i) => <label className={`${style.checkbox__label} w-full flex mb-4`} key={`regions ${i} ${el.id} ${el.name}`}>
-            <span
-              className={`${style.checkbox__input} ${
-                seletedItems.indexOf(el.id) != -1 ? style.isChecked : ""
-              }`}
-            >
-              <span className={`${style.checkbox__inner}`} />
-              <input
-                type="checkbox"
-                checked={seletedItems.indexOf(el.id) != -1}
-                aria-hidden="false"
-                className={style.checkbox__original}
-                value={el.name}
-                onChange={(e) => toggleFilter(el.id, e.target.checked)}
-              />
-            </span>
+        <div
+          className={`${style.checkbox__name} w-full flex items-center cursor-pointer`}
+          onClick={() => setOpenRegion(!openRegion)}
+        >
+          {option.name}{" "}
+          <svg
+            className={`${openRegion ? "-rotate-90" : "rotate-90"} transform ml-2 transition duration-300`}
+            xmlns="http://www.w3.org/2000/svg"
+            width="8"
+            height="10"
+            viewBox="0 0 8 10"
+            fill="none"
+          >
+            <path
+              d="M2.08268 0L0.916016 1.16667L4.74935 5L0.916016 8.83333L2.08268 10L7.08268 5L2.08268 0Z"
+              fill="#567DD0"
+            />
+          </svg>
+        </div>
+        <div className={`flex-col w-full pl-2.5 pr-4 ${openRegion ? style.hideListRegions : style.showListRegions}`}>
+          {option.items?.map((el, i) => (
+            <label className={`${style.checkbox__label} w-full flex mb-4`} key={`regions ${i} ${el.id} ${el.name}`}>
+              <span className={`${style.checkbox__input} ${seletedItems.indexOf(el.id) != -1 ? style.isChecked : ""}`}>
+                <span className={`${style.checkbox__inner}`} />
+                <input
+                  type="checkbox"
+                  checked={seletedItems.indexOf(el.id) != -1}
+                  aria-hidden="false"
+                  className={style.checkbox__original}
+                  value={el.name}
+                  onChange={(e) => toggleFilter(el.id, e.target.checked)}
+                />
+              </span>
               <div className={`${style.checkbox__name}`}>{el.name}</div>
-            </label>)
-          }
+            </label>
+          ))}
         </div>
       </div>
     </div>
-    )
-}
+  ));
+};
 
-const CityFilter:FC<{option: ClientCatalogFilterOptionDto, seletedItems:number[] , toggleFilter: (id: number | number[], selected: boolean) => void }> = ({option, seletedItems, toggleFilter}) => {
+const CityFilter: FC<{
+  option: ClientCatalogFilterOptionDto;
+  seletedItems: number[];
+  toggleFilter: (id: number | number[], selected: boolean) => void;
+}> = ({ option, seletedItems, toggleFilter }) => {
   return (
-    <label className={`${style.checkbox__label} w-full mb-4 flex`}>
-            <span
-              className={`${style.checkbox__input} ${
-                seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""
-              }`}
-            >
-              <span className={`${style.checkbox__inner}`} style={{marginTop: '2px'}} />
-              <input
-                type="checkbox"
-                checked={seletedItems.indexOf(option.id) != -1}
-                aria-hidden="false"
-                className={style.checkbox__original}
-                value={option.name}
-                onChange={(e) => toggleFilter(option.id, e.target.checked)}
-              />
-            </span>
+    <label className={`${style.checkbox__label} mb-4 flex w-5/12`}>
+      <span className={`${style.checkbox__input} ${seletedItems.indexOf(option.id) != -1 ? style.isChecked : ""}`}>
+        <span className={`${style.checkbox__inner}`} style={{ marginTop: "2px" }} />
+        <input
+          type="checkbox"
+          checked={seletedItems.indexOf(option.id) != -1}
+          aria-hidden="false"
+          className={style.checkbox__original}
+          value={option.name}
+          onChange={(e) => toggleFilter(option.id, e.target.checked)}
+        />
+      </span>
       <span className={`${style.checkbox__name}`}>{option.name}</span>
     </label>
-  )
-}
+  );
+};
 
 function CatalogFilter(props: {
   filter: CatalogFilterDto;
@@ -114,15 +130,27 @@ function CatalogFilter(props: {
     <div className={style.catalog__filterRow}>
       <h3 className={style.catalog__filterTitle}>{props.filter.name}</h3>
       <div
-        className={`flex flex-col relative ${props.filter.options.length > 5 ? style.filterList : ""} ${
-          props.filter.options.length <= 5 ? "" : show ? style.hideList : style.showList
-        }`}
+        className={`flex relative ${props.filter.identifier === "city" ? "flex-wrap justify-between" : "flex-col"} ${
+          props.filter.options.length > 5 ? style.filterList : ""
+        } ${props.filter.options.length <= 5 ? "" : show ? style.hideList : style.showList}`}
       >
-        {props.filter.options.map((option) => (
-          (option.items !== null && option.items.length > 0) ?
-          <RegionFilter option={option} toggleFilter={props.toggleFilter} seletedItems={props.seletedItems} key={`option ${option.name} ${option.id}`} />
-            : <CityFilter option={option} toggleFilter={props.toggleFilter} seletedItems={props.seletedItems} key={`option ${option.name} ${option.id}`} />
-        ))}
+        {props.filter.options.map((option) =>
+          option.items !== null && option.items.length > 0 ? (
+            <RegionFilter
+              option={option}
+              toggleFilter={props.toggleFilter}
+              seletedItems={props.seletedItems}
+              key={`option ${option.name} ${option.id}`}
+            />
+          ) : (
+            <CityFilter
+              option={option}
+              toggleFilter={props.toggleFilter}
+              seletedItems={props.seletedItems}
+              key={`option ${option.name} ${option.id}`}
+            />
+          )
+        )}
       </div>
       {props.filter.options.length > 5 && (
         <button className={style.showMore_button} type={"button"} onClick={() => setShow(!show)}>
@@ -173,18 +201,22 @@ const CatalogCategories = ({ lang = "en", type = "university" }) => (
 function CatalogFilters(props: {
   filters: CatalogFilterDto[];
   parsedFilters: CatalogFilterRequestDto[];
-  setFilter: (identifier: string, item: number| number[], value: boolean) => void;
+  setFilter: (identifier: string, item: number | number[], value: boolean) => void;
 }) {
   return (
     <div>
-      {props.filters.map((filter) => (
-        <CatalogFilter
-          key={filter.identifier}
-          filter={filter}
-          seletedItems={props.parsedFilters.find((f) => f.identifier == filter.identifier)?.values || []}
-          toggleFilter={(id, selected) => props.setFilter(filter.identifier, id, selected)}
-        />
-      ))}
+      {props.filters.map((filter) =>
+        filter.identifier === "housing-equipment" ? (
+          ""
+        ) : (
+          <CatalogFilter
+            key={filter.identifier}
+            filter={filter}
+            seletedItems={props.parsedFilters.find((f) => f.identifier == filter.identifier)?.values || []}
+            toggleFilter={(id, selected) => props.setFilter(filter.identifier, id, selected)}
+          />
+        )
+      )}
     </div>
   );
 }
@@ -250,7 +282,7 @@ export function CatalogView<T>(props: {
   data: CatalogResponseDto<T> | undefined;
   page: number;
   setPage: (p: number) => void;
-  setFilter: (identifier: string, item: number| number[], value: boolean) => void;
+  setFilter: (identifier: string, item: number | number[], value: boolean) => void;
   title: string;
   type: string;
   searchTitle: string;

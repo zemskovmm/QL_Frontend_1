@@ -3,11 +3,12 @@ import { encodeQueryString } from "src/utils/urlUtil";
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { AdminTraitListItemDto, AdminTraitItemDto, AdminTraitTypeDto } from "../interfaces/TraitPageDto";
 import { AdminUniversityItemDto, AdminUniversityItemPostDto } from "../interfaces/UniversityPageDto";
-import { AdminSchoolDto } from "../stores/pages/school/schoolPageStore";
+import { AdminSchoolDto } from "src/stores/pages/adminStores/school/schoolPageStore";
 import { RemoteUiDefinition } from "@kekekeks/remoteui/src";
-import { AdminCourseDto } from "../stores/pages/course/coursePageStore";
+import { AdminCourseDto } from "src/stores/pages/adminStores/course/coursePageStore";
 import { GlobalSettingsDto } from "src/interfaces/GlobalSettingsDto";
-import { ManagerCreateDto } from "../stores/pages/manager/managerCreateStore";
+import { ManagerCreateDto } from "src/stores/pages/adminStores/manager/managerCreateStore";
+import { ManagerApplicationListDto, ManagerListSettingsDto } from "../interfaces/ManagerRpc";
 import { AdminHousingDto } from "../stores/pages/housing/housing-page-store";
 import { AdminHousingAccommodationDto } from "../stores/pages/housing/housing-accommodation-page-store";
 
@@ -149,7 +150,8 @@ export class AdminApiClient extends ApiClientBase {
   postManagerCreate = (data: ManagerCreateDto) => this.sendRequest(`admin/auth/manager/register`, data, "POST");
 
   /* Manager cabinet */
-  getManagerApplication = (data: any) => this.sendRequest(`admin/personal/applications` + encodeQueryString(data));
+  getManagerApplication = (data: any | ManagerListSettingsDto) =>
+    this.sendRequest<ManagerApplicationListDto>(`admin/personal/applications` + encodeQueryString(data));
 }
 
 export const AdminApi = new AdminApiClient();
