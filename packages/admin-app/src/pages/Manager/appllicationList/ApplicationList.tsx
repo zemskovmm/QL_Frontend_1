@@ -1,24 +1,16 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import React, { PropsWithChildren, useContext, useEffect, useState } from "react";
 import { AdminApi } from "../../../clients/adminApiClient";
-
-const data = {
-  page: 0,
-  pageSize: 10,
-  type: "",
-  status: "",
-  isAnswer: false,
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-};
+import { ManagerListDto } from "../../../interfaces/ManagerRpc";
+import { SideSettings } from "../../../components/common/ManagerLayout";
+import { useObserver } from "mobx-react";
 
 export const ApplicationList = () => {
-  const [items, setItems] = useState({});
+  const ct = useContext(SideSettings);
+  const [items, setItems] = useState<ManagerListDto | {}>({});
   useEffect(() => {
     async function Appl() {
       try {
-        const json: any = await AdminApi.getManagerApplication(data);
+        const json: any = await AdminApi.getManagerApplication(ct!.list);
         return setItems(json);
       } catch (e) {
         alert(e);
@@ -26,6 +18,15 @@ export const ApplicationList = () => {
     }
     Appl();
     console.log("1");
-  }, []);
-  return <pre>{JSON.stringify(items, null, 2)}</pre>;
+  }, [ct!.list]);
+  return useObserver(() => (
+    <SideSettings.Consumer>
+      {() => (
+        <div>
+          <div>{ct!.text}</div>
+          <pre>{JSON.stringify(ct!.list, null, 2)}</pre>
+        </div>
+      )}
+    </SideSettings.Consumer>
+  ));
 };
