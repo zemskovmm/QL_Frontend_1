@@ -7,7 +7,7 @@ import {
   RemoteUiEditorStore,
 } from "@kekekeks/remoteui/src";
 import { action, observable } from "mobx";
-import { AdminSchoolDtoLanguagesDict, AdminSchoolLanguageDto } from "../../stores/pages/school/schoolPageStore";
+import { AdminSchoolDtoLanguagesDict } from "src/stores/pages/adminStores/school/schoolPageStore";
 import { FC, useState } from "react";
 import Select from "@project/components/src/ui/Select/Select";
 import { AllLanguages } from "@project/components/src/utils/langs";

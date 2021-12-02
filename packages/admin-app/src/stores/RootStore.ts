@@ -28,6 +28,7 @@ import { GlobalSettingsPageStore } from "./pages/adminStores/globalSettings/glob
 import { FormEditorPageStore } from "src/pages/Admin/globalSetting/formEditorPage/FormEditorPageStore";
 import { LoginStore } from "./pages/login/login";
 import { ManagerCreateStore } from "./pages/adminStores/manager/managerCreateStore";
+import { ManagerApplicationListStore } from "./pages/managerStores/applicationList/managerApplicationListStore";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -62,4 +63,7 @@ export class RootStore {
   @observable courseTraitEditor = new CourseTraitEditorStore(this);
 
   @observable mangerCreatePage = new ManagerCreateStore(this);
+
+  /* Manager Shell */
+  @observable mangerApplicationListPage = new ManagerApplicationListStore(this);
 }

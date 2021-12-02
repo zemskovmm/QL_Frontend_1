@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useObserver } from "mobx-react";
-import { GlobalSettingsPageStore } from "src/stores/pages/globalSettings/globalSettingsPageStore";
+import { GlobalSettingsPageStore } from "src/stores/pages/adminStores/globalSettings/globalSettingsPageStore";
 import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 import { RouterLink } from "mobx-state-router";
 
