@@ -1,6 +1,7 @@
 enum variants {
   "basicStyle",
   "colStyle",
+  "managerSettingsStyle",
 }
 
 type variantType = {
@@ -18,12 +19,19 @@ const basicStyle = {
 
 const colStyle = {
   label: "flex flex-col mb-4 w-full",
-  title: "text-gray-700 pr-4 mb-2",
+  title: "text-gray-700 mb-2",
   input:
     " rounded-lg border-transparent appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
 };
 
-const StyleVariant = [basicStyle, colStyle];
+const managerSettingsStyle = {
+  label: "flex flex-col mb-2 w-full",
+  title: "mb-1",
+  input:
+    "border-transparent appearance-none border border-gray-300 py-1 text-sm px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+};
+
+const StyleVariant = [basicStyle, colStyle, managerSettingsStyle];
 
 export interface AdminTextBoxProps
   extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {

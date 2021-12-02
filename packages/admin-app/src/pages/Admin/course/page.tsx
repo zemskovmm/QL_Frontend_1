@@ -6,11 +6,11 @@ import { AdminLanguageDictionaryEditorCustomization } from "../school/page";
 import { RouterLink } from "mobx-state-router";
 import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 import { AdminTable } from "src/components/common/AdminTable";
-import { AdminSchoolDto } from "src/stores/pages/school/schoolPageStore";
+import { AdminSchoolDto } from "src/stores/pages/adminStores/school/schoolPageStore";
 import { dmap } from "src/utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
 import { FC } from "react";
-import { AdminCourseLanguageDto } from "src/stores/pages/course/coursePageStore";
+import { AdminCourseLanguageDto } from "src/stores/pages/adminStores/course/coursePageStore";
 import { TraitEditor } from "src/components/traitEditor";
 
 const customize = new AdminLanguageDictionaryEditorCustomization();

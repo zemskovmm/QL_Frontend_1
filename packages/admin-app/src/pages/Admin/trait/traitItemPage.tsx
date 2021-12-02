@@ -3,7 +3,7 @@ import { useObserver } from "mobx-react";
 import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 import React, { FC, useState } from "react";
 import { RouterLink } from "mobx-state-router";
-import { TraitItemPageStore } from "src/stores/pages/trait/traitItemPageStore";
+import { TraitItemPageStore } from "src/stores/pages/adminStores/trait/traitItemPageStore";
 import { RemoteUiEditor } from "@kekekeks/remoteui/src";
 import { AdminLanguageDictionaryEditorCustomization } from "../school/page";
 

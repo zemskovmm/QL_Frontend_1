@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { useObserver } from "mobx-react";
 import { AdminInputBox } from "src/components/common/AdminInputBox";
-import { GlobalSettingsPageStore } from "src/stores/pages/globalSettings/globalSettingsPageStore";
 import { GlobalLink, GlobalSocialLink } from "../common/commonGlobal";
+import { GlobalSettingsPageStore } from "../../../../stores/pages/adminStores/globalSettings/globalSettingsPageStore";
 
 export const FooterSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
   return useObserver(() => (

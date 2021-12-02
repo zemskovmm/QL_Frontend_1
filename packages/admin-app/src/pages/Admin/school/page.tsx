@@ -1,6 +1,6 @@
 import { AdminTable } from "src/components/common/AdminTable";
 import { useRootStore } from "src/utils/rootStoreUtils";
-import { AdminSchoolDto, AdminSchoolLanguageDto } from "src/stores/pages/school/schoolPageStore";
+import { AdminSchoolDto, AdminSchoolLanguageDto } from "src/stores/pages/adminStores/school/schoolPageStore";
 import { useObserver } from "mobx-react";
 import { dmap } from "src/utils/util";
 import { AllLanguages } from "@project/components/src/utils/langs";
