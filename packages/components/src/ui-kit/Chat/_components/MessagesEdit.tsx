@@ -1,13 +1,8 @@
+import React, { FC, FormEvent, useState,useRef } from "react";
 import { Button } from "@project/components/src/ui-kit/Button";
-import { TextareaControlled } from "@project/components/src/form/TextareaControlled";
-import { useForm } from "react-hook-form";
-import React, { FC, FormEvent, useRef } from "react";
+import { Textarea } from "@project/components/src/ui-kit/Textarea";
 import cn from "classnames";
 import CLIP_ICON from "@project/components/src/assets/icons/clip.svg";
-
-type MessagesType = {
-  text: string;
-};
 
 type PropsType = {
   className?: string;
@@ -16,17 +11,17 @@ type PropsType = {
 };
 
 export const MessagesEdit: FC<PropsType> = ({ className, onSendMessage, onFileChose }) => {
-  const { handleSubmit, control, setValue } = useForm<MessagesType>();
   const fileRef = useRef<HTMLInputElement>(null);
+  const [message,setMessage] = useState("")
 
-  const handleSendMessage = ({ text }: MessagesType) => {
-    if (text) {
-      onSendMessage(text);
+  const handleSendMessage = () => {
+    if (message) {
+      onSendMessage(message);
     }
-    setValue("text", "");
+    setMessage("");
   };
 
-  const handleImageChange = async (e: FormEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     let file = e.currentTarget.files?.item(0);
     if (file) {
@@ -35,19 +30,19 @@ export const MessagesEdit: FC<PropsType> = ({ className, onSendMessage, onFileCh
   };
 
   return (
-    <form className={cn("flex", className)} onSubmit={handleSubmit(handleSendMessage) as any}>
-      <input ref={fileRef} type="file" onChange={handleImageChange} style={{ display: "none" }} />
-      <TextareaControlled
+    <div className={cn("flex", className)}>
+      <input ref={fileRef} type="file" onChange={handleFileChange} style={{ display: "none" }} />
+      <Textarea
         rows={1}
+        value={message}
         className="flex-grow mr-2 h-full"
-        name="text"
         placeholder="Ваше сообщение"
         iconSrc={CLIP_ICON}
         onIconClick={() => fileRef.current?.click()}
-        control={control}
-        onPressEnter={() => console.log('//TODO SEND MESSAGE')}
+        onPressEnter={handleSendMessage}
+        onChangeText={setMessage}
       />
-      <Button className="self-end" text="Отправить" color="red" type="submit" />
-    </form>
+      <Button className="self-end" text="Отправить" color="red" type="submit" onClick={handleSendMessage} />
+    </div>
   );
 };

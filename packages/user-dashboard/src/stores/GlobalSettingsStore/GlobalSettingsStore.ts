@@ -1,8 +1,7 @@
 import { action, map } from "nanostores";
 import { useStore } from "@nanostores/react";
-import { EditFormDto, PersonalCabinetDto } from "admin-app/src/interfaces/GlobalSettingsDto";
+import { PersonalCabinetDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 import { globalSettingsApi } from "src/api/GlobalSettingsApi";
-import { ActualState } from "src/stores/ActualState";
 
 interface GlobalSettingsStore {
   isLoading: boolean;
@@ -14,29 +13,33 @@ const globalSettingsStore = map<GlobalSettingsStore>({
   personalCabinet: {},
 });
 
-const globalSettingsActualState = new ActualState<string>(
-  async (lang: string) => {
-    const store = globalSettingsStore;
+var versionReq = 0;
+var lastLang: string;
+const getGlobalSettings = action(
+  globalSettingsStore,
+  "getGlobalSettings",
+  async (store, lang: string): Promise<void> => {
+    console.log("getGlobalSettings",lang);
+    if(lastLang === lang){
+      return;
+    }
+    
+    lastLang = lang
+    const newVersionReq = ++versionReq
+
     store.setKey("isLoading", true);
     const { isOk, body } = await globalSettingsApi.getGlobalSettings(lang);
     console.log(body);
-    let personalCabinet: EditFormDto | undefined = undefined;
+    if(newVersionReq!==versionReq){
+      return;
+    }
+    
     if (isOk) {
       store.setKey("personalCabinet", body?.personalCabinet || {});
     } else {
       store.setKey("personalCabinet", {});
     }
     store.setKey("isLoading", false);
-  },
-  "",
-  (prev, curr) => prev === curr
-);
-
-const getGlobalSettings = action(
-  globalSettingsStore,
-  "getGlobalSettings",
-  async (store, lang: string): Promise<void> => {
-    await globalSettingsActualState.update(lang);
   }
 );
 

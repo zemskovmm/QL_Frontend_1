@@ -1,4 +1,4 @@
-import React, { FC,KeyboardEvent } from "react";
+import React, { FC,KeyboardEventHandler } from "react";
 import { Text } from "@project/components/src/ui-kit/Text";
 import { IconButton } from "@project/components/src/ui-kit/IconButton";
 import { TextareaPropsType } from "./_types";
@@ -6,17 +6,9 @@ import cn from "classnames"
 
 
 export const Textarea:FC<TextareaPropsType> = 
-({className,label,value,placeholder,isError=false, helperText="",rows, onPressEnter,iconSrc,onIconClick, ...fields })=>{
+({className,label,value,placeholder,isError=false, helperText="",rows, onPressEnter,iconSrc,onIconClick,onChangeText, ...fields })=>{
 
     const textColor = isError ? 'error': 'help'
-
-
-    const handleKeyPress = (event:KeyboardEvent<HTMLTextAreaElement>)=>{
-        if(event.key=='Enter'){
-            event.preventDefault();
-            onPressEnter && onPressEnter()
-        }
-    }
 
     return <div className={`flex flex-col  ${className}`}>
         {label && <Text className="mb-2" text={label} color={textColor} size="caption"/>}
@@ -33,9 +25,15 @@ export const Textarea:FC<TextareaPropsType> =
                 )} 
                 style={{resize:'none'}}
                 value={value} 
-                onKeyPress={handleKeyPress}
+                onKeyPress={(event)=>{
+                    if(event.key=='Enter'){
+                        event.preventDefault();
+                        onPressEnter && onPressEnter()
+                    }
+                }}
                 placeholder={placeholder} 
                 rows={rows} 
+                onChange={(e)=>onChangeText?onChangeText(e.currentTarget.value):null}
                 {...fields}
             />
         </div>

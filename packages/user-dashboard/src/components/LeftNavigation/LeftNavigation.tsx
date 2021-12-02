@@ -6,9 +6,9 @@ import { useUserStatuseStore } from "src/stores/UserStatuseStore";
 import { IconLabel } from "@project/components/src/ui-kit/IconLabel";
 import USER_ICON from "@project/components/src/assets/icons/user.svg";
 import { Button } from "@project/components/src/ui-kit/Button";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useLocalized } from "src/locales";
-import { MY_APPLICATIONS_ROUTE, NEW_APPLICATION_ROUTE } from "src/constants";
+import { MY_APPLICATIONS_ROUTE, NEW_APPLICATION_ROUTE, PROFILE_ROUTE, SETTINGS_ROUTE } from "src/constants";
 import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
 
 export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) => {
@@ -18,8 +18,8 @@ export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) =
     user: { email, firstName, lastName },
     logoutAction,
   } = useUserStatuseStore();
+  const navigate = useNavigate();
  
-
   const { applications, onItemRender, getApplications,isOpenPage} = useApplicationsState();
 
   useEffect(() => {
@@ -39,8 +39,6 @@ export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) =
     [ApplicationType.Visa]:localizedText("APPLICATION_TYTLES_VISA_LANG"),
   }
 
-  
-
   const handleItemRender = (index: number): ListItemType | undefined => {
     onItemRender(index);
     const row = applications[index];
@@ -58,7 +56,9 @@ export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) =
     <div className={`p-4 h-full flex flex-col ${className}`}>
       <IconLabel className="mt-5 mb-8" iconSrc={USER_ICON} text={`${lastName} ${firstName}`} subText={email} />
       <div className="w-full flex flex-col">
-        <ListItem text={localizedText("PROFILE_LANG")} onClick={() => {}} />
+        <Link to={PROFILE_ROUTE}>
+          <ListItem text={localizedText("PROFILE_LANG")} />
+        </Link>
         <ListItem
           text={localizedText("MY_APPLICATIONS_LANG")}
           onClick={() => setApplicationsListOpen(!isApplicationsListOpen)}
@@ -71,12 +71,16 @@ export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) =
             depth={1}
             className="flex-shrink"
             count={applications.length}
-            onClick={(id) => {}}
+            onClick={navigate}
             onItemRender={handleItemRender}
           />
         )}
-        {isApplicationsListOpen && applications.length == 0 && <ListItem depth={1} text={localizedText("NOTHING_HERE_YET")} />}
-        <ListItem text={localizedText("SETTINGS_LANG")} onClick={() => {}} />
+        {isApplicationsListOpen && applications.length == 0 && 
+          <ListItem depth={1} text={localizedText("NOTHING_HERE_YET")} />
+        }
+        <Link to={SETTINGS_ROUTE}>
+          <ListItem text={localizedText("SETTINGS_LANG")} />
+        </Link>
         <div className={`mt-4 ml-auto md:hidden`}>
           <Link to={NEW_APPLICATION_ROUTE}>
             <Button plus={true} text={localizedText("NEW_APPLICATION_LANG")} color={"red"} />

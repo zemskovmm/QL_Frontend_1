@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { FC } from "react";
+import { FC,useEffect, useState } from "react";
 import { InputControlled } from "@project/components/src/form/InputControlled";
 import { useSignInStore } from "./_store";
 import { Button } from "@project/components/src/ui-kit/Button";
@@ -8,8 +8,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { CenterCardLayout } from "src/layouts/CenterCardLayout";
 import { UserStatuseLoginProps, useUserStatuseStore } from "src/stores/UserStatuseStore";
 import reg from "./reg.svg";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useLocalized } from "src/locales";
+import { CREATE_COMPLITE_APPLICATIONS_ROUTE, PROFILE_ROUTE } from "src/constants";
+import { useNewApplicationState } from "src/stores/ApplicationsState";
 
 const schema: SchemaOf<UserStatuseLoginProps> = object({
   email: string().required("Required to fill"),
@@ -22,24 +24,23 @@ export const SignInPage: FC = () => {
     resolver: yupResolver(schema),
   });
   const { isLoading, loginAction } = useSignInStore();
-  const { isLogined } = useUserStatuseStore();
+  const { isAuthorized } = useUserStatuseStore();
   const { localizedText } = useLocalized();
-  // const { PROFILE_PATH, SIGN_UP_PATH } = useRouterStore();
-
-  // const signUpPath = applicationType
-  //   ? SIGN_UP_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
-  //   : SIGN_UP_PATH;
-
-  // useEffect(() => {
-  //   const successPath = applicationType
-  //     ? CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
-  //     : PROFILE_PATH;
-  //   isLogined && route(successPath);
-  // }, [isLogined, applicationType, entityId]);
+  const {createApplicationReq} = useNewApplicationState();
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    if(isAuthorized){
+      if(createApplicationReq){
+        navigate(CREATE_COMPLITE_APPLICATIONS_ROUTE)
+      }
+      navigate(PROFILE_ROUTE)
+    }
+  }, [isAuthorized,createApplicationReq]);
 
   return (
     <CenterCardLayout title={localizedText('SIGN_IN_TITLE')} subtitle={localizedText('SIGN_IN_SUBTITLE')}>
-      <form className="flex flex-col md:px-28 w-full" onSubmit={handleSubmit(loginAction) as any}>
+      <form className="flex flex-col md:px-28 w-full" onSubmit={handleSubmit(loginAction)}>
         <InputControlled
           className="mb-4"
           name="email"

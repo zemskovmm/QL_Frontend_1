@@ -30,32 +30,6 @@ const setIsOpenPage = action(applicationsState,"setIsOpenPage",
   }
 );
 
-const addApplication = action(
-  applicationsState,
-  "addApplication",
-  async (store, applicationType: ApplicationType, entityId: number): Promise<number> => {
-    store.setKey("isLoading", true);
-    let outApplicationId = 0;
-
-    const result = await personalApi.addApplications({
-      ...APPLICATION_DTO_DEFAULT,
-      type: applicationType,
-      entityId,
-    });
-
-    const { isOk, body, error } = result;
-    if (isOk) {
-      outApplicationId = body?.id || 0;
-      await getApplications();
-    } else {
-      addErrorAction(error);
-    }
-
-    store.setKey("isLoading", false);
-    return outApplicationId;
-  }
-);
-
 const getApplications = action(applicationsState, "getApplications", async (store) => {
   loadedPages = [];
   await onItemRender(0);
@@ -98,5 +72,5 @@ const onItemRender = action(applicationsState, "getApplications", async (store, 
 
 export const useApplicationsState = () => {
   const state = useStore(applicationsState);
-  return { ...state, onItemRender, getApplications, addApplication, setIsOpenPage };
+  return { ...state, onItemRender, getApplications, setIsOpenPage };
 };

@@ -20,7 +20,7 @@ type PropsType = {
 
 export const DashboardNewApplication:FC<PropsType> = ({ onDismiss,onUsForm,applicationType,entityId}) => {
   const lang = useIntl().locale;
-  const dashboardUrl = `${DASHBOARD_PUBLIC_BASE_URL}/${lang}/create-applications/${applicationType}/${entityId}`;
+  const dashboardUrl = `${DASHBOARD_PUBLIC_BASE_URL}/create-applications/${applicationType}/${entityId}`;
 
   return (
     <OverlayDialog className={"text-center flex flex-col items-center justify-around h-112 w-160"} cancel={onDismiss}>

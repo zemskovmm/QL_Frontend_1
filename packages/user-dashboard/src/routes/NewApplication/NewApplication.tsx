@@ -17,9 +17,9 @@ export const NewApplication: FC = () => {
       <div className="self-stretch flex flex-wrap justify-center">
         <ApplicationCard href={`${NEXT_PUBLIC_BASE_URL}/${lang}/catalog/university`} title={localizedText('GET_EDUCATION_LANG')} />
         <ApplicationCard href={`${NEXT_PUBLIC_BASE_URL}/${lang}/catalog/course`} title={localizedText('TAKE_LANGUAGE_COURSES_LANG')} />
-        <ApplicationCard href={`${NEXT_PUBLIC_BASE_URL}/${lang}/catalog/housing`} title={('FIND_RENTAL_HOME')} />
+        <ApplicationCard href={`${NEXT_PUBLIC_BASE_URL}/${lang}/catalog/housing`} title={localizedText('FIND_RENTAL_HOME')} />
         <ApplicationCard
-          href = {CREATE_APPLICATIONS_ROUTE
+          href = { CREATE_APPLICATIONS_ROUTE
             .replace(':applicationType',ApplicationType.Visa)
             .replace(':entityId',"0")}
           title={localizedText('GET_VISA_FRANCE')}
