@@ -44,27 +44,6 @@ export class HousingTraitLoader extends TraitLoaderWithCache {
   }
 }
 
-export class HousingAccommodationTraitLoader extends TraitLoaderWithCache {
-  @observable HousingId = 0;
-
-  @observable async setHousingId(id: number) {
-    this.HousingId = id;
-    await this.reload();
-  }
-
-  async addTraitToItem(traitId: number) {
-    await AdminApi.addTraitToHousingAccommodation(this.HousingId, traitId);
-  }
-
-  async deleteTraitToItem(traitId: number) {
-    await AdminApi.removeTraitFromHousingAccommodation(this.HousingId, traitId);
-  }
-
-  async loadActiveTraits(): Promise<number[]> {
-    return await AdminApi.getActiveHousingAccommodationTraits(this.HousingId);
-  }
-}
-
 export class HousingEditPageStore extends Loadable {
   @observable.ref remoteUiStore?: RemoteUiEditorStore;
   @observable root: RootStore;
@@ -152,22 +131,6 @@ export class HousingTraitEditorStore {
   constructor(public rootStore: RootStore) {
     this.root = rootStore;
     this.traitStore = new TraitEditorStore(new HousingTraitLoader());
-  }
-
-  @action async loadStore(id: number) {
-    this.traitStore.page = 0;
-    await this.traitStore.traitLoader.setHousingId(id);
-    await this.traitStore.refresh({});
-  }
-}
-
-export class HousingAccommodationTraitEditorStore {
-  @observable root: RootStore;
-  @observable traitStore: TraitEditorStore<HousingAccommodationTraitLoader>;
-
-  constructor(public rootStore: RootStore) {
-    this.root = rootStore;
-    this.traitStore = new TraitEditorStore(new HousingAccommodationTraitLoader());
   }
 
   @action async loadStore(id: number) {

@@ -30,12 +30,16 @@ import { LoginStore } from "./pages/login/login";
 import { ManagerCreateStore } from "./pages/manager/managerCreateStore";
 import {
   CreateHousingPageStore,
-  HousingAccommodationTraitEditorStore,
-  HousingAccommodationTraitLoader,
   HousingEditPageStore,
   HousingListStore,
   HousingTraitEditorStore,
 } from "./pages/housing/housing-page-store";
+import {
+  CreateHousingAccommodationPageStore,
+  HousingAccommodationEditPageStore,
+  HousingAccommodationListStore,
+  HousingAccommodationTraitEditorStore,
+} from "./pages/housing/housing-accommodation-page-store";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -72,8 +76,11 @@ export class RootStore {
   @observable housingListPage = new HousingListStore(this);
   @observable housingCreate = new CreateHousingPageStore(this);
   @observable housingEdit = new HousingEditPageStore(this);
-  // TODO EDIT housingAccommodation create/edit
   @observable housingTraitEditor = new HousingTraitEditorStore(this);
+
+  @observable housingAccommodationListPage = new HousingAccommodationListStore(this);
+  @observable housingAccommodationCreate = new CreateHousingAccommodationPageStore(this);
+  @observable housingAccommodationEdit = new HousingAccommodationEditPageStore(this);
   @observable housingAccommodationTraitEditor = new HousingAccommodationTraitEditorStore(this);
 
   @observable mangerCreatePage = new ManagerCreateStore(this);

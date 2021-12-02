@@ -67,6 +67,12 @@ export const HousingEditPage = () => {
             Traits editor{" "}
           </AdminButton>
         </RouterLink>
+        <RouterLink routeName={AdminRouteNames.housingAccommodationList} params={{ id: `${housingEdit.id}` }}>
+          <AdminButton color={"primary"} className={`mr-4`}>
+            {" "}
+            Accommodations{" "}
+          </AdminButton>
+        </RouterLink>
         <div>Housing id: {housingEdit.id}</div>
       </div>
       {housingEdit.remoteUiStore ? (
@@ -100,13 +106,4 @@ export const HousingCreatePage = () => {
 export const HousingTraitEditPage = () => {
   const { housingTraitEditor } = useRootStore();
   return useObserver(() => <TraitEditor store={housingTraitEditor.traitStore} />);
-};
-
-export const HousingAccommodationEdit = () => {
-  return <>Accomodation edit</>;
-};
-
-export const HousingAccommodationTraitEdit = () => {
-  const { housingAccommodationTraitEditor } = useRootStore();
-  return useObserver(() => <TraitEditor store={housingAccommodationTraitEditor.traitStore} />);
 };

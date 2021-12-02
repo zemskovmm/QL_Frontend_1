@@ -20,14 +20,13 @@ import { CreateSchoolPage, SchoolListPage, SchoolPage, SchoolTraitEditorPage } f
 import { CourseCreatePage, CourseEditPage, CourseListPage, CourseTraitEditorPage } from "./course/page";
 import { ManagerCreatePage } from "./ManagerCreate/ManagerCreatePage";
 import { RouteNames } from "../../routing/routes";
+import { HousingCreatePage, HousingEditPage, HousingTablePage, HousingTraitEditPage } from "./housing/page";
 import {
+  HousingAccommodationCreatePage,
   HousingAccommodationEdit,
+  HousingAccommodationTablePage,
   HousingAccommodationTraitEdit,
-  HousingCreatePage,
-  HousingEditPage,
-  HousingTablePage,
-  HousingTraitEditPage,
-} from "./housing/page";
+} from "./housing/accommodation";
 
 export const UserAuthorizedOnlyHook: RouteTransitionHook = async (root) => {
   if (!(await root.loginStore.check())) throw new RouterState(RouteNames.index);
@@ -75,6 +74,9 @@ export enum AdminRouteNames {
   housingList = "admin-housing-list",
   housingEdit = "admin-housing-edit",
   housingTraitEdit = "admin-housing-trait-edit",
+
+  housingAccommodationList = "admin-accommodation-housing-list",
+  housingAccommodationCreate = "admin-accommodation-housing-create",
   housingAccommodationEdit = "admin-accommodation-edit",
   housingAccommodationTraitEdit = "admin-accommodation-trait-edit",
 }
@@ -121,7 +123,10 @@ export const AdminRouteViewMap = {
   [AdminRouteNames.housingEdit]: <HousingEditPage />,
   [AdminRouteNames.housingList]: <HousingTablePage />,
   [AdminRouteNames.housingTraitEdit]: <HousingTraitEditPage />,
+
   [AdminRouteNames.housingAccommodationEdit]: <HousingAccommodationEdit />,
+  [AdminRouteNames.housingAccommodationCreate]: <HousingAccommodationCreatePage />,
+  [AdminRouteNames.housingAccommodationList]: <HousingAccommodationTablePage />,
   [AdminRouteNames.housingAccommodationTraitEdit]: <HousingAccommodationTraitEdit />,
 };
 
@@ -341,12 +346,25 @@ export const AdminRoutes: Route[] = convertRoutes([
     onEnter: async (root, to) => await root.housingTraitEditor.loadStore(Number(to.params.id)),
   },
   {
-    pattern: "/housing/:id/accommodation/:accid/edit",
-    name: AdminRouteNames.housingAccommodationEdit,
+    pattern: "/housing/:id/accommodation",
+    name: AdminRouteNames.housingAccommodationList,
     hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.housingAccommodationListPage.loadById(Number(to.params.id)),
   },
   {
-    pattern: "/housing/:id/accommodation/:accid/traits",
+    pattern: "/housing/:id/accommodation/create",
+    name: AdminRouteNames.housingAccommodationCreate,
+    hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.housingAccommodationCreate.load(),
+  },
+  {
+    pattern: "/accommodation/:id/edit",
+    name: AdminRouteNames.housingAccommodationEdit,
+    hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.housingAccommodationEdit.loadById(Number(to.params.id)),
+  },
+  {
+    pattern: "/accommodation/:id/traits",
     name: AdminRouteNames.housingAccommodationTraitEdit,
     hooks: [UserAuthorizedOnlyHook],
     onEnter: async (root, to) => await root.housingAccommodationTraitEditor.loadStore(Number(to.params.id)),
