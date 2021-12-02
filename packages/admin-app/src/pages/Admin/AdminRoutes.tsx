@@ -320,21 +320,25 @@ export const AdminRoutes: Route[] = convertRoutes([
     pattern: "/housing",
     name: AdminRouteNames.housingList,
     hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.housingListPage.load(),
   },
   {
     pattern: "/housing/create",
     name: AdminRouteNames.housingCreate,
     hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.housingCreate.load(),
   },
   {
     pattern: "/housing/:id/edit",
     name: AdminRouteNames.housingEdit,
     hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.housingEdit.loadById(Number(to.params.id)),
   },
   {
     pattern: "/housing/:id/traits",
     name: AdminRouteNames.housingTraitEdit,
     hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.housingTraitEditor.loadStore(Number(to.params.id)),
   },
   {
     pattern: "/housing/:id/accommodation/:accid/edit",
@@ -345,5 +349,6 @@ export const AdminRoutes: Route[] = convertRoutes([
     pattern: "/housing/:id/accommodation/:accid/traits",
     name: AdminRouteNames.housingAccommodationTraitEdit,
     hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.housingAccommodationTraitEditor.loadStore(Number(to.params.id)),
   },
 ]);

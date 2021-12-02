@@ -28,6 +28,14 @@ import { GlobalSettingsPageStore } from "./pages/globalSettings/globalSettingsPa
 import { FormEditorPageStore } from "src/pages/Admin/globalSetting/formEditorPage/FormEditorPageStore";
 import { LoginStore } from "./pages/login/login";
 import { ManagerCreateStore } from "./pages/manager/managerCreateStore";
+import {
+  CreateHousingPageStore,
+  HousingAccommodationTraitEditorStore,
+  HousingAccommodationTraitLoader,
+  HousingEditPageStore,
+  HousingListStore,
+  HousingTraitEditorStore,
+} from "./pages/housing/housing-page-store";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -60,6 +68,13 @@ export class RootStore {
   @observable courseCreate = new CreateCoursePageStore(this);
   @observable courseEdit = new CourseEditPageStore(this);
   @observable courseTraitEditor = new CourseTraitEditorStore(this);
+
+  @observable housingListPage = new HousingListStore(this);
+  @observable housingCreate = new CreateHousingPageStore(this);
+  @observable housingEdit = new HousingEditPageStore(this);
+  // TODO EDIT housingAccommodation create/edit
+  @observable housingTraitEditor = new HousingTraitEditorStore(this);
+  @observable housingAccommodationTraitEditor = new HousingAccommodationTraitEditorStore(this);
 
   @observable mangerCreatePage = new ManagerCreateStore(this);
 }
