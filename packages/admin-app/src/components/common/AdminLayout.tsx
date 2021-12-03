@@ -30,6 +30,9 @@ const Navbar = () => {
           <RouterLink routeName={AdminRouteNames.courseList}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Coures</a>
           </RouterLink>
+          <RouterLink routeName={AdminRouteNames.housingList}>
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10">Housings</a>
+          </RouterLink>
           <RouterLink routeName={AdminRouteNames.globalSettingsEditor} params={{ lang: "en" }}>
             <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mx-10 whitespace-nowrap	">
               Global settings

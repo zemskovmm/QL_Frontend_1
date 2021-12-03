@@ -29,6 +29,18 @@ import { FormEditorPageStore } from "src/pages/Admin/globalSetting/formEditorPag
 import { LoginStore } from "./pages/login/login";
 import { ManagerCreateStore } from "./pages/adminStores/manager/managerCreateStore";
 import { ManagerApplicationListStore } from "./pages/managerStores/applicationList/managerApplicationListStore";
+import {
+  CreateHousingPageStore,
+  HousingEditPageStore,
+  HousingListStore,
+  HousingTraitEditorStore,
+} from "./pages/housing/housing-page-store";
+import {
+  CreateHousingAccommodationPageStore,
+  HousingAccommodationEditPageStore,
+  HousingAccommodationListStore,
+  HousingAccommodationTraitEditorStore,
+} from "./pages/housing/housing-accommodation-page-store";
 import { ManagerApplicationStore } from "./pages/managerStores/application/managerApplicationStore";
 
 export class RootStore {
@@ -62,6 +74,16 @@ export class RootStore {
   @observable courseCreate = new CreateCoursePageStore(this);
   @observable courseEdit = new CourseEditPageStore(this);
   @observable courseTraitEditor = new CourseTraitEditorStore(this);
+
+  @observable housingListPage = new HousingListStore(this);
+  @observable housingCreate = new CreateHousingPageStore(this);
+  @observable housingEdit = new HousingEditPageStore(this);
+  @observable housingTraitEditor = new HousingTraitEditorStore(this);
+
+  @observable housingAccommodationListPage = new HousingAccommodationListStore(this);
+  @observable housingAccommodationCreate = new CreateHousingAccommodationPageStore(this);
+  @observable housingAccommodationEdit = new HousingAccommodationEditPageStore(this);
+  @observable housingAccommodationTraitEditor = new HousingAccommodationTraitEditorStore(this);
 
   @observable mangerCreatePage = new ManagerCreateStore(this);
 
