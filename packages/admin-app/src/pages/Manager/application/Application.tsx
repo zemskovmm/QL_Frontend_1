@@ -4,13 +4,15 @@ import { useRootStore } from "../../../utils/rootStoreUtils";
 import { ManagerApplicationInfoDto } from "../../../interfaces/ManagerRpc";
 import { ManagerApplicationStore } from "../../../stores/pages/managerStores/application/managerApplicationStore";
 
-export const ManagerChat: FC<{ store: ManagerApplicationStore }> = ({ store }) => {
+const usePollMessages = (store: ManagerApplicationStore) =>
   useEffect(() => {
-    const interval = setInterval(async () => {
-      await store.loadMessages();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+    store.pollMessages();
+    return () => store.stopPolling();
+  });
+
+export const ManagerChat: FC<{ store: ManagerApplicationStore }> = ({ store }) => {
+  usePollMessages(store);
+
   return (
     <div className={`p-10 h-screen`}>
       <div className={`flex flex-col border h-full p-10`}>
