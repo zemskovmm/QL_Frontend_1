@@ -1,9 +1,9 @@
 import { userApi, QlClientLoginProps, QlClientRegisterProps } from "src/api/UserApi";
 import { action, computed, map, MapStore, onMount } from "nanostores";
-import { useStore } from "@nanostores/react";
 import { UserStatus } from "./_types";
 import { addErrorAction, addSuccessAction } from "src/stores/NotificationStore";
 import { onResponse } from "src/api/QLBaseApi";
+import { useStore } from "src/stores/react-nanostores";
 
 export type UserStatuseLoginProps = QlClientLoginProps;
 export type UserStatuseRegisterProps = QlClientRegisterProps;
@@ -147,7 +147,7 @@ const logoutAction = action(
 );
 
 export const useUserStatuseStore = () => {
-  const state = useStore(userStatuseStore,{});
+  const state = useStore(userStatuseStore);
   const isAuthorized = useStore(isAuthorizedComputed);
   const isNotAuthorized = useStore(isNotAuthorizedComputed);
   const isRegistrationComplite = useStore(isRegistrationCompliteComputed);

@@ -1,5 +1,5 @@
 import { action, map } from "nanostores";
-import { useStore } from "@nanostores/react";
+import { useStore } from "src/stores/react-nanostores";
 import { PersonalCabinetDto } from "admin-app/src/interfaces/GlobalSettingsDto";
 import { globalSettingsApi } from "src/api/GlobalSettingsApi";
 

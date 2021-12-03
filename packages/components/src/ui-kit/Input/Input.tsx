@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent,forwardRef } from "react";
 import { Text } from "@project/components/src/ui-kit/Text";
 
 export type InputTypeType = "text" | "email" | "tel" | "password";
@@ -14,7 +14,8 @@ export interface InputPropsType {
   sign?: boolean;
 }
 
-export const Input: FunctionComponent<InputPropsType> = ({
+export const Input: FunctionComponent<InputPropsType> = forwardRef<HTMLInputElement,InputPropsType>(({
+  
   className,
   label,
   value,
@@ -24,7 +25,7 @@ export const Input: FunctionComponent<InputPropsType> = ({
   type,
   sign,
   ...fields
-}) => {
+},ref) => {
   const inputClass = sign
     ? [
         "py-1 px-4 rounded-sm border-2 focus:border-blue-400 text-small leading-7	",
@@ -44,8 +45,8 @@ export const Input: FunctionComponent<InputPropsType> = ({
   return (
     <label className={`flex flex-col ${className}`}>
       {label && <Text className="mb-2" text={label} color={textColor} size="caption" />}
-      <input className={inputClass} type={type} value={value} placeholder={placeholder} {...fields} />
+      <input ref={ref} className={inputClass} type={type} value={value} placeholder={placeholder} {...fields} />
       {helperText && <Text className="mt-2" text={helperText} color={textColor} size="caption" />}
     </label>
   );
-};
+});
