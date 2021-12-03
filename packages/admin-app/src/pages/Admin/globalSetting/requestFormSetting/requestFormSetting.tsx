@@ -2,7 +2,7 @@ import React, { FC, Suspense } from "react";
 import { useObserver } from "mobx-react";
 import { HtmlEditor } from "src/components";
 import { AdminInputBox } from "src/components/common/AdminInputBox";
-import { GlobalSettingsPageStore } from "src/stores/pages/globalSettings/globalSettingsPageStore";
+import { GlobalSettingsPageStore } from "src/stores/pages/adminStores/globalSettings/globalSettingsPageStore";
 
 export const RequestFormSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {
   return useObserver(() => (

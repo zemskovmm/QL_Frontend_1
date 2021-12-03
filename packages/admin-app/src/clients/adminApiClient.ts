@@ -3,11 +3,14 @@ import { encodeQueryString } from "src/utils/urlUtil";
 import { ApiClientBase } from "@project/components/src/api/apiClientBase";
 import { AdminTraitListItemDto, AdminTraitItemDto, AdminTraitTypeDto } from "../interfaces/TraitPageDto";
 import { AdminUniversityItemDto, AdminUniversityItemPostDto } from "../interfaces/UniversityPageDto";
-import { AdminSchoolDto } from "../stores/pages/school/schoolPageStore";
+import { AdminSchoolDto } from "src/stores/pages/adminStores/school/schoolPageStore";
 import { RemoteUiDefinition } from "@kekekeks/remoteui/src";
-import { AdminCourseDto } from "../stores/pages/course/coursePageStore";
+import { AdminCourseDto } from "src/stores/pages/adminStores/course/coursePageStore";
 import { GlobalSettingsDto } from "src/interfaces/GlobalSettingsDto";
-import { ManagerCreateDto } from "../stores/pages/manager/managerCreateStore";
+import { ManagerCreateDto } from "src/stores/pages/adminStores/manager/managerCreateStore";
+import { ManagerApplicationListDto, ManagerListSettingsDto } from "../interfaces/ManagerRpc";
+import { AdminHousingDto } from "../stores/pages/housing/housing-page-store";
+import { AdminHousingAccommodationDto } from "../stores/pages/housing/housing-accommodation-page-store";
 
 export class AdminApiClient extends ApiClientBase {
   getTotalPages = (length: number) => (length % 10 ? Math.floor(length / 10) + 1 : Math.floor(length / 10));
@@ -37,6 +40,9 @@ export class AdminApiClient extends ApiClientBase {
   getActiveTraitsByCourseId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-course/${id}`);
   getActiveTraitsBySchoolId = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-school/${id}`);
   getActiveUniversityTraits = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-university/${id}`);
+  getActiveHousingTraits = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-housing/${id}`);
+  getActiveHousingAccommodationTraits = (id: number) =>
+    this.sendRequest<number[]>(`admin/entity-traits-housing-accommodation-type/${id}`);
   getActivePageTraits = (id: number) => this.sendRequest<number[]>(`admin/entity-traits-page/${id}`);
 
   /* Trait adders */
@@ -63,6 +69,18 @@ export class AdminApiClient extends ApiClientBase {
 
   removeTraitFromPage = (id: number, traitId: number) =>
     this.sendRequest(`admin/entity-traits-page/${id}/${traitId}`, "", "DELETE");
+
+  addTraitToHousing = (id: number, traitId: number) =>
+    this.sendRequest(`admin/entity-traits-housing/${id}/${traitId}`, "", "POST");
+
+  removeTraitFromHousing = (id: number, traitId: number) =>
+    this.sendRequest(`admin/entity-traits-housing/${id}/${traitId}`, "", "DELETE");
+
+  addTraitToHousingAccommodation = (id: number, traitId: number) =>
+    this.sendRequest(`admin/entity-traits-housing-accommodation-type/${id}/${traitId}`, "", "POST");
+
+  removeTraitFromHousingAccommodation = (id: number, traitId: number) =>
+    this.sendRequest(`admin/entity-traits-housing-accommodation-type/${id}/${traitId}`, "", "DELETE");
 
   // TODO remove this!
   getTraitList = () => this.sendRequest<AdminTraitListItemDto[]>("admin/trait-types");
@@ -106,11 +124,34 @@ export class AdminApiClient extends ApiClientBase {
   createCourse = (data: AdminCourseDto<unknown>) => this.sendRequest(`admin/courses/`, data, "POST");
   definitionCourses = () => this.sendRequest<RemoteUiDefinition>("admin/courses/definition");
 
+  /* Housing */
+  getHousingList = () => this.sendRequest<AdminHousingDto<unknown>[]>("admin/housings");
+  getHousing = (id: number) =>
+    this.sendRequest<{ value: AdminHousingDto<unknown>; definition: RemoteUiDefinition }>(`admin/housings/${id}`);
+  updateHousing = (id: number, data: AdminHousingDto<unknown>) => this.sendRequest(`admin/housings/${id}`, data, "PUT");
+  createHousing = (data: AdminHousingDto<unknown>) => this.sendRequest(`admin/housings/`, data, "POST");
+  definitionHousings = () => this.sendRequest<RemoteUiDefinition>("admin/housings/definition");
+
+  /* Housing Accommodation */
+  getHousingAccommodationList = (id: number) =>
+    this.sendRequest<AdminHousingAccommodationDto<unknown>[]>(`admin/housings/${id}/accommodations`);
+  getHousingAccommodation = (id: number) =>
+    this.sendRequest<{ value: AdminHousingAccommodationDto<unknown>; definition: RemoteUiDefinition }>(
+      `admin/housings/accommodation/type/${id}`
+    );
+  updateHousingAccommodation = (id: number, data: AdminHousingAccommodationDto<unknown>) =>
+    this.sendRequest(`admin/housings/accommodation/type/${id}`, data, "PUT");
+  createHousingAccommodation = (data: AdminHousingAccommodationDto<unknown>) =>
+    this.sendRequest(`admin/housings/accommodation/type`, data, "POST");
+  definitionHousingsAccommodation = () =>
+    this.sendRequest<RemoteUiDefinition>("admin/housings/accommodation/type/definition");
+
   /* Manager */
   postManagerCreate = (data: ManagerCreateDto) => this.sendRequest(`admin/auth/manager/register`, data, "POST");
 
   /* Manager cabinet */
-  getManagerApplication = (data: any) => this.sendRequest(`admin/personal/applications` + encodeQueryString(data));
+  getManagerApplication = (data: any | ManagerListSettingsDto) =>
+    this.sendRequest<ManagerApplicationListDto>(`admin/personal/applications` + encodeQueryString(data));
 }
 
 export const AdminApi = new AdminApiClient();

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useObserver } from "mobx-react";
-import { GlobalSettingsPageStore } from "src/stores/pages/globalSettings/globalSettingsPageStore";
+import { GlobalSettingsPageStore } from "src/stores/pages/adminStores/globalSettings/globalSettingsPageStore";
 import { GlobalLink, GlobalSocialLink } from "../common/commonGlobal";
 
 export const HeaderSettings: FC<{ s: GlobalSettingsPageStore }> = ({ s }) => {

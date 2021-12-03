@@ -1,33 +1,46 @@
 import { observable } from "mobx";
 import { RouterState, RouterStore } from "mobx-state-router";
 import { Routes } from "src/routing/routes";
-import { PageEditorPageStore } from "src/stores/pages/page/pageEditorPageStore";
-import { PageListPageStore } from "src/stores/pages/page/pageListPageStore";
-import { PageTraitEditPageStore } from "./pages/page/pageTraitEditPageStore";
-import { TraitListPageStore } from "./pages/trait/traitListPageStore";
-import { TraitPageStore } from "./pages/trait/traitPageStore";
-import { NewTraitItemPageStore, TraitItemPageStore } from "./pages/trait/traitItemPageStore";
-import { UniversityListPageStore } from "./pages/university/universityListPageStore";
-import { UniversityPageStore } from "./pages/university/universityPageStore";
-import { UniversityCreatePageStore } from "./pages/university/universityCreatePageStore";
-import { UniversityTraitEditPageStore } from "./pages/university/universityTraitEditPageStore";
+import { PageEditorPageStore } from "src/stores/pages/adminStores/page/pageEditorPageStore";
+import { PageListPageStore } from "src/stores/pages/adminStores/page/pageListPageStore";
+import { PageTraitEditPageStore } from "./pages/adminStores/page/pageTraitEditPageStore";
+import { TraitListPageStore } from "./pages/adminStores/trait/traitListPageStore";
+import { TraitPageStore } from "./pages/adminStores/trait/traitPageStore";
+import { NewTraitItemPageStore, TraitItemPageStore } from "./pages/adminStores/trait/traitItemPageStore";
+import { UniversityListPageStore } from "./pages/adminStores/university/universityListPageStore";
+import { UniversityPageStore } from "./pages/adminStores/university/universityPageStore";
+import { UniversityCreatePageStore } from "./pages/adminStores/university/universityCreatePageStore";
+import { UniversityTraitEditPageStore } from "./pages/adminStores/university/universityTraitEditPageStore";
 import {
   CreateSchoolPageStore,
   SchoolListPageStore,
   SchoolPageStore,
   SchoolTraitEditorStore,
-} from "./pages/school/schoolPageStore";
+} from "./pages/adminStores/school/schoolPageStore";
 import {
   CourseEditPageStore,
   CourseListStore,
   CourseTraitEditorStore,
   CreateCoursePageStore,
-} from "./pages/course/coursePageStore";
-import { CreateTraitTypePageStore, EditTraitTypePageStore } from "./pages/trait/createTraitTypePageStore";
-import { GlobalSettingsPageStore } from "./pages/globalSettings/globalSettingsPageStore";
+} from "./pages/adminStores/course/coursePageStore";
+import { CreateTraitTypePageStore, EditTraitTypePageStore } from "./pages/adminStores/trait/createTraitTypePageStore";
+import { GlobalSettingsPageStore } from "./pages/adminStores/globalSettings/globalSettingsPageStore";
 import { FormEditorPageStore } from "src/pages/Admin/globalSetting/formEditorPage/FormEditorPageStore";
 import { LoginStore } from "./pages/login/login";
-import { ManagerCreateStore } from "./pages/manager/managerCreateStore";
+import { ManagerCreateStore } from "./pages/adminStores/manager/managerCreateStore";
+import { ManagerApplicationListStore } from "./pages/managerStores/applicationList/managerApplicationListStore";
+import {
+  CreateHousingPageStore,
+  HousingEditPageStore,
+  HousingListStore,
+  HousingTraitEditorStore,
+} from "./pages/housing/housing-page-store";
+import {
+  CreateHousingAccommodationPageStore,
+  HousingAccommodationEditPageStore,
+  HousingAccommodationListStore,
+  HousingAccommodationTraitEditorStore,
+} from "./pages/housing/housing-accommodation-page-store";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -61,5 +74,18 @@ export class RootStore {
   @observable courseEdit = new CourseEditPageStore(this);
   @observable courseTraitEditor = new CourseTraitEditorStore(this);
 
+  @observable housingListPage = new HousingListStore(this);
+  @observable housingCreate = new CreateHousingPageStore(this);
+  @observable housingEdit = new HousingEditPageStore(this);
+  @observable housingTraitEditor = new HousingTraitEditorStore(this);
+
+  @observable housingAccommodationListPage = new HousingAccommodationListStore(this);
+  @observable housingAccommodationCreate = new CreateHousingAccommodationPageStore(this);
+  @observable housingAccommodationEdit = new HousingAccommodationEditPageStore(this);
+  @observable housingAccommodationTraitEditor = new HousingAccommodationTraitEditorStore(this);
+
   @observable mangerCreatePage = new ManagerCreateStore(this);
+
+  /* Manager Shell */
+  @observable mangerApplicationListPage = new ManagerApplicationListStore(this);
 }
