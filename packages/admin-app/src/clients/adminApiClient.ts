@@ -8,7 +8,7 @@ import { RemoteUiDefinition } from "@kekekeks/remoteui/src";
 import { AdminCourseDto } from "src/stores/pages/adminStores/course/coursePageStore";
 import { GlobalSettingsDto } from "src/interfaces/GlobalSettingsDto";
 import { ManagerCreateDto } from "src/stores/pages/adminStores/manager/managerCreateStore";
-import { ManagerApplicationListDto, ManagerListSettingsDto } from "../interfaces/ManagerRpc";
+import { ManagerApplicationInfoDto, ManagerApplicationListDto, ManagerListSettingsDto } from "../interfaces/ManagerRpc";
 import { AdminHousingDto } from "../stores/pages/housing/housing-page-store";
 import { AdminHousingAccommodationDto } from "../stores/pages/housing/housing-accommodation-page-store";
 
@@ -152,7 +152,10 @@ export class AdminApiClient extends ApiClientBase {
   /* Manager cabinet */
   getManagerApplicationList = (data: any | ManagerListSettingsDto) =>
     this.sendRequest<ManagerApplicationListDto>(`admin/personal/applications` + encodeQueryString(data));
-  getManagerApplication = (id: string) => this.sendRequest<any>(`admin/personal/applications/${id}`);
+  getManagerApplication = (id: string) =>
+    this.sendRequest<ManagerApplicationInfoDto>(`admin/personal/applications/${id}`);
+  getManagerApplicationMessages = (id: string) =>
+    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages`);
 }
 
 export const AdminApi = new AdminApiClient();

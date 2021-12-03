@@ -27,3 +27,12 @@ export interface ManagerApplicationDto {
   entityTypeSpecificApplicationInfo: any;
   id: number;
 }
+
+export interface ManagerApplicationInfoDto {
+  type?: string;
+  entityId?: number;
+  status?: string;
+  commonApplicationInfo?: any;
+  entityTypeSpecificApplicationInfo?: any;
+  id?: number;
+}
