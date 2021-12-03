@@ -111,8 +111,9 @@ export class AdminApiClient extends ApiClientBase {
   postManagerCreate = (data: ManagerCreateDto) => this.sendRequest(`admin/auth/manager/register`, data, "POST");
 
   /* Manager cabinet */
-  getManagerApplication = (data: any | ManagerListSettingsDto) =>
+  getManagerApplicationList = (data: any | ManagerListSettingsDto) =>
     this.sendRequest<ManagerApplicationListDto>(`admin/personal/applications` + encodeQueryString(data));
+  getManagerApplication = (id: string) => this.sendRequest<any>(`admin/personal/applications/${id}`);
 }
 
 export const AdminApi = new AdminApiClient();

@@ -41,5 +41,6 @@ export const ManagerRoutes: Route[] = convertRoutes([
     pattern: "/manager/application-user/:userId/:applicationId",
     name: ManagerRouteNames.applicationId,
     hooks: [UserAuthorizedOnlyHook],
+    onEnter: (root, to) => root.mangerApplicationPage.load(to.params["applicationId"]),
   },
 ]);

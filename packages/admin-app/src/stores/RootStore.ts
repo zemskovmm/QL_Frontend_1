@@ -29,6 +29,7 @@ import { FormEditorPageStore } from "src/pages/Admin/globalSetting/formEditorPag
 import { LoginStore } from "./pages/login/login";
 import { ManagerCreateStore } from "./pages/adminStores/manager/managerCreateStore";
 import { ManagerApplicationListStore } from "./pages/managerStores/applicationList/managerApplicationListStore";
+import { ManagerApplicationStore } from "./pages/managerStores/application/managerApplicationStore";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -66,4 +67,5 @@ export class RootStore {
 
   /* Manager Shell */
   @observable mangerApplicationListPage = new ManagerApplicationListStore(this);
+  @observable mangerApplicationPage = new ManagerApplicationStore(this);
 }
