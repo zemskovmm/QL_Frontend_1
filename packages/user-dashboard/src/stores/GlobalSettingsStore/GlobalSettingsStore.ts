@@ -19,7 +19,6 @@ const getGlobalSettings = action(
   globalSettingsStore,
   "getGlobalSettings",
   async (store, lang: string): Promise<void> => {
-    console.log("getGlobalSettings",lang);
     if(lastLang === lang){
       return;
     }
@@ -29,7 +28,6 @@ const getGlobalSettings = action(
 
     store.setKey("isLoading", true);
     const { isOk, body } = await globalSettingsApi.getGlobalSettings(lang);
-    console.log(body);
     if(newVersionReq!==versionReq){
       return;
     }
