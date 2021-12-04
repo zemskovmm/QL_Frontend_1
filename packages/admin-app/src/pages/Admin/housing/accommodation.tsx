@@ -10,18 +10,12 @@ import { AllLanguages } from "@project/components/src/utils/langs";
 import { dmap } from "../../../utils/util";
 import { AdminLanguageDictionaryEditorCustomization } from "../school/page";
 import { FC } from "react";
-import {
-  AdminHousingAccommodationDto,
-  AdminHousingAccommodationLanguageDto,
-} from "../../../stores/pages/housing/housing-accommodation-page-store";
+import { AdminHousingAccommodationDto } from "../../../stores/pages/housing/type-utils";
+import { Dictionary } from "../../../utils/types";
 
 const customize = new AdminLanguageDictionaryEditorCustomization();
 
-const Column: FC<{ item: AdminHousingAccommodationLanguageDto<unknown>; id: string; l: string; housingId: string }> = ({
-  item,
-  id,
-  housingId,
-}) =>
+const Column: FC<{ item: string; id: string; l: string; housingId: string }> = ({ item, id, housingId }) =>
   item ? (
     <RouterLink routeName={AdminRouteNames.housingAccommodationEdit} params={{ id, housingId }}>
       <a className="text-blue-500 hover:text-blue-300 cursor-pointer underline">
@@ -45,7 +39,7 @@ export const HousingAccommodationTablePage = () => {
           <AdminButton color={"primary"}>Create accommodation</AdminButton>
         </RouterLink>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <AdminTable<AdminHousingAccommodationDto<unknown>>
+          <AdminTable<AdminHousingAccommodationDto<Dictionary<string>>>
             columns={dmap(AllLanguages, (l) => ({
               id: l,
               header: l,

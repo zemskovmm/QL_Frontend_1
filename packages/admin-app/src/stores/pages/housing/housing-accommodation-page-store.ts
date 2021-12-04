@@ -4,26 +4,19 @@ import { RootStore } from "src/stores/RootStore";
 import { AdminApi } from "src/clients/adminApiClient";
 import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { LanguageDictionaryCustomize } from "src/components/remoteui/AdminLanguageDictionaryEditor";
-import { Dictionary } from "src/utils/types";
 import { TraitEditorStore, TraitLoaderWithCache } from "src/components/traitEditor";
 import { cloneDeep, set } from "lodash";
+import {
+  AdminHousingAccommodationDto,
+  AdminHousingAccommodationDtoLanguagesDict,
+  AdminHousingAccommodationDtoLanguagesDictRemoteUi,
+  mapFromRemoteUi,
+  mapToRemoteUi,
+} from "./type-utils";
 
-const emptyModel = ({ languages: { en: {} } } as unknown) as AdminHousingAccommodationDto<unknown>;
-
-export type AdminHousingAccommodationLanguageDto<T extends unknown> = {
-  name: string;
-  htmlDescription: string;
-  url: string;
-  metadata?: T;
-};
-
-export type AdminHousingAccommodationDtoLanguagesDict = Dictionary<AdminHousingAccommodationLanguageDto<unknown>>;
-
-export type AdminHousingAccommodationDto<T extends unknown> = {
-  id: number;
-  housingId: number;
-  names: AdminHousingAccommodationDtoLanguagesDict;
-};
+const emptyModel = ({
+  names: { en: { name: "" } },
+} as unknown) as AdminHousingAccommodationDto<AdminHousingAccommodationDtoLanguagesDictRemoteUi>;
 
 export class HousingAccommodationTraitLoader extends TraitLoaderWithCache {
   @observable HousingAccommodationId = 0;
@@ -64,11 +57,12 @@ export class HousingAccommodationEditPageStore extends Loadable {
   }
 
   @action async save() {
-    const data = (await this.remoteUiStore?.getDataAsync()) ?? {};
+    const data = (await this.remoteUiStore?.getDataAsync()) as AdminHousingAccommodationDto<AdminHousingAccommodationDtoLanguagesDictRemoteUi>;
+    if (!data) return;
     set(data, "housingId", this.housingId);
     if (data) {
       try {
-        await AdminApi.updateHousingAccommodation(this.id, data as AdminHousingAccommodationDto<unknown>);
+        await AdminApi.updateHousingAccommodation(this.id, mapFromRemoteUi(data));
         alert("Entity updated");
       } catch (e) {
         alert(`This id is school undefined`);
@@ -78,7 +72,12 @@ export class HousingAccommodationEditPageStore extends Loadable {
 
   async load(): Promise<void> {
     const { value, definition } = await this.track(() => AdminApi.getHousingAccommodation(this.id));
-    this.remoteUiStore = new RemoteUiEditorStore(definition, value, new LanguageDictionaryCustomize(value.names));
+    const mappedValue = mapToRemoteUi(value);
+    this.remoteUiStore = new RemoteUiEditorStore(
+      definition,
+      mappedValue,
+      new LanguageDictionaryCustomize(mappedValue.names)
+    );
   }
 }
 
@@ -93,11 +92,12 @@ export class CreateHousingAccommodationPageStore extends Loadable {
   }
 
   async save() {
-    const data = (await this.remoteUiStore?.getDataAsync()) ?? {};
+    const data = (await this.remoteUiStore?.getDataAsync()) as AdminHousingAccommodationDto<AdminHousingAccommodationDtoLanguagesDictRemoteUi>;
+    if (!data) return;
     set(data, "housingId", this.housingId);
     if (data) {
       try {
-        await AdminApi.createHousingAccommodation(data as AdminHousingAccommodationDto<unknown>);
+        await AdminApi.createHousingAccommodation(mapFromRemoteUi(data));
         alert("Entity created");
       } catch (e) {
         alert(`This id is school undefined`);
@@ -117,7 +117,7 @@ export class CreateHousingAccommodationPageStore extends Loadable {
 }
 
 export class HousingAccommodationListStore extends Loadable {
-  @observable items: AdminHousingAccommodationDto<unknown>[] = [];
+  @observable items: AdminHousingAccommodationDto<AdminHousingAccommodationDtoLanguagesDict>[] = [];
   @observable totalPages: number = 1;
   @observable currentPage: number = 1;
   @observable root: RootStore;
