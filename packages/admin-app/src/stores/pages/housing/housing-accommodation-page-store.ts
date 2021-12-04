@@ -6,6 +6,7 @@ import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
 import { LanguageDictionaryCustomize } from "src/components/remoteui/AdminLanguageDictionaryEditor";
 import { Dictionary } from "src/utils/types";
 import { TraitEditorStore, TraitLoaderWithCache } from "src/components/traitEditor";
+import { cloneDeep, set } from "lodash";
 
 const emptyModel = ({ languages: { en: {} } } as unknown) as AdminHousingAccommodationDto<unknown>;
 
@@ -49,19 +50,22 @@ export class HousingAccommodationEditPageStore extends Loadable {
   @observable.ref remoteUiStore?: RemoteUiEditorStore;
   @observable root: RootStore;
   @observable id = 0;
+  @observable housingId = 0;
 
   constructor(public rootStore: RootStore) {
     super();
     this.root = rootStore;
   }
 
-  @action async loadById(id: number) {
+  @action async loadById(id: number, housingId: number) {
     this.id = id;
+    this.housingId = housingId;
     await this.load();
   }
 
   @action async save() {
-    const data = await this.remoteUiStore?.getDataAsync();
+    const data = (await this.remoteUiStore?.getDataAsync()) ?? {};
+    set(data, "housingId", this.housingId);
     if (data) {
       try {
         await AdminApi.updateHousingAccommodation(this.id, data as AdminHousingAccommodationDto<unknown>);
@@ -81,6 +85,7 @@ export class HousingAccommodationEditPageStore extends Loadable {
 export class CreateHousingAccommodationPageStore extends Loadable {
   @observable.ref remoteUiStore?: RemoteUiEditorStore;
   @observable root: RootStore;
+  @observable housingId = 0;
 
   constructor(public rootStore: RootStore) {
     super();
@@ -88,7 +93,8 @@ export class CreateHousingAccommodationPageStore extends Loadable {
   }
 
   async save() {
-    const data = await this.remoteUiStore?.getDataAsync();
+    const data = (await this.remoteUiStore?.getDataAsync()) ?? {};
+    set(data, "housingId", this.housingId);
     if (data) {
       try {
         await AdminApi.createHousingAccommodation(data as AdminHousingAccommodationDto<unknown>);
@@ -99,9 +105,14 @@ export class CreateHousingAccommodationPageStore extends Loadable {
     }
   }
 
+  @action assignHousingId(housingId: number) {
+    this.housingId = housingId;
+  }
+
   @action async load(): Promise<void> {
     const def = await AdminApi.definitionHousingsAccommodation();
-    this.remoteUiStore = new RemoteUiEditorStore(def, emptyModel, new LanguageDictionaryCustomize(emptyModel.names));
+    const clone = { ...cloneDeep(emptyModel), housingId: this.housingId };
+    this.remoteUiStore = new RemoteUiEditorStore(def, clone, new LanguageDictionaryCustomize(clone.names));
   }
 }
 
@@ -111,14 +122,16 @@ export class HousingAccommodationListStore extends Loadable {
   @observable currentPage: number = 1;
   @observable root: RootStore;
   @observable id = 0;
+  @observable housingId = 0;
 
   constructor(public rootStore: RootStore) {
     super();
     this.root = rootStore;
   }
 
-  @action async loadById(id: number) {
+  @action async loadById(id: number, housingId: number) {
     this.id = id;
+    this.housingId = housingId;
     await this.load();
   }
 

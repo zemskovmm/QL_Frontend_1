@@ -23,7 +23,7 @@ const Column: FC<{ item: AdminHousingAccommodationLanguageDto<unknown>; id: stri
   housingId,
 }) =>
   item ? (
-    <RouterLink routeName={AdminRouteNames.housingAccommodationEdit} params={{ id }}>
+    <RouterLink routeName={AdminRouteNames.housingAccommodationEdit} params={{ id, housingId }}>
       <a className="text-blue-500 hover:text-blue-300 cursor-pointer underline">
         {item}
         <br />
@@ -36,13 +36,12 @@ const Column: FC<{ item: AdminHousingAccommodationLanguageDto<unknown>; id: stri
 
 export const HousingAccommodationTablePage = () => {
   const { housingAccommodationListPage } = useRootStore();
+  const id = `${housingAccommodationListPage.id}`;
+  const housingId = `${housingAccommodationListPage.housingId}`;
   return (
     <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
       <div className="py-8">
-        <RouterLink
-          routeName={AdminRouteNames.housingAccommodationCreate}
-          params={{ id: `${housingAccommodationListPage.id}` }}
-        >
+        <RouterLink routeName={AdminRouteNames.housingAccommodationCreate} params={{ id, housingId }}>
           <AdminButton color={"primary"}>Create accommodation</AdminButton>
         </RouterLink>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -63,6 +62,8 @@ export const HousingAccommodationTablePage = () => {
 
 export const HousingAccommodationEdit = () => {
   const { housingAccommodationEdit } = useRootStore();
+  const id = `${housingAccommodationEdit.id}`;
+  const housingId = `${housingAccommodationEdit.housingId}`;
 
   return useObserver(() => (
     <div>
@@ -70,16 +71,13 @@ export const HousingAccommodationEdit = () => {
         <AdminButton color={"primary"} className={`mr-4`} onClick={() => housingAccommodationEdit.save()}>
           Save
         </AdminButton>
-        <RouterLink
-          routeName={AdminRouteNames.housingAccommodationTraitEdit}
-          params={{ id: `${housingAccommodationEdit.id}` }}
-        >
+        <RouterLink routeName={AdminRouteNames.housingAccommodationTraitEdit} params={{ id, housingId }}>
           <AdminButton color={"primary"} className={`mr-4`}>
             {" "}
             Traits editor{" "}
           </AdminButton>
         </RouterLink>
-        <div>Housing id: {housingAccommodationEdit.id}</div>
+        <div>Housing id: {id}</div>
       </div>
       {housingAccommodationEdit.remoteUiStore ? (
         <RemoteUiEditor store={housingAccommodationEdit.remoteUiStore} customization={customize} />

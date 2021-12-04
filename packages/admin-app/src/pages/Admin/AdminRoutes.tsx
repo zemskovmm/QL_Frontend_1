@@ -349,22 +349,28 @@ export const AdminRoutes: Route[] = convertRoutes([
     pattern: "/housing/:id/accommodation",
     name: AdminRouteNames.housingAccommodationList,
     hooks: [UserAuthorizedOnlyHook],
-    onEnter: async (root, to) => await root.housingAccommodationListPage.loadById(Number(to.params.id)),
+    onEnter: async (root, to) =>
+      await root.housingAccommodationListPage.loadById(Number(to.params.id), Number(to.params.housingId)),
   },
   {
     pattern: "/housing/:id/accommodation/create",
     name: AdminRouteNames.housingAccommodationCreate,
     hooks: [UserAuthorizedOnlyHook],
-    onEnter: async (root, to) => await root.housingAccommodationCreate.load(),
+    async onEnter(root, to) {
+      const store = root.housingAccommodationCreate;
+      store.assignHousingId(Number(to.params.id));
+      await store.load();
+    },
   },
   {
-    pattern: "/accommodation/:id/edit",
+    pattern: "/housing/:housingId/accommodation/:id/edit",
     name: AdminRouteNames.housingAccommodationEdit,
     hooks: [UserAuthorizedOnlyHook],
-    onEnter: async (root, to) => await root.housingAccommodationEdit.loadById(Number(to.params.id)),
+    onEnter: async (root, to) =>
+      await root.housingAccommodationEdit.loadById(Number(to.params.id), Number(to.params.housingId)),
   },
   {
-    pattern: "/accommodation/:id/traits",
+    pattern: "/housing/:housingId/accommodation/:id/traits",
     name: AdminRouteNames.housingAccommodationTraitEdit,
     hooks: [UserAuthorizedOnlyHook],
     onEnter: async (root, to) => await root.housingAccommodationTraitEditor.loadStore(Number(to.params.id)),
