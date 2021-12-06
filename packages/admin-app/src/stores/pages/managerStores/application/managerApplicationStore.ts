@@ -23,6 +23,7 @@ export class ManagerApplicationStore extends RequestTracking {
   @observable messages: Message[] | any = [];
   @observable sms: string = "";
   @observable stopMore: boolean = false;
+  @observable stopLoad: boolean = false;
 
   @observable intervalTimer = 0;
 
@@ -80,6 +81,8 @@ export class ManagerApplicationStore extends RequestTracking {
 
   @action
   async loadMessages() {
+    if (this.stopMore) return;
+    this.stopLoad = true;
     try {
       const messages = await AdminApi.getManagerApplicationMessages(this.id, {
         beforeMessageId: null,
@@ -87,6 +90,7 @@ export class ManagerApplicationStore extends RequestTracking {
         count: 60,
       });
       this.messages = this.messages.concat(pullAllWith(messages, takeRight(this.messages, 60), isEqual));
+      this.stopLoad = false;
     } catch (e) {
       alert(e);
     }
