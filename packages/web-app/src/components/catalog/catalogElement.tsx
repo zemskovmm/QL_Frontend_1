@@ -23,25 +23,25 @@ const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
         </div>
       </div>
       <div className={style.card__right}>
-        <div className={style.card__rightTitle}>{item.name}</div>
+        <div className={style.card__rightTitle}>{item?.name}</div>
         {children}
         <div className={style.card__rightPrice}>
           <span className={style.card__rightSubtitle}>
             <LocalizedText id={"catalogItems_price"} />:
           </span>
           <div className={style.card__rightPrice__list}>
-            {item.priceFrom > 0 ? (
+            {item?.priceFrom > 0 ? (
               <>
                 <span className={style.card__rightPrice__listItem}>
                   <b>
-                    <LocalizedText id={"catalogItems_price_from"} /> {item.priceFrom}{" "}
+                    <LocalizedText id={"catalogItems_price_from"} /> {item?.priceFrom}{" "}
                     <LocalizedText id={"catalogItems_price_value"} />
                   </b>{" "}
                   / <LocalizedText id={"catalogItems_price_year"} />
                 </span>
                 <span className={style.card__rightPrice__listItem}>
                   <b>
-                    <LocalizedText id={"catalogItems_price_before"} /> {item.priceTo}{" "}
+                    <LocalizedText id={"catalogItems_price_before"} /> {item?.priceTo}{" "}
                     <LocalizedText id={"catalogItems_price_value"} />
                   </b>{" "}
                   / <LocalizedText id={"catalogItems_price_year"} />
@@ -50,7 +50,7 @@ const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
             ) : (
               <span className={style.card__rightPrice__listItem}>
                 <b>
-                  <LocalizedText id={"catalogItems_price_upto"} /> {item.priceTo}{" "}
+                  <LocalizedText id={"catalogItems_price_upto"} /> {item?.priceTo}{" "}
                   <LocalizedText id={"catalogItems_price_value"} />
                 </b>{" "}
                 / <LocalizedText id={"catalogItems_price_year"} />
@@ -64,7 +64,7 @@ const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
 );
 
 export const HousingCatalogElement: FC<{ item: CatalogHousingDto }> = ({ item }) => (
-  <Link href={item.url}>
+  <Link href={item?.url}>
     <a className={style.card}>
       <div className={style.card__left}>
         <div className={style.card__leftImg}>
