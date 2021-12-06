@@ -10,4 +10,5 @@ export interface TextareaPropsType  {
     iconSrc?:string;
     onIconClick?:()=>void
     onPressEnter?:()=>void
+    onChangeText?:(text:string)=>void;
 }

@@ -1,5 +1,5 @@
-import { action, map } from "nanostores";
-import { useStore } from "@nanostores/react";
+import { action, map, MapStore } from "nanostores";
+import { useStore } from "src/stores/react-nanostores";
 import { ApplicationsPropsReq, personalApi } from "../../api/PersonalApi";
 import { addErrorAction } from "../NotificationStore";
 import {
@@ -7,96 +7,104 @@ import {
   ApplicationType,
   APPLICATION_DTO_DEFAULT,
 } from "@project/components/src/interfaces/ApplicationDto";
+import { InfinityListProvider } from "@project/components/src/ui-kit/List";
+import { getLocaleTranslete } from "src/locales/locales";
 
 export const TOTAL_APPLICATIONS = 20;
 
 interface ApplicationsState {
-  isOpenPage: boolean;
+  isOpenList: boolean;
   isLoading: boolean;
-  applications: Array<ApplicationDto | undefined>;
+  lang: string;
+  applicationList: InfinityListProvider;
 }
 
 let loadedPages: Array<boolean> = [];
 
 const applicationsState = map<ApplicationsState>({
-  isOpenPage:false,
+  isOpenList: false,
   isLoading: false,
-  applications: [],
+  lang: "en",
+  applicationList: new InfinityListProvider(),
 });
 
-const setIsOpenPage = action(applicationsState,"setIsOpenPage",
-  (store, isOpen: boolean) => {
-    store.setKey("isOpenPage", isOpen);
+const setIsOpenList = action(applicationsState, "setIsOpenPage", (store, isOpen: boolean) => {
+  if (store.get().isOpenList === isOpen) {
+    return;
   }
-);
+  clearApplications(applicationsState);
+  store.setKey("isOpenList", isOpen);
+  if (isOpen) {
+    onItemsRendered(0, 0);
+  }
+});
 
-const addApplication = action(
+const setLang = action(applicationsState, "setLang", (store, lang: string) => {
+  if (store.get().lang === lang) {
+    return;
+  }
+  store.setKey("lang", lang);
+  clearApplications(applicationsState);
+  onItemsRendered(0, 0);
+});
+
+const clearApplications = (store: MapStore<ApplicationsState>) => {
+  loadedPages = [];
+  applicationsState.setKey("applicationList", new InfinityListProvider());
+};
+
+const onItemsRendered = action(
   applicationsState,
-  "addApplication",
-  async (store, applicationType: ApplicationType, entityId: number): Promise<number> => {
+  "onItemsRendered",
+  async (store, startIndex: number, stopIndex: number) => {
+    const pageIndex = Math.floor(startIndex / TOTAL_APPLICATIONS);
+    if (loadedPages[pageIndex]) {
+      return;
+    }
+    loadedPages[pageIndex] = true;
+    const data: ApplicationsPropsReq = {
+      page: pageIndex,
+      pageSize: TOTAL_APPLICATIONS,
+      type: "",
+      status: "",
+    };
     store.setKey("isLoading", true);
-    let outApplicationId = 0;
-
-    const result = await personalApi.addApplications({
-      ...APPLICATION_DTO_DEFAULT,
-      type: applicationType,
-      entityId,
-    });
-
+    const result = await personalApi.getApplications(data);
     const { isOk, body, error } = result;
     if (isOk) {
-      outApplicationId = body?.id || 0;
-      await getApplications();
+      if (body) {
+        const APPLICATION_TYTLES_LANG: { [key: string]: string } = {
+          [ApplicationType.Course]: getLocaleTranslete(store.get().lang).APPLICATION_TYTLES_COURSE_LANG,
+          [ApplicationType.Housing]: getLocaleTranslete(store.get().lang).APPLICATION_TYTLES_HOUSING_LANG,
+          [ApplicationType.University]: getLocaleTranslete(store.get().lang).APPLICATION_TYTLES_UNIVERSITY_LANG,
+          [ApplicationType.Visa]: getLocaleTranslete(store.get().lang).APPLICATION_TYTLES_VISA_LANG,
+        };
+        store.setKey(
+          "applicationList",
+          store.get().applicationList.push({
+            count: body.totalItems,
+            start: TOTAL_APPLICATIONS * pageIndex,
+            rows: body.items.map(({ id, type }) => {
+              const date: Date = new Date(); //TODO После добавления даты, получать с сервера
+              return {
+                id: id.toString(),
+                text: (APPLICATION_TYTLES_LANG[type] || type.toString()).replace(":date", date.toLocaleDateString()),
+              };
+            }),
+          })
+        );
+      } else {
+        store.setKey("applicationList", new InfinityListProvider());
+        loadedPages = [];
+      }
     } else {
       addErrorAction(error);
     }
-
     store.setKey("isLoading", false);
-    return outApplicationId;
   }
 );
 
-const getApplications = action(applicationsState, "getApplications", async (store) => {
-  loadedPages = [];
-  await onItemRender(0);
-});
-
-const onItemRender = action(applicationsState, "getApplications", async (store, index: number) => {
-  const pageIndex = Math.floor(index / TOTAL_APPLICATIONS);
-  if (loadedPages[pageIndex]) {
-    return;
-  }
-  loadedPages[pageIndex] = true;
-  const data: ApplicationsPropsReq = {
-    page: pageIndex,
-    pageSize: TOTAL_APPLICATIONS,
-    type: "",
-    status: "",
-  };
-  store.setKey("isLoading", true);
-  const result = await personalApi.getApplications(data);
-  const { isOk, body, error } = result;
-  if (isOk) {
-    let applications: Array<ApplicationDto | undefined> = store.get().applications || [];
-    if (body) {
-      if (applications.length !== body.totalItems) {
-        applications = new Array(body.totalItems);
-      }
-      body.items.forEach((item, index) => {
-        applications[TOTAL_APPLICATIONS * pageIndex + index] = item;
-      });
-    } else {
-      applications = [];
-      loadedPages = [];
-    }
-    store.setKey("applications", applications);
-  } else {
-    addErrorAction(error);
-  }
-  store.setKey("isLoading", false);
-});
-
 export const useApplicationsState = () => {
   const state = useStore(applicationsState);
-  return { ...state, onItemRender, getApplications, addApplication, setIsOpenPage };
+  return { ...state, setLang, onItemsRendered, setIsOpenList };
 };

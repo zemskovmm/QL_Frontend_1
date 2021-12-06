@@ -1,6 +1,6 @@
 import { Text } from "@project/components/src/ui-kit/Text";
 import { FC } from "react";
-import { NotificationGroupEnum, NotificationType } from "../../stores/NotificationStore";
+import { NotificationGroupEnum, NotificationType } from "src/stores/NotificationStore";
 
 const NotificationColors = {
   [NotificationGroupEnum.ERROR_NOTIFICATION_GROUP]: "bg-red-200 border-red-500",

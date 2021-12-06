@@ -11,41 +11,34 @@ import { RowsPresenter } from "@project/components/src/blocks";
 import { Preload } from "@project/components/src/ui-kit/Preload";
 import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
 import { useLocalized } from "src/locales";
+import { useNavigate } from "react-router-dom";
+import { CREATE_COMPLITE_APPLICATIONS_ROUTE } from "src/constants";
+import { useNewApplicationState } from "src/stores/ApplicationsState";
 
-type PropsType = {
-  applicationType?: string;
-  entityId?: string;
-};
 
-const ProfilePage: FC<PropsType> = ({ applicationType, entityId }) => {
+const ProfilePage: FC = () => {
   const cl = useContext(ComponentHostDashboardContext);
   const {lang,localizedText} = useLocalized()
   const { putUserAction, isLoading } = useProfileStore();
-  const store = useUserStatuseStore();
-  const {
-    isRegistrationComplite,
-    user: { firstName, lastName, phone, personalInfo },
-  } = store;
+  const { isRegistrationComplite,user } = useUserStatuseStore();
   const { handleSubmit, control, setValue } = useForm<UserStatuseUserProps>();
   const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
-  cl!.personalInfo = personalInfo;
+  const navigate = useNavigate()
+  const {createApplicationReq} = useNewApplicationState()
 
   useEffect(() => {
-    setValue("firstName", firstName);
-    setValue("lastName", lastName);
-    setValue("phone", phone);
+    cl!.personalInfo = user.personalInfo;
+    setValue("firstName", user.firstName);
+    setValue("lastName", user.lastName);
+    setValue("phone", user.phone);
     setValue("personalInfo", cl?.personalInfo);
-  }, [store]);
+  }, [user]);
 
-  // useEffect(() => {
-  //   if (applicationType && isRegistrationComplite) {
-  //     const createApplicationPath = CREATE_APPLICATIONS_TEMPLATE.getRoute({
-  //       lang,
-  //       params: [applicationType, entityId || "0"],
-  //     });
-  //     route(createApplicationPath);
-  //   }
-  // }, [isRegistrationComplite, applicationType, entityId]);
+  useEffect(() => {
+    if(createApplicationReq && isRegistrationComplite){
+      navigate(CREATE_COMPLITE_APPLICATIONS_ROUTE)
+    }
+  }, [isRegistrationComplite, createApplicationReq]);
 
   return (
     <LeftNavigationLayout title={localizedText('PROFILE_LANG')}>

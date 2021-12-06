@@ -1,5 +1,5 @@
 import { action, map } from "nanostores";
-import { useStore } from "@nanostores/react";
+import { useStore } from "src/stores/react-nanostores";
 import { putUserAction as UserStatusPutUserAction, UserStatuseUserProps } from "src/stores/UserStatuseStore";
 
 interface ProfileStore {

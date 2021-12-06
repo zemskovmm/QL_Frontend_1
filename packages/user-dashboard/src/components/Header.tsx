@@ -11,7 +11,7 @@ import { useLocalized } from "src/locales";
 import { PROFILE_ROUTE } from "src/constants";
 
 export const Header: FC = () => {
-  const { isLogined, user } = useUserStatuseStore();
+  const { isAuthorized, user } = useUserStatuseStore();
   const { lang,setLang} = useLocalized();
 
   const profileName =
@@ -31,7 +31,7 @@ export const Header: FC = () => {
             )}
           />
 
-          {isLogined && (
+          {isAuthorized && (
             <>
               <Link to={PROFILE_ROUTE}>
                 <Icon src={USER_ICON} alt={profileName} size="8" />

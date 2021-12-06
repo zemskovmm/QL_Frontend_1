@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { ComponentHostDashboardContext } from "../../HostLayout";
 import { without } from "lodash";
 
@@ -12,9 +12,11 @@ export const BasicInputFileBlock: any = (props: BasicInputFileBlockElement) => {
   const cl = useContext(ComponentHostDashboardContext);
   const [fileState, setFileState] = useState(false);
 
-  if (cl) {
-    setFileState(Boolean(cl?.personalInfo[props.schema.id]));
-  }
+  useEffect(()=>{
+    if (cl) {
+      setFileState(Boolean(cl?.personalInfo[props.schema.id]))
+    }
+  },[cl])
 
   return (
     <div className="pt-3">

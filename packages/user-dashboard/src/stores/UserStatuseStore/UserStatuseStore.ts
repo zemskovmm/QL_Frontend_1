@@ -1,9 +1,9 @@
 import { userApi, QlClientLoginProps, QlClientRegisterProps } from "src/api/UserApi";
-import { action, map, onMount, task } from "nanostores";
-import { useStore } from "@nanostores/react";
+import { action, computed, map, MapStore, onMount } from "nanostores";
 import { UserStatus } from "./_types";
 import { addErrorAction, addSuccessAction } from "src/stores/NotificationStore";
 import { onResponse } from "src/api/QLBaseApi";
+import { useStore } from "src/stores/react-nanostores";
 
 export type UserStatuseLoginProps = QlClientLoginProps;
 export type UserStatuseRegisterProps = QlClientRegisterProps;
@@ -24,32 +24,35 @@ const EMPTY_USER: UserStatuseUserProps = {
   personalInfo: {},
 };
 
-interface UserStatuseStore {
-  userStatus: UserStatus;
-  isLogined: boolean;
-  isUnlogined: boolean;
-  isRegistrationComplite: boolean;
+interface UserStatuseStore { 
+  userStatus:UserStatus
   user: UserStatuseUserProps;
 }
 
 const userStatuseStore = map<UserStatuseStore>({
-  userStatus: UserStatus.INIT_PROFILE_STATUS,
-  isLogined: false,
-  isUnlogined: false,
-  isRegistrationComplite: false,
+  userStatus:UserStatus.INIT_PROFILE_STATUS,
   user: EMPTY_USER,
 });
+
+const isAuthorizedComputed = computed(userStatuseStore, store => store.userStatus === UserStatus.AUTHORIZED_PROFILE_STATUS)
+const isNotAuthorizedComputed= computed(userStatuseStore, store => store.userStatus === UserStatus.NOT_AUTHORIZED_PROFILE_STATUS)
+const isRegistrationCompliteComputed= computed(userStatuseStore, store => (
+  store.userStatus !== UserStatus.INIT_PROFILE_STATUS && !! store.user.lastName && !!store.user.firstName && !!store.user.phone
+))
+const isNotRegistrationCompliteComputed= computed(userStatuseStore, store => (
+  store.userStatus !== UserStatus.INIT_PROFILE_STATUS && !(!! store.user.lastName && !!store.user.firstName && !!store.user.phone)
+))
 
 onMount(userStatuseStore, () => {
   heartbeatAction();
   return onResponse(({ status, url }) => {
     if (status === 401) {
-      setUserStatus(UserStatus.UNLOGINED_PROFILE_STATUS);
+      setUserStatus(userStatuseStore,UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
     }
   });
 });
 
-const setUser = action(userStatuseStore, "setUser", (store, user: any) => {
+const setUser =  (store:MapStore<UserStatuseStore>, user: any) => {
   store.setKey("user", {
     lastName: user.lastName || "",
     firstName: user.firstName || "",
@@ -57,17 +60,14 @@ const setUser = action(userStatuseStore, "setUser", (store, user: any) => {
     email: user.email || "",
     personalInfo: user.personalInfo || {},
   });
-  store.setKey("isRegistrationComplite", !!user.lastName && !!user.firstName && !!user.phone);
-});
+};
 
-const setUserStatus = action(userStatuseStore, "setUserStatus", (store, userStatus: UserStatus) => {
-  store.setKey("userStatus", userStatus);
-  store.setKey("isLogined", userStatus === UserStatus.LOGINED_PROFILE_STATUS);
-  store.setKey("isUnlogined", userStatus === UserStatus.UNLOGINED_PROFILE_STATUS);
-  if (userStatus != UserStatus.UNLOGINED_PROFILE_STATUS) {
-    setUser(EMPTY_USER);
+const setUserStatus = (store:MapStore<UserStatuseStore>, userStatus: UserStatus) => {
+  store.setKey("userStatus",userStatus)
+  if (userStatus == UserStatus.NOT_AUTHORIZED_PROFILE_STATUS) {
+    setUser(store,EMPTY_USER);
   }
-});
+};
 
 export const putUserAction = action(
   userStatuseStore,
@@ -76,7 +76,7 @@ export const putUserAction = action(
     const { isOk, error } = await userApi.putUser(data);
     if (isOk) {
       addSuccessAction("Profile successful update");
-      setUser(data);
+      setUser(store,data);
       return true;
     } else {
       addErrorAction(error);
@@ -88,15 +88,13 @@ export const putUserAction = action(
 const heartbeatAction = action(
   userStatuseStore,
   "heartbeatAction",
-  async (store): Promise<boolean> => {
+  async (store): Promise<void> => {
     const { isOk, body } = await userApi.getUser();
     if (isOk) {
-      setUserStatus(UserStatus.LOGINED_PROFILE_STATUS);
+      setUserStatus(store,UserStatus.AUTHORIZED_PROFILE_STATUS);
       const user = body || EMPTY_USER;
-      setUser(user);
-      return true;
+      setUser(store,user);
     }
-    return store.get().isLogined;
   }
 );
 
@@ -106,13 +104,13 @@ export const loginAction = action(
   async (store, data: UserStatuseLoginProps): Promise<boolean> => {
     const { isOk, error } = await userApi.login(data);
     if (isOk) {
-      setUserStatus(UserStatus.LOGINED_PROFILE_STATUS);
+      setUserStatus(store,UserStatus.AUTHORIZED_PROFILE_STATUS);
       addSuccessAction("Login successful");
-      return true;
+      return true
     } else {
       addErrorAction(error);
     }
-    return false;
+    return false
   }
 );
 
@@ -134,24 +132,37 @@ export const registerAction = action(
 const logoutAction = action(
   userStatuseStore,
   "logoutAction",
-  async (store): Promise<boolean> => {
+  async (store): Promise<void> => {
     const { isOk, status, error } = await userApi.logout();
     if (isOk) {
       addSuccessAction("Logout successful");
-      setUserStatus(UserStatus.UNLOGINED_PROFILE_STATUS);
-      return true;
+      setUserStatus(store,UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
     } else {
       addErrorAction(error);
     }
     if (status === 401) {
-      setUserStatus(UserStatus.UNLOGINED_PROFILE_STATUS);
-      return true;
+      setUserStatus(store,UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
     }
-    return store.get().isUnlogined;
   }
 );
 
 export const useUserStatuseStore = () => {
   const state = useStore(userStatuseStore);
-  return { ...state, heartbeatAction, logoutAction, loginAction, putUserAction, registerAction };
+  const isAuthorized = useStore(isAuthorizedComputed);
+  const isNotAuthorized = useStore(isNotAuthorizedComputed);
+  const isRegistrationComplite = useStore(isRegistrationCompliteComputed);
+  const isNotRegistrationComplite = useStore(isNotRegistrationCompliteComputed);
+
+  return { 
+    ...state,
+    isAuthorized,
+    isNotAuthorized,
+    isRegistrationComplite,
+    isNotRegistrationComplite,
+    heartbeatAction, 
+    logoutAction, 
+    loginAction, 
+    putUserAction, 
+    registerAction 
+  };
 };

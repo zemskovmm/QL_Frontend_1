@@ -1,5 +1,5 @@
 import { map, action } from "nanostores";
-import { useStore } from "@nanostores/react";
+import { useStore } from "src/stores/react-nanostores";
 import { registerAction as userStatuseregisterAction, UserStatuseRegisterProps } from "src/stores/UserStatuseStore";
 
 interface SignUpStore {

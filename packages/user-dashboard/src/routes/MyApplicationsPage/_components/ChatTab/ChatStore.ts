@@ -1,5 +1,5 @@
 import { map, action } from "nanostores";
-import { useStore } from "@nanostores/react";
+import { useStore } from "src/stores/react-nanostores";
 import { GetMessagesPropsReq, personalApi } from "src/api/PersonalApi";
 import { addErrorAction } from "src/stores/NotificationStore";
 import { MessageListProvider, MessageType } from "@project/components/src/ui-kit/Chat";

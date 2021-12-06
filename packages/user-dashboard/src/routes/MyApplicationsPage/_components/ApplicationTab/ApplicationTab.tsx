@@ -18,24 +18,27 @@ type PropsType = {
 
 export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
   const cl = useContext(ComponentHostDashboardContext);
-  const store = useApplicationStore();
+  const { application, postApplicationAction, isLoading: isLoadingStore,getApplication } = useApplicationStore();
   const { localizedText } = useLocalized();
-  const { application, postApplicationAction, isLoading: isLoadingStore } = store;
   const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
   const { handleSubmit, control, setValue } = useForm<ApplicationPostProps>();
 
   useEffect(() => {
-    store.getApplication(applicationId);
+    getApplication(applicationId);
   }, [applicationId]);
 
-  cl!.personalInfo = application.commonApplicationInfo;
+  useEffect(() => {
+    cl!.personalInfo = application.commonApplicationInfo;
+  }, [application]);
+
+  
 
   useEffect(() => {
     setValue("type", application.type);
     setValue("entityId", application.entityId);
     setValue("commonApplicationInfo", cl?.personalInfo ?? {});
     setValue("entityTypeSpecificApplicationInfo", {});
-  }, [store]);
+  }, [application]);
 
   const classes = ["flex flex-col gap-2", className ? className : ""].join(" ");
 

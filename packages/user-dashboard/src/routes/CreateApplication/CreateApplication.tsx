@@ -1,56 +1,42 @@
-import { Text } from "@project/components/src/ui-kit/Text";
 import React, { FC } from "react";
-import { useApplicationsState } from "src/stores/ApplicationsState";
+import { useNewApplicationState } from "src/stores/ApplicationsState";
 import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
 import { useEffect } from "react";
 import { useUserStatuseStore } from "src/stores/UserStatuseStore";
-import { useParams } from "react-router-dom";
-import { useLocalized } from "src/locales";
-
-type PropsType = {
-  applicationType: string;
-  entityId: string;
-};
+import { useParams, useNavigate } from "react-router-dom";
+import { MY_APPLICATIONS_ROUTE, PROFILE_ROUTE, SIGN_IN_ROUTE } from "src/constants";
+import { Preload } from "@project/components/src/ui-kit/Preload";
 
 export const CreateApplication: FC = () => {
   const { applicationType, entityId } = useParams();
-  const { addApplication } = useApplicationsState();
-  const { localizedText } = useLocalized();
-  // const { SIGN_IN_PATH, PROFILE_PATH } = useRouterStore();
-  // const { isUnlogined, isLogined, isRegistrationComplite } = useUserStatuseStore();
+  const navigate = useNavigate();
+  const {
+    saveCreateApplication,
+    createApplicationReq,
+    clearCreateApplication,
+    sendCreateApplication,
+    createApplicationId,
+  } = useNewApplicationState();
+  const { isNotAuthorized, isNotRegistrationComplite } = useUserStatuseStore();
 
-  // const signInPath = applicationType
-  //   ? SIGN_IN_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
-  //   : SIGN_IN_PATH;
-  //
-  // const profilePath = applicationType
-  //   ? PROFILE_REDIRECT_CREATE_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [applicationType, entityId || "0"] })
-  //   : PROFILE_PATH;
-
-  // useEffect(() => {
-  //   if (isUnlogined) {
-  //     route(signInPath, true);
-  //   } else if (isRegistrationComplite) {
-  //     handleAddApplication();
-  //   } else if (isLogined) {
-  //     route(profilePath, true);
-  //   }
-  // }, [isUnlogined, isLogined, applicationType, entityId]);
-
-  const handleAddApplication = async () => {
+  useEffect(() => {
     if (Object.values(ApplicationType).includes(applicationType as ApplicationType)) {
-      const id = await addApplication(applicationType as ApplicationType, Number(entityId));
-      // if (id) {
-      //   route(MY_APPLICATIONS_TEMPLATE.getRoute({ lang, params: [id.toString()] }), true);
-      // } else {
-      //   route(MY_APPLICATIONS_TEMPLATE.getRoute({ lang, params: ["0"] }), true);
-      // }
+      saveCreateApplication(applicationType as ApplicationType, Number(entityId));
     }
-  };
+  }, []);
 
-  return (
-    <div className="flex flex-col items-center p-4">
-      <Text className="m-4" text="Wait..." size="title-large" isBold />
-    </div>
-  );
+  useEffect(() => {
+    if (isNotAuthorized) {
+      navigate(SIGN_IN_ROUTE);
+    } else if (isNotRegistrationComplite) {
+      navigate(PROFILE_ROUTE);
+    } else if (createApplicationId) {
+      clearCreateApplication(),
+        navigate(MY_APPLICATIONS_ROUTE.replace(":applicationId", createApplicationId.toString()));
+    } else if (createApplicationReq) {
+      sendCreateApplication();
+    }
+  }, [createApplicationReq, createApplicationId, isNotAuthorized, isNotRegistrationComplite]);
+
+  return <Preload isLoading />;
 };

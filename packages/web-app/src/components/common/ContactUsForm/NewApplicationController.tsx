@@ -13,14 +13,16 @@ type NewApplicationControllerPropsType = {
 
 const NewApplicationController:FC<NewApplicationControllerPropsType> = ({applicationType, entityId, onDismiss }) => {
   const [isUsForm, setUsForm] = useState(false);
-  return <ContactUsFormController onDismiss={onDismiss} />;
-  // if (isUsForm)
-    // return <DashboardNewApplication 
-  //   applicationType={applicationType} 
-  //   entityId={entityId}
-  //   onDismiss={onDismiss}
-  //   onUsForm={()=>setUsForm(true)}
-  // />
+  
+  if (isUsForm){
+    return <ContactUsFormController onDismiss={onDismiss} />;
+  }
+  return <DashboardNewApplication 
+    applicationType={applicationType} 
+    entityId={entityId}
+    onDismiss={onDismiss}
+    onUsForm={()=>setUsForm(true)}
+  />
 };
 
 type NewApplicationButtonPropsType = {

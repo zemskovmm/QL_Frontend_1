@@ -9,13 +9,12 @@ const MyApplicationsPage: FC = () => {
   const [isAppTab, setAppTab] = useState(false);
   const { applicationId } = useParams();
   const applicationIdInt = Number(applicationId);
-  const {setIsOpenPage} = useApplicationsState()
-  const {localizedText} = useLocalized()
+  const { setIsOpenList } = useApplicationsState();
+  const { localizedText } = useLocalized();
 
-  useEffect(()=>{
-    setIsOpenPage(true)
-    return ()=>{setIsOpenPage(false)}
-  },[])
+  useEffect(() => {
+    setIsOpenList(true);
+  }, []);
 
   return (
     <LeftNavigationLayout title={`${localizedText("APPLICATION_LANG")} ${applicationId}`}>

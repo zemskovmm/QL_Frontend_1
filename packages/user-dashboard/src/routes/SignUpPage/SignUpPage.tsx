@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { FC } from "react";
+import { FC,useEffect } from "react";
 import { SchemaOf, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputControlled } from "@project/components/src/form/InputControlled";
@@ -7,8 +7,9 @@ import { Button } from "@project/components/src/ui-kit/Button";
 import { useSignUpStore } from "./_store";
 import { CenterCardLayout } from "src/layouts/CenterCardLayout";
 import { useUserStatuseStore } from "src/stores/UserStatuseStore";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useLocalized } from "src/locales";
+import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "src/constants";
 
 export type FormFields = {
   email: string;
@@ -26,23 +27,24 @@ const schema: SchemaOf<FormFields> = object({
     .required("Required to fill"),
 });
 
-type PropsType = {
-  applicationType?: string;
-  entityId?: string;
-};
 
-export const SignUpPage: FC<PropsType> = ({ applicationType, entityId }) => {
+export const SignUpPage: FC = () => {
   const { handleSubmit, control } = useForm<FormFields>({
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
   const { registerAction, isLoading, isSuccess } = useSignUpStore();
-  const { isLogined } = useUserStatuseStore();
+  const { isAuthorized } = useUserStatuseStore();
   const { localizedText } = useLocalized();
+  const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   (isLogined || isSuccess) && route(signInPath);
-  // }, [isLogined, isSuccess]);
+  useEffect(() => {
+    isAuthorized && navigate(PROFILE_ROUTE)
+  }, [isAuthorized]);
+
+  useEffect(() => {
+    isSuccess && navigate(SIGN_UP_ROUTE);
+  }, [isSuccess]);
 
   return (
     <CenterCardLayout title={localizedText('SIGN_UP_TITLE')} subtitle={localizedText('SIGN_UP_SUBTITLE')}>

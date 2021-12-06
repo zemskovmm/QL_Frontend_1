@@ -9,8 +9,13 @@ import NotFoundPage from "./routes/NotFoundPage";
 import ProfilePage from "./routes/ProfilePage";
 import {
   CREATE_APPLICATIONS_ROUTE,
+  CREATE_COMPLITE_APPLICATIONS_ROUTE,
   MY_APPLICATIONS_ROUTE,
-  PROFILE_ROUTE, SETTINGS_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE,
+  NEW_APPLICATION_ROUTE,
+  PROFILE_ROUTE,
+  SETTINGS_ROUTE,
+  SIGN_IN_ROUTE,
+  SIGN_UP_ROUTE,
 } from "./constants";
 import { useEffect } from "react";
 import { useUserStatuseStore } from "./stores/UserStatuseStore";
@@ -20,60 +25,71 @@ import MyApplicationsPage from "./routes/MyApplicationsPage";
 import CreateApplication from "./routes/CreateApplication";
 import { HostLayout } from "@project/components/src/FormBuilderBlocks/HostLayout";
 import { useGlobalSettingsStore } from "./stores/GlobalSettingsStore";
-import { useLocation,useNavigate} from "react-router-dom";
-import { LocalesContextProvider, useLocalized } from "./locales";
+import { useLocation, Navigate } from "react-router-dom";
+import { useLocalized } from "./locales";
+import { SecureRoute } from "./components/secure-route";
 
-
-const InitStores:FC = ({children})=>{
+const UpdateGlobalStores: FC = () => {
+  const { heartbeatAction } = useUserStatuseStore();
   const { getGlobalSettings } = useGlobalSettingsStore();
-  const {lang} = useLocalized()
+  const { lang } = useLocalized();
+  const location = useLocation();
 
-  useEffect(()=>{
+  useEffect(() => {
     getGlobalSettings(lang);
-  },[lang])
+  }, [lang]);
 
-  return <>{children}</>
-}
+  useEffect(() => {
+    heartbeatAction();
+  }, [location]);
+
+  return <></>;
+};
 
 export const Application: FC = () => {
-  const { heartbeatAction } = useUserStatuseStore();
-  const location = useLocation();
-  const navigate = useNavigate()
-  
-  useEffect(() => {
-    const url = location.pathname
-    if(!url || url==='/'){
-      navigate(PROFILE_ROUTE);
-    }
-    heartbeatAction();
-  }, [location])
-
   return (
-    <LocalesContextProvider>
-      <HostLayout>
-        <InitStores>
-          <div id="react_root" className="h-full">
-            <AppLayout>
-              <Routes>
-                <Route element={<ProfilePage />} path={PROFILE_ROUTE} />
-                <Route element={<SignUpPage />} path={SIGN_UP_ROUTE} />
-                <Route element={<SignInPage />} path={SIGN_IN_ROUTE} />
-                <Route element={<MyApplicationsPage />} path={MY_APPLICATIONS_ROUTE} />
-                <Route element={<CreateApplication />} path={CREATE_APPLICATIONS_ROUTE} />
-                <Route element={<CreateApplication />} path={CREATE_APPLICATIONS_ROUTE} />
-                <Route element={<SettingsPage />} path={SETTINGS_ROUTE} />
-                {/*<NewApplication path={NEW_APPLICATION_TEMPLATE.path} />*/}
-                <Route path={"*"} element={<NotFoundPage />} />
-              </Routes>
-            </AppLayout>
-            <Notification />
-          </div>
-        </InitStores>
-      </HostLayout>
-    </LocalesContextProvider>
+    <HostLayout>
+      <div id="react_root" className="h-full">
+        <AppLayout>
+          <Routes>
+            <Route element={<SignUpPage />} path={SIGN_UP_ROUTE} />
+            <Route element={<SignInPage />} path={SIGN_IN_ROUTE} />
+            <Route element={<CreateApplication />} path={CREATE_APPLICATIONS_ROUTE} />
+            <Route element={<CreateApplication />} path={CREATE_COMPLITE_APPLICATIONS_ROUTE} />
+            <Route element={<NewApplication />} path={NEW_APPLICATION_ROUTE} />
+            <Route
+              path={PROFILE_ROUTE}
+              element={
+                <SecureRoute>
+                  <ProfilePage />
+                </SecureRoute>
+              }
+            />
+            <Route
+              path={MY_APPLICATIONS_ROUTE}
+              element={
+                <SecureRoute>
+                  <MyApplicationsPage />
+                </SecureRoute>
+              }
+            />
+            <Route
+              path={SETTINGS_ROUTE}
+              element={
+                <SecureRoute>
+                  <SettingsPage />
+                </SecureRoute>
+              }
+            />
+            <Route path={"/"} element={<Navigate to={PROFILE_ROUTE} />} />
+            <Route path={"*"} element={<NotFoundPage />} />
+          </Routes>
+        </AppLayout>
+        <UpdateGlobalStores />
+        <Notification />
+      </div>
+    </HostLayout>
   );
 };
 
 export default Application;
-
-

@@ -1,82 +1,56 @@
-import { InfinityList, ListItem, ListItemType } from "@project/components/src/ui-kit/List";
+import { InfinityList, ListItem } from "@project/components/src/ui-kit/List";
 import { FC } from "react";
-import { useEffect, useState, memo } from "react";
+import { useEffect, memo } from "react";
 import { useApplicationsState } from "src/stores/ApplicationsState";
 import { useUserStatuseStore } from "src/stores/UserStatuseStore";
 import { IconLabel } from "@project/components/src/ui-kit/IconLabel";
 import USER_ICON from "@project/components/src/assets/icons/user.svg";
 import { Button } from "@project/components/src/ui-kit/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocalized } from "src/locales";
-import { MY_APPLICATIONS_ROUTE, NEW_APPLICATION_ROUTE } from "src/constants";
-import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
+import { MY_APPLICATIONS_ROUTE, NEW_APPLICATION_ROUTE, PROFILE_ROUTE } from "src/constants";
 
 export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) => {
-  const [ isApplicationsListOpen, setApplicationsListOpen ] = useState(false);
-  const { localizedText } = useLocalized()
+  const { lang, localizedText } = useLocalized();
   const {
     user: { email, firstName, lastName },
     logoutAction,
   } = useUserStatuseStore();
- 
+  const navigate = useNavigate();
 
-  const { applications, onItemRender, getApplications,isOpenPage} = useApplicationsState();
-
-  useEffect(() => {
-    getApplications();
-  }, []);
+  const { applicationList, onItemsRendered, setLang, isOpenList, setIsOpenList } = useApplicationsState();
 
   useEffect(() => {
-    if (isOpenPage) {
-      setApplicationsListOpen(true);
-    }
-  }, [isOpenPage]);
-
-  const APPLICATION_TYTLES_LANG:{[key:string]:string} = {
-    [ApplicationType.Course]:localizedText("APPLICATION_TYTLES_COURSE_LANG"),
-    [ApplicationType.Housing]:localizedText("APPLICATION_TYTLES_HOUSING_LANG"),
-    [ApplicationType.University]:localizedText("APPLICATION_TYTLES_UNIVERSITY_LANG"),
-    [ApplicationType.Visa]:localizedText("APPLICATION_TYTLES_VISA_LANG"),
-  }
-
-  
-
-  const handleItemRender = (index: number): ListItemType | undefined => {
-    onItemRender(index);
-    const row = applications[index];
-    if (row) {
-      const { id, type } = row;
-      const date: Date = new Date(); //TODO После добавления даты, получать с сервера
-      return {
-        id: MY_APPLICATIONS_ROUTE.replace(':applicationId',id.toString()),
-        text: (APPLICATION_TYTLES_LANG[type] || type.toString()).replace(":date", date.toLocaleDateString()),
-      };
-    }
-  };
+    setLang(lang);
+  }, [lang]);
 
   return (
     <div className={`p-4 h-full flex flex-col ${className}`}>
       <IconLabel className="mt-5 mb-8" iconSrc={USER_ICON} text={`${lastName} ${firstName}`} subText={email} />
       <div className="w-full flex flex-col">
-        <ListItem text={localizedText("PROFILE_LANG")} onClick={() => {}} />
+        <Link to={PROFILE_ROUTE}>
+          <ListItem text={localizedText("PROFILE_LANG")} />
+        </Link>
         <ListItem
           text={localizedText("MY_APPLICATIONS_LANG")}
-          onClick={() => setApplicationsListOpen(!isApplicationsListOpen)}
+          onClick={() => setIsOpenList(!isOpenList)}
           stopPropagation
-          isOpenArrow={isApplicationsListOpen}
+          isOpenArrow={isOpenList}
           withArrow
         />
-        {isApplicationsListOpen && (
+        {isOpenList && (
           <InfinityList
             depth={1}
             className="flex-shrink"
-            count={applications.length}
-            onClick={(id) => {}}
-            onItemRender={handleItemRender}
+            provider={applicationList}
+            onItemsRendered={onItemsRendered}
+            onClick={(id) => navigate(MY_APPLICATIONS_ROUTE.replace(":applicationId", id))}
           />
         )}
-        {isApplicationsListOpen && applications.length == 0 && <ListItem depth={1} text={localizedText("NOTHING_HERE_YET")} />}
-        <ListItem text={localizedText("SETTINGS_LANG")} onClick={() => {}} />
+        {isOpenList && applicationList.count == 0 && <ListItem depth={1} text={localizedText("NOTHING_HERE_YET")} />}
+        {/* <Link to={SETTINGS_ROUTE}>
+          <ListItem text={localizedText("SETTINGS_LANG")} />
+        </Link> */}
         <div className={`mt-4 ml-auto md:hidden`}>
           <Link to={NEW_APPLICATION_ROUTE}>
             <Button plus={true} text={localizedText("NEW_APPLICATION_LANG")} color={"red"} />

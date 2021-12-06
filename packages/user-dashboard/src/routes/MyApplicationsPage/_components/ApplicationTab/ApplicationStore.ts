@@ -1,5 +1,5 @@
 import { action, map } from "nanostores";
-import { useStore } from "@nanostores/react";
+import { useStore } from "src/stores/react-nanostores";
 import { personalApi } from "src/api/PersonalApi";
 import { addErrorAction, addSuccessAction } from "src/stores/NotificationStore";
 import { ApplicationPostProps } from "@project/components/src/interfaces/ApplicationDto";

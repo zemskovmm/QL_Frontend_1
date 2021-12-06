@@ -12,13 +12,12 @@ export type MessageType = {
 };
 
 type MessagePropsType = MessageType & {
-    key?:string;
     className?:string;
 };
 
 export const MIN_MESSAGE_HEIGHT=38;
 
-export const Message: FC<MessagePropsType> = ({key,id,className,text,me,fileId}) => {
+export const Message: FC<MessagePropsType> = ({id,className,text,me,fileId}) => {
     return (
         <div
             id={`message_${id}`}
@@ -30,7 +29,6 @@ export const Message: FC<MessagePropsType> = ({key,id,className,text,me,fileId})
             )}
         >
             <div 
-                key={key}
                 className={cn(
                     "flex flex-col p-2 h-full",
                     "border border-bdsecondary rounded",
