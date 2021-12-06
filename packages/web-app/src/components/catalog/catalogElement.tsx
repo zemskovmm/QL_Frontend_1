@@ -77,14 +77,14 @@ export const HousingCatalogElement: FC<{ item: CatalogHousingDto }> = ({ item })
       </div>
       <div className={style.card__right}>
         <div className={style.card__rightTitle}>
-          {item.name} {item.namedTraits.city && item.namedTraits.city[0]?.name}
+          {item?.name} {item.namedTraits.city && item.namedTraits.city[0]?.name}
         </div>
         <a
           className={`flex items-start ${style.multiImg__contentMap}`}
-          href={`https://www.google.com/maps/@${item.location.lat},${item.location.lng},20z`}
+          href={`https://www.google.com/maps/@${item.location?.lat},${item.location?.lng},20z`}
           target={`_blank`}
         >
-          <img src={pin} alt="" /> <span className={`ml-2 underline`}>{item.location.address}</span>
+          <img src={pin} alt="" /> <span className={`ml-2 underline`}>{item.location?.address}</span>
         </a>
         <div dangerouslySetInnerHTML={{ __html: item.htmlDescription }} className={`${style.card__housingDesc} py-5`} />
         <div className={`${style.card__rightPrice} mt-auto`}>
@@ -94,7 +94,7 @@ export const HousingCatalogElement: FC<{ item: CatalogHousingDto }> = ({ item })
           <div className={`${style.card__rightPrice__list}`}>
             <span className={style.card__rightPrice__listItem}>
               <b>
-                <LocalizedText id={"catalogItems_price_upto"} /> {item.price}{" "}
+                <LocalizedText id={"catalogItems_price_upto"} /> {item?.price}{" "}
                 <LocalizedText id={"catalogItems_price_value"} />
               </b>{" "}
               / <LocalizedText id={"catalogItems_price_month"} />
@@ -154,13 +154,13 @@ export const CourseCatalogElement: FC<{ item: CatalogCourseDto }> = ({ item }) =
         </div>
       </div>
       <div className={style.card__right}>
-        <div className={style.card__rightTitle}>{item.name}</div>
+        <div className={style.card__rightTitle}>{item?.name}</div>
         <div className={style.card__rightLevel}>
           <span className={style.card__rightSubtitle}>
             <LocalizedText id={"catalogItems_school"} />:{" "}
           </span>
           <p className={style.card__school}>
-            <span>{item.schoolName}</span>
+            <span>{item?.schoolName}</span>
           </p>
         </div>
         <div className={style.card__rightLevel}>
@@ -182,7 +182,7 @@ export const CourseCatalogElement: FC<{ item: CatalogCourseDto }> = ({ item }) =
           <div className={`${style.card__rightPrice__list}`}>
             <span className={style.card__rightPrice__listItem}>
               <b>
-                <LocalizedText id={"catalogItems_price_from"} /> {item.price}{" "}
+                <LocalizedText id={"catalogItems_price_from"} /> {item?.price}{" "}
                 <LocalizedText id={"catalogItems_price_value"} />
               </b>{" "}
               / <LocalizedText id={"catalogItems_price_month"} />
