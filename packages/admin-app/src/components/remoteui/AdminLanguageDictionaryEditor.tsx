@@ -61,6 +61,24 @@ export const pageLanguageDefinition: PageDefinitionBuilder = (name) => ({
   types: {},
 });
 
+export type AdminPlainDict = Dictionary<{ name: string }>;
+export const plainDictionaryDefinition: PageDefinitionBuilder = (name) => ({
+  groups: [
+    {
+      name,
+      fields: [
+        {
+          name: "name",
+          id: "name",
+          type: "String",
+          alwaysExpanded: false,
+        },
+      ] as any[],
+    },
+  ],
+  types: {},
+});
+
 const selectItems = [
   { id: "RU", name: AllLanguages.ru.title },
   { id: "EN", name: AllLanguages.en.title },
@@ -77,6 +95,7 @@ export class LanguageDictionaryCustomize<T extends Dictionary<unknown>> implemen
     if (type === "LanguageDictionary") return new AdminLanguageDictionaryEditorStore(pageLanguageDefinition, this.item);
     if (type === "TraitLanguageDictionary")
       return new AdminLanguageDictionaryEditorStore(traitEditLanguageDefinition, this.item);
+    if (type === "PlainDictionary") return new AdminPlainDictionaryEditorStore(plainDictionaryDefinition, this.item);
     return null!;
   }
 }
@@ -130,9 +149,50 @@ export class AdminLanguageDictionaryEditorStore<T extends Dictionary<unknown>> i
     );
   }
 }
+export class AdminPlainDictionaryEditorStore<
+  T extends Dictionary<unknown>
+> extends AdminLanguageDictionaryEditorStore<T> {}
+// COMPONENTS
 
 export const AdminRemoteUiLanguageDictionaryEditor: FC<{
   store: AdminLanguageDictionaryEditorStore<AdminSchoolDtoLanguagesDict>;
+}> = ({ store }) => {
+  const [lang, setLang] = useState({ id: "RU", name: AllLanguages.ru.title });
+  const keys = Object.keys(store.itemsStores);
+  return useObserver(() => (
+    <div>
+      <div>
+        <h2>Add language parameters</h2>
+        <div className="flex">
+          <div className="flex-grow">
+            <Select
+              value={lang.name}
+              options={selectItems}
+              selectChange={(value, id) => setLang({ id: id as string, name: value })}
+            />
+          </div>
+
+          <AdminButton color={"default"} onClick={() => store.insertLanguageField(lang.id)}>
+            Add
+          </AdminButton>
+        </div>
+      </div>
+      <div>
+        {keys.map((x) => (
+          <div>
+            <RemoteUiEditor store={store.itemsStores[x]} />
+            <AdminButton color={"danger"} onClick={() => store.removeLanguageField(x)}>
+              Remove
+            </AdminButton>
+          </div>
+        ))}
+      </div>
+    </div>
+  ));
+};
+
+export const AdminRemoteUiPlainDictionaryEditor: FC<{
+  store: AdminLanguageDictionaryEditorStore<AdminPlainDict>;
 }> = ({ store }) => {
   const [lang, setLang] = useState({ id: "RU", name: AllLanguages.ru.title });
   const keys = Object.keys(store.itemsStores);

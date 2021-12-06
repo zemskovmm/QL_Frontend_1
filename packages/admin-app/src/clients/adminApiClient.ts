@@ -10,7 +10,10 @@ import { GlobalSettingsDto } from "src/interfaces/GlobalSettingsDto";
 import { ManagerCreateDto } from "src/stores/pages/adminStores/manager/managerCreateStore";
 import { ManagerApplicationListDto, ManagerListSettingsDto } from "../interfaces/ManagerRpc";
 import { AdminHousingDto } from "../stores/pages/housing/housing-page-store";
-import { AdminHousingAccommodationDto } from "../stores/pages/housing/housing-accommodation-page-store";
+import {
+  AdminHousingAccommodationDto,
+  AdminHousingAccommodationDtoLanguagesDict,
+} from "../stores/pages/housing/type-utils";
 
 export class AdminApiClient extends ApiClientBase {
   getTotalPages = (length: number) => (length % 10 ? Math.floor(length / 10) + 1 : Math.floor(length / 10));
@@ -134,14 +137,19 @@ export class AdminApiClient extends ApiClientBase {
 
   /* Housing Accommodation */
   getHousingAccommodationList = (id: number) =>
-    this.sendRequest<AdminHousingAccommodationDto<unknown>[]>(`admin/housings/${id}/accommodations`);
-  getHousingAccommodation = (id: number) =>
-    this.sendRequest<{ value: AdminHousingAccommodationDto<unknown>; definition: RemoteUiDefinition }>(
-      `admin/housings/accommodation/type/${id}`
+    this.sendRequest<AdminHousingAccommodationDto<AdminHousingAccommodationDtoLanguagesDict>[]>(
+      `admin/housings/${id}/accommodations`
     );
-  updateHousingAccommodation = (id: number, data: AdminHousingAccommodationDto<unknown>) =>
-    this.sendRequest(`admin/housings/accommodation/type/${id}`, data, "PUT");
-  createHousingAccommodation = (data: AdminHousingAccommodationDto<unknown>) =>
+  getHousingAccommodation = (id: number) =>
+    this.sendRequest<{
+      value: AdminHousingAccommodationDto<AdminHousingAccommodationDtoLanguagesDict>;
+      definition: RemoteUiDefinition;
+    }>(`admin/housings/accommodation/type/${id}`);
+  updateHousingAccommodation = (
+    id: number,
+    data: AdminHousingAccommodationDto<AdminHousingAccommodationDtoLanguagesDict>
+  ) => this.sendRequest(`admin/housings/accommodation/type/${id}`, data, "PUT");
+  createHousingAccommodation = (data: AdminHousingAccommodationDto<AdminHousingAccommodationDtoLanguagesDict>) =>
     this.sendRequest(`admin/housings/accommodation/type`, data, "POST");
   definitionHousingsAccommodation = () =>
     this.sendRequest<RemoteUiDefinition>("admin/housings/accommodation/type/definition");
