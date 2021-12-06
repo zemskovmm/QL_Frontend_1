@@ -1,51 +1,65 @@
-import React, { FunctionComponent, CSSProperties } from "react";
+import React, { FC, useEffect } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { FixedSizeList } from "react-window";
-import { ListItemType } from ".";
+import { FixedSizeList, ListOnItemsRenderedProps } from "react-window";
+import { InfinityListProvider } from "./InfinityListProvider";
 import { ListItem, LIST_ITEM_H } from "./ListItem";
 
 export type InfinityListPropsType = {
   className?: string;
-  style?: CSSProperties;
-  count: number;
+  provider: InfinityListProvider;
   maxSize?: number;
   onClick: (id: string) => void;
-  onItemRender: (index: number) => ListItemType | undefined;
+  onItemsRendered: (startIndex: number, stopIndex: number) => void;
   depth?: number;
 };
 
-export const InfinityList: FunctionComponent<InfinityListPropsType> = ({
+export const InfinityList: FC<InfinityListPropsType> = ({
   className,
-  count,
   maxSize = 3,
+  provider,
   onClick,
-  onItemRender,
+  onItemsRendered,
   depth = 0,
 }) => {
+  const handleItemsRendered = ({ overscanStartIndex, overscanStopIndex }: ListOnItemsRenderedProps) => {
+    onItemsRendered(overscanStartIndex, overscanStopIndex);
+  };
+
+  useEffect(() => {
+    console.log("provider", provider.count, maxSize);
+  }, [provider]);
+
   const Row = ({ index, style }: any) => {
-    const item = onItemRender(index);
+    const item = provider.items[index];
     const hanldeClick = item ? onClick : () => {};
     const { id, text } = item || {
       id: `${index}`,
       text: "Loading...",
     };
-    return <ListItem id={id} style={style} depth={depth} key={`InfinityListLoading${id}`} text={text} onClick={() => hanldeClick(id)} />;
+    return (
+      <ListItem
+        id={id}
+        style={style}
+        depth={depth}
+        key={`InfinityListLoading${id}`}
+        text={text}
+        onClick={() => hanldeClick(id)}
+      />
+    );
   };
 
+  const height = LIST_ITEM_H * (provider.count > maxSize ? maxSize : provider.count);
+
   return (
-    <div
+    <FixedSizeList
       className={className}
-      style={{
-        height: LIST_ITEM_H * (count > maxSize ? maxSize : count),
-      }}
+      onItemsRendered={handleItemsRendered}
+      height={height}
+      itemCount={provider.count}
+      itemSize={LIST_ITEM_H}
+      width={"100%"}
     >
-      <AutoSizer>
-        {({ height, width }) => (
-          <FixedSizeList height={height} itemCount={count} itemSize={LIST_ITEM_H} width={width}>
-            {Row}
-          </FixedSizeList>
-        )}
-      </AutoSizer>
-    </div>
+      {Row}
+    </FixedSizeList>
   );
 };
