@@ -154,8 +154,12 @@ export class AdminApiClient extends ApiClientBase {
     this.sendRequest<ManagerApplicationListDto>(`admin/personal/applications` + encodeQueryString(data));
   getManagerApplication = (id: string) =>
     this.sendRequest<ManagerApplicationInfoDto>(`admin/personal/applications/${id}`);
-  getManagerApplicationMessages = (id: string) =>
-    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages`);
+  getManagerApplicationMessages = (id: string, data: any) =>
+    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages${encodeQueryString(data)}`);
+  postManagerApplicationUpload = (id: string, data: File) =>
+    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages/upload`, data, "POST");
+  postManagerApplicationMessage = (id: string, data: { type: number; text: string }) =>
+    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages`, data, "POST");
 }
 
 export const AdminApi = new AdminApiClient();

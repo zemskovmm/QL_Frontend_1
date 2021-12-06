@@ -1,8 +1,11 @@
-﻿import React, { FC, useEffect } from "react";
+﻿import React, { createRef, DOMElement, FC, useEffect, useRef } from "react";
 import { useObserver } from "mobx-react";
 import { useRootStore } from "../../../utils/rootStoreUtils";
 import { ManagerApplicationInfoDto } from "../../../interfaces/ManagerRpc";
-import { ManagerApplicationStore } from "../../../stores/pages/managerStores/application/managerApplicationStore";
+import {
+  ManagerApplicationStore,
+  Message,
+} from "../../../stores/pages/managerStores/application/managerApplicationStore";
 
 const usePollMessages = (store: ManagerApplicationStore) =>
   useEffect(() => {
@@ -10,22 +13,51 @@ const usePollMessages = (store: ManagerApplicationStore) =>
     return () => store.stopPolling();
   });
 
+const MessageChatWindow: FC<{ store: ManagerApplicationStore }> = ({ store }) => {
+  return useObserver(() => (
+    <div
+      className={`border h-full mb-5 customScroll overflow-y-scroll`}
+      onScroll={async (e: any) => {
+        if (e.target.scrollTop < 300) await store.MoreLoadMessages();
+      }}
+    >
+      {store.messages.map((el: Message, i: number) => (
+        <div className={`flex w-max flex-col `}>
+          <div className={`flex justify-between`}>
+            <span className={`mr-5`}>{el.author}</span>
+            <span>{new Date(el.date).toDateString()}</span>
+          </div>
+          <span>{el.text}</span>
+        </div>
+      ))}
+    </div>
+  ));
+};
+
 export const ManagerChat: FC<{ store: ManagerApplicationStore }> = ({ store }) => {
   usePollMessages(store);
 
-  return (
+  return useObserver(() => (
     <div className={`p-10 h-screen`}>
       <div className={`flex flex-col border h-full p-10`}>
-        <div className={`border h-full mb-5`}>
-          <pre>{JSON.stringify(store.messages, null, 2)}</pre>
-        </div>
-        <form className={`flex`}>
-          <textarea className={`w-11/12 mr-10 resize-none border p-4`} />
+        <MessageChatWindow store={store} />
+        <form
+          className={`flex`}
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await store.postMessages();
+          }}
+        >
+          <input
+            className={`w-11/12 mr-10 resize-none border p-4`}
+            value={store.sms}
+            onChange={(e) => (store.sms = e.target.value)}
+          />
           <button className={`button`}>Send</button>
         </form>
       </div>
     </div>
-  );
+  ));
 };
 
 export const ManagerApplicationInfo: FC<{ info: ManagerApplicationInfoDto; openInfo: boolean }> = ({

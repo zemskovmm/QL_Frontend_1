@@ -10,6 +10,9 @@ export const ApplicationSide = () => {
       <button className={`border mt-2 p-2 hover:border-gray-300`} onClick={() => (s.openInfo = !s.openInfo)}>
         Application Info
       </button>
+      <button className={`border mt-4 p-2 hover:border-gray-300`} onClick={() => (s.openInfo = !s.openInfo)}>
+        Upload File in chat
+      </button>
     </div>
   ));
 };
