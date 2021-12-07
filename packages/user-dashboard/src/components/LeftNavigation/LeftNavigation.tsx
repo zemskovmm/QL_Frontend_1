@@ -57,7 +57,12 @@ export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) =
           </Link>
         </div>
       </div>
-      <Button className="self-end mt-auto mb-2.5 w-32 " text="Выход" onClick={logoutAction} color="red" />
+      <Button
+        className="self-end mt-auto mb-2.5 w-32 "
+        text={localizedText("EXIT_LANG")}
+        onClick={logoutAction}
+        color="red"
+      />
     </div>
   );
 });

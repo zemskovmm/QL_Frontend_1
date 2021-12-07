@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useState,useRef } from "react";
+import React, { FC, FormEvent, useState, useRef } from "react";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { Textarea } from "@project/components/src/ui-kit/Textarea";
 import cn from "classnames";
@@ -8,11 +8,13 @@ type PropsType = {
   className?: string;
   onSendMessage: (text: string) => void;
   onFileChose: (file: File) => void;
+  sendButtonName?: string;
+  placeholder?: string;
 };
 
-export const MessagesEdit: FC<PropsType> = ({ className, onSendMessage, onFileChose }) => {
+export const MessagesEdit: FC<PropsType> = ({ className, onSendMessage, onFileChose, sendButtonName, placeholder }) => {
   const fileRef = useRef<HTMLInputElement>(null);
-  const [message,setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
   const handleSendMessage = () => {
     if (message) {
@@ -36,13 +38,13 @@ export const MessagesEdit: FC<PropsType> = ({ className, onSendMessage, onFileCh
         rows={1}
         value={message}
         className="flex-grow mr-2 h-full"
-        placeholder="Ваше сообщение"
+        placeholder={placeholder}
         iconSrc={CLIP_ICON}
         onIconClick={() => fileRef.current?.click()}
         onPressEnter={handleSendMessage}
         onChangeText={setMessage}
       />
-      <Button className="self-end" text="Отправить" color="red" type="submit" onClick={handleSendMessage} />
+      <Button className="self-end" text={sendButtonName} color="red" type="submit" onClick={handleSendMessage} />
     </div>
   );
 };
