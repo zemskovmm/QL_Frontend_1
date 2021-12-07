@@ -160,6 +160,8 @@ export class AdminApiClient extends ApiClientBase {
   /* Manager cabinet */
   getManagerApplicationList = (data: any | ManagerListSettingsDto) =>
     this.sendRequest<ManagerApplicationListDto>(`admin/personal/applications` + encodeQueryString(data));
+  getManagerApplicationUserIdList = (data: any | ManagerListSettingsDto, userId: string) =>
+    this.sendRequest<ManagerApplicationListDto>(`admin/personal/applications/user/${userId}` + encodeQueryString(data));
   getManagerApplication = (id: string) =>
     this.sendRequest<ManagerApplicationInfoDto>(`admin/personal/applications/${id}`);
   getManagerApplicationMessages = (id: string, data: any) =>

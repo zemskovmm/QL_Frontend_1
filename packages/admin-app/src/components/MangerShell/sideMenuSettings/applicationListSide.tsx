@@ -69,6 +69,12 @@ export const ApplicationListSide = () => {
         variant={2}
         onChange={(e) => (s.listSettings.phone = e.target.value)}
       />
+      <AdminInputBox
+        value={s.listSettings.userId}
+        label={"User id"}
+        variant={2}
+        onChange={(e) => (s.listSettings.userId = e.target.value)}
+      />
       <button className={`border mt-2 p-2 hover:border-gray-300`} onClick={async () => await s.load()}>
         Search
       </button>
