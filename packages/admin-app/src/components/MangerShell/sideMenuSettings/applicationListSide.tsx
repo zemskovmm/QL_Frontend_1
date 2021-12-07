@@ -7,7 +7,8 @@ export const ApplicationListSide = () => {
   const { mangerApplicationListPage: s } = useRootStore();
   return useObserver(() => (
     <div className={`flex flex-col`}>
-      <div className={`flex mb-4`}>
+      <div className={`text-center text-xl mb-3`}>Search settings</div>
+      <div className={`flex mb-2`}>
         <span className={`mr-2`}>Total items: {s.applications.totalItems}</span>{" "}
         <span>Total pages: {s.applications.totalPages} </span>
       </div>
@@ -69,7 +70,7 @@ export const ApplicationListSide = () => {
         onChange={(e) => (s.listSettings.phone = e.target.value)}
       />
       <button className={`border mt-2 p-2 hover:border-gray-300`} onClick={async () => await s.load()}>
-        Accept
+        Search
       </button>
     </div>
   ));

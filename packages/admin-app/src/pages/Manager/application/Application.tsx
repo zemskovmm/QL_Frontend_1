@@ -25,7 +25,7 @@ const MessageChatWindow: FC<{ store: ManagerApplicationStore }> = ({ store }) =>
       ref={ref}
     >
       {store.messages.map((el: Message, i: number) => (
-        <div className={`flex w-max flex-col `}>
+        <div className={`flex w-max flex-col `} key={`${i} ${el.id}`}>
           <div className={`flex justify-between`}>
             <span className={`mr-5`}>{el.author}</span>
             <span>{new Date(el.date).toDateString()}</span>

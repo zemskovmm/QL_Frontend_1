@@ -47,7 +47,10 @@ export class ManagerApplicationStore extends RequestTracking {
     }
   }
 
-  @action async postFile(file: File) {
+  @action async postFile(file: any) {
+    if (!file[0]) return;
+    const data = new FormData();
+    data.append("UploadedFile", file[0]);
     try {
       await AdminApi.postManagerApplicationUpload(this.id, file);
     } catch (e) {
@@ -85,9 +88,10 @@ export class ManagerApplicationStore extends RequestTracking {
         count: 60,
       });
       this.messages = this.messages.concat(pullAllWith(messages, takeRight(this.messages, 60), isEqual));
+      // we take the last 60 messages in the observer, check for unique messages and then concat to the right of our array of observers.
       this.stopLoad = false;
-    } catch (e) {
-      console.log(e);
+    } catch (e: Error | any) {
+      console.log(e.message);
     }
   }
 
@@ -103,6 +107,7 @@ export class ManagerApplicationStore extends RequestTracking {
         count: 30,
       });
       this.messages = pullAllWith(messagesBefore, take(this.messages, 30), isEqual).concat(this.messages);
+      // we take the last 30 messages in the observer, check for unique messages and then concat to the left of our array of observers.
       this.stopMore = false;
     } catch (e) {
       console.log(e);

@@ -11,10 +11,10 @@ const ManagerApplicationListItem: FC<{ item: ManagerApplicationDto }> = ({ item 
     <RouterLink
       routeName={ManagerRouteNames.applicationId}
       params={{ userId: String(item.userId), applicationId: String(item.id) }}
-      className={`flex flex-col w-4/12 px-4 py-2 box-border border`}
+      className={`flex flex-col w-3-calc px-4 py-2 box-border border`}
     >
       <div className={`flex justify-between mb-10`}>
-        <div className={`flex flex-col`}>
+        <div className={`flex flex-col text-xl`}>
           <span>{item.firstName}</span>
           <span>{item.lastName}</span>
         </div>
@@ -36,7 +36,7 @@ export const ApplicationList = () => {
   const { mangerApplicationListPage: s } = useRootStore();
   return useObserver(() => (
     <div className={`flex flex-col p-10 w-full`}>
-      <div className={`flex flex-wrap`}>
+      <div className={`flex flex-wrap gap-2`}>
         {s.applications.items?.map((el, i) => (
           <ManagerApplicationListItem item={el} key={`${el.id} ${i}`} />
         ))}

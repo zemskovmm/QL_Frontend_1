@@ -157,7 +157,7 @@ export class AdminApiClient extends ApiClientBase {
   getManagerApplicationMessages = (id: string, data: any) =>
     this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages${encodeQueryString(data)}`);
   postManagerApplicationUpload = (id: string, data: File) =>
-    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages/upload`, data, "POST");
+    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages/upload`, data, "POST", true);
   postManagerApplicationMessage = (id: string, data: { type: number; text: string }) =>
     this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages`, data, "POST");
 }
