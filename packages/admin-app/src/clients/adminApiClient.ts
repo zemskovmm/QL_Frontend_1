@@ -8,7 +8,7 @@ import { RemoteUiDefinition } from "@kekekeks/remoteui/src";
 import { AdminCourseDto } from "src/stores/pages/adminStores/course/coursePageStore";
 import { GlobalSettingsDto } from "src/interfaces/GlobalSettingsDto";
 import { ManagerCreateDto } from "src/stores/pages/adminStores/manager/managerCreateStore";
-import { ManagerApplicationListDto, ManagerListSettingsDto } from "../interfaces/ManagerRpc";
+import { ManagerApplicationInfoDto, ManagerApplicationListDto, ManagerListSettingsDto } from "../interfaces/ManagerRpc";
 import { AdminHousingDto } from "../stores/pages/housing/housing-page-store";
 import {
   AdminHousingAccommodationDto,
@@ -158,8 +158,16 @@ export class AdminApiClient extends ApiClientBase {
   postManagerCreate = (data: ManagerCreateDto) => this.sendRequest(`admin/auth/manager/register`, data, "POST");
 
   /* Manager cabinet */
-  getManagerApplication = (data: any | ManagerListSettingsDto) =>
+  getManagerApplicationList = (data: any | ManagerListSettingsDto) =>
     this.sendRequest<ManagerApplicationListDto>(`admin/personal/applications` + encodeQueryString(data));
+  getManagerApplication = (id: string) =>
+    this.sendRequest<ManagerApplicationInfoDto>(`admin/personal/applications/${id}`);
+  getManagerApplicationMessages = (id: string, data: any) =>
+    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages${encodeQueryString(data)}`);
+  postManagerApplicationUpload = (id: string, data: File) =>
+    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages/upload`, data, "POST", true);
+  postManagerApplicationMessage = (id: string, data: { type: number; text: string }) =>
+    this.sendRequest<any>(`admin/personal/applications/${id}/chat/messages`, data, "POST");
 }
 
 export const AdminApi = new AdminApiClient();
