@@ -6,22 +6,32 @@ import { RouterLink } from "mobx-state-router";
 import { ManagerRouteNames } from "../ManagerRoutes";
 import { Paginator } from "../../../components/common/Paginator";
 
+const StyleVariant: any = {
+  Visa: `bg-blue-400`,
+  University: `bg-pink-400`,
+  Housing: `bg-green-500`,
+  Course: `bg-red-400`,
+};
+
 const ManagerApplicationListItem: FC<{ item: ManagerApplicationDto }> = ({ item }) => {
   return (
     <RouterLink
       routeName={ManagerRouteNames.applicationId}
       params={{ userId: String(item.userId), applicationId: String(item.id) }}
-      className={`flex flex-col w-3-calc px-4 py-2 box-border border`}
+      className={`flex flex-col border-r w-3-calc items-center px-4 py-4 box-border border rounded transition transition-delay-300 hover:opacity-100 ${
+        StyleVariant[item.type]
+      } ${item.status === "New" ? "" : "opacity-80"}`}
     >
-      <div className={`flex justify-between mb-10`}>
-        <div className={`flex flex-col text-xl`}>
-          <span>{item.firstName}</span>
-          <span>{item.lastName}</span>
+      <div className={`ml-auto bg-white text-sm px-2 rounded-md`}>{item.status}</div>
+      <div className={`flex flex-col text-center items-center text-xl mb-4`}>
+        <div className={`rounded-full h-16 w-16 flex items-center justify-center bg-white opacity-90 mb-4`}>
+          {item.type[0]}
         </div>
-        {item.status}
+        <span>{item.type}</span>
+        <span>{item.firstName}</span>
+        <span>{item.lastName}</span>
       </div>
       <div className={`flex justify-between`}>
-        {item.type}
         <div>
           <span className={`mr-2`}>Entity id: {item.entityId}</span>
           <span className={`mr-2`}>User id: {item.userId}</span>
