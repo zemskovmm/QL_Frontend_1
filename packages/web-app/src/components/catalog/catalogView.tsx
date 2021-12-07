@@ -11,11 +11,12 @@ import filter from "src/assets/icons/filter.svg";
 import sort from "src/assets/icons/sort.svg";
 import close from "src/assets/icons/cross-remove.svg";
 import { LocalizedText } from "../common/LocalizedText";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import cn from "classnames";
 import { CourseCatalogElement, HousingCatalogElement, UniversityCatalogElement } from "./catalogElement";
 import { useObserver } from "mobx-react";
+import { ComponentHostContext } from "@project/components/src/blocks";
 
 const RegionFilter: FC<{
   option: ClientCatalogFilterOptionDto;
@@ -161,42 +162,45 @@ function CatalogFilter(props: {
   );
 }
 
-const CatalogCategories = ({ lang = "en", type = "university" }) => (
-  <div className={style.catalog__filterRow}>
-    <h3 className={style.catalog__filterTitle}>
-      <LocalizedText id={"catalogEducation_categories"} />
-    </h3>
-    <div>
-      {/*<a*/}
-      {/*  href={`/${lang}/catalog/course`}*/}
-      {/*  className={cn(style.toggle__switch, type === "course" ? style.toggle__switch_active : "")}*/}
-      {/*>*/}
-      {/*  <img src={course} alt="" className={`${style.toggle__switchImg}`} />*/}
-      {/*  <span className={`${style.toggle__switchName}`}>*/}
-      {/*    <LocalizedText id={"catalogEducation_courses"} />*/}
-      {/*  </span>*/}
-      {/*</a>*/}
-      <a
-        href={`/${lang}/catalog/university`}
-        className={cn(style.toggle__switch, type === "university" ? style.toggle__switch_active : "")}
-      >
-        <img src={education} alt="" className={`${style.toggle__switchImg}`} />
-        <span className={`${style.toggle__switchName}`}>
-          <LocalizedText id={"catalogEducation_education"} />
-        </span>
-      </a>
-      <a
-        href={`/${lang}/catalog/housing`}
-        className={cn(style.toggle__switch, type === "housing" ? style.toggle__switch_active : "")}
-      >
-        <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
-        <span className={`${style.toggle__switchName}`}>
-          <LocalizedText id={"catalogHousing_title"} />
-        </span>
-      </a>
+const CatalogCategories = ({ lang = "en", type = "university" }) => {
+  const ct = useContext(ComponentHostContext);
+  return (
+    <div className={style.catalog__filterRow}>
+      <h3 className={style.catalog__filterTitle}>
+        <LocalizedText id={"catalogEducation_categories"} />
+      </h3>
+      <div>
+        {/*<a*/}
+        {/*  href={`/${lang}/catalog/course`}*/}
+        {/*  className={cn(style.toggle__switch, type === "course" ? style.toggle__switch_active : "")}*/}
+        {/*>*/}
+        {/*  <img src={course} alt="" className={`${style.toggle__switchImg}`} />*/}
+        {/*  <span className={`${style.toggle__switchName}`}>*/}
+        {/*    <LocalizedText id={"catalogEducation_courses"} />*/}
+        {/*  </span>*/}
+        {/*</a>*/}
+        <a
+          href={`/${lang}/catalog/university`}
+          className={cn(style.toggle__switch, type === "university" ? style.toggle__switch_active : "")}
+        >
+          <img src={education} alt="" className={`${style.toggle__switchImg}`} />
+          <span className={`${style.toggle__switchName}`}>
+            <LocalizedText id={"catalogEducation_education"} />
+          </span>
+        </a>
+        <a
+          href={ct?.oldHousing ? `https://housing.quartier-latin.com/${lang}/housing` : `/${lang}/catalog/housing`}
+          className={cn(style.toggle__switch, type === "housing" ? style.toggle__switch_active : "")}
+        >
+          <img src={hotel} alt="" className={`${style.toggle__switchImg}`} />
+          <span className={`${style.toggle__switchName}`}>
+            <LocalizedText id={"catalogHousing_title"} />
+          </span>
+        </a>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 function CatalogFilters(props: {
   filters: CatalogFilterDto[];

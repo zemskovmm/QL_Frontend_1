@@ -25,6 +25,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
   @observable requestFormLeftTitle: string = "";
   @observable requestFormRightTitle: string = "";
   @observable requestFormPostText: string = "";
+  @observable oldHousing: boolean = false;
 
   @observable alert: boolean = false;
   @observable buttonDisabled: boolean = false;
@@ -47,6 +48,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
     this.requestFormLeftTitle = "";
     this.requestFormRightTitle = "";
     this.requestFormPostText = "";
+    this.oldHousing = false;
   }
 
   @action async load(lang: string) {
@@ -66,6 +68,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
       this.requestFormRightTitle = req.requestForm.requestFormRightTitle;
       this.requestFormPostText = req.requestForm.requestFormPostText;
       this.personalCabinet = req.personalCabinet ?? {};
+      this.oldHousing = req.oldHousing ?? false;
     } catch (e) {}
   }
 
@@ -90,6 +93,7 @@ export class GlobalSettingsPageStore extends RequestTracking {
         footerSocialLink: this.footerSocialLink,
       },
       personalCabinet: this.personalCabinet,
+      oldHousing: this.oldHousing,
     };
     try {
       await this.track(() => AdminApi.putGlobalSettings(this.lang, data));

@@ -25,6 +25,7 @@ function MyApp({
     <>
       <AppComponentHost
         requestSetting={globalSettings.requestForm}
+        oldHousing={globalSettings.oldHousing}
         headTitle={title}
         headMeta={module?.page?.Metadata?.meta ?? null}
       >

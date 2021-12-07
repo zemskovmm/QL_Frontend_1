@@ -88,6 +88,7 @@ export interface IComponentHost {
   lang: string;
   linkComponent: (props: { href: string; children: any }) => React.ReactElement;
   requestSetting: RequestFormDto;
+  oldHousing: boolean;
 }
 
 export const ComponentHostContext = React.createContext<IComponentHost | null>(null);

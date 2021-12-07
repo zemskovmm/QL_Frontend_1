@@ -308,6 +308,7 @@ export class FormEditorStore extends RequestTracking {
           header: this.req.header,
           footer: this.req.footer,
           personalCabinet: personalCabinet,
+          oldHousing: this.req.oldHousing,
         };
         try {
           await AdminApi.putGlobalSettings(this.lang, body);

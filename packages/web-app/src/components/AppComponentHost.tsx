@@ -13,9 +13,16 @@ type appComponentHostType = {
   headTitle: string;
   headMeta?: { name: string; content: string; property: string }[] | null;
   requestSetting: RequestFormDto;
+  oldHousing: boolean;
 };
 
-export const AppComponentHost: React.FC<appComponentHostType> = ({ headTitle, headMeta, requestSetting, children }) => {
+export const AppComponentHost: React.FC<appComponentHostType> = ({
+  headTitle,
+  headMeta,
+  requestSetting,
+  oldHousing,
+  children,
+}) => {
   const [isContactUsFormShown, setContactUsFormShown] = useState(false);
   const router = useRouter();
   const lang = router.query.lang || "en";
@@ -25,6 +32,7 @@ export const AppComponentHost: React.FC<appComponentHostType> = ({ headTitle, he
     lang: lang as string,
     linkComponent: Link,
     requestSetting: requestSetting,
+    oldHousing: oldHousing,
   };
   return (
     <>

@@ -13,7 +13,9 @@ export const DropDownList: FC<{ active: boolean; name: string; onClick: () => vo
 }) => {
   return (
     <div
-      className={`${styles.faqBlock__item} w-full flex flex-col ${active ? styles.showItem : styles.hideItem}`}
+      className={`${styles.faqBlock__item} cursor-pointer w-full flex flex-col ${
+        active ? styles.showItem : styles.hideItem
+      }`}
       onClick={() => onClick()}
     >
       <div className={`flex items-center`}>

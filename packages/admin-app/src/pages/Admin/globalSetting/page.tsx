@@ -22,7 +22,11 @@ export const AdminGlobalSettingEditor = () => {
   };
 
   return useObserver(() => (
-    <div className={`max-w-7xl py-10 mx-auto px-10`}>
+    <div className={`max-w-7xl flex flex-col py-10 mx-auto px-10`}>
+      <label className={`mb-10 cursor-pointer`}>
+        <input type="checkbox" checked={s.oldHousing} onChange={(e) => (s.oldHousing = e.target.checked)} />
+        <span className={`ml-3`}>Old Housing</span>
+      </label>
       <ChooseLang />
       <DropDownList name={`Header`} active={name === "Header"} onClick={() => openList("Header")}>
         <HeaderSettings s={s} />

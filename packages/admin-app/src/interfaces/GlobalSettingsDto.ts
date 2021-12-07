@@ -71,4 +71,5 @@ export interface GlobalSettingsDto {
   header: HeaderDto;
   footer: FooterDto;
   personalCabinet: PersonalCabinetDto;
+  oldHousing: boolean;
 }
