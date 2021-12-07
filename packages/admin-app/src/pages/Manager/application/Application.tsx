@@ -1,4 +1,4 @@
-﻿import React, { createRef, DOMElement, FC, useEffect, useRef } from "react";
+﻿import React, { createRef, DOMElement, FC, MutableRefObject, RefObject, useEffect, useRef } from "react";
 import { useObserver } from "mobx-react";
 import { useRootStore } from "../../../utils/rootStoreUtils";
 import { ManagerApplicationInfoDto } from "../../../interfaces/ManagerRpc";
@@ -14,12 +14,15 @@ const usePollMessages = (store: ManagerApplicationStore) =>
   });
 
 const MessageChatWindow: FC<{ store: ManagerApplicationStore }> = ({ store }) => {
+  const ref = useRef() as MutableRefObject<HTMLDivElement>;
+  useEffect(() => ref.current?.scrollTo({ top: ref.current.scrollHeight }), []);
   return useObserver(() => (
     <div
       className={`border h-full mb-5 customScroll overflow-y-scroll`}
       onScroll={async (e: any) => {
         if (e.target.scrollTop < 300) await store.MoreLoadMessages();
       }}
+      ref={ref}
     >
       {store.messages.map((el: Message, i: number) => (
         <div className={`flex w-max flex-col `}>

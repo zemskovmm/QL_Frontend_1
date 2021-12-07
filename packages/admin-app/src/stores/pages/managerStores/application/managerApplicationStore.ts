@@ -69,11 +69,6 @@ export class ManagerApplicationStore extends RequestTracking {
     this.intervalTimer = 0;
   }
 
-  @action reset() {
-    this.openInfo = false;
-    this.stopPolling();
-  }
-
   @action async loadMessagesIntervalCallback() {
     if (!this.isPolling) return;
     await this.loadMessages();
@@ -92,7 +87,7 @@ export class ManagerApplicationStore extends RequestTracking {
       this.messages = this.messages.concat(pullAllWith(messages, takeRight(this.messages, 60), isEqual));
       this.stopLoad = false;
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   }
 
@@ -110,18 +105,29 @@ export class ManagerApplicationStore extends RequestTracking {
       this.messages = pullAllWith(messagesBefore, take(this.messages, 30), isEqual).concat(this.messages);
       this.stopMore = false;
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   }
 
   /* Any */
+
+  @action reset() {
+    this.openInfo = false;
+    this.stopPolling();
+    this.application = {};
+    this.openInfo = false;
+    this.messages = [];
+    this.sms = "";
+    this.stopMore = false;
+    this.stopLoad = false;
+  }
 
   @action
   async loadApplication() {
     try {
       this.application = await AdminApi.getManagerApplication(this.id);
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   }
 
