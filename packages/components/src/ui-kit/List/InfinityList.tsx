@@ -25,10 +25,6 @@ export const InfinityList: FC<InfinityListPropsType> = ({
     onItemsRendered(overscanStartIndex, overscanStopIndex);
   };
 
-  useEffect(() => {
-    console.log("provider", provider.count, maxSize);
-  }, [provider]);
-
   const Row = ({ index, style }: any) => {
     const item = provider.items[index];
     const hanldeClick = item ? onClick : () => {};

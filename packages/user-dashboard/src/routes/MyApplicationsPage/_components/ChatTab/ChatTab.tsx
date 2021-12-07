@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useEffect } from "react";
 import { useChatStore } from "./ChatStore";
 import { Chat } from "@project/components/src/ui-kit/Chat";
+import { useLocalized } from "src/locales";
 
 type PropsType = {
   className?: string;
@@ -10,6 +11,7 @@ type PropsType = {
 
 export const ChatTab: FC<PropsType> = ({ className, applicationId }) => {
   const { getMessages, sendMessage, messages, setApplicationId, uploadFile } = useChatStore();
+  const { localizedText } = useLocalized();
 
   useEffect(() => {
     setApplicationId(applicationId);
@@ -37,6 +39,8 @@ export const ChatTab: FC<PropsType> = ({ className, applicationId }) => {
       onAfterMessages={handleAfterMessages}
       onSendMessage={handleSendMessage}
       onFileChose={handleChoseFile}
+      sendButtonName={localizedText("SEND_LANG")}
+      placeholder={localizedText("ENTER_YOUR_MESSAGE_LANG")}
     />
   );
 };
