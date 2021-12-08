@@ -3,6 +3,8 @@ stages:
   - deploy-develop
 
 .restore-build:
+  variables: 
+    NEXT_PUBLIC_API_BASE_URL: "https://ql-dev.dotlic.ru"
   script:
     - git submodule sync && git submodule update --init --recursive
     - yarn install --frozen-lockfile
@@ -27,7 +29,7 @@ deploy:
     - ql-dev
   only:
     - develop
-  after_script:
+  after_script: 
     # WEB (NEXT.JS Frontend)
     - sudo systemctl stop quartier-latin-web-dev
     - rm -rf /apps/quartier-dev/web && cp -r . /apps/quartier-dev/web/
