@@ -44,7 +44,7 @@ export const LeftNavigation: FC<{ className?: string }> = memo(({ className }) =
         </Link>
         {isRegistrationComplite && (
           <ListItem
-            className="flex-shrink-0"
+            className="flex-shrink-0 select-none"
             text={localizedText("MY_APPLICATIONS_LANG")}
             onClick={() => setIsOpenList(!isOpenList)}
             stopPropagation

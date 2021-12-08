@@ -63,12 +63,12 @@ const postApplicationAction = action(
   }
 );
 
-type UseApplicationStore = ApplicationStore & {
+type UseApplicationTabStore = ApplicationStore & {
   getApplication: (applicationId: number) => Promise<void>;
   postApplicationAction: (data: ApplicationPostProps) => Promise<boolean>;
 };
 
-export const useApplicationStore = (): UseApplicationStore => {
+export const useApplicationTabStore = (): UseApplicationTabStore => {
   const state = useStore(applicationStore);
 
   return { ...state, getApplication, postApplicationAction };

@@ -24,9 +24,10 @@ const chatStor = map<ChatStore>({
 
 const setApplicationId = action(chatStor, "setApplicationId", (store, applicationId: number) => {
   if (store.get().applicationId !== applicationId) {
+    store.setKey("applicationId", applicationId);
     store.setKey("messages", new MessageListProvider());
+    getMessages(applicationId);
   }
-  store.setKey("applicationId", applicationId);
 });
 
 const getMessages = action(

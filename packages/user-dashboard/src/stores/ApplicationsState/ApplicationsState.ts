@@ -3,7 +3,7 @@ import { useStore } from "src/stores/react-nanostores";
 import { ApplicationsPropsReq, personalApi } from "../../api/PersonalApi";
 import { addErrorAction } from "../NotificationStore";
 import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
-import { InfinityListProvider } from "@project/components/src/ui-kit/List";
+import { InfinityListProvider, InfinityListProviderInit } from "@project/components/src/ui-kit/List";
 import { getLocaleTranslete } from "src/locales/locales";
 
 export const TOTAL_APPLICATIONS = 20;
@@ -21,7 +21,7 @@ const applicationsState = map<ApplicationsState>({
   isOpenList: false,
   isLoading: false,
   lang: "en",
-  applicationList: new InfinityListProvider(),
+  applicationList: InfinityListProviderInit(5),
 });
 
 const setIsOpenList = action(applicationsState, "setIsOpenPage", (store, isOpen: boolean) => {
@@ -49,7 +49,6 @@ const setLang = action(applicationsState, "setLang", (store, lang: string) => {
 
 const clearApplications = (store: MapStore<ApplicationsState>) => {
   loadedPages = [];
-  applicationsState.setKey("applicationList", new InfinityListProvider());
 };
 
 const onItemsRendered = action(

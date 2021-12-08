@@ -49,10 +49,11 @@ export const InfinityList: FC<InfinityListPropsType> = ({
   const minHeight = provider.count ? LIST_ITEM_H : 0;
 
   return (
-    <div className={cn(className)} style={{ minHeight, maxHeight }}>
+    <div className={cn("border-b", className)} style={{ minHeight, maxHeight }}>
       <AutoSizer>
         {({ height, width }) => (
           <FixedSizeList
+            className="customScroll"
             onItemsRendered={handleItemsRendered}
             width={width}
             height={height}
