@@ -3,6 +3,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeList, ListOnItemsRenderedProps } from "react-window";
 import { InfinityListProvider } from "./InfinityListProvider";
 import { ListItem, LIST_ITEM_H } from "./ListItem";
+import cn from "classnames";
 
 export type InfinityListPropsType = {
   className?: string;
@@ -15,7 +16,7 @@ export type InfinityListPropsType = {
 
 export const InfinityList: FC<InfinityListPropsType> = ({
   className,
-  maxSize = 3,
+  maxSize = 20,
   provider,
   onClick,
   onItemsRendered,
@@ -44,18 +45,24 @@ export const InfinityList: FC<InfinityListPropsType> = ({
     );
   };
 
-  const height = LIST_ITEM_H * (provider.count > maxSize ? maxSize : provider.count);
+  const maxHeight = LIST_ITEM_H * maxSize;
+  const minHeight = provider.count ? LIST_ITEM_H : 0;
 
   return (
-    <FixedSizeList
-      className={className}
-      onItemsRendered={handleItemsRendered}
-      height={height}
-      itemCount={provider.count}
-      itemSize={LIST_ITEM_H}
-      width={"100%"}
-    >
-      {Row}
-    </FixedSizeList>
+    <div className={cn(className)} style={{ minHeight, maxHeight }}>
+      <AutoSizer>
+        {({ height, width }) => (
+          <FixedSizeList
+            onItemsRendered={handleItemsRendered}
+            width={width}
+            height={height}
+            itemCount={provider.count}
+            itemSize={LIST_ITEM_H}
+          >
+            {Row}
+          </FixedSizeList>
+        )}
+      </AutoSizer>
+    </div>
   );
 };

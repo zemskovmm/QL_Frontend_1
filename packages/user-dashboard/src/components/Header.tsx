@@ -9,38 +9,51 @@ import { MenuBurger } from "./MenuBurger";
 import { Link } from "react-router-dom";
 import { useLocalized } from "src/locales";
 import { PROFILE_ROUTE } from "src/constants";
+import cn from "classnames";
 
-export const Header: FC = () => {
+type PropsType = {
+  className?: string;
+};
+
+export const Header: FC<PropsType> = ({ className }) => {
   const { isAuthorized, user } = useUserStatuseStore();
-  const { lang,setLang} = useLocalized();
+  const { lang, setLang, localizedText } = useLocalized();
 
   const profileName =
-    user.lastName.length | user.firstName.length ? [user.lastName, user.firstName].join(" ") : "Профиль";
+    user.lastName.length | user.firstName.length
+      ? [user.lastName, user.firstName].join(" ")
+      : localizedText("PROFILE_LANG");
 
   return (
-    <div className="mb-10 md:mb-0 px-3 md:px-10 py-2.5 md:py-1 box-content shadow md:h-20 lg:absolute lg:left-0 lg:right-0 lg:top-0 lg:z-50">
-      <Container className="flex justify-between items-center h-full">
-        <Logo />
-        <div className="relative inline-flex gap-5 items-center">
-          <LangChooser
-            lang={lang}
-            linkComponent={(showLang:string) => (
-              <a onClick={() => {setLang(showLang)}}>
-                {showLang}
-              </a>
-            )}
-          />
+    <div className={cn("relative h-14 md:h-20", className)}>
+      <div className="fixed bg-white shadow left-0 top-0 h-14 md:h-20 py-2.5 md:py-1 w-full z-10">
+        <Container className="flex justify-between items-center h-full">
+          <Logo />
+          <div className="inline-flex gap-5 items-center">
+            <LangChooser
+              lang={lang}
+              linkComponent={(showLang: string) => (
+                <a
+                  onClick={() => {
+                    setLang(showLang);
+                  }}
+                >
+                  {showLang}
+                </a>
+              )}
+            />
 
-          {isAuthorized && (
-            <>
-              <Link to={PROFILE_ROUTE}>
-                <Icon src={USER_ICON} alt={profileName} size="8" />
-              </Link>
-              <MenuBurger className="inline tablet:hidden" />
-            </>
-          )}
-        </div>
-      </Container>
+            {isAuthorized && (
+              <>
+                <Link to={PROFILE_ROUTE}>
+                  <Icon src={USER_ICON} alt={profileName} size="8" />
+                </Link>
+                <MenuBurger className="inline md:hidden" />
+              </>
+            )}
+          </div>
+        </Container>
+      </div>
     </div>
   );
 };
