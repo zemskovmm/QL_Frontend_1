@@ -24,12 +24,6 @@ const Navbar = () => {
         >
           All Applications
         </RouterLink>
-        <RouterLink
-          routeName={ManagerRouteNames.findUserIdApplication}
-          className={`${linkClass} ${activeLink(ManagerRouteNames.findUserIdApplication)}`}
-        >
-          User Applications
-        </RouterLink>
       </div>
       <div className={`my-10 px-10 w-full`}>
         <div className={`border-t pt-5 text-white`}>

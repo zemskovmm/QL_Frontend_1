@@ -22,7 +22,11 @@ export class ManagerApplicationListStore extends RequestTracking {
   @action
   async load() {
     try {
-      this.applications = await AdminApi.getManagerApplicationList(this.listSettings);
+      if (this.listSettings.userId) {
+        this.applications = await AdminApi.getManagerApplicationUserIdList(this.listSettings, this.listSettings.userId);
+      } else {
+        this.applications = await AdminApi.getManagerApplicationList(this.listSettings);
+      }
     } catch (e) {
       alert(e);
     }
