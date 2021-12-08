@@ -26,10 +26,10 @@ export const Message: FC<MessagePropsType> = ({ id, className, text, me, fileId 
     >
       <div className={cn("flex p-2 h-full", "border border-bdsecondary rounded", me ? "bg-blue-50" : "bg-white")}>
         {fileId ? (
-          <>
+          <span className={`flex items-center`}>
             <IconButton src={CLIP_ICON} size="6" />
             <Text text={`document ${fileId}`} size="small" tag="pre" />
-          </>
+          </span>
         ) : null}
         {text ? <Text text={text} size="small" tag="pre" /> : null}
       </div>
