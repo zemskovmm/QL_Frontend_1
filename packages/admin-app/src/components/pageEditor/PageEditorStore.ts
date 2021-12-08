@@ -18,6 +18,7 @@ import { AdminApi } from "src/clients/adminApiClient";
 import { PageBlockRowDto } from "@project/components/src/interfaces/pageSharedDto";
 import { AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
 import { AdminRemoteUiDropdownEditorStore } from "../remoteui/AdminRemoteUiDropdownEditor";
+import { Debugger } from "inspector";
 export function createDefinition(definition: BlockUiDefinition): RemoteUiDefinition {
   const subTypes: { [key: string]: RemoteUiTypeDefinition } = {};
   if (definition.subTypes != null)
@@ -71,12 +72,13 @@ export class PageEditorCellDialogStore {
   @computed get currentEditor(): RemoteUiEditorStore | null {
     if (this.blocks[this.blockType] != null) return this.blocks[this.blockType];
     const info = findBlockInfo(this.blockType);
-    if (info != null)
+    if (info != null) {
       return (this.blocks[this.blockType] = new RemoteUiEditorStore(
         createDefinition(info.definition),
         JSON.parse(JSON.stringify(this.blockDatas[this.blockType] || info.initialData)),
         new RemoteUiCustomization()
       ));
+    }
 
     return null;
   }
