@@ -23,7 +23,7 @@ export const DashboardNewApplication: FC<PropsType> = ({ onDismiss, onUsForm, ap
 
   return (
     <OverlayDialog className={"text-center flex flex-col items-center justify-around h-112 w-160"} cancel={onDismiss}>
-      <Text className="mb-4" text="Как вы хотите подать заявку" size="title-large" isBold />
+      <Text className="mb-4" text="Как вы хотите подать заявку" size="title-large" weight="bold" />
       <Link href={{ pathname: `/create-applications/${applicationType}/${entityId}` }} replace>
         <a>Личный кабинет</a>
       </Link>
