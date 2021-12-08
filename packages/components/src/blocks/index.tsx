@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BasicHtmlBlockInfo } from "./BasicHtmlBlock/basic-html";
 import { CirclesBlockInfo } from "./CirclesBlock/circles";
 import { ReadMoreBlockInfo } from "./ReadMoreBlock/readMoreBlock";
@@ -94,9 +94,9 @@ export const ComponentHostContext = React.createContext<IComponentHost | null>(n
 
 export function findBlockInfo(blockType: string, formBuilder?: boolean): BlockTypeInfo | null {
   if (formBuilder) {
-    for (var info of FormBuilderBlockList) if (info.id == blockType) return info;
+    for (const info of FormBuilderBlockList) if (info.id == blockType) return info;
   } else {
-    for (var info of AvailableBlocks) if (info.id == blockType) return info;
+    for (const info of AvailableBlocks) if (info.id == blockType) return info;
   }
   return null;
 }
