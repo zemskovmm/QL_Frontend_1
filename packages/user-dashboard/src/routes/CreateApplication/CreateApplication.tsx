@@ -17,7 +17,7 @@ export const CreateApplication: FC = () => {
     sendCreateApplication,
     createApplicationId,
   } = useNewApplicationState();
-  const { isNotAuthorized, isNotRegistrationComplite } = useUserStatuseStore();
+  const { isInitProfile, isNotAuthorized, isNotRegistrationComplite } = useUserStatuseStore();
 
   useEffect(() => {
     if (Object.values(ApplicationType).includes(applicationType as ApplicationType)) {
@@ -26,6 +26,9 @@ export const CreateApplication: FC = () => {
   }, []);
 
   useEffect(() => {
+    if (isInitProfile) {
+      return;
+    }
     if (isNotAuthorized) {
       navigate(SIGN_IN_ROUTE);
     } else if (isNotRegistrationComplite) {

@@ -1,27 +1,28 @@
-import { FC,memo } from "react";
+import { FC, memo } from "react";
 import { LeftNavigation } from "src/components/LeftNavigation";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { Link } from "react-router-dom";
 import { NEW_APPLICATION_ROUTE } from "src/constants";
 import { useLocalized } from "src/locales";
+import { Text } from "@project/components/src/ui-kit/Text";
 
 type PropsType = {
   title: string;
 };
 
 export const LeftNavigationLayout: FC<PropsType> = memo(({ title, children }) => {
-  const {localizedText} = useLocalized()
+  const { localizedText } = useLocalized();
   return (
-    <div className=" flex flex-col my-auto">
-      <div className="hidden md:flex justify-between pb-4">
-        <h1 className={`text-4xl font-bold`}>{title}</h1>
+    <div className="flex flex-col w-full h-full md:h-auto">
+      <div className="hidden md:flex md:justify-between md:pb-4">
+        <Text text={title} weight="bold" size="title-large" />
         <Link to={NEW_APPLICATION_ROUTE}>
-          <Button plus={true} text={localizedText('NEW_APPLICATION_LANG') } color={"red"} />
+          <Button plus={true} text={localizedText("NEW_APPLICATION_LANG")} color={"red"} />
         </Link>
       </div>
-      <div className="flex flex-grow w-full md:h-screen MainContainer">
-        <LeftNavigation className="hidden tablet:flex border-r w-128 border rounded-primary shadow-left-navigation" />
-        <div className="flex-grow border rounded-primary customScroll">{children}</div>
+      <div className="flex h-full md:h-128">
+        <LeftNavigation className="hidden md:flex border-r w-128 border rounded-primary shadow-left-navigation" />
+        <div className="w-128 flex-grow border rounded-primary customScroll">{children}</div>
       </div>
     </div>
   );

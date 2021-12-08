@@ -4,10 +4,12 @@ import { FC } from "react";
 
 export const AppLayout: FC = ({ children }) => {
   return (
-    <div className="flex flex-col h-full">
-      <Header />
-      <div className="px-5 md:px-2 flex-grow flex flex-col">
-        <Container className={`md:my-auto flex flex-col lg:py-0`}>{children}</Container>
+    <div className="flex flex-col h-screen">
+      <Header className="flex-shrink-0" />
+      <div className="flex-grow">
+        <Container className="h-full">
+          <div className="h-full flex justify-center items-center py-4 md:py-8">{children}</div>
+        </Container>
       </div>
     </div>
   );

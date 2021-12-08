@@ -24,35 +24,53 @@ const EMPTY_USER: UserStatuseUserProps = {
   personalInfo: {},
 };
 
-interface UserStatuseStore { 
-  userStatus:UserStatus
+interface UserStatuseStore {
+  userStatus: UserStatus;
   user: UserStatuseUserProps;
 }
 
 const userStatuseStore = map<UserStatuseStore>({
-  userStatus:UserStatus.INIT_PROFILE_STATUS,
+  userStatus: UserStatus.INIT_PROFILE_STATUS,
   user: EMPTY_USER,
 });
 
-const isAuthorizedComputed = computed(userStatuseStore, store => store.userStatus === UserStatus.AUTHORIZED_PROFILE_STATUS)
-const isNotAuthorizedComputed= computed(userStatuseStore, store => store.userStatus === UserStatus.NOT_AUTHORIZED_PROFILE_STATUS)
-const isRegistrationCompliteComputed= computed(userStatuseStore, store => (
-  store.userStatus !== UserStatus.INIT_PROFILE_STATUS && !! store.user.lastName && !!store.user.firstName && !!store.user.phone
-))
-const isNotRegistrationCompliteComputed= computed(userStatuseStore, store => (
-  store.userStatus !== UserStatus.INIT_PROFILE_STATUS && !(!! store.user.lastName && !!store.user.firstName && !!store.user.phone)
-))
+const isAuthorizedComputed = computed(
+  userStatuseStore,
+  (store) => store.userStatus === UserStatus.AUTHORIZED_PROFILE_STATUS
+);
+const isNotAuthorizedComputed = computed(
+  userStatuseStore,
+  (store) => store.userStatus === UserStatus.NOT_AUTHORIZED_PROFILE_STATUS
+);
+const isInitProfileComputed = computed(
+  userStatuseStore,
+  (store) => store.userStatus === UserStatus.INIT_PROFILE_STATUS
+);
+const isRegistrationCompliteComputed = computed(
+  userStatuseStore,
+  (store) =>
+    store.userStatus !== UserStatus.INIT_PROFILE_STATUS &&
+    !!store.user.lastName &&
+    !!store.user.firstName &&
+    !!store.user.phone
+);
+const isNotRegistrationCompliteComputed = computed(
+  userStatuseStore,
+  (store) =>
+    store.userStatus !== UserStatus.INIT_PROFILE_STATUS &&
+    !(!!store.user.lastName && !!store.user.firstName && !!store.user.phone)
+);
 
 onMount(userStatuseStore, () => {
   heartbeatAction();
   return onResponse(({ status, url }) => {
     if (status === 401) {
-      setUserStatus(userStatuseStore,UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
+      setUserStatus(userStatuseStore, UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
     }
   });
 });
 
-const setUser =  (store:MapStore<UserStatuseStore>, user: any) => {
+const setUser = (store: MapStore<UserStatuseStore>, user: any) => {
   store.setKey("user", {
     lastName: user.lastName || "",
     firstName: user.firstName || "",
@@ -62,10 +80,10 @@ const setUser =  (store:MapStore<UserStatuseStore>, user: any) => {
   });
 };
 
-const setUserStatus = (store:MapStore<UserStatuseStore>, userStatus: UserStatus) => {
-  store.setKey("userStatus",userStatus)
+const setUserStatus = (store: MapStore<UserStatuseStore>, userStatus: UserStatus) => {
+  store.setKey("userStatus", userStatus);
   if (userStatus == UserStatus.NOT_AUTHORIZED_PROFILE_STATUS) {
-    setUser(store,EMPTY_USER);
+    setUser(store, EMPTY_USER);
   }
 };
 
@@ -76,7 +94,7 @@ export const putUserAction = action(
     const { isOk, error } = await userApi.putUser(data);
     if (isOk) {
       addSuccessAction("Profile successful update");
-      setUser(store,data);
+      setUser(store, data);
       return true;
     } else {
       addErrorAction(error);
@@ -91,9 +109,9 @@ const heartbeatAction = action(
   async (store): Promise<void> => {
     const { isOk, body } = await userApi.getUser();
     if (isOk) {
-      setUserStatus(store,UserStatus.AUTHORIZED_PROFILE_STATUS);
+      setUserStatus(store, UserStatus.AUTHORIZED_PROFILE_STATUS);
       const user = body || EMPTY_USER;
-      setUser(store,user);
+      setUser(store, user);
     }
   }
 );
@@ -104,13 +122,13 @@ export const loginAction = action(
   async (store, data: UserStatuseLoginProps): Promise<boolean> => {
     const { isOk, error } = await userApi.login(data);
     if (isOk) {
-      setUserStatus(store,UserStatus.AUTHORIZED_PROFILE_STATUS);
+      setUserStatus(store, UserStatus.AUTHORIZED_PROFILE_STATUS);
       addSuccessAction("Login successful");
-      return true
+      return true;
     } else {
       addErrorAction(error);
     }
-    return false
+    return false;
   }
 );
 
@@ -136,12 +154,12 @@ const logoutAction = action(
     const { isOk, status, error } = await userApi.logout();
     if (isOk) {
       addSuccessAction("Logout successful");
-      setUserStatus(store,UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
+      setUserStatus(store, UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
     } else {
       addErrorAction(error);
     }
     if (status === 401) {
-      setUserStatus(store,UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
+      setUserStatus(store, UserStatus.NOT_AUTHORIZED_PROFILE_STATUS);
     }
   }
 );
@@ -150,19 +168,21 @@ export const useUserStatuseStore = () => {
   const state = useStore(userStatuseStore);
   const isAuthorized = useStore(isAuthorizedComputed);
   const isNotAuthorized = useStore(isNotAuthorizedComputed);
+  const isInitProfile = useStore(isInitProfileComputed);
   const isRegistrationComplite = useStore(isRegistrationCompliteComputed);
   const isNotRegistrationComplite = useStore(isNotRegistrationCompliteComputed);
 
-  return { 
+  return {
     ...state,
     isAuthorized,
     isNotAuthorized,
+    isInitProfile,
     isRegistrationComplite,
     isNotRegistrationComplite,
-    heartbeatAction, 
-    logoutAction, 
-    loginAction, 
-    putUserAction, 
-    registerAction 
+    heartbeatAction,
+    logoutAction,
+    loginAction,
+    putUserAction,
+    registerAction,
   };
 };

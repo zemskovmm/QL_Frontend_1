@@ -28,11 +28,11 @@ body {
 }
 pre {
   font-family: "Montserrat", arial, sans-serif;
-  white-space: pre-wrap;       /* css-3 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 * {
@@ -56,13 +56,13 @@ img {
 }
 
 @media (min-width: 640px) {
-  .MainContainer{
+  .MainContainer {
     max-height: 455px;
   }
 }
 
 @media (min-width: 768px) {
-  .customScroll{
+  .customScroll {
     overflow-y: scroll;
   }
 
@@ -71,7 +71,7 @@ img {
   }
 
   .customScroll::-webkit-scrollbar-thumb {
-    background: #E6E6E6;
+    background: #e6e6e6;
     border-radius: 100px;
-  } 
+  }
 }
