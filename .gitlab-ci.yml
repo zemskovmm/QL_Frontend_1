@@ -3,7 +3,7 @@ stages:
   - deploy-develop
 
 .restore-build:
-  environment:
+  variables: 
     NEXT_PUBLIC_API_BASE_URL: "https://ql-dev.dotlic.ru/"
   script:
     - git submodule sync && git submodule update --init --recursive
