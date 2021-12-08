@@ -5,6 +5,7 @@ import { UserAuthorizedOnlyHook } from "../Admin/AdminRoutes";
 import { ApplicationList } from "./applicationList/ApplicationList";
 import { ApplicationListSide } from "../../components/MangerShell/sideMenuSettings/applicationListSide";
 import { ApplicationPage } from "./application/Application";
+import { ApplicationSide } from "../../components/MangerShell/sideMenuSettings/applicationSide";
 
 export enum ManagerRouteNames {
   applicationList = "manager-applicationList",
@@ -22,7 +23,7 @@ export const ManagerRouteViewMap = {
 export const ManagerRouteViewSettingsMap = {
   [ManagerRouteNames.applicationList]: <ApplicationListSide />,
   [ManagerRouteNames.findUserIdApplication]: <div />,
-  [ManagerRouteNames.applicationId]: <div />,
+  [ManagerRouteNames.applicationId]: <ApplicationSide />,
 };
 
 export const ManagerRoutes: Route[] = convertRoutes([
@@ -41,5 +42,6 @@ export const ManagerRoutes: Route[] = convertRoutes([
     pattern: "/manager/application-user/:userId/:applicationId",
     name: ManagerRouteNames.applicationId,
     hooks: [UserAuthorizedOnlyHook],
+    onEnter: async (root, to) => await root.mangerApplicationPage.load(to.params["applicationId"]),
   },
 ]);

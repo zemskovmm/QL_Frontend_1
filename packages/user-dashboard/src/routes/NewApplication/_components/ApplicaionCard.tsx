@@ -19,7 +19,7 @@ export const ApplicationCard: FC<PropsType> = ({ href, title }) => {
   return (
     <Card className="flex flex-col justify-between m-4" size="80">
       <Icon className="m-4 self-center" src={EmpryImgIcon} size="32" />
-      <Text className="m-4 " text={title} size="medium" isBold />
+      <Text className="m-4 " text={title} size="medium" weight="bold" />
 
       <Link to={{ pathname: href }} target="_blank">
         <Button className="m-auto max-w-48 w-full self-center" text={localizedText("GO_TO_LANG")} />

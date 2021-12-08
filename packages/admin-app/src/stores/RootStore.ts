@@ -41,6 +41,7 @@ import {
   HousingAccommodationListStore,
   HousingAccommodationTraitEditorStore,
 } from "./pages/housing/housing-accommodation-page-store";
+import { ManagerApplicationStore } from "./pages/managerStores/application/managerApplicationStore";
 
 export class RootStore {
   @observable routerStore = new RouterStore(this, Routes, new RouterState("not-found"));
@@ -88,4 +89,5 @@ export class RootStore {
 
   /* Manager Shell */
   @observable mangerApplicationListPage = new ManagerApplicationListStore(this);
+  @observable mangerApplicationPage = new ManagerApplicationStore(this);
 }

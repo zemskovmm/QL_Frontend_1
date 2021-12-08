@@ -10,10 +10,10 @@ const linkClass =
 const Navbar = () => {
   const { loginStore: s, routerStore } = useRootStore();
   const activeLink = (name: string) => {
-    return routerStore.getCurrentRoute().name === name ? "bg-red-300" : "bg-transparent	";
+    return routerStore.getCurrentRoute().name === name ? "bg-blue-400" : "bg-transparent	";
   };
   return useObserver(() => (
-    <nav className="flex flex-col items-center h-screen w-full max-w-xs bg-blue-600 pt-8 pb-10 sticky top-0">
+    <nav className="flex flex-col items-center h-screen w-full max-w-xs bg-blue-600 pt-8 pb-10 sticky top-0 overflow-y-scroll customScrollNav">
       <div className="flex items-center flex-shrink-0 text-white mb-6">
         <span className="font-semibold text-xl tracking-tight">Quartier Latin Manager</span>
       </div>
@@ -24,15 +24,9 @@ const Navbar = () => {
         >
           All Applications
         </RouterLink>
-        <RouterLink
-          routeName={ManagerRouteNames.findUserIdApplication}
-          className={`${linkClass} ${activeLink(ManagerRouteNames.findUserIdApplication)}`}
-        >
-          User Applications
-        </RouterLink>
       </div>
-      <div className={`mt-10 px-10 w-full`}>
-        <div className={`border-t pt-10 text-white`}>
+      <div className={`my-10 px-10 w-full`}>
+        <div className={`border-t pt-5 text-white`}>
           <RouterView routerStore={routerStore} viewMap={ManagerRouteViewSettingsMap} />
         </div>
       </div>

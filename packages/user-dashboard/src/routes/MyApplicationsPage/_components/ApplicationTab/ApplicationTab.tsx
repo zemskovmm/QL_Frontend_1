@@ -5,7 +5,7 @@ import { Button } from "@project/components/src/ui-kit/Button";
 import { useContext, useEffect } from "react";
 import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
 import { useGlobalSettingsStore } from "src/stores/GlobalSettingsStore";
-import { useApplicationStore } from "src/routes/MyApplicationsPage/_components/ApplicationTab/ApplicationStore";
+import { useApplicationTabStore } from "./ApplicationTabStore";
 import { useForm } from "react-hook-form";
 import { Preload } from "@project/components/src/ui-kit/Preload";
 import { ApplicationPostProps } from "@project/components/src/interfaces/ApplicationDto";
@@ -18,7 +18,7 @@ type PropsType = {
 
 export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
   const cl = useContext(ComponentHostDashboardContext);
-  const { application, postApplicationAction, isLoading: isLoadingStore,getApplication } = useApplicationStore();
+  const { application, postApplicationAction, isLoading: isLoadingStore, getApplication } = useApplicationTabStore();
   const { localizedText } = useLocalized();
   const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
   const { handleSubmit, control, setValue } = useForm<ApplicationPostProps>();
@@ -30,8 +30,6 @@ export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
   useEffect(() => {
     cl!.personalInfo = application.commonApplicationInfo;
   }, [application]);
-
-  
 
   useEffect(() => {
     setValue("type", application.type);
@@ -56,7 +54,7 @@ export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
             </div>
             <Button
               className="ml-auto mt-auto"
-              text={localizedText('PROFILE_SAVE')}
+              text={localizedText("PROFILE_SAVE")}
               type="submit"
               disabled={isLoadingStore}
               color="red"

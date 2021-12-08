@@ -40,7 +40,7 @@ export const SignInPage: FC = () => {
 
   return (
     <CenterCardLayout title={localizedText("SIGN_IN_TITLE")} subtitle={localizedText("SIGN_IN_SUBTITLE")}>
-      <form className="flex flex-col md:px-28 w-full" onSubmit={handleSubmit(loginAction)}>
+      <form className="flex flex-col md:px-20 w-full" onSubmit={handleSubmit(loginAction)}>
         <InputControlled
           className="mb-4"
           name="email"

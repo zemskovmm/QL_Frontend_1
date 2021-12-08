@@ -1,2 +1,1 @@
-export * from './_types'
-export * from './Text'
+export * from "./Text";

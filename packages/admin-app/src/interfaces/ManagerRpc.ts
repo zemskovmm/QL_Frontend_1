@@ -8,6 +8,7 @@
   lastName?: string;
   email?: string;
   phone?: string;
+  userId?: string;
 }
 
 export interface ManagerApplicationListDto {
@@ -26,4 +27,13 @@ export interface ManagerApplicationDto {
   commonApplicationInfo: any;
   entityTypeSpecificApplicationInfo: any;
   id: number;
+}
+
+export interface ManagerApplicationInfoDto {
+  type?: string;
+  entityId?: number;
+  status?: string;
+  commonApplicationInfo?: any;
+  entityTypeSpecificApplicationInfo?: any;
+  id?: number;
 }

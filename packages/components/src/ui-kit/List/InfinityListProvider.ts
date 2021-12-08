@@ -16,7 +16,7 @@ export class InfinityListProvider {
 
   push({ count, start, rows }: { count: number; start: number; rows: Array<ListItemType> }): InfinityListProvider {
     const out = new InfinityListProvider(this);
-    if (count != out.count) {
+    if (count !== out.count) {
       out.items = new Array(count);
     }
     rows.forEach((item, index) => {
@@ -25,3 +25,9 @@ export class InfinityListProvider {
     return out;
   }
 }
+
+export const InfinityListProviderInit = (count: number): InfinityListProvider => {
+  const out = new InfinityListProvider();
+  out.items = new Array(count);
+  return out;
+};

@@ -1,8 +1,8 @@
 import { RequestTracking } from "src/utils/Loadable";
 import { RootStore } from "src/stores/RootStore";
-import { action, computed, observable } from "mobx";
+import { action, observable } from "mobx";
 import { ManagerApplicationListDto, ManagerListSettingsDto } from "src/interfaces/ManagerRpc";
-import { AdminApi } from "../../../../clients/adminApiClient";
+import { AdminApi } from "src/clients/adminApiClient";
 
 export class ManagerApplicationListStore extends RequestTracking {
   @observable applications: ManagerApplicationListDto = {
@@ -22,7 +22,11 @@ export class ManagerApplicationListStore extends RequestTracking {
   @action
   async load() {
     try {
-      this.applications = await AdminApi.getManagerApplication(this.listSettings);
+      if (this.listSettings.userId) {
+        this.applications = await AdminApi.getManagerApplicationUserIdList(this.listSettings, this.listSettings.userId);
+      } else {
+        this.applications = await AdminApi.getManagerApplicationList(this.listSettings);
+      }
     } catch (e) {
       alert(e);
     }
