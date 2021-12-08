@@ -2,4 +2,4 @@
 import { CirclesBlockInfo } from "../blocks/CirclesBlock/circles";
 import { TypeInputBlockInfo } from "./TypeInputBlock/TypeInputBlock";
 
-export const FormBuilderBlockList: BlockTypeInfo[] = [CirclesBlockInfo, TypeInputBlockInfo];
+export const FormBuilderBlockList: BlockTypeInfo[] = [TypeInputBlockInfo];
