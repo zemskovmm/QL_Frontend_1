@@ -12,11 +12,8 @@ export const DropDownList: FC<{ active: boolean; name: string; onClick: () => vo
   children,
 }) => {
   return (
-    <div
-      className={`${styles.faqBlock__item} w-full flex flex-col ${active ? styles.showItem : styles.hideItem}`}
-      onClick={() => onClick()}
-    >
-      <div className={`flex items-center`}>
+    <div className={`${styles.faqBlock__item} w-full flex flex-col ${active ? styles.showItem : styles.hideItem}`}>
+      <div className={`flex items-center`} onClick={() => onClick()}>
         <div className={styles.faqBlock__itemTitle} dangerouslySetInnerHTML={{ __html: name }} />
         <img className={`ml-auto ${styles.faqBlock__itemArrow}`} src={arrow} alt="" />
       </div>
