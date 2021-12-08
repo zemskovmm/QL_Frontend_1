@@ -100,7 +100,7 @@ export const ChooseLang = () => {
         </a>
       </RouterLink>
 
-      <RouterLink routeName={AdminRouteNames.globalSettingsEditor} params={{ lang: "ch" }}>
+      <RouterLink routeName={AdminRouteNames.globalSettingsEditor} params={{ lang: "cn" }}>
         <a
           className={`text-white font-bold py-2 px-4 rounded inline-block bg-blue-500 hover:bg-blue-100 hover:text-black`}
         >
