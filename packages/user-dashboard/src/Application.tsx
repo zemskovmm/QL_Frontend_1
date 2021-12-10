@@ -23,7 +23,7 @@ import SettingsPage from "./routes/SettingsPage";
 import NewApplication from "./routes/NewApplication";
 import MyApplicationsPage from "./routes/MyApplicationsPage";
 import CreateApplication from "./routes/CreateApplication";
-import { HostLayout } from "@project/components/src/FormBuilderBlocks/HostLayout";
+import { FormBuilderProvider } from "@project/components/src/FormBuilderBlocks/FormBuilderProvider";
 import { useGlobalSettingsStore } from "./stores/GlobalSettingsStore";
 import { useLocation, Navigate } from "react-router-dom";
 import { useLocalized } from "./locales";
@@ -48,7 +48,7 @@ const UpdateGlobalStores: FC = () => {
 
 export const Application: FC = () => {
   return (
-    <HostLayout>
+    <FormBuilderProvider>
       <div id="react_root" className="h-full">
         <AppLayout>
           <Routes>
@@ -88,7 +88,7 @@ export const Application: FC = () => {
         <UpdateGlobalStores />
         <Notification />
       </div>
-    </HostLayout>
+    </FormBuilderProvider>
   );
 };
 

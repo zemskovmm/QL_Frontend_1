@@ -1,6 +1,6 @@
 import { action, map, MapStore } from "nanostores";
 import { useStore } from "src/stores/react-nanostores";
-import { ApplicationsPropsReq, personalApi } from "../../api/PersonalApi";
+import { ApplicationsPropsReq, applicationsApi } from "src/api/ApplicationApi";
 import { addErrorAction } from "../NotificationStore";
 import { ApplicationType } from "@project/components/src/interfaces/ApplicationDto";
 import { InfinityListProvider, InfinityListProviderInit } from "@project/components/src/ui-kit/List";
@@ -71,7 +71,7 @@ const onItemsRendered = action(
         status: "",
       };
       store.setKey("isLoading", true);
-      const result = await personalApi.getApplications(data);
+      const result = await applicationsApi.getApplications(data);
       const { isOk, body, error } = result;
       if (isOk) {
         if (body) {

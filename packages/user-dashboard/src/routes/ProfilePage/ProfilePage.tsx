@@ -9,14 +9,15 @@ import { LeftNavigationLayout } from "src/layouts/LeftNavigationLayout";
 import { useGlobalSettingsStore } from "src/stores/GlobalSettingsStore";
 import { RowsPresenter } from "@project/components/src/blocks";
 import { Preload } from "@project/components/src/ui-kit/Preload";
-import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
+import { useFormBuilderContext } from "@project/components/src/FormBuilderBlocks/FormBuilderProvider";
 import { useLocalized } from "src/locales";
 import { useNavigate } from "react-router-dom";
 import { CREATE_COMPLITE_APPLICATIONS_ROUTE } from "src/constants";
 import { useNewApplicationState } from "src/stores/ApplicationsState";
+import { portalUserFileApi } from "src/api/PortalUserFileApi";
 
 const ProfilePage: FC = () => {
-  const cl = useContext(ComponentHostDashboardContext);
+  const { info, setInfo, clear, setMediaStore } = useFormBuilderContext();
   const { lang, localizedText } = useLocalized();
   const { putUserAction, isLoading } = useProfileStore();
   const { isRegistrationComplite, user } = useUserStatuseStore();
@@ -26,11 +27,29 @@ const ProfilePage: FC = () => {
   const { createApplicationReq } = useNewApplicationState();
 
   useEffect(() => {
-    cl!.personalInfo = user.personalInfo;
+    setMediaStore({
+      postMedia: async (data: FormData) => {
+        const { isOk, error, body } = await portalUserFileApi.postUserFile(data);
+        if (isOk) {
+          return body?.id || 0;
+        }
+        throw error;
+      },
+      deleteMedia: async (id: number) => {
+        const { isOk, error, body } = await portalUserFileApi.deleteUserFile(id);
+        if (!isOk) {
+          throw error;
+        }
+      },
+    });
+    return clear;
+  }, []);
+
+  useEffect(() => {
+    setInfo(user.personalInfo);
     setValue("firstName", user.firstName);
     setValue("lastName", user.lastName);
     setValue("phone", user.phone);
-    setValue("personalInfo", cl?.personalInfo);
   }, [user]);
 
   useEffect(() => {
@@ -39,6 +58,10 @@ const ProfilePage: FC = () => {
     }
   }, [isRegistrationComplite, createApplicationReq]);
 
+  const handleSubmitForm = (data: UserStatuseUserProps) => {
+    putUserAction({ ...data, personalInfo: info });
+  };
+
   return (
     <LeftNavigationLayout title={localizedText("PROFILE_LANG")}>
       <Preload
@@ -46,7 +69,7 @@ const ProfilePage: FC = () => {
         isLoading={isLoading || isLoadingGS}
         color="white"
       >
-        <form className="flex flex-col justify-between h-full" onSubmit={handleSubmit(putUserAction) as any}>
+        <form className="flex flex-col justify-between h-full" onSubmit={handleSubmit(handleSubmitForm) as any}>
           <div className={`flex flex-col max-w-72`}>
             <InputControlled
               className="mb-3"

@@ -1,21 +1,21 @@
-import React, { useContext, useState } from "react";
-import { ComponentHostDashboardContext } from "../../HostLayout";
+import React, { FC, useContext, useState } from "react";
+import { useFormBuilderContext } from "../../FormBuilderProvider";
 import { without } from "lodash";
 
-export interface BasicInputFileListBlockElement {
+interface BasicInputFileListBlockElement {
   schema: { id: string | number; required: boolean };
   label: string;
   buttonName: string;
 }
 
-export const BasicInputFileListBlock = (props: BasicInputFileListBlockElement) => {
-  const cl = useContext(ComponentHostDashboardContext);
-  const [fileState, setFileState] = useState(true);
+export const BasicInputFileListBlock: FC<BasicInputFileListBlockElement> = ({ schema, label, buttonName }) => {
+  const { info, setValueInfo, mediaStore } = useFormBuilderContext();
+  const files = Array.isArray(info[schema.id]) ? info[schema.id] : [];
 
   return (
     <div className="pt-3 flex flex-col">
       <label className={`flex cursor-pointer justify-between w-full`}>
-        <span className={`mr-10`}>{props.label}</span>
+        <span className={`mr-10`}>{label}</span>
         <div style={{ padding: "4px", border: "1px solid #E7E7E7", background: "#F6FAFF" }} className={`flex `}>
           <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 16 17" fill="none">
             <path
@@ -26,36 +26,31 @@ export const BasicInputFileListBlock = (props: BasicInputFileListBlockElement) =
             />
           </svg>
         </div>
-        {cl ? (
-          <input
-            id={String(props.schema?.id)}
-            type="file"
-            style={{ width: "1px", height: "1px", opacity: "0" }}
-            className={"left-0 top-0 absolute"}
-            onChange={async (e) => {
-              if (e.target.files) {
-                const data = new FormData();
-                data.append("UploadedFile", e.target.files[0]);
-                try {
-                  const response: any = await cl?.postMedia(data);
-                  cl.personalInfo[props.schema.id] = [...cl.personalInfo[props.schema.id], response.id];
-                  setFileState(false);
-                  setFileState(true);
-                  e.target.value = "";
-                } catch (e) {
-                  alert("File not allowed");
-                }
+
+        <input
+          id={String(schema?.id)}
+          type="file"
+          style={{ width: "1px", height: "1px", opacity: "0" }}
+          className={"left-0 top-0 absolute"}
+          onChange={async (e) => {
+            if (e.target.files) {
+              const data = new FormData();
+              data.append("UploadedFile", e.target.files[0]);
+              try {
+                const id: number = await mediaStore.postMedia(data);
+                setValueInfo(schema.id, [...files, id]);
+              } catch (ex) {
+                console.error(ex);
               }
-            }}
-          />
-        ) : (
-          "input file list"
-        )}
+              e.target.value = "";
+            }
+          }}
+        />
       </label>
       <div className={`flex flex-col`}>
-        {cl && fileState
-          ? cl.personalInfo[props.schema.id]?.map((el: number) => (
-              <div className={`flex items-center justify-between mt-2 w-full`}>
+        {files.length > 0
+          ? files.map((el: number) => (
+              <div key={el} className={`flex items-center justify-between mt-2 w-full`}>
                 {el}
                 <button
                   type={"button"}
@@ -63,12 +58,10 @@ export const BasicInputFileListBlock = (props: BasicInputFileListBlockElement) =
                   className={`flex `}
                   onClick={async () => {
                     try {
-                      cl?.deleteMedia(el);
-                      cl.personalInfo[props.schema.id] = without(cl.personalInfo[props.schema.id], el);
-                      setFileState(false);
-                      setFileState(true);
+                      mediaStore.deleteMedia(el);
+                      setValueInfo(schema.id, without(files, el));
                     } catch (e) {
-                      alert(e);
+                      console.error(e);
                     }
                   }}
                 >
