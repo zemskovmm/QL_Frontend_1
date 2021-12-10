@@ -39,9 +39,10 @@ export const BasicInputFileListBlock: FC<BasicInputFileListBlockElement> = ({ sc
               try {
                 const id: number = await mediaStore.postMedia(data);
                 setValueInfo(schema.id, [...files, id]);
-              } catch (e) {
-                console.error(e);
+              } catch (ex) {
+                console.error(ex);
               }
+              e.target.value = "";
             }
           }}
         />
