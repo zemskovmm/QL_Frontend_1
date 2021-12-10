@@ -17,6 +17,10 @@ const events = {
   onResponseList: new Array<SubscriberType>(),
 };
 
+export type IdReq = {
+  id: number;
+};
+
 export const jsonToUrlParam = (path: string, data: any): string => {
   const param = Object.keys(data)
     .filter((key) => {

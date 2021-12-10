@@ -1,5 +1,5 @@
-import React, { useContext, useState,useEffect } from "react";
-import { ComponentHostDashboardContext } from "../../HostLayout";
+import React, { FC, useContext, useState, useEffect } from "react";
+import { useFormBuilderContext } from "../../FormBuilderProvider";
 import { without } from "lodash";
 
 export interface BasicInputFileBlockElement {
@@ -8,34 +8,25 @@ export interface BasicInputFileBlockElement {
   schema: { id: string | number; required: boolean };
 }
 
-export const BasicInputFileBlock: any = (props: BasicInputFileBlockElement) => {
-  const cl = useContext(ComponentHostDashboardContext);
-  const [fileState, setFileState] = useState(false);
-
-  useEffect(()=>{
-    if (cl) {
-      setFileState(Boolean(cl?.personalInfo[props.schema.id]))
-    }
-  },[cl])
+export const BasicInputFileBlock: FC<BasicInputFileBlockElement> = ({ label, placeholder, schema }) => {
+  const { info, setValueInfo, mediaStore } = useFormBuilderContext();
+  const fileId = info[schema.id] ? info[schema.id] : 0;
 
   return (
     <div className="pt-3">
-      {!cl ? (
-        "input file"
-      ) : fileState ? (
+      {fileId ? (
         <div className={`flex items-center justify-between w-full`}>
-          {cl.personalInfo[props.schema.id]}{" "}
+          {`${fileId} `}
           <button
             type={"button"}
             style={{ padding: "2px", border: "1px solid #E7E7E7", background: "#F6FAFF" }}
             className={`flex `}
             onClick={async () => {
               try {
-                cl?.deleteMedia(cl.personalInfo[props.schema.id]);
-                cl.personalInfo[props.schema.id] = null;
-                setFileState(false);
+                mediaStore.deleteMedia(fileId);
+                setValueInfo(schema.id, null);
               } catch (e) {
-                alert(e);
+                console.error(e);
               }
             }}
           >
@@ -51,7 +42,7 @@ export const BasicInputFileBlock: any = (props: BasicInputFileBlockElement) => {
         </div>
       ) : (
         <label className={`flex cursor-pointer justify-between w-full`}>
-          <span className={`mr-10`}>{props.label}</span>
+          <span className={`mr-10`}>{label}</span>
           <div style={{ padding: "4px", border: "1px solid #E7E7E7", background: "#F6FAFF" }} className={`flex `}>
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 16 17" fill="none">
               <path
@@ -63,7 +54,7 @@ export const BasicInputFileBlock: any = (props: BasicInputFileBlockElement) => {
             </svg>
           </div>
           <input
-            id={String(props.schema?.id)}
+            id={String(schema?.id)}
             type="file"
             style={{ width: "1px", height: "1px", opacity: "0" }}
             className={"left-0 top-0 absolute"}
@@ -72,11 +63,10 @@ export const BasicInputFileBlock: any = (props: BasicInputFileBlockElement) => {
                 const data = new FormData();
                 data.append("UploadedFile", e.target.files[0]);
                 try {
-                  const response: any = await cl?.postMedia(data);
-                  cl.personalInfo[props.schema.id] = response.id;
-                  setFileState(true);
+                  const id = await mediaStore.postMedia(data);
+                  setValueInfo(schema.id, id);
                 } catch (e) {
-                  alert("File not allowed");
+                  console.error(e);
                 }
               }
             }}
