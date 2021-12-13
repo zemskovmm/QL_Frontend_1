@@ -205,18 +205,14 @@ function CatalogFilters(props: {
 }) {
   return (
     <div>
-      {props.filters.map((filter) =>
-        filter.identifier === "housing-equipment" ? (
-          ""
-        ) : (
-          <CatalogFilter
-            key={filter.identifier}
-            filter={filter}
-            seletedItems={props.parsedFilters.find((f) => f.identifier == filter.identifier)?.values || []}
-            toggleFilter={(id, selected) => props.setFilter(filter.identifier, id, selected)}
-          />
-        )
-      )}
+      {props.filters.map((filter) => (
+        <CatalogFilter
+          key={filter.identifier}
+          filter={filter}
+          seletedItems={props.parsedFilters.find((f) => f.identifier == filter.identifier)?.values || []}
+          toggleFilter={(id, selected) => props.setFilter(filter.identifier, id, selected)}
+        />
+      ))}
     </div>
   );
 }
