@@ -24,7 +24,13 @@ export const App = observer(() => {
   const route = root.routerStore.routerState.routeName;
   return (
     <Provider rootStore={root}>
-      {route.startsWith("admin-") ? <AdminShell /> : route.startsWith("manager-") ? <ManagerShell /> : <AnonShell />}
+      {route.startsWith("admin-") && root.loginStore.role === "Admin" ? (
+        <AdminShell />
+      ) : route.startsWith("manager-") && root.loginStore.role === "Manager" ? (
+        <ManagerShell />
+      ) : (
+        <AnonShell />
+      )}
     </Provider>
   );
 });

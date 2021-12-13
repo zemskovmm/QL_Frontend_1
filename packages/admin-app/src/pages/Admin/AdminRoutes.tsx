@@ -29,7 +29,7 @@ import {
 } from "./housing/accommodation";
 
 export const UserAuthorizedOnlyHook: RouteTransitionHook = async (root) => {
-  if (!(await root.loginStore.check())) throw new RouterState(RouteNames.index);
+  if (!(await root.loginStore.check()) || !(root.loginStore.role === "Admin")) throw new RouterState(RouteNames.index);
 };
 
 export enum AdminRouteNames {
