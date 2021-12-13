@@ -74,14 +74,13 @@ export class EditTraitTypePageStore extends Loadable {
     if (!value) return;
     const unmapNames = Object.keys(value.names).reduce((acc, x) => ({ ...acc, [x]: value.names[x].name }), {});
     const unWhiteSpaceIdentifier = value.identifier.replace(/\s/g, "");
-    await this.track(() =>
-      AdminApi.updateTraitType(Number(this.traitTypeId), {
-        ...value,
-        identifier: unWhiteSpaceIdentifier,
-        names: unmapNames,
-        entityTypes: this.entityTypes,
-      })
-    );
+    const data = {
+      ...value,
+      identifier: unWhiteSpaceIdentifier,
+      names: unmapNames,
+      entityTypes: this.entityTypes,
+    };
+    await this.track(() => AdminApi.updateTraitType(Number(this.traitTypeId), data));
     await this.root.routerStore.goTo(AdminRouteNames.traitPage, { id: this.traitTypeId });
   }
 }
