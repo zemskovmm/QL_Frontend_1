@@ -1,11 +1,8 @@
-﻿import React, { createRef, DOMElement, FC, MutableRefObject, RefObject, useEffect, useRef } from "react";
+﻿import React, { FC, MutableRefObject, useEffect, useRef } from "react";
 import { useObserver } from "mobx-react";
-import { useRootStore } from "../../../utils/rootStoreUtils";
-import { ManagerApplicationInfoDto } from "../../../interfaces/ManagerRpc";
-import {
-  ManagerApplicationStore,
-  Message,
-} from "../../../stores/pages/managerStores/application/managerApplicationStore";
+import { useRootStore } from "src/utils/rootStoreUtils";
+import { ManagerApplicationInfoDto } from "src/interfaces/ManagerRpc";
+import { ManagerApplicationStore, Message } from "src/stores/pages/managerStores/application/managerApplicationStore";
 
 const usePollMessages = (store: ManagerApplicationStore) =>
   useEffect(() => {
@@ -18,21 +15,31 @@ const MessageChatWindow: FC<{ store: ManagerApplicationStore }> = ({ store }) =>
   useEffect(() => ref.current?.scrollTo({ top: ref.current.scrollHeight }), []);
   return useObserver(() => (
     <div
-      className={`border h-full mb-5 customScroll overflow-y-scroll`}
+      className={`border h-full mb-5 overflow-y-scroll customScroll py-10 px-5`}
       onScroll={async (e: any) => {
         if (e.target.scrollTop < 300) await store.MoreLoadMessages();
       }}
       ref={ref}
     >
-      {store.messages.map((el: Message, i: number) => (
-        <div className={`flex w-max flex-col `} key={`${i} ${el.id}`}>
-          <div className={`flex justify-between`}>
-            <span className={`mr-5`}>{el.author}</span>
-            <span>{new Date(el.date).toDateString()}</span>
+      {store.messages.map((el: Message, i: number) =>
+        el.type === "File" ? (
+          <div className={`flex w-max flex-col mb-4 border bg-white px-5 py-2 rounded-lg`} key={`${i} ${el.id}`}>
+            <span className={`text-sm mb-2`}>{new Date(el.date).toDateString()}</span>
+            <div>
+              <span>Document number {el.id}</span>
+              <button>save</button>
+            </div>
           </div>
-          <span>{el.text}</span>
-        </div>
-      ))}
+        ) : (
+          <div
+            className={`ml-auto flex w-max text-right flex-col bg-white mb-4 border px-5 py-2 rounded-lg`}
+            key={`${i} ${el.id}`}
+          >
+            <span className={`text-sm mb-2`}>{new Date(el.date).toDateString()}</span>
+            <span>{el.text}</span>
+          </div>
+        )
+      )}
     </div>
   ));
 };
@@ -42,7 +49,7 @@ export const ManagerChat: FC<{ store: ManagerApplicationStore }> = ({ store }) =
 
   return useObserver(() => (
     <div className={`p-10 h-screen`}>
-      <div className={`flex flex-col border h-full p-10`}>
+      <div className={`flex flex-col border bg-blue-400 h-full p-10 shadow`}>
         <MessageChatWindow store={store} />
         <form
           className={`flex`}
@@ -52,11 +59,13 @@ export const ManagerChat: FC<{ store: ManagerApplicationStore }> = ({ store }) =
           }}
         >
           <input
-            className={`w-11/12 mr-10 resize-none border p-4`}
+            className={`w-11/12 mr-5 outline-none text-white border p-4 bg-transparent`}
             value={store.sms}
             onChange={(e) => (store.sms = e.target.value)}
           />
-          <button className={`button`}>Send</button>
+          <button className={`border flex w-2/12 items-center justify-center hover:border-gray-300 text-white`}>
+            Send
+          </button>
         </form>
       </div>
     </div>

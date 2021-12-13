@@ -118,4 +118,17 @@ button:focus {
   width: 24.5%;
          }
 
+
+.customScroll {
+  overflow-y: scroll;
+}
+
+.customScroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.customScroll::-webkit-scrollbar-thumb {
+  background: #e6e6e6;
+  border-radius: 100px;
+}
 @tailwind utilities;
