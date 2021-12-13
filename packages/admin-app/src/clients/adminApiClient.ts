@@ -35,6 +35,7 @@ export class AdminApiClient extends ApiClientBase {
   postLogin = (data: { username: string; password: string; rememberMe: boolean }) =>
     this.sendRequest("admin/auth/login", data, "POST");
   getCheck = () => this.sendRequest("admin/auth/check");
+  getRole = () => this.sendRequest<string[]>("admin/auth/roles");
   getLogout = () => this.sendRequest("admin/auth/logout");
 
   /* Trait */

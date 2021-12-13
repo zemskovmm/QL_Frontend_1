@@ -7,6 +7,7 @@ import { LoadingIf } from "src/components/common/Loading";
 import { useRootStore } from "../../utils/rootStoreUtils";
 import { useObserver } from "mobx-react-lite";
 import { AnonRouteViewMap } from "../../routing/routes";
+import { NotFoundPage } from "../../pages/NotFounds/NotFoundPage";
 
 export const AnonShell = () => {
   const { routerStore } = useRootStore();
