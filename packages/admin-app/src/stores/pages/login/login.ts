@@ -7,8 +7,8 @@ import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
 import { ManagerRouteNames } from "../../../pages/Manager/ManagerRoutes";
 
 export class LoginStore extends RequestTracking {
-  @observable username: string = "manager@example.com";
-  @observable password: string = "1234567890";
+  @observable username: string = "";
+  @observable password: string = "";
   @observable rememberMe: boolean = true;
   @observable role: string = "";
 

@@ -5,7 +5,6 @@ import { RemoteUiEditor } from "@kekekeks/remoteui/src";
 import { AdminLanguageDictionaryEditorCustomization } from "../school/page";
 import { RouterLink } from "mobx-state-router";
 import { AdminRouteNames } from "src/pages/Admin/AdminRoutes";
-import { findIndex, dropWhile, remove } from "lodash";
 
 const customization = new AdminLanguageDictionaryEditorCustomization();
 

@@ -131,4 +131,8 @@ button:focus {
   background: #e6e6e6;
   border-radius: 100px;
 }
+
+.ck.ck-balloon-panel{
+  z-index: 500000;
+}
 @tailwind utilities;
