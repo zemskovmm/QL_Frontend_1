@@ -19,19 +19,19 @@ const getGlobalSettings = action(
   globalSettingsStore,
   "getGlobalSettings",
   async (store, lang: string): Promise<void> => {
-    if(lastLang === lang){
+    if (lastLang === lang) {
       return;
     }
-    
-    lastLang = lang
-    const newVersionReq = ++versionReq
+
+    lastLang = lang;
+    const newVersionReq = ++versionReq;
 
     store.setKey("isLoading", true);
     const { isOk, body } = await globalSettingsApi.getGlobalSettings(lang);
-    if(newVersionReq!==versionReq){
+    if (newVersionReq !== versionReq) {
       return;
     }
-    
+
     if (isOk) {
       store.setKey("personalCabinet", body?.personalCabinet || {});
     } else {

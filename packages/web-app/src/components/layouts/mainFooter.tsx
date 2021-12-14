@@ -101,9 +101,7 @@ export const MainFooter: FC<{ s: FooterDto }> = ({ s }) => {
               )
             )}
           </div>
-          {lang === "cn" && (
-            <img src="/WeChat.jpg" alt="" className={`w-full mx-auto lg:pl-6 mb-10`} style={{ maxWidth: "240px" }} />
-          )}
+          {lang === "cn" && <img src="/WeChat.jpg" alt="" className={`w-full mb-10`} style={{ maxWidth: "240px" }} />}
         </div>
       </div>
     </footer>

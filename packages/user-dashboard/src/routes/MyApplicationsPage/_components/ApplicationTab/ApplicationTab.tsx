@@ -3,7 +3,7 @@ import { FC } from "react";
 import { RowsPresenter } from "@project/components/src/blocks";
 import { Button } from "@project/components/src/ui-kit/Button";
 import { useContext, useEffect } from "react";
-import { ComponentHostDashboardContext } from "@project/components/src/FormBuilderBlocks/HostLayout";
+import { useFormBuilderContext } from "@project/components/src/FormBuilderBlocks/FormBuilderProvider";
 import { useGlobalSettingsStore } from "src/stores/GlobalSettingsStore";
 import { useApplicationTabStore } from "./ApplicationTabStore";
 import { useForm } from "react-hook-form";
@@ -17,26 +17,41 @@ type PropsType = {
 };
 
 export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
-  const cl = useContext(ComponentHostDashboardContext);
-  const { application, postApplicationAction, isLoading: isLoadingStore, getApplication } = useApplicationTabStore();
+  const {
+    application,
+    postApplicationAction,
+    isLoading: isLoadingStore,
+    getApplication,
+    postMedia,
+    deleteMedia,
+  } = useApplicationTabStore();
   const { localizedText } = useLocalized();
   const { isLoading: isLoadingGS, personalCabinet } = useGlobalSettingsStore();
   const { handleSubmit, control, setValue } = useForm<ApplicationPostProps>();
+
+  const { info, setInfo, clear, setMediaStore } = useFormBuilderContext();
+
+  useEffect(() => {
+    setMediaStore({ postMedia, deleteMedia });
+    return clear;
+  }, []);
 
   useEffect(() => {
     getApplication(applicationId);
   }, [applicationId]);
 
   useEffect(() => {
-    cl!.personalInfo = application.commonApplicationInfo;
-  }, [application]);
-
-  useEffect(() => {
+    setInfo(application.commonApplicationInfo);
     setValue("type", application.type);
     setValue("entityId", application.entityId);
-    setValue("commonApplicationInfo", cl?.personalInfo ?? {});
     setValue("entityTypeSpecificApplicationInfo", {});
   }, [application]);
+
+  const handleSubmitForm = (data: ApplicationPostProps) => {
+    postApplicationAction({ ...data, commonApplicationInfo: info });
+  };
+
+  console.log(personalCabinet[application.type.toString().toLowerCase()]);
 
   const classes = ["flex flex-col gap-2", className ? className : ""].join(" ");
 
@@ -45,7 +60,7 @@ export const ApplicationTab: FC<PropsType> = ({ className, applicationId }) => {
       <Preload isLoading={isLoadingStore || isLoadingGS} color="white" className={`flex flex-col h-full`}>
         {/*<Text text={APPLICATION_LANG} size="title-medium" />*/}
         {personalCabinet[application.type.toString().toLowerCase()] ? (
-          <form className="flex flex-col mx-0 h-full" onSubmit={handleSubmit(postApplicationAction) as any}>
+          <form className="flex flex-col mx-0 h-full" onSubmit={handleSubmit(handleSubmitForm) as any}>
             <div className={`mb-3`}>
               <RowsPresenter
                 marginAuto={true}

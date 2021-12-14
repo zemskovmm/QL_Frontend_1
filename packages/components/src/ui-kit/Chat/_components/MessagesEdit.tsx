@@ -29,6 +29,7 @@ export const MessagesEdit: FC<PropsType> = ({ className, onSendMessage, onFileCh
     if (file) {
       onFileChose(file);
     }
+    e.currentTarget.value = "";
   };
 
   return (

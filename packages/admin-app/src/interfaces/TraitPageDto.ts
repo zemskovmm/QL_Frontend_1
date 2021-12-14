@@ -14,9 +14,15 @@ export interface AdminTraitItemDto {
   parentId: number | null;
 }
 
+export interface entityType {
+  entityTypeName: string;
+  entityTypeId: number;
+}
+
 export interface AdminTraitTypeDto {
   id: number;
   names: Dictionary<string>;
   identifier: string;
   order: number;
+  entityTypes: entityType[];
 }

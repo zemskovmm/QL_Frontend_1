@@ -1,6 +1,6 @@
 import { map, action } from "nanostores";
 import { useStore } from "src/stores/react-nanostores";
-import { GetMessagesPropsReq, personalApi } from "src/api/PersonalApi";
+import { GetMessagesPropsReq, applicationsApi } from "src/api/ApplicationApi";
 import { addErrorAction } from "src/stores/NotificationStore";
 import { MessageListProvider, MessageType } from "@project/components/src/ui-kit/Chat";
 
@@ -37,7 +37,7 @@ const getMessages = action(
     setApplicationId(applicationId);
     if (applicationId === 0) return;
     store.setKey("isLoading", true);
-    const result = await personalApi.getMessages(applicationId, { ...data, count: MAX_MESSAGES });
+    const result = await applicationsApi.getMessages(applicationId, { ...data, count: MAX_MESSAGES });
     const { isOk, body, error } = result;
     if (isOk) {
       const messages: Array<MessageType> = (body || []).map(({ id, author, blobId, date, type, text }) => ({
@@ -64,7 +64,7 @@ const uploadFile = action(
     let fileToBlob = new Blob([new Uint8Array(await file.arrayBuffer())], { type: file.type });
     data.append("UploadedFile", fileToBlob, file.name);
 
-    const result = await personalApi.uploadFile(applicationId, data);
+    const result = await applicationsApi.uploadMessageFile(applicationId, data);
     const { isOk, body, error } = result;
     if (isOk) {
       if (store.get().applicationId === applicationId) {
@@ -82,7 +82,7 @@ const sendMessage = action(
   async (store, applicationId: number, message: ChatSendMessageType): Promise<void> => {
     setApplicationId(applicationId);
     if (applicationId === 0) return;
-    const result = await personalApi.sendMessages(applicationId, { ...message, type: 0 });
+    const result = await applicationsApi.sendMessages(applicationId, { ...message, type: 0 });
     const { isOk, error } = result;
     if (isOk) {
       if (store.get().applicationId === applicationId) {

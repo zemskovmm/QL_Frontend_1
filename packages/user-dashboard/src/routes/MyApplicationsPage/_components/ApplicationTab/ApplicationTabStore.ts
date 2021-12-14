@@ -1,8 +1,9 @@
 import { action, map } from "nanostores";
 import { useStore } from "src/stores/react-nanostores";
-import { personalApi } from "src/api/PersonalApi";
+import { applicationsApi } from "src/api/ApplicationApi";
 import { addErrorAction, addSuccessAction } from "src/stores/NotificationStore";
 import { ApplicationPostProps } from "@project/components/src/interfaces/ApplicationDto";
+import { portalUserFileApi } from "src/api/PortalUserFileApi";
 
 type ApplicationItem = {
   id: number;
@@ -36,7 +37,7 @@ const getApplication = action(
   async (store, applicationId: number): Promise<void> => {
     if (!applicationId) return;
     store.setKey("isLoading", true);
-    const result = await personalApi.getApplicationItem(applicationId);
+    const result = await applicationsApi.getApplicationItem(applicationId);
     const { isOk, body, error } = result;
     if (isOk) {
       store.setKey("application", body as ApplicationItem);
@@ -52,7 +53,7 @@ const postApplicationAction = action(
   "postApplicationAction",
   async (store, data: ApplicationPostProps): Promise<boolean> => {
     if (!store.get().application.id) return false;
-    const { isOk, error } = await personalApi.postApplicationItem(store.get().application.id, data);
+    const { isOk, error } = await applicationsApi.postApplicationItem(store.get().application.id, data);
     if (isOk) {
       addSuccessAction("Profile successful update");
       return true;
@@ -63,13 +64,34 @@ const postApplicationAction = action(
   }
 );
 
-type UseApplicationTabStore = ApplicationStore & {
-  getApplication: (applicationId: number) => Promise<void>;
-  postApplicationAction: (data: ApplicationPostProps) => Promise<boolean>;
-};
+const postMedia = action(
+  applicationStore,
+  "postMedia",
+  async (store, data: FormData): Promise<number> => {
+    //const { isOk, error, body } = await applicationsApi.postMedia(store.get().application.id, data);
+    const { isOk, error, body } = await portalUserFileApi.postUserFile(data);
+    if (isOk) {
+      return body?.id || 0;
+    }
+    throw error;
+  }
+);
 
-export const useApplicationTabStore = (): UseApplicationTabStore => {
+const deleteMedia = action(
+  applicationStore,
+  "deleteMedia",
+  async (store, blobId: number): Promise<void> => {
+    //const { isOk, error, body } = await applicationsApi.deleteMedia(store.get().application.id, blobId);
+    const { isOk, error, body } = await portalUserFileApi.deleteUserFile(blobId);
+
+    if (!isOk) {
+      throw error;
+    }
+  }
+);
+
+export const useApplicationTabStore = () => {
   const state = useStore(applicationStore);
 
-  return { ...state, getApplication, postApplicationAction };
+  return { ...state, getApplication, postApplicationAction, postMedia, deleteMedia };
 };
