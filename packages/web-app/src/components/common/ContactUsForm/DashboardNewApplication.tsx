@@ -7,6 +7,7 @@ import { useIntl } from "react-intl";
 import classnames from "classnames/bind";
 import styles from "./DashboardNewApplication.module.css";
 import Link from "next/link";
+import { SsrCompatibleApiBaseUrl } from "@project/components/src/api/apiClientBase";
 
 const cn = classnames.bind(styles);
 const CLASS_NAME = "DashboardNewApplication";
@@ -24,7 +25,10 @@ export const DashboardNewApplication: FC<PropsType> = ({ onDismiss, onUsForm, ap
   return (
     <OverlayDialog className={"text-center flex flex-col items-center justify-around h-112 w-160"} cancel={onDismiss}>
       <Text className="mb-4" text="Как вы хотите подать заявку" size="title-large" weight="bold" />
-      <Link href={{ pathname: `/create-applications/${applicationType}/${entityId}` }} replace>
+      <Link
+        href={{ pathname: `${SsrCompatibleApiBaseUrl}/create-applications/${applicationType}/${entityId}` }}
+        replace
+      >
         <a>Личный кабинет</a>
       </Link>
 

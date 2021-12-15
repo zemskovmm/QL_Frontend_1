@@ -31,12 +31,12 @@ export const ApplicationListSide = () => {
         variant={2}
         onChange={(e) => (s.listSettings.type = e.target.value)}
       />
-      <AdminInputBox
-        value={s.listSettings.status}
-        label={"Status"}
-        variant={2}
-        onChange={(e) => (s.listSettings.type = e.target.value)}
-      />
+      {/*<AdminInputBox*/}
+      {/*  value={s.listSettings.status}*/}
+      {/*  label={"Status"}*/}
+      {/*  variant={2}*/}
+      {/*  onChange={(e) => (s.listSettings.type = e.target.value)}*/}
+      {/*/>*/}
       <label className={`mb-2`}>
         <input
           type="checkbox"
@@ -75,7 +75,7 @@ export const ApplicationListSide = () => {
         variant={2}
         onChange={(e) => (s.listSettings.userId = e.target.value)}
       />
-      <button className={`border mt-2 p-2 hover:border-gray-300`} onClick={async () => await s.load()}>
+      <button className={`border mt-2 p-2 hover:border-gray-300`} onClick={async () => await s.getApplication(true)}>
         Search
       </button>
     </div>

@@ -19,8 +19,19 @@ export class ManagerApplicationListStore extends RequestTracking {
     super();
   }
 
-  @action
-  async load() {
+  @action reset() {
+    this.listSettings = {
+      page: 0,
+      pageSize: 20,
+    };
+    this.applications = {
+      totalPages: 0,
+      totalItems: 0,
+    };
+  }
+
+  @action async getApplication(newSearch?: boolean) {
+    if (newSearch) this.listSettings.page = 0;
     try {
       if (this.listSettings.userId) {
         this.applications = await AdminApi.getManagerApplicationUserIdList(this.listSettings, this.listSettings.userId);
@@ -30,5 +41,12 @@ export class ManagerApplicationListStore extends RequestTracking {
     } catch (e) {
       alert(e);
     }
+  }
+
+  @action
+  async load(status?: string) {
+    this.reset();
+    if (status) this.listSettings.status = status;
+    await this.getApplication();
   }
 }

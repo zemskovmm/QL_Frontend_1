@@ -10,6 +10,8 @@ const usePollMessages = (store: ManagerApplicationStore) =>
     return () => store.stopPolling();
   });
 
+const managerMessages = "ml-auto text-right";
+
 const MessageChatWindow: FC<{ store: ManagerApplicationStore }> = ({ store }) => {
   const ref = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => ref.current?.scrollTo({ top: ref.current.scrollHeight }), []);
@@ -23,7 +25,12 @@ const MessageChatWindow: FC<{ store: ManagerApplicationStore }> = ({ store }) =>
     >
       {store.messages.map((el: Message, i: number) =>
         el.type === "File" ? (
-          <div className={`flex w-max flex-col mb-4 border bg-white px-5 py-2 rounded-lg`} key={`${i} ${el.id}`}>
+          <div
+            className={`flex w-max flex-col mb-4 border bg-white px-5 py-2 rounded-lg ${
+              el.author === "Manager" ? managerMessages : ""
+            }`}
+            key={`${i} ${el.id}`}
+          >
             <span className={`text-sm mb-2`}>{new Date(el.date).toDateString()}</span>
             <div>
               <span>Document number {el.id}</span>
@@ -32,7 +39,9 @@ const MessageChatWindow: FC<{ store: ManagerApplicationStore }> = ({ store }) =>
           </div>
         ) : (
           <div
-            className={`ml-auto flex w-max text-right flex-col bg-white mb-4 border px-5 py-2 rounded-lg`}
+            className={`flex w-max flex-col bg-white mb-4 border px-5 py-2 rounded-lg ${
+              el.author === "Manager" ? managerMessages : ""
+            }`}
             key={`${i} ${el.id}`}
           >
             <span className={`text-sm mb-2`}>{new Date(el.date).toDateString()}</span>
@@ -93,8 +102,14 @@ export const ManagerApplicationInfo: FC<{ info: ManagerApplicationInfoDto; openI
         </div>
       </div>
       <div className={`flex flex-col`}>
-        <span>{JSON.stringify(info.commonApplicationInfo, null, 2)}</span>
-        <span>{JSON.stringify(info.entityTypeSpecificApplicationInfo, null, 2)}</span>
+        <div className={`flex flex-col mb-4`}>
+          <span className={`mb-4`}>commonApplicationInfo</span>
+          <span>{JSON.stringify(info.commonApplicationInfo, null, 2)}</span>
+        </div>
+        <div className={`flex flex-col`}>
+          <span>entityTypeSpecificApplicationInfo</span>
+          <span>{JSON.stringify(info.entityTypeSpecificApplicationInfo, null, 2)}</span>
+        </div>
       </div>
     </div>
   );
