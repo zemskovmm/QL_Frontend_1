@@ -44,10 +44,10 @@ export const MultiImgBlock: FC<MultiImgBlockProps> = ({ img, text, title, city, 
           </div>
           <a
             className={`flex items-start  ${style.multiImg__contentMap}`}
-            href={`https://www.google.com/maps/@${location.lat},${location.lng},20z`}
+            href={`https://www.google.com/maps/@${location?.lat},${location?.lng},20z`}
             target={`_blank`}
           >
-            <img src={pin} alt="" /> <span className={`ml-2 underline`}>{location.address}</span>
+            <img src={pin} alt="" /> <span className={`ml-2 underline`}>{location?.address}</span>
           </a>
         </div>
         <div
