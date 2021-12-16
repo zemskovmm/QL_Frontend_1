@@ -43,10 +43,10 @@ export const ManagerRoutes: Route[] = convertRoutes([
     onEnter: async (root) => await root.mangerApplicationListPage.load(),
   },
   {
-    pattern: "/manager/application-list/new",
+    pattern: "/manager/application-list/actual",
     name: ManagerRouteNames.applicationListNew,
     hooks: [ManagerAuthorizedOnlyHook],
-    onEnter: async (root) => await root.mangerApplicationListPage.load("new"),
+    onEnter: async (root) => await root.mangerApplicationListPage.load(true),
   },
   {
     pattern: "/manager/application-list-user",
