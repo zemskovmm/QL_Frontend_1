@@ -2,7 +2,7 @@ import { FormEditorStore } from "../Editor/FormEditorStore";
 import { FC } from "react";
 import { useObserver } from "mobx-react";
 import { RemoteUiEditor } from "@kekekeks/remoteui/src";
-import "@kekekeks/remoteui/src/styles/RemoteUiEditor.css";
+import "@kekekeks/remoteui/src/RemoteUiEditor.css";
 import { AdminOverlayDialog } from "src/components/common/AdminOverlayDialog";
 import { AdminButton } from "src/components/common/AdminButton";
 import { FormSchemaFieldDto } from "src/interfaces/GlobalSettingsDto";
