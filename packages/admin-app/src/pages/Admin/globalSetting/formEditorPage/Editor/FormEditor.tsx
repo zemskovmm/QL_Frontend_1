@@ -16,7 +16,7 @@ import { AdminButton } from "src/components/common/AdminButton";
 import { IRemoteUiData, IRemoteUiEditorCustomization, RemoteUiEditor } from "@kekekeks/remoteui/src";
 import { AdminSlider } from "src/components/common/AdminSlider";
 import { AdminOverlayDialog } from "src/components/common/AdminOverlayDialog";
-import "@kekekeks/remoteui/src/styles/RemoteUiEditor.css";
+import "@kekekeks/remoteui/src/RemoteUiEditor.css";
 import grid from "@project/components/src/styles/grid.module.css";
 import { AdminRemoteUiRowsEditor, AdminRemoteUiRowsStore } from "src/components/remoteui/AdminRemoteUiRowsEditor";
 import { useEffect, useState } from "react";
