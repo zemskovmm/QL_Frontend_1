@@ -57,7 +57,7 @@ export const ApplicationList = () => {
           totalPages={Number(s.applications.totalPages)}
           setPage={async (p) => {
             s.listSettings.page = p;
-            await s.load();
+            await s.getApplication();
           }}
         />
       )}

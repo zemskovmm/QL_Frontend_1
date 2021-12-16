@@ -113,6 +113,23 @@ export class ManagerApplicationStore extends RequestTracking {
       console.log(e);
     }
   }
+  /*Update Application*/
+
+  @action async IsAnswered() {
+    try {
+      const data = {
+        type: this.application.type,
+        entityId: this.application.entityId,
+        commonApplicationInfo: this.application.commonApplicationInfo,
+        entityTypeSpecificApplicationInfo: this.application.entityTypeSpecificApplicationInfo,
+        isAnswered: true,
+      };
+      await AdminApi.putManagerApplication(this.id, data);
+      alert("Application Answered");
+    } catch (e) {
+      alert(e);
+    }
+  }
 
   /* Any */
 

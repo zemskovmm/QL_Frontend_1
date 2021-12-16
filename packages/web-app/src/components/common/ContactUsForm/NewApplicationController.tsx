@@ -6,33 +6,41 @@ import { DashboardNewApplication } from "./DashboardNewApplication";
 import { ContactUsFormController } from "./ContactUsFormController";
 
 type NewApplicationControllerPropsType = {
-  onDismiss: () => void
-  applicationType:ApplicationType;
-  entityId:number;
-}
+  onDismiss: () => void;
+  applicationType: ApplicationType;
+  entityId: number;
+};
 
-const NewApplicationController:FC<NewApplicationControllerPropsType> = ({applicationType, entityId, onDismiss }) => {
-  const [isUsForm, setUsForm] = useState(false);
-  
-  if (isUsForm){
+const NewApplicationController: FC<NewApplicationControllerPropsType> = ({ applicationType, entityId, onDismiss }) => {
+  const [isUsForm, setUsForm] = useState(true);
+
+  if (isUsForm) {
     return <ContactUsFormController onDismiss={onDismiss} />;
   }
-  return <DashboardNewApplication 
-    applicationType={applicationType} 
-    entityId={entityId}
-    onDismiss={onDismiss}
-    onUsForm={()=>setUsForm(true)}
-  />
+  return (
+    <DashboardNewApplication
+      applicationType={applicationType}
+      entityId={entityId}
+      onDismiss={onDismiss}
+      onUsForm={() => setUsForm(true)}
+    />
+  );
 };
 
 type NewApplicationButtonPropsType = {
-  applicationType:ApplicationType;
-  entityId:number;
+  applicationType: ApplicationType;
+  entityId: number;
   className?: string;
   footer?: boolean;
-}
+};
 
-export const NewApplicationButton:FC<NewApplicationButtonPropsType> = ({applicationType,entityId,className,footer, children   }) => {
+export const NewApplicationButton: FC<NewApplicationButtonPropsType> = ({
+  applicationType,
+  entityId,
+  className,
+  footer,
+  children,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -41,7 +49,9 @@ export const NewApplicationButton:FC<NewApplicationButtonPropsType> = ({applicat
         type={"button"}
         className={
           footer
-            ? className ? className : ""
+            ? className
+              ? className
+              : ""
             : cn(
                 styles.NewApplicationButton,
                 "bg-bgprimary",
@@ -50,7 +60,7 @@ export const NewApplicationButton:FC<NewApplicationButtonPropsType> = ({applicat
                 "flex",
                 "items-center",
                 "text-secondary",
-                className,
+                className
               )
         }
         onClick={() => {
@@ -59,11 +69,13 @@ export const NewApplicationButton:FC<NewApplicationButtonPropsType> = ({applicat
       >
         <span className={`${footer ? "" : "hidden md:block"}`}>{children}</span>
       </button>
-      {isOpen && <NewApplicationController
-        applicationType={applicationType}
-        entityId={entityId}
-        onDismiss={() => setIsOpen(false)} 
-      />}
+      {isOpen && (
+        <NewApplicationController
+          applicationType={applicationType}
+          entityId={entityId}
+          onDismiss={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 };

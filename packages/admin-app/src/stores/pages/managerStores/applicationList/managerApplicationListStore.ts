@@ -44,9 +44,9 @@ export class ManagerApplicationListStore extends RequestTracking {
   }
 
   @action
-  async load(status?: string) {
+  async load(answered?: boolean) {
     this.reset();
-    if (status) this.listSettings.status = status;
+    if (answered) this.listSettings.isAnswered = true;
     await this.getApplication();
   }
 }

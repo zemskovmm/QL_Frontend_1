@@ -24,7 +24,7 @@ export interface CatalogWidgetProps {
 }
 
 const housingLangs: { [key: string]: string } = {
-  ru: "/catalog/housing",
+  ru: "/ru/catalog/housing",
   en: "/en/catalog/housing",
   cn: "/cn/catalog/housing",
   fr: "/fr/catalog/housing",
@@ -70,7 +70,6 @@ const searchTranslate: { [key: string]: string } = {
   en: "Search",
   esp: "Buscar",
 };
-
 
 export const CatalogWidget: FC<CatalogWidgetProps> = (props) => {
   const router = useRouter();
@@ -126,22 +125,22 @@ export const ServerCatalogWidget: FC<ServerCatalogWidgetProps> = (props) => {
   const cl = useContext(ComponentHostContext);
   useEffect(() => {
     if (props.entityType === "housing") {
-		/*
+      /*
       if (state.filtersLoadedForLang != cl?.lang) {
         setState({
           filters: housingCatalogFilters[cl?.lang ?? "en"].filters,
           filtersLoadedForLang: cl?.lang,
         });
       } */
-	   if (state.filtersLoadedForLang != cl?.lang) {
+      if (state.filtersLoadedForLang != cl?.lang) {
         cl?.filters.getCatalogFilters(cl?.lang, props.entityType).then((filter: any) =>
           setState({
             filters: filter,
             filtersLoadedForLang: cl?.lang,
           })
         );
-	  
-    } }else {
+      }
+    } else {
       if (state.filtersLoadedForLang != cl?.lang) {
         cl?.filters.getCatalogFilters(cl?.lang, props.entityType).then((filter: any) =>
           setState({
