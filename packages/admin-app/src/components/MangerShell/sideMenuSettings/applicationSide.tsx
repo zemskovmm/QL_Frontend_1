@@ -19,6 +19,9 @@ export const ApplicationSide = () => {
         />
         Upload File in chat
       </label>
+      <button className={`border mt-4 p-2 hover:border-gray-300`} onClick={() => s.IsAnswered()}>
+        Application Ansewered
+      </button>
     </div>
   ));
 };

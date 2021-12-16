@@ -19,16 +19,16 @@ const Navbar = () => {
       </div>
       <div className={`flex flex-col w-full`}>
         <RouterLink
-          routeName={ManagerRouteNames.applicationListNew}
-          className={`${linkClass} ${activeLink(ManagerRouteNames.applicationListNew)}`}
-        >
-          New Applications
-        </RouterLink>
-        <RouterLink
           routeName={ManagerRouteNames.applicationList}
           className={`${linkClass} ${activeLink(ManagerRouteNames.applicationList)}`}
         >
           All Applications
+        </RouterLink>
+        <RouterLink
+          routeName={ManagerRouteNames.applicationListNew}
+          className={`${linkClass} ${activeLink(ManagerRouteNames.applicationListNew)}`}
+        >
+          Actual Applications
         </RouterLink>
       </div>
       <div className={`my-10 px-10 w-full`}>

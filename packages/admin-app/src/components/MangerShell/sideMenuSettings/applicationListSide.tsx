@@ -12,7 +12,7 @@ export const ApplicationListSide = () => {
         <span className={`mr-2`}>Total items: {s.applications.totalItems}</span>{" "}
         <span>Total pages: {s.applications.totalPages} </span>
       </div>
-      <label className={`flex justify-between mb-2`}>
+      <label className={`flex justify-between mb-3`}>
         <span>Page size</span>
         <select
           className={`text-black`}
@@ -25,26 +25,26 @@ export const ApplicationListSide = () => {
           <option value="80">80</option>
         </select>
       </label>
+      <label className={`flex justify-between mb-3`}>
+        <span>Type</span>
+        <select
+          className={`text-black`}
+          onChange={(e) => (s.listSettings.type = e.target.value)}
+          value={s.listSettings.type}
+        >
+          <option value="">change type</option>
+          <option value="Visa">Visa</option>
+          <option value="Course">Course</option>
+          <option value="Housing">Housing</option>
+          <option value="University">University</option>
+        </select>
+      </label>
       <AdminInputBox
-        value={s.listSettings.type}
-        label={"Type"}
+        value={s.listSettings.status}
+        label={"Status"}
         variant={2}
         onChange={(e) => (s.listSettings.type = e.target.value)}
       />
-      {/*<AdminInputBox*/}
-      {/*  value={s.listSettings.status}*/}
-      {/*  label={"Status"}*/}
-      {/*  variant={2}*/}
-      {/*  onChange={(e) => (s.listSettings.type = e.target.value)}*/}
-      {/*/>*/}
-      <label className={`mb-2`}>
-        <input
-          type="checkbox"
-          checked={s.listSettings.isAnswered}
-          onChange={(e) => (s.listSettings.isAnswered = e.target.checked)}
-        />
-        <span className={`ml-3`}>Is Answared</span>
-      </label>
       <AdminInputBox
         value={s.listSettings.firstName}
         label={"First name"}
