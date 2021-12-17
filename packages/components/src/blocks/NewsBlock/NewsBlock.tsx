@@ -35,8 +35,8 @@ export const NewsBlock: React.FC<NewsProps> = ({ title, url, num, news }) => (
       <div className={cn(styles.news, "flex flex-wrap")}>
         {news &&
           news.map(({ link, img, description, date }, ind) => (
-            <a key={ind} href={url}>
-              <img src={`${ApiBaseUrl}/api/media/${img}`} alt="" />
+            <a key={ind} href={link}>
+              <img src={`${ApiBaseUrl}/api/media/${img}`} alt={`news img ${ind}`} />
               <div>
                 <span>{date}</span>
                 <p>{description}</p>

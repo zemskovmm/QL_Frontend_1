@@ -8,7 +8,6 @@ import CloseIcon from "src/assets/icons/cross-remove.svg";
 import Menu from "src/assets/icons/menu.svg";
 import { default as Social } from "src/assets/icons/social";
 import { LangChooser } from "src/components/common/langChooser/langChooser";
-import IconMagnify from "src/assets/icons/IconMagnify";
 import styles from "./main.module.css";
 import cn from "classnames";
 import React, { FC, useState } from "react";
@@ -65,14 +64,14 @@ export const MainHeader: FC<MainHeaderProps & { s: HeaderDto }> = ({ urls, s }) 
                 <LocalizedText id="contactUs_title" />
               </ContactUsFormButton>
             </div>
-            <div
-              className={
-                "bg-bgprimary rounded-primary cursor-pointer flex-shrink-0 p-2.5 ml-2 md:ml-2.5 flex items-center text-secondary " +
-                styles.btnSearch
-              }
-            >
-              <IconMagnify />
-            </div>
+            {/*<div*/}
+            {/*  className={*/}
+            {/*    "bg-bgprimary rounded-primary cursor-pointer flex-shrink-0 p-2.5 ml-2 md:ml-2.5 flex items-center text-secondary " +*/}
+            {/*    styles.btnSearch*/}
+            {/*  }*/}
+            {/*>*/}
+            {/*  <IconMagnify />*/}
+            {/*</div>*/}
             <div className={"ml-2 md:ml-2.5"}>
               <LangChooser lang={lang} urls={urls} />
             </div>
