@@ -9,7 +9,7 @@ export interface ClientCatalogFilterOptionItemsDto {
 export interface ClientCatalogFilterOptionDto {
   id: number;
   name: string;
-  items: null | ClientCatalogFilterOptionItemsDto[]
+  items: null | ClientCatalogFilterOptionItemsDto[];
 }
 
 export interface CatalogFilterDto {
