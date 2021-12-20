@@ -9,6 +9,12 @@
   position: relative;
 }
 
+@media (max-width: 769px) {
+  .table{
+    min-width: 1200px;
+  }
+}
+
 .table div {
   min-height: 40px;
 }
