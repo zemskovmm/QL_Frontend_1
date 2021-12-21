@@ -39,7 +39,7 @@ const fr: LocaleDefinition = {
   catalogItems_duration: "Durée",
   catalogItems_week: "A partir de 1 semaine",
   catalogItems_price: "Le coût",
-  catalogItems_price_from: "de ",
+  catalogItems_price_from: "à partir de ",
   catalogItems_price_before: "à ",
   catalogItems_price_upto: "Moins de ",
   catalogItems_price_year: "an",
