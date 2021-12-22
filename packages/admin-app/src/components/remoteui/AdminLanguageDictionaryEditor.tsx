@@ -89,10 +89,10 @@ const selectItems = [
 
 export class LanguageDictionaryCustomize<T extends Dictionary<unknown>> implements IRemoteUiEditorStoreCustomization {
   // TODO Dictionary<unknown> (оно же T) в пропах - является костылем, что бы подпереть недогенерированные филды из за типа Dictionary'2 вместо LanguageDictionary
-  constructor(public item: T) {}
+  constructor(public item: T, public LanguageDictionaryDefinition: PageDefinitionBuilder = pageLanguageDefinition) {}
 
   getCustomStore(config: RemoteUiEditorConfiguration, type: string, data: any): IRemoteUiData {
-    if (type === "LanguageDictionary") return new AdminLanguageDictionaryEditorStore(pageLanguageDefinition, this.item);
+    if (type === "LanguageDictionary") return new AdminLanguageDictionaryEditorStore(this.LanguageDictionaryDefinition, this.item);
     if (type === "TraitLanguageDictionary")
       return new AdminLanguageDictionaryEditorStore(traitEditLanguageDefinition, this.item);
     if (type === "PlainDictionary") return new AdminPlainDictionaryEditorStore(plainDictionaryDefinition, this.item);

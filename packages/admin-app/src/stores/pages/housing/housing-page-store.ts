@@ -2,10 +2,14 @@ import { Loadable } from "src/utils/Loadable";
 import { action, observable } from "mobx";
 import { RootStore } from "src/stores/RootStore";
 import { AdminApi } from "src/clients/adminApiClient";
-import { RemoteUiEditorStore } from "@kekekeks/remoteui/src";
-import { LanguageDictionaryCustomize } from "src/components/remoteui/AdminLanguageDictionaryEditor";
+import { RemoteUiDefinition, RemoteUiEditorStore } from "@kekekeks/remoteui/src";
+import {
+  LanguageDictionaryCustomize,
+  PageDefinitionBuilder,
+} from "src/components/remoteui/AdminLanguageDictionaryEditor";
 import { Dictionary } from "src/utils/types";
 import { TraitEditorStore, TraitLoaderWithCache } from "src/components/traitEditor";
+import { get, set } from "lodash";
 
 const emptyModel = ({ languages: { en: {} } } as unknown) as AdminHousingDto<unknown>;
 
@@ -21,6 +25,18 @@ export type AdminHousingDtoLanguagesDict = Dictionary<AdminHousingLanguageDto<un
 export type AdminHousingDto<T extends unknown> = {
   id: string;
   languages: AdminHousingDtoLanguagesDict;
+};
+type PageDefinitionFactory = (x: RemoteUiDefinition) => PageDefinitionBuilder;
+
+const pageDefinitionFactory: PageDefinitionFactory = (x) => (name) => {
+  const def: RemoteUiDefinition = {
+    types: {
+      HousingLanguageLocationAdminDto: get(x, "types.HousingLanguageLocationAdminDto"),
+    },
+    groups: get(x, "types.HousingLanguageAdminDto.groups"),
+  };
+  set(def.groups, "[0].name", name);
+  return def;
 };
 
 export class HousingTraitLoader extends TraitLoaderWithCache {
@@ -73,7 +89,11 @@ export class HousingEditPageStore extends Loadable {
 
   async load(): Promise<void> {
     const { value, definition } = await this.track(() => AdminApi.getHousing(this.id));
-    this.remoteUiStore = new RemoteUiEditorStore(definition, value, new LanguageDictionaryCustomize(value.languages));
+    this.remoteUiStore = new RemoteUiEditorStore(
+      definition,
+      value,
+      new LanguageDictionaryCustomize(value.languages, pageDefinitionFactory(definition))
+    );
   }
 }
 
