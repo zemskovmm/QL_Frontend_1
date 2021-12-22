@@ -94,7 +94,7 @@ const BlogPage = () => {
           </a>
         </Link>
       )}
-      {/*{filters.map((el) => el)}*/}
+
       <FiltersBlock tags={tags} click={(id: number) => toggleFilter(id)} />
 
       {articles && (

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styles from "./filtersBlock.module.css";
+import { useIntl } from "react-intl";
 
 export const FiltersBlock = (props: { tags?: any[]; tags2?: string[]; click: (id: number) => void }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const lang = useIntl().locale;
+
   return (
     <div className={`py-12 mx-4`}>
       <button onClick={() => setOpenMenu(true)} className={`${styles.filter__button} flex w-full md:hidden`}>
@@ -19,10 +22,10 @@ export const FiltersBlock = (props: { tags?: any[]; tags2?: string[]; click: (id
           <form className={`flex flex-wrap ${styles.filter__red} md:w-6/12`}>
             {props.tags &&
               props.tags.map((tag) => {
-                return tag ? (
+                return tag && tag.names[lang] ? (
                   <label className={`mb-4 mr-3`} key={tag.id}>
                     <input type={"checkbox"} name={"hi"} onChange={(e) => props.click(tag.id)} />
-                    <span>{tag.names["en"]}</span>
+                    <span>{tag.names[lang]}</span>
                   </label>
                 ) : (
                   ""
