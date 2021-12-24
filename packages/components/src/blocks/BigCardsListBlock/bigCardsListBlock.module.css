@@ -25,7 +25,7 @@
 
 
 .bigCard {
-  max-width: 370px;
+  max-width: 30%;
   margin: 0 15px 30px;
   background: #FFFFFF;
   border: 1px solid #EFF3FA;
@@ -164,6 +164,7 @@
   .bigCard{
     padding: 10px;
     margin: 0 5px 10px;
+    max-width: 370px;
   }
 
   .bigCard__img{

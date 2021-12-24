@@ -19,6 +19,7 @@
 
 .partner {
   max-width: 15%;
+  min-width: 200px;
   margin: 0 auto;
   padding: 0 10px;
   display: flex;
