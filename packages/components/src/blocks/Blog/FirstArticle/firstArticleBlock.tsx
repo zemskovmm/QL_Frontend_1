@@ -19,7 +19,7 @@ export interface FirstArticleBlockElement {
 export const FirstArticleBlock = (props: FirstArticleBlockElement) => {
   return (
     <div className={`${styles.firstArticle__width} ${props.blog ? styles.firstArticle__blog : ""} py-12`}>
-      <div className={styles.firstArticle}>
+      <div className={styles.firstArticle + " mt-10"}>
         <div className={`flex flex-col relative mb-3`}>
           <img
             className={styles.firstArticle__img}
