@@ -47,7 +47,7 @@ const BlogPage = () => {
     ],
   })?.items[0];
 
-  const tags = siteApi.useTraitByType(traitNameMap[lang]);
+  const tags = siteApi.useBlogTags();
 
   const toggleFilter = (id: number) => {
     const exists = filters != null && filters.indexOf(id) != -1;

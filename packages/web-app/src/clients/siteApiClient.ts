@@ -140,6 +140,14 @@ export class SiteApiClient extends ApiClientBase {
       (req) => this.getTraitByType(typeName)
     );
   }
+
+  async getBlogTags(): Promise<TraitDto[]> {
+    return await this.sendRequest<TraitDto[]>(`traits/by-type/with-contents/blog-tags`);
+  }
+
+  useBlogTags(): TraitDto[] | undefined {
+    return useData({}, (req) => this.getBlogTags());
+  }
 }
 
 export const siteApi = new SiteApiClient();
