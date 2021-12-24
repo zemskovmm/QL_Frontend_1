@@ -16,7 +16,7 @@ export interface ReasonsAcceptIconBlockElement {
 
 export const ReasonsAcceptIconBlock = (props: ReasonsAcceptIconBlockElement) => {
   return (
-    <div className="py-12 px-4 lg:px-0">
+    <div className="py-12 px-4 lg:px-10">
       <div className="flex justify-between mx-auto max-w-screen-xl w-full">
         <div className={"flex flex-col w-full"}>
           <div className={styles.reasonsAcceptIconBlock__title}>{props.header}</div>

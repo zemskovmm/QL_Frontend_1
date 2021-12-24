@@ -44,7 +44,10 @@ const Search = ({
         callback ? "lg:flex-row lg:items-center" : ""
       }`}
     >
-      <h1 className={cn(titleColor === "white" ? styles.white_title : "", titleShadow ? styles.shadow_title : "")}>
+      <h1
+        className={cn(titleColor === "white" ? styles.white_title : "", titleShadow ? styles.shadow_title : "")}
+        style={{ textShadow: "1px 1px 1px #fff" }}
+      >
         {logo && <img src={`${ApiBaseUrl}/api/media/${logo}`} alt="" />}
         {title}
       </h1>

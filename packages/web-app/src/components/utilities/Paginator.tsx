@@ -5,13 +5,14 @@ export const Paginator = (props: { page: number; totalPages: number; setPage: (p
   const { page, totalPages, setPage } = props;
   const Btn = (props: { page: number; index: number; totalButtons: number }) => {
     return (
-      <button
+      <a
+        href="#header"
         type="button"
         onClick={() => setPage(props.page)}
         className={`${style.btn} ${page === props.page ? style.btn_active : ""}`}
       >
         {props.page + 1}
-      </button>
+      </a>
     );
   };
 
