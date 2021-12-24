@@ -134,25 +134,11 @@ export const UniversityCatalogElement: FC<{ item: CatalogUniversityDto }> = ({ i
           <LocalizedText id={"catalogItems_language"} />:
         </span>
         <div className={style.card__rightLanguage_list}>
-          <span className={`mr-2`}>
-            <Flags icon={"en"} />
-          </span>
-
-          <span className={`mr-2`}>
-            <Flags icon={"ru"} />
-          </span>
-
-          <span className={`mr-2`}>
-            <Flags icon={"fr"} />
-          </span>
-
-          <span className={`mr-2`}>
-            <Flags icon={"esp"} />
-          </span>
-
-          <span className={`mr-2`}>
-            <Flags icon={"cn"} />
-          </span>
+          {item?.instructionLanguages?.map((el, i) => (
+            <span className={`mr-2`} key={i + el}>
+              <Flags icon={el} />
+            </span>
+          ))}
         </div>
       </div>
     </ElementCatalog>
