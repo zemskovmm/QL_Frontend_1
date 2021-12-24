@@ -95,15 +95,9 @@ export const HousingCatalogElement: FC<{ item: CatalogHousingDto }> = ({ item })
           <div className={`${style.card__rightPrice__list}`}>
             <span className={style.card__rightPrice__listItem}>
               <b>
-                {Number(item?.price) < 400 ? (
-                  <span>
-                    <LocalizedText id={"catalogItems_price_upto"} /> {"400"}
-                  </span>
-                ) : (
-                  <span>
-                    <LocalizedText id={"catalogItems_price_from"} /> {item?.price}{" "}
-                  </span>
-                )}
+                <span>
+                  <LocalizedText id={"catalogItems_price_from"} /> {item?.price}{" "}
+                </span>
                 <LocalizedText id={"catalogItems_price_value"} />
               </b>{" "}
               / <LocalizedText id={"catalogItems_price_month"} />
