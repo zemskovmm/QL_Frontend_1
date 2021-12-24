@@ -46,8 +46,8 @@ export const FirstArticleBlock = (props: FirstArticleBlockElement) => {
           )}
           <div className={`${props.blog ? "justify-center md:justify-start" : ""} flex flex-wrap`}>
             {props.tags &&
-              props.tags.map((tag) => (
-                <span className={styles.firstArticle__tag} key={tag.id}>
+              props.tags.map((tag, i) => (
+                <span className={styles.firstArticle__tag} key={tag.id + i}>
                   {tag.name}
                 </span>
               ))}

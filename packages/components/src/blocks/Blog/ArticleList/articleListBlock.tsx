@@ -36,7 +36,12 @@ export const ArticleBlock = (props: articleListBlockElement) => {
         <div className={`lg:flex-col lg:flex justify-between lg:px-2.5 lg:mt-4`}>
           <div className={styles.articleList__title}>{props.title}</div>
           <div className={`flex flex-wrap`}>
-            {props.tags && props.tags.map((tag) => <span className={styles.articleList__tag}>{tag.name}</span>)}
+            {props.tags &&
+              props.tags.map((tag) => (
+                <span className={styles.articleList__tag} key={tag.id}>
+                  {tag.name}
+                </span>
+              ))}
           </div>
         </div>
       </div>
