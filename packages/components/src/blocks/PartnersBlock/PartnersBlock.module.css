@@ -37,6 +37,7 @@
 
 .partner img {
   max-height: 200px;
+  min-width: 200px;
   max-width: 100%;
   object-fit: contain;
   object-position: center;

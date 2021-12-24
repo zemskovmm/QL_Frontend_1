@@ -15,6 +15,7 @@ export interface ImgAndTextEditorBlockElement {
   img: number | null;
   imgWidth: string;
   textButton: string;
+  buttonLink: string;
   showButton: boolean;
 }
 
@@ -53,7 +54,14 @@ export const ImgAndTextEditorBlock = (props: ImgAndTextEditorBlockElement) => {
               />
             )}
             <HtmlPresenter text={props.text} />
-            {props.showButton && <ButtonFormBlock myClass={`mt-6`} name={props.textButton} align={`justify-start`} />}
+            {props.showButton && (
+              <ButtonFormBlock
+                myClass={`mt-6`}
+                name={props.textButton}
+                align={`justify-start`}
+                link={props.buttonLink}
+              />
+            )}
           </div>
           {props.videoLink && (
             <iframe
@@ -91,6 +99,7 @@ export const ImgAndTextEditorBlockInfo: TypedBlockTypeInfo<ImgAndTextEditorBlock
     img: null,
     imgWidth: "400px",
     textButton: "",
+    buttonLink: "",
     showButton: false,
   },
   definition: {
@@ -150,6 +159,11 @@ export const ImgAndTextEditorBlockInfo: TypedBlockTypeInfo<ImgAndTextEditorBlock
         id: "textButton",
         type: "String",
         name: "Text button",
+      },
+      {
+        id: "buttonLink",
+        type: "String",
+        name: "Button link",
       },
       {
         id: "showButton",

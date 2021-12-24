@@ -13,6 +13,7 @@ import React, { FC, useContext } from "react";
 import pin from "src/assets/icons/pin.svg";
 import { useObserver } from "mobx-react";
 import { ComponentHostContext } from "@project/components/src/blocks";
+import { default as Flags } from "../../assets/icons/flags";
 
 const ElementCatalog: FC<{ item: CatalogItemDto }> = ({ children, item }) => (
   <Link href={item.url ?? "#"}>
@@ -94,7 +95,15 @@ export const HousingCatalogElement: FC<{ item: CatalogHousingDto }> = ({ item })
           <div className={`${style.card__rightPrice__list}`}>
             <span className={style.card__rightPrice__listItem}>
               <b>
-                <LocalizedText id={"catalogItems_price_from"} /> {item?.price}{" "}
+                {Number(item?.price) < 400 ? (
+                  <span>
+                    <LocalizedText id={"catalogItems_price_upto"} /> {"400"}
+                  </span>
+                ) : (
+                  <span>
+                    <LocalizedText id={"catalogItems_price_from"} /> {item?.price}{" "}
+                  </span>
+                )}
                 <LocalizedText id={"catalogItems_price_value"} />
               </b>{" "}
               / <LocalizedText id={"catalogItems_price_month"} />
@@ -125,12 +134,25 @@ export const UniversityCatalogElement: FC<{ item: CatalogUniversityDto }> = ({ i
           <LocalizedText id={"catalogItems_language"} />:
         </span>
         <div className={style.card__rightLanguage_list}>
-          <b>
-            <img src={`../../images/catalogFlags/${lang}.svg`} alt="" />
-            <span>
-              <LocalizedText id={"catalogItems_language_all"} />
-            </span>
-          </b>
+          <span className={`mr-2`}>
+            <Flags icon={"en"} />
+          </span>
+
+          <span className={`mr-2`}>
+            <Flags icon={"ru"} />
+          </span>
+
+          <span className={`mr-2`}>
+            <Flags icon={"fr"} />
+          </span>
+
+          <span className={`mr-2`}>
+            <Flags icon={"esp"} />
+          </span>
+
+          <span className={`mr-2`}>
+            <Flags icon={"cn"} />
+          </span>
         </div>
       </div>
     </ElementCatalog>

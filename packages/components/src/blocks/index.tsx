@@ -119,6 +119,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
       style={{
         background: props.background,
         alignItems: props.vertical,
+        maxWidth: props.maxWidth ? props.maxWidth : "100%",
       }}
       className={`relative ${props.marginAuto ? "" : "mx-auto"} flex-wrap flex`}
     >
@@ -135,7 +136,6 @@ const RowPresenter = (props: PageBlockRowDto) => {
             )}
             style={{
               verticalAlign: "top",
-              maxWidth: props.maxWidth ? props.maxWidth : "100%",
               backgroundColor: props.background ? props.background : "",
             }}
           >
