@@ -33,11 +33,11 @@ export const MainHeader: FC<MainHeaderProps & { s: HeaderDto }> = ({ urls, s }) 
           <div className="flex">
             <Link href={`/${lang}`}>
               <a>
-                <img className="mr-6 cursor-pointer hidden lg:block" src={Logo} alt="Quartier Latin" />
-                <img className="mr-6 cursor-pointer lg:hidden" src={LogoMob} alt="Quartier Latin" />
+                <img className="mr-6 cursor-pointer hidden xl:block" src={Logo} alt="Quartier Latin" />
+                <img className="mr-6 cursor-pointer xl:hidden" src={LogoMob} alt="Quartier Latin" />
               </a>
             </Link>
-            <ul className="hidden lg:flex list-none ">
+            <ul className="hidden xl:flex list-none ">
               {s.headerTopLink.map((el, index) => (
                 <li key={`headerTopLink ${index} ${el.link}`} className="mx-4 uppercase flex items-center">
                   <a className="text-xs font-bold hover:text-hover" href={el.link}>
@@ -48,7 +48,7 @@ export const MainHeader: FC<MainHeaderProps & { s: HeaderDto }> = ({ urls, s }) 
             </ul>
           </div>
           <div className="flex items-center">
-            <div className="hidden lg:flex justify-end items-center mr-4">
+            <div className="hidden xl:flex justify-end items-center mr-4">
               {s.headerSocialLink.map((el, index) => {
                 return el ? (
                   <a key={el.link + index} className={cn("mx-3 cursor-pointer", styles.header_social)} href={el.link}>
@@ -75,13 +75,13 @@ export const MainHeader: FC<MainHeaderProps & { s: HeaderDto }> = ({ urls, s }) 
             <div className={"ml-2 md:ml-2.5"}>
               <LangChooser lang={lang} urls={urls} />
             </div>
-            <button onClick={() => setMenuOpen(true)} className={styles.btnMenu + " lg:hidden ml-2"}>
+            <button onClick={() => setMenuOpen(true)} className={styles.btnMenu + " xl:hidden ml-2"}>
               <img src={Menu} alt="Menu" />
             </button>
           </div>
         </nav>
       </div>
-      <div className="hidden lg:flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-1 px-10">
+      <div className="hidden xl:flex justify-between items-center max-w-screen-xl w-full my-0 mx-auto py-1 px-10">
         {s.headerBottomLink.map((el, i) => (
           <Link key={`${i} headLink`} href={el.link}>
             <a className={cn(styles.header_offer, "py-5 whitespace-nowrap text-center")}>{el.name}</a>

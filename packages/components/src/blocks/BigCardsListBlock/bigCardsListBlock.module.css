@@ -164,7 +164,11 @@
   .bigCard{
     padding: 10px;
     margin: 0 5px 10px;
-    max-width: 370px;
+    max-width: 48%;
+  }
+  
+  .main a{
+    width: 100%;
   }
 
   .bigCard__img{
@@ -177,6 +181,13 @@
 @media (max-width: 767px) {
   .postScriptButton {
     flex-direction: column;
+  }
+
+
+  .bigCard{
+    padding: 10px;
+    margin: 0 5px 10px;
+    max-width: none;
   }
 
   .postScriptButton__description {
