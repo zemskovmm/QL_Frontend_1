@@ -32,11 +32,11 @@
   max-width: 300px;
 }
 
-@media (max-width: 1030px) {
-  .frame{
-    max-width: none;
-  }
-}
+/*@media (max-width: 1030px) {*/
+/*  .frame{*/
+/*    max-width: none;*/
+/*  }*/
+/*}*/
 
 .frame_big {
   max-width: calc(100% - 10px) !important;
