@@ -26,29 +26,35 @@ export const ReasonsCustomIconBlock = (props: ReasonsCustomIconBlockElement) => 
         <div className={"flex flex-col w-full"}>
           <div className={styles.reasonsCustomIconBlock__title}>{props.header}</div>
           {props.subtitle && <h2 className={styles.reasonsCustomIconBlock__subtitle}>{props.subtitle}</h2>}
-          <div className={"flex flex-col lg:flex-row flex-wrap w-full"}>
+          <div className={"flex flex-col lg:flex-row flex-wrap w-full"} style={{ marginBottom: "-60px" }}>
             {props.elements.map((el) => {
-              return el.link
-                  ? <a href={el.link} className={styles.reasonsCustomIconBlock__item}>
-                    <div className={styles.reasonsCustomIconBlock__icon}>
-                      <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
-                    </div>
-                    <div className={`flex flex-col w-full items-center`}>
-                      <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
-                      <div className={styles.reasonsCustomIconBlock__text}
-                           dangerouslySetInnerHTML={{ __html: el.text }} />
-                    </div>
-                  </a>
-                  : <div className={styles.reasonsCustomIconBlock__item}>
-                    <div className={styles.reasonsCustomIconBlock__icon}>
-                      <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
-                    </div>
-                    <div className={`flex flex-col w-full items-center`}>
-                      <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
-                      <div className={styles.reasonsCustomIconBlock__text}
-                           dangerouslySetInnerHTML={{ __html: el.text }} />
-                    </div>
+              return el.link ? (
+                <a href={el.link} className={styles.reasonsCustomIconBlock__item}>
+                  <div className={styles.reasonsCustomIconBlock__icon}>
+                    <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
                   </div>
+                  <div className={`flex flex-col w-full items-center`}>
+                    <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
+                    <div
+                      className={styles.reasonsCustomIconBlock__text}
+                      dangerouslySetInnerHTML={{ __html: el.text }}
+                    />
+                  </div>
+                </a>
+              ) : (
+                <div className={styles.reasonsCustomIconBlock__item}>
+                  <div className={styles.reasonsCustomIconBlock__icon}>
+                    <img src={`${ApiBaseUrl}/api/media/${el.image}`} alt="" />
+                  </div>
+                  <div className={`flex flex-col w-full items-center`}>
+                    <div className={styles.reasonsCustomIconBlock__itemTitle}>{el.title}</div>
+                    <div
+                      className={styles.reasonsCustomIconBlock__text}
+                      dangerouslySetInnerHTML={{ __html: el.text }}
+                    />
+                  </div>
+                </div>
+              );
             })}
           </div>
           {props.showButton && (

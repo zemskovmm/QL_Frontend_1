@@ -79,7 +79,9 @@ export const MainFooter: FC<{ s: FooterDto }> = ({ s }) => {
                   <a className="absolute top-1 left-0 w-5 h-5" href={link}>
                     <Social className={styles.footer_icon} icon={icon.toLowerCase()} />
                   </a>
-                  <a href={link}>{text}</a>
+                  <a href={link} className={`ml-4`}>
+                    {text}
+                  </a>
                 </div>
               ))}
           </div>

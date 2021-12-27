@@ -121,7 +121,7 @@ const RowPresenter = (props: PageBlockRowDto) => {
         alignItems: props.vertical,
         maxWidth: props.maxWidth ? props.maxWidth : "100%",
       }}
-      className={`relative ${props.marginAuto ? "" : "mx-auto"} flex-wrap flex`}
+      className={`relative ${props.marginAuto ? "" : "mx-auto"} flex-wrap flex overflow-hidden`}
     >
       {sortBlocks.map((cell, i) => {
         if (cell.hide) return;

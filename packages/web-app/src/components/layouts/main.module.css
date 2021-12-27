@@ -228,6 +228,7 @@
   display: flex;
   flex-wrap: wrap;
   max-width: 240px;
+  margin-left: 16px;
 }
 
 
@@ -258,7 +259,7 @@
   font-size: 0.875rem;
   max-width: 220px;
   height: 50px;
-  margin: 0 24px 40px;
+  margin: 0 auto 24px 40px;
 }
 
 .footer_column button.footer_writeus:before {

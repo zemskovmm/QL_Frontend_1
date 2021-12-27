@@ -4,9 +4,6 @@ import styles from "./feedbackSliderBlock.module.css";
 
 import Slider from "react-slick";
 import cn from "classnames";
-import { ButtonFormBlock } from "../ButtonFormBlock/buttonFormBlock";
-
-import ArrowPict from "./icon/arrow-left.svg";
 import ClosePict from "./icon/close.svg";
 
 import { ApiBaseUrl } from "../../api/apiClientBase";
@@ -29,9 +26,7 @@ export const FeedbackSliderBlock = (props: FeedbackSliderBlockElement) => {
   const settings = {
     dots: true,
     arrows: false,
-    centerMode: true,
     infinite: true,
-    centerPadding: "25%",
     autoplay: true,
     speed: 500,
     autoplaySpeed: 10000,
