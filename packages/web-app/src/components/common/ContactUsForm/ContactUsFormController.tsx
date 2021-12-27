@@ -11,13 +11,12 @@ export const ContactUsFormController = (props: { onDismiss: () => void }) => {
   return <ContactUsForm onDismiss={props.onDismiss} onSuccess={() => setIsSuccess(true)} />;
 };
 
-
 type ContactUsFormButtonPropsType = {
-  className?: string
+  className?: string;
   footer?: boolean;
-}
+};
 
-export const ContactUsFormButton:FC<ContactUsFormButtonPropsType> = ({className,footer, children   }) => {
+export const ContactUsFormButton: FC<ContactUsFormButtonPropsType> = ({ className, footer, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -26,7 +25,9 @@ export const ContactUsFormButton:FC<ContactUsFormButtonPropsType> = ({className,
         type={"button"}
         className={
           footer
-            ? className ? className : ""
+            ? className
+              ? className
+              : ""
             : cn(
                 styles.ContactUsFormButton,
                 "bg-bgprimary",
@@ -35,14 +36,14 @@ export const ContactUsFormButton:FC<ContactUsFormButtonPropsType> = ({className,
                 "flex",
                 "items-center",
                 "text-secondary",
-                className,
+                className
               )
         }
         onClick={() => {
           setIsOpen(true);
         }}
       >
-        <span className={`${footer ? "" : "hidden md:block"}`}>{children}</span>
+        <span className={`${footer ? "" : "hidden md:block"} whitespace-nowrap`}>{children}</span>
       </button>
       {isOpen ? <ContactUsFormController onDismiss={() => setIsOpen(false)} /> : null}
     </>

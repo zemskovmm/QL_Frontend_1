@@ -90,3 +90,14 @@
     min-width: 0;
   }
 }
+
+
+@media screen and (max-width: 580px) {
+  .news a {
+    max-width: none;
+    margin-right: 0;
+  }
+  .news{
+    padding: 20px;
+  }
+}

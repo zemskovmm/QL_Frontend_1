@@ -138,7 +138,9 @@
 }
 
 .slider :global(.slick-list) {
-  overflow-x: hidden;
+  width: 900px;
+  overflow: visible;
+  margin: auto;
 }
 
 .slider :global(.slick-track) {
