@@ -137,10 +137,13 @@
   z-index: 100003;
 }
 
-.slider :global(.slick-list) {
-  width: 900px;
-  overflow: visible;
-  margin: auto;
+
+@media (min-width: 1024px) {
+  .slider :global(.slick-list) {
+    width: 900px;
+    overflow: visible;
+    margin: auto;
+  }
 }
 
 .slider :global(.slick-track) {
