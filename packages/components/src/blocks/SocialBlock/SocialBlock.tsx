@@ -19,7 +19,7 @@ export const SocialBlock: React.FC<SocialTabsProps> = ({ title1, title2, link1, 
     setItsFirefox(window.navigator.userAgent.includes("firefox"));
   }, []);
   return !itsFirefox ? (
-    <div>
+    <div className={`px-4 xl:px-0`}>
       <div className="flex w-full">
         <div
           className={cn(styles.link, activeTab.title === title1 ? styles.active : "")}

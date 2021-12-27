@@ -21,10 +21,11 @@
   max-width: 15%;
   min-width: 200px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: content-box;
 }
 
 .partner.white {
@@ -46,7 +47,7 @@
 
 @media screen and (max-width: 1024px) {
   .partner {
-    max-width: none;
+    max-width: 200px;
     width: 50%;
     margin-bottom: 20px;
   }

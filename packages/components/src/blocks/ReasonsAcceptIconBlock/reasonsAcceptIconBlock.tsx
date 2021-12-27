@@ -33,7 +33,14 @@ export const ReasonsAcceptIconBlock = (props: ReasonsAcceptIconBlockElement) => 
               </div>
             ))}
             {props.showButton && (
-              <div className={styles.reasonsAcceptIconBlock__item + " flex-col px-10 lg:px-0"}>
+              <div
+                className={
+                  styles.reasonsAcceptIconBlock__item +
+                  " " +
+                  styles.reasonsAcceptIconBlock__itemButton +
+                  " flex-col px-10 lg:px-0"
+                }
+              >
                 {props.textOverButton && (
                   <div className={styles.reasonsAcceptIconBlock__buttonText}>
                     <HtmlPresenter text={props.textOverButton} />

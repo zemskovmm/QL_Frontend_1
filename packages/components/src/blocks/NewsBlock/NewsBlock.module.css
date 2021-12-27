@@ -69,7 +69,7 @@
   max-width: 200px;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1199px) {
   .container {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -79,11 +79,14 @@
     padding: 0 10px;
     text-align: center;
   }
+  
+  .news {
+    justify-content: center;
+  }
 
   .news a {
     width: 100%;
-    max-width: 386px;
+    max-width: 45%;
     min-width: 0;
-    margin-right: 0;
   }
 }
