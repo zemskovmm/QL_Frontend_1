@@ -115,35 +115,38 @@ const RowPresenter = (props: PageBlockRowDto) => {
   const findSkip = [...props.blocks].findIndex((x) => x.type === "skipHistoryBlock");
 
   return (
-    <section
-      style={{
-        background: props.background,
-        alignItems: props.vertical,
-        maxWidth: props.maxWidth ? props.maxWidth : "100%",
-      }}
-      className={`relative ${props.marginAuto ? "" : "mx-auto"} flex-wrap flex overflow-hidden`}
-    >
-      {sortBlocks.map((cell, i) => {
-        if (cell.hide) return;
-        if (props.hideHistory && i >= findSkip && findSkip !== -1) return;
-        if (cell.type === "breadcrumbsBlock") return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
-        return (
-          <div
-            key={i}
-            className={cn(
-              i === 1 && sortBlocks[0].type == "breadcrumbsBlock" ? "block-with-breadcrumbs" : "",
-              `inline-block ${grid["col-" + cell.size]} box-border mx-auto`
-            )}
-            style={{
-              verticalAlign: "top",
-              backgroundColor: props.background ? props.background : "",
-            }}
-          >
-            <BlockPresenter blockType={cell.type} blockData={cell.data} />
-          </div>
-        );
-      })}
-    </section>
+    <div className={`w-full`} style={{ background: props.background }}>
+      <section
+        style={{
+          background: props.background,
+          alignItems: props.vertical,
+          maxWidth: props.maxWidth ? props.maxWidth : "100%",
+        }}
+        className={`relative ${props.marginAuto ? "" : "mx-auto"} flex-wrap flex overflow-hidden`}
+      >
+        {sortBlocks.map((cell, i) => {
+          if (cell.hide) return;
+          if (props.hideHistory && i >= findSkip && findSkip !== -1) return;
+          if (cell.type === "breadcrumbsBlock") return <BlockPresenter blockType={cell.type} blockData={cell.data} />;
+          console.log(sortBlocks);
+          return (
+            <div
+              key={i}
+              className={cn(
+                i === 1 && sortBlocks[0].type == "breadcrumbsBlock" ? "block-with-breadcrumbs" : "",
+                `inline-block ${grid["col-" + cell.size]} box-border mx-auto`
+              )}
+              style={{
+                verticalAlign: "top",
+                backgroundColor: props.background ? props.background : "",
+              }}
+            >
+              <BlockPresenter blockType={cell.type} blockData={cell.data} />
+            </div>
+          );
+        })}
+      </section>
+    </div>
   );
 };
 
